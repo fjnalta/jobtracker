@@ -17,9 +17,10 @@
 
 	<!-- Other module inherits -->
 	<inherits name="org.gwtbootstrap3.GwtBootstrap3" />
+	<inherits name="org.gwtbootstrap3.extras.fullcalendar.FullCalendar"/>
 
 	<!-- Specify the app entry point class. -->
-	<entry-point class='net.greenbeansit.timer.client.Net_greenbeansit_timer' />
+	<entry-point class='net.greenbeansit.timer.client.GwtEntryPoint' />
 
 	<!-- Specify the paths for translatable code -->
 	<source path='client' />
