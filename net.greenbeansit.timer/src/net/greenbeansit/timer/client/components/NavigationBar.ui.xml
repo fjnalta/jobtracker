@@ -3,12 +3,23 @@
 	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:b="urn:import:org.gwtbootstrap3.client.ui"
 	xmlns:b.html="urn:import:org.gwtbootstrap3.client.ui.html"
 	xmlns:components="urn:import:net.greenbeansit.timer.client.components">
-	<b:NavPills stacked="true" ui:field="navPills">
-		<b:AnchorListItem iconFixedWidth="true" ui:field="homeNavButton" >Home</b:AnchorListItem>
-		<b:AnchorListItem iconFixedWidth="true" ui:field="calendarNavButton">Kalender</b:AnchorListItem>
-		<b:AnchorListItem iconFixedWidth="true" ui:field="jobsNavButton" >Jobs</b:AnchorListItem>
-		<b:AnchorListItem iconFixedWidth="true" ui:field="utilizationNavButton">Auslastung</b:AnchorListItem>
-		<b:AnchorListItem iconFixedWidth="true" ui:field="capazityNavButton">Kapazität</b:AnchorListItem>
-		<b:AnchorListItem iconFixedWidth="true" ui:field="budgetNavButton">Bugdet</b:AnchorListItem>
-	</b:NavPills>
+	<b:Navbar>
+		<b:NavbarHeader>
+			<b:NavbarBrand>Menu</b:NavbarBrand>
+			<b:NavbarCollapseButton dataTarget="#navbar-collapse" />
+		</b:NavbarHeader>
+			<b:NavbarCollapse b:id="navbar-collapse">
+				<b:NavbarNav ui:field="navPills" inline="true">
+					<b:AnchorListItem iconFixedWidth="true" ui:field="homeNavButton">Home</b:AnchorListItem>
+					<b:AnchorListItem iconFixedWidth="true"
+						ui:field="calendarNavButton">Kalender</b:AnchorListItem>
+					<b:AnchorListItem iconFixedWidth="true" ui:field="jobsNavButton">Jobs</b:AnchorListItem>
+					<b:AnchorListItem iconFixedWidth="true"
+						ui:field="utilizationNavButton">Auslastung</b:AnchorListItem>
+					<b:AnchorListItem iconFixedWidth="true"
+						ui:field="capazityNavButton">Kapazität</b:AnchorListItem>
+					<b:AnchorListItem iconFixedWidth="true" ui:field="budgetNavButton">Bugdet</b:AnchorListItem>
+				</b:NavbarNav>
+			</b:NavbarCollapse>
+	</b:Navbar>
 </ui:UiBinder> 

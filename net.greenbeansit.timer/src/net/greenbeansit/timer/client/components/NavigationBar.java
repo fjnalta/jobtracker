@@ -2,6 +2,7 @@ package net.greenbeansit.timer.client.components;
 
 import org.gwtbootstrap3.client.ui.AnchorListItem;
 import org.gwtbootstrap3.client.ui.NavPills;
+import org.gwtbootstrap3.client.ui.NavbarNav;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -46,7 +47,7 @@ public class NavigationBar extends Composite
 	AnchorListItem budgetNavButton;
 	
 	@UiField
-	NavPills navPills;
+	NavbarNav navPills;
 
 	@UiTemplate("NavigationBar.ui.xml") 
 	interface NavigationBarUiBinder extends UiBinder<Widget, NavigationBar>

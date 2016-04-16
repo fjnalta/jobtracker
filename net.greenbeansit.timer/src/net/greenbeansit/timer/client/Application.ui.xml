@@ -6,11 +6,11 @@
 	<g:ScrollPanel>
 		<b:Container fluid="true">
 			<b:Row>
-				<b:Column size="MD_3">
+				<b:Column size="MD_2">
 					<components:NavigationBar ui:field="navigationBar" />
 				</b:Column>
 
-				<b:Column size="MD_9" ui:field="columnRight">
+				<b:Column size="MD_10" ui:field="columnRight">
 					<components:DashBoard ui:field="dashboard" />
 				</b:Column>
 			</b:Row>
