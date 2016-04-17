@@ -1,7 +1,8 @@
 package net.greenbeansit.timer.client;
 
 import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.user.client.ui.RootLayoutPanel;
+import com.google.gwt.user.client.ui.Panel;
+import com.google.gwt.user.client.ui.RootPanel;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
@@ -22,6 +23,8 @@ class GwtEntryPoint implements EntryPoint
 	{	
 		Application app = new Application();
 		
-		RootLayoutPanel.get().add(app);
+		Panel rootPanel = RootPanel.get();
+		
+		rootPanel.add(app);
 	}
 }

@@ -2,16 +2,34 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:b="urn:import:org.gwtbootstrap3.client.ui">
 	<ui:style>
-	.closeButton
+	.dashBoardWidget
 	{
-		float: left;
+		border-style: solid;
+		border-width: 1px;
+		border-color: #000000;
+		padding: 15px;
+	}
+	.dashBoardWidgetCloseButton
+	{
+		float: right;
+		margin-bottom:15px;
+	}
+	.dashBoardWidgetRow
+	{
+		margin: 0px;
 	}
 	</ui:style>
-	<b:Container fluid="true">
-		<b:Row>
-			<b:Button ui:field="buttonClose" width="30" height="30" type="DANGER" icon="CLOSE"></b:Button>
+	
+	<b:Container addStyleNames="{style.dashBoardWidget}">
+	
+		<!--Header-->
+		<b:Row addStyleNames="{style.dashBoardWidgetRow}">
+			<b:Label ui:field="labelTitle">Hier könnte ihr Titel stehen</b:Label>
+			<b:Button ui:field="buttonClose" type="DANGER" icon="CLOSE" addStyleNames="{style.dashBoardWidgetCloseButton}"/>
 		</b:Row>
-		<b:Row>
+		
+		<!--Body-->
+		<b:Row addStyleNames="{style.dashBoardWidgetRow}">
 			<b:Container fluid="true" ui:field="content"/>
 		</b:Row>
 	</b:Container>

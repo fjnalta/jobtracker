@@ -1,6 +1,7 @@
 package net.greenbeansit.timer.client.components.widgets;
 
 import org.gwtbootstrap3.client.ui.Container;
+import org.gwtbootstrap3.client.ui.Label;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -24,7 +25,11 @@ public class DashBoardWidget extends Composite
 	
 	@UiField
 	Container content;
+	
+	@UiField
+	Label labelTitle;
 
+	
 	@UiHandler("buttonClose")
 	void onClickCloseButton(ClickEvent e)
 	{
@@ -42,8 +47,12 @@ public class DashBoardWidget extends Composite
 		this.activity = activity;
 		
 		content.add(activity);
+		
+		//setTitle(this.getClass().getName());
 	}
-
-
 	
+	public void setTitle(String title)
+	{
+		labelTitle.setText(title);
+	}
 }

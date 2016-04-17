@@ -3,17 +3,18 @@
 	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:b="urn:import:org.gwtbootstrap3.client.ui"
 	xmlns:b.html="urn:import:org.gwtbootstrap3.client.ui.html"
 	xmlns:components="urn:import:net.greenbeansit.timer.client.components">
-	<g:ScrollPanel>
-		<b:Container fluid="true">
-			<b:Row>
-				<b:Column size="MD_2">
-					<components:NavigationBar ui:field="navigationBar" />
-				</b:Column>
+	<ui:style>
+	.mainContainer
+	{
+		padding-top: 70px;
+		overflow: visible;
+	}
+	</ui:style>
 
-				<b:Column size="MD_10" ui:field="columnRight">
-					<components:DashBoard ui:field="dashboard" />
-				</b:Column>
-			</b:Row>
-		</b:Container>
-	</g:ScrollPanel>
+
+	<b:Container addStyleNames="{style.mainContainer}">
+		<components:NavigationBar ui:field="navigationBar" />
+		<components:DashBoard ui:field="dashboard" />
+	</b:Container>
+
 </ui:UiBinder> 
