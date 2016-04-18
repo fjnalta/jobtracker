@@ -14,6 +14,9 @@ import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 
+import net.greenbeansit.timer.client.components.HomePage;
+import net.greenbeansit.timer.client.components.ProjectPage;
+
 /**
  * Represents the main widget of the application.
  */
@@ -67,7 +70,7 @@ class Application extends Composite
 					
 					removeActiveContentContainer();
 					
-					//TODO create project page
+					addWidgetAsContentPage(new ProjectPage());
 					break;
 					
 				default: //home
@@ -75,7 +78,7 @@ class Application extends Composite
 					
 					removeActiveContentContainer();
 					
-					//TODO: create home page
+					addWidgetAsContentPage(new HomePage());
 					break;
 			}
 			
@@ -96,6 +99,11 @@ class Application extends Composite
 			for(int i = 1; i < mainContainer.getWidgetCount(); i++)
 				mainContainer.remove(i);
 			
+		}
+		
+		private void addWidgetAsContentPage(Widget widget)
+		{
+			mainContainer.add(widget);
 		}
 	}
 }
