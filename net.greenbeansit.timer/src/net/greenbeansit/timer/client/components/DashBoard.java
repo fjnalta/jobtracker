@@ -27,17 +27,15 @@ public class DashBoard extends Composite {
 	}
 
 	public void addWidget(String name) {
-		if (checkForWidget(name) == false) 
-		{
-			switch (name) {
-			case "calendar":
-				widgetRow.add(new DashBoardWidget(new CalendarActivity()));
-				break;
 
-			case "jobs":
-				widgetRow.add(new DashBoardWidget(new JobsActivity()));
-				break;
-			}
+		switch (name) {
+		case "calendar":
+			widgetRow.add(new DashBoardWidget(new CalendarActivity()));
+			break;
+
+		case "jobs":
+			widgetRow.add(new DashBoardWidget(new JobsActivity()));
+			break;
 		}
 	}
 
@@ -45,7 +43,7 @@ public class DashBoard extends Composite {
 		boolean isThere = false;
 		for (int i = 0; i < widgetRow.getWidgetCount(); i++) {
 			if (widgetRow.getWidget(i).getTitle() == name)
-				System.out.println(widgetRow.getWidget(i).getTitle());
+				//System.out.println(widgetRow.getWidget(i).getTitle());
 				isThere = true;
 		}
 		return isThere;
