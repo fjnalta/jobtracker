@@ -8,6 +8,5 @@
 		
 	}
 	</ui:style>
-	
-	<g:HTMLPanel ui:field="container" addStyleNames="{style.dashBoardCalendar}"/>
+	<b:Row ui:field="container" addStyleNames="{style.dashBoardCalendar}"/>
 </ui:UiBinder> 

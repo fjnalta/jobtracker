@@ -12,9 +12,10 @@
 	</ui:style>
 
 
-	<b:Container addStyleNames="{style.mainContainer}">
+	<b:Container addStyleNames="{style.mainContainer}" fluid="true">
 		<components:NavigationBar ui:field="navigationBar" />
-		<components:DashBoard ui:field="dashboard" />
+		
+		<components:HomePage ui:field="dashboard" />
 	</b:Container>
 
 </ui:UiBinder> 

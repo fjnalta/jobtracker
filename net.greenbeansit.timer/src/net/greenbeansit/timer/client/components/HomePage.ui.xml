@@ -1,0 +1,21 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:b="urn:import:org.gwtbootstrap3.client.ui">
+	<ui:style>
+		.first_column {
+		margin-left:25px;
+		}
+		.second_column{
+		margin-right:25px;
+		}
+	</ui:style>
+	<b:Row>
+		<b:Column size="XS_3,SM_3,MD_3,LG_3" ui:field="first_column"
+			addStyleNames="{style.first_column}">
+		</b:Column>
+		<b:Column size="XS_7,SM_7,MD_7,LG_7" offset="XS_1,SM_1,MD_1,LG_1"
+			addStyleNames="{style.second_column}" ui:field="second_column">
+		</b:Column>
+	</b:Row>
+
+</ui:UiBinder> 

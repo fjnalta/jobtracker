@@ -1,8 +1,23 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
-	xmlns:g="urn:import:com.google.gwt.user.client.ui">
-	
-	<g:HTMLPanel>
-		Hello
-	</g:HTMLPanel>
+	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:b="urn:import:org.gwtbootstrap3.client.ui">
+
+	<b:Row>
+		<b:NavTabs>
+				<b:TabListItem active="true" dataTarget="#tab1" text="Alle Jobs"/>
+				<b:TabListItem dataTarget="#tab2" text="Favoriten"/>
+		</b:NavTabs>
+		<b:TabContent>
+			<b:TabPane active="true" b:id="tab1">
+			    <g:HTMLPanel>
+			        dosafbasifgasgas
+			    </g:HTMLPanel>
+			</b:TabPane>
+			<b:TabPane b:id="tab2">
+			     <g:HTMLPanel>
+			        adgvadigiadsfaosigbaoubsgobuaanofoaibnvo oafbi afb iuabfb iabf abfv afv avio
+			    </g:HTMLPanel>
+			</b:TabPane>
+		</b:TabContent>
+	</b:Row>
 </ui:UiBinder> 

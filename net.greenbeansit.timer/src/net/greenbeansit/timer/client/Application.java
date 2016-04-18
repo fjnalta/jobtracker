@@ -8,7 +8,7 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 
-import net.greenbeansit.timer.client.components.DashBoard;
+import net.greenbeansit.timer.client.components.HomePage;
 import net.greenbeansit.timer.client.components.NavigationBar;
 import net.greenbeansit.timer.client.components.NavigationBar.OnClickListener;
 
@@ -30,7 +30,7 @@ class Application extends Composite
 	NavigationBar navigationBar;
 	
 	@UiField
-	DashBoard dashboard;
+	HomePage dashboard;
 	
 	
 	public Application()
@@ -41,7 +41,6 @@ class Application extends Composite
 			
 			@Override
 			public void onClick(String uiField) {
-				dashboard.addWidget(uiField);
 				
 			}
 		});

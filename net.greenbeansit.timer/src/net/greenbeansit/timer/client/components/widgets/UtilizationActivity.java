@@ -11,7 +11,7 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.Widget;
 
-public class UtilizationActivity extends DashBoardActivity {
+public class UtilizationActivity extends Composite {
 
 	private static UtilizationActivityUiBinder uiBinder = GWT.create(UtilizationActivityUiBinder.class);
 
