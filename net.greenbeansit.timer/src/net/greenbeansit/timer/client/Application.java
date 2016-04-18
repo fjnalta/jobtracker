@@ -1,16 +1,18 @@
 package net.greenbeansit.timer.client;
 
+import org.gwtbootstrap3.client.ui.AnchorListItem;
+import org.gwtbootstrap3.client.ui.Container;
+import org.gwtbootstrap3.client.ui.NavbarNav;
+
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiTemplate;
-import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
-
-import net.greenbeansit.timer.client.components.DashBoard;
-import net.greenbeansit.timer.client.components.NavigationBar;
-import net.greenbeansit.timer.client.components.NavigationBar.OnClickListener;
 
 /**
  * Represents the main widget of the application.
@@ -26,27 +28,74 @@ class Application extends Composite
 		
 	}
 	
-	@UiField 
-	NavigationBar navigationBar;
 	
 	@UiField
-	DashBoard dashboard;
+	Container mainContainer;
+	
+	@UiField
+	AnchorListItem navHome;
+	
+	@UiField
+	AnchorListItem navProject;
+	
+	@UiField
+	NavbarNav nav;
 	
 	
 	public Application()
 	{
 		initWidget(uiBinder.createAndBindUi(this));
 		
-		navigationBar.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(String uiField) {
-				dashboard.addWidget(uiField);
-				
-			}
-		});
+		History.addValueChangeHandler(new HistoryValueChangeHandler());
 		
+		History.fireCurrentHistoryState();
 	}
 	
 	
+	private class HistoryValueChangeHandler implements ValueChangeHandler<String>
+	{
+
+		@Override
+		public void onValueChange(ValueChangeEvent<String> event)
+		{
+			deactivateAllNavButtons();
+			
+			switch(event.getValue())
+			{
+				case "project":
+					navProject.setActive(true);
+					
+					removeActiveContentContainer();
+					
+					//TODO create project page
+					break;
+					
+				default: //home
+					navHome.setActive(true);
+					
+					removeActiveContentContainer();
+					
+					//TODO: create home page
+					break;
+			}
+			
+		}
+		
+		private void deactivateAllNavButtons()
+		{
+			for(int i= 0; i < nav.getWidgetCount(); i++)
+			{
+				Widget widget = nav.getWidget(i);
+				if(widget instanceof AnchorListItem)
+					((AnchorListItem)widget).setActive(false);
+			}
+		}
+		
+		private void removeActiveContentContainer()
+		{
+			for(int i = 1; i < mainContainer.getWidgetCount(); i++)
+				mainContainer.remove(i);
+			
+		}
+	}
 }

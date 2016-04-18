@@ -4,17 +4,34 @@
 	xmlns:b.html="urn:import:org.gwtbootstrap3.client.ui.html"
 	xmlns:components="urn:import:net.greenbeansit.timer.client.components">
 	<ui:style>
-	.mainContainer
-	{
+	.mainContainer {
 		padding-top: 70px;
 		overflow: visible;
 	}
 	</ui:style>
 
 
-	<b:Container addStyleNames="{style.mainContainer}">
-		<components:NavigationBar ui:field="navigationBar" />
-		<components:DashBoard ui:field="dashboard" />
+
+	<b:Container addStyleNames="{style.mainContainer}"
+		ui:field="mainContainer">
+		<b:Navbar position="FIXED_TOP" marginBottom="20">
+			<b:NavbarHeader>
+				<b:NavbarBrand>Menu</b:NavbarBrand>
+				<b:NavbarCollapseButton dataTarget="#navbar-collapse" />
+			</b:NavbarHeader>
+			<b:NavbarCollapse b:id="navbar-collapse">
+				<b:NavbarNav ui:field="nav" inline="true">
+					<b:AnchorListItem iconFixedWidth="true" ui:field="navHome"
+						href="#home">
+						Home
+					</b:AnchorListItem>
+					<b:AnchorListItem iconFixedWidth="true" ui:field="navProject"
+						href="#project">
+						Projekt
+					</b:AnchorListItem>
+				</b:NavbarNav>
+			</b:NavbarCollapse>
+		</b:Navbar>
 	</b:Container>
 
 </ui:UiBinder> 
