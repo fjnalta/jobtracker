@@ -20,10 +20,8 @@
 		margin: 0px;
 	}
 	</ui:style>
-	
-	<b:Container addStyleNames="{style.dashBoardWidget}">
-	
-		<!--Header-->
+		<Container>
+		    <!--Header-->
 		<b:Row addStyleNames="{style.dashBoardWidgetRow}">
 			<b:Label ui:field="labelTitle">Hier könnte ihr Titel stehen</b:Label>
 			<b:Button ui:field="buttonClose" type="DANGER" icon="CLOSE" addStyleNames="{style.dashBoardWidgetCloseButton}"/>
@@ -33,5 +31,7 @@
 		<b:Row addStyleNames="{style.dashBoardWidgetRow}">
 			<b:Container fluid="true" ui:field="content"/>
 		</b:Row>
-	</b:Container>
+		</Container>
+		
+	
 </ui:UiBinder> 

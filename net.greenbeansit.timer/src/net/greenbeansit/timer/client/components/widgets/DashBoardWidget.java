@@ -1,5 +1,6 @@
 package net.greenbeansit.timer.client.components.widgets;
 
+import org.gwtbootstrap3.client.ui.Column;
 import org.gwtbootstrap3.client.ui.Container;
 import org.gwtbootstrap3.client.ui.Label;
 
@@ -26,6 +27,7 @@ public class DashBoardWidget extends Composite
 	@UiField
 	Container content;
 	
+	
 	@UiField
 	Label labelTitle;
 
@@ -50,6 +52,15 @@ public class DashBoardWidget extends Composite
 		
 		//setTitle(this.getClass().getName());
 	}
+	
+	public DashBoardWidget(DashBoardActivity activity,String size){
+		initWidget(uiBinder.createAndBindUi(this));
+		
+		this.activity = activity;
+		
+		content.add(activity);
+	}
+	
 	
 	public void setTitle(String title)
 	{
