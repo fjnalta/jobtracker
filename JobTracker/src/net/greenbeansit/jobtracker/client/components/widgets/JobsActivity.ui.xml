@@ -6,21 +6,17 @@
 		border-style:solid;
 		border-width:1px;
 		border-color:white;
-		}
-		.navTab{
-		width:50%;
+margin-top:25px;
 		}
 		.tab {
 		background-color:white;
-		height:250px;
 		}
 	</ui:style>
 	<b:Row addStyleNames="{style.row}">
-		<b:NavTabs>
+		<b:NavTabs justified="true">
 			<b:TabListItem active="true" dataTarget="#tabAllJobs"
-				text="ALLE JOBS" addStyleNames="{style.navTab}" />
-			<b:TabListItem dataTarget="#tabFavoriten" text="FAVORITEN"
-				addStyleNames="{style.navTab}" />
+				text="ALLEJOBS" />
+			<b:TabListItem dataTarget="#tabFavoriten" text="FAVORITEN"/>
 		</b:NavTabs>
 		<b:TabContent>
 			<b:TabPane active="true" b:id="tabAllJobs" addStyleNames="{style.tab}">

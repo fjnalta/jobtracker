@@ -1,5 +1,7 @@
 package net.greenbeansit.jobtracker.client.components.widgets;
 
+import org.gwtbootstrap3.client.ui.Container;
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -18,6 +20,7 @@ public class UtilizationActivity extends Composite {
 	interface UtilizationActivityUiBinder extends UiBinder<Widget, UtilizationActivity> {
 	}
 
+	
 	public UtilizationActivity() {
 		initWidget(uiBinder.createAndBindUi(this));
 	}
