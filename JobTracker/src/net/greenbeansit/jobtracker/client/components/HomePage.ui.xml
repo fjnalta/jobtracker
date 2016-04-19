@@ -9,6 +9,7 @@
 	.second_column {
 		margin-right: 25px;
 	}
+
 	</ui:style>
 	<b:Row>
 		<b:Column size="XS_3,SM_3,MD_3,LG_3" ui:field="first_column"

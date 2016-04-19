@@ -1,0 +1,36 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui"
+	xmlns:b="urn:import:org.gwtbootstrap3.client.ui">
+	<ui:style>
+	.row {
+		border-style:solid;
+		border-width:1px;
+		border-color:white;
+	}
+	.navTab{
+		width:50%;
+	}
+	.tab {
+		background-color:white;
+	}
+	</ui:style>
+	<b:Row addStyleNames="{style.row}">
+		<b:NavTabs>
+				<b:TabListItem active="true" dataTarget="#tabManuell" text="MANUELL" addStyleNames="{style.navTab}"/>
+				<b:TabListItem dataTarget="#tabVorlagen" text="VORLAGE" addStyleNames="{style.navTab}"/>
+		</b:NavTabs>
+		<b:TabContent>
+			<b:TabPane active="true" b:id="tabManuell"  addStyleNames="{style.tab}">
+			    <g:HTMLPanel>
+			        Hier kann man in Zukunft Tätigkeiten eintragen
+			    </g:HTMLPanel>
+			</b:TabPane>
+			<b:TabPane b:id="tabVorlagen"  addStyleNames="{style.tab}">
+			     <g:HTMLPanel>
+			        Hier werden Vorlagen angezeigt
+			    </g:HTMLPanel>
+			</b:TabPane>
+		</b:TabContent>
+	</b:Row>
+</ui:UiBinder> 

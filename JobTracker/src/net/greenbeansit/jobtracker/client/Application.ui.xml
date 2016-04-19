@@ -7,13 +7,14 @@
 	.mainContainer {
 		padding-top: 70px;
 		overflow: visible;
+		background-color:#f4f4f1;
 	}
 	</ui:style>
 
 
 
 	<b:Container addStyleNames="{style.mainContainer}"
-		ui:field="mainContainer">
+		ui:field="mainContainer" fluid="true">
 		<b:Navbar position="FIXED_TOP" marginBottom="20">
 			<b:NavbarHeader>
 				<b:NavbarBrand>JobTracker</b:NavbarBrand>

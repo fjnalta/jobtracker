@@ -15,6 +15,8 @@ import com.google.gwt.user.client.ui.Widget;
 
 import net.greenbeansit.jobtracker.client.components.widgets.CalendarActivity;
 import net.greenbeansit.jobtracker.client.components.widgets.JobsActivity;
+import net.greenbeansit.jobtracker.client.components.widgets.UtilizationActivity;
+import net.greenbeansit.jobtracker.client.components.widgets.WorkActivity;
 
 public class HomePage extends Composite{
 
@@ -32,8 +34,8 @@ public class HomePage extends Composite{
 	public HomePage() {
 		initWidget(uiBinder.createAndBindUi(this));
 		first_column.add(new JobsActivity());
-		first_column.add(new JobsActivity());
-		first_column.add(new JobsActivity());
+		first_column.add(new WorkActivity());
+		first_column.add(new UtilizationActivity());
 		second_column.add(new CalendarActivity());
 	}
 

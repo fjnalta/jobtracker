@@ -1,22 +1,37 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:b="urn:import:org.gwtbootstrap3.client.ui">
-
-	<b:Row>
+	<ui:style>
+		.row {
+		border-style:solid;
+		border-width:1px;
+		border-color:white;
+		}
+		.navTab{
+		width:50%;
+		}
+		.tab {
+		background-color:white;
+		height:250px;
+		}
+	</ui:style>
+	<b:Row addStyleNames="{style.row}">
 		<b:NavTabs>
-				<b:TabListItem active="true" dataTarget="#tab1" text="Alle Jobs"/>
-				<b:TabListItem dataTarget="#tab2" text="Favoriten"/>
+			<b:TabListItem active="true" dataTarget="#tabAllJobs"
+				text="ALLE JOBS" addStyleNames="{style.navTab}" />
+			<b:TabListItem dataTarget="#tabFavoriten" text="FAVORITEN"
+				addStyleNames="{style.navTab}" />
 		</b:NavTabs>
 		<b:TabContent>
-			<b:TabPane active="true" b:id="tab1">
-			    <g:HTMLPanel>
-			        dosafbasifgasgas
-			    </g:HTMLPanel>
+			<b:TabPane active="true" b:id="tabAllJobs" addStyleNames="{style.tab}">
+				<g:HTMLPanel>
+					TODO Job List
+				</g:HTMLPanel>
 			</b:TabPane>
-			<b:TabPane b:id="tab2">
-			     <g:HTMLPanel>
-			        adgvadigiadsfaosigbaoubsgobuaanofoaibnvo oafbi afb iuabfb iabf abfv afv avio
-			    </g:HTMLPanel>
+			<b:TabPane b:id="tabFavoriten" addStyleNames="{style.tab}">
+				<g:HTMLPanel>
+					TODO Jobs Favoriten List
+				</g:HTMLPanel>
 			</b:TabPane>
 		</b:TabContent>
 	</b:Row>
