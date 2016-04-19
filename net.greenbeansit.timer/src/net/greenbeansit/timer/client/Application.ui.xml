@@ -16,7 +16,7 @@
 		ui:field="mainContainer">
 		<b:Navbar position="FIXED_TOP" marginBottom="20">
 			<b:NavbarHeader>
-				<b:NavbarBrand>Menu</b:NavbarBrand>
+				<b:NavbarBrand>JobTracker</b:NavbarBrand>
 				<b:NavbarCollapseButton dataTarget="#navbar-collapse" />
 			</b:NavbarHeader>
 			<b:NavbarCollapse b:id="navbar-collapse">
