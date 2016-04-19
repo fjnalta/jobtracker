@@ -6,27 +6,66 @@
 		border-style:solid;
 		border-width:1px;
 		border-color:white;
+		margin-top:25px;
 		}
 		.tab {
-		background-color:white;
+		background-color: lightgrey;
 		}
-		.navTab{
-		width:50%;
+		.slider {
+		background-color: #669966;
+		color:red;
 		}
+		.slider .active {
+		background-color: #FF7600;
+		}
+		.NavTabs>li{
+		background-color:black;
+		}
+	
 	</ui:style>
 	<b:Row addStyleNames="{style.row}">
-		<b:NavTabs>
+		<b:NavTabs justified="true" >
 			<b:TabListItem active="true" dataTarget="#tabAuslastung"
-				text="AUSLASTUNG" addStyleNames="{style.navTab}" />
-			<b:TabListItem dataTarget="#tabArbeitszeit" text="ARBEITSZEIT"
-				addStyleNames="{style.navTab}" />
+				text="AUSLASTUNG"/>
+			<b:TabListItem dataTarget="#tabArbeitszeit" text="ARBEITSZEIT"/>
 		</b:NavTabs>
 		<b:TabContent>
 			<b:TabPane active="true" b:id="tabAuslastung"
 				addStyleNames="{style.tab}">
-				<g:HTMLPanel>
-					Hier wird die Auslastung als Pie Chart angezeigt
-				</g:HTMLPanel>
+				<b:Carousel b:id="carousel-basic">
+					<b:CarouselIndicators>
+						<b:CarouselIndicator dataTarget="#carousel-basic"
+							dataSlideTo="0" active="true" addStyleNames="{style.slider}"/>
+						<b:CarouselIndicator dataTarget="#carousel-basic"
+							dataSlideTo="1" />
+						<b:CarouselIndicator dataTarget="#carousel-basic"
+							dataSlideTo="2" />
+					</b:CarouselIndicators>
+					<b:CarouselInner>
+						<b:CarouselSlide active="true">
+							<g:HTMLPanel>
+								<br>TEST</br>
+								<br>TEST</br>
+								<br>TEST</br>
+								<br>TEST</br>
+								<br>TEST</br>
+								<br>TEST</br>
+								<br>TEST</br>
+								<br>TEST</br>
+								<br>TEST</br>
+							</g:HTMLPanel>
+						</b:CarouselSlide>
+						<b:CarouselSlide>
+							<b:Image
+								url="https://gwtbootstrap3.github.io/gwtbootstrap3-demo/images/carousel2.png" />
+						</b:CarouselSlide>
+						<b:CarouselSlide>
+							<b:Image
+								url="https://gwtbootstrap3.github.io/gwtbootstrap3-demo/images/carousel3.png" />
+						</b:CarouselSlide>
+					</b:CarouselInner>
+
+				</b:Carousel>
 			</b:TabPane>
 			<b:TabPane b:id="tabArbeitszeit" addStyleNames="{style.tab}">
 				<g:HTMLPanel>

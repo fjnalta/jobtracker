@@ -12,10 +12,10 @@
 
 	</ui:style>
 	<b:Row>
-		<b:Column size="XS_3,SM_3,MD_3,LG_3" ui:field="first_column"
+		<b:Column size="XS_9,SM_6,MD_3,LG_3" ui:field="first_column"
 			addStyleNames="{style.first_column}">
 		</b:Column>
-		<b:Column size="XS_7,SM_7,MD_7,LG_7" offset="XS_1,SM_1,MD_1,LG_1"
+		<b:Column size="XS_9,SM_7,MD_7,LG_7" offset="XS_1,SM_1,MD_1,LG_1"
 			addStyleNames="{style.second_column}" ui:field="second_column">
 		</b:Column>
 	</b:Row>
