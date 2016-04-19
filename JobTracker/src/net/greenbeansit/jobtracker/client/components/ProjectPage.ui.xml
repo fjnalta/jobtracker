@@ -113,9 +113,8 @@
 				</b:Row>
 			</b:Column>
 			<b:Column size="XS_8,SM_8,MD_8,LG_8" addStyleNames="{style.mainColumn}">
-				<b:Row addStyleNames="{style.largeContainer}">
-					<!-- Project diagram -->
-					<b:Heading size="H3" text="Terasda" />
+				<b:Row addStyleNames="{style.largeContainer}" ui:field="containerBudgetDiagrams">
+					<!-- Project diagrams -->
 					
 				</b:Row>
 			</b:Column>
