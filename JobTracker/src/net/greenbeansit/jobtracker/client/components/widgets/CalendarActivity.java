@@ -1,6 +1,6 @@
 package net.greenbeansit.jobtracker.client.components.widgets;
 
-import org.gwtbootstrap3.client.ui.Row;
+import org.gwtbootstrap3.client.ui.html.ClearFix;
 import org.gwtbootstrap3.extras.fullcalendar.client.ui.CalendarConfig;
 import org.gwtbootstrap3.extras.fullcalendar.client.ui.FullCalendar;
 import org.gwtbootstrap3.extras.fullcalendar.client.ui.GeneralDisplay;
@@ -8,11 +8,9 @@ import org.gwtbootstrap3.extras.fullcalendar.client.ui.Language;
 import org.gwtbootstrap3.extras.fullcalendar.client.ui.ViewOption;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.logging.client.DefaultLevel.Config;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Widget;
 
 public class CalendarActivity extends Composite
@@ -26,7 +24,7 @@ public class CalendarActivity extends Composite
 	}
 
 	@UiField
-	Row container;
+	ClearFix container;
 	
 	FullCalendar calendar;
 	

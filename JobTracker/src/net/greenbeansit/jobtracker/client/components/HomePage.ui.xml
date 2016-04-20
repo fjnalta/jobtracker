@@ -1,23 +1,86 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
-	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:b="urn:import:org.gwtbootstrap3.client.ui">
+	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:b="urn:import:org.gwtbootstrap3.client.ui"
+	xmlns:b.html="urn:import:org.gwtbootstrap3.client.ui.html"
+	xmlns:widgets="urn:import:net.greenbeansit.jobtracker.client.components.widgets">
 	<ui:style>
-	.first_column {
-		margin-left: 25px;
+	.headerRow {
+		margin: 10px;
+		padding: 10px;
+		background-color: #ffffff;
 	}
 	
-	.second_column {
-		margin-right: 25px;
+	.bottomRow {
+		margin: 0px;
 	}
-
+	
+	.mainColumn {
+		padding: 0;
+	}
+	
+	.largeContainer {
+		margin-top: 10px;
+		margin-bottom: 10px;
+		margin-left: 10px;
+		margin-right: 10px;
+		padding: 10px;
+		background-color: #ffffff;
+	}
+	
+	.smallContainer {
+		margin: 10px 10px;
+		padding: 10px;
+		background-color: #ffffff;
+	}
+	
+	/*Title*/
+	.title {
+		float: right;
+	}
+	
+	/*Infobox*/
+	.bigButton {
+		margin: 10px;
+		text-align: left;
+	}
+	
+	.infoHeader {
+		margin: 10px;
+	}
+	
+	.infoName {
+		margin: 5px;
+		float: left;
+	}
+	
+	.infoContent {
+		margin: 5px;
+		float: right;
+		color: #ff0066;
+	}
+	
+	.horizontalfillRow {
+		width: 100%;
+		margin: 0;
+	}
 	</ui:style>
-	<b:Row>
-		<b:Column size="XS_9,SM_6,MD_3,LG_3" ui:field="first_column"
-			addStyleNames="{style.first_column}">
+	<b:Container fluid="true">
+		<b:Column size="XS_12,SM_12,MD_4,LG_4" addStyleNames="{style.mainColumn}">
+			<b:Row addStyleNames="{style.smallContainer}">
+				<widgets:JobsActivity />
+			</b:Row>
+			<b:Row addStyleNames="{style.smallContainer}">
+				<widgets:WorkActivity />
+			</b:Row>
+			<b:Row addStyleNames="{style.smallContainer}">
+				<widgets:UtilizationActivity />
+			</b:Row>
 		</b:Column>
-		<b:Column size="XS_9,SM_7,MD_7,LG_7" offset="XS_1,SM_1,MD_1,LG_1"
-			addStyleNames="{style.second_column}" ui:field="second_column">
+		<b:Column size="XS_12,SM_12,MD_8,LG_8" addStyleNames="{style.mainColumn}">
+			<b:Row addStyleNames="{style.largeContainer}" ui:field="containerBudgetDiagrams">
+				<widgets:CalendarActivity />
+			</b:Row>
 		</b:Column>
-	</b:Row>
+	</b:Container>
 
 </ui:UiBinder> 
