@@ -11,7 +11,7 @@
 	}
 	
 	.bottomRow {
-		margin: 10px;
+		margin: 0px;
 	}
 	
 	.mainColumn {
@@ -22,13 +22,13 @@
 		margin-top: 10px;
 		margin-bottom: 10px;
 		margin-left: 10px;
-		margin-right: 0px;
+		margin-right: 10px;
 		padding: 10px;
 		background-color: #ffffff;
 	}
 	
 	.smallContainer {
-		margin: 10px 0px;
+		margin: 10px 10px;
 		padding: 10px;
 		background-color: #ffffff;
 	}
@@ -69,7 +69,7 @@
 			<b:Heading size="H3" addStyleNames="{style.title}" text="Alle Projekte" />
 		</b:Row>
 		<b:Row addStyleNames="{style.bottomRow}">
-			<b:Column size="XS_4,SM_4,MD_4,LG_4" addStyleNames="{style.mainColumn}">
+			<b:Column size="XS_12,SM_12,MD_4,LG_4" addStyleNames="{style.mainColumn}">
 				<b:Row addStyleNames="{style.smallContainer}">
 					<b:ButtonGroup width="100%">
 						<b:Button dataToggle="DROPDOWN" text="Projekt" type="DEFAULT"
@@ -112,10 +112,10 @@
 					</g:VerticalPanel>
 				</b:Row>
 			</b:Column>
-			<b:Column size="XS_8,SM_8,MD_8,LG_8" addStyleNames="{style.mainColumn}">
+			<b:Column size="XS_12,SM_12,MD_8,LG_8" addStyleNames="{style.mainColumn}">
 				<b:Row addStyleNames="{style.largeContainer}" ui:field="containerBudgetDiagrams">
 					<!-- Project diagrams -->
-					
+
 				</b:Row>
 			</b:Column>
 		</b:Row>
