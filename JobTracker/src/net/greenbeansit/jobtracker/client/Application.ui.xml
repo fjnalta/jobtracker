@@ -6,6 +6,8 @@
 	<ui:style>
 	.mainContainer {
 		padding-top: 70px;
+		padding-left: 0px;
+		padding-right: 0px;
 		overflow: visible;
 		background-color:#f4f4f1;
 	}
