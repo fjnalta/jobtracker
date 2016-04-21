@@ -72,14 +72,12 @@
 		<b:Row addStyleNames="{style.bottomRow}">
 			<b:Column size="XS_12,SM_12,MD_4,LG_4" addStyleNames="{style.mainColumn}">
 				<b:Row addStyleNames="{style.smallContainer}">
-
-
-					<s:Select addStyleNames="{style.bigButton}" type="PRIMARY">
+					<s:Select addStyleNames="{style.bigButton}" type="PRIMARY" ui:field="selectCustomer">
 						<s:Option text="Kunde X"/>
 						<s:Option text="Kunde Y"/>
 						<s:Option text="Kunde Z"/>
 					</s:Select>
-					<s:Select addStyleNames="{style.bigButton}" type="PRIMARY">
+					<s:Select addStyleNames="{style.bigButton}" type="PRIMARY" ui:field="selectProject">
 						<s:Option text="Projekt X"/>
 						<s:Option text="Projekt Y"/>
 						<s:Option text="Projekt Z"/>
