@@ -67,18 +67,18 @@
 	<b:Container fluid="true">
 		<b:Column size="XS_12,SM_12,MD_4,LG_4" addStyleNames="{style.mainColumn}">
 			<b:Row addStyleNames="{style.smallContainer}">
-				<widgets:JobsActivity />
+				<widgets:JobsWidget />
 			</b:Row>
 			<b:Row addStyleNames="{style.smallContainer}">
-				<widgets:WorkActivity />
+				<widgets:WorkDiscriptionWidget />
 			</b:Row>
 			<b:Row addStyleNames="{style.smallContainer}">
-				<widgets:UtilizationActivity />
+				<widgets:UtilizationWidget />
 			</b:Row>
 		</b:Column>
 		<b:Column size="XS_12,SM_12,MD_8,LG_8" addStyleNames="{style.mainColumn}">
 			<b:Row addStyleNames="{style.largeContainer}" ui:field="containerBudgetDiagrams">
-				<widgets:CalendarActivity />
+				<widgets:CalendarWidget />
 			</b:Row>
 		</b:Column>
 	</b:Container>

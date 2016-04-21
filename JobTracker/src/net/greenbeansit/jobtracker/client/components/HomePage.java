@@ -13,7 +13,6 @@ public class HomePage extends Composite{
 	}
 	
 	
-
 	public HomePage() {
 		initWidget(uiBinder.createAndBindUi(this));
 	}

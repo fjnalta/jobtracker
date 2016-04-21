@@ -11,14 +11,14 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.Widget;
 
-public class WorkActivity extends Composite{
+public class WorkDiscriptionWidget extends Composite{
 
-	private static WorkActivityUiBinder uiBinder = GWT.create(WorkActivityUiBinder.class);
+	private static WorkDiscriptionWidgetUiBinder uiBinder = GWT.create(WorkDiscriptionWidgetUiBinder.class);
 
-	interface WorkActivityUiBinder extends UiBinder<Widget, WorkActivity> {
+	interface WorkDiscriptionWidgetUiBinder extends UiBinder<Widget, WorkDiscriptionWidget> {
 	}
 
-	public WorkActivity() {
+	public WorkDiscriptionWidget() {
 		initWidget(uiBinder.createAndBindUi(this));
 	}
 

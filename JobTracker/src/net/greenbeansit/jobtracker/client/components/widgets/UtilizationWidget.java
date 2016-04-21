@@ -13,15 +13,15 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.Widget;
 
-public class UtilizationActivity extends Composite {
+public class UtilizationWidget extends Composite {
 
-	private static UtilizationActivityUiBinder uiBinder = GWT.create(UtilizationActivityUiBinder.class);
+	private static UtilizationWidgetUiBinder uiBinder = GWT.create(UtilizationWidgetUiBinder.class);
 
-	interface UtilizationActivityUiBinder extends UiBinder<Widget, UtilizationActivity> {
+	interface UtilizationWidgetUiBinder extends UiBinder<Widget, UtilizationWidget> {
 	}
 
 	
-	public UtilizationActivity() {
+	public UtilizationWidget() {
 		initWidget(uiBinder.createAndBindUi(this));
 	}
 

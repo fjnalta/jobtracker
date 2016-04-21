@@ -10,12 +10,12 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 
-public class JobsActivity extends Composite
+public class JobsWidget extends Composite
 {
 
-	private static JobsActivityUiBinder uiBinder = GWT.create(JobsActivityUiBinder.class);
+	private static JobsWidgetUiBinder uiBinder = GWT.create(JobsWidgetUiBinder.class);
 
-	interface JobsActivityUiBinder extends UiBinder<Widget, JobsActivity> {
+	interface JobsWidgetUiBinder extends UiBinder<Widget, JobsWidget> {
 	}
 	
 	@UiField
@@ -23,7 +23,7 @@ public class JobsActivity extends Composite
 	@UiField
 	LinkedGroup tabAllJobsContent;
 
-	public JobsActivity() {
+	public JobsWidget() {
 		initWidget(uiBinder.createAndBindUi(this));
 		
 		LinkedGroupItem job1 = new LinkedGroupItem("Job1", "#home");

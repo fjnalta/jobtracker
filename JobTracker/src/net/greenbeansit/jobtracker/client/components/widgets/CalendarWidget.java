@@ -17,11 +17,11 @@ import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 
-public class CalendarActivity extends Composite {
+public class CalendarWidget extends Composite {
 
 	private static CalendarWidgetUiBinder uiBinder = GWT.create(CalendarWidgetUiBinder.class);
 
-	interface CalendarWidgetUiBinder extends UiBinder<Widget, CalendarActivity> {
+	interface CalendarWidgetUiBinder extends UiBinder<Widget, CalendarWidget> {
 
 	}
 
@@ -30,7 +30,7 @@ public class CalendarActivity extends Composite {
 
 	FullCalendar calendar;
 
-	public CalendarActivity() {
+	public CalendarWidget() {
 		initWidget(uiBinder.createAndBindUi(this));
 
 		new RenderTimer().schedule(0);

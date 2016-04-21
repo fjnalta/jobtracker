@@ -11,14 +11,14 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.Widget;
 
-public class CapazityActivity extends Composite {
+public class CapazityWidget extends Composite {
 
-	private static CapazityActivityUiBinder uiBinder = GWT.create(CapazityActivityUiBinder.class);
+	private static CapazityWidgetUiBinder uiBinder = GWT.create(CapazityWidgetUiBinder.class);
 
-	interface CapazityActivityUiBinder extends UiBinder<Widget, CapazityActivity> {
+	interface CapazityWidgetUiBinder extends UiBinder<Widget, CapazityWidget> {
 	}
 
-	public CapazityActivity() {
+	public CapazityWidget() {
 		initWidget(uiBinder.createAndBindUi(this));
 	}
 
