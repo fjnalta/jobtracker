@@ -3,26 +3,64 @@
 	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:h="urn:import:org.gwtbootstrap3.client.ui.html"
 	xmlns:b="urn:import:org.gwtbootstrap3.client.ui">
 	<ui:style>
-	.dayNumber
-	{
-		width: 30px;
-	}
-	.diagramInner
-	{
-		
-	}
-	.diagramOuter
-	{
+	.dayNumber {
 		width: 30px;
 	}
 	
+	.diagramOuter {
+		width: 200px;
+		height: 200px;
+		border-radius: 50%;
+		background-color: #d8d8d8;
+		position: relative;
+	}
+	
+	.diagramInner {
+		height: 180px;
+		width: 180px;
+		margin: auto;
+		position: absolute;
+		
+		top: 0;
+		left: 0;
+		bottom: 0;
+		right: 0;
+		border-radius: 50%;
+		background-color: #ffffff;
+	}
+	
+	.diagramInnerText {
+		color: black;
+	}
+	
+	.quarter {
+		width: 100%;
+		height: 100%;
+		clip: rect(0, 200px, 100px, 100px);
+		position: absolute;
+		border-radius: 50%;
+		background-color: #6391ff;
+	}
+	
+	.quarterFinal {
+		width: 100%;
+		height: 100%;
+		clip: rect(0, 200px, 100px, 100px);
+		position: absolute;
+		border-radius: 50%;
+		background-color: #d8d8d8;
+	}
 	</ui:style>
-	<h:ClearFix>
-		<b:Row ui:field="rowDiagram">
-			
-		</b:Row>
-		<b:Row ui:field="rowNumber">
-			
-		</b:Row>
+	<h:ClearFix addStyleNames="{style.diagramOuter}" ui:field="diagramOuter">
+		<h:ClearFix addStyleNames="{style.quarter}" ui:field="quarterOne" />
+		<h:ClearFix addStyleNames="{style.quarter}" ui:field="quarterTwo" />
+		<h:ClearFix addStyleNames="{style.quarter}" ui:field="quarterThree" />
+		<h:ClearFix addStyleNames="{style.quarter}" ui:field="quarterFour" />
+		<h:ClearFix addStyleNames="{style.quarterFinal}" ui:field="quarterFinal" />
+
+		<h:ClearFix addStyleNames="{style.diagramInner}" ui:field="diagramInner">
+			<b:Heading size="H1" text="[Prozent]" addStyleNames="{style.diagramInnerText}"
+				ui:field="diagramInnerText" />
+		</h:ClearFix>
 	</h:ClearFix>
 </ui:UiBinder> 
