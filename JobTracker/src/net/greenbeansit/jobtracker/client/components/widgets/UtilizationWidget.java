@@ -21,17 +21,16 @@ public class UtilizationWidget extends Composite {
 	@UiField
 	ClearFix container;
 	
-	UtilizationDiagram diagram;
+	@UiField
+	UtilizationDiagram utilizationDiagram;
+	
 	
 	public UtilizationWidget()
 	{
 		initWidget(uiBinder.createAndBindUi(this));
-	
-		diagram = new UtilizationDiagram();
 		
-		container.add(diagram);
+		utilizationDiagram.setUtilization(80);
 		
-		diagram.setUtilization(20);
 	}
 	
 
