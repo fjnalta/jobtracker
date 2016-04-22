@@ -11,13 +11,9 @@
 		position: absolute;
 		left: 0;
 		right: 0;
-		margin-top: 45px;
+		margin-top: 20px;
 		margin-left: auto;
 		margin-right: auto;
-	}
-	
-	.labelName {
-		color: #000000;
 	}
 	
 	.labelValue {
@@ -29,7 +25,7 @@
 	</ui:style>
 	<h:ClearFix ui:field="container">
 		<b:Column size="XS_12,SM_12,MD_6,LG_6">
-			<b:Heading size="H4" text="Verbleibende Urlaubstage:"/>
+			<b:Heading size="H4" text="Verbleibende Urlaubstage:" />
 			<h:Span text="13" addStyleNames="{style.labelValue}" />
 		</b:Column>
 		<b:Column size="XS_12,SM_12,MD_6,LG_6">
