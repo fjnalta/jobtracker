@@ -12,21 +12,22 @@ import com.google.gwt.user.client.ui.UIObject;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
- * Represents a percentage in a donut diagram.
+ * Represents a percentage in a ring diagram.
  * 
  * @author Max Blatt
  */
-public class UtilizationDiagram extends Composite
+public class PercentageRingDiagram extends Composite
 {
-	private static UtilizationDiagramUiBinder uiBinder =
-			GWT.create(UtilizationDiagramUiBinder.class);
+	private static PercentageRingDiagramUiBinder uiBinder =
+			GWT.create(PercentageRingDiagramUiBinder.class);
 
-	interface UtilizationDiagramUiBinder extends UiBinder<Widget, UtilizationDiagram>
+	interface PercentageRingDiagramUiBinder 
+		extends UiBinder<Widget, PercentageRingDiagram>
 	{
 		
 	}
 
-	private double utilization;
+	private double percentage;
 	
 	@UiField
 	ClearFix diagramOuter;
@@ -54,34 +55,34 @@ public class UtilizationDiagram extends Composite
 	
 	
 	/**
-	 * Initializes a new instance of the {@link UtilizationDiagram} class.
+	 * Initializes a new instance of the {@link PercentageRingDiagram} class.
 	 */
-	public UtilizationDiagram()
+	public PercentageRingDiagram()
 	{
 		initWidget(uiBinder.createAndBindUi(this));
 		
 	}
 	
 	/**
-	 * Gets the percentage of the current {@link UtilizationDiagram}.
+	 * Gets the percentage of the current {@link PercentageRingDiagram}.
 	 * 
 	 * @return a double.
 	 */
-	public double getUtilization()
+	public double getPercentage()
 	{
-		return utilization;
+		return percentage;
 	}
 	
 	/**
-	 * Sets the percentag of the current {@link UtilizationDiagram} and
+	 * Sets the percentage of the current {@link PercentageRingDiagram} and
 	 * updates the graphics.
 	 * 
-	 * @param utilization the percentage the diagram should be filled.
+	 * @param percentage the percentage to which the diagram should be filled.
 	 * 0 means empty and 100 completely filled.
 	 */
-	public void setUtilization(double utilization)
+	public void setPercentage(double percentage)
 	{
-		if(utilization >= 100f) //full
+		if(percentage >= 100f) //full
 		{
 			//Fill all four quarters
 			rotateQuarter(quarterOne, 0f);
@@ -92,7 +93,7 @@ public class UtilizationDiagram extends Composite
 			//..and hide the final one.
 			quarterFinal.setVisible(false);
 		}
-		else if(utilization >= 75f)
+		else if(percentage >= 75f)
 		{
 			/* To prevent the final quarter from moving over the 0 degree
 			 * point, it will be set to 270 degrees and the fourth quarter will
@@ -105,9 +106,9 @@ public class UtilizationDiagram extends Composite
 			
 			rotateQuarter(quarterFinal, 270f);
 			
-			rotateQuarterByPercent(quarterFour, utilization, -90f);
+			rotateQuarterToFillPercentage(quarterFour, percentage, -90f);
 		}
-		else if(utilization >= 50f)
+		else if(percentage >= 50f)
 		{
 			//Fill first three quarters...
 			rotateQuarter(quarterOne, 0f);
@@ -118,9 +119,9 @@ public class UtilizationDiagram extends Composite
 			quarterFour.setVisible(false);
 			
 			//..and move the final one over the third.
-			rotateQuarterByPercent(quarterFinal, utilization, 0f);
+			rotateQuarterToFillPercentage(quarterFinal, percentage, 0f);
 		}
-		else if(utilization >= 25f)
+		else if(percentage >= 25f)
 		{
 			//Fill first two quarters...
 			rotateQuarter(quarterOne, 0f);
@@ -131,9 +132,9 @@ public class UtilizationDiagram extends Composite
 			quarterFour.setVisible(false);
 			
 			//..and move the final one over the second.
-			rotateQuarterByPercent(quarterFinal, utilization, 0f);
+			rotateQuarterToFillPercentage(quarterFinal, percentage, 0f);
 		}
-		else if(utilization > 0f)
+		else if(percentage > 0f)
 		{
 			//Fill first quarter...
 			rotateQuarter(quarterOne, 0f);
@@ -144,7 +145,7 @@ public class UtilizationDiagram extends Composite
 			quarterFour.setVisible(false);
 			
 			//...and move the final one over the first.
-			rotateQuarterByPercent(quarterFinal, utilization, 0f);
+			rotateQuarterToFillPercentage(quarterFinal, percentage, 0f);
 		}
 		else
 		{
@@ -158,9 +159,9 @@ public class UtilizationDiagram extends Composite
 		}
 		
 		diagramInnerText.setText(
-				NumberFormat.getFormat("###").format(utilization) + "%");
+				NumberFormat.getFormat("###").format(percentage) + "%");
 		
-		this.utilization = utilization;
+		this.percentage = percentage;
 	}
 	
 	/**
@@ -168,15 +169,15 @@ public class UtilizationDiagram extends Composite
 	 * corresponding rotation of the following percentage. 
 	 * 
 	 * @param quarter the {@link UIObject} that should be rotated.
-	 * @param percent the percentage the diagram should be filled.
+	 * @param percentage the percentage to which the diagram should be filled.
 	 * @param degreeOffset the offset for the rotation in degrees.
 	 */
-	private static void rotateQuarterByPercent(
+	private static void rotateQuarterToFillPercentage(
 			UIObject quarter,
-			double percent,
+			double percentage,
 			double degreeOffset)
 	{
-		double filledDegrees = (360 * (percent * 0.01f)) + degreeOffset;
+		double filledDegrees = (360 * (percentage * 0.01f)) + degreeOffset;
 		
 		rotateQuarter(quarter, filledDegrees);
 	}
