@@ -26,7 +26,7 @@ public class Job implements Serializable {
 	public int getWorkedBudget(){
 		int workedBudget = 0;
 		for(Activity a : this.Activities){
-			workedBudget = a.getWorkedTime()*hourCost;
+			//workedBudget = a.getWorkedTime()*hourCost;
 		}
 		return workedBudget;
 	}

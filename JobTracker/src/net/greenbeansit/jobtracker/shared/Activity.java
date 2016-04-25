@@ -5,58 +5,61 @@ import java.util.Date;
 
 public class Activity implements Serializable {
 
-	private String description;
-	private int workedTime;
-	private int month;
-	private int year;
-	private int day;
-
-	public int getMonth() {
-		return month;
+	private String descriptionOne;
+	private String descriptionTwo;
+	private int duration;
+	private DateClass startTime;
+	private DateClass endTime;
+	
+	public Activity(String descriptionOne, String descriptionTwo, int duration, DateClass startTime,
+			DateClass endTime) {
+		this.descriptionOne = descriptionOne;
+		this.descriptionTwo = descriptionTwo;
+		this.duration = duration;
+		this.startTime = startTime;
+		this.endTime = endTime;
 	}
 
-	public void setMonth(int month) {
-		this.month = month;
+	public String getDescriptionOne() {
+		return descriptionOne;
 	}
 
-	public int getYear() {
-		return year;
+	public void setDescriptionOne(String descriptionOne) {
+		this.descriptionOne = descriptionOne;
 	}
 
-	public void setYear(int year) {
-		this.year = year;
+	public String getDescriptionTwo() {
+		return descriptionTwo;
 	}
 
-	public int getDay() {
-		return day;
+	public void setDescriptionTwo(String descriptionTwo) {
+		this.descriptionTwo = descriptionTwo;
 	}
 
-	public void setDay(int day) {
-		this.day = day;
+	public int getDuration() {
+		return duration;
 	}
 
-	public String getDescription() {
-		return description;
+	public void setDuration(int duration) {
+		this.duration = duration;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public DateClass getStartTime() {
+		return startTime;
 	}
 
-	public int getWorkedTime() {
-		return workedTime;
+	public void setStartTime(DateClass startTime) {
+		this.startTime = startTime;
 	}
 
-	public void setWorkedTime(int workedTime) {
-		this.workedTime = workedTime;
+	public DateClass getEndTime() {
+		return endTime;
 	}
 
-	public Activity(String description, int workedTime,  int day, int month, int year) {
-		this.description = description;
-		this.workedTime = workedTime;
-		this.month = month;
-		this.year = year;
-		this.day = day;
+	public void setEndTime(DateClass endTime) {
+		this.endTime = endTime;
 	}
+	
+	
 
 }

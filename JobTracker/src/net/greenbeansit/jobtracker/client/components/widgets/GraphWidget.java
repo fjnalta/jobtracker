@@ -29,6 +29,8 @@ import com.googlecode.gwt.charts.client.event.ReadyHandler;
 import com.googlecode.gwt.charts.client.options.HAxis;
 import com.googlecode.gwt.charts.client.options.VAxis;
 
+import net.greenbeansit.jobtracker.controller.Controller;
+import net.greenbeansit.jobtracker.controller.ControllerInterface;
 import net.greenbeansit.jobtracker.shared.Activity;
 import net.greenbeansit.jobtracker.shared.Job;
 
@@ -55,19 +57,18 @@ public class GraphWidget extends Composite {
 
 	@UiField
 	Label labelBudgetLeft;
+	
+	private ControllerInterface controller;
+
+	
 
 	private LineChart linechart;
 	private PieChart piechart;
 	private Job currentJob;
 	private int[][] currentFocus;
-	private String[] monthNamesLocalized;
 
 	private void initialize() {
 		currentFocus = new int[][] { { 17, 4, 2016 }, { 24, 4, 2016 } };
-		setMonthNamesLocalized(new String[] { "Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August",
-				"September", "Oktober", "November", "Dezember" });
-
-		// showWeek();
 
 		ChartLoader chartLoader = new ChartLoader(ChartPackage.CORECHART);
 		chartLoader.loadApi(new Runnable() {
@@ -84,16 +85,16 @@ public class GraphWidget extends Composite {
 			}
 		});
 	}
+	
+	public ControllerInterface getController() {
+		return controller;
+	}
+
+	public void setController(ControllerInterface controller) {
+		this.controller = controller;
+	}
 
 	private void loadData() {
-	}
-
-	public String[] getMonthNamesLocalized() {
-		return monthNamesLocalized;
-	}
-
-	public void setMonthNamesLocalized(String[] monthNamesLocalized) {
-		this.monthNamesLocalized = monthNamesLocalized;
 	}
 
 	private void setJob(Job currentJob) {
@@ -140,32 +141,27 @@ public class GraphWidget extends Composite {
 		currentFocus[0][0] = currentFocus[1][0];
 		//creating dummy data
 		
-		Job temp = new Job();
-		for(int i = 0; i<12; i++){
-			for(int a = 0; a<28;a++){
-				//temp.addActivity(new Activity("test",,i,currentFocus[0][2],a));
-			}
-		}
+		int[] months = new int[]{1,2,3,4,5,6,7,8,9,10,11,12};
+		
+		Controller controller = new Controller();
+		
 		
 		
 		int[] values = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
-		
-		for (Activity e : this.currentJob.getActivities()) {
+		//values[0] = temp.getActivities().size();
+		/*
+		for (Activity e : controller.getJob(String.valueOf(0)).getActivities()) {
 			if (e.getYear() == currentFocus[0][2] || e.getYear() == currentFocus[1][2]) {
-				if (currentFocus[0][1] <= e.getMonth() && e.getMonth() <= currentFocus[1][1]) {
-					if (currentFocus[0][0] <= e.getMonth() && e.getMonth() <= currentFocus[1][0]) {
 						values[e.getMonth()] += e.getWorkedTime();
-					}
-				}
 			}
 		}
-		
+		*/
 		DataTable dataTable = DataTable.create();
 		dataTable.addColumn(ColumnType.STRING, "Year");
 		dataTable.addColumn(ColumnType.NUMBER, "LAWL");
-		dataTable.addRows(monthNamesLocalized.length);
-		for (int i = 0; i < monthNamesLocalized.length; i++) {
-			dataTable.setValue(i, 0, monthNamesLocalized[i]);
+		dataTable.addRows(months.length);
+		for (int i = 0; i < months.length; i++) {
+			dataTable.setValue(i, 0, String.valueOf(months[i]));
 		}
 		for (int row = 0; row < values.length; row++) {
 			dataTable.setValue(row, 1, values[row]);
