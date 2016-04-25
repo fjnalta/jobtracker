@@ -3,6 +3,8 @@ package net.greenbeansit.jobtracker.client.components.widgets;
 import org.gwtbootstrap3.extras.select.client.ui.Select;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.core.client.Scheduler;
+import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.Timer;
@@ -27,7 +29,14 @@ public class WorkDiscriptionWidget extends Composite
 	{
 		initWidget(uiBinder.createAndBindUi(this));
 		
-		new RenderTimer().schedule(500);
+		
+	}
+
+
+	@Override
+	protected void onAttach() {
+		// TODO Auto-generated method stub
+		super.onAttach();
 	}
 
 
@@ -36,7 +45,7 @@ public class WorkDiscriptionWidget extends Composite
 		@Override
 		public void run()
 		{
-			selectTemplate.render();
+			
 		}
 		
 	}

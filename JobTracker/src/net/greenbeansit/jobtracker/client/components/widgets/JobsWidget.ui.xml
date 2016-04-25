@@ -7,7 +7,7 @@
 		
 	}
 	</ui:style>
-	<h:ClearFix>
+	<h:ClearFix ui:field="container">
 		<s:Select ui:field="selectJob" liveSearch="true"
 			liveSearchPlaceholder="Name" placeholder="Projekt auswählen" type="PRIMARY">
 			<s:OptGroup label="Favoriten">
