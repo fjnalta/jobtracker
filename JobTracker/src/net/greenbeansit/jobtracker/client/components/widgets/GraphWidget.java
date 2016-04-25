@@ -1,5 +1,8 @@
 package net.greenbeansit.jobtracker.client.components.widgets;
 
+import java.util.Date;
+
+import org.gwtbootstrap3.client.ui.Label;
 import org.gwtbootstrap3.client.ui.html.ClearFix;
 
 import com.google.gwt.core.client.GWT;
@@ -26,13 +29,15 @@ import com.googlecode.gwt.charts.client.event.ReadyHandler;
 import com.googlecode.gwt.charts.client.options.HAxis;
 import com.googlecode.gwt.charts.client.options.VAxis;
 
-public class GraphWidget extends Composite{
+import net.greenbeansit.jobtracker.shared.Activity;
+import net.greenbeansit.jobtracker.shared.Job;
+
+public class GraphWidget extends Composite {
 
 	private static GraphWidgetUiBinder uiBinder = GWT.create(GraphWidgetUiBinder.class);
 
 	interface GraphWidgetUiBinder extends UiBinder<Widget, GraphWidget> {
 	}
-
 
 	public GraphWidget() {
 		initWidget(uiBinder.createAndBindUi(this));
@@ -41,15 +46,30 @@ public class GraphWidget extends Composite{
 
 	@UiField
 	ClearFix budgetContent;
-	
+
 	@UiField
 	ClearFix activityContent;
 
+	@UiField
+	Label labelBudget;
+
+	@UiField
+	Label labelBudgetLeft;
+
 	private LineChart linechart;
 	private PieChart piechart;
-
+	private Job currentJob;
+	private int[][] currentFocus;
+	private String[] monthNamesLocalized;
 
 	private void initialize() {
+		currentFocus = new int[][] { { 17, 4, 2016 }, { 24, 4, 2016 } };
+		setMonthNamesLocalized(new String[] { "Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August",
+				"September", "Oktober", "November", "Dezember" });
+
+		// showWeek();
+		showYear();
+
 		ChartLoader chartLoader = new ChartLoader(ChartPackage.CORECHART);
 		chartLoader.loadApi(new Runnable() {
 
@@ -58,53 +78,97 @@ public class GraphWidget extends Composite{
 				// Create and attach the chart
 				linechart = new LineChart();
 				budgetContent.add(linechart);
-				drawLineChart();
+				//drawLineChart();
 				piechart = new PieChart();
 				activityContent.add(piechart);
 				drawPieChart();
 			}
 		});
 	}
-	
-	
-	public void showWeek(){
-		//TODO Datenauswahl für eine Woche
-	}
-	
-	public void showMonth(){
-		//TODO Datenauswahl für einen Monat
-	}
-	
-	public void showYear(){
-		//TODO Datenauswahl für ein Jahr
-	}
-	
-	public void drawFromData(){
-		//TODO von einer DatenKlasse chart zeichnen
-	}
-	
-	private void drawLineChart() {
-		String[] countries = new String[] { "Austria", "Bulgaria", "Denmark", "Greece" };
-		int[] years = new int[] { 2003, 2004, 2005, 2006, 2007, 2008 };
-		int[][] values = new int[][] { { 1336060, 1538156, 1576579, 1600652, 1968113, 1901067 },
-				{ 400361, 366849, 440514, 434552, 393032, 517206 },
-				{ 1001582, 1119450, 993360, 1004163, 979198, 916965 },
-				{ 997974, 941795, 930593, 897127, 1080887, 1056036 } };
 
-		// Prepare the data
+	private void loadData() {
+	}
+
+	public String[] getMonthNamesLocalized() {
+		return monthNamesLocalized;
+	}
+
+	public void setMonthNamesLocalized(String[] monthNamesLocalized) {
+		this.monthNamesLocalized = monthNamesLocalized;
+	}
+
+	private void setJob(Job currentJob) {
+		this.currentJob = currentJob;
+	}
+
+	public void showPreviousWeek() {
+		// TODO Datenanzeige für die Woche vor der aktuell angezeigten Woche
+	}
+
+	public void showNextWeek() {
+		// TODO Datenanzeigen für die Woche nach der aktuell angezeigten Woche
+	}
+
+	public void showPreviousMonth() {
+		currentFocus[0][1] = currentFocus[0][1] - 1;
+		currentFocus[1][1] = currentFocus[1][1] - 1;
+	}
+
+	public void showNextMonth() {
+		currentFocus[0][1] = currentFocus[0][1] + 1;
+		currentFocus[1][1] = currentFocus[1][1] + 1;
+	}
+
+	public void showPreviousYear() {
+		currentFocus[0][2] = currentFocus[0][2] - 1;
+		currentFocus[1][2] = currentFocus[1][2] - 1;
+	}
+
+	public void showNextYear() {
+		currentFocus[0][2] = currentFocus[0][2] + 1;
+		currentFocus[1][2] = currentFocus[1][2] + 1;
+	}
+
+	public void showWeek() {
+	}
+
+	public void showMonth() {
+	}
+	
+	public void showYear() {
+		currentFocus[0][2] = currentFocus[1][2] -1;
+		currentFocus[0][1] = currentFocus[1][1];
+		currentFocus[0][0] = currentFocus[1][0];
+		//creating dummy data
+		Job temp = new Job();
+		for(int i = 0; i<12; i++){
+			for(int a = 0; a<28;a++){
+				temp.addActivity(new Activity("test",a*5*i,i,currentFocus[0][2],a));
+			}
+		}
+		
+		
+		int[] values = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+		/*
+		for (Activity e : this.currentJob.getActivities()) {
+			if (e.getYear() == currentFocus[0][2] || e.getYear() == currentFocus[1][2]) {
+				if (currentFocus[0][1] <= e.getMonth() && e.getMonth() <= currentFocus[1][1]) {
+					if (currentFocus[0][0] <= e.getMonth() && e.getMonth() <= currentFocus[1][0]) {
+						values[e.getMonth()] += e.getWorkedTime();
+					}
+				}
+			}
+		}*/
+		
 		DataTable dataTable = DataTable.create();
 		dataTable.addColumn(ColumnType.STRING, "Year");
-		for (int i = 0; i < countries.length; i++) {
-			dataTable.addColumn(ColumnType.NUMBER, countries[i]);
+		dataTable.addColumn(ColumnType.NUMBER, "LAWL");
+		dataTable.addRows(monthNamesLocalized.length);
+		for (int i = 0; i < monthNamesLocalized.length; i++) {
+			dataTable.setValue(i, 0, monthNamesLocalized[i]);
 		}
-		dataTable.addRows(years.length);
-		for (int i = 0; i < years.length; i++) {
-			dataTable.setValue(i, 0, String.valueOf(years[i]));
-		}
-		for (int col = 0; col < values.length; col++) {
-			for (int row = 0; row < values[col].length; row++) {
-				dataTable.setValue(row, col + 1, values[col][row]);
-			}
+		for (int row = 0; row < values.length; row++) {
+			dataTable.setValue(row, 1, values[row]);
 		}
 
 		// Set options
@@ -113,11 +177,15 @@ public class GraphWidget extends Composite{
 		options.setFontName("Tahoma");
 		options.setTitle("Yearly Coffee Consumption by Country");
 		options.setHAxis(HAxis.create("Year"));
-		options.setVAxis(VAxis.create("Cups"));
-
-		// Draw the chart
-		linechart.draw(dataTable, options);
+		options.setVAxis(VAxis.create("€"));
+		drawLineChart(dataTable,options);
 	}
+	
+	private void drawLineChart(DataTable table, LineChartOptions options) {
+		// Draw the chart
+		linechart.draw(table, options);
+	}
+
 	private void drawPieChart() {
 		// Prepare the data
 		DataTable dataTable = DataTable.create();
@@ -149,8 +217,7 @@ public class GraphWidget extends Composite{
 
 		// Draw the chart
 		piechart.draw(dataTable, options);
-		
-	}
 
+	}
 
 }

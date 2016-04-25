@@ -26,10 +26,10 @@
 							<b:Icon type="ANCHOR" />
 						</b:Row>
 						<b:Row>
-							<b:Label text="xxxx von xxx" />
+							<b:Label text="xxxx von xxx" ui:field="labelBudget" />
 						</b:Row>
 						<b:Row>
-							<b:Label text="REST xxxxx" />
+							<b:Label text="REST xxxxx" ui:field="labelBudgetLeft"/>
 						</b:Row>
 
 					</b:Column>

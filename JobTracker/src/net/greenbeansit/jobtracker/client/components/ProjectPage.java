@@ -11,6 +11,8 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 
+import net.greenbeansit.jobtracker.client.components.widgets.CalendarWidget;
+import net.greenbeansit.jobtracker.client.components.widgets.GraphWidget;
 import net.greenbeansit.jobtracker.client.components.widgets.ProjectBudgetBar;
 
 public class ProjectPage extends Composite
@@ -39,7 +41,7 @@ public class ProjectPage extends Composite
 		containerBudgetDiagrams.add(new ProjectBudgetBar(500, 1000, "Projekt X"));
 		containerBudgetDiagrams.add(new ProjectBudgetBar(920, 1000, "Projekt Y"));
 		containerBudgetDiagrams.add(new ProjectBudgetBar(800, 1000, "Projekt Z"));
-		
+		containerBudgetDiagrams.add(new GraphWidget());
 		new RenderTimer().schedule(50);
 	}
 	

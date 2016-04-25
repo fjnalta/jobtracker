@@ -1,13 +1,14 @@
 package net.greenbeansit.jobtracker.shared;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 
-public class Job {
+public class Job implements Serializable {
 	
 	private LinkedList<Activity> Activities;
 	private String jobName;
 	private int id;
-	private long budget;
+	private int budget;
 	private static int hourCost = 30;
 	
 	public LinkedList<Activity> getActivities() {
@@ -40,7 +41,7 @@ public class Job {
 		this.id = 0;
 	}
 	
-	public Job(int id, String jobName, LinkedList<Activity> activities,long budget){
+	public Job(int id, String jobName, LinkedList<Activity> activities,int budget){
 		this.id = id;
 		this.jobName = jobName;
 		this.Activities = activities;
@@ -53,7 +54,7 @@ public class Job {
 		}
 		return null;
 	}
-	public void setCorrespondingActivitys(LinkedList<Activity> Activities) {
+	public void setActivitys(LinkedList<Activity> Activities) {
 		this.Activities = Activities;
 	}
 	public String getJobName() {
