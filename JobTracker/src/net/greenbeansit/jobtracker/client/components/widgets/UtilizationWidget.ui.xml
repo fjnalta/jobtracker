@@ -5,51 +5,33 @@
 	xmlns:components="urn:import:net.greenbeansit.jobtracker.client.components.widgets"
 	xmlns:d="urn:import:com.google.gwt.canvas.dom.client" xmlns:gwt="urn:import:org.gwtbootstrap3.client.ui.gwt">
 	<ui:style>
-	.slider {
-		background-color: #669966;
-		color: red;
+	.utilizationDiagram {
+		width: 200px;
+		height: 200px;
+		position: absolute;
+		left: 0;
+		right: 0;
+		margin-top: 20px;
+		margin-left: auto;
+		margin-right: auto;
 	}
 	
-	.slider .active {
-		background-color: #FF7600;
-	}
-	
-	.NavTabs>li {
-		background-color: black;
-	}
-	
-	.circle {
-		width: 50px;
-		height: 50px;
-		-webkit-border-radius: 25px;
-		-moz-border-radius: 25px;
-		border-radius: 25px;
-		background: red;
-	}
-	
-	.circleOuter {
-		width: 50px;
-		height: 50px;
-		-webkit-border-radius: 25px;
-		-moz-border-radius: 25px;
-		border-radius: 25px;
-		background: red;
-		padding: 10px;
-	}
-	
-	.circleInner {
-		width: 100%;
-		height: 100%;
-		-webkit-border-radius: 50%;
-		-moz-border-radius: 50%;
-		border-radius: 50%;
-		background: white;
+	.labelValue {
+		font-size: 36px;
+		color: #ff0066;
+		text-align: left;
+		margin-top: 20px;
 	}
 	</ui:style>
 	<h:ClearFix ui:field="container">
-		<b:Heading size="H5" text="Auslastung" />
-		
+		<b:Column size="XS_12,SM_12,MD_6,LG_6">
+			<b:Heading size="H4" text="Verbleibende Urlaubstage:" />
+			<h:Span text="13" addStyleNames="{style.labelValue}" />
+		</b:Column>
+		<b:Column size="XS_12,SM_12,MD_6,LG_6">
+			<b:Heading size="H4" text="Auslastung:" />
+			<components:PercentageRingDiagram
+				addStyleNames="{style.utilizationDiagram}" ui:field="utilizationDiagram" />
+		</b:Column>
 	</h:ClearFix>
-
-	
 </ui:UiBinder> 
