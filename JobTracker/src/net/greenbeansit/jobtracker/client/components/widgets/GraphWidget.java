@@ -68,7 +68,6 @@ public class GraphWidget extends Composite {
 				"September", "Oktober", "November", "Dezember" });
 
 		// showWeek();
-		showYear();
 
 		ChartLoader chartLoader = new ChartLoader(ChartPackage.CORECHART);
 		chartLoader.loadApi(new Runnable() {
@@ -78,7 +77,7 @@ public class GraphWidget extends Composite {
 				// Create and attach the chart
 				linechart = new LineChart();
 				budgetContent.add(linechart);
-				//drawLineChart();
+				showYear();
 				piechart = new PieChart();
 				activityContent.add(piechart);
 				drawPieChart();
@@ -140,16 +139,17 @@ public class GraphWidget extends Composite {
 		currentFocus[0][1] = currentFocus[1][1];
 		currentFocus[0][0] = currentFocus[1][0];
 		//creating dummy data
+		
 		Job temp = new Job();
 		for(int i = 0; i<12; i++){
 			for(int a = 0; a<28;a++){
-				temp.addActivity(new Activity("test",a*5*i,i,currentFocus[0][2],a));
+				//temp.addActivity(new Activity("test",,i,currentFocus[0][2],a));
 			}
 		}
 		
 		
-		int[] values = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-		/*
+		int[] values = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
+		
 		for (Activity e : this.currentJob.getActivities()) {
 			if (e.getYear() == currentFocus[0][2] || e.getYear() == currentFocus[1][2]) {
 				if (currentFocus[0][1] <= e.getMonth() && e.getMonth() <= currentFocus[1][1]) {
@@ -158,7 +158,7 @@ public class GraphWidget extends Composite {
 					}
 				}
 			}
-		}*/
+		}
 		
 		DataTable dataTable = DataTable.create();
 		dataTable.addColumn(ColumnType.STRING, "Year");
@@ -179,6 +179,7 @@ public class GraphWidget extends Composite {
 		options.setHAxis(HAxis.create("Year"));
 		options.setVAxis(VAxis.create("€"));
 		drawLineChart(dataTable,options);
+		linechart.draw(dataTable, options);
 	}
 	
 	private void drawLineChart(DataTable table, LineChartOptions options) {
