@@ -3,118 +3,147 @@ package net.greenbeansit.jobtracker.shared;
 import java.io.Serializable;
 import java.util.Date;
 
-
 /**
- * Shared representation of an Activity (Taetigkeitsbericht (TB)).
- * Is used in frontend logic and used as a medium between frontend and backend.
+ * Shared representation of an Activity (Taetigkeitsbericht (TB)). Is used in
+ * frontend logic and used as a medium between frontend and backend.
+ * 
  * @author Mike Hukiewitz & Alex
  *
  */
-public class ActivityReport implements Serializable {
+public class ActivityReport implements Serializable
+{
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	
-	
-	
-	private String description;
-	private String identifier;
-	private Date date;
-	private Integer startTime;
-	private Integer duration;
-	private Long author;
-	private Long id;
+	private static final long	serialVersionUID	= 1L;
 
-	public Long getId() {
+	private String				description;
+	private String				identifier;
+	private Date				date;
+	private Integer				startTime;
+	private Integer				duration;
+	private Long				author;
+	private Long				id;
+
+	public Long getId()
+	{
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Long id)
+	{
 		this.id = id;
 	}
 
-	/* -- Constructors -- */
-	public ActivityReport(String description, String identifier, Date date, int startTime, int duration) {
+	
+	/**
+	 * Initializes a new instance of the {@link ActivityReport} class with
+	 * its fields set to null.
+	 */
+	public ActivityReport()
+	{
+		
+	}
+	
+	/**
+	 * Initializes a new instance of the {@link ActivityReport} class with
+	 * the following values
+	 * 
+	 * @param description the description of the report.
+	 * @param identifier the identifier string.
+	 * @param date the date of the report.
+	 * @param startTime the start time of the report.
+	 * @param duration the duration time of the report.
+	 */
+	public ActivityReport(String description, String identifier, Date date,
+			int startTime, int duration)
+	{
 		this.setDescription(description);
 		this.setIdentifier(identifier);
 		this.setDuration(duration);
 		this.setStartTime(startTime);
 	}
-	
-	/* -- Logic -- */
-//	public int getUsedBudget() {
-//		TODO: implement
-//	}
 
-	/* -- Getter/Setter -- */
-	//TODO: Exceptions
-	public String getDescription() {
+	
+	public String getDescription()
+	{
 		return description;
 	}
 
-	public void setDescription(String description) {
+	public void setDescription(String description)
+	{
 		this.description = description;
 	}
 
-	public String getIdentifier() {
+	public String getIdentifier()
+	{
 		return identifier;
 	}
 
-	public void setIdentifier(String identifier) {
+	public void setIdentifier(String identifier)
+	{
 		this.identifier = identifier;
 	}
 
-	public int getDuration() {
+	public int getDuration()
+	{
 		return duration;
 	}
 
-	public void setDuration(int duration) {
-		if(duration < 1 || startTime+duration > 1440)
-			throw(new IllegalArgumentException());
+	public void setDuration(int duration)
+	{
+		if (duration < 1 || startTime + duration > 1440)
+			throw (new IllegalArgumentException());
 		this.duration = duration;
 	}
 
-	public int getStartTime() {
+	public int getStartTime()
+	{
 		return startTime;
 	}
 
-	public void setStartTime(int startTime) {
-		if(startTime >= 1440)
-			throw(new IllegalArgumentException());
+	public void setStartTime(int startTime)
+	{
+		if (startTime >= 1440)
+			throw (new IllegalArgumentException());
+		
 		this.startTime = startTime;
 	}
 
-	public int getEndTime() {
-		return startTime+duration;
+	public int getEndTime()
+	{
+		return startTime + duration;
 	}
 
-	public void setEndTime(int endTime) {
-		if(endTime-startTime <= 0)
-			throw(new IllegalArgumentException());
-		this.duration = endTime-startTime;
+	public void setEndTime(int endTime)
+	{
+		if (endTime - startTime <= 0)
+			throw (new IllegalArgumentException());
+		this.duration = endTime - startTime;
 	}
 
-	public Long getAuthor() {
+	public Long getAuthor()
+	{
 		return author;
 	}
 
-	public void setAuthor(Long author) {
-		if(author == null)
-			throw(new IllegalArgumentException());
+	public void setAuthor(Long author)
+	{
+		if (author == null)
+			throw (new IllegalArgumentException());
 		this.author = author;
 	}
 
-	public Date getDate() {
+	public Date getDate()
+	{
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(Date date)
+	{
 		this.date = date;
 	}
-	
-	public void setDate(int year, int month, int day) {
+
+	public void setDate(int year, int month, int day)
+	{
 		this.date = new Date(year, month, day);
 	}
 

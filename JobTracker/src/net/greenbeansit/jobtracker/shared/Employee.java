@@ -1,24 +1,44 @@
 package net.greenbeansit.jobtracker.shared;
 
+
+/**
+ * Represents a normal user with no extra rights.
+ * 
+ * @author Max Blatt
+ */
 public class Employee
 {
-	private Long id;
-	private String firstName,
-				   lastName;
+	private Long	id;
+	private String	firstName, lastName;
 
-	public String getFirstName() {
+	
+	/**
+	 * Initializes a new instance of the {@link Employee} class.
+	 */
+	public Employee()
+	{
+		
+	}
+	
+	
+	
+	public String getFirstName()
+	{
 		return firstName;
 	}
 
-	public void setFirstName(String firstName) {
+	public void setFirstName(String firstName)
+	{
 		this.firstName = firstName;
 	}
 
-	public String getLastName() {
+	public String getLastName()
+	{
 		return lastName;
 	}
 
-	public void setLastName(String lastName) {
+	public void setLastName(String lastName)
+	{
 		this.lastName = lastName;
 	}
 

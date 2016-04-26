@@ -11,10 +11,20 @@ import javax.ws.rs.core.MediaType;
 @Produces(MediaType.APPLICATION_JSON)
 public interface ActivityReportTemplateService
 {
+	/**
+	 * Gets all templates created by the user.
+	 * 
+	 * @return an array of {@link ActivityReportTemplate}s.
+	 */
 	@GET
 	@Path("/")
 	ActivityReportTemplate[] getAllTemplates();
 	
+	/**
+	 * Saves an {@link ActivityReportTemplate} with a new ID.
+	 * 
+	 * @param template the {@link ActivityReportTemplate} that should be saved.
+	 */
 	@POST
 	@Path("/")
 	void saveTemplate(ActivityReportTemplate template);
