@@ -2,8 +2,6 @@ package net.greenbeansit.jobtracker.shared;
 
 import java.io.Serializable;
 
-import net.greenbeansit.jobtracker.shared.exceptions.InvalidInput;
-
 /**
  * Implements a simple date class which can compare it's objects.
  * 
@@ -76,7 +74,7 @@ public class Date implements Serializable {
 
 	public void setYear(int year) {
 		if(year < 1970)
-			throw(new InvalidInput());
+			throw(new IllegalArgumentException());
 		this.year = year;
 	}
 
@@ -86,7 +84,7 @@ public class Date implements Serializable {
 
 	public void setMonth(int month) {
 		if(month > 12 || month < 1)
-			throw(new InvalidInput());
+			throw(new IllegalArgumentException());
 		this.month = month;
 	}
 
@@ -96,7 +94,7 @@ public class Date implements Serializable {
 
 	public void setDay(int day) {
 		if(day > 31 || day < 1)
-			throw(new InvalidInput());
+			throw(new IllegalArgumentException());
 		this.day = day;
 	}
 }

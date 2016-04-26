@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.LinkedList;
 
 import net.greenbeansit.jobtracker.shared.JobID.PayMode;
-import net.greenbeansit.jobtracker.shared.exceptions.InvalidInput;
 
 /**
  * Shared representation of a job. Is used in frontend logic and used as a
@@ -94,7 +93,7 @@ public class Job implements Serializable {
 
 	public void setJobID(JobID jobID) {
 		if(jobID == null)
-			throw(new InvalidInput());
+			throw(new IllegalArgumentException());
 		this.jobID = jobID;
 	}
 	
@@ -123,7 +122,7 @@ public class Job implements Serializable {
 
 	public void addActivity(ActivityReport activity) {
 		if(activity == null)
-			throw(new InvalidInput());
+			throw(new IllegalArgumentException());
 		this.activities.add(activity);
 	}
 	
@@ -133,7 +132,7 @@ public class Job implements Serializable {
 
 	public void setMaxBudget(int maxBudget) {
 		if(maxBudget < 0)
-			throw(new InvalidInput());
+			throw(new IllegalArgumentException());
 		this.maxBudget = maxBudget;
 	}
 }

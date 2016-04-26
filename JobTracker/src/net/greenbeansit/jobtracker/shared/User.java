@@ -1,7 +1,5 @@
 package net.greenbeansit.jobtracker.shared;
 
-import net.greenbeansit.jobtracker.shared.exceptions.InvalidInput;
-
 public class User {
 	private String userID;
 	private float hourlyPay;
@@ -25,7 +23,7 @@ public class User {
 
 	public void setHourlyPay(float hourlyPay) {
 		if(hourlyPay < 0)
-			throw(new InvalidInput());
+			throw(new IllegalArgumentException());
 		this.hourlyPay = hourlyPay;
 	}
 	

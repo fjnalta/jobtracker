@@ -1,7 +1,5 @@
 package net.greenbeansit.jobtracker.shared;
 
-import net.greenbeansit.jobtracker.shared.exceptions.InvalidInput;
-
 /**
  * Result of parsing the job number string. A job number is read-only
  * accessible. "jobNr-posNr-payMode | clientID | desc"
@@ -21,7 +19,7 @@ public class JobID {
 
 	public JobID(int jobNr, int posNr, PayMode payMode, String clientID, String desc) {
 		if(jobNr < 0 || posNr < 0 || payMode == null || clientID == "" || desc == "")
-			throw(new InvalidInput());
+			throw(new IllegalArgumentException());
 		this.jobNr = jobNr;
 		this.posNr = posNr;
 		this.payMode = payMode;

@@ -7,14 +7,11 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.Timer;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 
-import net.greenbeansit.jobtracker.client.components.widgets.CalendarWidget;
 import net.greenbeansit.jobtracker.client.components.widgets.GraphWidget;
 import net.greenbeansit.jobtracker.client.components.widgets.ProjectBudgetBar;
-import net.greenbeansit.jobtracker.client.controller.Controller;
 
 public class ProjectPage extends Composite
 {

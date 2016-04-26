@@ -1,6 +1,5 @@
 package net.greenbeansit.jobtracker.client.controller;
 
-import net.greenbeansit.jobtracker.shared.Activity;
 import net.greenbeansit.jobtracker.shared.Job;
 
 public class Controller implements ControllerInterface {

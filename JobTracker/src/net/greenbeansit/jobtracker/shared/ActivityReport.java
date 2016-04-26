@@ -2,8 +2,6 @@ package net.greenbeansit.jobtracker.shared;
 
 import java.io.Serializable;
 
-import net.greenbeansit.jobtracker.shared.exceptions.InvalidInput;
-
 /**
  * Shared representation of an Activity (Taetigkeitsbericht (TB)).
  * Is used in frontend logic and used as a medium between frontend and backend.
@@ -48,7 +46,7 @@ public class ActivityReport implements Serializable {
 
 	public void setDescription(String description) {
 		if(description == "")
-			throw(new InvalidInput());
+			throw(new IllegalArgumentException());
 		this.description = description;
 	}
 
@@ -66,7 +64,7 @@ public class ActivityReport implements Serializable {
 
 	public void setDuration(int duration) {
 		if(duration < 1 || startTime+duration+breakTime > 1440 || duration < breakTime)
-			throw(new InvalidInput());
+			throw(new IllegalArgumentException());
 		this.duration = duration;
 	}
 
@@ -76,7 +74,7 @@ public class ActivityReport implements Serializable {
 
 	public void setStartTime(int startTime) {
 		if(startTime >= 1440 || startTime+duration+breakTime > 1440)
-			throw(new InvalidInput());
+			throw(new IllegalArgumentException());
 		this.startTime = startTime;
 	}
 
@@ -86,7 +84,7 @@ public class ActivityReport implements Serializable {
 
 	public void setEndTime(int endTime) {
 		if(endTime-startTime-breakTime <= 0 || endTime > 1440)
-			throw(new InvalidInput());
+			throw(new IllegalArgumentException());
 		this.duration = endTime-startTime;
 	}
 
@@ -96,7 +94,7 @@ public class ActivityReport implements Serializable {
 
 	public void setAuthor(User author) {
 		if(author == null)
-			throw(new InvalidInput());
+			throw(new IllegalArgumentException());
 		this.author = author;
 	}
 
@@ -118,7 +116,7 @@ public class ActivityReport implements Serializable {
 
 	public void setBreakTime(int breakTime) {
 		if(breakTime > duration)
-			throw(new InvalidInput());
+			throw(new IllegalArgumentException());
 		this.breakTime = breakTime;
 	}
 

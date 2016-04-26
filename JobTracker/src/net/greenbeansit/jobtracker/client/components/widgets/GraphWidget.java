@@ -31,7 +31,6 @@ import com.googlecode.gwt.charts.client.options.VAxis;
 
 import net.greenbeansit.jobtracker.client.controller.Controller;
 import net.greenbeansit.jobtracker.client.controller.ControllerInterface;
-import net.greenbeansit.jobtracker.shared.Activity;
 import net.greenbeansit.jobtracker.shared.Job;
 
 public class GraphWidget extends Composite {

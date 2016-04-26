@@ -1,7 +1,6 @@
 package net.greenbeansit.jobtracker.shared;
 
 import net.greenbeansit.jobtracker.shared.JobID.PayMode;
-import net.greenbeansit.jobtracker.shared.exceptions.InvalidInput;
 
 /**
  * Parses internal and external job numbers as {@code JobNr} objects.
@@ -13,7 +12,7 @@ public class JobIDParser {
 	public static JobID parse(String input) {
 		//Minimum length to even try
 		if(input.length() <= 18)
-			throw(new InvalidInput());
+			throw(new IllegalArgumentException());
 		int jobNr, posNr;
 		PayMode payMode;
 		String clientID = "";
