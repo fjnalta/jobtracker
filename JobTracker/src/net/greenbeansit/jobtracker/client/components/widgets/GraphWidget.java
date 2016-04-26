@@ -31,7 +31,7 @@ import com.googlecode.gwt.charts.client.options.VAxis;
 
 import net.greenbeansit.jobtracker.client.controller.Controller;
 import net.greenbeansit.jobtracker.client.controller.ControllerInterface;
-import net.greenbeansit.jobtracker.shared.Job;
+//import net.greenbeansit.jobtracker.shared.Job;
 
 public class GraphWidget extends Composite {
 
@@ -63,7 +63,7 @@ public class GraphWidget extends Composite {
 
 	private LineChart linechart;
 	private PieChart piechart;
-	private Job currentJob;
+//	private Job currentJob;
 	private int[][] currentFocus;
 
 	private void initialize() {
@@ -96,9 +96,9 @@ public class GraphWidget extends Composite {
 	private void loadData() {
 	}
 
-	private void setJob(Job currentJob) {
-		this.currentJob = currentJob;
-	}
+//	private void setJob(Job currentJob) {
+//		this.currentJob = currentJob;
+//	}
 
 	public void showPreviousWeek() {
 		// TODO Datenanzeige für die Woche vor der aktuell angezeigten Woche
