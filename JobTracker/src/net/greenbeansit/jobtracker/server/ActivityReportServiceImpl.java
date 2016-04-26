@@ -1,12 +1,11 @@
 package net.greenbeansit.jobtracker.server;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.ws.rs.NotFoundException;
-
-import com.google.gwt.dev.util.collect.HashMap;
 
 import net.greenbeansit.jobtracker.shared.ActivityReport;
 import net.greenbeansit.jobtracker.shared.ActivityReportService;
