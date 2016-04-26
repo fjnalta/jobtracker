@@ -1,6 +1,7 @@
 package net.greenbeansit.jobtracker.shared;
 
 import java.io.Serializable;
+import java.util.Date;
 
 
 /**
@@ -11,6 +12,13 @@ import java.io.Serializable;
  */
 public class ActivityReport implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	
+	
 	private String description;
 	private String identifier;
 	private Date date;
@@ -18,6 +26,14 @@ public class ActivityReport implements Serializable {
 	private Integer duration;
 	private Long author;
 	private Long id;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	/* -- Constructors -- */
 	public ActivityReport(String description, String identifier, Date date, int startTime, int duration) {
