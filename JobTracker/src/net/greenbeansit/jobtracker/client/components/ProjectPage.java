@@ -37,22 +37,7 @@ public class ProjectPage extends Composite
 		containerBudgetDiagrams.add(new ProjectBudgetBar(920, 1000, "Projekt Y"));
 		containerBudgetDiagrams.add(new ProjectBudgetBar(800, 1000, "Projekt Z"));
 		containerBudgetDiagrams.add(new GraphWidget());
-		new RenderTimer().schedule(50);
 		
-		
-	}
-	
-	private class RenderTimer extends Timer
-	{
-		@Override
-		public void run()
-		{
-			//TODO: Improve workaround
-			selectCustomer.render();
-			selectProject.render();
-		}
-		
-
 	}
 
 }

@@ -17,9 +17,6 @@ public class WorkDiscriptionWidget extends Composite
 	{
 		
 	}
-
-	@UiField
-	Select selectTemplate;
 	
 	public WorkDiscriptionWidget()
 	{
@@ -33,16 +30,5 @@ public class WorkDiscriptionWidget extends Composite
 	protected void onAttach() {
 		// TODO Auto-generated method stub
 		super.onAttach();
-	}
-
-
-	private class RenderTimer extends Timer
-	{
-		@Override
-		public void run()
-		{
-			
-		}
-		
 	}
 }
