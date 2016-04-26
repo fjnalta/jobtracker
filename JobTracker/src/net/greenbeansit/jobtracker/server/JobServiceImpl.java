@@ -4,6 +4,13 @@ import net.greenbeansit.jobtracker.shared.Job;
 import net.greenbeansit.jobtracker.shared.JobService;
 
 public class JobServiceImpl implements JobService {
+	
+	private Long employeeId;
+	
+	public JobServiceImpl(Long employeeId)
+	{
+		this.employeeId = employeeId;
+	}
 
 	@Override
 	public Job[] getAllJobs() {
