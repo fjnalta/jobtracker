@@ -16,7 +16,7 @@ import com.google.gwt.user.client.ui.Widget;
 
 import net.greenbeansit.jobtracker.client.components.HomePage;
 import net.greenbeansit.jobtracker.client.components.ProjectPage;
-import net.greenbeansit.jobtracker.controller.Controller;
+import net.greenbeansit.jobtracker.client.controller.Controller;
 
 /**
  * Represents the main widget of the application.

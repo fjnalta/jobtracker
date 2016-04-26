@@ -11,12 +11,12 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="src" output="target/JobTracker-0.0.1-SNAPSHOT/WEB-INF/classes" path="target/generated-sources/gwt">
+	<classpathentry kind="src" path="target/generated-sources/gwt">
 		<attributes>
 			<attribute name="optional" value="true"/>
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="output" path="target/JobTracker-0.0.1-SNAPSHOT/WEB-INF/classes"/>
+	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>

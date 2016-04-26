@@ -1,4 +1,4 @@
-package net.greenbeansit.jobtracker.controller;
+package net.greenbeansit.jobtracker.client.controller;
 
 import net.greenbeansit.jobtracker.shared.Activity;
 import net.greenbeansit.jobtracker.shared.Job;

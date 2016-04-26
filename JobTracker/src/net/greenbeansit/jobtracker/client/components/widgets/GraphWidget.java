@@ -29,8 +29,8 @@ import com.googlecode.gwt.charts.client.event.ReadyHandler;
 import com.googlecode.gwt.charts.client.options.HAxis;
 import com.googlecode.gwt.charts.client.options.VAxis;
 
-import net.greenbeansit.jobtracker.controller.Controller;
-import net.greenbeansit.jobtracker.controller.ControllerInterface;
+import net.greenbeansit.jobtracker.client.controller.Controller;
+import net.greenbeansit.jobtracker.client.controller.ControllerInterface;
 import net.greenbeansit.jobtracker.shared.Activity;
 import net.greenbeansit.jobtracker.shared.Job;
 
