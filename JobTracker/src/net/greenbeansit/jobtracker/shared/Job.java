@@ -3,81 +3,84 @@ package net.greenbeansit.jobtracker.shared;
 import java.io.Serializable;
 import java.util.LinkedList;
 
+import net.greenbeansit.jobtracker.shared.JobID.PayMode;
+
+/**
+ * Shared representation of a job. Is used in frontend logic and used as a
+ * medium between frontend and backend. A job consists of several
+ * {@code Activity} to determine the used budget;
+ * @author Mike Hukiewitz & Alex
+ *
+ */
 public class Job implements Serializable {
+
+	private JobID jobID;
+	private LinkedList<ActivityReport> activities;
+	private int maxBudget;
+	private int usedBudget;
+
 	
-	private LinkedList<Activity> Activities;
-	private String jobName;
-	private int id;
-	private int budget;
-	private static int hourCost = 30;
+	/* -- Constructors -- */
+	public Job(JobID jobID, int maxBudget) {
+		this.setJobID(jobID);
+		this.setActivities(new LinkedList<ActivityReport>());
+		this.setMaxBudget(maxBudget);
+	}
 	
-	public LinkedList<Activity> getActivities() {
-		return Activities;
+	public Job(String jobID, int maxBudget) {
+		this.setJobID(jobID);
+		this.setActivities(new LinkedList<ActivityReport>());
+		this.setMaxBudget(maxBudget);
 	}
 
-	public void setActivities(LinkedList<Activity> activities) {
-		Activities = activities;
+	public Job(JobID jobID, int maxBudget, LinkedList<ActivityReport> activities) {
+		this.setJobID(jobID);
+		this.setActivities(activities);
+		this.setMaxBudget(maxBudget);
+	}
+	
+	/* -- Getter/Setter -- */
+	//TODO: Exceptions
+	public JobID getJobID() {
+		return jobID;
 	}
 
-	public long getBudget() {
-		return budget;
+	public void setJobID(JobID jobID) {
+		this.jobID = jobID;
 	}
 	
-	public int getWorkedBudget(){
-		int workedBudget = 0;
-		for(Activity a : this.Activities){
-			//workedBudget = a.getWorkedTime()*hourCost;
-		}
-		return workedBudget;
+	public void setJobID(String jobID) {
+		this.jobID = JobIDParser.parse(jobID);
+	}
+	
+	public void setJobID(int jobNr, int posNr, PayMode payMode, String clientID, String desc) {
+		this.jobID = new JobID(jobNr, posNr, payMode, clientID, desc);
+	}
+	
+	public LinkedList<ActivityReport> getActivities() {
+		return activities;
 	}
 
-	public void setBudget(int budget) {
-		this.budget = budget;
+	public void setActivities(LinkedList<ActivityReport> activities) {
+		this.activities = activities;
 	}
 
-	public Job(){
-		this.Activities = new LinkedList<Activity>();
-		this.jobName = "";
-		this.id = 0;
+	public ActivityReport getActivity(int index) {
+		if (this.activities != null)
+			return this.activities.get(index);
+		else
+			return null;
+	}
+
+	public void addActivity(ActivityReport activity) {
+		this.activities.add(activity);
 	}
 	
-	public Job(int id, String jobName, LinkedList<Activity> activities,int budget){
-		this.id = id;
-		this.jobName = jobName;
-		this.Activities = activities;
-		this.budget = budget;
+	public long getMaxBudget() {
+		return maxBudget;
 	}
-	
-	public LinkedList<Activity> getActivitiess() {
-		if(this.Activities!=null){
-			return Activities;
-		}
-		return null;
-	}
-	public void setActivitys(LinkedList<Activity> Activities) {
-		this.Activities = Activities;
-	}
-	public String getJobName() {
-		return jobName;
-	}
-	public void setJobName(String jobName) {
-		this.jobName = jobName;
-	}
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
-	
-	public Activity getActivity(int index){
-		if(this.Activities!=null){
-			return this.Activities.get(index);
-		}
-		return null;
-	}
-	
-	public void addActivity(Activity activity){
-		this.Activities.add(activity);
+
+	public void setMaxBudget(int maxBudget) {
+		this.maxBudget = maxBudget;
 	}
 }
