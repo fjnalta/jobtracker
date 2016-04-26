@@ -7,20 +7,23 @@ import java.io.Serializable;
  * 
  * @author Alex & Mike Hukiewitz
  */
-public class Date implements Serializable {
+public class Date implements Serializable
+{
 
-	private int day;
-	private int month;
-	private int year;
+	private int	day;
+	private int	month;
+	private int	year;
 
 	/* -- Constructors -- */
-	public Date(int year, int month, int day) {
+	public Date(int year, int month, int day)
+	{
 		this.setDay(day);
 		this.setMonth(month);
 		this.setYear(year);
 	}
 
-	public Date() {
+	public Date()
+	{
 		this.day = 1;
 		this.month = 1;
 		this.year = 1970;
@@ -28,13 +31,17 @@ public class Date implements Serializable {
 
 	/* -- Logic -- */
 	/**
-	 * Returns true if 'anotherDate' chronologically occurred before 'this' date.
+	 * Returns true if 'anotherDate' chronologically occurred before 'this'
+	 * date.
 	 * 
 	 * @param anotherDate
 	 * @return
 	 */
-	public boolean isAfter(Date anotherDate) {
-		if (this.year > anotherDate.getYear() || this.month > anotherDate.getMonth() || this.day > anotherDate.getDay())
+	public boolean isAfter(Date anotherDate)
+	{
+		if (this.year > anotherDate.getYear()
+				|| this.month > anotherDate.getMonth()
+				|| this.day > anotherDate.getDay())
 			return true;
 		else
 			return false;
@@ -46,8 +53,11 @@ public class Date implements Serializable {
 	 * @param anotherDate
 	 * @return
 	 */
-	public boolean isBefore(Date anotherDate) {
-		if (this.year < anotherDate.getYear() || this.month < anotherDate.getMonth() || this.day > anotherDate.getDay())
+	public boolean isBefore(Date anotherDate)
+	{
+		if (this.year < anotherDate.getYear()
+				|| this.month < anotherDate.getMonth()
+				|| this.day > anotherDate.getDay())
 			return true;
 		else
 			return false;
@@ -59,42 +69,51 @@ public class Date implements Serializable {
 	 * @param anotherDate
 	 * @return
 	 */
-	public boolean equals(Date anotherDate) {
-		if (this.year == anotherDate.getYear() && this.month == anotherDate.getMonth()
-				&& this.day == anotherDate.getDay()) {
+	public boolean equals(Date anotherDate)
+	{
+		if (this.year == anotherDate.getYear()
+				&& this.month == anotherDate.getMonth()
+				&& this.day == anotherDate.getDay())
+		{
 			return true;
 		}
 		return false;
 	}
 
 	/* -- Getter/Setter -- */
-	public int getYear() {
+	public int getYear()
+	{
 		return year;
 	}
 
-	public void setYear(int year) {
-		if(year < 1970)
-			throw(new IllegalArgumentException());
+	public void setYear(int year)
+	{
+		if (year < 1970)
+			throw (new IllegalArgumentException());
 		this.year = year;
 	}
 
-	public int getMonth() {
+	public int getMonth()
+	{
 		return month;
 	}
 
-	public void setMonth(int month) {
-		if(month > 12 || month < 1)
-			throw(new IllegalArgumentException());
+	public void setMonth(int month)
+	{
+		if (month > 12 || month < 1)
+			throw (new IllegalArgumentException());
 		this.month = month;
 	}
 
-	public int getDay() {
+	public int getDay()
+	{
 		return day;
 	}
 
-	public void setDay(int day) {
-		if(day > 31 || day < 1)
-			throw(new IllegalArgumentException());
+	public void setDay(int day)
+	{
+		if (day > 31 || day < 1)
+			throw (new IllegalArgumentException());
 		this.day = day;
 	}
 }

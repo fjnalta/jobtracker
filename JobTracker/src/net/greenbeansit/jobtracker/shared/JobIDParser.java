@@ -7,12 +7,14 @@ import net.greenbeansit.jobtracker.shared.JobID.PayMode;
  * 
  * @author Mike Hukiewitz
  */
-public class JobIDParser {
+public class JobIDParser
+{
 
-	public static JobID parse(String input) {
-		//Minimum length to even try
-		if(input.length() <= 18)
-			throw(new IllegalArgumentException());
+	public static JobID parse(String input)
+	{
+		// Minimum length to even try
+		if (input.length() <= 18)
+			throw (new IllegalArgumentException());
 		int jobNr, posNr;
 		PayMode payMode;
 		String clientID = "";
@@ -31,7 +33,8 @@ public class JobIDParser {
 		posNr = Integer.parseInt(input.substring(k, i));
 		k = i;
 		// get payMode
-		switch (input.substring(i, i + 1)) {
+		switch (input.substring(i, i + 1))
+		{
 		case "TM":
 			payMode = PayMode.TM;
 			break;
@@ -45,7 +48,8 @@ public class JobIDParser {
 		}
 		// get clientID
 		i += 4;
-		while (input.charAt(i) != ' ') {
+		while (input.charAt(i) != ' ')
+		{
 			clientID += input.charAt(i);
 			i++;
 		}

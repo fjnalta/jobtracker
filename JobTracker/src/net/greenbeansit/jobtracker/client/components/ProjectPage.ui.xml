@@ -71,44 +71,14 @@
 		</b:Row>
 		<b:Row addStyleNames="{style.bottomRow}">
 			<b:Column size="XS_12,SM_12,MD_4,LG_4" addStyleNames="{style.mainColumn}">
-				<b:Row addStyleNames="{style.smallContainer}">
-					<s:Select addStyleNames="{style.bigButton}" type="PRIMARY" ui:field="selectCustomer">
-						<s:Option text="Kunde X"/>
-						<s:Option text="Kunde Y"/>
-						<s:Option text="Kunde Z"/>
-					</s:Select>
-					<s:Select addStyleNames="{style.bigButton}" type="PRIMARY" ui:field="selectProject">
-						<s:Option text="Projekt X"/>
-						<s:Option text="Projekt Y"/>
-						<s:Option text="Projekt Z"/>
-					</s:Select>
-				</b:Row>
-				<b:Row addStyleNames="{style.smallContainer}">
-					<g:VerticalPanel width="100%">
-						<b:Heading size="H3" text="Information" addStyleNames="{style.infoHeader}" />
-						<b:Row addStyleNames="{style.horizontalfillRow}">
-							<b.html:Span addStyleNames="{style.infoName}" text="Kunde:" />
-							<b.html:Span addStyleNames="{style.infoContent}"
-								text="#Kundenname" />
-						</b:Row>
-						<b:Row addStyleNames="{style.horizontalfillRow}">
-							<b.html:Span addStyleNames="{style.infoName}" text="Budget:" />
-							<b.html:Span addStyleNames="{style.infoContent}"
-								text="#BudgetBetrag" />
-						</b:Row>
-						<b:Row addStyleNames="{style.horizontalfillRow}">
-							<b.html:Span addStyleNames="{style.infoName}" text="Zeitraum:" />
-							<b.html:Span addStyleNames="{style.infoContent}"
-								text="#Zeitraum" />
-						</b:Row>
-
-					</g:VerticalPanel>
+				<b:Row addStyleNames="{style.smallContainer}" ui:field="containerBudgetDiagrams">
+				 	
+					<!-- Project diagrams -->
 				</b:Row>
 			</b:Column>
 			<b:Column size="XS_12,SM_12,MD_8,LG_8" addStyleNames="{style.mainColumn}">
-				<b:Row addStyleNames="{style.largeContainer}" ui:field="containerBudgetDiagrams">
-					<!-- Project diagrams -->
-
+				<b:Row addStyleNames="{style.largeContainer}" >
+					
 				</b:Row>
 			</b:Column>
 		</b:Row>

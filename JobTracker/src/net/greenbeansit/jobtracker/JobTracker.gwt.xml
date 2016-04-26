@@ -15,11 +15,13 @@
 	<!-- <inherits name='com.google.gwt.user.theme.chrome.Chrome'/> -->
 	<!-- <inherits name='com.google.gwt.user.theme.dark.Dark'/> -->
 
+
 	<!-- Other module inherits -->
 	<inherits name="org.gwtbootstrap3.GwtBootstrap3" />
 	<inherits name="org.gwtbootstrap3.extras.fullcalendar.FullCalendar"/>
 	<inherits name="org.gwtbootstrap3.extras.select.Select"/>
 	<inherits name='com.googlecode.gwt.charts.Charts'/>
+	<inherits name="com.google.gwt.i18n.I18N"/>
 	
 	<!-- Specify the app entry point class. -->
 	<entry-point class='net.greenbeansit.jobtracker.client.GwtEntryPoint' />

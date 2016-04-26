@@ -6,20 +6,25 @@ package net.greenbeansit.jobtracker.shared;
  * 
  * @author Mike Hukiewitz
  */
-public class JobID {
+public class JobID
+{
 
-	enum PayMode {
+	enum PayMode
+	{
 		TM, FP, NF
 	};
 
-	PayMode payMode;
-	int jobNr, posNr;
-	String clientID;
-	String desc;
+	PayMode	payMode;
+	int		jobNr, posNr;
+	String	clientID;
+	String	desc;
 
-	public JobID(int jobNr, int posNr, PayMode payMode, String clientID, String desc) {
-		if(jobNr < 0 || posNr < 0 || payMode == null || clientID == "" || desc == "")
-			throw(new IllegalArgumentException());
+	public JobID(int jobNr, int posNr, PayMode payMode, String clientID,
+			String desc)
+	{
+		if (jobNr < 0 || posNr < 0 || payMode == null || clientID == ""
+				|| desc == "")
+			throw (new IllegalArgumentException());
 		this.jobNr = jobNr;
 		this.posNr = posNr;
 		this.payMode = payMode;
@@ -27,23 +32,28 @@ public class JobID {
 		this.desc = desc;
 	}
 
-	public String getDesc() {
+	public String getDesc()
+	{
 		return desc;
 	}
 
-	public int getJobNr() {
+	public int getJobNr()
+	{
 		return jobNr;
 	}
 
-	public int getPosNr() {
+	public int getPosNr()
+	{
 		return posNr;
 	}
 
-	public PayMode getPayMode() {
+	public PayMode getPayMode()
+	{
 		return payMode;
 	}
 
-	public String getClientID() {
+	public String getClientID()
+	{
 		return clientID;
 	}
 
