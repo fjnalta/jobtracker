@@ -12,14 +12,30 @@ import javax.ws.rs.core.MediaType;
 import org.fusesource.restygwt.client.DirectRestService;
 
 
+/**
+ * Service for report functions of an employee.
+ * 
+ * @author Max Blatt
+ */
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public interface ActivityReportService extends DirectRestService  
 {
+	/**
+	 * Gets all of reports of the associated employee.
+	 * 
+	 * @return an array of {@link ActivityReport}s.
+	 */
 	@GET
 	@Path("/")
 	ActivityReport[] getAllReports();
 	
+	/**
+	 * Gets the {@link ActivityReport} with the following ID.
+	 * 
+	 * @param reportId the id of the searched report.
+	 * @return a {@link ActivityReport}.
+	 */
 	@GET
 	@Path("/{reportId}")
 	ActivityReport getReport(@PathParam("reportid") Long reportId);

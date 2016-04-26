@@ -8,13 +8,26 @@ import com.google.gwt.dev.util.collect.HashMap;
 
 import net.greenbeansit.jobtracker.shared.ActivityReportTemplate;
 import net.greenbeansit.jobtracker.shared.ActivityReportTemplateService;
+import net.greenbeansit.jobtracker.shared.Employee;
 
+/**
+ * Dummy implementation of the {@link ActivityReportTemplateService} interface.
+ * 
+ * @author Max Blatt
+ */
 public class ActivityReportTemplateServiceImpl implements ActivityReportTemplateService
 {	
 	private static Map<Long, ActivityReportTemplate> templateMap;
 	
 	private Long employeeId;
 	
+	
+	/**
+	 * Initializes a new instance of the {@link ActivityReportServiceImpl} class
+	 * associated with the {@link Employee} with the following ID.
+	 * 
+	 * @param employeeId the ID of the {@link Employee}.
+	 */
 	public ActivityReportTemplateServiceImpl(Long employeeId)
 	{
 		this.employeeId = employeeId;
@@ -50,7 +63,12 @@ public class ActivityReportTemplateServiceImpl implements ActivityReportTemplate
 		}
 	}
 	
-	private long createNewTemplateId()
+	/**
+	 * Generates a new, valid ID for a template.
+	 * 
+	 * @return a long integer.
+	 */
+	private static long createNewTemplateId()
 	{
 		int newId = templateMap.size();
 		while(templateMap.containsKey(newId))

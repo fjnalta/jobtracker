@@ -8,12 +8,23 @@ import javax.ws.rs.NotFoundException;
 import net.greenbeansit.jobtracker.shared.Job;
 import net.greenbeansit.jobtracker.shared.JobService;
 
+/**
+ * Dummy implementation of the {@link JobService} interface.
+ * 
+ * @author Max Blatt
+ */
 public class JobServiceImpl implements JobService
 {
 	private static Map<Long, Job> jobMap;
 	
 	private Long employeeId;
 	
+	/**
+	 * Initializes a new instance of the {@link JobServiceImpl} class
+	 * associated with the employee with the following ID.
+	 * 
+	 * @param employeeId the ID of the employee.
+	 */
 	public JobServiceImpl(Long employeeId)
 	{
 		if(jobMap == null)
