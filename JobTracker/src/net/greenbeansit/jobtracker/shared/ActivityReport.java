@@ -17,6 +17,7 @@ public class ActivityReport implements Serializable {
 	private Date date;
 	private int startTime;
 	private int duration;
+	private int breakTime;
 	private User author;
 
 	/* -- Constructors -- */
@@ -28,17 +29,26 @@ public class ActivityReport implements Serializable {
 	}
 	
 	/* -- Logic -- */
-//	public int getUsedBudget() {
-//		TODO: implement
-//	}
+	/**
+	 * Returns how much the company has to pay the author for the work done in Euro/Dollar.
+	 * @return 
+	 */
+	public int getUsedBudget() {
+		return (int)(duration*author.getHourlyPay())/60;
+	}
+	
+	public int getFaktura() {
+		return (int)((duration-breakTime)*author.getHourlyPay())/60;
+	}
 
 	/* -- Getter/Setter -- */
-	//TODO: Exceptions
 	public String getDescription() {
 		return description;
 	}
 
 	public void setDescription(String description) {
+		if(description == "")
+			throw(new InvalidInput());
 		this.description = description;
 	}
 
@@ -55,7 +65,7 @@ public class ActivityReport implements Serializable {
 	}
 
 	public void setDuration(int duration) {
-		if(duration < 1 || startTime+duration > 1440)
+		if(duration < 1 || startTime+duration+breakTime > 1440 || duration < breakTime)
 			throw(new InvalidInput());
 		this.duration = duration;
 	}
@@ -65,7 +75,7 @@ public class ActivityReport implements Serializable {
 	}
 
 	public void setStartTime(int startTime) {
-		if(startTime >= 1440)
+		if(startTime >= 1440 || startTime+duration+breakTime > 1440)
 			throw(new InvalidInput());
 		this.startTime = startTime;
 	}
@@ -75,7 +85,7 @@ public class ActivityReport implements Serializable {
 	}
 
 	public void setEndTime(int endTime) {
-		if(endTime-startTime <= 0)
+		if(endTime-startTime-breakTime <= 0 || endTime > 1440)
 			throw(new InvalidInput());
 		this.duration = endTime-startTime;
 	}
@@ -100,6 +110,16 @@ public class ActivityReport implements Serializable {
 	
 	public void setDate(int year, int month, int day) {
 		this.date = new Date(year, month, day);
+	}
+
+	public int getBreakTime() {
+		return breakTime;
+	}
+
+	public void setBreakTime(int breakTime) {
+		if(breakTime > duration)
+			throw(new InvalidInput());
+		this.breakTime = breakTime;
 	}
 
 }

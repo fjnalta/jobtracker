@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.LinkedList;
 
 import net.greenbeansit.jobtracker.shared.JobID.PayMode;
+import net.greenbeansit.jobtracker.shared.exceptions.InvalidInput;
 
 /**
  * Shared representation of a job. Is used in frontend logic and used as a
@@ -17,7 +18,6 @@ public class Job implements Serializable {
 	private JobID jobID;
 	private LinkedList<ActivityReport> activities;
 	private int maxBudget;
-	private int usedBudget;
 
 	
 	/* -- Constructors -- */
@@ -39,13 +39,62 @@ public class Job implements Serializable {
 		this.setMaxBudget(maxBudget);
 	}
 	
+	/* -- Logic -- */
+	public int getUsedBudget() {
+		int usedBudget = 0;
+		for(ActivityReport a : activities) {
+			usedBudget += a.getUsedBudget();
+		}
+		return usedBudget;
+	}
+	/**
+	 * Returns the used budget of a single user.
+	 * @param userID
+	 * @return
+	 */
+	public int getUsedBudget(String userID) {
+		int usedBudget = 0;
+		for(ActivityReport a : activities) {
+			if(a.getAuthor().getUserID() == userID) {
+				usedBudget += a.getUsedBudget();
+			}
+		}
+		return usedBudget;
+	}
+	/**
+	 * Returns the productive amount of work time in Euro/Dollar.
+	 * @return
+	 */
+	public int getFaktura() {
+		int usedBudget = 0;
+		for(ActivityReport a : activities) {
+			usedBudget += a.getFaktura();
+		}
+		return usedBudget;
+	}
+	/**
+	 * Returns the productive amount of work time of a single user.
+	 * @param userID
+	 * @return
+	 */
+	public int getFaktura(String userID) {
+		int usedBudget = 0;
+		for(ActivityReport a : activities) {
+			if(a.getAuthor().getUserID() == userID) {
+				usedBudget += a.getFaktura();
+			}
+		}
+		return usedBudget;
+	}
+	
 	/* -- Getter/Setter -- */
-	//TODO: Exceptions
 	public JobID getJobID() {
 		return jobID;
 	}
 
 	public void setJobID(JobID jobID) {
+		if(jobID == null)
+			throw(new InvalidInput());
 		this.jobID = jobID;
 	}
 	
@@ -73,6 +122,8 @@ public class Job implements Serializable {
 	}
 
 	public void addActivity(ActivityReport activity) {
+		if(activity == null)
+			throw(new InvalidInput());
 		this.activities.add(activity);
 	}
 	
@@ -81,6 +132,8 @@ public class Job implements Serializable {
 	}
 
 	public void setMaxBudget(int maxBudget) {
+		if(maxBudget < 0)
+			throw(new InvalidInput());
 		this.maxBudget = maxBudget;
 	}
 }

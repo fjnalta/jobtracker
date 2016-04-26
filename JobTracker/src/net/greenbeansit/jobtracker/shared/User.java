@@ -1,20 +1,21 @@
 package net.greenbeansit.jobtracker.shared;
 
+import net.greenbeansit.jobtracker.shared.exceptions.InvalidInput;
+
 public class User {
-	private int userID;
+	private String userID;
 	private float hourlyPay;
 
-	public User(int userID, float hourlyPay) {
+	public User(String userID, float hourlyPay) {
 		this.setUserID(userID);
 		this.setHourlyPay(hourlyPay);
 	}
 
-	//TODO: Exceptions
-	public int getUserID() {
+	public String getUserID() {
 		return userID;
 	}
 
-	public void setUserID(int userID) {
+	public void setUserID(String userID) {
 		this.userID = userID;
 	}
 
@@ -23,6 +24,8 @@ public class User {
 	}
 
 	public void setHourlyPay(float hourlyPay) {
+		if(hourlyPay < 0)
+			throw(new InvalidInput());
 		this.hourlyPay = hourlyPay;
 	}
 	
