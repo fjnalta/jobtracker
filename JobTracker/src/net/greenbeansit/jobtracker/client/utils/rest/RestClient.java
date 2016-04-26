@@ -5,6 +5,10 @@ import org.fusesource.restygwt.client.Method;
 import org.fusesource.restygwt.client.MethodCallback;
 import org.fusesource.restygwt.client.callback.CallbackAware;
 
+import com.google.gwt.core.client.GWT;
+
+import net.greenbeansit.jobtracker.shared.EmployeeService;
+
 /**
  * Client for backend service calls.
  * 
@@ -13,7 +17,7 @@ import org.fusesource.restygwt.client.callback.CallbackAware;
  */
 public class RestClient<R> {
 
-	
+	private static EmployeeService EMPLOYEE_SERVICE = GWT.create(EmployeeService.class);
 
 	private MethodCallback<R> callback;
 
@@ -72,6 +76,11 @@ public class RestClient<R> {
 	private final <T extends DirectRestService> T setCallback(T service) {
 		((CallbackAware) service).setCallback(callback);
 		return service;
+	}
+	
+	public EmployeeService getEmployeeService()
+	{
+		return setCallback(EMPLOYEE_SERVICE);
 	}
 
 }
