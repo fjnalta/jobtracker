@@ -4,6 +4,8 @@ public class ActivityReportTemplate extends ActivityReport
 {
 
 	private String templateName;
+	private String description;
+	private Long id; 
 
 	public ActivityReportTemplate(String description, String identifier,
 			Date date, int startTime, int duration, String templateName)
@@ -22,5 +24,20 @@ public class ActivityReportTemplate extends ActivityReport
 		if (templateName == "")
 			throw (new IllegalArgumentException());
 		this.templateName = templateName;
+	}
+		public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 }

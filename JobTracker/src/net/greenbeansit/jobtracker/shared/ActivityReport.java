@@ -1,6 +1,7 @@
 package net.greenbeansit.jobtracker.shared;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Shared representation of an Activity (Taetigkeitsbericht (TB)). Is used in
@@ -11,14 +12,19 @@ import java.io.Serializable;
  */
 public class ActivityReport implements Serializable
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	private String	description;
 	private String	identifier;
 	private Date	date;
-	private int		startTime;
-	private int		duration;
-	private int		breakTime;
+	private Integer	startTime;
+	private Integer	duration;
+	private Integer	breakTime;
 	private User	author;
+	private Long id;
 
 	/* -- Constructors -- */
 	public ActivityReport(String description, String identifier, Date date,
@@ -143,6 +149,14 @@ public class ActivityReport implements Serializable
 		if (breakTime > duration)
 			throw (new IllegalArgumentException());
 		this.breakTime = breakTime;
+	}
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 }
