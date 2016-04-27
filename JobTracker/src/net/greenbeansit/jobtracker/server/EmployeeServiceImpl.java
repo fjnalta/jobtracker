@@ -43,7 +43,7 @@ public class EmployeeServiceImpl implements EmployeeService
 	public JobService getJobService(Long employeeId)
 	{
 		if (employeeMap.containsKey(employeeId))
-			return new JobServiceImpl(employeeId);
+			return new JobServiceImpl();
 
 		throw new NotFoundException();
 	}
