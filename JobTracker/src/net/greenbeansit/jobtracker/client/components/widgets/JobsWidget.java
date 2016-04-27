@@ -32,5 +32,34 @@ public class JobsWidget extends Composite
 	public JobsWidget()
 	{
 		initWidget(uiBinder.createAndBindUi(this));
+		
+
+//		Scheduler.get().scheduleDeferred(new ScheduledCommand()
+//		{
+//			
+//			@Override
+//			public void execute() {
+//				// TODO Auto-generated method stub
+//				selectJob.render();
+//				
+//				Select select = new Select();
+//				select.setLiveSearch(true);
+//				select.setLiveSearchPlaceholder("Suche");
+//				select.setPlaceholder("Jobnummer");
+//				
+//				for(int i = 0; i < 10; i++)
+//				{
+//					Option option = new Option();
+//					option.setText("TEST" + i);
+//					
+//					select.add(option);
+//				}
+//
+//				container.add(select);
+//				
+//				
+//			}
+//		});
+		//new RenderTimer().schedule(300);
 	}
 }

@@ -40,22 +40,12 @@ public interface ActivityReportService extends DirectRestService
 	@Path("/{reportId}")
 	ActivityReport getReport(@PathParam("reportid") Long reportId);
 	
-	/**
-	 * Returns all {@code ActivityReport}s of a certain employee in a given time span. 
-	 * @param employeeId whose reports to load.
-	 * @param from beginning of time span.
-	 * @param to end of time span.
-	 * @return an array of {@link ActivityReport}s.
-	 */
 	@GET
 	@Path("/{employeeId}/reportPeriod")
 	ActivityReport[] getReportPeriod(@PathParam("reportid") Long employeeId, String from, String to);
 	
 	
-	/**
-	 * Creates a given {@code ActivityReport} on the server.
-	 * @param report {@code ActivityReport} to send.
-	 */
+	
 	@POST
 	@Path("/")
 	void createReport(ActivityReport report);
