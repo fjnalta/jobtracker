@@ -15,13 +15,13 @@ public class Employee
 	/**
 	 * Initializes a new instance of the {@link Employee} class.
 	 */
-	public Employee()
-	{
-		
+	public Employee(String firstName, String lastName) {
+		this.firstName = firstName;
+		this.lastName = lastName;
 	}
 	
 	
-	
+	/* -- Getter/Setter --*/
 	public String getFirstName()
 	{
 		return firstName;

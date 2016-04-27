@@ -17,22 +17,22 @@ public class JobServiceImpl implements JobService
 {
 	private static Map<Long, Job> jobMap;
 	
-	private Long employeeId;
+	//private Long employeeId;
 	
 	/**
-	 * Initializes a new instance of the {@link JobServiceImpl} class
-	 * associated with the employee with the following ID.
-	 * 
-	 * @param employeeId the ID of the employee.
+	 * Initializes a new instance of the {@link JobServiceImpl} class.
 	 */
-	public JobServiceImpl(Long employeeId)
+	public JobServiceImpl()
 	{
 		if(jobMap == null)
 			jobMap = new HashMap<Long, Job>();
 		
-		this.employeeId = employeeId;
+		//this.employeeId = employeeId;
 	}
 
+	/**
+	 * Returns all jobs.
+	 */
 	@Override
 	public Job[] getAllJobs()
 	{
