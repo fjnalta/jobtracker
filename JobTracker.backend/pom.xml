@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>net.greenbeansit</groupId>
-	<artifactId>Jobtracker.backend</artifactId>
+	<artifactId>Jobtacker.backend</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<name>JobTracker.backend</name>
@@ -48,13 +48,12 @@
 			<artifactId>liquibase-core</artifactId>
 			<version>3.4.2</version>
 		</dependency>
+		<dependency>
+			<groupId>net.greenbeansit</groupId>
+			<artifactId>Jobtracker.shared</artifactId>
+			<version>${shared.version}</version>
+		</dependency>
 	</dependencies>
-
-	<dependency>
-		<groupId>net.greenbeansit</groupId>
-		<artifactId>Jobtracker.shared</artifactId>
-		<version>${shared.version}</version>
-	</dependency>
 	<build>
 		<plugins>
 			<plugin>
