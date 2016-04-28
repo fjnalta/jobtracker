@@ -1,3 +1,4 @@
+
 package net.greenbeansit.jobtracker.backend.services;
 
 import java.util.HashMap;
@@ -5,7 +6,8 @@ import java.util.Map;
 
 import javax.ws.rs.NotFoundException;
 
-import net.greenbeansit.Jobtracker.shared.*;
+import net.greenbeansit.Jobtracker.shared.Job;
+import net.greenbeansit.Jobtracker.shared.JobService;
 
 /**
  * Dummy implementation of the {@link JobService} interface.
@@ -15,21 +17,15 @@ import net.greenbeansit.Jobtracker.shared.*;
 public class JobServiceImpl implements IJobService
 {
 	private static Map<Long, Job> jobMap;
-	
-	private Long employeeId;
+
 	
 	/**
-	 * Initializes a new instance of the {@link JobServiceImpl} class
-	 * associated with the employee with the following ID.
-	 * 
-	 * @param employeeId the ID of the employee.
+	 * Initializes a new instance of the {@link JobServiceImpl} class.
 	 */
-	public JobServiceImpl(Long employeeId)
+	public JobServiceImpl()
 	{
 		if(jobMap == null)
 			jobMap = new HashMap<Long, Job>();
-		
-		this.employeeId = employeeId;
 	}
 
 	public Job[] getAllJobs()

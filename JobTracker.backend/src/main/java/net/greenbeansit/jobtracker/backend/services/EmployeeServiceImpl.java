@@ -1,18 +1,16 @@
+
 package net.greenbeansit.jobtracker.backend.services;
 
 import java.util.Map;
 
-import javax.inject.Inject;
 import javax.ws.rs.NotFoundException;
-
-import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.google.gwt.dev.util.collect.HashMap;
 
 import net.greenbeansit.Jobtracker.shared.ActivityReportService;
 import net.greenbeansit.Jobtracker.shared.ActivityReportTemplateService;
 import net.greenbeansit.Jobtracker.shared.Employee;
+import net.greenbeansit.Jobtracker.shared.EmployeeService;
 import net.greenbeansit.Jobtracker.shared.JobService;
 
 /**
@@ -20,10 +18,8 @@ import net.greenbeansit.Jobtracker.shared.JobService;
  * 
  * @author Max Blatt
  */
-
 public class EmployeeServiceImpl implements IEmployeeService
 {
-	
 	private static Map<Long, Employee> employeeMap;
 
 	/**
@@ -34,7 +30,7 @@ public class EmployeeServiceImpl implements IEmployeeService
 		if (employeeMap == null)
 			employeeMap = new HashMap<Long, Employee>();
 	}
-	
+
 	public Employee getEmployee(Long employeeId)
 	{
 		if (employeeMap.containsKey(employeeId))
@@ -46,7 +42,7 @@ public class EmployeeServiceImpl implements IEmployeeService
 	public JobService getJobService(Long employeeId)
 	{
 		if (employeeMap.containsKey(employeeId))
-			return (JobService) new JobServiceImpl(employeeId);
+			return (JobService) new JobServiceImpl();
 
 		throw new NotFoundException();
 	}
