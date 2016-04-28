@@ -7,7 +7,7 @@ import com.google.gwt.user.client.ui.RootPanel;
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
  */
-class GwtEntryPoint implements EntryPoint
+public class GwtEntryPoint implements EntryPoint
 {
 	/**
 	 * The message displayed to the user when the server cannot be reached or

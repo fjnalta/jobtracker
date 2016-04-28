@@ -1,24 +1,29 @@
-package net.greenbeansit.jobtracker.server;
+package net.greenbeansit.jobtracker.backend.services;
 
 import java.util.Map;
 
+import javax.inject.Inject;
 import javax.ws.rs.NotFoundException;
+
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.google.gwt.dev.util.collect.HashMap;
 
-import net.greenbeansit.jobtracker.shared.ActivityReportService;
-import net.greenbeansit.jobtracker.shared.ActivityReportTemplateService;
-import net.greenbeansit.jobtracker.shared.Employee;
-import net.greenbeansit.jobtracker.shared.EmployeeService;
-import net.greenbeansit.jobtracker.shared.JobService;
+import net.greenbeansit.Jobtracker.shared.ActivityReportService;
+import net.greenbeansit.Jobtracker.shared.ActivityReportTemplateService;
+import net.greenbeansit.Jobtracker.shared.Employee;
+import net.greenbeansit.Jobtracker.shared.JobService;
 
 /**
  * Dummy implementation of the {@link EmployeeService} interface.
  * 
  * @author Max Blatt
  */
-public class EmployeeServiceImpl implements EmployeeService
+
+public class EmployeeServiceImpl implements IEmployeeService
 {
+	
 	private static Map<Long, Employee> employeeMap;
 
 	/**
@@ -29,8 +34,7 @@ public class EmployeeServiceImpl implements EmployeeService
 		if (employeeMap == null)
 			employeeMap = new HashMap<Long, Employee>();
 	}
-
-	@Override
+	
 	public Employee getEmployee(Long employeeId)
 	{
 		if (employeeMap.containsKey(employeeId))
@@ -39,29 +43,26 @@ public class EmployeeServiceImpl implements EmployeeService
 		throw new NotFoundException();
 	}
 
-	@Override
 	public JobService getJobService(Long employeeId)
 	{
 		if (employeeMap.containsKey(employeeId))
-			return new JobServiceImpl(employeeId);
+			return (JobService) new JobServiceImpl(employeeId);
 
 		throw new NotFoundException();
 	}
 
-	@Override
 	public ActivityReportService getReportService(Long employeeId)
 	{
 		if (employeeMap.containsKey(employeeId))
-			return new ActivityReportServiceImpl(employeeId);
+			return (ActivityReportService) new ActivityReportServiceImpl(employeeId);
 
 		throw new NotFoundException();
 	}
 
-	@Override
 	public ActivityReportTemplateService getTemplateService(Long employeeId)
 	{
 		if (employeeMap.containsKey(employeeId))
-			return new ActivityReportTemplateServiceImpl(employeeId);
+			return (ActivityReportTemplateService) new ActivityReportTemplateServiceImpl(employeeId);
 
 		throw new NotFoundException();
 	}

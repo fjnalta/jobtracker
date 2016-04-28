@@ -71,13 +71,12 @@
 			<artifactId>jersey-media-json-jackson</artifactId>
 			<version>2.7</version>
 		</dependency>
-		<!-- Jackson -->
+		<!-- JSON Provider -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
 			<version>2.7.3</version>
 		</dependency>
-		<!-- JSON Provider -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.jaxrs</groupId>
 			<artifactId>jackson-jaxrs-json-provider</artifactId>
@@ -120,8 +119,8 @@
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.6</version>
-			<!-- Liquibase -->
 		</dependency>
+		<!-- Liquibase -->
 		<dependency>
 			<groupId>org.liquibase</groupId>
 			<artifactId>liquibase-core</artifactId>

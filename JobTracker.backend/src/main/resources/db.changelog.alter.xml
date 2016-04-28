@@ -1,0 +1,20 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+	<changeSet id="20160328-002" author="fmisir">
+		<sql>
+			<![CDATA[
+				CREATE TABLE `PERSON`
+				(
+					`ID` BIGINT NOT NULL AUTO_INCREMENT ,
+					`LASTNAME` VARCHAR(50) NOT NULL,
+					`FIRSTNAME` VARCHAR(50) NOT NULL,
+					CONSTRAINT `PK_PERSON` PRIMARY KEY (`ID`)
+				)
+				;
+			]]>
+		</sql>
+	</changeSet>
+</databaseChangeLog>
