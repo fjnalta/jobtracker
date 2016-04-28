@@ -5,7 +5,6 @@
 	.first_column {
 		margin-left: 25px;
 	}
-	
 	.second_column {
 		margin-right: 25px;
 	}

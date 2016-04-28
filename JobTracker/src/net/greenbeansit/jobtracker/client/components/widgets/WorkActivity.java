@@ -18,6 +18,7 @@ public class WorkActivity extends Composite{
 	interface WorkActivityUiBinder extends UiBinder<Widget, WorkActivity> {
 	}
 
+	
 	public WorkActivity() {
 		initWidget(uiBinder.createAndBindUi(this));
 	}

@@ -21,6 +21,7 @@ public class UtilizationActivity extends Composite {
 	}
 
 	
+	
 	public UtilizationActivity() {
 		initWidget(uiBinder.createAndBindUi(this));
 	}
