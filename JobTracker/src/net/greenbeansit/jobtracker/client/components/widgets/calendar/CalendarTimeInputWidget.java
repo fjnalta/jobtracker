@@ -3,6 +3,7 @@ package net.greenbeansit.jobtracker.client.components.widgets.calendar;
 import java.util.Observer;
 
 import org.gwtbootstrap3.client.ui.Button;
+import org.gwtbootstrap3.client.ui.IntegerBox;
 import org.gwtbootstrap3.client.ui.TextBox;
 import org.gwtbootstrap3.client.ui.constants.IconPosition;
 import org.gwtbootstrap3.client.ui.constants.IconType;
@@ -57,10 +58,10 @@ public class CalendarTimeInputWidget extends Composite {
 	TextBox eventEnd;
 
 	@UiField
-	TextBox pause;
+	IntegerBox pause;
 
 	@UiField
-	TextBox workTime;
+	IntegerBox workTime;
 
 	public CalendarTimeInputWidget() {
 		initWidget(uiBinder.createAndBindUi(this));
@@ -73,47 +74,133 @@ public class CalendarTimeInputWidget extends Composite {
 
 	@UiHandler("buttonUpStart")
 	public void onClickUpStart(ClickEvent event) {
-
+		increaseEvent(eventStart);
 	}
 
 	@UiHandler("buttonDownStart")
 	public void onClickDownStart(ClickEvent event) {
-
+		decreaseEvent(eventStart);
 	}
 
 	@UiHandler("buttonUpEnd")
 	public void onClickUpEnd(ClickEvent event) {
-
+		increaseEvent(eventEnd);
 	}
 
 	@UiHandler("buttonDownEnd")
 	public void onClickDownEnd(ClickEvent event) {
-
+		decreaseEvent(eventEnd);
 	}
 
 	@UiHandler("eventStart")
 	public void keyPressedEventStart(KeyPressEvent event) {
-		if (verifyTextInput(event))
-			event.preventDefault();
+		String before = eventStart.getText().replace(":", "");
+		eventStart.setText(before);
+		inputLengthIsToLong(before, event);
+		inputIsNotAnNumber(event);
+		eventStart.setText(before);
 	}
 
 	@UiHandler("eventEnd")
 	public void keyPressedEventEnd(KeyPressEvent event) {
-
+		inputLengthIsToLong(eventEnd.getText(), event);
+		inputIsNotAnNumber(event);
 	}
 
 	@UiHandler("pause")
 	public void keyPressedPause(KeyPressEvent event) {
-
+		inputLengthIsToLong(pause.getText(), event);
+		inputIsNotAnNumber(event);
 	}
+
 	@UiHandler("workTime")
 	public void keyPressedWorkTime(KeyPressEvent event) {
+		inputLengthIsToLong(workTime.getText(), event);
+		inputIsNotAnNumber(event);
+	}
+
+	private void increaseEvent(TextBox box) {
+		String hourString = removeLeadingNull(box.getText().substring(0, 2));
+		String minuteString = removeLeadingNull(box.getText().substring(2, box.getText().length()));
+		
+		int hours = Integer.parseInt(hourString);
+		int minutes = Integer.parseInt(minuteString);
+		
+		if(minutes < 59){
+			minutes++;
+		}else{
+			if(hours < 23){
+				hours++;
+				minutes = 0;
+			}else{
+				hours = 0;
+				minutes = 0;
+			}
+		}
+		hourString = "" + hours;
+		minuteString = "" + minutes;
+		
+		hourString  = addLeadingNull(hourString);
+		minuteString = addLeadingNull(minuteString);
+		
+		box.setText(hourString + minuteString);
+	}
+	
+	private String addLeadingNull(String sign){
+		if(sign.length()< 2){
+			return (0 + sign);
+		}else{
+			return sign;
+		}
+	}
+	
+	private String removeLeadingNull(String sign){
+		if(sign.startsWith("0") && !(sign.equals("00"))){
+			return sign.replace("0", "");
+		}else{
+			return sign;
+		}
+	}
+
+	private void decreaseEvent(TextBox box) {
+		String hourString = removeLeadingNull(box.getText().substring(0, 2));
+		String minuteString = removeLeadingNull(box.getText().substring(2, box.getText().length()));
+		
+		int hours = Integer.parseInt(hourString);
+		int minutes = Integer.parseInt(minuteString);
+		
+		if(minutes > 0){
+			minutes--;
+		}else{
+			if(hours > 0){
+				hours--;
+				minutes = 59;
+			}else{
+				hours = 23;
+				minutes = 59;
+			}
+		}
+		hourString = "" + hours;
+		minuteString = "" + minutes;
+		
+		hourString  = addLeadingNull(hourString);
+		minuteString = addLeadingNull(minuteString);
+		
+		box.setText(hourString + minuteString);
+	}
+
+	private void inputIsNotAnNumber(KeyPressEvent event) {
+		String input = String.valueOf(event.getCharCode());
+		if (!Character.isDigit(event.getCharCode())) {
+			event.preventDefault();
+		}
 
 	}
-	private boolean verifyTextInput(KeyPressEvent event) {
-		String input = String.valueOf(event.getCharCode());
-		if (!input.matches("[0-9]*") || (input.length() > 3))
-			return true;
-		return false;
+
+	private void inputLengthIsToLong(String before, KeyPressEvent event) {
+		// Window.alert(""+ before.length() +" " + before);
+		if (before.length() > 3) {
+			event.preventDefault();
+		}
 	}
 }
