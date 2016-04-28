@@ -28,16 +28,24 @@ public class ProjectPage extends Composite
 	@UiField
 	Row containerBudgetDiagrams;
 	
+	@UiField
+	GraphWidget graphWidget;
+	
 	
 	public ProjectPage()
 	{
 		initWidget(uiBinder.createAndBindUi(this));
 		
+		initialize();
+		
 		containerBudgetDiagrams.add(new ProjectBudgetBar(500, 1000, "Projekt X"));
 		containerBudgetDiagrams.add(new ProjectBudgetBar(920, 1000, "Projekt Y"));
 		containerBudgetDiagrams.add(new ProjectBudgetBar(800, 1000, "Projekt Z"));
-		containerBudgetDiagrams.add(new GraphWidget());
 		
+	}
+	
+	private void initialize(){
+		graphWidget.registerObserver(this);
 	}
 
 }

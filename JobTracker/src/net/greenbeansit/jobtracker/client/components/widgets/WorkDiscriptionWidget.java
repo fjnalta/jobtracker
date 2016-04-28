@@ -7,7 +7,9 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 
-public class WorkDiscriptionWidget extends Composite
+import net.greenbeansit.jobtracker.client.components.HomePage;
+
+public class WorkDiscriptionWidget extends Composite implements ObservableOnHomePage
 {
 
 	private static WorkDiscriptionWidgetUiBinder uiBinder = 
@@ -30,5 +32,26 @@ public class WorkDiscriptionWidget extends Composite
 	protected void onAttach() {
 		// TODO Auto-generated method stub
 		super.onAttach();
+	}
+
+
+	@Override
+	public void registerObserver(HomePage homePage) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void removeObserver(HomePage homePage) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void notificate() {
+		// TODO Auto-generated method stub
+		
 	}
 }

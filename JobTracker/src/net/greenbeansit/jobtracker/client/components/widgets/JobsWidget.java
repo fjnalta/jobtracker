@@ -13,7 +13,10 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 
-public class JobsWidget extends Composite
+import net.greenbeansit.jobtracker.client.components.HomePage;
+import net.greenbeansit.jobtracker.shared.Job;
+
+public class JobsWidget extends Composite implements ObservableOnHomePage
 {
 
 	private static JobsWidgetUiBinder uiBinder = GWT.create(JobsWidgetUiBinder.class);
@@ -61,5 +64,27 @@ public class JobsWidget extends Composite
 //			}
 //		});
 		//new RenderTimer().schedule(300);
+	}
+	
+	public Job getSelectedJob(){
+		return null;
+	}
+
+	@Override
+	public void registerObserver(HomePage homePage) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void removeObserver(HomePage homePage) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void notificate() {
+		// TODO Auto-generated method stub
+		
 	}
 }

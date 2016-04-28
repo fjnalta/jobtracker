@@ -5,7 +5,9 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 
-public class CapazityWidget extends Composite {
+import net.greenbeansit.jobtracker.client.components.HomePage;
+
+public class CapazityWidget extends Composite{
 
 	private static CapazityWidgetUiBinder uiBinder = GWT.create(CapazityWidgetUiBinder.class);
 

@@ -19,7 +19,9 @@ import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 
-public class CalendarWidget extends Composite {
+import net.greenbeansit.jobtracker.client.components.HomePage;
+
+public class CalendarWidget extends Composite implements ObservableOnHomePage {
 
 	private static CalendarWidgetUiBinder uiBinder = GWT.create(CalendarWidgetUiBinder.class);
 
@@ -68,6 +70,24 @@ public class CalendarWidget extends Composite {
 	@Override
 	protected void onLoad() {
 		super.onLoad();
+		
+	}
+
+	@Override
+	public void registerObserver(HomePage homePage) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void removeObserver(HomePage homePage) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void notificate() {
+		// TODO Auto-generated method stub
 		
 	}
 

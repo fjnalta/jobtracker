@@ -19,10 +19,11 @@ import com.googlecode.gwt.charts.client.corechart.PieChartOptions;
 import com.googlecode.gwt.charts.client.options.HAxis;
 import com.googlecode.gwt.charts.client.options.VAxis;
 
+import net.greenbeansit.jobtracker.client.components.ProjectPage;
 import net.greenbeansit.jobtracker.client.controller.Controller;
 import net.greenbeansit.jobtracker.client.controller.ControllerInterface;
 
-public class GraphWidget extends Composite
+public class GraphWidget extends Composite implements ObservableOnProjectPage
 {
 
 	private static GraphWidgetUiBinder uiBinder = GWT
@@ -226,6 +227,24 @@ public class GraphWidget extends Composite
 		// Draw the chart
 		piechart.draw(dataTable, options);
 
+	}
+
+	@Override
+	public void registerObserver(ProjectPage projectPage) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void removeObserver(ProjectPage projectPage) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void notificate() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
