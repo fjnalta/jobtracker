@@ -2,7 +2,8 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:b="urn:import:org.gwtbootstrap3.client.ui"
 	xmlns:b.html="urn:import:org.gwtbootstrap3.client.ui.html"
-	xmlns:widgets="urn:import:net.greenbeansit.jobtracker.client.components.widgets">
+	xmlns:widgets="urn:import:net.greenbeansit.jobtracker.client.components.widgets"
+	xmlns:c="urn:import:net.greenbeansit.jobtracker.client.components.widgets.calendar">
 	<ui:style>
 	.headerRow {
 		margin: 10px;
@@ -78,7 +79,7 @@
 		</b:Column>
 		<b:Column size="XS_12,SM_12,MD_8,LG_8" addStyleNames="{style.mainColumn}">
 			<b:Row addStyleNames="{style.largeContainer}" ui:field="containerBudgetDiagrams">
-				<widgets:CalendarWidget />
+				<c:CalendarWidget />
 			</b:Row>
 		</b:Column>
 	</b:Container>

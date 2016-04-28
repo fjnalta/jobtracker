@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+
+<ui:UiBinder xmlns:s="urn:import:javax.swing"
+	xmlns:h="urn:import:org.gwtbootstrap3.client.ui.html"
+	xmlns:b2="urn:import:org.gwtbootstrap3.extras.datetimepicker.client.ui"
+	xmlns:b="urn:import:org.gwtbootstrap3.client.ui" xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:org.gwtbootstrap3.client.ui.gwt">
+	<ui:style>
+	.button {
+		
+	}
+	
+	.textInput {
+		
+	}
+	</ui:style>
+	
+	<b:FormGroup>
+
+		<b:Form>
+			<g:FlowPanel addStyleNames="col-xs-1">
+				<h:Text>Pause</h:Text>
+			</g:FlowPanel>
+			<g:FlowPanel addStyleNames="col-xs-1">
+				<b:TextBox addStyleNames="{style.textInput}" ui:field="pause" />
+			</g:FlowPanel>
+		</b:Form>
+
+		<g:FlowPanel addStyleNames="col-xs-1">
+			<h:Text>Zeit</h:Text>
+		</g:FlowPanel>
+		<g:FlowPanel addStyleNames="col-xs-1">
+			<b:TextBox addStyleNames="{style.textInput}" ui:field="workTime" />
+		</g:FlowPanel>
+
+
+
+			<g:FlowPanel addStyleNames="col-xs-1">
+				<b:Column size="XS_SM_MD_LG">
+					<b:Button addStyleNames="{style.button}" ui:field="buttonUpStart" />
+				</b:Column>
+				<b:Column size="XS_SM_MD_LG">
+					<b:Button addStyleNames="{style.button}" ui:field="buttonDownStart" />
+				</b:Column>
+			</g:FlowPanel>
+			<g:FlowPanel addStyleNames="col-xs-1">
+				<b:TextBox addStyleNames="{style.textInput}" ui:field="eventStart">23</b:TextBox>
+			</g:FlowPanel>
+
+			<g:FlowPanel addStyleNames="col-xs-1">
+				<b:TextBox addStyleNames="{style.textInput}" ui:field="eventEnd">59</b:TextBox>
+			</g:FlowPanel>
+			<g:FlowPanel addStyleNames="col-xs-1">
+				<b:Column size="XS_SM_MD_LG">
+					<b:Button addStyleNames="{style.button}" ui:field="buttonUpEnd" />
+				</b:Column>
+				<b:Column size="XS_SM_MD_LG">
+					<b:Button addStyleNames="{style.button}" ui:field="buttonDownEnd" />
+				</b:Column>
+			</g:FlowPanel>
+
+		<g:FlowPanel addStyleNames="col-xs-1">
+			<b:Button addStyleNames="{style.button}" ui:field="buttonBuchen"
+				text="Buchen" />
+		</g:FlowPanel>
+
+	</b:FormGroup>
+
+</ui:UiBinder>
