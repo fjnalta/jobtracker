@@ -1,13 +1,18 @@
 package net.greenbeansit.jobtracker.shared;
 
+import java.io.Serializable;
 
 /**
  * Represents a normal user with no extra rights.
  * 
  * @author Max Blatt
  */
-public class Employee
+public class Employee implements Serializable
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5141608788110790303L;
 	private Long	id;
 	private String	firstName, lastName;
 
@@ -20,6 +25,11 @@ public class Employee
 		
 	}
 	
+	public Employee(Long id,String firstName,String lastName){
+		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
+	}
 	
 	
 	public String getFirstName()

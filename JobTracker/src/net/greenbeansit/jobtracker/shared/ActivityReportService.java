@@ -16,6 +16,7 @@ import org.fusesource.restygwt.client.DirectRestService;
  * 
  * @author Max Blatt
  */
+
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public interface ActivityReportService extends DirectRestService

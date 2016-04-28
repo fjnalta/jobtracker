@@ -1,8 +1,13 @@
 package net.greenbeansit.jobtracker.server;
 
 import java.util.ArrayList;
+
 import java.util.List;
 import java.util.Map;
+
+import javax.ws.rs.Consumes;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 
 import com.google.gwt.dev.util.collect.HashMap;
 
@@ -10,6 +15,8 @@ import net.greenbeansit.jobtracker.shared.ActivityReportTemplate;
 import net.greenbeansit.jobtracker.shared.ActivityReportTemplateService;
 import net.greenbeansit.jobtracker.shared.Employee;
 
+@Consumes(MediaType.APPLICATION_JSON)
+@Produces(MediaType.APPLICATION_JSON)
 /**
  * Dummy implementation of the {@link ActivityReportTemplateService} interface.
  * 
