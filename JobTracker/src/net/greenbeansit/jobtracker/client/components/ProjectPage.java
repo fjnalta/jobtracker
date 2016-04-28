@@ -18,6 +18,7 @@ public class ProjectPage extends Composite
 	interface ProjectPageUiBinder extends UiBinder<Widget, ProjectPage>
 	{
 		
+		
 	}
 
 	

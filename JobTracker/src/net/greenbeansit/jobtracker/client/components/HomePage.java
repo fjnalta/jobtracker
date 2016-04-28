@@ -24,7 +24,6 @@ public class HomePage extends Composite{
 
 	interface HomePageUiBinder extends UiBinder<Widget, HomePage> {
 	}
-	
 	@UiField
 	Column first_column;
 	
