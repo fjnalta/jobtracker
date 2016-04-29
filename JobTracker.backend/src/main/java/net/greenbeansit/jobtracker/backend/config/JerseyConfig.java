@@ -20,15 +20,19 @@ import org.glassfish.jersey.server.ResourceConfig;
 import org.springframework.stereotype.Component;
 
 import net.greenbeansit.jobtracker.backend.services.*;
+import net.greenbeansit.jobtracker.backend.services.activityreport.ActivityReportServiceImpl;
+import net.greenbeansit.jobtracker.backend.services.activityreporttemplate.ActivityReportTemplateServiceImpl;
+import net.greenbeansit.jobtracker.backend.services.employee.EmployeeServiceImpl;
+import net.greenbeansit.jobtracker.backend.services.job.JobServiceImpl;
 
 @Component
 public class JerseyConfig extends ResourceConfig {
 
 	public JerseyConfig() {
 		register(EmployeeServiceImpl.class);
-//		register(ActivityReportServiceImpl.class);
-//		register(ActivityReportTemplateServiceImpl.class);
-//		register(JobServiceImpl.class);
+		register(ActivityReportServiceImpl.class);
+		register(ActivityReportTemplateServiceImpl.class);
+		register(JobServiceImpl.class);
 	}
 
 }

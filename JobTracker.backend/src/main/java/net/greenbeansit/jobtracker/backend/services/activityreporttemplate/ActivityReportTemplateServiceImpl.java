@@ -1,4 +1,4 @@
-package net.greenbeansit.jobtracker.backend.services;
+package net.greenbeansit.jobtracker.backend.services.activityreporttemplate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,6 +7,7 @@ import java.util.Map;
 import com.google.gwt.dev.util.collect.HashMap;
 
 import net.greenbeansit.Jobtracker.shared.ActivityReportTemplate;
+import net.greenbeansit.jobtracker.backend.services.activityreport.ActivityReportServiceImpl;
 
 /**
  * Dummy implementation of the {@link ActivityReportTemplateService} interface.

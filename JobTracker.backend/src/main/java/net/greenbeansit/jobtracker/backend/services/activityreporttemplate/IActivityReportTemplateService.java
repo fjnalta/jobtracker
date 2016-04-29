@@ -1,4 +1,4 @@
-package net.greenbeansit.jobtracker.backend.services;
+package net.greenbeansit.jobtracker.backend.services.activityreporttemplate;
 
 import net.greenbeansit.Jobtracker.shared.ActivityReportTemplate;
 

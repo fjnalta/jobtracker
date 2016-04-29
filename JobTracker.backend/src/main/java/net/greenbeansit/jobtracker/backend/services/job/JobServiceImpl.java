@@ -1,5 +1,5 @@
 
-package net.greenbeansit.jobtracker.backend.services;
+package net.greenbeansit.jobtracker.backend.services.job;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,5 +1,5 @@
 
-package net.greenbeansit.jobtracker.backend.services;
+package net.greenbeansit.jobtracker.backend.services.employee;
 
 import java.util.Map;
 
@@ -12,6 +12,9 @@ import net.greenbeansit.Jobtracker.shared.ActivityReportTemplateService;
 import net.greenbeansit.Jobtracker.shared.Employee;
 import net.greenbeansit.Jobtracker.shared.EmployeeService;
 import net.greenbeansit.Jobtracker.shared.JobService;
+import net.greenbeansit.jobtracker.backend.services.activityreport.ActivityReportServiceImpl;
+import net.greenbeansit.jobtracker.backend.services.activityreporttemplate.ActivityReportTemplateServiceImpl;
+import net.greenbeansit.jobtracker.backend.services.job.JobServiceImpl;
 
 /**
  * Dummy implementation of the {@link EmployeeService} interface.
