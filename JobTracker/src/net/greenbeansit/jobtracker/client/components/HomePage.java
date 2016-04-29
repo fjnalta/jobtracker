@@ -69,20 +69,6 @@ public class HomePage extends Composite {
 	
 	private void loadJobs(Long Id){
 		
-		RestClient.build(new SuccessFunction<Employee>() {
-
-			@Override
-			public void onSuccess(Method method, Employee response) {
-				/*jobsWidget.addJobs(new Job[]{new Job(new JobID(1,1, "TM", "Kunde 1", "Beschreibung des Pr0jektes"),
-					1000, 1000)});
-				//jobsWidget.*/
-				Window.alert("WARUM");
-				
-			}
-
-			
-			
-		}).getEmployeeService().getEmployee(Id);
 	}
 	
 	private void loadEmploye(Long Id){
