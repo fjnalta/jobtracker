@@ -117,6 +117,11 @@ public class CalendarTimeInputWidget extends Composite {
 	public void keyPressedWorkTime(KeyPressEvent event) {
 		inputLengthIsToLong(workTime.getText(), event);
 		inputIsNotAnNumber(event);
+		if(workTime.getText().length() > 0){
+			workTimeIsEntered();
+		}else{
+			enableFields();
+		}
 	}
 
 	private void increaseEvent(TextBox box) {
@@ -190,7 +195,6 @@ public class CalendarTimeInputWidget extends Composite {
 	}
 
 	private void inputIsNotAnNumber(KeyPressEvent event) {
-		String input = String.valueOf(event.getCharCode());
 		if (!Character.isDigit(event.getCharCode())) {
 			event.preventDefault();
 		}
@@ -198,9 +202,33 @@ public class CalendarTimeInputWidget extends Composite {
 	}
 
 	private void inputLengthIsToLong(String before, KeyPressEvent event) {
-		// Window.alert(""+ before.length() +" " + before);
 		if (before.length() > 3) {
 			event.preventDefault();
 		}
+	}
+	
+	private void workTimeIsEntered(){
+		buttonDownEnd.setEnabled(false);
+		buttonDownStart.setEnabled(false);
+		buttonUpEnd.setEnabled(false);
+		buttonUpStart.setEnabled(false);
+		eventEnd.setEnabled(false);
+	}
+	
+	private void enableFields(){
+		buttonDownEnd.setEnabled(true);
+		buttonDownStart.setEnabled(true);
+		buttonUpEnd.setEnabled(true);
+		buttonUpStart.setEnabled(true);
+		eventEnd.setEnabled(true);
+	}
+	
+	private String calculateNewEnd(){
+		String startTime = eventStart.getText();
+		String workString = workTime.getText();
+//		int startTimeHour
+//		int startTimeMinute
+//		int work
+		return null;
 	}
 }
