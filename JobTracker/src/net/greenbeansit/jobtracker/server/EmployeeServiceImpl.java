@@ -1,6 +1,7 @@
 package net.greenbeansit.jobtracker.server;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -25,18 +26,30 @@ import net.greenbeansit.jobtracker.shared.JobID;
 /**
  * Dummy implementation of the {@link EmployeeService} interface.
  * 
- * @author Max Blatt
+ * @author Max Blatt & Alexander Kirilyuk
  */
 public class EmployeeServiceImpl implements EmployeeService
 {
 	private static Map<Long, Employee> employeeMap = new HashMap<Long, Employee>();
-	private static Map<Long, ActivityReport> reportMap = new HashMap<Long, ActivityReport>();
-	private static Map<Long, ActivityReportTemplate> reportTemplateMap = new HashMap<Long, ActivityReportTemplate>();
-	private static Map<Long, Job> jobMap = new HashMap<Long, Job>();
+	private static Map<Long, List<ActivityReport>> reportMap = new HashMap<Long, List<ActivityReport>>();
+	private static Map<Long, List<ActivityReportTemplate>> reportTemplateMap = new HashMap<Long, List<ActivityReportTemplate>>();
+	private static Map<Long, List<Job>> jobMap = new HashMap<Long, List<Job>>();
 
 	static{
-		employeeMap.put(1L, new Employee(1L,"Alexander","Kirilyuk"));
-		jobMap.put(1L,new Job(new JobID(1,2,"TEST","TEST","TEST"),1000,1000));
+		employeeMap.put(1L, new Employee(1L,"Max Mus","Kirilyuk"));
+		employeeMap.put(2L, new Employee(2L,"Alexander","Kirilyuk"));
+		
+		List<Job> firstJobList = new ArrayList<Job>();
+		firstJobList.add(new Job(new JobID(1,2,"TEST","TEST","TEST"),1000,1000));
+		firstJobList.add(new Job(new JobID(2,2,"TEST2","TEST2","TEST2"),2000,2000));
+		firstJobList.add(new Job(new JobID(3,2,"TEST3","TEST3","TEST3"),2000,2000));
+		jobMap.put(1L,firstJobList);
+		List<Job> secondJobList = new ArrayList<Job>();
+		secondJobList.add(new Job(new JobID(3,2,"TEST3","TEST","TEST"),1000,1000));
+		secondJobList.add(new Job(new JobID(4,2,"TEST4","Discription","TEST2"),2000,2000));
+		secondJobList.add(new Job(new JobID(5,2,"TEST5","TEST3","TEST3"),2000,2000));
+		jobMap.put(2L,secondJobList);
+		
 	}
 	/**
 	 * Initializes a new instance of the {@link EmployeeService} class.
@@ -59,38 +72,45 @@ public class EmployeeServiceImpl implements EmployeeService
 	@Override
 	public List<Job> getAllJobs(Long employeeId) {
 		if (jobMap.containsKey(employeeId))
-			return new ArrayList<Job>(jobMap.values());
+			return jobMap.get(employeeId);
 		throw new NotFoundException();
 	}
 	
 	
 	@Override
-	public Job getJob(Long employeeId, Long jobId) {
-		if (jobMap.containsKey(employeeId))
-			return jobMap.get(employeeId);
-
+	public Job getJob(Long employeeId, Integer jobId) {
+		if (jobMap.containsKey(employeeId)){
+			for(Job currentJob : jobMap.get(employeeId)){
+				if(currentJob.getJobID().getJobNr()==jobId){
+					return currentJob;
+				}
+			}
+		}
 		throw new NotFoundException();
 	}
 	
 	@Override
 	public List<ActivityReport> getAllReports(Long employeeId) {
 		if (reportMap.containsKey(employeeId))
-			return new ArrayList<ActivityReport>(reportMap.values());
+			return reportMap.get(employeeId);
 		throw new NotFoundException();
 	}
 	
 	@Override
 	public ActivityReport getReport(Long employeeId, Long reportId) {
 		if (reportMap.containsKey(employeeId))
-			return reportMap.get(employeeId);
-
+			for(ActivityReport currentReport : reportMap.get(employeeId)){
+				if(currentReport.getId()==reportId){
+					return currentReport;
+				}
+			}
 		throw new NotFoundException();
 	}
 	
 	@Override
 	public List<ActivityReport> getReportPeriod(Long employeeId, String from, String to) {
 		if (reportMap.containsKey(employeeId))
-			return new ArrayList<ActivityReport>(reportMap.values());
+			return reportMap.get(employeeId);
 		throw new NotFoundException();
 	}
 	
@@ -109,7 +129,7 @@ public class EmployeeServiceImpl implements EmployeeService
 	@Override
 	public List<ActivityReportTemplate> getAllTemplates(Long employeeId) {
 		if (reportTemplateMap.containsKey(employeeId))
-			return new ArrayList<ActivityReportTemplate>(reportTemplateMap.values());
+			return reportTemplateMap.get(employeeId);
 		throw new NotFoundException();
 	}
 	
