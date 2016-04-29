@@ -138,8 +138,10 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 	}
 
 	private void increaseEvent(TextBox box) {
-		String hourString = removeLeadingNull(box.getText().substring(0, 2));
-		String minuteString = removeLeadingNull(box.getText().substring(2, box.getText().length()));
+		String boxText = removeDoublePoint(box.getText());
+		String hourString = removeLeadingNull(boxText.substring(0, 2));
+		String minuteString = removeLeadingNull(boxText.substring(2, boxText.length()));
+		
 		
 		int hours = Integer.parseInt(hourString);
 		int minutes = Integer.parseInt(minuteString);
@@ -161,7 +163,7 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 		hourString  = addLeadingNull(hourString);
 		minuteString = addLeadingNull(minuteString);
 		
-		box.setText(hourString + minuteString);
+		box.setText(addDoublePoint(hourString + minuteString));
 	}
 	
 	private String addLeadingNull(String sign){
@@ -181,8 +183,9 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 	}
 
 	private void decreaseEvent(TextBox box) {
-		String hourString = removeLeadingNull(box.getText().substring(0, 2));
-		String minuteString = removeLeadingNull(box.getText().substring(2, box.getText().length()));
+		String boxText = removeDoublePoint(box.getText());
+		String hourString = removeLeadingNull(boxText.substring(0, 2));
+		String minuteString = removeLeadingNull(boxText.substring(2, boxText.length()));
 		
 		int hours = Integer.parseInt(hourString);
 		int minutes = Integer.parseInt(minuteString);
@@ -204,7 +207,7 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 		hourString  = addLeadingNull(hourString);
 		minuteString = addLeadingNull(minuteString);
 		
-		box.setText(hourString + minuteString);
+		box.setText(addDoublePoint(hourString + minuteString));
 	}
 
 	private void inputIsNotAnNumber(KeyPressEvent event) {
@@ -237,8 +240,8 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 	}
 	
 	private String calculateNewEnd(){
-		String startTime = eventStart.getText();
-		String workString = workTime.getText();
+		String startTime = addDoublePoint(eventStart.getText());
+		String workString = addDoublePoint(workTime.getText());
 //		int startTimeHour
 //		int startTimeMinute
 //		int work
@@ -249,19 +252,27 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 	
 	@Override
 	public void update() {
-		eventEnd.setText(handler.events.endTime);
-		eventStart.setText(handler.events.startTime);
-		Window.alert(handler.events.eventDate.toString());
-		//pause.setText(handler.events.pause);
-		//workTime.setText(handler.events.workTime);
+		eventEnd.setText(addDoublePoint(handler.events.endTime));
+		eventStart.setText(addDoublePoint(handler.events.startTime));
+		pause.setText(handler.events.pause);
+		workTime.setText(handler.events.workTime);
 	}
 
 	@Override
 	public void notifyHandler() {
+	//	Window.alert("Button");
 		handler.events.endTime = eventEnd.getText();
 		handler.events.startTime = eventStart.getText();
 		handler.events.pause = pause.getText();
 		handler.events.workTime = workTime.getText();
 		handler.updateObserver(this);
+	}
+	
+	private String removeDoublePoint(String input){
+		return input = input.replace(":", "");
+	}
+	
+	public String addDoublePoint(String input){
+		return input = input.substring(0, 2) + ":" + input.substring(2, input.length());
 	}
 }

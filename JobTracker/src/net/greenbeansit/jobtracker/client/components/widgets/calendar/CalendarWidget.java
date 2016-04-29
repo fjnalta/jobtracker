@@ -2,6 +2,7 @@ package net.greenbeansit.jobtracker.client.components.widgets.calendar;
 
 import java.util.Date;
 
+import org.apache.commons.io.filefilter.NotFileFilter;
 import org.gwtbootstrap3.client.ui.Row;
 import org.gwtbootstrap3.extras.fullcalendar.client.ui.AgendaOptions;
 import org.gwtbootstrap3.extras.fullcalendar.client.ui.CalendarConfig;
@@ -127,9 +128,10 @@ public class CalendarWidget extends Composite implements CalendarObserver {
 					@Override
 					public void eventClick(JavaScriptObject calendarEvent, NativeEvent event,
 							JavaScriptObject viewObject) {
-						Event e = new Event(calendarEvent);
-						calendar.removeEvent(e.getId());
-
+						//Event e = new Event(calendarEvent);
+						//calendar.removeEvent(e.getId());
+						calendar.currentEvent = new Event(calendarEvent);
+						notifyHandler();
 					}
 
 					/**
@@ -156,6 +158,7 @@ public class CalendarWidget extends Composite implements CalendarObserver {
 						tmp.setEnd(end);
 						unselect(viewObject, event);
 						calendar.addEvent(tmp);
+						calendar.currentEvent = tmp;
 						notifyHandler();
 					}
 
@@ -174,30 +177,34 @@ public class CalendarWidget extends Composite implements CalendarObserver {
 					@Override
 					public void eventResizeStop(JavaScriptObject calendarEvent, NativeEvent nativeEvent) {
 						// System.out.println("eventResizeStop");
+						notifyHandler();
 
 					}
 
 					@Override
 					public void eventResizeStart(JavaScriptObject calendarEvent, NativeEvent nativeEvent) {
 						// System.out.println("eventResizeStart");
+						notifyHandler();
 					}
 
 					@Override
 					public void eventResize(JavaScriptObject calendarEvent, JavaScriptObject revertFunction,
 							NativeEvent nativeEvent) {
 						// System.out.println("eventResize");
+						notifyHandler();
 					}
 
 					@Override
 					public void eventDrop(JavaScriptObject calendarEvent, JavaScriptObject revertFunction,
 							NativeEvent nativeEvent) {
 						// System.out.println("eventResize");
+						notifyHandler();
 					}
 
 					@Override
 					public void eventDragStop(JavaScriptObject calendarEvent, NativeEvent nativeEvent) {
 						// System.out.println("eventResize");
-						
+						notifyHandler();
 					}
 
 					/**
@@ -207,7 +214,7 @@ public class CalendarWidget extends Composite implements CalendarObserver {
 					public void eventDragStart(JavaScriptObject calendarEvent, NativeEvent nativeEvent) {
 
 						// .alert(nativeEvent.getCharCode() + " " + '\u0061');
-						if (true) {
+						if (nativeEvent.getAltKey()) {
 							updateId();
 							Event dragEvent = new Event(calendarEvent);
 							Event oldEvent = createEvent(dragEvent.getTitle());
@@ -218,7 +225,8 @@ public class CalendarWidget extends Composite implements CalendarObserver {
 							
 							dragEvent.setTitle(dragEvent.getTitle() + titleNumber++);
 							calendar.addEvent(oldEvent);
-							
+							calendar.currentEvent = dragEvent;
+							notifyHandler();
 						}
 
 					}
@@ -233,8 +241,8 @@ public class CalendarWidget extends Composite implements CalendarObserver {
 	@Override
 	public void update() {
 		calendar.currentEvent.setEnd(handler.events.endTime);
-//		calendar.currentEvent.setStart(handler.events.startTime);
-		
+		calendar.currentEvent.setStart(handler.events.startTime);
+		calendar.render();
 	}
 
 	@Override

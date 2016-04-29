@@ -8,7 +8,9 @@ public class EventDummy {
 
 	public Date eventDate;
 
-	public String startTime, endTime, workTime, pause, id;
+	public String startTime, endTime, workTime, id;
+	
+	public String pause = "01:00";
 	
 	public int utilization = 50;
 }
