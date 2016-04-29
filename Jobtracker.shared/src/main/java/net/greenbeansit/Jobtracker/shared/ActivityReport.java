@@ -13,8 +13,11 @@ import java.util.Date;
 public class ActivityReport implements Serializable
 {
 
-	private static final long	serialVersionUID	= 1L;
-
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7318453042992057384L;
+	
 	private String				description;
 	private String				identifier;
 	private Date				date;
