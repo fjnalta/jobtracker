@@ -17,12 +17,10 @@ import net.greenbeansit.jobtracker.client.components.widgets.WorkDiscriptionWidg
 import net.greenbeansit.jobtracker.client.utils.rest.RestClient;
 import net.greenbeansit.jobtracker.client.utils.rest.RestClient.SuccessFunction;
 import net.greenbeansit.jobtracker.shared.ActivityReport;
-import net.greenbeansit.jobtracker.shared.ActivityReportService;
 import net.greenbeansit.jobtracker.shared.ActivityReportTemplate;
-import net.greenbeansit.jobtracker.shared.ActivityReportTemplateService;
+import net.greenbeansit.jobtracker.shared.Employee;
 import net.greenbeansit.jobtracker.shared.Job;
 import net.greenbeansit.jobtracker.shared.JobID;
-import net.greenbeansit.jobtracker.shared.JobService;
 
 
 public class HomePage extends Composite {
@@ -47,9 +45,8 @@ public class HomePage extends Composite {
 	private Job currentJob;
 	private Job[] allJobs;
 	
-	private ActivityReportService activityReportService;
-	private ActivityReportTemplateService activityReporttemplateService;
-	private JobService jobService;
+	private Employee employee;
+	
 
 	public HomePage() {
 		initWidget(uiBinder.createAndBindUi(this));
@@ -71,14 +68,21 @@ public class HomePage extends Composite {
 	
 	
 	private void loadJobs(Long Id){
-		RestClient.build(new SuccessFunction<JobService>() {
+		
+		RestClient.build(new SuccessFunction<Employee>() {
+
 			@Override
-			public void onSuccess(Method method, JobService response) {
-				jobService = response;
-				allJobs = response.getAllJobs();
-				jobsWidget.addJobs(allJobs);
+			public void onSuccess(Method method, Employee response) {
+				/*jobsWidget.addJobs(new Job[]{new Job(new JobID(1,1, "TM", "Kunde 1", "Beschreibung des Pr0jektes"),
+					1000, 1000)});
+				//jobsWidget.*/
+				Window.alert("WARUM");
+				
 			}
-		}).getEmployeeService().getJobService(Id);
+
+			
+			
+		}).getEmployeeService().getEmployee(Id);
 	}
 	
 	private void loadEmploye(Long Id){
@@ -115,7 +119,6 @@ public class HomePage extends Composite {
 	 */
 	public void update() {
 		this.currentJob = jobsWidget.getSelectedJob();
-		Window.alert(currentJob.getJobID().toString() + "ICH WURDE AUF DER HOMEPAGE AUSGEFÜHRT");
 	}
 
 }

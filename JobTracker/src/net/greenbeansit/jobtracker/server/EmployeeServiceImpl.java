@@ -4,17 +4,19 @@ import java.util.Map;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.NotFoundException;
+import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import com.google.gwt.dev.util.collect.HashMap;
 
-import net.greenbeansit.jobtracker.shared.ActivityReportService;
-import net.greenbeansit.jobtracker.shared.ActivityReportTemplateService;
+import net.greenbeansit.jobtracker.shared.ActivityReport;
+import net.greenbeansit.jobtracker.shared.ActivityReportTemplate;
 import net.greenbeansit.jobtracker.shared.Employee;
 import net.greenbeansit.jobtracker.shared.EmployeeService;
-import net.greenbeansit.jobtracker.shared.JobService;
+import net.greenbeansit.jobtracker.shared.Job;
 
+@Path("employee")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 /**
@@ -24,16 +26,18 @@ import net.greenbeansit.jobtracker.shared.JobService;
  */
 public class EmployeeServiceImpl implements EmployeeService
 {
-	private static Map<Long, Employee> employeeMap;
+	private static Map<Long, Employee> employeeMap = new HashMap<Long, Employee>();
 
+	static{
+		employeeMap.put(1L, new Employee(1L,"Alexander","Kirilyuk"));
+	}
 	/**
 	 * Initializes a new instance of the {@link EmployeeService} class.
 	 */
 	public EmployeeServiceImpl()
 	{
-		if (employeeMap == null)
-			employeeMap = new HashMap<Long, Employee>();
-			employeeMap.put(1L, new Employee(1L,"Alexander","Kirilyuk"));
+		
+			
 	}
 
 	@Override
@@ -46,30 +50,56 @@ public class EmployeeServiceImpl implements EmployeeService
 	}
 
 	@Override
-	public JobService getJobService(Long employeeId)
-	{
-		if (employeeMap.containsKey(employeeId))
-			return new JobServiceImpl();
-
-		throw new NotFoundException();
+	public Job[] getAllJobs(Long employeeId) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
-	public ActivityReportService getReportService(Long employeeId)
-	{
-		if (employeeMap.containsKey(employeeId))
-			return new ActivityReportServiceImpl(employeeId);
-
-		throw new NotFoundException();
+	public Job getJob(Long employeeId, Long jobId) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
-	public ActivityReportTemplateService getTemplateService(Long employeeId)
-	{
-		if (employeeMap.containsKey(employeeId))
-			return new ActivityReportTemplateServiceImpl(employeeId);
-
-		throw new NotFoundException();
+	public ActivityReport[] getAllReports(Long employeeId) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
+	@Override
+	public ActivityReport getReport(Long employeeId, Long reportId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ActivityReport[] getReportPeriod(Long employeeId, String from, String to) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void createReport(Long employeeId, ActivityReport report) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateReport(Long employeeId, ActivityReport report) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public ActivityReportTemplate[] getAllTemplates(Long employeeId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void saveTemplate(Long employeeId, ActivityReportTemplate template) {
+		// TODO Auto-generated method stub
+		
+	}
 }
