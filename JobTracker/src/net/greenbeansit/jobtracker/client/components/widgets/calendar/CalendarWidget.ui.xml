@@ -6,22 +6,37 @@
 	<ui:style>
 	.dashBoardCalendar {
 		background-color: white;
+		height: 50%;
 	}
+	
 	.smallContainerCalendar {
-		margin-bottom:5px;
+		margin-bottom: 5px;
 		padding: 10px;
 		background-color: #ffffff;
+		height: 10%;
 	}
+	
+	.scrollPanel {
+		scrollbar-3dlight-color: red;
+		scrollbar-arrow-color: white;
+		scrollbar-base-color: grey;
+		scrollbar-darkshadow-color: yellow;
+		scrollbar-face-color: black;
+		scrollbar-highlight-color: greeb;
+		scrollbar-shadow-color: blue;
+	}
+	
 	</ui:style>
 
-	<h:Div ui:field="container" >
+	<h:Div ui:field="container">
 		<b:Row addStyleNames="{style.smallContainerCalendar}">
 			<widgets:CalendarTimeLineWidget />
 		</b:Row>
-		<b:Row addStyleNames="{style.smallContainerCalendar}">
+		<b:Row  addStyleNames="{style.smallContainerCalendar}">
 			<widgets:CalendarUtilizationWidget />
 		</b:Row>
-		<b:Row    addStyleNames="{style.dashBoardCalendar}" ui:field="calendarRow"    />
+		<b:Row addStyleNames="{style.dashBoardCalendar} {style.scrollPanel}"
+			ui:field="calendarRow" />
 		<b:Row addStyleNames="{style.smallContainerCalendar}">
 			<widgets:CalendarTimeInputWidget />
 		</b:Row>
