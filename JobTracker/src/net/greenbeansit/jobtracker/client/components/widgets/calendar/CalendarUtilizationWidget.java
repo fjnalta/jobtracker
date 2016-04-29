@@ -19,13 +19,15 @@ import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.user.datepicker.client.CalendarUtil;
 
+import net.greenbeansit.jobtracker.client.components.CalendarObserver;
+
 /**
  * Shows the Utilization per Day of the month above the Calendar
  * 
  * @author ahmed
  *
  */
-public class CalendarUtilizationWidget extends Composite {
+public class CalendarUtilizationWidget extends Composite implements CalendarObserver {
 
 	private static CalendarUtilizationWidgetUiBinder uiBinder = GWT.create(CalendarUtilizationWidgetUiBinder.class);
 
@@ -58,7 +60,7 @@ public class CalendarUtilizationWidget extends Composite {
 		initWidget(uiBinder.createAndBindUi(this));
 		date = new Date();
 		// table.setStylePrimaryName("fontColor");
-
+		handler.addObserver(this);
 		leftButton.setIcon(IconType.ARROW_LEFT);
 		rightButton.setIcon(IconType.ARROW_RIGHT);
 		createNewTimeline(0);
@@ -135,6 +137,16 @@ public class CalendarUtilizationWidget extends Composite {
 		}
 
 		return dayName;
+	}
+
+	@Override
+	public void update() {
+		
+	}
+
+	@Override
+	public void notifyHandler() {
+		handler.updateObserver(this);
 	}
 
 }

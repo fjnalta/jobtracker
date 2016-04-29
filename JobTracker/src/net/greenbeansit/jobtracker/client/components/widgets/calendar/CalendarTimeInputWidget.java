@@ -28,13 +28,15 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.Widget;
 
+import net.greenbeansit.jobtracker.client.components.CalendarObserver;
+
 /**
  * The Calendar time input from keyboard
  * 
  * @author Jonathan
  *
  */
-public class CalendarTimeInputWidget extends Composite {
+public class CalendarTimeInputWidget extends Composite implements CalendarObserver {
 
 	private static CalendarTimeInputWidgetUiBinder uiBinder = GWT.create(CalendarTimeInputWidgetUiBinder.class);
 
@@ -62,10 +64,13 @@ public class CalendarTimeInputWidget extends Composite {
 
 	@UiField
 	IntegerBox workTime;
+	
+	@UiField
+	Button buttonBuchen;
 
 	public CalendarTimeInputWidget() {
 		initWidget(uiBinder.createAndBindUi(this));
-
+		handler.addObserver(this);
 		buttonUpStart.setIcon(IconType.ARROW_UP);
 		buttonDownStart.setIcon(IconType.ARROW_DOWN);
 		buttonUpEnd.setIcon(IconType.ARROW_UP);
@@ -75,21 +80,25 @@ public class CalendarTimeInputWidget extends Composite {
 	@UiHandler("buttonUpStart")
 	public void onClickUpStart(ClickEvent event) {
 		increaseEvent(eventStart);
+		notifyHandler();
 	}
 
 	@UiHandler("buttonDownStart")
 	public void onClickDownStart(ClickEvent event) {
 		decreaseEvent(eventStart);
+		notifyHandler();
 	}
 
 	@UiHandler("buttonUpEnd")
 	public void onClickUpEnd(ClickEvent event) {
 		increaseEvent(eventEnd);
+		notifyHandler();
 	}
 
 	@UiHandler("buttonDownEnd")
 	public void onClickDownEnd(ClickEvent event) {
 		decreaseEvent(eventEnd);
+		notifyHandler();
 	}
 
 	@UiHandler("eventStart")
@@ -99,18 +108,21 @@ public class CalendarTimeInputWidget extends Composite {
 		inputLengthIsToLong(before, event);
 		inputIsNotAnNumber(event);
 		eventStart.setText(before);
+		notifyHandler();
 	}
 
 	@UiHandler("eventEnd")
 	public void keyPressedEventEnd(KeyPressEvent event) {
 		inputLengthIsToLong(eventEnd.getText(), event);
 		inputIsNotAnNumber(event);
+		notifyHandler();
 	}
 
 	@UiHandler("pause")
 	public void keyPressedPause(KeyPressEvent event) {
 		inputLengthIsToLong(pause.getText(), event);
 		inputIsNotAnNumber(event);
+		notifyHandler();
 	}
 
 	@UiHandler("workTime")
@@ -122,6 +134,7 @@ public class CalendarTimeInputWidget extends Composite {
 		}else{
 			enableFields();
 		}
+		notifyHandler();
 	}
 
 	private void increaseEvent(TextBox box) {
@@ -230,5 +243,25 @@ public class CalendarTimeInputWidget extends Composite {
 //		int startTimeMinute
 //		int work
 		return null;
+	}
+
+	
+	
+	@Override
+	public void update() {
+		eventEnd.setText(handler.events.endTime);
+		eventStart.setText(handler.events.startTime);
+		Window.alert(handler.events.eventDate.toString());
+		//pause.setText(handler.events.pause);
+		//workTime.setText(handler.events.workTime);
+	}
+
+	@Override
+	public void notifyHandler() {
+		handler.events.endTime = eventEnd.getText();
+		handler.events.startTime = eventStart.getText();
+		handler.events.pause = pause.getText();
+		handler.events.workTime = workTime.getText();
+		handler.updateObserver(this);
 	}
 }

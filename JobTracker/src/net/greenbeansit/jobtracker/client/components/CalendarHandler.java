@@ -1,7 +1,10 @@
 package net.greenbeansit.jobtracker.client.components;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
+import net.greenbeansit.jobtracker.client.components.widgets.calendar.EventDummy;
 
 /**
  * This class handles the communication between the calender widgets
@@ -10,6 +13,9 @@ import java.util.List;
  *
  */
 public class CalendarHandler {
+	
+	public EventDummy events = new EventDummy();
+	
 
 	private List<CalendarObserver> list = new ArrayList<>();
 
@@ -18,11 +24,11 @@ public class CalendarHandler {
 	 * @param w
 	 */
 	public void addObserver(CalendarObserver w) {
-		
+
 		for (CalendarObserver p : list) {
-			if(p.getClass().equals(w.getClass()))
+			if (p.getClass().equals(w.getClass()))
 				return;
-			
+
 		}
 		list.add(w);
 	}
@@ -30,9 +36,13 @@ public class CalendarHandler {
 	/**
 	 * 
 	 */
-	public void updateObserver(){
+	public void updateObserver(CalendarObserver obs) {
 		for (CalendarObserver p : list) {
-			p.update();
+			if (p.getClass() == obs.getClass()) {
+
+			} else {
+				p.update();
+			}
 		}
 	}
 
@@ -40,8 +50,8 @@ public class CalendarHandler {
 	 * 
 	 * @param w
 	 */
-	public void deleteObserver(CalendarObserver w){
-			list.remove(w);
+	public void deleteObserver(CalendarObserver w) {
+		list.remove(w);
 	}
 
 }

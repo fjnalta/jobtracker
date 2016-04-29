@@ -24,10 +24,12 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 
 import com.google.gwt.user.client.Timer;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.user.datepicker.client.CalendarUtil;
 
+import net.greenbeansit.jobtracker.client.components.CalendarHandler;
 import net.greenbeansit.jobtracker.client.components.CalendarObserver;
 
 public class CalendarWidget extends Composite implements CalendarObserver {
@@ -44,7 +46,9 @@ public class CalendarWidget extends Composite implements CalendarObserver {
 
 	public CalendarWidget() {
 		initWidget(uiBinder.createAndBindUi(this));
-
+		
+		handler.addObserver(this);
+		
 		Timer t = new Timer() {
 			String eventTitel = "new Event";
 			int titleNumber;
@@ -133,7 +137,7 @@ public class CalendarWidget extends Composite implements CalendarObserver {
 					 */
 					@Override
 					public void dayClick(JavaScriptObject moment, NativeEvent event, JavaScriptObject viewObject) {
-
+						
 					}
 
 				});
@@ -152,6 +156,7 @@ public class CalendarWidget extends Composite implements CalendarObserver {
 						tmp.setEnd(end);
 						unselect(viewObject, event);
 						calendar.addEvent(tmp);
+						notifyHandler();
 					}
 
 					@Override
@@ -192,6 +197,7 @@ public class CalendarWidget extends Composite implements CalendarObserver {
 					@Override
 					public void eventDragStop(JavaScriptObject calendarEvent, NativeEvent nativeEvent) {
 						// System.out.println("eventResize");
+						
 					}
 
 					/**
@@ -208,9 +214,11 @@ public class CalendarWidget extends Composite implements CalendarObserver {
 
 							oldEvent.setStart(dragEvent.getISOStart());
 							oldEvent.setEnd(dragEvent.getISOEnd());
-
+							
+							
 							dragEvent.setTitle(dragEvent.getTitle() + titleNumber++);
 							calendar.addEvent(oldEvent);
+							
 						}
 
 					}
@@ -224,8 +232,32 @@ public class CalendarWidget extends Composite implements CalendarObserver {
 
 	@Override
 	public void update() {
-		// TODO Auto-generated method stub
-
+		calendar.currentEvent.setEnd(handler.events.endTime);
+//		calendar.currentEvent.setStart(handler.events.startTime);
+		
 	}
 
+	@Override
+	public void notifyHandler() {
+		handler.events.endTime = timeParser(calendar.currentEvent.getISOEnd());
+		handler.events.startTime = timeParser(calendar.currentEvent.getISOStart());
+		handler.events.eventDate = dateParser(calendar.currentEvent.getISOEnd());
+		handler.updateObserver(this);
+	}
+	
+	private String timeParser(String date){
+		String [] temp = date.split("T");
+		String [] temp2 = temp[1].split(":");
+		return temp2[0] + temp2[1];
+	}
+	
+	@SuppressWarnings("deprecation")
+	private Date dateParser(String date2){
+		String [] temp = date2.split("T");
+		String [] temp2 = temp[0].split("-");
+		int year = Integer.parseInt(temp2[0]); 
+		int month = Integer.parseInt(temp2[1]);
+		int date = Integer.parseInt(temp2[2]);
+		return new Date(year, month, date);
+	}
 }
