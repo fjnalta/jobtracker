@@ -6,11 +6,11 @@ import javax.ws.rs.NotFoundException;
 
 import com.google.gwt.dev.util.collect.HashMap;
 
-import net.greenbeansit.jobtracker.shared.ActivityReportService;
-import net.greenbeansit.jobtracker.shared.ActivityReportTemplateService;
+import net.greenbeansit.jobtracker.shared.ActivityReport;
+import net.greenbeansit.jobtracker.shared.ActivityReportTemplate;
 import net.greenbeansit.jobtracker.shared.Employee;
 import net.greenbeansit.jobtracker.shared.EmployeeService;
-import net.greenbeansit.jobtracker.shared.JobService;
+import net.greenbeansit.jobtracker.shared.Job;
 
 /**
  * Dummy implementation of the {@link EmployeeService} interface.
@@ -40,30 +40,57 @@ public class EmployeeServiceImpl implements EmployeeService
 	}
 
 	@Override
-	public JobService getJobService(Long employeeId)
-	{
-		if (employeeMap.containsKey(employeeId))
-			return new JobServiceImpl();
-
-		throw new NotFoundException();
+	public Job[] getAllJobs(Long employeeId) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
-	public ActivityReportService getReportService(Long employeeId)
-	{
-		if (employeeMap.containsKey(employeeId))
-			return new ActivityReportServiceImpl(employeeId);
-
-		throw new NotFoundException();
+	public Job getJob(Long employeeId, Long jobId) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
-	public ActivityReportTemplateService getTemplateService(Long employeeId)
-	{
-		if (employeeMap.containsKey(employeeId))
-			return new ActivityReportTemplateServiceImpl(employeeId);
+	public ActivityReport[] getAllReports(Long employeeId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-		throw new NotFoundException();
+	@Override
+	public ActivityReport getReport(Long employeeId, Long reportId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ActivityReport[] getReportPeriod(Long employeeId, String from, String to) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void createReport(Long employeeId, ActivityReport report) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateReport(Long employeeId, ActivityReport report) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public ActivityReportTemplate[] getAllTemplates(Long employeeId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void saveTemplate(Long employeeId, ActivityReportTemplate template) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
