@@ -17,14 +17,14 @@
 	}
 	
 	.formGroupDate {
+		margin-top: -5;
 		margin-left: 0;
 	}
 	
 	.dateDiv {
-		float:right;
+		float: right;
 		margin-right: 5.5em;
 	}
-
 	</ui:style>
 
 	<b:FormGroup addStyleNames="{style.formGroupDate}">

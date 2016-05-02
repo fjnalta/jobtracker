@@ -11,6 +11,7 @@ import org.gwtbootstrap3.extras.fullcalendar.client.ui.ClickAndHoverEventCallbac
 import org.gwtbootstrap3.extras.fullcalendar.client.ui.DragAndResizeCallback;
 import org.gwtbootstrap3.extras.fullcalendar.client.ui.DragAndResizeConfig;
 import org.gwtbootstrap3.extras.fullcalendar.client.ui.Event;
+import org.gwtbootstrap3.extras.fullcalendar.client.ui.EventDataConfig;
 import org.gwtbootstrap3.extras.fullcalendar.client.ui.GeneralDisplay;
 import org.gwtbootstrap3.extras.fullcalendar.client.ui.Header;
 import org.gwtbootstrap3.extras.fullcalendar.client.ui.Language;
@@ -134,7 +135,10 @@ public class CalendarWidget extends Composite implements CalendarObserver {
 							JavaScriptObject viewObject) {
 						//Event e = new Event(calendarEvent);
 						//calendar.removeEvent(e.getId());
-						calendar.currentEvent = new Event(calendarEvent);
+						Window.alert("klicke auf Event?");
+						Event e = new Event(calendarEvent);
+						calendar.currentEvent = e;
+						e.setBackgroundColor("green");
 						notifyHandler();
 					}
 
@@ -244,8 +248,10 @@ public class CalendarWidget extends Composite implements CalendarObserver {
 
 	@Override
 	public void update() {
+		calendar.currentEvent.setBackgroundColor("blue");
 		calendar.currentEvent.setEnd(handler.events.endTime);
 		calendar.currentEvent.setStart(handler.events.startTime);
+		calendar.updateEvent(calendar.currentEvent);
 		calendar.render();
 	}
 
