@@ -96,7 +96,7 @@ public class ActivityReportServiceImpl implements IActivityReportService
 			throw new IllegalArgumentException();
 
 		else if (reportMap.containsKey(report.getId()))
-			reportMap.replace(report.getId(), report);
+			reportMap.put(report.getId(), report);
 		else
 		{
 			report.setId(createNewReportId());
