@@ -10,7 +10,7 @@
 	}
 	
 	.smallContainerCalendar {
-		margin-bottom: 5px;
+		margin: 0;
 		padding: 10px;
 		background-color: #ffffff;
 		height: 10%;
@@ -24,6 +24,10 @@
 		scrollbar-face-color: black;
 		scrollbar-highlight-color: greeb;
 		scrollbar-shadow-color: blue;
+		margin-left: -10px;
+		margin-right: -10px;
+		margin-top: 0;
+		margin-bottom: 0;
 	}
 	
 	</ui:style>
