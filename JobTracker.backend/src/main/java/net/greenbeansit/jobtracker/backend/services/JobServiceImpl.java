@@ -6,8 +6,8 @@ import java.util.Map;
 
 import javax.ws.rs.NotFoundException;
 
-import net.greenbeansit.Jobtracker.shared.Job;
-import net.greenbeansit.Jobtracker.shared.JobService;
+import net.greenbeansit.jobtracker.shared.Job;
+import net.greenbeansit.jobtracker.shared.JobService;
 
 /**
  * Dummy implementation of the {@link JobService} interface.

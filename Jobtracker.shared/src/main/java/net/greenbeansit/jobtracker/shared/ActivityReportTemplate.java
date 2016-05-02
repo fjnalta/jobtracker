@@ -1,4 +1,4 @@
-package net.greenbeansit.Jobtracker.shared;
+package net.greenbeansit.jobtracker.shared;
 
 /**
  * Represents a template for an {@link ActivityReport}.

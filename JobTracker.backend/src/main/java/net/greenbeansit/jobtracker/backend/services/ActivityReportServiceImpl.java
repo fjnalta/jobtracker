@@ -7,7 +7,7 @@ import java.util.Map;
 
 import javax.ws.rs.NotFoundException;
 
-import net.greenbeansit.Jobtracker.shared.*;
+import net.greenbeansit.jobtracker.shared.*;
 /**
  * Dummy implementation of the {@link ActivityReportService} interface.
  * 

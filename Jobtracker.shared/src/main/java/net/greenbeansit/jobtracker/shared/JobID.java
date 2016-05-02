@@ -1,4 +1,4 @@
-package net.greenbeansit.Jobtracker.shared;
+package net.greenbeansit.jobtracker.shared;
 
 /**
  * Result of parsing the job number string. A job number is read-only

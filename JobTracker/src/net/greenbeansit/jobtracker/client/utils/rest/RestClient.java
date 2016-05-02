@@ -7,7 +7,7 @@ import org.fusesource.restygwt.client.callback.CallbackAware;
 
 import com.google.gwt.core.client.GWT;
 
-import net.greenbeansit.Jobtracker.shared.*;
+import net.greenbeansit.jobtracker.shared.*;
 
 /**
  * Client for backend service calls.

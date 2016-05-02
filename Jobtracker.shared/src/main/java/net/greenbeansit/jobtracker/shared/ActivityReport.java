@@ -1,4 +1,4 @@
-package net.greenbeansit.Jobtracker.shared;
+package net.greenbeansit.jobtracker.shared;
 
 import java.io.Serializable;
 import java.util.Date;

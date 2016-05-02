@@ -6,7 +6,7 @@ import java.util.Map;
 
 import java.util.HashMap;
 
-import net.greenbeansit.Jobtracker.shared.ActivityReportTemplate;
+import net.greenbeansit.jobtracker.shared.ActivityReportTemplate;
 
 /**
  * Dummy implementation of the {@link ActivityReportTemplateService} interface.

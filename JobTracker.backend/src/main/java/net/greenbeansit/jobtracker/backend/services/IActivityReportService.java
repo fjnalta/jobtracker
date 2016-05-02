@@ -1,6 +1,6 @@
 package net.greenbeansit.jobtracker.backend.services;
 
-import net.greenbeansit.Jobtracker.shared.ActivityReport;
+import net.greenbeansit.jobtracker.shared.ActivityReport;
 
 public interface IActivityReportService {
 
