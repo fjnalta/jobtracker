@@ -1,4 +1,4 @@
-package net.greenbeansit.jobtracker.backend.services.job;
+package net.greenbeansit.jobtracker.backend.services;
 
 import net.greenbeansit.Jobtracker.shared.Job;
 

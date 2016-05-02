@@ -1,4 +1,4 @@
-package net.greenbeansit.jobtracker.backend.services.activityreport;
+package net.greenbeansit.jobtracker.backend.services;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -34,7 +34,7 @@ public class ActivityReportServiceImpl implements IActivityReportService
 			reportMap = new HashMap<Long, ActivityReport>();
 	}
 
-	public List<ActivityReport> getAllActivityReports()
+	public ActivityReport[] getAllReports()
 	{
 		List<ActivityReport> list = new ArrayList<ActivityReport>();
 
@@ -45,10 +45,10 @@ public class ActivityReportServiceImpl implements IActivityReportService
 				list.add(report);
 		}
 
-		return list;
+		return list.toArray(new ActivityReport[list.size()]);
 	}
 
-	public ActivityReport getActivityReport(Long reportId)
+	public ActivityReport getReport(Long reportId)
 	{
 		if (reportMap.containsKey(reportId))
 			return reportMap.get(reportId);
@@ -56,14 +56,14 @@ public class ActivityReportServiceImpl implements IActivityReportService
 		throw new NotFoundException();
 	}
 
-	public List<ActivityReport> getActivityReportPeriod(Long employeeId, String from,
+	public ActivityReport[] getReportPeriod(Long employeeId, String from,
 			String to)
 	{
 		// TODO Implement getReportPeriod
-		return new ArrayList<ActivityReport>();
+		return new ActivityReport[0];
 	}
 
-	public void createActivityReport(ActivityReport report)
+	public void createReport(ActivityReport report)
 	{
 		if (report == null)
 			throw new IllegalArgumentException();
@@ -90,13 +90,13 @@ public class ActivityReportServiceImpl implements IActivityReportService
 		return newId;
 	}
 
-	public void updateActivityReport(ActivityReport report)
+	public void updateReport(ActivityReport report)
 	{
 		if (report == null)
 			throw new IllegalArgumentException();
 
 		else if (reportMap.containsKey(report.getId()))
-			reportMap.put(report.getId(), report);
+			reportMap.replace(report.getId(), report);
 		else
 		{
 			report.setId(createNewReportId());
