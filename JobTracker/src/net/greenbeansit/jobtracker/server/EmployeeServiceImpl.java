@@ -17,7 +17,6 @@ import net.greenbeansit.jobtracker.shared.ActivityReportTemplate;
 import net.greenbeansit.jobtracker.shared.Employee;
 import net.greenbeansit.jobtracker.shared.EmployeeService;
 import net.greenbeansit.jobtracker.shared.Job;
-import net.greenbeansit.jobtracker.shared.JobID;
 
 @Path("employee")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -36,7 +35,6 @@ public class EmployeeServiceImpl implements EmployeeService
 
 	static{
 		employeeMap.put(1L, new Employee(1L,"Alexander","Kirilyuk"));
-		jobMap.put(1L,new Job(new JobID(1,2,"TEST","TEST","TEST"),1000,1000));
 	}
 	/**
 	 * Initializes a new instance of the {@link EmployeeService} class.
