@@ -1,9 +1,63 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
-	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:b="urn:import:org.gwtbootstrap3.client.ui">
+	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:b="urn:import:org.gwtbootstrap3.client.ui"
+	xmlns:b.html="urn:import:org.gwtbootstrap3.client.ui.html"
+	xmlns:widgets="urn:import:net.greenbeansit.jobtracker.client.components.widgets"
+	xmlns:c="urn:import:net.greenbeansit.jobtracker.client.components.widgets.calendar">
 	<ui:style>
-	.first_column {
-		margin-left: 25px;
+	.headerRow {
+		margin: 10px;
+		padding: 10px;
+		background-color: #ffffff;
+	}
+	
+	.bottomRow {
+		margin: 0px;
+	}
+	
+	.mainColumn {
+		padding: 0;
+	}
+	
+	.largeContainer {
+		margin-top: 10px;
+		margin-bottom: 10px;
+		margin-left: 10px;
+		margin-right: 10px;
+		padding: 10px;
+		background-color: #ffffff;
+	}
+	
+	.smallContainer {
+		margin: 10px 10px;
+		padding: 10px;
+		background-color: #ffffff;
+	}
+	
+	/*Title*/
+	.title {
+		float: right;
+	}
+	
+	/*Infobox*/
+	.bigButton {
+		margin: 10px;
+		text-align: left;
+	}
+	
+	.infoHeader {
+		margin: 10px;
+	}
+	
+	.infoName {
+		margin: 5px;
+		float: left;
+	}
+	
+	.infoContent {
+		margin: 5px;
+		float: right;
+		color: #ff0066;
 	}
 	.second_column {
 		margin-right: 25px;

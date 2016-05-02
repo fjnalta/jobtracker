@@ -1,15 +1,19 @@
 package net.greenbeansit.jobtracker.client.components;
 
+import org.gwtbootstrap3.client.ui.ListBox;
+import org.gwtbootstrap3.client.ui.Row;
+import org.gwtbootstrap3.extras.select.client.ui.Select;
+
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.uibinder.client.UiHandler;
-import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.HasText;
+import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.Widget;
+
+import net.greenbeansit.jobtracker.client.components.widgets.GraphWidget;
+import net.greenbeansit.jobtracker.client.components.widgets.ProjectBudgetBar;
 
 public class ProjectPage extends Composite
 {
@@ -22,9 +26,27 @@ public class ProjectPage extends Composite
 	}
 
 	
+	@UiField
+	Row containerBudgetDiagrams;
+	
+	@UiField
+	GraphWidget graphWidget;
+	
+	
 	public ProjectPage()
 	{
 		initWidget(uiBinder.createAndBindUi(this));
+		
+		initialize();
+		
+		containerBudgetDiagrams.add(new ProjectBudgetBar(500, 1000, "Projekt X"));
+		containerBudgetDiagrams.add(new ProjectBudgetBar(920, 1000, "Projekt Y"));
+		containerBudgetDiagrams.add(new ProjectBudgetBar(800, 1000, "Projekt Z"));
+		
+	}
+	
+	private void initialize(){
+		graphWidget.registerObserver(this);
 	}
 
 }

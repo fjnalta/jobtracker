@@ -26,6 +26,11 @@
 			<version>${shared.version}</version>
 		</dependency>
 		<dependency>
+			<groupId>com.googlecode.gwt-charts</groupId>
+			<artifactId>gwt-charts</artifactId>
+			<version>0.9.8</version>
+		</dependency>
+		<dependency>
 			<groupId>org.gwtbootstrap3</groupId>
 			<artifactId>gwtbootstrap3</artifactId>
 			<version>0.9.3</version>

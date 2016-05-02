@@ -6,6 +6,8 @@
 	<ui:style>
 	.mainContainer {
 		padding-top: 70px;
+		padding-left: 0px;
+		padding-right: 0px;
 		overflow: visible;
 		background-color:#f4f4f1;
 	}
@@ -27,9 +29,17 @@
 						href="#home">
 						Home
 					</b:AnchorListItem>
+					<b:AnchorListItem iconFixedWidth="true" ui:field="navKapa"
+						>
+						Kapaplanung
+					</b:AnchorListItem>
 					<b:AnchorListItem iconFixedWidth="true" ui:field="navProject"
 						href="#project">
-						Projekt
+						Projektleitung
+					</b:AnchorListItem>
+					<b:AnchorListItem iconFixedWidth="true" ui:field="navManagement"
+						>
+						Management
 					</b:AnchorListItem>
 				</b:NavbarNav>
 			</b:NavbarCollapse>

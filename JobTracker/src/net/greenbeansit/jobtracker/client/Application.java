@@ -16,6 +16,7 @@ import com.google.gwt.user.client.ui.Widget;
 
 import net.greenbeansit.jobtracker.client.components.HomePage;
 import net.greenbeansit.jobtracker.client.components.ProjectPage;
+import net.greenbeansit.jobtracker.client.controller.Controller;
 
 /**
  * Represents the main widget of the application.
@@ -31,7 +32,6 @@ public class Application extends Composite
 		
 	}
 	
-	
 	@UiField
 	Container mainContainer;
 	
@@ -44,6 +44,7 @@ public class Application extends Composite
 	@UiField
 	NavbarNav nav;
 	
+	Controller controller;
 	
 	public Application()
 	{
@@ -52,6 +53,8 @@ public class Application extends Composite
 		History.addValueChangeHandler(new HistoryValueChangeHandler());
 		
 		History.fireCurrentHistoryState();
+		
+		controller = new Controller();
 	}
 	
 	
