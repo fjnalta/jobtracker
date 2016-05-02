@@ -59,18 +59,30 @@
 		float: right;
 		color: #ff0066;
 	}
-	.second_column {
-		margin-right: 25px;
+	
+	.horizontalfillRow {
+		width: 100%;
+		margin: 0;
 	}
-
 	</ui:style>
-	<b:Row>
-		<b:Column size="XS_9,SM_6,MD_3,LG_3" ui:field="first_column"
-			addStyleNames="{style.first_column}">
+	<b:Container fluid="true">
+		<b:Column size="XS_12,SM_12,MD_4,LG_4" addStyleNames="{style.mainColumn}">
+			<b:Row addStyleNames="{style.smallContainer}">
+				<widgets:JobsWidget ui:field="jobsWidget" />
+			</b:Row>
+			<b:Row addStyleNames="{style.smallContainer}">
+				<widgets:WorkDiscriptionWidget ui:field="workDiscriptionWidget" />
+			</b:Row>
+			<b:Row addStyleNames="{style.smallContainer}">
+				<widgets:UtilizationWidget ui:field="utilizationWidget" />
+			</b:Row>
 		</b:Column>
-		<b:Column size="XS_9,SM_7,MD_7,LG_7" offset="XS_1,SM_1,MD_1,LG_1"
-			addStyleNames="{style.second_column}" ui:field="second_column">
+		<b:Column size="XS_12,SM_12,MD_8,LG_8" addStyleNames="{style.mainColumn}">
+			<b:Row addStyleNames="{style.largeContainer}" ui:field="containerBudgetDiagrams">
+				<c:CalendarWidget />
+			</b:Row>
 		</b:Column>
-	</b:Row>
+	</b:Container>
+
 
 </ui:UiBinder> 
