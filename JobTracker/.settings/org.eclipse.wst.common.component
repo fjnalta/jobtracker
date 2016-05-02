@@ -4,7 +4,7 @@
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/target/generated-sources/gwt"/>
-        <dependent-module archiveName="shared-0.0.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/Jobtracker.shared/Jobtracker.shared">
+        <dependent-module archiveName="shared-0.0.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/shared/shared">
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <property name="java-output-path" value="/JobTracker/target/classes"/>
