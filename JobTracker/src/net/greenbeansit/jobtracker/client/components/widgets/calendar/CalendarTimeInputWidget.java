@@ -256,11 +256,11 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 		eventStart.setText(addDoublePoint(handler.events.startTime));
 		pause.setText(handler.events.pause);
 		workTime.setText(handler.events.workTime);
+		Window.alert("Start:" + handler.events.startTime + " End:" + handler.events.endTime);
 	}
 
 	@Override
 	public void notifyHandler() {
-	//	Window.alert("Button");
 		handler.events.endTime = eventEnd.getText();
 		handler.events.startTime = eventStart.getText();
 		handler.events.pause = pause.getText();

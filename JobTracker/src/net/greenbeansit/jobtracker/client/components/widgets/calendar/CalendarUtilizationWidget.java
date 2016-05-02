@@ -6,6 +6,7 @@ import org.gwtbootstrap3.client.ui.Button;
 import org.gwtbootstrap3.client.ui.Column;
 import org.gwtbootstrap3.client.ui.Row;
 import org.gwtbootstrap3.client.ui.constants.IconType;
+import org.gwtbootstrap3.extras.fullcalendar.client.ui.ViewOption;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -46,7 +47,8 @@ public class CalendarUtilizationWidget extends Composite implements CalendarObse
 	@UiHandler("leftButton")
 	public void clickHandlerLeftButton(ClickEvent e) {
 		createNewTimeline(-1);
-
+		handler.calendar.getDate().setMonth(12);
+	
 	}
 
 	@UiHandler("rightButton")

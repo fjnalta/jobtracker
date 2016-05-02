@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.google.gwt.user.client.Window;
+
 import net.greenbeansit.jobtracker.client.components.widgets.calendar.EventDummy;
+import net.greenbeansit.jobtracker.client.components.widgets.calendar.FullCalendarCustomize;
 
 /**
  * This class handles the communication between the calender widgets
@@ -13,9 +16,9 @@ import net.greenbeansit.jobtracker.client.components.widgets.calendar.EventDummy
  *
  */
 public class CalendarHandler {
-	
+
 	public EventDummy events = new EventDummy();
-	
+	public FullCalendarCustomize calendar;
 
 	private List<CalendarObserver> list = new ArrayList<>();
 
@@ -54,4 +57,7 @@ public class CalendarHandler {
 		list.remove(w);
 	}
 
+	public void registerCalendar(FullCalendarCustomize calenda){
+		this.calendar = calenda;
+	}
 }

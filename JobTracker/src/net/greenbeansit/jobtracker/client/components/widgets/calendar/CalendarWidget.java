@@ -44,6 +44,7 @@ public class CalendarWidget extends Composite implements CalendarObserver {
 	Row calendarRow;
 
 	FullCalendarCustomize calendar;
+	CalendarConfig config;
 
 	public CalendarWidget() {
 		initWidget(uiBinder.createAndBindUi(this));
@@ -78,7 +79,7 @@ public class CalendarWidget extends Composite implements CalendarObserver {
 			@Override
 			public void run() {
 
-				CalendarConfig config = new CalendarConfig();
+				config = new CalendarConfig();
 				config.setLangauge(Language.German);
 				config.setClickHoverConfig(getClickAndHoverConfig());
 				config.setSelectConfig(getSelectConfig());
@@ -108,7 +109,10 @@ public class CalendarWidget extends Composite implements CalendarObserver {
 				calendar = new FullCalendarCustomize("fullCalendar", ViewOption.agendaWeek, config, true);
 				calendarRow.add(calendar);
 				calendar.render();
+				handler.registerCalendar(calendar);
 			}
+			
+			
 
 			private ClickAndHoverConfig getClickAndHoverConfig() {
 				ClickAndHoverConfig clickHoverConfig = new ClickAndHoverConfig(new ClickAndHoverEventCallback() {
@@ -184,21 +188,18 @@ public class CalendarWidget extends Composite implements CalendarObserver {
 					@Override
 					public void eventResizeStart(JavaScriptObject calendarEvent, NativeEvent nativeEvent) {
 						// System.out.println("eventResizeStart");
-						notifyHandler();
 					}
 
 					@Override
 					public void eventResize(JavaScriptObject calendarEvent, JavaScriptObject revertFunction,
 							NativeEvent nativeEvent) {
 						// System.out.println("eventResize");
-						notifyHandler();
 					}
 
 					@Override
 					public void eventDrop(JavaScriptObject calendarEvent, JavaScriptObject revertFunction,
 							NativeEvent nativeEvent) {
 						// System.out.println("eventResize");
-						notifyHandler();
 					}
 
 					@Override
@@ -228,7 +229,7 @@ public class CalendarWidget extends Composite implements CalendarObserver {
 							calendar.currentEvent = dragEvent;
 							notifyHandler();
 						}
-
+						
 					}
 
 				});
@@ -268,4 +269,6 @@ public class CalendarWidget extends Composite implements CalendarObserver {
 		int date = Integer.parseInt(temp2[2]);
 		return new Date(year, month, date);
 	}
+	
+	
 }
