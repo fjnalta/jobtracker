@@ -5,7 +5,7 @@ import java.util.Map;
 
 import javax.ws.rs.NotFoundException;
 
-import com.google.gwt.dev.util.collect.HashMap;
+import java.util.HashMap;
 
 import net.greenbeansit.Jobtracker.shared.ActivityReportService;
 import net.greenbeansit.Jobtracker.shared.ActivityReportTemplateService;

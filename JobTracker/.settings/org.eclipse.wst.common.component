@@ -2,9 +2,12 @@
     <wb-module deploy-name="JobTracker">
         <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
-        <wb-resource deploy-path="/WEB-INF/classes" source-path="/target/generated-sources/gwt"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
-        <property name="context-root" value="JobTracker"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/target/generated-sources/gwt"/>
+        <dependent-module archiveName="shared-0.0.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/Jobtracker.shared/Jobtracker.shared">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="java-output-path" value="/JobTracker/target/classes"/>
+        <property name="context-root" value="client"/>
     </wb-module>
 </project-modules>

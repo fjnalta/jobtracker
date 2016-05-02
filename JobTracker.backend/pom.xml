@@ -3,8 +3,8 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>net.greenbeansit</groupId>
-	<artifactId>Jobtacker.backend</artifactId>
+	<groupId>net.greenbeansit.jobtracker</groupId>
+	<artifactId>backend</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<name>JobTracker.backend</name>
@@ -17,6 +17,11 @@
 	</properties>
 
 	<dependencies>
+		<dependency>
+			<groupId>net.greenbeansit.jobtracker</groupId>
+			<artifactId>shared</artifactId>
+			<version>${shared.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-jersey</artifactId>
@@ -47,11 +52,6 @@
 			<groupId>org.liquibase</groupId>
 			<artifactId>liquibase-core</artifactId>
 			<version>3.4.2</version>
-		</dependency>
-		<dependency>
-			<groupId>net.greenbeansit</groupId>
-			<artifactId>Jobtracker.shared</artifactId>
-			<version>${shared.version}</version>
 		</dependency>
 	</dependencies>
 	<build>
