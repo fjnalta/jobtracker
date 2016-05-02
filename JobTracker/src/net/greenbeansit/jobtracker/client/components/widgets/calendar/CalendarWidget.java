@@ -188,18 +188,21 @@ public class CalendarWidget extends Composite implements CalendarObserver {
 					@Override
 					public void eventResizeStart(JavaScriptObject calendarEvent, NativeEvent nativeEvent) {
 						// System.out.println("eventResizeStart");
+						notifyHandler();
 					}
 
 					@Override
 					public void eventResize(JavaScriptObject calendarEvent, JavaScriptObject revertFunction,
 							NativeEvent nativeEvent) {
 						// System.out.println("eventResize");
+						notifyHandler();
 					}
 
 					@Override
 					public void eventDrop(JavaScriptObject calendarEvent, JavaScriptObject revertFunction,
 							NativeEvent nativeEvent) {
 						// System.out.println("eventResize");
+						notifyHandler();
 					}
 
 					@Override

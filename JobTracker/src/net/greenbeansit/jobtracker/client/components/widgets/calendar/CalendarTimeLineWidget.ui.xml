@@ -17,24 +17,28 @@
 	}
 	
 	.formGroupDate {
-		float: right;
-		margin: 0 0 0 0;
+		margin-left: 0;
 	}
 	
-	.test {
-		background-color: grey;
+	.dateDiv {
+		float:right;
+		margin-right: 4em;
 	}
+
 	</ui:style>
 
 	<b:FormGroup addStyleNames="{style.formGroupDate}">
-		<widgets:CalendarTimeLineButtons />
-		
-		<g:FlowPanel addStyleNames="col-xs-1 {style.kwStyle}">
-			<h:Text ui:field="kw" />
+		<g:FlowPanel addStyleNames="col-xs-1">
+			<widgets:CalendarTimeLineButtons />
 		</g:FlowPanel>
-		<g:FlowPanel addStyleNames="col-xs-1 {style.textMonth}">
-			<h:Text ui:field="date" />
-		</g:FlowPanel>
+		<h:Div addStyleNames="{style.dateDiv}">
+			<g:FlowPanel addStyleNames="col-xs-1 {style.kwStyle}">
+				<h:Text ui:field="kw" />
+			</g:FlowPanel>
+			<g:FlowPanel addStyleNames="col-xs-1 {style.textMonth}">
+				<h:Text ui:field="date" />
+			</g:FlowPanel>
+		</h:Div>
 	</b:FormGroup>
 
 

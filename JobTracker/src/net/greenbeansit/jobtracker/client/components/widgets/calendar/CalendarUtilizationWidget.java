@@ -47,7 +47,7 @@ public class CalendarUtilizationWidget extends Composite implements CalendarObse
 	@UiHandler("leftButton")
 	public void clickHandlerLeftButton(ClickEvent e) {
 		createNewTimeline(-1);
-		handler.calendar.getDate().setMonth(12);
+		handler.calendar.setView(ViewOption.agendaDay);
 	
 	}
 
