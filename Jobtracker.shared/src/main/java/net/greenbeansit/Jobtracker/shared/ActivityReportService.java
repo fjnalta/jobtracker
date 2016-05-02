@@ -1,7 +1,5 @@
 package net.greenbeansit.Jobtracker.shared;
 
-import java.util.List;
-
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -17,9 +15,8 @@ import org.fusesource.restygwt.client.DirectRestService;
 /**
  * Service for report functions of an employee.
  * 
- * @author Max Blatt & Mike Hukiewitz
+ * @author Max Blatt
  */
-@Path("activityreport")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public interface ActivityReportService extends DirectRestService  
@@ -31,7 +28,7 @@ public interface ActivityReportService extends DirectRestService
 	 */
 	@GET
 	@Path("/")
-	List<ActivityReport> getAllActivityReports();
+	ActivityReport[] getAllReports();
 	
 	/**
 	 * Gets the {@link ActivityReport} with the following ID.
@@ -41,19 +38,19 @@ public interface ActivityReportService extends DirectRestService
 	 */
 	@GET
 	@Path("/{reportId}")
-	ActivityReport getActivityReport(@PathParam("reportid") String reportId);
+	ActivityReport getReport(@PathParam("reportid") Long reportId);
 	
 	@GET
 	@Path("/{employeeId}/reportPeriod")
-	List<ActivityReport> getActivityReportPeriod(@PathParam("reportid") String employeeId, String from, String to);
+	ActivityReport[] getReportPeriod(@PathParam("reportid") Long employeeId, String from, String to);
 	
 	
 	
 	@POST
 	@Path("/")
-	ActivityReport createActivityReport(ActivityReport report);
+	void createReport(ActivityReport report);
 	
 	@PUT
 	@Path("/")
-	ActivityReport updateActivityReport(ActivityReport report);
+	void updateReport(ActivityReport report);
 }
