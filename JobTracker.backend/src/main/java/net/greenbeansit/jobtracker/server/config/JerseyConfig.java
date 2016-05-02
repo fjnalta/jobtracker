@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package net.greenbeansit.jobtracker.backend.config;
+package net.greenbeansit.jobtracker.server.config;
 
 import org.glassfish.jersey.server.ResourceConfig;
 import org.springframework.stereotype.Component;
 
-import net.greenbeansit.jobtracker.backend.services.*;
+import net.greenbeansit.jobtracker.server.services.*;
 
 @Component
 public class JerseyConfig extends ResourceConfig {

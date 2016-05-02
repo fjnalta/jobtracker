@@ -1,4 +1,4 @@
-package net.greenbeansit.jobtracker.backend.services;
+package net.greenbeansit.jobtracker.server.services;
 
 import java.util.ArrayList;
 import java.util.HashMap;

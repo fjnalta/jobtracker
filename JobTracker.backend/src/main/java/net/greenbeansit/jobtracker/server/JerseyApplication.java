@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package net.greenbeansit.jobtracker.backend;
+package net.greenbeansit.jobtracker.server;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;

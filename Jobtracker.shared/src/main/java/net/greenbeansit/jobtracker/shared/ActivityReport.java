@@ -13,56 +13,52 @@ import java.util.Date;
 public class ActivityReport implements Serializable
 {
 
-	private static final long	serialVersionUID	= 1L;
+	private static final long	serialVersionUID	= 7682896069658320372L;
 
 	private String				description;
 	private String				identifier;
 	private Date				date;
 	private Integer				startTime;
 	private Integer				duration;
+	private Integer				breakTime;
 	private Long				author;
 	private Long				id;
 
-	public Long getId()
-	{
-		return id;
-	}
-
-	public void setId(Long id)
-	{
-		this.id = id;
-	}
-
-	
 	/**
-	 * Initializes a new instance of the {@link ActivityReport} class with
-	 * its fields set to null.
+	 * Initializes a new instance of the {@link ActivityReport} class with its
+	 * fields set to null.
 	 */
 	public ActivityReport()
 	{
-		
+
 	}
-	
+
 	/**
-	 * Initializes a new instance of the {@link ActivityReport} class with
-	 * the following values
+	 * Initializes a new instance of the {@link ActivityReport} class with the
+	 * following values
 	 * 
-	 * @param description the description of the report.
-	 * @param identifier the identifier string.
-	 * @param date the date of the report.
-	 * @param startTime the start time of the report.
-	 * @param duration the duration time of the report.
+	 * @param description
+	 *            the description of the report.
+	 * @param identifier
+	 *            the identifier string.
+	 * @param date
+	 *            the date of the report.
+	 * @param startTime
+	 *            the start time of the report.
+	 * @param duration
+	 *            the duration time of the report.
 	 */
 	public ActivityReport(String description, String identifier, Date date,
-			int startTime, int duration)
+			int startTime, int duration, int breakTime)
 	{
 		this.setDescription(description);
 		this.setIdentifier(identifier);
-		this.setDuration(duration);
+		this.setDate(date);
 		this.setStartTime(startTime);
+		this.setDuration(duration);
+		this.setBreakTime(breakTime);
 	}
 
-	
 	public String getDescription()
 	{
 		return description;
@@ -104,7 +100,7 @@ public class ActivityReport implements Serializable
 	{
 		if (startTime >= 1440)
 			throw (new IllegalArgumentException());
-		
+
 		this.startTime = startTime;
 	}
 
@@ -142,9 +138,32 @@ public class ActivityReport implements Serializable
 		this.date = date;
 	}
 
+	@SuppressWarnings("deprecation")
 	public void setDate(int year, int month, int day)
 	{
 		this.date = new Date(year, month, day);
+	}
+
+	public Integer getBreakTime()
+	{
+		return breakTime;
+	}
+
+	public void setBreakTime(Integer breakTime)
+	{
+		if (breakTime < 0)
+			throw (new IllegalArgumentException());
+		this.breakTime = breakTime;
+	}
+
+	public Long getId()
+	{
+		return id;
+	}
+
+	public void setId(Long id)
+	{
+		this.id = id;
 	}
 
 }

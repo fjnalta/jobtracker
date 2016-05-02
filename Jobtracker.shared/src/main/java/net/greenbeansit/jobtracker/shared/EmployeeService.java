@@ -57,7 +57,7 @@ public interface EmployeeService extends DirectRestService {
 	
 	@GET
 	@Path("/{employeeId}/job/{jobId}")
-	Job getJob(@PathParam("employeeId") Long employeeId, @PathParam("jobId") Long jobId);
+	Job getJob(@PathParam("employeeId") Long employeeId, @PathParam("jobId") Integer jobId);
 
 	/**
 	 * Gets all {@link ActivityReport} for the {@link Employee} with the
@@ -153,4 +153,3 @@ public interface EmployeeService extends DirectRestService {
 	void saveTemplate(@PathParam("employeeId") Long employeeId, ActivityReportTemplate template);
 
 }
-
