@@ -21,7 +21,7 @@
 	.textArea {
 		max-width: 100%;
 		min-width: 100%;
-		min-height: 35px;
+		min-height: 80px;
 	}
 	.button
 	{

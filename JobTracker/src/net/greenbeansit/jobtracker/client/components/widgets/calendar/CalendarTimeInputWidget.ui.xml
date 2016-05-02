@@ -1,0 +1,115 @@
+<?xml version="1.0"?>
+
+<ui:UiBinder xmlns:s="urn:import:javax.swing"
+	xmlns:h="urn:import:org.gwtbootstrap3.client.ui.html" xmlns:b2="urn:import:org.gwtbootstrap3.extras.datetimepicker.client.ui"
+	xmlns:b="urn:import:org.gwtbootstrap3.client.ui" xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:org.gwtbootstrap3.client.ui.gwt">
+	<ui:style>
+	.button {
+		width: 10px;
+		height: 0px;
+		font-size: 10px;
+		line-height: 0px;
+		text-align: center;
+		padding: 0;
+		border: none;
+	}
+	
+	.buchen {
+		width: 50px;
+		height: 50px;
+		font-size: 30px;
+		line-height: 0px;
+		text-align: center;
+	}
+	
+	.textInput {
+		font-size: 20px;
+		width: 75px;
+		height: 40px;
+		border-bottom: none;
+		border-right: none;
+	}
+	
+	.text {
+		margin-top: 20px;
+		font-size: 20px;
+		width: 75px;
+		height: 50px;
+		line-height: 0px;
+		text-align: center;
+		padding: 0;
+		border: none;
+		background-color: white;
+		color: black;
+	}
+	</ui:style>
+
+	<b:FormGroup>
+		<g:FlowPanel addStyleNames="col-xs-1">
+			<b:Column size="XS_12,SM_12,MD_4,LG_4">
+				<b:Label addStyleNames="{style.text}">Pause</b:Label>
+			</b:Column>
+			<b:Column size="XS_12,SM_12,MD_4,LG_4">
+				<b:IntegerBox addStyleNames="{style.textInput}"
+					ui:field="pause" />
+			</b:Column>
+		</g:FlowPanel>
+
+		<g:FlowPanel addStyleNames="col-xs-1">
+			<b:Column size="XS_12,SM_12,MD_4,LG_4">
+				<b:Label addStyleNames="{style.text}">Zeit</b:Label>
+			</b:Column>
+			<b:Column size="XS_12,SM_12,MD_4,LG_4">
+				<b:IntegerBox addStyleNames="{style.textInput}"
+					ui:field="workTime" />
+			</b:Column>
+		</g:FlowPanel>
+		<g:FlowPanel addStyleNames="col-xs-1">
+		</g:FlowPanel>
+		<g:FlowPanel addStyleNames="col-xs-2">
+
+		</g:FlowPanel>
+		<g:FlowPanel addStyleNames="col-xs-1">
+			<b:Column size="XS_12,SM_12,MD_4,LG_4">
+				<b:Row>
+					<b:Button addStyleNames="{style.button}" ui:field="buttonUpStart" />
+				</b:Row>
+				<b:Row>
+					<b:Button addStyleNames="{style.button}" ui:field="buttonDownStart" />
+				</b:Row>
+			</b:Column>
+			<b:Column size="XS_12,SM_12,MD_4,LG_4" marginRight="10">
+				<b:TextBox addStyleNames="{style.textInput}" ui:field="eventStart">12:00</b:TextBox>
+			</b:Column>
+		</g:FlowPanel>
+		<g:FlowPanel addStyleNames="col-xs-1">
+			<b:Column size="XS_12,SM_12,MD_4,LG_4">
+			</b:Column>
+		</g:FlowPanel>
+		
+		<g:FlowPanel addStyleNames="col-xs-1">
+			<b:Column size="XS_12,SM_12,MD_4,LG_4">
+				<b:TextBox addStyleNames="{style.textInput}" ui:field="eventEnd">22:59</b:TextBox>
+			</b:Column>
+		</g:FlowPanel>
+		<g:FlowPanel width="0" addStyleNames="col-xs-1">
+			<b:Column size="XS_12,SM_12,MD_4,LG_4">
+				<b:Row>
+					<b:Button addStyleNames="{style.button}" ui:field="buttonUpEnd" />
+				</b:Row>
+				<b:Row>
+					<b:Button addStyleNames="{style.button}" ui:field="buttonDownEnd" />
+				</b:Row>
+			</b:Column>
+
+		</g:FlowPanel>
+
+		<g:FlowPanel addStyleNames="col-xs-1">
+			<b:Button addStyleNames="{style.buchen}" ui:field="buttonBuchen"
+				text="Buchen" />
+		</g:FlowPanel>
+
+	</b:FormGroup>
+
+</ui:UiBinder>

@@ -1,0 +1,45 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:b="urn:import:org.gwtbootstrap3.client.ui" xmlns:g="urn:import:org.gwtbootstrap3.client.ui.gwt"
+	xmlns:h="urn:import:org.gwtbootstrap3.client.ui.html"
+	xmlns:widgets="urn:import:net.greenbeansit.jobtracker.client.components.widgets.calendar">
+	<ui:style>
+	.textMonth {
+		font-size: 2em;
+		width: 50px;
+	}
+	
+	.kwStyle {
+		margin-top: 1em;
+		width: 50px;
+		font-style: italic;
+		font-size: 1em;
+	}
+	
+	.formGroupDate {
+		margin-top: -5;
+		margin-left: 0;
+	}
+	
+	.dateDiv {
+		float: right;
+		margin-right: 5.5em;
+	}
+	</ui:style>
+
+	<b:FormGroup addStyleNames="{style.formGroupDate}">
+		<g:FlowPanel addStyleNames="col-xs-1">
+			<widgets:CalendarTimeLineButtons />
+		</g:FlowPanel>
+		<h:Div addStyleNames="{style.dateDiv}">
+			<g:FlowPanel addStyleNames="col-xs-1 {style.kwStyle}">
+				<h:Text ui:field="kw" />
+			</g:FlowPanel>
+			<g:FlowPanel addStyleNames="col-xs-1 {style.textMonth}">
+				<h:Text ui:field="date" />
+			</g:FlowPanel>
+		</h:Div>
+	</b:FormGroup>
+
+
+</ui:UiBinder> 

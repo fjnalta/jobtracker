@@ -28,9 +28,17 @@
 						href="#home">
 						Home
 					</b:AnchorListItem>
+					<b:AnchorListItem iconFixedWidth="true" ui:field="navKapa"
+						>
+						Kapaplanung
+					</b:AnchorListItem>
 					<b:AnchorListItem iconFixedWidth="true" ui:field="navProject"
 						href="#project">
-						Projekt
+						Projektleitung
+					</b:AnchorListItem>
+					<b:AnchorListItem iconFixedWidth="true" ui:field="navManagement"
+						>
+						Management
 					</b:AnchorListItem>
 				</b:NavbarNav>
 			</b:NavbarCollapse>
