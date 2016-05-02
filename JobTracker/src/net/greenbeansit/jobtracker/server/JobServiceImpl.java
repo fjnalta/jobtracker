@@ -16,15 +16,21 @@ import net.greenbeansit.jobtracker.shared.JobService;
 public class JobServiceImpl implements JobService
 {
 	private static Map<Long, Job> jobMap;
-
+	
+	private Long employeeId;
 	
 	/**
-	 * Initializes a new instance of the {@link JobServiceImpl} class.
+	 * Initializes a new instance of the {@link JobServiceImpl} class
+	 * associated with the employee with the following ID.
+	 * 
+	 * @param employeeId the ID of the employee.
 	 */
-	public JobServiceImpl()
+	public JobServiceImpl(Long employeeId)
 	{
 		if(jobMap == null)
 			jobMap = new HashMap<Long, Job>();
+		
+		this.employeeId = employeeId;
 	}
 
 	@Override
