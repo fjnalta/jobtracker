@@ -18,6 +18,7 @@ public class CapazityActivity extends Composite {
 	interface CapazityActivityUiBinder extends UiBinder<Widget, CapazityActivity> {
 	}
 
+	
 	public CapazityActivity() {
 		initWidget(uiBinder.createAndBindUi(this));
 	}

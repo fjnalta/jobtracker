@@ -1,4 +1,4 @@
-package net.greenbeansit.jobtracker.shared;
+package net.greenbeansit.Jobtracker.shared;
 
 
 /**

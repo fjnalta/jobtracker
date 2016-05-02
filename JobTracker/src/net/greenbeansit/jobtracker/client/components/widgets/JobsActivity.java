@@ -13,7 +13,6 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class JobsActivity extends Composite
 {
-
 	private static JobsActivityUiBinder uiBinder = GWT.create(JobsActivityUiBinder.class);
 
 	interface JobsActivityUiBinder extends UiBinder<Widget, JobsActivity> {

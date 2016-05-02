@@ -1,4 +1,4 @@
-package net.greenbeansit.jobtracker.server;
+package net.greenbeansit.jobtracker.backend.services;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,16 +7,13 @@ import java.util.Map;
 
 import javax.ws.rs.NotFoundException;
 
-import net.greenbeansit.jobtracker.shared.ActivityReport;
-import net.greenbeansit.jobtracker.shared.ActivityReportService;
-import net.greenbeansit.jobtracker.shared.Employee;
-
+import net.greenbeansit.Jobtracker.shared.*;
 /**
  * Dummy implementation of the {@link ActivityReportService} interface.
  * 
  * @author Max Blatt
  */
-public class ActivityReportServiceImpl implements ActivityReportService
+public class ActivityReportServiceImpl implements IActivityReportService
 {
 	private static Map<Long, ActivityReport>	reportMap;
 
@@ -37,7 +34,6 @@ public class ActivityReportServiceImpl implements ActivityReportService
 			reportMap = new HashMap<Long, ActivityReport>();
 	}
 
-	@Override
 	public ActivityReport[] getAllReports()
 	{
 		List<ActivityReport> list = new ArrayList<ActivityReport>();
@@ -52,7 +48,6 @@ public class ActivityReportServiceImpl implements ActivityReportService
 		return list.toArray(new ActivityReport[list.size()]);
 	}
 
-	@Override
 	public ActivityReport getReport(Long reportId)
 	{
 		if (reportMap.containsKey(reportId))
@@ -61,7 +56,6 @@ public class ActivityReportServiceImpl implements ActivityReportService
 		throw new NotFoundException();
 	}
 
-	@Override
 	public ActivityReport[] getReportPeriod(Long employeeId, String from,
 			String to)
 	{
@@ -69,7 +63,6 @@ public class ActivityReportServiceImpl implements ActivityReportService
 		return new ActivityReport[0];
 	}
 
-	@Override
 	public void createReport(ActivityReport report)
 	{
 		if (report == null)
@@ -97,7 +90,6 @@ public class ActivityReportServiceImpl implements ActivityReportService
 		return newId;
 	}
 
-	@Override
 	public void updateReport(ActivityReport report)
 	{
 		if (report == null)

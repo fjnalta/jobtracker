@@ -17,7 +17,6 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class CalendarActivity extends Composite
 {
-
 	private static CalendarWidgetUiBinder uiBinder = GWT.create(CalendarWidgetUiBinder.class);
 
 	interface CalendarWidgetUiBinder extends UiBinder<Widget, CalendarActivity>

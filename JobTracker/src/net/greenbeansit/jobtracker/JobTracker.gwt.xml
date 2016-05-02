@@ -18,6 +18,7 @@
 	<!-- Other module inherits -->
 	<inherits name="org.gwtbootstrap3.GwtBootstrap3" />
 	<inherits name="org.gwtbootstrap3.extras.fullcalendar.FullCalendar"/>
+	<inherits name="org.fusesource.restygwt.RestyGWT"/>
 	
 	<!-- Specify the app entry point class. -->
 	<entry-point class='net.greenbeansit.jobtracker.client.GwtEntryPoint' />

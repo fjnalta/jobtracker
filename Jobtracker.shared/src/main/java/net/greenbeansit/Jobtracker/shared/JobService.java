@@ -1,4 +1,4 @@
-package net.greenbeansit.jobtracker.shared;
+package net.greenbeansit.Jobtracker.shared;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;

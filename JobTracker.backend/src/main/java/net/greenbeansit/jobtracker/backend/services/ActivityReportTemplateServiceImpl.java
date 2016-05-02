@@ -1,4 +1,4 @@
-package net.greenbeansit.jobtracker.server;
+package net.greenbeansit.jobtracker.backend.services;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,16 +6,14 @@ import java.util.Map;
 
 import com.google.gwt.dev.util.collect.HashMap;
 
-import net.greenbeansit.jobtracker.shared.ActivityReportTemplate;
-import net.greenbeansit.jobtracker.shared.ActivityReportTemplateService;
-import net.greenbeansit.jobtracker.shared.Employee;
+import net.greenbeansit.Jobtracker.shared.ActivityReportTemplate;
 
 /**
  * Dummy implementation of the {@link ActivityReportTemplateService} interface.
  * 
  * @author Max Blatt
  */
-public class ActivityReportTemplateServiceImpl implements ActivityReportTemplateService
+public class ActivityReportTemplateServiceImpl implements IActivityReportTemplateService
 {	
 	private static Map<Long, ActivityReportTemplate> templateMap;
 	
@@ -36,7 +34,6 @@ public class ActivityReportTemplateServiceImpl implements ActivityReportTemplate
 			templateMap = new HashMap<Long, ActivityReportTemplate>();
 	}
 	
-	@Override
 	public ActivityReportTemplate[] getAllTemplates()
 	{
 		List<ActivityReportTemplate> list = new ArrayList<ActivityReportTemplate>();
@@ -50,7 +47,6 @@ public class ActivityReportTemplateServiceImpl implements ActivityReportTemplate
 		return list.toArray(new ActivityReportTemplate[list.size()]);
 	}
 
-	@Override
 	public void saveTemplate(ActivityReportTemplate template)
 	{
 		if(template == null)

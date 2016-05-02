@@ -20,7 +20,7 @@ import net.greenbeansit.jobtracker.client.components.ProjectPage;
 /**
  * Represents the main widget of the application.
  */
-class Application extends Composite
+public class Application extends Composite
 {
 	private static ApplicationUiBinder uiBinder = 
 			GWT.create(ApplicationUiBinder.class);

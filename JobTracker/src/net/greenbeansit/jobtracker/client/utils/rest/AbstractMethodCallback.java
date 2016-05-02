@@ -14,7 +14,6 @@ import com.google.gwt.user.client.Window;
  */
 public abstract class AbstractMethodCallback<T> implements MethodCallback<T> {
 
-
 	  @Override
 	  public void onFailure(Method method, Throwable exception) {
 		  //TODO Error handling have to be implemented here.
