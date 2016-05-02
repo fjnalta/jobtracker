@@ -1,6 +1,5 @@
 package net.greenbeansit.jobtracker.server;
 
-import java.util.List;
 import java.util.Map;
 
 import javax.ws.rs.NotFoundException;
@@ -16,7 +15,7 @@ import net.greenbeansit.jobtracker.shared.Job;
 /**
  * Dummy implementation of the {@link EmployeeService} interface.
  * 
- * @author Max Blatt & Alexander Kirilyuk
+ * @author Max Blatt
  */
 public class EmployeeServiceImpl implements EmployeeService
 {
@@ -32,13 +31,16 @@ public class EmployeeServiceImpl implements EmployeeService
 	}
 
 	@Override
-	public Employee getEmployee(Long employeeId) {
-		// TODO Auto-generated method stub
-		return null;
+	public Employee getEmployee(Long employeeId)
+	{
+		if (employeeMap.containsKey(employeeId))
+			return employeeMap.get(employeeId);
+
+		throw new NotFoundException();
 	}
 
 	@Override
-	public List<Job> getAllJobs(Long employeeId) {
+	public Job[] getAllJobs(Long employeeId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -50,7 +52,7 @@ public class EmployeeServiceImpl implements EmployeeService
 	}
 
 	@Override
-	public List<ActivityReport> getAllReports(Long employeeId) {
+	public ActivityReport[] getAllReports(Long employeeId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -62,7 +64,7 @@ public class EmployeeServiceImpl implements EmployeeService
 	}
 
 	@Override
-	public List<ActivityReport> getReportPeriod(Long employeeId, String from, String to) {
+	public ActivityReport[] getReportPeriod(Long employeeId, String from, String to) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -80,7 +82,7 @@ public class EmployeeServiceImpl implements EmployeeService
 	}
 
 	@Override
-	public List<ActivityReportTemplate> getAllTemplates(Long employeeId) {
+	public ActivityReportTemplate[] getAllTemplates(Long employeeId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -90,6 +92,5 @@ public class EmployeeServiceImpl implements EmployeeService
 		// TODO Auto-generated method stub
 		
 	}
-
 
 }

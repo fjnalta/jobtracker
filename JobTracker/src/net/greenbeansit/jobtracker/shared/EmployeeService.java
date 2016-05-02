@@ -1,7 +1,5 @@
 package net.greenbeansit.jobtracker.shared;
 
-import java.util.List;
-
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -38,12 +36,12 @@ public interface EmployeeService extends DirectRestService {
 	 * 
 	 * @param employeeId
 	 *            the ID of the {@link Employee}.
-	 * @return List of {@link Job}.
+	 * @return Array of {@link Job}.
 	 */
-	
+
 	@GET
 	@Path("/{employeeId}/job")
-	List<Job> getAllJobs(@PathParam("employeeId") Long employeeId);
+	Job[] getAllJobs(@PathParam("employeeId") Long employeeId);
 
 	/**
 	 * Gets one {@link Job} for the {@link Employee} with the following IDs
@@ -54,7 +52,7 @@ public interface EmployeeService extends DirectRestService {
 	 *            the id of the {@link Job}
 	 * @return one single {@link Job} with the jobId
 	 */
-	
+
 	@GET
 	@Path("/{employeeId}/job/{jobId}")
 	Job getJob(@PathParam("employeeId") Long employeeId, @PathParam("jobId") Long jobId);
@@ -65,12 +63,12 @@ public interface EmployeeService extends DirectRestService {
 	 * 
 	 * @param employeeId
 	 *            the ID of the {@link Employee}.
-	 * @return an {@link ActivityReport} List
+	 * @return an {@link ActivityReport} Array
 	 */
-	
+
 	@GET
 	@Path("/{employeeId}/report")
-	List<ActivityReport> getAllReports(@PathParam("employeeId") Long employeeId);
+	ActivityReport[] getAllReports(@PathParam("employeeId") Long employeeId);
 
 	/**
 	 * 
@@ -81,7 +79,7 @@ public interface EmployeeService extends DirectRestService {
 	 *           the ID of the {@link Employee}.
 	 * @param reportId
 	 * 				the ID of the {@link ActivityReport}
-	 * @return an {@link ActivityReport}
+	 * @return an {@link ActivityReportService}
 	 */
 
 	@GET
@@ -100,12 +98,12 @@ public interface EmployeeService extends DirectRestService {
 	 * @param to
 	 * 			the end date
 	 * @return
-	 * 			List of {@link ActivityReport}
+	 * 			array of {@link ActivityReport}
 	 */
-	
+
 	@GET
 	@Path("/{employeeId}/report/reportPeriod/{from}/{to}")
-	List<ActivityReport> getReportPeriod(@PathParam("employeeId") Long employeeId, @PathParam("from") String from,
+	ActivityReport[] getReportPeriod(@PathParam("employeeId") Long employeeId, @PathParam("from") String from,
 			@PathParam("to") String to);
 
 	/**
@@ -132,12 +130,12 @@ public interface EmployeeService extends DirectRestService {
 	 * 
 	 * @param employeeId
 	 *            the ID of the {@link Employee}.
-	 * @return List of {@link ActivityReportTemplate}.
+	 * @return Array of {@link ActivityReportTemplate}.
 	 */
-	
+
 	@GET
 	@Path("/{employeeId}/template")
-	List<ActivityReportTemplate> getAllTemplates(@PathParam("employeeId") Long employeeId);
+	ActivityReportTemplate[] getAllTemplates(@PathParam("employeeId") Long employeeId);
 
 	/**
 	 * Saves an {@link ActivityReportTemplate} with a new ID for the
