@@ -80,7 +80,7 @@
 				</b:Row>
 			</b:Column>
 			<b:Column size="XS_12,SM_12,MD_4,LG_4" marginRight="10">
-				<b:TextBox addStyleNames="{style.textInput}" ui:field="eventStart">1200</b:TextBox>
+				<b:TextBox addStyleNames="{style.textInput}" ui:field="eventStart">12:00</b:TextBox>
 			</b:Column>
 		</g:FlowPanel>
 		<g:FlowPanel addStyleNames="col-xs-1">
@@ -90,7 +90,7 @@
 		
 		<g:FlowPanel addStyleNames="col-xs-1">
 			<b:Column size="XS_12,SM_12,MD_4,LG_4">
-				<b:TextBox addStyleNames="{style.textInput}" ui:field="eventEnd">2259</b:TextBox>
+				<b:TextBox addStyleNames="{style.textInput}" ui:field="eventEnd">22:59</b:TextBox>
 			</b:Column>
 		</g:FlowPanel>
 		<g:FlowPanel width="0" addStyleNames="col-xs-1">
