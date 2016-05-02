@@ -28,7 +28,7 @@
 	</ui:style>
 
 	<b:FormGroup addStyleNames="{style.formGroupDate}">
-		<g:FlowPanel addStyleNames="col-xs-1">
+		<g:FlowPanel>
 			<widgets:CalendarTimeLineButtons />
 		</g:FlowPanel>
 		<h:Div addStyleNames="{style.dateDiv}">
