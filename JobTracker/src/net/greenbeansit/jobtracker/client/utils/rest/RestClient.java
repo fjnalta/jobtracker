@@ -12,7 +12,7 @@ import net.greenbeansit.jobtracker.shared.EmployeeService;
 /**
  * Client for backend service calls.
  * 
- * @author Max Blatt & Alexander Kirilyuk
+ * @author Fethullah Misir
  * @param <R>
  */
 public class RestClient<R> {
