@@ -1,20 +1,20 @@
 package net.greenbeansit.jobtracker.shared;
 
-import java.io.Serializable;
-
 /**
  * Result of parsing the job number string. A job number is read-only
  * accessible. "jobNr-posNr-payMode | clientID | desc"
  * 
  * @author Mike Hukiewitz
  */
-public class JobID implements Serializable
+public class JobID
 {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 8137626358041245741L;
-	String	payMode;
+
+	enum PayMode
+	{
+		TM, FP, NF
+	};
+
+	PayMode	payMode;
 	Integer	jobNr, posNr;
 	String	clientID;
 	String	desc;
@@ -27,9 +27,8 @@ public class JobID implements Serializable
 	{
 
 	}
-	
-	
-	public JobID(int jobNr, int posNr, String payMode, String clientID,
+
+	public JobID(int jobNr, int posNr, PayMode payMode, String clientID,
 			String desc)
 	{
 		this.jobNr = jobNr;
@@ -38,7 +37,6 @@ public class JobID implements Serializable
 		this.clientID = clientID;
 		this.desc = desc;
 	}
-	
 
 	public String getDesc()
 	{
@@ -55,14 +53,14 @@ public class JobID implements Serializable
 		return posNr;
 	}
 
-	
+	public PayMode getPayMode()
+	{
+		return payMode;
+	}
+
 	public String getClientID()
 	{
 		return clientID;
-	}
-	
-	public String toString(){
-		return this.jobNr + "-"+ this.posNr + "-" + this.payMode + "|" + this.clientID +"|" + this.desc;
 	}
 
 }

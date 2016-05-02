@@ -70,5 +70,4 @@ public class Job implements Serializable
 	{
 		this.usedBudget = usedBudget;
 	}
-	
 }

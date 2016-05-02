@@ -17,7 +17,7 @@ import net.greenbeansit.jobtracker.shared.EmployeeService;
  */
 public class RestClient<R> {
 
-	public static EmployeeService EMPLOYEE_SERVICE = GWT.create(EmployeeService.class);
+	private static EmployeeService EMPLOYEE_SERVICE = GWT.create(EmployeeService.class);
 
 	private MethodCallback<R> callback;
 

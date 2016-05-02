@@ -2,10 +2,7 @@ package net.greenbeansit.jobtracker.server;
 
 import java.util.Map;
 
-import javax.ws.rs.Consumes;
 import javax.ws.rs.NotFoundException;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
 
 import com.google.gwt.dev.util.collect.HashMap;
 
@@ -15,8 +12,6 @@ import net.greenbeansit.jobtracker.shared.Employee;
 import net.greenbeansit.jobtracker.shared.EmployeeService;
 import net.greenbeansit.jobtracker.shared.JobService;
 
-@Consumes(MediaType.APPLICATION_JSON)
-@Produces(MediaType.APPLICATION_JSON)
 /**
  * Dummy implementation of the {@link EmployeeService} interface.
  * 
@@ -33,7 +28,6 @@ public class EmployeeServiceImpl implements EmployeeService
 	{
 		if (employeeMap == null)
 			employeeMap = new HashMap<Long, Employee>();
-			employeeMap.put(1L, new Employee(1L,"Alexander","Kirilyuk"));
 	}
 
 	@Override

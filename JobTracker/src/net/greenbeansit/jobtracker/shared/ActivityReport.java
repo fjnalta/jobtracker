@@ -138,7 +138,6 @@ public class ActivityReport implements Serializable
 		this.date = date;
 	}
 
-	@SuppressWarnings("deprecation")
 	public void setDate(int year, int month, int day)
 	{
 		this.date = new Date(year, month, day);

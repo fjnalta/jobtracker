@@ -1,22 +1,12 @@
 package net.greenbeansit.jobtracker.shared;
 
-import java.io.Serializable;
-
 /**
  * Represents a template for an {@link ActivityReport}.
  * 
  * @author Max Blatt
  */
-public class ActivityReportTemplate implements Serializable
+public class ActivityReportTemplate
 {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1035084213210834537L;
-	/**
-	 * 
-	 */ 
-	
 	private String	templateName;
 	private String	description;
 	private Long	id;
