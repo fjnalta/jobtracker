@@ -20,6 +20,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.web.SpringBootServletInitializer;
 
+import com.fasterxml.jackson.databind.JavaType;
+
 @SpringBootApplication
 public class JerseyApplication extends SpringBootServletInitializer {
 

@@ -1,7 +1,7 @@
 package net.greenbeansit.jobtracker.server.services;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -11,8 +11,6 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import java.util.HashMap;
-
 import net.greenbeansit.jobtracker.shared.ActivityReport;
 import net.greenbeansit.jobtracker.shared.ActivityReportTemplate;
 import net.greenbeansit.jobtracker.shared.Employee;
@@ -20,7 +18,7 @@ import net.greenbeansit.jobtracker.shared.EmployeeService;
 import net.greenbeansit.jobtracker.shared.Job;
 import net.greenbeansit.jobtracker.shared.JobID;
 
-@Path("employee")
+@Path("/employee")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 /**
@@ -69,9 +67,13 @@ public class EmployeeServiceImpl implements EmployeeService
 
 	public Employee getEmployee(Long employeeId)
 	{
+		System.out.println("getEmployee(" + employeeId + ")");
+		
 		if (employeeMap.containsKey(employeeId))
 			return employeeMap.get(employeeId);
 
+		
+		
 		throw new NotFoundException();
 	}
 
