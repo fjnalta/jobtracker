@@ -19,8 +19,8 @@ import net.greenbeansit.jobtracker.server.service.JobService;
 public class JobServiceJpa implements JobService
 {
 
-	@Inject
-	private JobRepository	personRepository;
+//	@Inject
+//	private JobRepository	personRepository;
 	private EntityManager	entityManager;
 
 	@PersistenceContext

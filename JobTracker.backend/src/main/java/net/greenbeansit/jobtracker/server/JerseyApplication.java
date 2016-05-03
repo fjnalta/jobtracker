@@ -35,5 +35,4 @@ public class JerseyApplication extends SpringBootServletInitializer {
 				.configure(new SpringApplicationBuilder(JerseyApplication.class))
 				.run(args);
 	}
-
 }
