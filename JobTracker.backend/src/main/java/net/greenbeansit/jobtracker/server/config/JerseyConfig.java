@@ -19,16 +19,22 @@ package net.greenbeansit.jobtracker.server.config;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
+
 import net.greenbeansit.jobtracker.server.services.*;
 
 @Component
-public class JerseyConfig extends ResourceConfig {
+public class JerseyConfig extends ResourceConfig
+{
 
-	public JerseyConfig() {
+	public JerseyConfig()
+	{
+		System.out.println("JerseyConfig");
+		
+		packages("net.greenbeansit.jobtracker.server.services");
+		register(JacksonJsonProvider.class);
+		
 		register(EmployeeServiceImpl.class);
-//		register(ActivityReportServiceImpl.class);
-//		register(ActivityReportTemplateServiceImpl.class);
-//		register(JobServiceImpl.class);
 	}
 
 }
