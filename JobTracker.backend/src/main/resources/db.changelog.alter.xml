@@ -3,15 +3,68 @@
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
-	<changeSet id="20160328-002" author="fmisir">
+	<changeSet id="1" author="mike">
 		<sql>
 			<![CDATA[
-				CREATE TABLE `PERSON`
+				CREATE TABLE 'JOB'
 				(
-					`ID` BIGINT NOT NULL AUTO_INCREMENT ,
-					`LASTNAME` VARCHAR(50) NOT NULL,
-					`FIRSTNAME` VARCHAR(50) NOT NULL,
-					CONSTRAINT `PK_PERSON` PRIMARY KEY (`ID`)
+					'ID' BIGINT NOT NULL AUTO_INCREMENT ,
+					'JOBNR' VARCHAR(6) NOT NULL,
+					'POSNR' VARCHAR(3) NOT NULL,
+					'PAYMODE' VARCHAR(2) NOT NULL,
+					'CUSTOMERID' VARCHAR(20),
+					'DESCRIPTION' TEXT,
+					'MAXBUDGET' INT,
+					'USEDBUDGET' INT,
+					CONSTRAINT 'PK_JOB' PRIMARY KEY ('ID')
+				)
+				;
+			]]>
+		</sql>
+	</changeSet>
+	<changeSet id="2" author="mike">
+		<sql>
+			<![CDATA[
+				CREATE TABLE 'ACTIVITYREPORT'
+				(
+					'ID' BIGINT NOT NULL AUTO_INCREMENT ,
+					'DESCRIPTION' TEXT,
+					'IDENTIFIER' VARCHAR(60),
+					'DATE' DATE,
+					'STARTTIME' INT,
+					'DURATION' INT,
+					'BREAKTIME' INT,
+					'AUTHOR' BIGINT,
+					CONSTRAINT 'PK_ACTIVITYREPORT' PRIMARY KEY ('ID')
+				)
+				;
+			]]>
+		</sql>
+	</changeSet>
+	<changeSet id="3" author="mike">
+		<sql>
+			<![CDATA[
+				CREATE TABLE 'ACTIVITYREPORTTEMPLATE'
+				(
+					'ID' BIGINT NOT NULL AUTO_INCREMENT ,
+					'NAME' VARCHAR(20),
+					'DESCRIPTION' TEXT,
+					'IDENTIFIER' VARCHAR(60),
+					CONSTRAINT 'PK_ACTIVITYREPORTTEMPLATE' PRIMARY KEY ('ID')
+				)
+				;
+			]]>
+		</sql>
+	</changeSet>
+	<changeSet id="4" author="mike">
+		<sql>
+			<![CDATA[
+				CREATE TABLE 'EMPLOYEE'
+				(
+					'ID' BIGINT NOT NULL AUTO_INCREMENT ,
+					'FIRSTNAME' VARCHAR(40),
+					'LASTNAME' VARCHAR(40),
+					CONSTRAINT 'PK_EMPLOYEE' PRIMARY KEY ('ID')
 				)
 				;
 			]]>

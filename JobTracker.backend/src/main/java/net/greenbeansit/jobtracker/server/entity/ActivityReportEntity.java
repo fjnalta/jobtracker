@@ -11,7 +11,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "ACTIVITYREPORT")
-//TODO: Implement NamedQueries for ActivityReport
+//TODO Mike: Implement NamedQueries for ActivityReport
 //@NamedQueries( { @NamedQuery(name = "ActivityReportTemplate.findAll", query = "SELECT p FROM Person p"),
 //@NamedQuery(name = "Person.findPerson", query = "SELECT p FROM Person p where p.name=:name and p.age=:age")
 //})
@@ -31,6 +31,7 @@ public class ActivityReportEntity implements Serializable {
 	private Date				date;
 	private Integer				startTime;
 	private Integer				duration;
+	private Integer				breakTime;
 	private Long				author;
 
 	public Long getId() {
@@ -94,6 +95,17 @@ public class ActivityReportEntity implements Serializable {
 	public void setDuration(Integer duration)
 	{
 		this.duration = duration;
+	}
+
+	@Column(name = "BREAKTIME")
+	public Integer getBreakTime()
+	{
+		return breakTime;
+	}
+
+	public void setBreakTime(Integer breakTime)
+	{
+		this.breakTime = breakTime;
 	}
 
 	@Column(name = "AUTHOR")

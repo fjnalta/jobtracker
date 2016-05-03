@@ -6,7 +6,7 @@ import net.greenbeansit.jobtracker.server.entity.JobEntity;
 
 public interface JobRepository extends CrudRepository<JobEntity, Long> {
 
-	//TODO: Vervollständigen
+	//TODO Mike: Vervollständigen
 	JobEntity findByJobID(Integer jobID, Integer posID);
 	JobEntity[] findByCustomerID(String customerID);
 }

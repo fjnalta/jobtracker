@@ -12,7 +12,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "JOB")
-//TODO: Implement NamedQueries for Job
+//TODO Mike: Implement NamedQueries for Job
 //@NamedQueries( { @NamedQuery(name = "ActivityReportTemplate.findAll", query = "SELECT p FROM Person p"),
 //@NamedQuery(name = "Person.findPerson", query = "SELECT p FROM Person p where p.name=:name and p.age=:age")
 //})
@@ -30,7 +30,7 @@ public class JobEntity implements Serializable {
 	private Integer				jobNr;
 	private Integer				posNr;
 	private String				payMode;
-	private String				clientID;
+	private String				customerID;
 	private String				desc;
 	private Integer				maxBudget;
 	private Integer				usedBudget;
@@ -41,23 +41,6 @@ public class JobEntity implements Serializable {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	@Column(name = "MAXBUDGET")
-	public Integer getMaxBudget()
-	{
-		return maxBudget;
-	}
-
-	public void setMaxBudget(Integer maxBudget)
-	{
-		this.maxBudget = maxBudget;
-	}
-
-	@Column(name = "USEDBUDGET")
-	public Integer getUsedBudget()
-	{
-		return usedBudget;
 	}
 
 	public void setUsedBudget(Integer usedBudget)
@@ -98,15 +81,15 @@ public class JobEntity implements Serializable {
 		this.payMode = payMode;
 	}
 
-	@Column(name = "CLIENTID")
-	public String getClientID()
+	@Column(name = "CUSTOMERID")
+	public String getCustomerID()
 	{
-		return clientID;
+		return customerID;
 	}
 
-	public void setClientID(String clientID)
+	public void setCustomerID(String clientID)
 	{
-		this.clientID = clientID;
+		this.customerID = clientID;
 	}
 
 	@Column(name = "DESCRIPTION")
@@ -119,5 +102,21 @@ public class JobEntity implements Serializable {
 	{
 		this.desc = desc;
 	}
+	
+	@Column(name = "MAXBUDGET")
+	public Integer getMaxBudget()
+	{
+		return maxBudget;
+	}
 
+	public void setMaxBudget(Integer maxBudget)
+	{
+		this.maxBudget = maxBudget;
+	}
+
+	@Column(name = "USEDBUDGET")
+	public Integer getUsedBudget()
+	{
+		return usedBudget;
+	}
 }
