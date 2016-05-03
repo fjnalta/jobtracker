@@ -32,8 +32,8 @@ public class CalendarTimeLineButtons extends Composite implements CalendarObserv
 	@UiField
 	Button buttonMonth;
 
-	@UiField
-	Button buttonYear;
+//	@UiField
+//	Button buttonYear;
 
 	public CalendarTimeLineButtons(String firstName) {
 		initWidget(uiBinder.createAndBindUi(this));
@@ -43,7 +43,6 @@ public class CalendarTimeLineButtons extends Composite implements CalendarObserv
 	@UiHandler("buttonMonth")
 	public void onClickButtonMonth(ClickEvent event){
 		handler.calendar.setView(ViewOption.month);
-		//handler.calendar.render();
 	}
 
 	@UiHandler("buttonWeek")

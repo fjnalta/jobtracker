@@ -6,8 +6,6 @@
 	xmlns:g="urn:import:org.gwtbootstrap3.client.ui.gwt">
 	<ui:style>
 	.button {
-		width: 10px;
-		height: 0px;
 		font-size: 10px;
 		line-height: 0px;
 		text-align: center;
@@ -16,26 +14,14 @@
 	}
 	
 	.buchen {
-		width: 50px;
-		height: 50px;
-		font-size: 30px;
-		line-height: 0px;
-		text-align: center;
 	}
 	
 	.textInput {
-		font-size: 20px;
-		width: 75px;
-		height: 40px;
 		border-bottom: none;
 		border-right: none;
 	}
 	
 	.text {
-		margin-top: 20px;
-		font-size: 20px;
-		width: 75px;
-		height: 50px;
 		line-height: 0px;
 		text-align: center;
 		padding: 0;
@@ -44,7 +30,57 @@
 		color: black;
 	}
 	</ui:style>
+	<b:Container fluid="true">
+		<b:Row>
+	
+			<b:Column size="XS_6,SM_4,MD_3,LG_1">
+				<b:Label addStyleNames="{style.text}">Pause</b:Label>
+			</b:Column>
+		
+			<b:Column size="XS_6,SM_4,MD_3,LG_1" >
+				<b:IntegerBox addStyleNames="{style.textInput}"	ui:field="pause" />
+			</b:Column>
+	
+			<b:Column size="XS_6,SM_4,MD_3,LG_1" >
+				<b:Label addStyleNames="{style.text}">Zeit</b:Label>
+			</b:Column>
 
+			<b:Column size="XS_6,SM_4,MD_3,LG_1">
+				<b:IntegerBox addStyleNames="{style.textInput}"	ui:field="workTime" />
+			</b:Column>
+	
+			<b:Column offset="MD_1" size="XS_6,SM_4,MD_3,LG_1" >
+				<b:Row>
+					<b:Button addStyleNames="{style.button}" ui:field="buttonUpStart" />
+				</b:Row>
+				<b:Row>
+					<b:Button addStyleNames="{style.button}" ui:field="buttonDownStart" />
+				</b:Row>
+			</b:Column>
+	
+			<b:Column size="XS_6,SM_4,MD_3,LG_1" >
+				<b:TextBox addStyleNames="{style.textInput}" ui:field="eventStart">12:00</b:TextBox>
+			</b:Column>
+
+			<b:Column size="XS_6,SM_4,MD_3,LG_1">
+				<b:TextBox addStyleNames="{style.textInput}" ui:field="eventEnd">22:59</b:TextBox>
+			</b:Column>
+	
+			<b:Column size="XS_6,SM_4,MD_3,LG_1" >
+				<b:Row>
+					<b:Button addStyleNames="{style.button}" ui:field="buttonUpEnd" />
+				</b:Row>
+				<b:Row>
+					<b:Button addStyleNames="{style.button}" ui:field="buttonDownEnd" />
+				</b:Row>
+			</b:Column>
+	
+			<b:Column size="XS_6,SM_4,MD_3,LG_1" >
+				<b:Button addStyleNames="{style.buchen}" ui:field="buttonBuchen" text="Buchen" />
+			</b:Column>
+		</b:Row>
+	</b:Container>
+	<!-- 
 	<b:FormGroup>
 		<g:FlowPanel addStyleNames="col-xs-1">
 			<b:Column size="XS_12,SM_12,MD_4,LG_4">
@@ -111,5 +147,5 @@
 		</g:FlowPanel>
 
 	</b:FormGroup>
-
+	 -->
 </ui:UiBinder>

@@ -8,6 +8,8 @@ import org.gwtbootstrap3.extras.fullcalendar.client.ui.ViewOption;
 
 import com.google.gwt.event.shared.HandlerManager;
 
+import net.greenbeansit.jobtracker.shared.ActivityReport;
+
 public class FullCalendarCustomize extends FullCalendar {
 
 	public FullCalendarCustomize(String id, ViewOption defaultView, boolean editable) {
@@ -38,4 +40,25 @@ public class FullCalendarCustomize extends FullCalendar {
 		super.addEvent(event);
 		this.currentEvent = event;
 	}
+	
+	/*
+	ActivityReport Dummy
+	private static final long	serialVersionUID	= 7682896069658320372L;
+
+	private String				description;
+	private String				identifier;
+	private Date				date;
+	private Integer				startTime;
+	private Integer				duration;
+	private Integer				breakTime;
+	private Long				author;
+	private Long				id;
+	 */
+	
+	public void addActvityRepors(ActivityReport report){
+		Event event = new Event(report.getIdentifier(), report.getDescription(), true, true, true);
+		//event start,ende usw setzen
+	}
+	
+	
 }

@@ -47,13 +47,13 @@ public class CalendarUtilizationWidget extends Composite implements CalendarObse
 	@UiHandler("leftButton")
 	public void clickHandlerLeftButton(ClickEvent e) {
 		createNewTimeline(-1);
-
+		handler.calendar.previous();
 	}
 
 	@UiHandler("rightButton")
 	public void clickHandlerRightButton(ClickEvent e) {
 		createNewTimeline(1);
-		
+		handler.calendar.next();
 	}
 
 	Date date;

@@ -90,7 +90,7 @@ public class CalendarWidget extends Composite implements CalendarObserver {
 				config.setSelectHelper(true);
 
 				GeneralDisplay generalDisplay = new GeneralDisplay();
-				generalDisplay.setHeight(600);
+				generalDisplay.setHeight(715);
 				Header header = new Header();
 				header.setLeft("");
 				header.setCenter("");
@@ -135,10 +135,8 @@ public class CalendarWidget extends Composite implements CalendarObserver {
 							JavaScriptObject viewObject) {
 						//Event e = new Event(calendarEvent);
 						//calendar.removeEvent(e.getId());
-						Window.alert("klicke auf Event?");
 						Event e = new Event(calendarEvent);
 						calendar.currentEvent = e;
-						e.setBackgroundColor("green");
 						notifyHandler();
 					}
 
@@ -248,7 +246,9 @@ public class CalendarWidget extends Composite implements CalendarObserver {
 
 	@Override
 	public void update() {
-		calendar.currentEvent.setBackgroundColor("blue");
+		calendar.currentEvent.setEditable(true);
+		calendar.currentEvent.setDurationEditable(true);
+		calendar.currentEvent.setStartEditable(true);
 		calendar.currentEvent.setEnd(handler.events.endTime);
 		calendar.currentEvent.setStart(handler.events.startTime);
 		calendar.updateEvent(calendar.currentEvent);
@@ -274,7 +274,7 @@ public class CalendarWidget extends Composite implements CalendarObserver {
 		String [] temp = date2.split("T");
 		String [] temp2 = temp[0].split("-");
 		int year = Integer.parseInt(temp2[0]); 
-		int month = Integer.parseInt(temp2[1]);
+		int month = Integer.parseInt(temp2[1])-1;
 		int date = Integer.parseInt(temp2[2]);
 		return new Date(year, month, date);
 	}
