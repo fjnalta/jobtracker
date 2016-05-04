@@ -2,7 +2,6 @@ package net.greenbeansit.jobtracker.server.service.jpa;
 
 import java.util.List;
 
-import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -12,7 +11,6 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import net.greenbeansit.jobtracker.server.entity.JobEntity;
-import net.greenbeansit.jobtracker.server.repository.JobRepository;
 import net.greenbeansit.jobtracker.server.service.JobService;
 
 @Service("jobService")
