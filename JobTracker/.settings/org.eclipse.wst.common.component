@@ -4,6 +4,7 @@
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/target/generated-sources/gwt"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test"/>
         <dependent-module archiveName="shared-0.0.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/shared/shared">
             <dependency-type>uses</dependency-type>
         </dependent-module>
