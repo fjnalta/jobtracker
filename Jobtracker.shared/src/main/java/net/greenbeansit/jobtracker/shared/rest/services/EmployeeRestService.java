@@ -1,4 +1,4 @@
-package net.greenbeansit.jobtracker.shared;
+package net.greenbeansit.jobtracker.shared.rest.services;
 
 import java.util.List;
 
@@ -13,6 +13,11 @@ import javax.ws.rs.core.MediaType;
 
 import org.fusesource.restygwt.client.DirectRestService;
 
+import net.greenbeansit.jobtracker.shared.ActivityReport;
+import net.greenbeansit.jobtracker.shared.ActivityReportTemplate;
+import net.greenbeansit.jobtracker.shared.Employee;
+import net.greenbeansit.jobtracker.shared.Job;
+
 /**
  * The service for all server fuctions
  * 
@@ -21,7 +26,7 @@ import org.fusesource.restygwt.client.DirectRestService;
 @Path("rest/employee")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
-public interface EmployeeService extends DirectRestService {
+public interface EmployeeRestService extends DirectRestService {
 	/**
 	 * Gets the {@link Employee} with the following ID.
 	 * 

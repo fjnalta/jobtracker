@@ -17,17 +17,17 @@ import org.springframework.stereotype.Component;
 import net.greenbeansit.jobtracker.shared.ActivityReport;
 import net.greenbeansit.jobtracker.shared.ActivityReportTemplate;
 import net.greenbeansit.jobtracker.shared.Employee;
-import net.greenbeansit.jobtracker.shared.EmployeeService;
 import net.greenbeansit.jobtracker.shared.Job;
 import net.greenbeansit.jobtracker.shared.JobID;
+import net.greenbeansit.jobtracker.shared.rest.services.EmployeeRestService;
 
 
 /**
- * Dummy implementation of the {@link EmployeeService} interface.
+ * Dummy implementation of the {@link EmployeeRestService} interface.
  * 
  * @author Max Blatt & Alexander Kirilyuk
  */
-public class EmployeeServiceImpl implements EmployeeService
+public class EmployeeRestServiceImpl implements EmployeeRestService
 {
 	private static Map<Long, Employee>						employeeMap			= new HashMap<Long, Employee>();
 	private static Map<Long, List<ActivityReport>>			reportMap			= new HashMap<Long, List<ActivityReport>>();
@@ -59,9 +59,9 @@ public class EmployeeServiceImpl implements EmployeeService
 	}
 
 	/**
-	 * Initializes a new instance of the {@link EmployeeService} class.
+	 * Initializes a new instance of the {@link EmployeeRestService} class.
 	 */
-	public EmployeeServiceImpl()
+	public EmployeeRestServiceImpl()
 	{
 
 	}
