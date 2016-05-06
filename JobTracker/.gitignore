@@ -31,3 +31,6 @@ target
 
 war/META-INF
 war/WEB-INF/classes
+
+.metadata
+.settings
