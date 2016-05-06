@@ -2,7 +2,7 @@ package net.greenbeansit.jobtracker.server.data;
 
 import java.util.List;
 
-import net.greenbeansit.jobtracker.server.data.entity.JobEntity;
+import net.greenbeansit.jobtracker.shared.Job;
 
 /**
  * Database interface for {@link Job}s.
@@ -12,9 +12,10 @@ import net.greenbeansit.jobtracker.server.data.entity.JobEntity;
 
 public interface JobService {
 	
-	List<JobEntity> getAll();
-	JobEntity getJob(Long jobId);
-	boolean save(JobEntity job);
-	boolean update(JobEntity job);
-	boolean delete(JobEntity job);
+	List<Job> getAll();
+	Job getJob(Long jobId);
+	Job getJob(Integer jobNr, Integer posNr);
+	boolean save(Job job);
+	boolean update(Job job);
+	boolean delete(Job job);
 }

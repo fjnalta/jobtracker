@@ -70,4 +70,11 @@
 			]]>
 		</sql>
 	</changeSet>
+	<changeSet id="5" author="mike">
+		<sql>
+			<![CDATA[
+				ALTER TABLE 'ACTIVITYREPORTTEMPLATE' ADD COLUMN 'AUTHOR' BIGINT;
+			]]>
+		</sql>
+	</changeSet>
 </databaseChangeLog>

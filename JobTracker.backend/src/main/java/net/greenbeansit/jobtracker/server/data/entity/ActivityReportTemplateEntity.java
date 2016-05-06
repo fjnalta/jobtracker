@@ -28,6 +28,7 @@ public class ActivityReportTemplateEntity implements Serializable {
 	private String	templateName;
 	private String	description;
 	private String	identifier;
+	private Long	author;
 
 	public Long getId() {
 		return id;
@@ -68,5 +69,16 @@ public class ActivityReportTemplateEntity implements Serializable {
 	public void setIdentifier(String identifier)
 	{
 		this.identifier = identifier;
+	}
+
+	@Column(name = "AUTHOR")
+	public Long getAuthor()
+	{
+		return author;
+	}
+
+	public void setAuthor(Long author)
+	{
+		this.author = author;
 	}
 }

@@ -12,9 +12,11 @@ import net.greenbeansit.jobtracker.shared.ActivityReportTemplate;
 
 public interface ActivityReportTemplateService {
 	
-	List<ActivityReportTemplate> getAllActivityReportTemplates();
-	ActivityReportTemplate getActivityReportTemplate(Long templateId);
-	void saveActivityReportTemplate(ActivityReportTemplate template);
-	void updateActivityReportTemplate(ActivityReportTemplate template);
-	void deleteActivityReportTemplate(ActivityReportTemplate template);
+	List<ActivityReportTemplate> getAll();
+	List<ActivityReportTemplate> getBy(Long author);
+	ActivityReportTemplate getTemplate(Long templateId);
+	ActivityReportTemplate getTemplate(Long author, String name);
+	void save(ActivityReportTemplate template);
+	void update(ActivityReportTemplate template);
+	void delete(ActivityReportTemplate template);
 }

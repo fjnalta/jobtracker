@@ -12,9 +12,10 @@ import net.greenbeansit.jobtracker.shared.Employee;
 
 public interface EmployeeService {
 	
-	List<Employee> getAllEmployees();
+	List<Employee> getAll();
 	Employee getEmployee(Long employeeId);
-	void saveEmployee(Employee employee);
-	void updateEmployee(Employee employee);
-	void deleteEmployee(Employee employee);
+	List<Employee> getEmployee(String firstname, String lastname);
+	void save(Employee employee);
+	void update(Employee employee);
+	void delete(Employee employee);
 }
