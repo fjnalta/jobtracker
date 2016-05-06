@@ -51,7 +51,7 @@ public class Job implements Serializable
 		this.jobID = jobID;
 	}
 
-	public long getMaxBudget()
+	public Integer getMaxBudget()
 	{
 		return maxBudget;
 	}

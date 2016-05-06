@@ -17,5 +17,5 @@ public interface JobDataService {
 	Job getJob(Integer jobNr, Integer posNr);
 	boolean save(Job job);
 	boolean update(Job job);
-	boolean delete(Job job);
+	void delete(Job job);
 }

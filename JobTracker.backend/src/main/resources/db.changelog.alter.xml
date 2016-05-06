@@ -73,7 +73,7 @@
 	<changeSet id="5" author="mike">
 		<sql>
 			<![CDATA[
-				ALTER TABLE 'ACTIVITYREPORTTEMPLATE' ADD COLUMN 'AUTHOR' BIGINT;
+				ALTER TABLE `ACTIVITYREPORTTEMPLATE` ADD `AUTHOR` BIGINT;
 			]]>
 		</sql>
 	</changeSet>

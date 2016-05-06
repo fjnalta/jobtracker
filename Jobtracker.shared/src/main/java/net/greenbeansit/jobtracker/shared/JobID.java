@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
  * Result of parsing the job number string. A job number is read-only
- * accessible. "jobNr-posNr-payMode | clientID | desc"
+ * accessible. "jobNr-posNr-payMode | customerID | desc"
  * 
  * @author Mike Hukiewitz
  */
@@ -16,7 +16,7 @@ public class JobID implements Serializable
 	private static final long serialVersionUID = 8137626358041245741L;
 	String	payMode;
 	Integer	jobNr, posNr;
-	String	clientID;
+	String	customerID;
 	String	desc;
 
 	/**
@@ -29,13 +29,13 @@ public class JobID implements Serializable
 	}
 	
 	
-	public JobID(int jobNr, int posNr, String payMode, String clientID,
+	public JobID(int jobNr, int posNr, String payMode, String customerID,
 			String desc)
 	{
 		this.jobNr = jobNr;
 		this.posNr = posNr;
 		this.payMode = payMode;
-		this.clientID = clientID;
+		this.customerID = customerID;
 		this.desc = desc;
 	}
 	
@@ -55,14 +55,17 @@ public class JobID implements Serializable
 		return posNr;
 	}
 
+	public String getPayMode() {
+		return payMode;
+	}
 	
-	public String getClientID()
+	public String getCustomerID()
 	{
-		return clientID;
+		return customerID;
 	}
 	
 	public String toString(){
-		return this.jobNr + "-"+ this.posNr + "-" + this.payMode + "|" + this.clientID +"|" + this.desc;
+		return this.jobNr + "-"+ this.posNr + "-" + this.payMode + "|" + this.customerID +"|" + this.desc;
 	}
 
 }

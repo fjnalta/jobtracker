@@ -7,7 +7,7 @@
 	
 	<changeSet author="phil" id="20160503-001">
 		<insert catalogName="jobtracker" dbms="mysql" schemaName="public"
-			tableName="employee">
+			tableName="EMPLOYEE">
 			<column name="FIRSTNAME" type="varchar(25)" value="Max Mus" />
 			<column name="LASTNAME" type="varchar(25)" value="Kirilyuikikhgfddsaf" />
 		</insert>
