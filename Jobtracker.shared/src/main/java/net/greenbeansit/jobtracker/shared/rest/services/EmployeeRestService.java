@@ -3,7 +3,9 @@ package net.greenbeansit.jobtracker.shared.rest.services;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.NotFoundException;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
@@ -26,135 +28,176 @@ import net.greenbeansit.jobtracker.shared.Job;
 @Path("rest/employee")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
-public interface EmployeeRestService extends DirectRestService {
+public interface EmployeeRestService extends DirectRestService
+{
 	/**
 	 * Gets the {@link Employee} with the following ID.
 	 * 
 	 * @param employeeId
 	 *            the ID of the searched {@link Employee}.
 	 * @return an {@link Employee}.
+	 * 
+	 * @throws NotFoundException
+	 *             if the employeeId does not exist.
 	 */
 	@GET
 	@Path("/{employeeId}")
 	Employee getEmployee(@PathParam("employeeId") Long employeeId);
 
 	/**
-	 * Gets all {@link Job} for the {@link Employee} with the following ID.
+	 * Gets all {@link Job} made by the {@link Employee} with the following ID.
 	 * 
 	 * @param employeeId
 	 *            the ID of the {@link Employee}.
-	 * @return List of {@link Job}.
+	 * @return a List of {@link Job}s.
+	 * 
+	 * @throws NotFoundException
+	 *             if the employeeId does not exist.
 	 */
-	
 	@GET
 	@Path("/{employeeId}/job")
 	List<Job> getAllJobs(@PathParam("employeeId") Long employeeId);
 
 	/**
-	 * Gets one {@link Job} for the {@link Employee} with the following IDs
-	 * 
-	 * @param employeeId
-	 *            the id of the {@link Employee}
-	 * @param jobId
-	 *            the id of the {@link Job}
-	 * @return one single {@link Job} with the jobId
-	 */
-	
-	@GET
-	@Path("/{employeeId}/job/{jobId}")
-	Job getJob(@PathParam("employeeId") Long employeeId, @PathParam("jobId") Integer jobId);
-
-	/**
-	 * Gets all {@link ActivityReport} for the {@link Employee} with the
+	 * Gets all {@link ActivityReport}s made by the {@link Employee} with the
 	 * following ID.
 	 * 
 	 * @param employeeId
 	 *            the ID of the {@link Employee}.
-	 * @return an {@link ActivityReport} List
+	 * @return a List of {@link ActivityReport}s.
+	 * 
+	 * @throws NotFoundException
+	 *             if the employeeId does not exist.
 	 */
-	
 	@GET
 	@Path("/{employeeId}/report")
-	List<ActivityReport> getAllReports(@PathParam("employeeId") Long employeeId);
+	List<ActivityReport> getAllReports(
+			@PathParam("employeeId") Long employeeId);
 
 	/**
 	 * 
-	 * Gets one {@link ActivityReport} for the {@link Employee} with the
-	 * following IDs
+	 * Gets the {@link ActivityReport} with the following reportId for the
+	 * {@link Employee} with the following employeeId.
 	 * 
 	 * @param employeeId
-	 *           the ID of the {@link Employee}.
+	 *            the ID of the {@link Employee}.
 	 * @param reportId
-	 * 				the ID of the {@link ActivityReport}
-	 * @return an {@link ActivityReport}
+	 *            the ID of the {@link ActivityReport}.
+	 * @return an {@link ActivityReport}.
+	 * 
+	 * @throws NotFoundException
+	 *             if the employeeId or the reportId does not exist.
 	 */
-
 	@GET
 	@Path("/{employeeId}/report/{reportId}")
-	ActivityReport getReport(@PathParam("employeeId") Long employeeId, @PathParam("reportId") Long reportId);
+	ActivityReport getReport(@PathParam("employeeId") Long employeeId,
+			@PathParam("reportId") Long reportId);
 
 	/**
-	 * Gets all report {@link ActivityReport} for the {@link Employee} from a
-	 * period to a certain period of time. if only from is set it gives back the
-	 * reports from till now
+	 * Gets all {@link ActivityReport}s made by the {@link Employee} with the
+	 * following ID that are in the following period of time.
 	 * 
 	 * @param employeeId
-	 * 			the ID of the {@link Employee}
+	 *            the ID of the {@link Employee}.
 	 * @param from
-	 * 			the start date
+	 *            the start date.
 	 * @param to
-	 * 			the end date
-	 * @return
-	 * 			List of {@link ActivityReport}
+	 *            the end date.
+	 * @return List of {@link ActivityReport}.
+	 * 
+	 * @throws NotFoundException
+	 *             if the employeeId does not exist.
 	 */
-	
 	@GET
-	@Path("/{employeeId}/report/reportPeriod/{from}/{to}")
-	List<ActivityReport> getReportPeriod(@PathParam("employeeId") Long employeeId, @PathParam("from") String from,
-			@PathParam("to") String to);
+	@Path("/{employeeId}/reportPeriod")
+	List<ActivityReport> getReportPeriod(
+			@PathParam("employeeId") Long employeeId, String from, String to);
 
 	/**
 	 * Creates a given {@code ActivityReport} on the server for the
 	 * {@link Employee}
 	 * 
+	 * @param empleyeeId
+	 *            the ID of {@link Employee}.
 	 * @param report
 	 *            {@code ActivityReport} to send.
 	 * 
-	 * @param empleyeeId
-	 *            the Id of {@link Employee}
+	 * @throws NotFoundException
+	 *             if the employeeId does not exist.
 	 */
 	@POST
 	@Path("/{employeeId}/report/")
-	void createReport(@PathParam("employeeId") Long employeeId, ActivityReport report);
-
-	@PUT
-	@Path("/{employeeId}/report/")
-	void updateReport(@PathParam("employeeId") Long employeeId, ActivityReport report);
+	void createReport(@PathParam("employeeId") Long employeeId,
+			ActivityReport report);
 
 	/**
-	 * Gets all {@link ActivityReportTemplate} for the {@link Employee}
-	 * with the following ID.
+	 * Updates the following {@link ActivityReport} if it does not exist, it
+	 * will be created.
+	 * 
+	 * @param employeeId
+	 *            the ID of {@link Employee}
+	 * @param report
+	 *            the {@link ActivityReport} that should be updated.
+	 * 
+	 * @throws NotFoundException
+	 *             if the employeeId does not exist.
+	 */
+	@PUT
+	@Path("/{employeeId}/report/")
+	void updateReport(@PathParam("employeeId") Long employeeId,
+			ActivityReport report);
+
+	/**
+	 * Deletes an {@link ActivityReportTemplate}.
+	 * 
+	 * @param employeeId
+	 *            the ID of {@link Employee}
+	 * @param report
+	 *            the ID of the {@link ActivityReport} that should be deleted.
+	 * 
+	 * @throws NotFoundException
+	 *             if the employeeId or the reportId does not exist.
+	 */
+	@DELETE
+	@Path("/{employeeId}/report_template/{templateId}")
+	void deleteReport(@PathParam("employeeId") Long employeeId,
+			@PathParam("templateId") Long reportId);
+
+	/**
+	 * Gets all {@link ActivityReportTemplate}s of the {@link Employee} with the
+	 * following ID.
 	 * 
 	 * @param employeeId
 	 *            the ID of the {@link Employee}.
-	 * @return List of {@link ActivityReportTemplate}.
+	 * @return a List of {@link ActivityReportTemplate}s.
+	 * 
+	 * @throws NotFoundException
+	 *             if the employeeId does not exist.
 	 */
-	
 	@GET
-	@Path("/{employeeId}/template")
-	List<ActivityReportTemplate> getAllTemplates(@PathParam("employeeId") Long employeeId);
+	@Path("/{employeeId}/report")
+	List<ActivityReportTemplate> getAllReportTemplates(
+			@PathParam("employeeId") Long employeeId);
 
 	/**
 	 * Saves an {@link ActivityReportTemplate} with a new ID for the
 	 * {@link Employee}
 	 * 
+	 * @param empleyeeId
+	 *            the ID of {@link Employee}
 	 * @param template
 	 *            the {@link ActivityReportTemplate} that should be saved.
-	 * @param empleyeeId
-	 *            the Id of {@link Employee}
+	 * 
+	 * @throws NotFoundException
+	 *             if the employeeId does not exist.
 	 */
 	@POST
-	@Path("/{employeeId}/template/")
-	void saveTemplate(@PathParam("employeeId") Long employeeId, ActivityReportTemplate template);
+	@Path("/{employeeId}/report/")
+	void saveReportTemplate(@PathParam("employeeId") Long employeeId,
+			ActivityReportTemplate template);
 
+	@DELETE
+	@Path("/{employeeId}/report/{reportId}")
+	void deleteReportTemplate(@PathParam("employeeId") Long employeeId,
+			@PathParam("reportId") Long templateId);
 }
