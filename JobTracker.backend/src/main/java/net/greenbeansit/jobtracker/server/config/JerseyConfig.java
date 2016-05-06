@@ -29,12 +29,16 @@ public class JerseyConfig extends ResourceConfig
 
 	public JerseyConfig()
 	{
-		System.out.println("JerseyConfig");
-		
 		packages("net.greenbeansit.jobtracker.server.services");
 		register(JacksonJsonProvider.class);
 		
 		register(EmployeeServiceImpl.class);
+		
+		
+		for(Class<?> c : getClasses())
+			System.out.println(c.toString());
+		
+		System.out.println("JerseyConfig finished");
 	}
 
 }

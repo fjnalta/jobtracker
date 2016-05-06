@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
-  <display-name>JobTracker.backend</display-name>
-  <servlet>
-    <servlet-name>employeeServiceImpl</servlet-name>
-    <servlet-class>
-    		net.greenbeansit.jobtracker.server.EmployeeServiceImpl
-  		</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>employeeServiceImpl</servlet-name>
-    <url-pattern>/rest/*</url-pattern>
-  </servlet-mapping>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+	version="3.1">
+	<display-name>JobTracker.backend</display-name>
+	<servlet>
+		<servlet-name>EmployeeService</servlet-name>
+		<servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
+		<init-param>
+			<param-name>jersey.config.server.provider.packages</param-name>
+			<param-value>net.greenbeansit.jobtracker.server.services</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>EmployeeService</servlet-name>
+		<url-pattern>/rest/*</url-pattern>
+	</servlet-mapping>
 </web-app>

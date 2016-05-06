@@ -18,7 +18,7 @@ import org.fusesource.restygwt.client.DirectRestService;
  * 
  * @author Max Blatt & Alexander Kirilyuk
  */
-@Path("/employee")
+@Path("rest/employee")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public interface EmployeeService extends DirectRestService {

@@ -5,11 +5,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.jws.WebService;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.NotFoundException;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+
+import org.springframework.stereotype.Component;
 
 import net.greenbeansit.jobtracker.shared.ActivityReport;
 import net.greenbeansit.jobtracker.shared.ActivityReportTemplate;
@@ -18,9 +21,7 @@ import net.greenbeansit.jobtracker.shared.EmployeeService;
 import net.greenbeansit.jobtracker.shared.Job;
 import net.greenbeansit.jobtracker.shared.JobID;
 
-@Path("/employee")
-@Consumes(MediaType.APPLICATION_JSON)
-@Produces(MediaType.APPLICATION_JSON)
+
 /**
  * Dummy implementation of the {@link EmployeeService} interface.
  * 
@@ -72,8 +73,6 @@ public class EmployeeServiceImpl implements EmployeeService
 		if (employeeMap.containsKey(employeeId))
 			return employeeMap.get(employeeId);
 
-		
-		
 		throw new NotFoundException();
 	}
 
