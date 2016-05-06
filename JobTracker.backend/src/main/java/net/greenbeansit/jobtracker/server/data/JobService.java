@@ -1,8 +1,8 @@
-package net.greenbeansit.jobtracker.server.service;
+package net.greenbeansit.jobtracker.server.data;
 
 import java.util.List;
 
-import net.greenbeansit.jobtracker.server.entity.JobEntity;
+import net.greenbeansit.jobtracker.server.data.entity.JobEntity;
 
 /**
  * Database interface for {@link Job}s.

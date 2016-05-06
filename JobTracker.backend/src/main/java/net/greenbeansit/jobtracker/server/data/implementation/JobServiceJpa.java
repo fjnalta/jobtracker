@@ -1,4 +1,4 @@
-package net.greenbeansit.jobtracker.server.service.jpa;
+package net.greenbeansit.jobtracker.server.data.implementation;
 
 import java.util.List;
 
@@ -10,8 +10,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import net.greenbeansit.jobtracker.server.entity.JobEntity;
-import net.greenbeansit.jobtracker.server.service.JobService;
+import net.greenbeansit.jobtracker.server.data.JobService;
+import net.greenbeansit.jobtracker.server.data.entity.JobEntity;
 
 @Service("jobService")
 public class JobServiceJpa implements JobService

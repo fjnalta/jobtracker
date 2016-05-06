@@ -1,8 +1,8 @@
-package net.greenbeansit.jobtracker.server.repository;
+package net.greenbeansit.jobtracker.server.data.repository;
 
 import org.springframework.data.repository.CrudRepository;
 
-import net.greenbeansit.jobtracker.server.entity.JobEntity;
+import net.greenbeansit.jobtracker.server.data.entity.JobEntity;
 
 public interface JobRepository extends CrudRepository<JobEntity, Long> {
 

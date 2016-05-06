@@ -1,4 +1,4 @@
-package net.greenbeansit.jobtracker.server.entity;
+package net.greenbeansit.jobtracker.server.data.entity;
 
 import java.io.Serializable;
 

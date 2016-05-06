@@ -1,4 +1,4 @@
-package net.greenbeansit.jobtracker.server.service;
+package net.greenbeansit.jobtracker.server.data;
 
 import java.util.List;
 
