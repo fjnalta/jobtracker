@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import net.greenbeansit.jobtracker.server.data.JobService;
 import net.greenbeansit.jobtracker.server.data.entity.JobEntity;
+import net.greenbeansit.jobtracker.shared.Job;
 
 @Service("jobService")
 public class JobServiceJpa implements JobService
@@ -37,17 +38,7 @@ public class JobServiceJpa implements JobService
 	{
 		return entityManager.find(JobEntity.class, id);
 	}
-
-	@SuppressWarnings("unchecked")
-	@Transactional(readOnly = true)
-	public List<JobEntity> getAll()
-	{
-		Query query = entityManager.createNamedQuery("JobEntity.findAll");
-		List<JobEntity> jobs = null;
-		jobs = query.getResultList();
-		return jobs;
-	}
-
+	
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
 	public boolean save(JobEntity job)
 	{
@@ -99,7 +90,43 @@ public class JobServiceJpa implements JobService
 		return null;
 	}
 
-	public JobEntity getJob(Long jobId)
+	@Override
+	public Job getJob(Integer jobNr, Integer posNr)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean save(Job job)
+	{
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean update(Job job)
+	{
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean delete(Job job)
+	{
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public List<Job> getAll()
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Job getJob(Long jobId)
 	{
 		// TODO Auto-generated method stub
 		return null;
