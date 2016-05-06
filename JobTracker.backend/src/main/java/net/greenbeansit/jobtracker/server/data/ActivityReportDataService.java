@@ -11,10 +11,11 @@ import net.greenbeansit.jobtracker.shared.ActivityReport;
  */
 public interface ActivityReportDataService {
 
-	List<ActivityReport> getAllActivityReports();
+	List<ActivityReport> getAll();
 	ActivityReport getActivityReport(Long reportId);
-	List<ActivityReport> getActivityReportPeriod(Long employeeId, String from, String to);
-	void saveActivityReport(ActivityReport report);
-	void updateActivityReport(ActivityReport report);
-	void deleteActivityReport(ActivityReport report);
+	List<ActivityReport> getByUserAndPeriod(Long employeeId, String from, String to);
+	List<ActivityReport> getByUser(Long employeeId);
+	void save(ActivityReport report);
+	void update(ActivityReport report);
+	void delete(ActivityReport report);
 }

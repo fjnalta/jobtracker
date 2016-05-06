@@ -14,7 +14,7 @@ public interface EmployeeDataService {
 	
 	List<Employee> getAll();
 	Employee getEmployee(Long employeeId);
-	List<Employee> getEmployee(String firstname, String lastname);
+	List<Employee> getByName(String firstname, String lastname);
 	void save(Employee employee);
 	void update(Employee employee);
 	void delete(Employee employee);
