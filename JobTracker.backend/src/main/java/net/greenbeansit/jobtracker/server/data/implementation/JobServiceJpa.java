@@ -10,12 +10,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import net.greenbeansit.jobtracker.server.data.JobService;
+import net.greenbeansit.jobtracker.server.data.JobDataService;
 import net.greenbeansit.jobtracker.server.data.entity.JobEntity;
 import net.greenbeansit.jobtracker.shared.Job;
 
 @Service("jobService")
-public class JobServiceJpa implements JobService
+public class JobServiceJpa implements JobDataService
 {
 
 //	@Inject

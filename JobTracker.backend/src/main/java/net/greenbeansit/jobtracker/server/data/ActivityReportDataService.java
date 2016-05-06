@@ -9,7 +9,7 @@ import net.greenbeansit.jobtracker.shared.ActivityReport;
  * @author Mike Hukiewitz
  *
  */
-public interface ActivityReportService {
+public interface ActivityReportDataService {
 
 	List<ActivityReport> getAllActivityReports();
 	ActivityReport getActivityReport(Long reportId);

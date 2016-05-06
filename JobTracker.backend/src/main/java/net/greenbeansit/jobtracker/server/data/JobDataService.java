@@ -10,7 +10,7 @@ import net.greenbeansit.jobtracker.shared.Job;
  *
  */
 
-public interface JobService {
+public interface JobDataService {
 	
 	List<Job> getAll();
 	Job getJob(Long jobId);

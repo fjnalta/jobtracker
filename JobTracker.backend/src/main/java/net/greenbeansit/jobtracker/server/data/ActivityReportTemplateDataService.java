@@ -10,7 +10,7 @@ import net.greenbeansit.jobtracker.shared.ActivityReportTemplate;
  *
  */
 
-public interface ActivityReportTemplateService {
+public interface ActivityReportTemplateDataService {
 	
 	List<ActivityReportTemplate> getAll();
 	List<ActivityReportTemplate> getBy(Long author);
