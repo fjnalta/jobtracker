@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "ACTIVITYREPORTTEMPLATE")
+@Table(name = "ACTIVITY_REPORT_TEMPLATE")
 //TODO Mike: Implement NamedQueries for ActivityReportTemplates
 //@NamedQueries( { @NamedQuery(name = "ActivityReportTemplate.findAll", query = "SELECT p FROM Person p"),
 //@NamedQuery(name = "Person.findPerson", query = "SELECT p FROM Person p where p.name=:name and p.age=:age")
@@ -23,33 +23,33 @@ public class ActivityReportTemplateEntity implements Serializable {
 
 	@Id
 	@GeneratedValue
-	private Long id;
+	private Integer id;
 
-	private String	templateName;
+	//private String	templateName; TODO: In Datenbank einfügen (Philipp anhauen)
 	private String	description;
-	private String	identifier;
-	private Long	author;
+	private Integer	taskId;
+	private Integer	author;
 
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	@Column(name = "NAME")
-	public String getTemplateName()
-	{
-		return templateName;
-	}
+//	@Column(name = "NAME")
+//	public String getTemplateName()
+//	{
+//		return templateName;
+//	}
+//
+//	public void setTemplateName(String templateName)
+//	{
+//		this.templateName = templateName;
+//	}
 
-	public void setTemplateName(String templateName)
-	{
-		this.templateName = templateName;
-	}
-
-	@Column(name = "DESCRIPTION")
+	@Column(name = "TEXT")
 	public String getDescription()
 	{
 		return description;
@@ -60,24 +60,24 @@ public class ActivityReportTemplateEntity implements Serializable {
 		this.description = description;
 	}
 
-	@Column(name = "IDENTIFIER")
-	public String getIdentifier()
+	@Column(name = "TASK_ID")
+	public Integer getTaskId()
 	{
-		return identifier;
+		return taskId;
 	}
 
-	public void setIdentifier(String identifier)
+	public void setTaskId(Integer taskId)
 	{
-		this.identifier = identifier;
+		this.taskId = taskId;
 	}
 
 	@Column(name = "AUTHOR")
-	public Long getAuthor()
+	public Integer getAuthor()
 	{
 		return author;
 	}
 
-	public void setAuthor(Long author)
+	public void setAuthor(Integer author)
 	{
 		this.author = author;
 	}

@@ -23,30 +23,26 @@ public class JobEntity implements Serializable {
 
 	@Id
 	@GeneratedValue
-	private Long id;
+	private Integer id;
 
 	private Integer				jobNr;
 	private Integer				posNr;
-	private String				payMode;
-	private String				customerID;
+	private Integer				accountingMode;
+	private Integer				customerID;
 	private String				desc;
 	private Integer				maxBudget;
 	private Integer				usedBudget;
+	private boolean				isIntern;
 
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	public void setUsedBudget(Integer usedBudget)
-	{
-		this.usedBudget = usedBudget;
-	}
-
-	@Column(name = "JOBNR")
+	@Column(name = "JOB_NO")
 	public Integer getJobNr()
 	{
 		return jobNr;
@@ -57,7 +53,7 @@ public class JobEntity implements Serializable {
 		this.jobNr = jobNr;
 	}
 
-	@Column(name = "POSNR")
+	@Column(name = "POS_NO")
 	public Integer getPosNr()
 	{
 		return posNr;
@@ -68,26 +64,26 @@ public class JobEntity implements Serializable {
 		this.posNr = posNr;
 	}
 
-	@Column(name = "PAYMODE")
-	public String getPayMode()
+	@Column(name = "ACOUNTING_MODE")
+	public Integer getAccountingMode()
 	{
-		return payMode;
+		return accountingMode;
 	}
 
-	public void setPayMode(String payMode)
+	public void setAccountingMode(Integer accountingMode)
 	{
-		this.payMode = payMode;
+		this.accountingMode = accountingMode;
 	}
 
-	@Column(name = "CUSTOMERID")
-	public String getCustomerID()
+	@Column(name = "CUSTOMER_ID")
+	public Integer getCustomerID()
 	{
 		return customerID;
 	}
 
-	public void setCustomerID(String clientID)
+	public void setCustomerID(Integer customerID)
 	{
-		this.customerID = clientID;
+		this.customerID = customerID;
 	}
 
 	@Column(name = "DESCRIPTION")
@@ -101,7 +97,7 @@ public class JobEntity implements Serializable {
 		this.desc = desc;
 	}
 	
-	@Column(name = "MAXBUDGET")
+	@Column(name = "BUDGET")
 	public Integer getMaxBudget()
 	{
 		return maxBudget;
@@ -112,9 +108,25 @@ public class JobEntity implements Serializable {
 		this.maxBudget = maxBudget;
 	}
 
-	@Column(name = "USEDBUDGET")
+	@Column(name = "BUDGET_USED")
 	public Integer getUsedBudget()
 	{
 		return usedBudget;
+	}
+	
+	public void setUsedBudget(Integer usedBudget)
+	{
+		this.usedBudget = usedBudget;
+	}
+
+	@Column(name = "IS_INTERN")
+	public boolean isIntern()
+	{
+		return isIntern;
+	}
+
+	public void setIntern(boolean isIntern)
+	{
+		this.isIntern = isIntern;
 	}
 }

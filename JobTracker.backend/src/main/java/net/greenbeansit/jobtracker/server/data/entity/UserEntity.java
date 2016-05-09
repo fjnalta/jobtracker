@@ -9,12 +9,12 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "EMPLOYEE")
+@Table(name = "USER")
 //TODO Mike: Implement NamedQueries for Employee
 //@NamedQueries( { @NamedQuery(name = "ActivityReportTemplate.findAll", query = "SELECT p FROM Person p"),
 //@NamedQuery(name = "Person.findPerson", query = "SELECT p FROM Person p where p.name=:name and p.age=:age")
 //})
-public class EmployeeEntity implements Serializable {
+public class UserEntity implements Serializable {
 
 	/**
 	 * 
@@ -23,39 +23,52 @@ public class EmployeeEntity implements Serializable {
 
 	@Id
 	@GeneratedValue
-	private Long id;
+	private Integer id;
 
-	private String	firstName;
-	private String	lastName;
+	private String	name;
+	private String	surname;
+	private Integer supervisor;
+	
 
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	@Column(name = "FIRSTNAME")
-	public String getFirstName()
+	@Column(name = "NAME")
+	public String getName()
 	{
-		return firstName;
+		return name;
 	}
 
-	public void setFirstName(String firstName)
+	public void setName(String name)
 	{
-		this.firstName = firstName;
+		this.name = name;
 	}
 
-	@Column(name = "LASTNAME")
-	public String getLastName()
+	@Column(name = "SURNAME")
+	public String getSurname()
 	{
-		return lastName;
+		return surname;
 	}
 
-	public void setLastName(String lastName)
+	public void setSurname(String surname)
 	{
-		this.lastName = lastName;
+		this.surname = surname;
+	}
+
+	@Column(name = "SUPERVISOR")
+	public Integer getSupervisor()
+	{
+		return supervisor;
+	}
+
+	public void setSupervisor(Integer supervisor)
+	{
+		this.supervisor = supervisor;
 	}
 
 }
