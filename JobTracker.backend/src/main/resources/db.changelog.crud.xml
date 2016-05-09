@@ -4,13 +4,5 @@
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
 	<include file="db.changelog.alter.xml" />
-	
-	<changeSet author="phil" id="20160503-001">
-		<insert catalogName="jobtracker" dbms="mysql" schemaName="public"
-			tableName="EMPLOYEE">
-			<column name="FIRSTNAME" type="varchar(25)" value="Max Mus" />
-			<column name="LASTNAME" type="varchar(25)" value="Kirilyuikikhgfddsaf" />
-		</insert>
-	</changeSet>
 
 </databaseChangeLog>
