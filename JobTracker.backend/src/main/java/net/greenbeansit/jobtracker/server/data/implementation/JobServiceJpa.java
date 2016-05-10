@@ -29,11 +29,11 @@ public class JobServiceJpa implements JobDataService
 	public boolean save(Job job)
 	{
 		JobEntity entity = new JobEntity();
-		entity.setJobNr(job.getJobID().getJobNr());
-		entity.setPosNr(job.getJobID().getPosNr());
-		entity.setAccountingMode(job.getJobID().getPayMode());
-		entity.setCustomerID(job.getJobID().getCustomerID());
-		entity.setDesc(job.getJobID().getDesc());
+		entity.setJobNr(job.getJobNr());
+		entity.setPosNr(job.getPosNr());
+		entity.setPayMode(job.getPayMode());
+		entity.setCustomerID(job.getCustomerID());
+		entity.setDesc(job.getDesc());
 		entity.setMaxBudget(job.getMaxBudget());
 		entity.setUsedBudget(job.getUsedBudget());
 		return personRepository.save(entity) != null;
