@@ -25,35 +25,35 @@ public class EmployeeRestServiceImpl implements EmployeeRestService
 	}
 
 	@Override
-	public User getEmployee(Integer employeeId)
+	public User getEmployee(Integer userId)
 	{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Job> getAllJobs(Integer employeeId)
+	public List<Job> getAllJobs(Integer userId)
 	{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<ActivityReport> getAllReports(Integer employeeId)
+	public List<ActivityReport> getAllReports(Integer userId)
 	{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public ActivityReport getReport(Integer employeeId, Long reportId)
+	public ActivityReport getReport(Integer userId, Long reportId)
 	{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<ActivityReport> getReportPeriod(Integer employeeId, String from,
+	public List<ActivityReport> getReportPeriod(Integer userId, String from,
 			String to)
 	{
 		// TODO Auto-generated method stub
@@ -61,35 +61,35 @@ public class EmployeeRestServiceImpl implements EmployeeRestService
 	}
 
 	@Override
-	public void createReport(Integer employeeId, ActivityReport report)
+	public void createReport(Integer userId, ActivityReport report)
 	{
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void updateReport(Integer employeeId, ActivityReport report)
+	public void updateReport(Integer userId, ActivityReport report)
 	{
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void deleteReport(Integer employeeId, Long reportId)
+	public void deleteReport(Integer userId, Long reportId)
 	{
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public List<ActivityReportTemplate> getAllReportTemplates(Integer employeeId)
+	public List<ActivityReportTemplate> getAllReportTemplates(Integer userId)
 	{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void saveReportTemplate(Integer employeeId,
+	public void saveReportTemplate(Integer userId,
 			ActivityReportTemplate template)
 	{
 		// TODO Auto-generated method stub
@@ -97,7 +97,7 @@ public class EmployeeRestServiceImpl implements EmployeeRestService
 	}
 
 	@Override
-	public void deleteReportTemplate(Integer employeeId, Long templateId)
+	public void deleteReportTemplate(Integer userId, Long templateId)
 	{
 		// TODO Auto-generated method stub
 

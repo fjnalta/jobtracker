@@ -33,7 +33,7 @@ public interface EmployeeRestService extends DirectRestService
 	/**
 	 * Gets the {@link User} with the following ID.
 	 * 
-	 * @param employeeId
+	 * @param userId
 	 *            the ID of the searched {@link User}.
 	 * @return an {@link User}.
 	 * 
@@ -41,13 +41,13 @@ public interface EmployeeRestService extends DirectRestService
 	 *             if the employeeId does not exist.
 	 */
 	@GET
-	@Path("/{employeeId}")
-	User getEmployee(@PathParam("employeeId") Integer employeeId);
+	@Path("/{userId}")
+	User getEmployee(@PathParam("userId") Integer userId);
 
 	/**
 	 * Gets all {@link Job} made by the {@link User} with the following ID.
 	 * 
-	 * @param employeeId
+	 * @param userId
 	 *            the ID of the {@link User}.
 	 * @return a List of {@link Job}s.
 	 * 
@@ -55,8 +55,8 @@ public interface EmployeeRestService extends DirectRestService
 	 *             if the employeeId does not exist.
 	 */
 	@GET
-	@Path("/{employeeId}/job")
-	List<Job> getAllJobs(@PathParam("employeeId") Integer employeeId);
+	@Path("/{userId}/job")
+	List<Job> getAllJobs(@PathParam("employeeId") Integer userId);
 
 	/**
 	 * Gets all {@link ActivityReport}s made by the {@link User} with the
@@ -70,16 +70,16 @@ public interface EmployeeRestService extends DirectRestService
 	 *             if the employeeId does not exist.
 	 */
 	@GET
-	@Path("/{employeeId}/report")
+	@Path("/{userId}/report")
 	List<ActivityReport> getAllReports(
-			@PathParam("employeeId") Integer employeeId);
+			@PathParam("userId") Integer userId);
 
 	/**
 	 * 
 	 * Gets the {@link ActivityReport} with the following reportId for the
 	 * {@link User} with the following employeeId.
 	 * 
-	 * @param employeeId
+	 * @param userId
 	 *            the ID of the {@link User}.
 	 * @param reportId
 	 *            the ID of the {@link ActivityReport}.
@@ -89,15 +89,15 @@ public interface EmployeeRestService extends DirectRestService
 	 *             if the employeeId or the reportId does not exist.
 	 */
 	@GET
-	@Path("/{employeeId}/report/{reportId}")
-	ActivityReport getReport(@PathParam("employeeId") Integer employeeId,
+	@Path("/{userId}/report/{reportId}")
+	ActivityReport getReport(@PathParam("userId") Integer userId,
 			@PathParam("reportId") Long reportId);
 
 	/**
 	 * Gets all {@link ActivityReport}s made by the {@link User} with the
 	 * following ID that are in the following period of time.
 	 * 
-	 * @param employeeId
+	 * @param userId
 	 *            the ID of the {@link User}.
 	 * @param from
 	 *            the start date.
@@ -109,15 +109,15 @@ public interface EmployeeRestService extends DirectRestService
 	 *             if the employeeId does not exist.
 	 */
 	@GET
-	@Path("/{employeeId}/reportPeriod")
+	@Path("/{userId}/reportPeriod")
 	List<ActivityReport> getReportPeriod(
-			@PathParam("employeeId") Integer employeeId, String from, String to);
+			@PathParam("employeeId") Integer userId, String from, String to);
 
 	/**
 	 * Creates a given {@code ActivityReport} on the server for the
 	 * {@link User}
 	 * 
-	 * @param empleyeeId
+	 * @param userId
 	 *            the ID of {@link User}.
 	 * @param report
 	 *            {@code ActivityReport} to send.
@@ -126,15 +126,15 @@ public interface EmployeeRestService extends DirectRestService
 	 *             if the employeeId does not exist.
 	 */
 	@POST
-	@Path("/{employeeId}/report/")
-	void createReport(@PathParam("employeeId") Integer employeeId,
+	@Path("/{userId}/report/")
+	void createReport(@PathParam("userId") Integer userId,
 			ActivityReport report);
 
 	/**
 	 * Updates the following {@link ActivityReport} if it does not exist, it
 	 * will be created.
 	 * 
-	 * @param employeeId
+	 * @param userId
 	 *            the ID of {@link User}
 	 * @param report
 	 *            the {@link ActivityReport} that should be updated.
@@ -143,14 +143,14 @@ public interface EmployeeRestService extends DirectRestService
 	 *             if the employeeId does not exist.
 	 */
 	@PUT
-	@Path("/{employeeId}/report/")
-	void updateReport(@PathParam("employeeId") Integer employeeId,
+	@Path("/{userId}/report/")
+	void updateReport(@PathParam("userId") Integer userId,
 			ActivityReport report);
 
 	/**
 	 * Deletes an {@link ActivityReportTemplate}.
 	 * 
-	 * @param employeeId
+	 * @param userId
 	 *            the ID of {@link User}
 	 * @param report
 	 *            the ID of the {@link ActivityReport} that should be deleted.
@@ -159,15 +159,15 @@ public interface EmployeeRestService extends DirectRestService
 	 *             if the employeeId or the reportId does not exist.
 	 */
 	@DELETE
-	@Path("/{employeeId}/report_template/{templateId}")
-	void deleteReport(@PathParam("employeeId") Integer employeeId,
+	@Path("/{userId}/report_template/{templateId}")
+	void deleteReport(@PathParam("userId") Integer userId,
 			@PathParam("templateId") Long reportId);
 
 	/**
 	 * Gets all {@link ActivityReportTemplate}s of the {@link User} with the
 	 * following ID.
 	 * 
-	 * @param employeeId
+	 * @param userId
 	 *            the ID of the {@link User}.
 	 * @return a List of {@link ActivityReportTemplate}s.
 	 * 
@@ -175,15 +175,15 @@ public interface EmployeeRestService extends DirectRestService
 	 *             if the employeeId does not exist.
 	 */
 	@GET
-	@Path("/{employeeId}/report")
+	@Path("/{userId}/report")
 	List<ActivityReportTemplate> getAllReportTemplates(
-			@PathParam("employeeId") Integer employeeId);
+			@PathParam("userId") Integer userId);
 
 	/**
 	 * Saves an {@link ActivityReportTemplate} with a new ID for the
 	 * {@link User}
 	 * 
-	 * @param empleyeeId
+	 * @param userId
 	 *            the ID of {@link User}
 	 * @param template
 	 *            the {@link ActivityReportTemplate} that should be saved.
@@ -192,12 +192,12 @@ public interface EmployeeRestService extends DirectRestService
 	 *             if the employeeId does not exist.
 	 */
 	@POST
-	@Path("/{employeeId}/report/")
-	void saveReportTemplate(@PathParam("employeeId") Integer employeeId,
+	@Path("/{userId}/report/")
+	void saveReportTemplate(@PathParam("userId") Integer userId,
 			ActivityReportTemplate template);
 
 	@DELETE
-	@Path("/{employeeId}/report/{reportId}")
-	void deleteReportTemplate(@PathParam("employeeId") Integer employeeId,
+	@Path("/{userId}/report/{reportId}")
+	void deleteReportTemplate(@PathParam("userId") Integer userId,
 			@PathParam("reportId") Long templateId);
 }
