@@ -10,14 +10,9 @@
 	<h:ClearFix ui:field="container">
 		<s:Select ui:field="selectJob" liveSearch="true"
 			liveSearchPlaceholder="Name" placeholder="Projekt auswählen" type="PRIMARY">
-			<s:OptGroup label="Favoriten">
-				<s:Option text="Kunde A -- Project X -- Job 001" />
-				<s:Option text="Kunde B -- Project Z -- Job 002" />
+			<s:OptGroup label="Favoriten" ui:field="favoriteJobsOptGroup">
 			</s:OptGroup>
-			<s:OptGroup label="Alle anderen">
-				<s:Option text="Kunde A -- Project Y -- Job 003" />
-				<s:Option text="Kunde C -- Project V -- Job 008" />
-				<s:Option text="Kunde B -- Project W -- Job 010" />
+			<s:OptGroup label="Alle anderen" ui:field="allJobsOptGroup">
 			</s:OptGroup>
 		</s:Select>
 	</h:ClearFix>

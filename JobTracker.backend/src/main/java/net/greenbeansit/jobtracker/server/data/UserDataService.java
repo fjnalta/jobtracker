@@ -2,10 +2,10 @@ package net.greenbeansit.jobtracker.server.data;
 
 import java.util.List;
 
-import net.greenbeansit.jobtracker.shared.Employee;
+import net.greenbeansit.jobtracker.shared.User;
 
 /**
- * Database interface for {@link Employee}s.
+ * Database interface for {@link User}s.
  * 
  * @author Mike Hukiewitz
  *
@@ -14,15 +14,15 @@ import net.greenbeansit.jobtracker.shared.Employee;
 public interface UserDataService
 {
 
-	List<Employee> getAll();
+	List<User> getAll();
 
-	Employee getEmployee(Long employeeId);
+	User getEmployee(Long employeeId);
 
-	List<Employee> getByName(String firstname, String lastname);
+	List<User> getByName(String firstname, String lastname);
 
-	void save(Employee employee);
+	void save(User employee);
 
-	void update(Employee employee);
+	void update(User employee);
 
-	void delete(Employee employee);
+	void delete(User employee);
 }

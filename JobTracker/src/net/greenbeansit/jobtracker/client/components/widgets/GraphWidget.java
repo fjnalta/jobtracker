@@ -1,11 +1,21 @@
 package net.greenbeansit.jobtracker.client.components.widgets;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import org.gwtbootstrap3.client.ui.Button;
+import org.gwtbootstrap3.client.ui.Icon;
 import org.gwtbootstrap3.client.ui.Label;
 import org.gwtbootstrap3.client.ui.html.ClearFix;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.dev.util.collect.HashMap;
+import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.uibinder.client.UiHandler;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 import com.googlecode.gwt.charts.client.ChartLoader;
@@ -20,58 +30,81 @@ import com.googlecode.gwt.charts.client.options.HAxis;
 import com.googlecode.gwt.charts.client.options.VAxis;
 
 import net.greenbeansit.jobtracker.client.components.ProjectPage;
-import net.greenbeansit.jobtracker.client.controller.Controller;
-import net.greenbeansit.jobtracker.client.controller.ControllerInterface;
+import net.greenbeansit.jobtracker.shared.ActivityReport;
 
-public class GraphWidget extends Composite implements ObservableOnProjectPage
-{
+public class GraphWidget extends Composite implements ObservableOnProjectPage {
 
-	private static GraphWidgetUiBinder uiBinder = GWT
-			.create(GraphWidgetUiBinder.class);
+	private static GraphWidgetUiBinder uiBinder = GWT.create(GraphWidgetUiBinder.class);
 
-	interface GraphWidgetUiBinder extends UiBinder<Widget, GraphWidget>
-	{
+	interface GraphWidgetUiBinder extends UiBinder<Widget, GraphWidget> {
 	}
 
-	public GraphWidget()
-	{
+	public static enum GraphMode {
+		WEEK, MONTH, YEAR
+	}
+
+	public GraphWidget() {
 		initWidget(uiBinder.createAndBindUi(this));
-		initialize();
+		// initialize();
 	}
 
 	@UiField
-	ClearFix					budgetContent;
+	ClearFix budgetContent;
 
 	@UiField
-	ClearFix					activityContent;
+	ClearFix activityContent;
 
 	@UiField
-	Label						labelBudget;
+	Label labelBudget;
 
 	@UiField
-	Label						labelBudgetLeft;
+	Label labelBudgetLeft;
 
-	private ControllerInterface	controller;
+	@UiField
+	Button buttonModeYear;
 
-	private LineChart			linechart;
-	private PieChart			piechart;
-	// private Job currentJob;
-	private int[][]				currentFocus;
+	@UiField
+	Button buttonModeMonth;
 
-	private void initialize()
-	{
-		currentFocus = new int[][]
-		{
-				{ 17, 4, 2016 },
-				{ 24, 4, 2016 } };
+	@UiField
+	Button buttonModeWeek;
+
+	private List<ActivityReport> reportList;
+
+	private LineChart linechart;
+	private PieChart piechart;
+	private Date startDate;
+	private Date endDate;
+	private HashMap<String,String> languagePack;
+
+	private GraphMode currentMode;
+
+	private void initialize() {
+		if(this.languagePack==null){
+			languagePack.put("jan", "January");
+			languagePack.put("feb", "February");
+			languagePack.put("mar", "March");
+			languagePack.put("jan", "Januar");
+			languagePack.put("jan", "Januar");
+			languagePack.put("jan", "Januar");
+			languagePack.put("jan", "Januar");
+			languagePack.put("jan", "Januar");
+			languagePack.put("jan", "Januar");
+			languagePack.put("jan", "Januar");
+			
+			
+		}
+		
+		startDate = new Date();
+		startDate.setYear(startDate.getYear() - 1);
+		endDate = new Date();
+		endDate.setHours(endDate.getHours() + 1);
 
 		ChartLoader chartLoader = new ChartLoader(ChartPackage.CORECHART);
-		chartLoader.loadApi(new Runnable()
-		{
+		chartLoader.loadApi(new Runnable() {
 
 			@Override
-			public void run()
-			{
+			public void run() {
 				// Create and attach the chart
 				linechart = new LineChart();
 				budgetContent.add(linechart);
@@ -83,97 +116,108 @@ public class GraphWidget extends Composite implements ObservableOnProjectPage
 		});
 	}
 
-	public ControllerInterface getController()
-	{
-		return controller;
+	@UiHandler("buttonNext")
+	public void showNext(ClickEvent event) {
+		switch (currentMode) {
+		case WEEK:
+			startDate.setDate(startDate.getDate() + 7);
+			endDate.setDate(startDate.getDate() + 7);
+			break;
+		case MONTH:
+			startDate.setMonth(startDate.getMonth() + 1);
+			endDate.setMonth(endDate.getMonth() + 1);
+			break;
+		case YEAR:
+			startDate.setYear(startDate.getYear() + 1);
+			endDate.setYear(endDate.getYear() + 1);
+			break;
+		default:
+			break;
+		}
 	}
 
-	public void setController(ControllerInterface controller)
-	{
-		this.controller = controller;
+	@UiHandler("buttonPrevious")
+	public void showPrevious(ClickEvent event) {
+		switch (currentMode) {
+		case WEEK:
+			startDate.setDate(startDate.getDate() - 7);
+			endDate.setDate(startDate.getDate() - 7);
+			break;
+		case MONTH:
+			startDate.setMonth(startDate.getMonth() - 1);
+			endDate.setMonth(endDate.getMonth() - 1);
+			break;
+		case YEAR:
+			startDate.setYear(startDate.getYear() - 1);
+			endDate.setYear(endDate.getYear() - 1);
+			break;
+		default:
+			break;
+		}
 	}
 
-	private void loadData()
-	{
+	@UiHandler("buttonModeWeek")
+	public void showWeekMode(ClickEvent event) {
+		buttonModeYear.removeStyleName("active");
+		buttonModeMonth.removeStyleName("active");
+		buttonModeWeek.addStyleName("active");
+		showWeek();
 	}
 
-	// private void setJob(Job currentJob) {
-	// this.currentJob = currentJob;
-	// }
-
-	public void showPreviousWeek()
-	{
-		// TODO Datenanzeige für die Woche vor der aktuell angezeigten Woche
+	@UiHandler("buttonModeMonth")
+	public void showMonthMode(ClickEvent event) {
+		buttonModeYear.removeStyleName("active");
+		buttonModeMonth.addStyleName("active");
+		buttonModeWeek.removeStyleName("active");
+		showMonth();
 	}
 
-	public void showNextWeek()
-	{
-		// TODO Datenanzeigen für die Woche nach der aktuell angezeigten Woche
+	@UiHandler("buttonModeYear")
+	public void showYearMode(ClickEvent event) {
+		buttonModeYear.addStyleName("active");
+		buttonModeMonth.removeStyleName("active");
+		buttonModeWeek.removeStyleName("active");
+		showYear();
 	}
 
-	public void showPreviousMonth()
-	{
-		currentFocus[0][1] = currentFocus[0][1] - 1;
-		currentFocus[1][1] = currentFocus[1][1] - 1;
+	public void showWeek() {
+		currentMode = GraphMode.WEEK;
 	}
 
-	public void showNextMonth()
-	{
-		currentFocus[0][1] = currentFocus[0][1] + 1;
-		currentFocus[1][1] = currentFocus[1][1] + 1;
+	public void showMonth() {
+		currentMode = GraphMode.MONTH;
+		startDate = new Date();
+		startDate.setMonth(startDate.getMonth() - 1);
 	}
 
-	public void showPreviousYear()
-	{
-		currentFocus[0][2] = currentFocus[0][2] - 1;
-		currentFocus[1][2] = currentFocus[1][2] - 1;
-	}
+	public void showYear() {
+		currentMode = GraphMode.YEAR;
+		startDate = new Date();
+		startDate.setYear(startDate.getYear() - 1);
 
-	public void showNextYear()
-	{
-		currentFocus[0][2] = currentFocus[0][2] + 1;
-		currentFocus[1][2] = currentFocus[1][2] + 1;
-	}
+		int[] months = new int[12];
+		for (int i = 0; i < months.length; i++) {
+			months[i] = endDate.getMonth() - 12 + i;
+		}
 
-	public void showWeek()
-	{
-	}
+		int[] values = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
-	public void showMonth()
-	{
-	}
+		// load relevant data in value array
+		for (ActivityReport report : reportList) {
+			if (report.getDate().after(startDate) && report.getDate().before(endDate)) {
 
-	public void showYear()
-	{
-		currentFocus[0][2] = currentFocus[1][2] - 1;
-		currentFocus[0][1] = currentFocus[1][1];
-		currentFocus[0][0] = currentFocus[1][0];
-		// creating dummy data
+				values[Math.abs(report.getDate().getMonth() - 1)] += report.getDuration();
+			}
+		}
 
-		int[] months = new int[]
-		{ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
-
-		Controller controller = new Controller();
-
-		int[] values = new int[]
-		{ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 };
-		// values[0] = temp.getActivities().size();
-		/*
-		 * for (Activity e :
-		 * controller.getJob(String.valueOf(0)).getActivities()) { if
-		 * (e.getYear() == currentFocus[0][2] || e.getYear() ==
-		 * currentFocus[1][2]) { values[e.getMonth()] += e.getWorkedTime(); } }
-		 */
 		DataTable dataTable = DataTable.create();
 		dataTable.addColumn(ColumnType.STRING, "Year");
 		dataTable.addColumn(ColumnType.NUMBER, "LAWL");
 		dataTable.addRows(months.length);
-		for (int i = 0; i < months.length; i++)
-		{
+		for (int i = 0; i < months.length; i++) {
 			dataTable.setValue(i, 0, String.valueOf(months[i]));
 		}
-		for (int row = 0; row < values.length; row++)
-		{
+		for (int row = 0; row < values.length; row++) {
 			dataTable.setValue(row, 1, values[row]);
 		}
 
@@ -188,14 +232,12 @@ public class GraphWidget extends Composite implements ObservableOnProjectPage
 		linechart.draw(dataTable, options);
 	}
 
-	private void drawLineChart(DataTable table, LineChartOptions options)
-	{
+	private void drawLineChart(DataTable table, LineChartOptions options) {
 		// Draw the chart
 		linechart.draw(table, options);
 	}
 
-	private void drawPieChart()
-	{
+	private void drawPieChart() {
 		// Prepare the data
 		DataTable dataTable = DataTable.create();
 		dataTable.addColumn(ColumnType.STRING, "Task");
@@ -229,22 +271,33 @@ public class GraphWidget extends Composite implements ObservableOnProjectPage
 
 	}
 
+	public void setReportList(List<ActivityReport> reports) {
+		this.reportList = reports;
+	}
+
+	public void render() {
+		initialize();
+	}
+
 	@Override
 	public void registerObserver(ProjectPage projectPage) {
-		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void removeObserver(ProjectPage projectPage) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void notificate() {
 		// TODO Auto-generated method stub
-		
+
+	}
+	
+	public void setLanguage(HashMap<String,String> languagePack){
+		this.languagePack = languagePack;
 	}
 
 }

@@ -3,8 +3,23 @@
 	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:b="urn:import:org.gwtbootstrap3.client.ui"
 	xmlns:h="urn:import:org.gwtbootstrap3.client.ui.html">
 	<ui:style>
-		.important {
-		font-weight: bold;
+		.buttonStyle {
+		border-radius: 100%;
+		height: 25px;
+		width: 25px;
+		margin: 2px 2px 2px 2px;
+		}
+		.buttonStyle-active{
+		border-radius: 100%;
+		height: 25px;
+		width: 25px;
+		margin: 2px 2px 2px 2px;
+		color:grey;
+		}
+
+		.buttonForm {
+		margin-top: 0.6em;
+		width: auto;
 		}
 		.floatright{
 		float:right;
@@ -29,7 +44,7 @@
 							<b:Label text="xxxx von xxx" ui:field="labelBudget" />
 						</b:Row>
 						<b:Row>
-							<b:Label text="REST xxxxx" ui:field="labelBudgetLeft"/>
+							<b:Label text="REST xxxxx" ui:field="labelBudgetLeft" />
 						</b:Row>
 
 					</b:Column>
@@ -42,15 +57,15 @@
 
 				</b:Row>
 				<b:Row>
-					<b:Column size="XS_2,SM_2,MD_2,LG_2" offset="XS_9,SM_9,MD_9,LG_9">
-						<b:Icon type="ARROW_LEFT" />
-						<b:Label text="JANUAR" />
-						<b:Icon type="ARROW_RIGHT" />
+					<b:Column size="XS_2,SM_2,MD_2,LG_2" offset="XS_8,SM_8,MD_8,LG_8">
+						<b:Icon type="ARROW_LEFT" ui:field="buttonNext" />
+						<b:Label text="JANUAR" ui:field="labelCurrentFocus" />
+						<b:Icon type="ARROW_RIGHT" ui:field="buttonPrevious" />
 					</b:Column>
-					<b:Column size="XS_1,SM_1,MD_1,LG_1">
-						<b:Icon type="CIRCLE" />
-						<b:Icon type="CIRCLE_O" />
-						<b:Icon type="CIRCLE_O" />
+					<b:Column size="XS_2,SM_2,MD_2,LG_2">
+						<b:Button ui:field="buttonModeWeek" addStyleNames="{style.buttonStyle}" />
+						<b:Button ui:field="buttonModeMonth" addStyleNames="{style.buttonStyle}" />
+						<b:Button ui:field="buttonModeYear" addStyleNames="{style.buttonStyle}" />
 					</b:Column>
 				</b:Row>
 			</b:TabPane>

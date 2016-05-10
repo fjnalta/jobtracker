@@ -17,7 +17,7 @@ import org.fusesource.restygwt.client.DirectRestService;
 
 import net.greenbeansit.jobtracker.shared.ActivityReport;
 import net.greenbeansit.jobtracker.shared.ActivityReportTemplate;
-import net.greenbeansit.jobtracker.shared.Employee;
+import net.greenbeansit.jobtracker.shared.User;
 import net.greenbeansit.jobtracker.shared.Job;
 
 /**
@@ -31,24 +31,24 @@ import net.greenbeansit.jobtracker.shared.Job;
 public interface EmployeeRestService extends DirectRestService
 {
 	/**
-	 * Gets the {@link Employee} with the following ID.
+	 * Gets the {@link User} with the following ID.
 	 * 
 	 * @param employeeId
-	 *            the ID of the searched {@link Employee}.
-	 * @return an {@link Employee}.
+	 *            the ID of the searched {@link User}.
+	 * @return an {@link User}.
 	 * 
 	 * @throws NotFoundException
 	 *             if the employeeId does not exist.
 	 */
 	@GET
 	@Path("/{employeeId}")
-	Employee getEmployee(@PathParam("employeeId") Long employeeId);
+	User getEmployee(@PathParam("employeeId") Integer employeeId);
 
 	/**
-	 * Gets all {@link Job} made by the {@link Employee} with the following ID.
+	 * Gets all {@link Job} made by the {@link User} with the following ID.
 	 * 
 	 * @param employeeId
-	 *            the ID of the {@link Employee}.
+	 *            the ID of the {@link User}.
 	 * @return a List of {@link Job}s.
 	 * 
 	 * @throws NotFoundException
@@ -56,14 +56,14 @@ public interface EmployeeRestService extends DirectRestService
 	 */
 	@GET
 	@Path("/{employeeId}/job")
-	List<Job> getAllJobs(@PathParam("employeeId") Long employeeId);
+	List<Job> getAllJobs(@PathParam("employeeId") Integer employeeId);
 
 	/**
-	 * Gets all {@link ActivityReport}s made by the {@link Employee} with the
+	 * Gets all {@link ActivityReport}s made by the {@link User} with the
 	 * following ID.
 	 * 
 	 * @param employeeId
-	 *            the ID of the {@link Employee}.
+	 *            the ID of the {@link User}.
 	 * @return a List of {@link ActivityReport}s.
 	 * 
 	 * @throws NotFoundException
@@ -72,15 +72,15 @@ public interface EmployeeRestService extends DirectRestService
 	@GET
 	@Path("/{employeeId}/report")
 	List<ActivityReport> getAllReports(
-			@PathParam("employeeId") Long employeeId);
+			@PathParam("employeeId") Integer employeeId);
 
 	/**
 	 * 
 	 * Gets the {@link ActivityReport} with the following reportId for the
-	 * {@link Employee} with the following employeeId.
+	 * {@link User} with the following employeeId.
 	 * 
 	 * @param employeeId
-	 *            the ID of the {@link Employee}.
+	 *            the ID of the {@link User}.
 	 * @param reportId
 	 *            the ID of the {@link ActivityReport}.
 	 * @return an {@link ActivityReport}.
@@ -90,15 +90,15 @@ public interface EmployeeRestService extends DirectRestService
 	 */
 	@GET
 	@Path("/{employeeId}/report/{reportId}")
-	ActivityReport getReport(@PathParam("employeeId") Long employeeId,
+	ActivityReport getReport(@PathParam("employeeId") Integer employeeId,
 			@PathParam("reportId") Long reportId);
 
 	/**
-	 * Gets all {@link ActivityReport}s made by the {@link Employee} with the
+	 * Gets all {@link ActivityReport}s made by the {@link User} with the
 	 * following ID that are in the following period of time.
 	 * 
 	 * @param employeeId
-	 *            the ID of the {@link Employee}.
+	 *            the ID of the {@link User}.
 	 * @param from
 	 *            the start date.
 	 * @param to
@@ -111,14 +111,14 @@ public interface EmployeeRestService extends DirectRestService
 	@GET
 	@Path("/{employeeId}/reportPeriod")
 	List<ActivityReport> getReportPeriod(
-			@PathParam("employeeId") Long employeeId, String from, String to);
+			@PathParam("employeeId") Integer employeeId, String from, String to);
 
 	/**
 	 * Creates a given {@code ActivityReport} on the server for the
-	 * {@link Employee}
+	 * {@link User}
 	 * 
 	 * @param empleyeeId
-	 *            the ID of {@link Employee}.
+	 *            the ID of {@link User}.
 	 * @param report
 	 *            {@code ActivityReport} to send.
 	 * 
@@ -127,7 +127,7 @@ public interface EmployeeRestService extends DirectRestService
 	 */
 	@POST
 	@Path("/{employeeId}/report/")
-	void createReport(@PathParam("employeeId") Long employeeId,
+	void createReport(@PathParam("employeeId") Integer employeeId,
 			ActivityReport report);
 
 	/**
@@ -135,7 +135,7 @@ public interface EmployeeRestService extends DirectRestService
 	 * will be created.
 	 * 
 	 * @param employeeId
-	 *            the ID of {@link Employee}
+	 *            the ID of {@link User}
 	 * @param report
 	 *            the {@link ActivityReport} that should be updated.
 	 * 
@@ -144,14 +144,14 @@ public interface EmployeeRestService extends DirectRestService
 	 */
 	@PUT
 	@Path("/{employeeId}/report/")
-	void updateReport(@PathParam("employeeId") Long employeeId,
+	void updateReport(@PathParam("employeeId") Integer employeeId,
 			ActivityReport report);
 
 	/**
 	 * Deletes an {@link ActivityReportTemplate}.
 	 * 
 	 * @param employeeId
-	 *            the ID of {@link Employee}
+	 *            the ID of {@link User}
 	 * @param report
 	 *            the ID of the {@link ActivityReport} that should be deleted.
 	 * 
@@ -160,15 +160,15 @@ public interface EmployeeRestService extends DirectRestService
 	 */
 	@DELETE
 	@Path("/{employeeId}/report_template/{templateId}")
-	void deleteReport(@PathParam("employeeId") Long employeeId,
+	void deleteReport(@PathParam("employeeId") Integer employeeId,
 			@PathParam("templateId") Long reportId);
 
 	/**
-	 * Gets all {@link ActivityReportTemplate}s of the {@link Employee} with the
+	 * Gets all {@link ActivityReportTemplate}s of the {@link User} with the
 	 * following ID.
 	 * 
 	 * @param employeeId
-	 *            the ID of the {@link Employee}.
+	 *            the ID of the {@link User}.
 	 * @return a List of {@link ActivityReportTemplate}s.
 	 * 
 	 * @throws NotFoundException
@@ -177,14 +177,14 @@ public interface EmployeeRestService extends DirectRestService
 	@GET
 	@Path("/{employeeId}/report")
 	List<ActivityReportTemplate> getAllReportTemplates(
-			@PathParam("employeeId") Long employeeId);
+			@PathParam("employeeId") Integer employeeId);
 
 	/**
 	 * Saves an {@link ActivityReportTemplate} with a new ID for the
-	 * {@link Employee}
+	 * {@link User}
 	 * 
 	 * @param empleyeeId
-	 *            the ID of {@link Employee}
+	 *            the ID of {@link User}
 	 * @param template
 	 *            the {@link ActivityReportTemplate} that should be saved.
 	 * 
@@ -193,11 +193,11 @@ public interface EmployeeRestService extends DirectRestService
 	 */
 	@POST
 	@Path("/{employeeId}/report/")
-	void saveReportTemplate(@PathParam("employeeId") Long employeeId,
+	void saveReportTemplate(@PathParam("employeeId") Integer employeeId,
 			ActivityReportTemplate template);
 
 	@DELETE
 	@Path("/{employeeId}/report/{reportId}")
-	void deleteReportTemplate(@PathParam("employeeId") Long employeeId,
+	void deleteReportTemplate(@PathParam("employeeId") Integer employeeId,
 			@PathParam("reportId") Long templateId);
 }

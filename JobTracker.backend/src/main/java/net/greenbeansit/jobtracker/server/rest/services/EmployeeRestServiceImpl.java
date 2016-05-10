@@ -6,7 +6,7 @@ import net.greenbeansit.jobtracker.server.data.JobDataService;
 import net.greenbeansit.jobtracker.server.data.implementation.JobServiceJpa;
 import net.greenbeansit.jobtracker.shared.ActivityReport;
 import net.greenbeansit.jobtracker.shared.ActivityReportTemplate;
-import net.greenbeansit.jobtracker.shared.Employee;
+import net.greenbeansit.jobtracker.shared.User;
 import net.greenbeansit.jobtracker.shared.Job;
 import net.greenbeansit.jobtracker.shared.rest.services.EmployeeRestService;
 
@@ -25,35 +25,35 @@ public class EmployeeRestServiceImpl implements EmployeeRestService
 	}
 
 	@Override
-	public Employee getEmployee(Long employeeId)
+	public User getEmployee(Integer employeeId)
 	{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Job> getAllJobs(Long employeeId)
+	public List<Job> getAllJobs(Integer employeeId)
 	{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<ActivityReport> getAllReports(Long employeeId)
+	public List<ActivityReport> getAllReports(Integer employeeId)
 	{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public ActivityReport getReport(Long employeeId, Long reportId)
+	public ActivityReport getReport(Integer employeeId, Long reportId)
 	{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<ActivityReport> getReportPeriod(Long employeeId, String from,
+	public List<ActivityReport> getReportPeriod(Integer employeeId, String from,
 			String to)
 	{
 		// TODO Auto-generated method stub
@@ -61,35 +61,35 @@ public class EmployeeRestServiceImpl implements EmployeeRestService
 	}
 
 	@Override
-	public void createReport(Long employeeId, ActivityReport report)
+	public void createReport(Integer employeeId, ActivityReport report)
 	{
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void updateReport(Long employeeId, ActivityReport report)
+	public void updateReport(Integer employeeId, ActivityReport report)
 	{
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void deleteReport(Long employeeId, Long reportId)
+	public void deleteReport(Integer employeeId, Long reportId)
 	{
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public List<ActivityReportTemplate> getAllReportTemplates(Long employeeId)
+	public List<ActivityReportTemplate> getAllReportTemplates(Integer employeeId)
 	{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void saveReportTemplate(Long employeeId,
+	public void saveReportTemplate(Integer employeeId,
 			ActivityReportTemplate template)
 	{
 		// TODO Auto-generated method stub
@@ -97,7 +97,7 @@ public class EmployeeRestServiceImpl implements EmployeeRestService
 	}
 
 	@Override
-	public void deleteReportTemplate(Long employeeId, Long templateId)
+	public void deleteReportTemplate(Integer employeeId, Long templateId)
 	{
 		// TODO Auto-generated method stub
 

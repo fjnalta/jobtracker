@@ -3,7 +3,7 @@
 	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:b="urn:import:org.gwtbootstrap3.client.ui"
 	xmlns:b.html="urn:import:org.gwtbootstrap3.client.ui.html"
 	xmlns:widgets="urn:import:net.greenbeansit.jobtracker.client.components.widgets"
-	xmlns:c="urn:import:net.greenbeansit.jobtracker.client.components.widgets.calendar">
+	xmlns:cal="urn:import:net.greenbeansit.jobtracker.client.components.widgets.calendar">
 	<ui:style>
 	.headerRow {
 		margin: 10px;
@@ -67,22 +67,19 @@
 	</ui:style>
 	<b:Container fluid="true">
 		<b:Column size="XS_12,SM_12,MD_4,LG_4" addStyleNames="{style.mainColumn}">
-			<b:Row addStyleNames="{style.smallContainer}">
-				<widgets:JobsWidget ui:field="jobsWidget" />
+			<b:Row addStyleNames="{style.smallContainer}" ui:field="rowJobs">
 			</b:Row>
-			<b:Row addStyleNames="{style.smallContainer}">
-				<widgets:WorkDiscriptionWidget ui:field="workDiscriptionWidget" />
+			<b:Row addStyleNames="{style.smallContainer}" ui:field="rowWork">
 			</b:Row>
-			<b:Row addStyleNames="{style.smallContainer}">
+			<b:Row addStyleNames="{style.smallContainer}" ui:field="rowUtilization">
 				<widgets:UtilizationWidget ui:field="utilizationWidget" />
 			</b:Row>
 		</b:Column>
 		<b:Column size="XS_12,SM_12,MD_8,LG_8" addStyleNames="{style.mainColumn}">
 			<b:Row addStyleNames="{style.largeContainer}" ui:field="containerBudgetDiagrams">
-				<c:CalendarWidget />
+				<cal:CalendarWidget ui:field="calendarWidget"/>
 			</b:Row>
 		</b:Column>
 	</b:Container>
-
 
 </ui:UiBinder> 
