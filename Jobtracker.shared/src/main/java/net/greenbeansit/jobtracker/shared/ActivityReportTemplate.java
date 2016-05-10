@@ -12,14 +12,14 @@ public class ActivityReportTemplate implements Serializable
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1035084213210834537L;
+	private static final long	serialVersionUID	= 1035084213210834537L;
 	/**
 	 * 
-	 */ 
-	
-	private String	templateName;
-	private String	description;
-	private Long	id;
+	 */
+
+	private String				templateName;
+	private String				description;
+	private Long				id;
 
 	/**
 	 * Initializes a new instance of the {@link ActivityReportTemplate} class.
@@ -29,7 +29,6 @@ public class ActivityReportTemplate implements Serializable
 
 	}
 
-	
 	public String getTemplateName()
 	{
 		return templateName;

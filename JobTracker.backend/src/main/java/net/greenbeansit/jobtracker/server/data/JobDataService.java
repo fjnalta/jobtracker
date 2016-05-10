@@ -6,16 +6,23 @@ import net.greenbeansit.jobtracker.shared.Job;
 
 /**
  * Database interface for {@link Job}s.
+ * 
  * @author Mike Hukiewitz
  *
  */
 
-public interface JobDataService {
-	
+public interface JobDataService
+{
+
 	List<Job> getAll();
+
 	Job getJob(Long jobId);
+
 	Job getJob(Integer jobNr, Integer posNr);
+
 	boolean save(Job job);
+
 	boolean update(Job job);
+
 	void delete(Job job);
 }

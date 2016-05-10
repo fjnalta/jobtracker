@@ -10,29 +10,34 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "PSEUDO_JOB")
-//TODO Mike: Implement NamedQueries for Employee
-//@NamedQueries( { @NamedQuery(name = "ActivityReportTemplate.findAll", query = "SELECT p FROM Person p"),
-//@NamedQuery(name = "Person.findPerson", query = "SELECT p FROM Person p where p.name=:name and p.age=:age")
-//})
-public class PseudoJobEntity implements Serializable {
+// TODO Mike: Implement NamedQueries for Employee
+// @NamedQueries( { @NamedQuery(name = "ActivityReportTemplate.findAll", query =
+// "SELECT p FROM Person p"),
+// @NamedQuery(name = "Person.findPerson", query = "SELECT p FROM Person p where
+// p.name=:name and p.age=:age")
+// })
+public class PseudoJobEntity implements Serializable
+{
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -5496667715876969877L;
+	private static final long	serialVersionUID	= -5496667715876969877L;
 
 	@Id
 	@GeneratedValue
-	private Integer id;
+	private Integer				id;
 
-	private String	name;
-	private String	customer;
+	private String				name;
+	private String				customer;
 
-	public Integer getId() {
+	public Integer getId()
+	{
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Integer id)
+	{
 		this.id = id;
 	}
 

@@ -23,87 +23,87 @@ import net.greenbeansit.jobtracker.client.controller.Controller;
  */
 public class Application extends Composite
 {
-	private static ApplicationUiBinder uiBinder = 
-			GWT.create(ApplicationUiBinder.class);
-	
-	@UiTemplate("Application.ui.xml") 
+	private static ApplicationUiBinder uiBinder = GWT
+			.create(ApplicationUiBinder.class);
+
+	@UiTemplate("Application.ui.xml")
 	interface ApplicationUiBinder extends UiBinder<Widget, Application>
 	{
-		
+
 	}
-	
+
 	@UiField
-	Container mainContainer;
-	
+	Container		mainContainer;
+
 	@UiField
-	AnchorListItem navHome;
-	
+	AnchorListItem	navHome;
+
 	@UiField
-	AnchorListItem navProject;
-	
+	AnchorListItem	navProject;
+
 	@UiField
-	NavbarNav nav;
-	
-	Controller controller;
-	
+	NavbarNav		nav;
+
+	Controller		controller;
+
 	public Application()
 	{
 		initWidget(uiBinder.createAndBindUi(this));
-		
+
 		History.addValueChangeHandler(new HistoryValueChangeHandler());
-		
+
 		History.fireCurrentHistoryState();
-		
+
 		controller = new Controller();
 	}
-	
-	
-	private class HistoryValueChangeHandler implements ValueChangeHandler<String>
+
+	private class HistoryValueChangeHandler
+			implements ValueChangeHandler<String>
 	{
 
 		@Override
 		public void onValueChange(ValueChangeEvent<String> event)
 		{
 			deactivateAllNavButtons();
-			
-			switch(event.getValue())
+
+			switch (event.getValue())
 			{
-				case "project":
-					navProject.setActive(true);
-					
-					removeActiveContentContainer();
-					
-					addWidgetAsContentPage(new ProjectPage());
-					break;
-					
-				default: //home
-					navHome.setActive(true);
-					
-					removeActiveContentContainer();
-					
-					addWidgetAsContentPage(new HomePage());
-					break;
+			case "project":
+				navProject.setActive(true);
+
+				removeActiveContentContainer();
+
+				addWidgetAsContentPage(new ProjectPage());
+				break;
+
+			default: // home
+				navHome.setActive(true);
+
+				removeActiveContentContainer();
+
+				addWidgetAsContentPage(new HomePage());
+				break;
 			}
-			
+
 		}
-		
+
 		private void deactivateAllNavButtons()
 		{
-			for(int i= 0; i < nav.getWidgetCount(); i++)
+			for (int i = 0; i < nav.getWidgetCount(); i++)
 			{
 				Widget widget = nav.getWidget(i);
-				if(widget instanceof AnchorListItem)
-					((AnchorListItem)widget).setActive(false);
+				if (widget instanceof AnchorListItem)
+					((AnchorListItem) widget).setActive(false);
 			}
 		}
-		
+
 		private void removeActiveContentContainer()
 		{
-			for(int i = 1; i < mainContainer.getWidgetCount(); i++)
+			for (int i = 1; i < mainContainer.getWidgetCount(); i++)
 				mainContainer.remove(i);
-			
+
 		}
-		
+
 		private void addWidgetAsContentPage(Widget widget)
 		{
 			mainContainer.add(widget);

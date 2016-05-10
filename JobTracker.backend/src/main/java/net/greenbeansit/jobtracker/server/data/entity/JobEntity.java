@@ -10,20 +10,23 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "JOB")
-//TODO Mike: Implement NamedQueries for Job
-//@NamedQueries( { @NamedQuery(name = "ActivityReportTemplate.findAll", query = "SELECT p FROM Person p"),
-//@NamedQuery(name = "Person.findPerson", query = "SELECT p FROM Person p where p.name=:name and p.age=:age")
-//})
-public class JobEntity implements Serializable {
+// TODO Mike: Implement NamedQueries for Job
+// @NamedQueries( { @NamedQuery(name = "ActivityReportTemplate.findAll", query =
+// "SELECT p FROM Person p"),
+// @NamedQuery(name = "Person.findPerson", query = "SELECT p FROM Person p where
+// p.name=:name and p.age=:age")
+// })
+public class JobEntity implements Serializable
+{
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -8538049446050091809L;
+	private static final long	serialVersionUID	= -8538049446050091809L;
 
 	@Id
 	@GeneratedValue
-	private Integer id;
+	private Integer				id;
 
 	private Integer				jobNr;
 	private Integer				posNr;
@@ -34,11 +37,31 @@ public class JobEntity implements Serializable {
 	private Integer				usedBudget;
 	private boolean				isIntern;
 
-	public Integer getId() {
+	public JobEntity()
+	{
+
+	}
+
+	public JobEntity(Integer jobNr, Integer posNr, Integer accountingMode,
+			Integer customerID, String desc, Integer maxBudget,
+			Integer usedBudget)
+	{
+		this.jobNr = jobNr;
+		this.posNr = posNr;
+		this.accountingMode = accountingMode;
+		this.customerID = customerID;
+		this.desc = desc;
+		this.maxBudget = maxBudget;
+		this.usedBudget = usedBudget;
+	}
+
+	public Integer getId()
+	{
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Integer id)
+	{
 		this.id = id;
 	}
 
@@ -96,7 +119,7 @@ public class JobEntity implements Serializable {
 	{
 		this.desc = desc;
 	}
-	
+
 	@Column(name = "BUDGET")
 	public Integer getMaxBudget()
 	{
@@ -113,7 +136,7 @@ public class JobEntity implements Serializable {
 	{
 		return usedBudget;
 	}
-	
+
 	public void setUsedBudget(Integer usedBudget)
 	{
 		this.usedBudget = usedBudget;

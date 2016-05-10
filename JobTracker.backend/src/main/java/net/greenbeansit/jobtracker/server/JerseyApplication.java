@@ -21,16 +21,21 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.web.SpringBootServletInitializer;
 
 @SpringBootApplication
-public class JerseyApplication extends SpringBootServletInitializer {
+public class JerseyApplication extends SpringBootServletInitializer
+{
 
 	@Override
-	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+	protected SpringApplicationBuilder configure(
+			SpringApplicationBuilder application)
+	{
 		return application.sources(JerseyApplication.class);
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args)
+	{
 		new JerseyApplication()
-				.configure(new SpringApplicationBuilder(JerseyApplication.class))
+				.configure(
+						new SpringApplicationBuilder(JerseyApplication.class))
 				.run(args);
 	}
 }

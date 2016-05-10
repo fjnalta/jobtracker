@@ -13,11 +13,11 @@ public class GwtEntryPoint implements EntryPoint
 	 * This is the entry point method.
 	 */
 	public void onModuleLoad()
-	{	
+	{
 		Application app = new Application();
-		
+
 		Panel rootPanel = RootPanel.get();
-		
+
 		rootPanel.add(app);
 	}
 }

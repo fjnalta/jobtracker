@@ -19,25 +19,32 @@ public class Job implements Serializable
 	private String				desc;
 
 	/**
-	 * Initializes a new instance of the {@link Job} class
-	 * with all its fields set to null.
+	 * Initializes a new instance of the {@link Job} class with all its fields
+	 * set to null.
 	 */
 	public Job()
 	{
-		
+
 	}
-	
+
 	/**
-	 * Initializes a new instance of the  {@link Job} class
-	 * with the following values.
+	 * Initializes a new instance of the {@link Job} class with the following
+	 * values.
 	 * 
-	 * @param jobNr the {@link jobNr} the is used to identify the {@link Job}.
-	 * @param posNr the position no.
-	 * @param payMode the payMode as a String.
-	 * @param customerID the unique identifier for the customer
-	 * @param desc the description of the job
-	 * @param maxBudget the maximum budget for the job.
-	 * @param usedBudget the currently used budget for the job
+	 * @param jobNr
+	 *            the {@link jobNr} the is used to identify the {@link Job}.
+	 * @param posNr
+	 *            the position no.
+	 * @param payMode
+	 *            the payMode as a String.
+	 * @param customerID
+	 *            the unique identifier for the customer
+	 * @param desc
+	 *            the description of the job
+	 * @param maxBudget
+	 *            the maximum budget for the job.
+	 * @param usedBudget
+	 *            the currently used budget for the job
 	 */
 	public Job(int jobNr, int posNr, Integer payMode, Integer customerID,
 			String desc, int maxBudget, int usedBudget)
@@ -50,20 +57,20 @@ public class Job implements Serializable
 		this.customerID = customerID;
 		this.desc = desc;
 	}
-	
+
 	/**
 	 * Setter & Getter
-	*/
+	 */
 	public Integer getMaxBudget()
 	{
 		return maxBudget;
 	}
-	
+
 	public Integer getUsedBudget()
 	{
 		return usedBudget;
 	}
-		
+
 	public String getDesc()
 	{
 		return desc;
@@ -83,15 +90,16 @@ public class Job implements Serializable
 	{
 		return payMode;
 	}
-	
+
 	public Integer getCustomerID()
 	{
 		return customerID;
 	}
-	
+
 	public String toString()
 	{
-		return this.jobNr + "-"+ this.posNr + "-" + this.payMode + "|" + this.customerID +"|" + this.desc;
+		return this.jobNr + "-" + this.posNr + "-" + this.payMode + "|"
+				+ this.customerID + "|" + this.desc;
 	}
-	
+
 }

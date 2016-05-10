@@ -12,36 +12,40 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "ACTIVITY_REPORT")
-//TODO Mike: Implement NamedQueries for ActivityReport
-//@NamedQueries( { @NamedQuery(name = "ActivityReportTemplate.findAll", query = "SELECT p FROM Person p"),
-//@NamedQuery(name = "Person.findPerson", query = "SELECT p FROM Person p where p.name=:name and p.age=:age")
-//})
-public class ActivityReportEntity implements Serializable {
+// TODO Mike: Implement NamedQueries for ActivityReport
+// @NamedQueries( { @NamedQuery(name = "ActivityReportTemplate.findAll", query =
+// "SELECT p FROM Person p"),
+// @NamedQuery(name = "Person.findPerson", query = "SELECT p FROM Person p where
+// p.name=:name and p.age=:age")
+// })
+public class ActivityReportEntity implements Serializable
+{
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -178627731533874470L;
+	private static final long	serialVersionUID	= -178627731533874470L;
 
 	@Id
 	@GeneratedValue
-	private Integer id;
+	private Integer				id;
 
-	private Integer	author;
-	private String	text;
-	private Date	beginDate;
-	private Time	beginTime;
-	private Date	endDate;
-	private Time	endTime;
-	private Integer	taskId;
-	private Integer	jobId;
-	
+	private Integer				author;
+	private String				text;
+	private Date				beginDate;
+	private Time				beginTime;
+	private Date				endDate;
+	private Time				endTime;
+	private Integer				taskId;
+	private Integer				jobId;
 
-	public Integer getId() {
+	public Integer getId()
+	{
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Integer id)
+	{
 		this.id = id;
 	}
 

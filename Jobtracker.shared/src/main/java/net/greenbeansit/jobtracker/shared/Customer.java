@@ -10,15 +10,18 @@ import java.io.Serializable;
 public class Customer implements Serializable
 {
 
-	private static final long serialVersionUID = 5968348976224309946L;
-	
-	private Integer id;
-	private String name;
-	
+	private static final long	serialVersionUID	= 5968348976224309946L;
+
+	private Integer				id;
+	private String				name;
+
 	/**
 	 * Initializes a new instance of the {@link Customer} class
-	 * @param id the identifier of the customer
-	 * @param name the name of the customer
+	 * 
+	 * @param id
+	 *            the identifier of the customer
+	 * @param name
+	 *            the name of the customer
 	 */
 	public Customer(Integer id, String name)
 	{
@@ -26,12 +29,12 @@ public class Customer implements Serializable
 		this.name = name;
 	}
 
-	public Integer getId() 
+	public Integer getId()
 	{
 		return id;
 	}
 
-	public void setId(Integer id) 
+	public void setId(Integer id)
 	{
 		if (id == null)
 		{
@@ -40,12 +43,12 @@ public class Customer implements Serializable
 		this.id = id;
 	}
 
-	public String getName() 
+	public String getName()
 	{
 		return name;
 	}
 
-	public void setName(String name) 
+	public void setName(String name)
 	{
 		if (name == null)
 		{

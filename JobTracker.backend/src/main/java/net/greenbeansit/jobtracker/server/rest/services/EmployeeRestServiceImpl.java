@@ -10,7 +10,6 @@ import net.greenbeansit.jobtracker.shared.Employee;
 import net.greenbeansit.jobtracker.shared.Job;
 import net.greenbeansit.jobtracker.shared.rest.services.EmployeeRestService;
 
-
 /**
  * Dummy implementation of the {@link EmployeeRestService} interface.
  * 
@@ -19,13 +18,12 @@ import net.greenbeansit.jobtracker.shared.rest.services.EmployeeRestService;
 public class EmployeeRestServiceImpl implements EmployeeRestService
 {
 	private JobDataService dataservice;
-	
+
 	public EmployeeRestServiceImpl()
 	{
 		dataservice = new JobServiceJpa();
 	}
-	
-	
+
 	@Override
 	public Employee getEmployee(Long employeeId)
 	{
@@ -66,21 +64,21 @@ public class EmployeeRestServiceImpl implements EmployeeRestService
 	public void createReport(Long employeeId, ActivityReport report)
 	{
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void updateReport(Long employeeId, ActivityReport report)
 	{
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void deleteReport(Long employeeId, Long reportId)
 	{
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -95,14 +93,14 @@ public class EmployeeRestServiceImpl implements EmployeeRestService
 			ActivityReportTemplate template)
 	{
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void deleteReportTemplate(Long employeeId, Long templateId)
 	{
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

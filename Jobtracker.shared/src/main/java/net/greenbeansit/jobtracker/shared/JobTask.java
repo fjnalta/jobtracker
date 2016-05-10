@@ -9,17 +9,21 @@ import java.io.Serializable;
  */
 public class JobTask implements Serializable
 {
-	private static final long serialVersionUID = 1834300319535257310L;
-	
-	private Integer id;
-	private Integer jobId;
-	private String name;
-	
+	private static final long	serialVersionUID	= 1834300319535257310L;
+
+	private Integer				id;
+	private Integer				jobId;
+	private String				name;
+
 	/**
 	 * Initializes a new instance of the {@link JobTask} class
-	 * @param id unique id for the JobTask
-	 * @param jobId the identifier of the jobId
-	 * @param name the name of the Task
+	 * 
+	 * @param id
+	 *            unique id for the JobTask
+	 * @param jobId
+	 *            the identifier of the jobId
+	 * @param name
+	 *            the name of the Task
 	 */
 	public JobTask(Integer id, Integer jobId, String name)
 	{
@@ -35,7 +39,7 @@ public class JobTask implements Serializable
 
 	public void setId(Integer id)
 	{
-		if(id == null)
+		if (id == null)
 		{
 			throw new IllegalArgumentException();
 		}
@@ -49,7 +53,7 @@ public class JobTask implements Serializable
 
 	public void setJobId(Integer jobId)
 	{
-		if(jobId == null)
+		if (jobId == null)
 		{
 			throw new IllegalArgumentException();
 		}

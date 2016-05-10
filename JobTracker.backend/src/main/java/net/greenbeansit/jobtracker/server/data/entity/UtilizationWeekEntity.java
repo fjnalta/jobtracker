@@ -13,35 +13,39 @@ import liquibase.datatype.core.DecimalType;
 
 @Entity
 @Table(name = "UTILIZATION_WEEK")
-//TODO Mike: Implement NamedQueries for Employee
-//@NamedQueries( { @NamedQuery(name = "ActivityReportTemplate.findAll", query = "SELECT p FROM Person p"),
-//@NamedQuery(name = "Person.findPerson", query = "SELECT p FROM Person p where p.name=:name and p.age=:age")
-//})
-public class UtilizationWeekEntity implements Serializable {
+// TODO Mike: Implement NamedQueries for Employee
+// @NamedQueries( { @NamedQuery(name = "ActivityReportTemplate.findAll", query =
+// "SELECT p FROM Person p"),
+// @NamedQuery(name = "Person.findPerson", query = "SELECT p FROM Person p where
+// p.name=:name and p.age=:age")
+// })
+public class UtilizationWeekEntity implements Serializable
+{
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 3842559068860954254L;
+	private static final long	serialVersionUID	= 3842559068860954254L;
 
 	@Id
 	@GeneratedValue
-	private Integer id;
+	private Integer				id;
 
-	private Integer		author;
-	private Date		begin;
-	private Integer		daysFree;
-	private Integer		daysWork;
-	private Integer 	daysHoliday;
-	private Integer		possibilty;
-	private Integer		pseudoJobId;
-	
+	private Integer				author;
+	private Date				begin;
+	private Integer				daysFree;
+	private Integer				daysWork;
+	private Integer				daysHoliday;
+	private Integer				possibilty;
+	private Integer				pseudoJobId;
 
-	public Integer getId() {
+	public Integer getId()
+	{
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Integer id)
+	{
 		this.id = id;
 	}
 

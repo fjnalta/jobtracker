@@ -10,31 +10,35 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "USER")
-//TODO Mike: Implement NamedQueries for Employee
-//@NamedQueries( { @NamedQuery(name = "ActivityReportTemplate.findAll", query = "SELECT p FROM Person p"),
-//@NamedQuery(name = "Person.findPerson", query = "SELECT p FROM Person p where p.name=:name and p.age=:age")
-//})
-public class UserEntity implements Serializable {
+// TODO Mike: Implement NamedQueries for Employee
+// @NamedQueries( { @NamedQuery(name = "ActivityReportTemplate.findAll", query =
+// "SELECT p FROM Person p"),
+// @NamedQuery(name = "Person.findPerson", query = "SELECT p FROM Person p where
+// p.name=:name and p.age=:age")
+// })
+public class UserEntity implements Serializable
+{
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1371314200909587258L;
+	private static final long	serialVersionUID	= 1371314200909587258L;
 
 	@Id
 	@GeneratedValue
-	private Integer id;
+	private Integer				id;
 
-	private String	name;
-	private String	surname;
-	private Integer supervisor;
-	
+	private String				name;
+	private String				surname;
+	private Integer				supervisor;
 
-	public Integer getId() {
+	public Integer getId()
+	{
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Integer id)
+	{
 		this.id = id;
 	}
 

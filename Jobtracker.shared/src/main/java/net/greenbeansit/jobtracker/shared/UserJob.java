@@ -13,15 +13,17 @@ public class UserJob implements Serializable
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -6327917752248682924L;
-	
-	private Integer id;
-	private Integer jobId;
-	private Integer role;
-	
+	private static final long	serialVersionUID	= -6327917752248682924L;
+
+	private Integer				id;
+	private Integer				jobId;
+	private Integer				role;
+
 	/**
 	 * Initializes a new instance of the {@link UserJob} class
-	 * @param id the unique identifier
+	 * 
+	 * @param id
+	 *            the unique identifier
 	 * @param jobId
 	 * @param role
 	 */
@@ -39,7 +41,7 @@ public class UserJob implements Serializable
 
 	public void setId(Integer id)
 	{
-		if(id == null)
+		if (id == null)
 		{
 			throw new IllegalArgumentException();
 		}
@@ -53,7 +55,7 @@ public class UserJob implements Serializable
 
 	public void setJobId(Integer jobId)
 	{
-		if(jobId == null)
+		if (jobId == null)
 		{
 			throw new IllegalArgumentException();
 		}
@@ -65,9 +67,9 @@ public class UserJob implements Serializable
 		return role;
 	}
 
-	public void setRole(Integer role) 
+	public void setRole(Integer role)
 	{
-		if(role == null)
+		if (role == null)
 		{
 			throw new IllegalArgumentException();
 		}
