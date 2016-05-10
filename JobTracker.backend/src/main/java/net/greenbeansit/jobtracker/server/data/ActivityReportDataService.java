@@ -1,5 +1,6 @@
 package net.greenbeansit.jobtracker.server.data;
 
+import java.sql.Date;
 import java.util.List;
 
 import net.greenbeansit.jobtracker.shared.ActivityReport;
@@ -15,12 +16,14 @@ public interface ActivityReportDataService
 
 	List<ActivityReport> getAll();
 
-	ActivityReport getActivityReport(Long reportId);
+	ActivityReport getActivityReport(Integer reportId);
 
-	List<ActivityReport> getByUserAndPeriod(Long employeeId, String from,
-			String to);
+	List<ActivityReport> getByUserAndPeriod(Integer authorId, Date from,
+			Date to);
 
-	List<ActivityReport> getByUser(Long employeeId);
+	List<ActivityReport> getByUser(Integer authorId);
+	
+	List<ActivityReport> getByJob(Integer jobId);
 
 	void save(ActivityReport report);
 

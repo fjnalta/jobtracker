@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.print.attribute.standard.DateTimeAtCompleted;
 
 @Entity
 @Table(name = "ACTIVITY_REPORT")
@@ -36,8 +37,28 @@ public class ActivityReportEntity implements Serializable
 	private Time				beginTime;
 	private Date				endDate;
 	private Time				endTime;
+	private Integer				breakTime;
 	private Integer				taskId;
 	private Integer				jobId;
+
+	public ActivityReportEntity()
+	{
+
+	}
+
+	public ActivityReportEntity(Integer author, String text, Date beginDate,
+			Time beginTime, Time endTime, Integer breakTime, Integer taskId,
+			Integer jobId)
+	{
+		this.author = author;
+		this.text = text;
+		this.beginDate = beginDate;
+		this.beginTime = beginTime;
+		this.endDate = null;
+		this.endTime = endTime;
+		this.taskId = taskId;
+		this.jobId = jobId;
+	}
 
 	public Integer getId()
 	{
@@ -135,6 +156,17 @@ public class ActivityReportEntity implements Serializable
 	public void setJobId(Integer jobId)
 	{
 		this.jobId = jobId;
+	}
+
+	@Column(name = "BREAK_TIME")
+	public Integer getBreakTime()
+	{
+		return breakTime;
+	}
+
+	public void setBreakTime(Integer breakTime)
+	{
+		this.breakTime = breakTime;
 	}
 
 }
