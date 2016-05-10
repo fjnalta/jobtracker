@@ -3,29 +3,33 @@ package net.greenbeansit.jobtracker.shared;
 import java.io.Serializable;
 
 /**
- * Represents a JobTask
+ * Represents a UserJob
  * 
  * @author Philipp Minges
  */
-public class JobTask implements Serializable
+public class UserJob implements Serializable
 {
-	private static final long serialVersionUID = 1834300319535257310L;
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6327917752248682924L;
 	
 	private Integer id;
 	private Integer jobId;
-	private String name;
+	private Integer role;
 	
 	/**
-	 * Initializes a new instance of the {@link JobTask} class
-	 * @param id unique id for the JobTask
-	 * @param jobId the identifier of the jobId
-	 * @param name the name of the Task
+	 * Initializes a new instance of the {@link UserJob} class
+	 * @param id the unique identifier
+	 * @param jobId
+	 * @param role
 	 */
-	public JobTask(Integer id, Integer jobId, String name)
+	public UserJob(Integer id, Integer jobId, Integer role)
 	{
 		this.id = id;
 		this.jobId = jobId;
-		this.name = name;
+		this.role = role;
 	}
 
 	public Integer getId()
@@ -56,17 +60,17 @@ public class JobTask implements Serializable
 		this.jobId = jobId;
 	}
 
-	public String getName()
+	public Integer getRole()
 	{
-		return name;
+		return role;
 	}
 
-	public void setName(String name)
+	public void setRole(Integer role) 
 	{
-		if (name == "")
+		if(role == null)
 		{
 			throw new IllegalArgumentException();
 		}
-		this.name = name;
+		this.role = role;
 	}
 }
