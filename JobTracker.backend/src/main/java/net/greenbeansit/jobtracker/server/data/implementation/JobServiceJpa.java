@@ -1,5 +1,6 @@
 package net.greenbeansit.jobtracker.server.data.implementation;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -30,7 +31,7 @@ public class JobServiceJpa implements JobDataService
 		JobEntity entity = new JobEntity();
 		entity.setJobNr(job.getJobID().getJobNr());
 		entity.setPosNr(job.getJobID().getPosNr());
-		entity.setPayMode(job.getJobID().getPayMode());
+		entity.setAccountingMode(job.getJobID().getPayMode());
 		entity.setCustomerID(job.getJobID().getCustomerID());
 		entity.setDesc(job.getJobID().getDesc());
 		entity.setMaxBudget(job.getMaxBudget());
@@ -41,18 +42,32 @@ public class JobServiceJpa implements JobDataService
 	@Override
 	public boolean update(Job job)
 	{
-		return personRepository.update(job) != null;
+		JobEntity entity = new JobEntity();
+		entity.setJobNr(job.getJobID().getJobNr());
+		entity.setPosNr(job.getJobID().getPosNr());
+		entity.setAccountingMode(job.getJobID().getPayMode());
+		entity.setCustomerID(job.getJobID().getCustomerID());
+		entity.setDesc(job.getJobID().getDesc());
+		entity.setMaxBudget(job.getMaxBudget());
+		entity.setUsedBudget(job.getUsedBudget());
+		return personRepository.update(entity) != null;
 	}
 
 	@Override
 	public void delete(Job job)
 	{
-		personRepository.delete(job);
+		personRepository.delete(personRepository.findByJobNrAndPosNr(job.getJobID().getJobNr(), job.getJobID().getPosNr()));
 	}
 
 	@Override
 	public List<Job> getAll()
 	{
+		ArrayList<Job> list = new ArrayList<Job>();
+		for(JobEntity entity : personRepository.findAll())
+		{
+			Job job = new Job();
+			//TODO
+		}
 		return personRepository.findAll();
 	}
 

@@ -1,6 +1,7 @@
 package net.greenbeansit.jobtracker.server.data.entity;
 
 import java.io.Serializable;
+import java.sql.Time;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -29,9 +30,9 @@ public class ActivityReportEntity implements Serializable {
 	private Integer	author;
 	private String	text;
 	private Date	beginDate;
-	private Integer	beginTime;
+	private Time	beginTime;
 	private Date	endDate;
-	private Integer	endTime;
+	private Time	endTime;
 	private Integer	taskId;
 	private Integer	jobId;
 	
@@ -78,12 +79,12 @@ public class ActivityReportEntity implements Serializable {
 	}
 
 	@Column(name = "BEGIN_TIME")
-	public Integer getBeginTime()
+	public Time getBeginTime()
 	{
 		return beginTime;
 	}
 
-	public void setBeginTime(Integer beginTime)
+	public void setBeginTime(Time beginTime)
 	{
 		this.beginTime = beginTime;
 	}
@@ -100,12 +101,12 @@ public class ActivityReportEntity implements Serializable {
 	}
 
 	@Column(name = "END_TIME")
-	public Integer getEndTime()
+	public Time getEndTime()
 	{
 		return endTime;
 	}
 
-	public void setEndTime(Integer endTime)
+	public void setEndTime(Time endTime)
 	{
 		this.endTime = endTime;
 	}
