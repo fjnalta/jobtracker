@@ -7,7 +7,7 @@ import java.util.Date;
  * Shared representation of an Activity (Taetigkeitsbericht (TB)). Is used in
  * frontend logic and used as a medium between frontend and backend.
  * 
- * @author Mike Hukiewitz & Alex
+ * @authorId Mike Hukiewitz & Alex
  *
  */
 public class ActivityReport implements Serializable
@@ -15,14 +15,16 @@ public class ActivityReport implements Serializable
 
 	private static final long	serialVersionUID	= 7682896069658320372L;
 
-	private String				description;
-	private String				identifier;
+	private Integer				id;
+	private Integer				taskId;
+	private Integer				jobId;
+	private Integer				authorId;
+
+	private String				text;
 	private Date				date;
 	private Integer				startTime;
 	private Integer				duration;
 	private Integer				breakTime;
-	private Long				author;
-	private Long				id;
 
 	/**
 	 * Initializes a new instance of the {@link ActivityReport} class with its
@@ -37,46 +39,48 @@ public class ActivityReport implements Serializable
 	 * Initializes a new instance of the {@link ActivityReport} class with the
 	 * following values
 	 * 
-	 * @param description
-	 *            the description of the report.
-	 * @param identifier
-	 *            the identifier string.
+	 * @param id
+	 *            id of this ActivityReport.
+	 * @param taskId
+	 *            id of the corresponding task.
+	 * @param jobId
+	 *            id of the corresponding job.
+	 * @param authorId
+	 *            of the author.
+	 * @param text
+	 *            the text of the report.
 	 * @param date
 	 *            the date of the report.
 	 * @param startTime
-	 *            the start time of the report.
+	 *            the start time as minutes since 0 am. (1 = 0:01)
 	 * @param duration
-	 *            the duration time of the report.
+	 *            the duration in minutes.
+	 * @param breakTime
+	 *            duration of breaks in minutes.
 	 */
-	public ActivityReport(String description, String identifier, Date date,
-			int startTime, int duration, int breakTime)
+	public ActivityReport(Integer id, Integer taskId, Integer jobId,
+			Integer authorId, String text, Date date, Integer startTime,
+			Integer duration, Integer breakTime)
 	{
-		this.setDescription(description);
-		this.setIdentifier(identifier);
+		this.setId(id);
+		this.setTaskId(taskId);
+		this.setJobId(jobId);
+		this.setAuthor(authorId);
+		this.setText(text);
 		this.setDate(date);
 		this.setStartTime(startTime);
 		this.setDuration(duration);
 		this.setBreakTime(breakTime);
 	}
 
-	public String getDescription()
+	public String getText()
 	{
-		return description;
+		return text;
 	}
 
-	public void setDescription(String description)
+	public void setText(String text)
 	{
-		this.description = description;
-	}
-
-	public String getIdentifier()
-	{
-		return identifier;
-	}
-
-	public void setIdentifier(String identifier)
-	{
-		this.identifier = identifier;
+		this.text = text;
 	}
 
 	public int getDuration()
@@ -116,16 +120,16 @@ public class ActivityReport implements Serializable
 		this.duration = endTime - startTime;
 	}
 
-	public Long getAuthor()
+	public Integer getAuthor()
 	{
-		return author;
+		return authorId;
 	}
 
-	public void setAuthor(Long author)
+	public void setAuthor(Integer authorId)
 	{
-		if (author == null)
+		if (authorId == null)
 			throw (new IllegalArgumentException());
-		this.author = author;
+		this.authorId = authorId;
 	}
 
 	public Date getDate()
@@ -156,14 +160,34 @@ public class ActivityReport implements Serializable
 		this.breakTime = breakTime;
 	}
 
-	public Long getId()
+	public Integer getId()
 	{
 		return id;
 	}
 
-	public void setId(Long id)
+	public void setId(Integer id)
 	{
 		this.id = id;
+	}
+
+	public Integer getTaskId()
+	{
+		return taskId;
+	}
+
+	public void setTaskId(Integer taskId)
+	{
+		this.taskId = taskId;
+	}
+
+	public Integer getJobId()
+	{
+		return jobId;
+	}
+
+	public void setJobId(Integer jobId)
+	{
+		this.jobId = jobId;
 	}
 
 }
