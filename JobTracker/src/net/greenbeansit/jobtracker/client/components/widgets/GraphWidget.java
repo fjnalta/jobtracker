@@ -75,12 +75,12 @@ public class GraphWidget extends Composite implements ObservableOnProjectPage {
 	private PieChart piechart;
 	private Date startDate;
 	private Date endDate;
-	private HashMap<String,String> languagePack;
+	//private HashMap<String,String> languagePack;
 
 	private GraphMode currentMode;
 
 	private void initialize() {
-		if(this.languagePack==null){
+		/*if(this.languagePack==null){
 			languagePack.put("jan", "January");
 			languagePack.put("feb", "February");
 			languagePack.put("mar", "March");
@@ -94,7 +94,7 @@ public class GraphWidget extends Composite implements ObservableOnProjectPage {
 			
 			
 		}
-		
+		*/
 		startDate = new Date();
 		startDate.setYear(startDate.getYear() - 1);
 		endDate = new Date();
@@ -295,9 +295,9 @@ public class GraphWidget extends Composite implements ObservableOnProjectPage {
 		// TODO Auto-generated method stub
 
 	}
-	
+	/*
 	public void setLanguage(HashMap<String,String> languagePack){
 		this.languagePack = languagePack;
 	}
-
+*/
 }

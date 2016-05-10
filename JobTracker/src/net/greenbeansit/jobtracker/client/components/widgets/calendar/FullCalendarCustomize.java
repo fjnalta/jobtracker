@@ -56,7 +56,7 @@ public class FullCalendarCustomize extends FullCalendar {
 	 */
 	
 	public void addActvityRepors(ActivityReport report){
-		Event event = new Event(report.getIdentifier(), report.getDescription(), true, true, true);
+		//Event event = new Event(report.getIdentifier(), report.getDescription(), true, true, true);
 		//event start,ende usw setzen
 	}
 	

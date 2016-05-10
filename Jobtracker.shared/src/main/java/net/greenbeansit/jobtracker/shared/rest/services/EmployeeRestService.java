@@ -109,9 +109,9 @@ public interface EmployeeRestService extends DirectRestService
 	 *             if the employeeId does not exist.
 	 */
 	@GET
-	@Path("/{userId}/reportPeriod")
+	@Path("/{userId}/reportPeriod/{from}/{to}")
 	List<ActivityReport> getReportPeriod(
-			@PathParam("employeeId") Integer userId, String from, String to);
+			@PathParam("userId") Integer userId, @PathParam("from")String from, @PathParam("to")String to);
 
 	/**
 	 * Creates a given {@code ActivityReport} on the server for the
