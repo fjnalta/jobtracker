@@ -33,7 +33,7 @@ public class UtilizationWeekEntity implements Serializable {
 	private Integer		daysFree;
 	private Integer		daysWork;
 	private Integer 	daysHoliday;
-	private DecimalType	possibilty;
+	private Integer		possibilty;
 	private Integer		pseudoJobId;
 	
 
@@ -101,12 +101,12 @@ public class UtilizationWeekEntity implements Serializable {
 	}
 
 	@Column(name = "POSSIBILITY")
-	public DecimalType getPossibilty()
+	public Integer getPossibilty()
 	{
 		return possibilty;
 	}
 
-	public void setPossibilty(DecimalType possibilty)
+	public void setPossibilty(Integer possibilty)
 	{
 		this.possibilty = possibilty;
 	}
