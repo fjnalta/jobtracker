@@ -3,7 +3,7 @@ package net.greenbeansit.jobtracker.shared;
 import java.io.Serializable;
 
 /**
- * Represents 
+ * Represents a Customer
  * 
  * @author Philipp Minges
  */
