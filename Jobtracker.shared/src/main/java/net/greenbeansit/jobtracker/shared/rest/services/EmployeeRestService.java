@@ -97,6 +97,8 @@ public interface EmployeeRestService extends DirectRestService
 	 * Gets all {@link ActivityReport}s made by the {@link User} with the
 	 * following ID that are in the following period of time.
 	 * 
+	 * The pattern of the date is dd.mm.yyyy
+	 * 
 	 * @param userId
 	 *            the ID of the {@link User}.
 	 * @param from

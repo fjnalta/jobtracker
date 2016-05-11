@@ -1,12 +1,14 @@
 package net.greenbeansit.jobtracker.client.components;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.fusesource.restygwt.client.Method;
 import org.gwtbootstrap3.client.ui.Row;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.Window;
@@ -75,6 +77,9 @@ public class HomePage extends Composite {
 		loadJobs(this.currentUserId);
 		loadTemplates(this.currentUserId);
 		loadUser(this.currentUserId);
+		DateTimeFormat format = DateTimeFormat.getFormat("dd.MM.yyyy");
+		
+		Window.alert(format.format(new Date()));
 	}
 
 	private void loadJobs(Integer Id) {

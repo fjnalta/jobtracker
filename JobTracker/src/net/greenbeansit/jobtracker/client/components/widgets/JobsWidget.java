@@ -74,12 +74,10 @@ public class JobsWidget extends Composite implements HomePageObservable {
 	@Override
 	public void update() {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void notifyHandler() {
 		// TODO Auto-generated method stub
-		
 	}
 }
