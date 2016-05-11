@@ -42,64 +42,70 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 
 	interface CalendarTimeInputWidgetUiBinder extends UiBinder<Widget, CalendarTimeInputWidget> {
 	}
+	
+	@UiField
+	Button buttonUpDateStart;
+	@UiField
+	Button buttonDownDateStart;
+	@UiField
+	TextBox dateStart;
+	@UiField
+	TextBox dateEnd;
+	@UiField
+	Button buttonUpDateEnd;
+	@UiField
+	Button buttonDownDateEnd;
 
 	@UiField
-	Button buttonUpStart;
+	Button buttonTimeHourUpEnd;
 	@UiField
-	Button buttonDownStart;
-
+	Button buttonTimeHourDownEnd;
 	@UiField
-	Button buttonUpEnd;
+	Button buttonTimeHourUpStart;
 	@UiField
-	Button buttonDownEnd;
-
+	Button buttonTimeHourDownStart;
 	@UiField
 	TextBox eventStart;
-
 	@UiField
 	TextBox eventEnd;
+	@UiField
+	Button buttonTimeMinuteUpEnd;
+	@UiField
+	Button buttonTimeMinuteDownEnd;
+	@UiField
+	Button buttonTimeMinuteUpStart;
+	@UiField
+	Button buttonTimeMinuteDownStart;
+	
+	@UiField
+	Button buttonTimeHourUpPause;
+	@UiField
+	Button buttonTimeHourDownPause;
+	@UiField
+	TextBox pause;
+	@UiField
+	Button buttonTimeMinuteUpPause;
+	@UiField
+	Button buttonTimeMinuteDownPause;
+	
+	
+	
+	@UiField
+	TextBox workTime;
 
 	@UiField
-	IntegerBox pause;
-
-	@UiField
-	IntegerBox workTime;
-
-	@UiField
-	Button buttonBuchen;
+	Button buttonBook;
 
 	public CalendarTimeInputWidget() {
 		initWidget(uiBinder.createAndBindUi(this));
 		handler.addObserver(this);
-		buttonUpStart.setIcon(IconType.ARROW_UP);
-		buttonDownStart.setIcon(IconType.ARROW_DOWN);
-		buttonUpEnd.setIcon(IconType.ARROW_UP);
-		buttonDownEnd.setIcon(IconType.ARROW_DOWN);
+		// buttonUpStart.setIcon(IconType.ARROW_UP);
+		// buttonDownStart.setIcon(IconType.ARROW_DOWN);
+		// buttonUpEnd.setIcon(IconType.ARROW_UP);
+		// buttonDownEnd.setIcon(IconType.ARROW_DOWN);
 	}
 
-	@UiHandler("buttonUpStart")
-	public void onClickUpStart(ClickEvent event) {
-		increaseEvent(eventStart);
-		notifyHandler();
-	}
 
-	@UiHandler("buttonDownStart")
-	public void onClickDownStart(ClickEvent event) {
-		decreaseEvent(eventStart);
-		notifyHandler();
-	}
-
-	@UiHandler("buttonUpEnd")
-	public void onClickUpEnd(ClickEvent event) {
-		increaseEvent(eventEnd);
-		notifyHandler();
-	}
-
-	@UiHandler("buttonDownEnd")
-	public void onClickDownEnd(ClickEvent event) {
-		decreaseEvent(eventEnd);
-		notifyHandler();
-	}
 
 	@UiHandler("eventStart")
 	public void keyPressedEventStart(KeyPressEvent event) {
@@ -226,18 +232,12 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 	}
 
 	private void workTimeIsEntered() {
-		buttonDownEnd.setEnabled(false);
-		buttonDownStart.setEnabled(false);
-		buttonUpEnd.setEnabled(false);
-		buttonUpStart.setEnabled(false);
+	
 		eventEnd.setEnabled(false);
 	}
 
 	private void enableFields() {
-		buttonDownEnd.setEnabled(true);
-		buttonDownStart.setEnabled(true);
-		buttonUpEnd.setEnabled(true);
-		buttonUpStart.setEnabled(true);
+		
 		eventEnd.setEnabled(true);
 	}
 
@@ -287,6 +287,5 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 	public String addDoublePoint(String input) {
 		return input = input.substring(0, 2) + ":" + input.substring(2, input.length());
 	}
-	
-	
+
 }
