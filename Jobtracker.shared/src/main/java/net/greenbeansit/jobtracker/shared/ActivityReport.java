@@ -17,9 +17,11 @@ public class ActivityReport implements Serializable
 
 	private Integer				id;
 	private Integer				taskId;
-	private Integer				jobId;
+	private Integer				jobNr;
+	private Integer				jobPosNr;
 	private Integer				authorId;
-
+	
+	private String 				jobDesc;
 	private String				text;
 	private Date				date;
 	private Integer				startTime;
@@ -58,13 +60,13 @@ public class ActivityReport implements Serializable
 	 * @param breakTime
 	 *            duration of breaks in minutes.
 	 */
-	public ActivityReport(Integer id, Integer taskId, Integer jobId,
+	public ActivityReport(Integer id, Integer taskId, Integer jobNr,
 			Integer authorId, String text, Date date, Integer startTime,
 			Integer duration, Integer breakTime)
 	{
 		this.setId(id);
 		this.setTaskId(taskId);
-		this.setJobId(jobId);
+		this.setJobNr(jobNr);
 		this.setAuthor(authorId);
 		this.setText(text);
 		this.setDate(date);
@@ -180,14 +182,28 @@ public class ActivityReport implements Serializable
 		this.taskId = taskId;
 	}
 
-	public Integer getJobId()
-	{
-		return jobId;
+	public String getJobDesc() {
+		return jobDesc;
 	}
 
-	public void setJobId(Integer jobId)
-	{
-		this.jobId = jobId;
+	public void setJobDesc(String jobDesc) {
+		this.jobDesc = jobDesc;
+	}
+
+	public Integer getJobPosNr() {
+		return jobPosNr;
+	}
+
+	public void setJobPosNr(Integer jobPosNr) {
+		this.jobPosNr = jobPosNr;
+	}
+
+	public Integer getJobNr() {
+		return jobNr;
+	}
+
+	public void setJobNr(Integer jobNr) {
+		this.jobNr = jobNr;
 	}
 
 }
