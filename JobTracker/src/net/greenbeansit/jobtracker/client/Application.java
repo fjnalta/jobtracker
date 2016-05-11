@@ -2,6 +2,8 @@ package net.greenbeansit.jobtracker.client;
 
 import org.gwtbootstrap3.client.ui.AnchorListItem;
 import org.gwtbootstrap3.client.ui.Container;
+import org.gwtbootstrap3.client.ui.Image;
+import org.gwtbootstrap3.client.ui.NavbarBrand;
 import org.gwtbootstrap3.client.ui.NavbarNav;
 import org.gwtbootstrap3.extras.notify.client.ui.Notify;
 
@@ -44,6 +46,9 @@ public class Application extends Composite
 
 	@UiField
 	NavbarNav		nav;
+	
+	@UiField
+	NavbarBrand navbarBrand;
 
 	Controller		controller;
 
@@ -51,6 +56,9 @@ public class Application extends Composite
 	{
 		initWidget(uiBinder.createAndBindUi(this));
 
+		//Add navbar logo
+		navbarBrand.add(new Image("jobtracker/assets/images/navbar_logo.png"));
+		
 		History.addValueChangeHandler(new HistoryValueChangeHandler());
 
 		History.fireCurrentHistoryState();
