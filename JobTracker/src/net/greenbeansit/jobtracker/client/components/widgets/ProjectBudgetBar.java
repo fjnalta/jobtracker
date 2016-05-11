@@ -13,7 +13,7 @@ import com.google.gwt.user.client.ui.Widget;
 
 import net.greenbeansit.jobtracker.client.components.ProjectPage;
 
-public class ProjectBudgetBar extends Composite implements ObservableOnProjectPage
+public class ProjectBudgetBar extends Composite
 {
 
 	private static ProjectBudgetBarUiBinder uiBinder =
@@ -56,24 +56,4 @@ public class ProjectBudgetBar extends Composite implements ObservableOnProjectPa
 		budgetBar.setText(consumedBudget + "/" + totalBudget);
 		//budgetBar.setText(percentage + "");
 	}
-
-	@Override
-	public void registerObserver(ProjectPage projectPage) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void removeObserver(ProjectPage projectPage) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void notificate() {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	
 }

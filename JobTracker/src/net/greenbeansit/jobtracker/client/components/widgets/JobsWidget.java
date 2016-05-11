@@ -22,9 +22,10 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 
 import net.greenbeansit.jobtracker.client.components.HomePage;
+import net.greenbeansit.jobtracker.client.components.HomePageObservable;
 import net.greenbeansit.jobtracker.shared.Job;
 
-public class JobsWidget extends Composite implements ObservableOnHomePage {
+public class JobsWidget extends Composite implements HomePageObservable {
 
 	private static JobsWidgetUiBinder uiBinder = GWT.create(JobsWidgetUiBinder.class);
 
@@ -71,19 +72,14 @@ public class JobsWidget extends Composite implements ObservableOnHomePage {
 	}
 
 	@Override
-	public void registerObserver(HomePage homePage) {
-		this.homePage = homePage;
-
+	public void update() {
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
-	public void removeObserver(HomePage homePage) {
-		this.homePage = null;
-
-	}
-
-	@Override
-	public void notificate() {
-		this.homePage.update();
+	public void notifyHandler() {
+		// TODO Auto-generated method stub
+		
 	}
 }

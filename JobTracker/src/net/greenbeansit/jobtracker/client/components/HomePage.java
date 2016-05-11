@@ -68,13 +68,9 @@ public class HomePage extends Composite {
 	private void initialize() {
 		jobsWidget = new JobsWidget();
 		rowJobs.add(jobsWidget);
-		jobsWidget.registerObserver(this);
 		
 		workWidget = new WorkDiscriptionWidget();
-		workWidget.registerObserver(this);
 		rowWork.add(workWidget);
-		
-		utilizationWidget.registerObserver(this);
 		
 		loadJobs(this.currentUserId);
 		loadTemplates(this.currentUserId);
@@ -89,7 +85,6 @@ public class HomePage extends Composite {
 
 				jobsWidget.removeFromParent();
 				jobsWidget = new JobsWidget();
-				jobsWidget.registerObserver(self);
 				jobsWidget.addJobs(response);
 				rowJobs.add(jobsWidget);
 				

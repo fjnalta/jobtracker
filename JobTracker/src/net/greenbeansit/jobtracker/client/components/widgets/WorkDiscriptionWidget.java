@@ -6,6 +6,7 @@ import org.fusesource.restygwt.client.Method;
 import org.gwtbootstrap3.client.ui.Button;
 import org.gwtbootstrap3.client.ui.TextArea;
 import org.gwtbootstrap3.client.ui.TextBox;
+import org.gwtbootstrap3.extras.notify.client.ui.Notify;
 import org.gwtbootstrap3.extras.select.client.ui.OptGroup;
 import org.gwtbootstrap3.extras.select.client.ui.Select;
 
@@ -20,12 +21,13 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 
 import net.greenbeansit.jobtracker.client.components.HomePage;
+import net.greenbeansit.jobtracker.client.components.HomePageObservable;
 import net.greenbeansit.jobtracker.client.utils.rest.RestClient;
 import net.greenbeansit.jobtracker.client.utils.rest.RestClient.SuccessFunction;
 import net.greenbeansit.jobtracker.shared.ActivityReportTemplate;
 import net.greenbeansit.jobtracker.shared.Job;
 
-public class WorkDiscriptionWidget extends Composite implements ObservableOnHomePage
+public class WorkDiscriptionWidget extends Composite implements HomePageObservable
 {		
 
 	private static WorkDiscriptionWidgetUiBinder uiBinder = 
@@ -75,18 +77,6 @@ public class WorkDiscriptionWidget extends Composite implements ObservableOnHome
 	}
 
 
-	@Override
-	public void registerObserver(HomePage homePage) {
-		this.homePage = homePage;
-		
-	}
-
-
-	@Override
-	public void removeObserver(HomePage homePage) {
-		this.homePage = null;
-		
-	}
 	
 	@UiHandler("buttonSave")
 	public void saveTemplate(final ClickEvent e){
@@ -99,10 +89,6 @@ public class WorkDiscriptionWidget extends Composite implements ObservableOnHome
 		//textIdentifier.setText(selectedTemplate.getIdentifier());
 	}
 
-	@Override
-	public void notificate() {
-		this.homePage.update();
-	}
 	
 	public void addTemplates(List<ActivityReportTemplate> templateList){
 		for(ActivityReportTemplate t : templateList){
@@ -117,5 +103,17 @@ public class WorkDiscriptionWidget extends Composite implements ObservableOnHome
 		template.setTemplateName(textName.getText());
 		
 		return template;
+	}
+
+
+	@Override
+	public void update() {
+		
+	}
+
+
+	@Override
+	public void notifyHandler() {
+		
 	}
 }
