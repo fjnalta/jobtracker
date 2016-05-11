@@ -1,0 +1,42 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:h="urn:import:org.gwtbootstrap3.client.ui.html"
+	xmlns:gwtbootstrap3="urn:import:org.gwtbootstrap3.client.ui">
+	<ui:style>
+	.container {
+		padding: 5px;
+	}
+	
+	.spanName {
+		width: 30%;
+		margin-right: 5px;
+		overflow: hidden;
+	}
+	
+	.barUtilization {
+		width: 60%;
+		height: 15px;
+		
+		margin-top: auto;
+		margin-bottom: auto;
+		
+		top: 0;
+		bottom: 0;
+		
+		margin-right: 5px;
+		
+		
+	}
+	
+	.spanUtilization {
+		width: 10%;
+		margin-right: 5px;
+	}
+	</ui:style>
+	<h:ClearFix addStyleNames="{style.container}" ui:field="anchor">
+		<h:Span ui:field="spanName" addStyleNames="{style.spanName}" />
+		<gwtbootstrap3:ProgressBar ui:field="barUtilization"
+			addStyleNames="{style.barUtilization}" />
+		<h:Span ui:field="spanUtilization" addStyleNames="{style.spanUtilization}" />
+	</h:ClearFix>
+</ui:UiBinder> 
