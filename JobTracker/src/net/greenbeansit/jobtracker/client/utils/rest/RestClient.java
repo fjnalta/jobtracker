@@ -31,6 +31,7 @@ public class RestClient<R> {
 	 */
 	public interface SuccessFunction<T> {
 		void onSuccess(Method method, T response);
+		void onFailure(Method method, Throwable exception);
 	}
 
 	/**
@@ -63,7 +64,12 @@ public class RestClient<R> {
 			public void onSuccess(Method method, R response) {
 				successFunction.onSuccess(method, response);
 			}
-		};
+
+			@Override
+			public void onFailure(Method method, Throwable exception) {
+				successFunction.onFailure(method,exception);	
+			}
+			};
 		return new RestClient<R>(callback);
 	}
 
