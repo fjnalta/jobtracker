@@ -23,6 +23,7 @@
 	<inherits name='com.googlecode.gwt.charts.Charts'/>
 	<inherits name="com.google.gwt.i18n.I18N"/>
 	<inherits name="org.fusesource.restygwt.RestyGWT"/>
+	<inherits name="org.gwtbootstrap3.extras.notify.Notify"/>
 	
 	<!-- Specify the app entry point class. -->
 	<entry-point class='net.greenbeansit.jobtracker.client.GwtEntryPoint' />

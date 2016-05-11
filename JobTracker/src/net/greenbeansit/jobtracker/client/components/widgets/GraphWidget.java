@@ -32,7 +32,7 @@ import com.googlecode.gwt.charts.client.options.VAxis;
 import net.greenbeansit.jobtracker.client.components.ProjectPage;
 import net.greenbeansit.jobtracker.shared.ActivityReport;
 
-public class GraphWidget extends Composite implements ObservableOnProjectPage {
+public class GraphWidget extends Composite{
 
 	private static GraphWidgetUiBinder uiBinder = GWT.create(GraphWidgetUiBinder.class);
 
@@ -279,22 +279,7 @@ public class GraphWidget extends Composite implements ObservableOnProjectPage {
 		initialize();
 	}
 
-	@Override
-	public void registerObserver(ProjectPage projectPage) {
-
-	}
-
-	@Override
-	public void removeObserver(ProjectPage projectPage) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void notificate() {
-		// TODO Auto-generated method stub
-
-	}
+	
 	/*
 	public void setLanguage(HashMap<String,String> languagePack){
 		this.languagePack = languagePack;

@@ -46,7 +46,7 @@ public class ProjectPage extends Composite
 	}
 	
 	private void initialize(){
-		graphWidget.registerObserver(this);
+		
 	}
 
 }

@@ -3,6 +3,7 @@ package net.greenbeansit.jobtracker.client;
 import org.gwtbootstrap3.client.ui.AnchorListItem;
 import org.gwtbootstrap3.client.ui.Container;
 import org.gwtbootstrap3.client.ui.NavbarNav;
+import org.gwtbootstrap3.extras.notify.client.ui.Notify;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
