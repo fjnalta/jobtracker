@@ -25,9 +25,9 @@ public interface ActivityReportDataService
 	
 	List<ActivityReport> getByJob(Integer jobId);
 
-	void save(ActivityReport report);
+	boolean save(ActivityReport report);
 
-	void update(ActivityReport report);
+	boolean update(ActivityReport report);
 
 	void delete(ActivityReport report);
 }

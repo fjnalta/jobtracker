@@ -15,7 +15,7 @@ import net.greenbeansit.jobtracker.server.data.repository.ActivityReportReposito
 import net.greenbeansit.jobtracker.shared.ActivityReport;
 import net.greenbeansit.jobtracker.shared.Job;
 
-@Service("jobService")
+@Service("activityReportService")
 public class ActivityReportServiceJpa implements ActivityReportDataService
 {
 
@@ -40,14 +40,16 @@ public class ActivityReportServiceJpa implements ActivityReportDataService
 	}
 
 	@Override
-	public List<ActivityReport> getByUserAndPeriod(Integer employeeId, Date from,
-			Date to)
+	public List<ActivityReport> getByUserAndPeriod(Integer employeeId,
+			Date from, Date to)
 	{
 		ArrayList<ActivityReport> list = new ArrayList<ActivityReport>();
-		for (ActivityReportEntity entity : activityRepository.findByAuthor(employeeId))
+		for (ActivityReportEntity entity : activityRepository
+				.findByAuthor(employeeId))
 		{
-			//TODO filter
-			list.add(convert(entity));
+			if (entity.getBeginDate().compareTo(from) >= 0
+					&& entity.getBeginDate().compareTo(to) <= 0)
+				list.add(convert(entity));
 		}
 		return list;
 	}
@@ -55,22 +57,25 @@ public class ActivityReportServiceJpa implements ActivityReportDataService
 	@Override
 	public List<ActivityReport> getByUser(Integer employeeId)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<ActivityReport> list = new ArrayList<ActivityReport>();
+		for (ActivityReportEntity entity : activityRepository
+				.findByAuthor(employeeId))
+		{
+			list.add(convert(entity));
+		}
+		return list;
 	}
 
 	@Override
-	public void save(ActivityReport report)
+	public boolean save(ActivityReport report)
 	{
-		// TODO Auto-generated method stub
-
+		return activityRepository.save(convert(report)) != null;
 	}
 
 	@Override
-	public void update(ActivityReport report)
+	public boolean update(ActivityReport report)
 	{
-		// TODO Auto-generated method stub
-
+		return activityRepository.update(convert(report)) != null;
 	}
 
 	@Override
@@ -86,7 +91,7 @@ public class ActivityReportServiceJpa implements ActivityReportDataService
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
 	private ActivityReport convert(ActivityReportEntity entity)
 	{
 		if (entity == null)
