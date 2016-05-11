@@ -20,5 +20,7 @@ public interface JobRepository extends CrudRepository<JobEntity, Long>
 
 	JobEntity update(JobEntity persisted);
 
-	JobEntity findByJobNrAndPosNr(Integer jobNr, Integer posNr);
+	JobEntity findByJobNrAndPosNr(Integer JOB_NO, Integer POS_NO);
+	
+	List<JobEntity> findByCustomerId(Integer CUSTOMER_ID);
 }

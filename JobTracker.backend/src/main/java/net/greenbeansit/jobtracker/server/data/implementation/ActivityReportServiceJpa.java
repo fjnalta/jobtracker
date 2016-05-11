@@ -10,23 +10,21 @@ import org.springframework.stereotype.Service;
 
 import net.greenbeansit.jobtracker.server.data.ActivityReportDataService;
 import net.greenbeansit.jobtracker.server.data.entity.ActivityReportEntity;
-import net.greenbeansit.jobtracker.server.data.entity.JobEntity;
 import net.greenbeansit.jobtracker.server.data.repository.ActivityReportRepository;
 import net.greenbeansit.jobtracker.shared.ActivityReport;
-import net.greenbeansit.jobtracker.shared.Job;
 
 @Service("activityReportService")
 public class ActivityReportServiceJpa implements ActivityReportDataService
 {
 
 	@Inject
-	private ActivityReportRepository activityRepository;
+	private ActivityReportRepository repository;
 
 	@Override
 	public List<ActivityReport> getAll()
 	{
 		ArrayList<ActivityReport> list = new ArrayList<ActivityReport>();
-		for (ActivityReportEntity entity : activityRepository.findAll())
+		for (ActivityReportEntity entity : repository.findAll())
 		{
 			list.add(convert(entity));
 		}
@@ -36,7 +34,7 @@ public class ActivityReportServiceJpa implements ActivityReportDataService
 	@Override
 	public ActivityReport getActivityReport(Integer reportId)
 	{
-		return convert(activityRepository.findOne(reportId));
+		return convert(repository.findOne(reportId));
 	}
 
 	@Override
@@ -44,7 +42,7 @@ public class ActivityReportServiceJpa implements ActivityReportDataService
 			Date from, Date to)
 	{
 		ArrayList<ActivityReport> list = new ArrayList<ActivityReport>();
-		for (ActivityReportEntity entity : activityRepository
+		for (ActivityReportEntity entity : repository
 				.findByAuthor(employeeId))
 		{
 			if (entity.getBeginDate().compareTo(from) >= 0
@@ -58,7 +56,7 @@ public class ActivityReportServiceJpa implements ActivityReportDataService
 	public List<ActivityReport> getByUser(Integer employeeId)
 	{
 		ArrayList<ActivityReport> list = new ArrayList<ActivityReport>();
-		for (ActivityReportEntity entity : activityRepository
+		for (ActivityReportEntity entity : repository
 				.findByAuthor(employeeId))
 		{
 			list.add(convert(entity));
@@ -69,27 +67,31 @@ public class ActivityReportServiceJpa implements ActivityReportDataService
 	@Override
 	public boolean save(ActivityReport report)
 	{
-		return activityRepository.save(convert(report)) != null;
+		return repository.save(convert(report)) != null;
 	}
 
 	@Override
 	public boolean update(ActivityReport report)
 	{
-		return activityRepository.update(convert(report)) != null;
+		return repository.update(convert(report)) != null;
 	}
 
 	@Override
 	public void delete(ActivityReport report)
 	{
-		// TODO Auto-generated method stub
-
+		repository.delete(convert(report));
 	}
 
 	@Override
 	public List<ActivityReport> getByJob(Integer jobId)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<ActivityReport> list = new ArrayList<ActivityReport>();
+		for (ActivityReportEntity entity : repository
+				.findByJobId(jobId))
+		{
+			list.add(convert(entity));
+		}
+		return list;
 	}
 
 	private ActivityReport convert(ActivityReportEntity entity)

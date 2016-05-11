@@ -3,83 +3,6 @@
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
-	<changeSet id="1" author="mike">
-		<sql>
-			<![CDATA[
-				CREATE TABLE `JOB`
-				(
-					`ID` BIGINT NOT NULL AUTO_INCREMENT,
-					`JOBNR` VARCHAR(6) NOT NULL,
-					`POSNR` VARCHAR(3) NOT NULL,
-					`PAYMODE` VARCHAR(2) NOT NULL,
-					`CUSTOMERID` VARCHAR(20),
-					`DESCRIPTION` TEXT,
-					`MAXBUDGET` INT,
-					`USEDBUDGET` INT,
-					CONSTRAINT `PK_JOB` PRIMARY KEY (`ID`)
-				)
-				;
-			]]>
-		</sql>
-	</changeSet>
-	<changeSet id="2" author="mike">
-		<sql>
-			<![CDATA[
-				CREATE TABLE `ACTIVITYREPORT`
-				(
-					`ID` BIGINT NOT NULL AUTO_INCREMENT,
-					`DESCRIPTION` TEXT,
-					`IDENTIFIER` VARCHAR(60),
-					`DATE` DATE,
-					`STARTTIME` INT,
-					`DURATION` INT,
-					`BREAKTIME` INT,
-					`AUTHOR` BIGINT,
-					CONSTRAINT `PK_ACTIVITYREPORT` PRIMARY KEY (`ID`)
-				)
-				;
-			]]>
-		</sql>
-	</changeSet>
-	<changeSet id="3" author="mike">
-		<sql>
-			<![CDATA[
-				CREATE TABLE `ACTIVITYREPORTTEMPLATE`
-				(
-					`ID` BIGINT NOT NULL AUTO_INCREMENT,
-					`NAME` VARCHAR(20),
-					`DESCRIPTION` TEXT,
-					`IDENTIFIER` VARCHAR(60),
-					CONSTRAINT `PK_ACTIVITYREPORTTEMPLATE` PRIMARY KEY (`ID`)
-				)
-				;
-			]]>
-		</sql>
-	</changeSet>
-	<changeSet id="4" author="mike">
-		<sql>
-			<![CDATA[
-				CREATE TABLE `EMPLOYEE`
-				(
-					`ID` BIGINT NOT NULL AUTO_INCREMENT,
-					`FIRSTNAME` VARCHAR(40),
-					`LASTNAME` VARCHAR(40),
-					CONSTRAINT `PK_EMPLOYEE` PRIMARY KEY (`ID`)
-				)
-				;
-			]]>
-		</sql>
-	</changeSet>
-	<changeSet id="5" author="mike">
-		<sql>
-			<![CDATA[
-				ALTER TABLE `ACTIVITYREPORTTEMPLATE` ADD `AUTHOR` BIGINT;
-			]]>
-		</sql>
-	</changeSet>
-
-
-
 
 	<changeSet id="20160509-CREATEPseudoJob" author="phil">
 		<sql>
@@ -91,23 +14,7 @@
 					`CUSTOMER` VARCHAR(30),
 					PRIMARY KEY (`ID`)
 				)
-				;
-			]]>
-		</sql>
-	</changeSet>
-	<changeSet id="20160509-CREATEUser-DROPEmployee" author="phil">
-		<sql>
-			<![CDATA[
-				DROP TABLE IF EXISTS EMPLOYEE;
-				CREATE TABLE `USER`
-				(
-					`ID` INT NOT NULL AUTO_INCREMENT,
-					`NAME` VARCHAR(30),
-					`SURNAME` VARCHAR(30),
-					`SUPERVISOR` INT,
-					PRIMARY KEY (`ID`),
-					FOREIGN KEY (`SUPERVISOR`) REFERENCES user(`ID`)
-				)
+				ENGINE = InnoDB
 				;
 			]]>
 		</sql>
@@ -121,6 +28,7 @@
 					`NAME` VARCHAR(30),
 					PRIMARY KEY (`ID`)
 				)
+				ENGINE = InnoDB
 				;
 			]]>
 		</sql>
@@ -128,7 +36,6 @@
 	<changeSet id="20160509-ALTERJob" author="phil">
 		<sql>
 			<![CDATA[
-				DROP TABLE IF EXISTS JOB;
 				CREATE TABLE `JOB`
 				(
 					`JOB_NO` INT NOT NULL AUTO_INCREMENT,
@@ -142,6 +49,24 @@
 					PRIMARY KEY (`JOB_NO`,`POS_NO`,`DESCRIPTION`),
 					FOREIGN KEY (`CUSTOMER_ID`) REFERENCES customer(`ID`)
 				)
+				ENGINE = InnoDB
+				;
+			]]>
+		</sql>
+	</changeSet>
+	<changeSet id="20160509-CREATEUser-DROPEmployee" author="phil">
+		<sql>
+			<![CDATA[
+				CREATE TABLE `USER`
+				(
+					`ID` INT NOT NULL AUTO_INCREMENT,
+					`NAME` VARCHAR(30),
+					`SURNAME` VARCHAR(30),
+					`SUPERVISOR` INT,
+					PRIMARY KEY (`ID`),
+					FOREIGN KEY (`SUPERVISOR`) REFERENCES user(`ID`)
+				)
+				ENGINE = InnoDB
 				;
 			]]>
 		</sql>
@@ -157,6 +82,7 @@
 					PRIMARY KEY (`ID`,`JOB_ID`),
 					FOREIGN KEY (`JOB_ID`) REFERENCES job(`JOB_NO`)
 				)
+				ENGINE = InnoDB
 				;
 			]]>
 		</sql>
@@ -173,6 +99,7 @@
 					FOREIGN KEY (`USER_ID`) REFERENCES user(`ID`),
 					FOREIGN KEY (`JOB_ID`) REFERENCES job(`JOB_NO`)
 				)
+				ENGINE = InnoDB
 				;
 			]]>
 		</sql>
@@ -180,7 +107,6 @@
 	<changeSet id="20160509-CREATEActivityReportTemplate" author="phil">
 		<sql>
 			<![CDATA[
-				DROP TABLE IF EXISTS `ACTIVITYREPORTTEMPLATE`;
 				CREATE TABLE `ACTIVITY_REPORT_TEMPLATE`
 				(
 					`ID` INT NOT NULL AUTO_INCREMENT,
@@ -190,6 +116,7 @@
 					PRIMARY KEY (`ID`,`AUTHOR`),
 					FOREIGN KEY (`TASK_ID`) REFERENCES job_task(`ID`)
 				)
+				ENGINE = InnoDB
 				;
 			]]>
 		</sql>
@@ -210,6 +137,7 @@
 					PRIMARY KEY (`ID`,`AUTHOR`),
 					FOREIGN KEY (`AUTHOR`) REFERENCES user(`ID`)
 				)
+				ENGINE = InnoDB
 				;
 			]]>
 		</sql>
@@ -217,7 +145,6 @@
 	<changeSet id="20160509-ALTERActivityReport" author="phil">
 		<sql>
 			<![CDATA[
-				DROP TABLE IF EXISTS `ACTIVITYREPORT`;
 				CREATE TABLE `ACTIVITY_REPORT`
 				(
 					`ID` INT NOT NULL AUTO_INCREMENT,
@@ -233,14 +160,8 @@
 					FOREIGN KEY (`TASK_ID`) REFERENCES job_task(`ID`),
 					FOREIGN KEY (`JOB_ID`) REFERENCES job(`JOB_NO`)
 				)
+				ENGINE = InnoDB
 				;
-			]]>
-		</sql>
-	</changeSet>
-	<changeSet id="20160509-DROPPerson" author="phil">
-		<sql>
-			<![CDATA[
-				DROP TABLE IF EXISTS `PERSON`;
 			]]>
 		</sql>
 	</changeSet>

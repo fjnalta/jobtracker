@@ -20,11 +20,11 @@ public interface ActivityReportRepository extends CrudRepository<ActivityReportE
 
 	ActivityReportEntity update(ActivityReportEntity persisted);
 
-	List<ActivityReportEntity> findByAuthor(Integer author);
+	List<ActivityReportEntity> findByAuthor(Integer AUTHOR);
 	
-	List<ActivityReportEntity> findByTaskId(Integer taskId);
+	List<ActivityReportEntity> findByTaskId(Integer TASK_ID);
 	
-	List<ActivityReportEntity> findByJobId(Integer jobId);
+	List<ActivityReportEntity> findByJobId(Integer JOB_ID);
 	
 	//TODO add some more
 }
