@@ -13,12 +13,6 @@ import liquibase.datatype.core.DecimalType;
 
 @Entity
 @Table(name = "UTILIZATION_WEEK")
-// TODO Mike: Implement NamedQueries for Employee
-// @NamedQueries( { @NamedQuery(name = "ActivityReportTemplate.findAll", query =
-// "SELECT p FROM Person p"),
-// @NamedQuery(name = "Person.findPerson", query = "SELECT p FROM Person p where
-// p.name=:name and p.age=:age")
-// })
 public class UtilizationWeekEntity implements Serializable
 {
 

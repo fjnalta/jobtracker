@@ -13,12 +13,6 @@ import javax.print.attribute.standard.DateTimeAtCompleted;
 
 @Entity
 @Table(name = "ACTIVITY_REPORT")
-// TODO Mike: Implement NamedQueries for ActivityReport
-// @NamedQueries( { @NamedQuery(name = "ActivityReportTemplate.findAll", query =
-// "SELECT p FROM Person p"),
-// @NamedQuery(name = "Person.findPerson", query = "SELECT p FROM Person p where
-// p.name=:name and p.age=:age")
-// })
 public class ActivityReportEntity implements Serializable
 {
 

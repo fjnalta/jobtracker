@@ -10,12 +10,6 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "ACTIVITY_REPORT_TEMPLATE")
-// TODO Mike: Implement NamedQueries for ActivityReportTemplates
-// @NamedQueries( { @NamedQuery(name = "ActivityReportTemplate.findAll", query =
-// "SELECT p FROM Person p"),
-// @NamedQuery(name = "Person.findPerson", query = "SELECT p FROM Person p where
-// p.name=:name and p.age=:age")
-// })
 public class ActivityReportTemplateEntity implements Serializable
 {
 

@@ -16,30 +16,30 @@ public class JobServiceJpa implements JobDataService
 {
 
 	@Inject
-	private JobRepository personRepository;
+	private JobRepository repository;
 
 	@Override
 	public Job getJob(Integer jobNr, Integer posNr)
 	{
-		return convert(personRepository.findByJobNrAndPosNr(jobNr, posNr));
+		return convert(repository.findByJobNrAndPosNr(jobNr, posNr));
 	}
 
 	@Override
 	public boolean save(Job job)
 	{
-		return personRepository.save(convert(job)) != null;
+		return repository.save(convert(job)) != null;
 	}
 
 	@Override
 	public boolean update(Job job)
 	{
-		return personRepository.update(convert(job)) != null;
+		return repository.update(convert(job)) != null;
 	}
 
 	@Override
 	public void delete(Job job)
 	{
-		personRepository.delete(personRepository
+		repository.delete(repository
 				.findByJobNrAndPosNr(job.getJobNr(), job.getPosNr()));
 	}
 
@@ -47,7 +47,18 @@ public class JobServiceJpa implements JobDataService
 	public List<Job> getAll()
 	{
 		ArrayList<Job> list = new ArrayList<Job>();
-		for (JobEntity entity : personRepository.findAll())
+		for (JobEntity entity : repository.findAll())
+		{
+			list.add(convert(entity));
+		}
+		return list;
+	}
+	
+	@Override
+	public List<Job> getByCustomer(Integer customerId)
+	{
+		ArrayList<Job> list = new ArrayList<Job>();
+		for (JobEntity entity : repository.findAll())
 		{
 			list.add(convert(entity));
 		}
@@ -57,7 +68,7 @@ public class JobServiceJpa implements JobDataService
 	@Override
 	public Job getJob(Long jobId)
 	{
-		return convert(personRepository.findOne(jobId));
+		return convert(repository.findOne(jobId));
 	}
 
 	private Job convert(JobEntity entity)

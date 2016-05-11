@@ -19,6 +19,8 @@ public interface JobDataService
 	Job getJob(Long jobId);
 
 	Job getJob(Integer jobNr, Integer posNr);
+	
+	List<Job> getByCustomer(Integer customerId);
 
 	boolean save(Job job);
 

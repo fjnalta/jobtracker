@@ -4,21 +4,23 @@ import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
 
-import net.greenbeansit.jobtracker.server.data.entity.JobEntity;
+import net.greenbeansit.jobtracker.server.data.entity.UserEntity;
 
-public interface UserRepository extends CrudRepository<JobEntity, Long>
+public interface UserRepository extends CrudRepository<UserEntity, Long>
 {
 
-	void delete(JobEntity deleted);
+	void delete(UserEntity deleted);
 
-	List<JobEntity> findAll();
+	List<UserEntity> findAll();
 
-	JobEntity findOne(Long id);
+	UserEntity findOne(Long id);
 
 	@SuppressWarnings("unchecked")
-	JobEntity save(JobEntity persisted);
+	UserEntity save(UserEntity persisted);
 
-	JobEntity update(JobEntity persisted);
+	UserEntity update(UserEntity persisted);
 
-	JobEntity findByJobNrAndPosNr(Integer jobNr, Integer posNr);
+	List<UserEntity> findByNameAndSurname(String NAME, String SURNAME);
+	
+	List<UserEntity> findBySupervisor(Integer SUPERVISOR);
 }

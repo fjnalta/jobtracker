@@ -16,13 +16,15 @@ public interface UserDataService
 
 	List<User> getAll();
 
-	User getEmployee(Long employeeId);
+	User getUser(Long employeeId);
 
 	List<User> getByName(String firstname, String lastname);
+	
+	List<User> getBySupervisor(Integer supervisorId);
 
-	void save(User employee);
+	boolean save(User employee);
 
-	void update(User employee);
+	boolean update(User employee);
 
 	void delete(User employee);
 }
