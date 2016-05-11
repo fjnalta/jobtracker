@@ -94,12 +94,19 @@ public class HomePage extends Composite {
 				rowJobs.add(jobsWidget);
 				
 			}
+
+			@Override
+			public void onFailure(Method method, Throwable exception) {
+				//do error handling here
+				
+			}
+		
 		}).getEmployeeService().getAllJobs(Id);
 		
 	}
 	
 	private void loadTemplates(Integer Id){
-		
+		/*
 		RestClient.build(new SuccessFunction<List<ActivityReportTemplate>>() {
 			@Override
 			public void onSuccess(Method method, List<ActivityReportTemplate> response) {
@@ -111,12 +118,12 @@ public class HomePage extends Composite {
 				rowWork.add(workWidget);
 				
 			}
-		}).getEmployeeService().getAllReportTemplates(Id);
+		}).getEmployeeService().getAllReportTemplates(Id);*/
 		
 	}
 	
 	private void loadUser(Integer Id) {
-		
+		/*
 		RestClient.build(new SuccessFunction<User>() {
 			@Override
 			public void onSuccess(Method method, User response) {
@@ -124,7 +131,7 @@ public class HomePage extends Composite {
 				self.user = response;
 				
 			}
-		}).getEmployeeService().getEmployee(Id);
+		}).getEmployeeService().getEmployee(Id);*/
 	}
 		
 	private ActivityReport[] loadActivityReports(Long ID) {
@@ -165,13 +172,13 @@ public class HomePage extends Composite {
 
 	public void saveTemplate() {
 		ActivityReportTemplate template = workWidget.getTemplateToSave();
-		
+		/*
 		RestClient.build(new SuccessFunction<ActivityReportTemplate>() {
 			@Override
 			public void onSuccess(Method method, ActivityReportTemplate response) {
 				self.update();
 			}
-		}).getEmployeeService().saveReportTemplate(user.getId(), template);
+		}).getEmployeeService().saveReportTemplate(user.getId(), template);*/
 		
 	}
 
