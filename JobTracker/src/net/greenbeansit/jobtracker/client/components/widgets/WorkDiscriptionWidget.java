@@ -2,11 +2,8 @@ package net.greenbeansit.jobtracker.client.components.widgets;
 
 import java.util.List;
 
-import org.fusesource.restygwt.client.Method;
-import org.gwtbootstrap3.client.ui.Button;
 import org.gwtbootstrap3.client.ui.TextArea;
 import org.gwtbootstrap3.client.ui.TextBox;
-import org.gwtbootstrap3.extras.notify.client.ui.Notify;
 import org.gwtbootstrap3.extras.select.client.ui.OptGroup;
 import org.gwtbootstrap3.extras.select.client.ui.Select;
 
@@ -20,12 +17,16 @@ import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 
-import net.greenbeansit.jobtracker.client.components.HomePage;
 import net.greenbeansit.jobtracker.client.components.HomePageObservable;
-import net.greenbeansit.jobtracker.client.utils.rest.RestClient;
-import net.greenbeansit.jobtracker.client.utils.rest.RestClient.SuccessFunction;
 import net.greenbeansit.jobtracker.shared.ActivityReportTemplate;
-import net.greenbeansit.jobtracker.shared.Job;
+
+/**
+ * Widget Class which provide the functionality of saving and loading report templates,
+ *and enter a working description
+ * 
+ * @author Alexander Kirilyuk
+ *
+ */
 
 public class WorkDiscriptionWidget extends Composite implements HomePageObservable
 {		
@@ -37,8 +38,6 @@ public class WorkDiscriptionWidget extends Composite implements HomePageObservab
 	{
 		
 	}
-	
-	private HomePage homePage;
 	
 	@UiField 
 	Select selectTemplate;
@@ -58,15 +57,17 @@ public class WorkDiscriptionWidget extends Composite implements HomePageObservab
 	ActivityReportTemplate selectedTemplate;
 	
 	public WorkDiscriptionWidget()
-	{
+	{	
 		initWidget(uiBinder.createAndBindUi(this));
+		
+		handler.addObservable(this);
+		handler.updateObservable(this);
 		selectTemplate.addValueChangeHandler(new ValueChangeHandler<String>() {
 			@Override
 			public void onValueChange(ValueChangeEvent<String> event) {
 				selectedTemplate = ((SelectTemplateOption)selectTemplate.getSelectedItem()).getTemplate();
 			}
 		});
-		
 	}
 
 
@@ -75,18 +76,20 @@ public class WorkDiscriptionWidget extends Composite implements HomePageObservab
 		// TODO Auto-generated method stub
 		super.onAttach();
 	}
-
-
 	
 	@UiHandler("buttonSave")
 	public void saveTemplate(final ClickEvent e){
-		homePage.saveTemplate();
+		ActivityReportTemplate template = new ActivityReportTemplate();
+		template.setId(0L);
+		template.setDescription(textDiscription.getText());
+		template.setTemplateName(textName.getText());
+		handler.saveTemplate(template);
 	}
 	
 	@UiHandler("buttonLoad")
 	public void loadTemplate(final ClickEvent e){
 		textDiscription.setText(selectedTemplate.getDescription());
-		//textIdentifier.setText(selectedTemplate.getIdentifier());
+		textName.setText(selectedTemplate.getTemplateName());
 	}
 
 	
@@ -95,25 +98,21 @@ public class WorkDiscriptionWidget extends Composite implements HomePageObservab
 			selectTemplate.add(new SelectTemplateOption(t));
 		}
 	}
-	
-	public ActivityReportTemplate getTemplateToSave(){
-		ActivityReportTemplate template = new ActivityReportTemplate();
-		template.setId(0L);
-		template.setDescription(textDiscription.getText());
-		template.setTemplateName(textName.getText());
-		
-		return template;
-	}
-
 
 	@Override
 	public void update() {
-		
+		selectTemplate.clear();
+		addTemplates(handler.getTemplateList());
+		selectTemplate.refresh();
 	}
 
 
 	@Override
 	public void notifyHandler() {
-		
+		ActivityReportTemplate template = new ActivityReportTemplate();
+		template.setId(0L);
+		template.setDescription(textDiscription.getText());
+		template.setTemplateName(textName.getText());
+		handler.setCurrentTemplate(template);
 	}
 }

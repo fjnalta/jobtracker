@@ -73,94 +73,8 @@ public class HomePage extends Composite {
 		
 		workWidget = new WorkDiscriptionWidget();
 		rowWork.add(workWidget);
-		
-		loadJobs(this.currentUserId);
-		loadTemplates(this.currentUserId);
-		loadUser(this.currentUserId);
-		DateTimeFormat format = DateTimeFormat.getFormat("dd.MM.yyyy");
-		
-		Window.alert(format.format(new Date()));
 	}
 
-	private void loadJobs(Integer Id) {
-		
-		RestClient.build(new SuccessFunction<List<Job>>() {
-			@Override
-			public void onSuccess(Method method, List<Job> response) {
-
-				jobsWidget.removeFromParent();
-				jobsWidget = new JobsWidget();
-				jobsWidget.addJobs(response);
-				rowJobs.add(jobsWidget);
-				
-			}
-
-			@Override
-			public void onFailure(Method method, Throwable exception) {
-				//do error handling here
-				
-			}
-		
-		}).getEmployeeService().getAllJobs(Id);
-		
-	}
-	
-	private void loadTemplates(Integer Id){
-		/*
-		RestClient.build(new SuccessFunction<List<ActivityReportTemplate>>() {
-			@Override
-			public void onSuccess(Method method, List<ActivityReportTemplate> response) {
-
-				workWidget.removeFromParent();
-				workWidget = new WorkDiscriptionWidget();
-				workWidget.registerObserver(self);
-				workWidget.addTemplates(response);
-				rowWork.add(workWidget);
-				
-			}
-		}).getEmployeeService().getAllReportTemplates(Id);*/
-		
-	}
-	
-	private void loadUser(Integer Id) {
-		/*
-		RestClient.build(new SuccessFunction<User>() {
-			@Override
-			public void onSuccess(Method method, User response) {
-
-				self.user = response;
-				
-			}
-		}).getEmployeeService().getEmployee(Id);*/
-	}
-		
-	private ActivityReport[] loadActivityReports(Long ID) {
-		// TODO load all ActivityRepots for the current Employee
-		return null;
-	}
-
-	private void saveActivityReportTemplate(ActivityReportTemplate template) {
-		// TODO load
-	}
-
-	/**
-	 * Method for booking a new ActivityReport The method gets the data from
-	 * calendarWidget,JobsWidget and WorkDiscriptionWidget then it sends it to
-	 * the backend
-	 */
-	public void bookActivityReport() {
-		Job jobToSave = jobsWidget.getSelectedJob();
-		// ActivityReport newReport = calendarWidget.getNewActivityReport();
-
-	}
-
-	/**
-	 * updates and synchronizes all Widgets
-	 */
-	public void update() {
-		loadJobs(this.currentUserId);
-		loadTemplates(this.currentUserId);
-	}
 
 	public int getCurrentUserId() {
 		return currentUserId;
@@ -168,18 +82,6 @@ public class HomePage extends Composite {
 
 	public void setCurrentUserId(Integer currentUserId) {
 		this.currentUserId = currentUserId;
-	}
-
-	public void saveTemplate() {
-		ActivityReportTemplate template = workWidget.getTemplateToSave();
-		/*
-		RestClient.build(new SuccessFunction<ActivityReportTemplate>() {
-			@Override
-			public void onSuccess(Method method, ActivityReportTemplate response) {
-				self.update();
-			}
-		}).getEmployeeService().saveReportTemplate(user.getId(), template);*/
-		
 	}
 
 }

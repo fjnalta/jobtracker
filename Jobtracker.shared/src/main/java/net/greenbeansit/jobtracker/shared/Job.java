@@ -7,23 +7,21 @@ import java.io.Serializable;
  * 
  * @author Mike Hukiewitz & Alex & Philipp
  */
-public class Job implements Serializable
-{
-	private static final long	serialVersionUID	= -3379608733084915877L;
+public class Job implements Serializable {
+	private static final long serialVersionUID = -3379608733084915877L;
 
-	private Integer				maxBudget;
-	private Integer				usedBudget;
-	private Integer				payMode;
-	private Integer				jobNr, posNr;
-	private Integer				customerID;
-	private String				desc;
+	private Integer maxBudget;
+	private Integer usedBudget;
+	private Integer payMode;
+	private Integer jobNr, posNr;
+	private Integer customerID;
+	private String desc;
 
 	/**
 	 * Initializes a new instance of the {@link Job} class with all its fields
 	 * set to null.
 	 */
-	public Job()
-	{
+	public Job() {
 
 	}
 
@@ -46,9 +44,7 @@ public class Job implements Serializable
 	 * @param usedBudget
 	 *            the currently used budget for the job
 	 */
-	public Job(int jobNr, int posNr, Integer payMode, Integer customerID,
-			String desc, int maxBudget, int usedBudget)
-	{
+	public Job(int jobNr, int posNr, Integer payMode, Integer customerID, String desc, int maxBudget, int usedBudget) {
 		this.maxBudget = maxBudget;
 		this.usedBudget = usedBudget;
 		this.jobNr = jobNr;
@@ -61,45 +57,40 @@ public class Job implements Serializable
 	/**
 	 * Setter & Getter
 	 */
-	public Integer getMaxBudget()
-	{
+	public Integer getMaxBudget() {
 		return maxBudget;
 	}
 
-	public Integer getUsedBudget()
-	{
+	public Integer getUsedBudget() {
 		return usedBudget;
 	}
 
-	public String getDesc()
-	{
+	public String getDesc() {
 		return desc;
 	}
 
-	public int getJobNr()
-	{
+	public int getJobNr() {
 		return jobNr;
 	}
 
-	public int getPosNr()
-	{
+	public int getPosNr() {
 		return posNr;
 	}
 
-	public Integer getPayMode()
-	{
+	public Integer getPayMode() {
 		return payMode;
 	}
 
-	public Integer getCustomerID()
-	{
+	public Integer getCustomerID() {
 		return customerID;
 	}
 
-	public String toString()
-	{
-		return this.jobNr + "-" + this.posNr + "-" + this.payMode + "|"
-				+ this.customerID + "|" + this.desc;
+	public String toString() {
+		return this.jobNr + "-" + this.posNr + "-" + this.payMode + "|" + this.customerID + "|" + this.desc;
+	}
+
+	public boolean equals(Job otherJob) {
+		return this.jobNr == otherJob.jobNr && this.posNr == otherJob.posNr && this.desc.equals(otherJob.getDesc());
 	}
 
 }

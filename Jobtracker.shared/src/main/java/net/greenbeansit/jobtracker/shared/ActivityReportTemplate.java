@@ -29,6 +29,15 @@ public class ActivityReportTemplate implements Serializable
 
 	}
 
+	public ActivityReportTemplate(String templateName, String description, Long id) {
+		super();
+		this.templateName = templateName;
+		this.description = description;
+		this.id = id;
+	}
+
+
+
 	public String getTemplateName()
 	{
 		return templateName;
