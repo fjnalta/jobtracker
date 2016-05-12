@@ -31,6 +31,18 @@ import net.greenbeansit.jobtracker.shared.Job;
 public interface RestService extends DirectRestService
 {
 	/**
+	 * Gets all {@link User}.
+	 * 
+	 * @return a List of {@link User}s.
+	 * 
+	 * @throws NotFoundException
+	 *             if there are no Users.
+	 */
+	@GET
+	@Path("/")
+	List<User> getAllUser();
+	
+	/**
 	 * Gets the {@link User} with the following ID.
 	 * 
 	 * @param userId

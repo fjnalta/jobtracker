@@ -38,11 +38,15 @@ public class RestServiceImpl implements RestService
 
 	//User
 	@Override
+	public List<User> getAllUser() {
+		return userService.getAll();
+	}
+	
+	@Override
 	public User getUser(Integer id)
 	{
 		return userService.getUser(id);
 	}
-
 	
 	//Jobs
 	@Override
