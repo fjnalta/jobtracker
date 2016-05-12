@@ -4,79 +4,31 @@
 	xmlns:h="urn:import:org.gwtbootstrap3.client.ui.html" xmlns:b2="urn:import:org.gwtbootstrap3.extras.datetimepicker.client.ui"
 	xmlns:b="urn:import:org.gwtbootstrap3.client.ui" xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:g="urn:import:org.gwtbootstrap3.client.ui.gwt">
-	<ui:style>
-	* {
-		margin: 0;
-		padding: 0;
-	}
+	<ui:style src="css/CalendarTimeInput.css" />
 	
-	.buttonRight {
-		float: left;
-	}
-	
-	.book {
-		
-	}
-	
-	.eventButton {
-		border-radius: 100%;
-		visibility: hidden;
-	}
-	
-	.textInput {
-		text-size: 6px;
-		border-left: none;
-		border-right: none;
-	}
-	
-	.buttonLeft {
-		float: right;
-	}
-	
-	.eventButton, .book {
-		margin-top: 2em;
-	}
-	
-	.buttonLeft, .buttonRight {
-		font-size: 10px;
-		line-height: 0px;
-		text-align: center;
-		padding: 0;
-		border: none;
-		margin: 0;
-	}
-	
-	.text {
-		line-height: 0px;
-		text-align: center;
-		padding: 0;
-		border: none;
-		background-color: white;
-		color: black;
-	}
-	</ui:style>
 	<b:Container fluid="true">
 		<b:Row>
 			<b:Column size="XS_12,SM_3,MD_3,LG_3">
 				<b:Row>
 					<b:Column size="XS_12,SM_12,MD_12,LG_12">
-						<b:Label addStyleNames="{style.text}">Datum</b:Label>
+						<b:Label addStyleNames="{style.text}">DATUM</b:Label>
 					</b:Column>
 
-					<b:Column size="XS_12,SM_6,MD_6,LG_6">
+					<b:Column size="XS_12,SM_6,MD_6,LG_6" addStyleNames="{style.columnfield}">
 						<b:Row>
+							<b:Column size="XS_6,SM_6,MD_6,LG_6">
+								<b:TextBox addStyleNames="{style.textInput}" ui:field="dateStart">06.05</b:TextBox>
+							</b:Column>
+
 							<b:Column size="XS_1,SM_1,MD_1,LG_1">
 								<b:Button addStyleNames="{style.buttonLeft}" ui:field="buttonUpDateStart" />
 								<b:Button addStyleNames="{style.buttonLeft}" ui:field="buttonDownDateStart" />
-							</b:Column>
 
-							<b:Column size="XS_6,SM_6,MD_6,LG_6">
-								<b:TextBox addStyleNames="{style.textInput}" ui:field="dateStart">06.05</b:TextBox>
 							</b:Column>
 						</b:Row>
 					</b:Column>
 
-					<b:Column size="XS_12,SM_6,MD_6,LG_6">
+					<b:Column size="XS_12,SM_6,MD_6,LG_6" addStyleNames="{style.columnfield}">
 						<b:Row>
 							<b:Column size="XS_6,SM_6,MD_6,LG_6">
 								<b:TextBox addStyleNames="{style.textInput}" ui:field="dateEnd">06.05</b:TextBox>
@@ -91,14 +43,14 @@
 				</b:Row>
 			</b:Column>
 
-			<b:Column size="XS_12,SM_3,MD_3,LG_3">
+			<b:Column size="XS_3,SM_3,MD_3,LG_3">
 				<b:Row>
 
 					<b:Column size="XS_12,SM_12,MD_12,LG_12">
-						<b:Label addStyleNames="{style.text}">Uhrzeit</b:Label>
+						<b:Label addStyleNames="{style.text}">UHRZEIT</b:Label>
 					</b:Column>
 
-					<b:Column size="XS_12,SM_6,MD_6,LG_6">
+					<b:Column size="XS_12,SM_6,MD_6,LG_6" addStyleNames="{style.columnfield}">
 						<b:Row>
 							<b:Column size="XS_1,SM_1,MD_1,LG_1">
 								<b:Button addStyleNames="{style.buttonLeft}" ui:field="buttonTimeHourUpStart" />
@@ -117,7 +69,7 @@
 						</b:Row>
 					</b:Column>
 
-					<b:Column size="XS_12,SM_6,MD_6,LG_6">
+					<b:Column size="XS_12,SM_6,MD_6,LG_6" addStyleNames="{style.columnfield}">
 						<b:Row>
 
 							<b:Column size="XS_1,SM_1,MD_1,LG_1">
@@ -140,13 +92,13 @@
 				</b:Row>
 			</b:Column>
 
-			<b:Column size="XS_12,SM_3,MD_3,LG_3">
+			<b:Column size="XS_3,SM_3,MD_3,LG_3">
 				<b:Row>
 					<b:Column size="XS_12,SM_12,MD_12,LG_12">
-						<b:Label addStyleNames="{style.text}">Pause</b:Label>
+						<b:Label addStyleNames="{style.text}">PAUSE</b:Label>
 					</b:Column>
 
-					<b:Column size="XS_12,SM_6,MD_6,LG_6">
+					<b:Column size="XS_12,SM_6,MD_6,LG_6" addStyleNames="{style.columnfield}">
 						<b:Row>
 
 							<b:Column size="XS_1,SM1,MD_1,LG_1">
@@ -165,7 +117,7 @@
 						</b:Row>
 					</b:Column>
 
-					<b:Column size="XS_12,SM_6,MD_6,LG_6">
+					<b:Column size="XS_12,SM_6,MD_6,LG_6" addStyleNames="{style.columnfield}">
 						<b:Row>
 
 							<b:Column size="XS_1,SM1,MD_1,LG_1">
@@ -188,7 +140,7 @@
 				</b:Row>
 			</b:Column>
 
-			<b:Column size="XS_12,SM_3,MD_3,LG_3">
+			<b:Column size="XS_3,SM_3,MD_3,LG_3">
 				<b:Column size="XS_4,SM_4,MD_4,LG_4">
 					<b:Button addStyleNames="{style.eventButton}" text="+"
 						ui:field="buttonCopy" />
