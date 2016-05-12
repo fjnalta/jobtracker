@@ -25,11 +25,12 @@ public class User implements Serializable
 
 	}
 
-	public User(Integer id, String name, String surname)
+	public User(Integer id, String name, String surname, Integer supervisor)
 	{
 		this.id = id;
 		this.name = name;
 		this.surname = surname;
+		this.supervisor = supervisor;
 	}
 
 	public Integer getId() {
