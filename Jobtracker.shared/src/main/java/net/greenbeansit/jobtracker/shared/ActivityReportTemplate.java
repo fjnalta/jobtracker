@@ -19,7 +19,9 @@ public class ActivityReportTemplate implements Serializable
 
 	private String				templateName;
 	private String				description;
-	private Long				id;
+	private Integer				id;
+	private Integer				taskId;
+	private Integer				author;
 
 	/**
 	 * Initializes a new instance of the {@link ActivityReportTemplate} class.
@@ -29,11 +31,12 @@ public class ActivityReportTemplate implements Serializable
 
 	}
 
-	public ActivityReportTemplate(String templateName, String description, Long id) {
-		super();
+	public ActivityReportTemplate(String templateName, String description, Integer id, Integer taskId, Integer author) {
 		this.templateName = templateName;
 		this.description = description;
 		this.id = id;
+		this.taskId = taskId;
+		this.author = author;
 	}
 
 
@@ -50,12 +53,12 @@ public class ActivityReportTemplate implements Serializable
 		this.templateName = templateName;
 	}
 
-	public Long getId()
+	public Integer getId()
 	{
 		return id;
 	}
 
-	public void setId(Long id)
+	public void setId(Integer id)
 	{
 		this.id = id;
 	}
@@ -68,5 +71,25 @@ public class ActivityReportTemplate implements Serializable
 	public void setDescription(String description)
 	{
 		this.description = description;
+	}
+
+	public Integer getTaskId()
+	{
+		return taskId;
+	}
+
+	public void setTaskId(Integer taskId)
+	{
+		this.taskId = taskId;
+	}
+
+	public Integer getAuthor()
+	{
+		return author;
+	}
+
+	public void setAuthor(Integer author)
+	{
+		this.author = author;
 	}
 }
