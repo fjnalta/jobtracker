@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.sql.Date;
 import java.util.List;
 
-import javax.inject.Inject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import net.greenbeansit.jobtracker.server.data.ActivityReportDataService;
@@ -17,7 +17,7 @@ import net.greenbeansit.jobtracker.shared.ActivityReport;
 public class ActivityReportServiceJpa implements ActivityReportDataService
 {
 
-	@Inject
+	@Autowired
 	private ActivityReportEntityRepository repository;
 
 	@Override

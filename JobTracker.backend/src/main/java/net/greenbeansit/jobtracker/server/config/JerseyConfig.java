@@ -21,7 +21,7 @@ import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
 
-import net.greenbeansit.jobtracker.server.rest.services.EmployeeRestServiceImpl;
+import net.greenbeansit.jobtracker.server.rest.services.RestServiceImpl;
 
 @Component
 public class JerseyConfig extends ResourceConfig
@@ -32,7 +32,7 @@ public class JerseyConfig extends ResourceConfig
 		packages("net.greenbeansit.jobtracker.server.services");
 		register(JacksonJsonProvider.class);
 
-		register(EmployeeRestServiceImpl.class);
+		register(RestServiceImpl.class);
 
 		for (Class<?> c : getClasses())
 			System.out.println(c.toString());

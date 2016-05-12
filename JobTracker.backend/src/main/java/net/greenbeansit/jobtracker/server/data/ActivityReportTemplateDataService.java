@@ -22,9 +22,7 @@ public interface ActivityReportTemplateDataService
 
 	ActivityReportTemplate getTemplate(Long author, String name);
 
-	void save(ActivityReportTemplate template);
-
-	void update(ActivityReportTemplate template);
+	boolean save(ActivityReportTemplate template);
 
 	void delete(ActivityReportTemplate template);
 }

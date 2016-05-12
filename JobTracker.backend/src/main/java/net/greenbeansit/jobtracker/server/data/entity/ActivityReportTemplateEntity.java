@@ -22,8 +22,7 @@ public class ActivityReportTemplateEntity implements Serializable
 	@GeneratedValue
 	private Integer				id;
 
-	// private String templateName; TODO: In Datenbank einfügen (Philipp
-	// anhauen)
+	private String				name;
 	private String				description;
 	private Integer				taskId;
 	private Integer				author;
@@ -38,16 +37,16 @@ public class ActivityReportTemplateEntity implements Serializable
 		this.id = id;
 	}
 
-	// @Column(name = "NAME")
-	// public String getTemplateName()
-	// {
-	// return templateName;
-	// }
-	//
-	// public void setTemplateName(String templateName)
-	// {
-	// this.templateName = templateName;
-	// }
+	 @Column(name = "NAME")
+	 public String getName()
+	 {
+	 return name;
+	 }
+	
+	 public void setName(String name)
+	 {
+	 this.name = name;
+	 }
 
 	@Column(name = "TEXT")
 	public String getDescription()
