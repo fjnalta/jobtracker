@@ -26,8 +26,8 @@ import net.greenbeansit.jobtracker.shared.Job;
  * @author Max Blatt & Alexander Kirilyuk
  */
 @Path("rest/employee")
-@Consumes(MediaType.APPLICATION_JSON)
-@Produces(MediaType.APPLICATION_JSON)
+//@Consumes(MediaType.APPLICATION_JSON)
+//@Produces(MediaType.APPLICATION_JSON)
 public interface RestService extends DirectRestService
 {
 	/**
@@ -161,9 +161,9 @@ public interface RestService extends DirectRestService
 	 *             if the employeeId or the reportId does not exist.
 	 */
 	@DELETE
-	@Path("/{userId}/report_template/{templateId}")
+	@Path("/{userId}/report/{reportId}")
 	void deleteReport(@PathParam("userId") Integer userId,
-			@PathParam("templateId") Integer reportId);
+			@PathParam("reportId") Integer reportId);
 
 	/**
 	 * Gets all {@link ActivityReportTemplate}s of the {@link User} with the
@@ -177,7 +177,7 @@ public interface RestService extends DirectRestService
 	 *             if the employeeId does not exist.
 	 */
 	@GET
-	@Path("/{userId}/report")
+	@Path("/{userId}/report_template")
 	List<ActivityReportTemplate> getAllReportTemplates(
 			@PathParam("userId") Integer userId);
 
@@ -194,12 +194,12 @@ public interface RestService extends DirectRestService
 	 *             if the employeeId does not exist.
 	 */
 	@POST
-	@Path("/{userId}/report/")
+	@Path("/{userId}/report_template/")
 	void saveReportTemplate(@PathParam("userId") Integer userId,
 			ActivityReportTemplate template);
 
 	@DELETE
-	@Path("/{userId}/report/{reportId}")
+	@Path("/{userId}/report_template/{reportId}")
 	void deleteReportTemplate(@PathParam("userId") Integer userId,
 			@PathParam("reportId") Integer templateId);
 }

@@ -26,6 +26,34 @@ public class ActivityReportTemplateEntity implements Serializable
 	private String				description;
 	private Integer				taskId;
 	private Integer				author;
+	
+	public ActivityReportTemplateEntity()
+	{
+		
+	}
+	
+	/**
+	 * Constructor for a new template (and ID to be generated)
+	 */
+	public ActivityReportTemplateEntity(String name, String description, Integer taskId, Integer author)
+	{
+		this.name = name;
+		this.description = description;
+		this.taskId = taskId;
+		this.author = author;
+	}
+	
+	/**
+	 * Constructor for an already existing template (used in backend)
+	 */
+	public ActivityReportTemplateEntity(Integer id, String name, String description, Integer taskId, Integer author)
+	{
+		this.id = id;
+		this.name = name;
+		this.description = description;
+		this.taskId = taskId;
+		this.author = author;
+	}
 
 	public Integer getId()
 	{

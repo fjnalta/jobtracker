@@ -3,9 +3,10 @@ package net.greenbeansit.jobtracker.server.rest.services;
 import java.sql.Date;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import net.greenbeansit.jobtracker.server.data.ActivityReportDataService;
 import net.greenbeansit.jobtracker.server.data.JobDataService;
-import net.greenbeansit.jobtracker.server.data.implementation.JobServiceJpa;
 import net.greenbeansit.jobtracker.shared.ActivityReport;
 import net.greenbeansit.jobtracker.shared.ActivityReportTemplate;
 import net.greenbeansit.jobtracker.shared.User;
@@ -19,12 +20,14 @@ import net.greenbeansit.jobtracker.shared.rest.services.RestService;
  */
 public class RestServiceImpl implements RestService
 {
+	@Inject
 	private JobDataService jobService;
+	@Inject
 	private ActivityReportDataService activityService;
 
 	public RestServiceImpl()
 	{
-		jobService = new JobServiceJpa();
+		
 	}
 
 	@Override

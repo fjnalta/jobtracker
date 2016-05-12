@@ -16,11 +16,11 @@ public interface ActivityReportTemplateDataService
 
 	List<ActivityReportTemplate> getAll();
 
-	List<ActivityReportTemplate> getBy(Long author);
+	List<ActivityReportTemplate> getBy(Integer author);
 
-	ActivityReportTemplate getTemplate(Long templateId);
+	ActivityReportTemplate getTemplate(Integer templateId);
 
-	ActivityReportTemplate getTemplate(Long author, String name);
+	ActivityReportTemplate getTemplate(Integer author, String name);
 
 	boolean save(ActivityReportTemplate template);
 
