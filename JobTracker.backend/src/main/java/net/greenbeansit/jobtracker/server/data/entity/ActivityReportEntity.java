@@ -33,7 +33,8 @@ public class ActivityReportEntity implements Serializable
 	private Time				endTime;
 	private Integer				breakTime;
 	private Integer				taskId;
-	private Integer				jobId;
+	private Integer				jobNr;
+	private Integer				posNr;
 
 	public ActivityReportEntity()
 	{
@@ -42,7 +43,7 @@ public class ActivityReportEntity implements Serializable
 
 	public ActivityReportEntity(Integer author, String text, Date beginDate,
 			Time beginTime, Time endTime, Integer breakTime, Integer taskId,
-			Integer jobId)
+			Integer jobNr, Integer posNr)
 	{
 		this.author = author;
 		this.text = text;
@@ -51,7 +52,8 @@ public class ActivityReportEntity implements Serializable
 		this.endDate = null;
 		this.endTime = endTime;
 		this.taskId = taskId;
-		this.jobId = jobId;
+		this.jobNr = jobNr;
+		this.posNr = posNr;
 	}
 
 	public Integer getId()
@@ -141,17 +143,6 @@ public class ActivityReportEntity implements Serializable
 		this.taskId = taskId;
 	}
 
-	@Column(name = "JOB_ID")
-	public Integer getJobId()
-	{
-		return jobId;
-	}
-
-	public void setJobId(Integer jobId)
-	{
-		this.jobId = jobId;
-	}
-
 	@Column(name = "BREAK_TIME")
 	public Integer getBreakTime()
 	{
@@ -161,6 +152,28 @@ public class ActivityReportEntity implements Serializable
 	public void setBreakTime(Integer breakTime)
 	{
 		this.breakTime = breakTime;
+	}
+
+	@Column(name = "JOB_NO")
+	public Integer getJobNr()
+	{
+		return jobNr;
+	}
+
+	public void setJobNr(Integer jobNr)
+	{
+		this.jobNr = jobNr;
+	}
+
+	@Column(name = "POS_NO")
+	public Integer getPosNr()
+	{
+		return posNr;
+	}
+
+	public void setPosNr(Integer posNr)
+	{
+		this.posNr = posNr;
 	}
 
 }

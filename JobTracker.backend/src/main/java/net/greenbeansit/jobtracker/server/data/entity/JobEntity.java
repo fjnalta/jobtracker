@@ -4,11 +4,11 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.Table;
 
-@Entity
+@Entity @IdClass(JobEntityId.class)
 @Table(name = "JOB")
 // TODO Mike: Implement NamedQueries for Job
 // @NamedQueries( { @NamedQuery(name = "ActivityReportTemplate.findAll", query =
@@ -24,17 +24,21 @@ public class JobEntity implements Serializable
 	 */
 	private static final long	serialVersionUID	= -8538049446050091809L;
 
-	@Id
-	@GeneratedValue
-	private Integer				id;
-
+	@Id @Column(name = "job_no", nullable = false)
 	private Integer				jobNr;
+	@Id @Column(name = "pos_no", nullable = false)
 	private Integer				posNr;
-	private Integer				accountingMode;
-	private Integer				customerID;
+	@Id @Column(name = "description", nullable = false)
 	private String				desc;
+	@Column(name = "accounting_mode")
+	private Integer				accountingMode;
+	@Column(name = "customer_id")
+	private Integer				customerID;
+	@Column(name = "budget")
 	private Integer				maxBudget;
+	@Column(name = "budget_used")
 	private Integer				usedBudget;
+	@Column(name = "is_intern")
 	private boolean				isIntern;
 
 	public JobEntity()
@@ -55,17 +59,7 @@ public class JobEntity implements Serializable
 		this.usedBudget = usedBudget;
 	}
 
-	public Integer getId()
-	{
-		return id;
-	}
-
-	public void setId(Integer id)
-	{
-		this.id = id;
-	}
-
-	@Column(name = "JOB_NO")
+	
 	public Integer getJobNr()
 	{
 		return jobNr;
@@ -76,7 +70,7 @@ public class JobEntity implements Serializable
 		this.jobNr = jobNr;
 	}
 
-	@Column(name = "POS_NO")
+	
 	public Integer getPosNr()
 	{
 		return posNr;
@@ -87,7 +81,7 @@ public class JobEntity implements Serializable
 		this.posNr = posNr;
 	}
 
-	@Column(name = "ACOUNTING_MODE")
+	
 	public Integer getAccountingMode()
 	{
 		return accountingMode;
@@ -98,7 +92,7 @@ public class JobEntity implements Serializable
 		this.accountingMode = accountingMode;
 	}
 
-	@Column(name = "CUSTOMER_ID")
+	
 	public Integer getCustomerID()
 	{
 		return customerID;
@@ -109,7 +103,7 @@ public class JobEntity implements Serializable
 		this.customerID = customerID;
 	}
 
-	@Column(name = "DESCRIPTION")
+	
 	public String getDesc()
 	{
 		return desc;
@@ -120,7 +114,7 @@ public class JobEntity implements Serializable
 		this.desc = desc;
 	}
 
-	@Column(name = "BUDGET")
+	
 	public Integer getMaxBudget()
 	{
 		return maxBudget;
@@ -131,7 +125,7 @@ public class JobEntity implements Serializable
 		this.maxBudget = maxBudget;
 	}
 
-	@Column(name = "BUDGET_USED")
+	
 	public Integer getUsedBudget()
 	{
 		return usedBudget;
@@ -142,7 +136,7 @@ public class JobEntity implements Serializable
 		this.usedBudget = usedBudget;
 	}
 
-	@Column(name = "IS_INTERN")
+	
 	public boolean isIntern()
 	{
 		return isIntern;

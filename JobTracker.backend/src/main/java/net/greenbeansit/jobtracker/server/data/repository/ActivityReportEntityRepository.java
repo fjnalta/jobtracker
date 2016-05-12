@@ -6,25 +6,25 @@ import org.springframework.data.repository.CrudRepository;
 
 import net.greenbeansit.jobtracker.server.data.entity.ActivityReportEntity;
 
-public interface ActivityReportRepository extends CrudRepository<ActivityReportEntity, Long>
+public interface ActivityReportEntityRepository extends CrudRepository<ActivityReportEntity, Long>
 {
 
 	void delete(ActivityReportEntity deleted);
 
 	List<ActivityReportEntity> findAll();
 
-	ActivityReportEntity findOne(Integer id);
+	ActivityReportEntity findById(Integer id);
 
 	@SuppressWarnings("unchecked")
 	ActivityReportEntity save(ActivityReportEntity persisted);
 
-	ActivityReportEntity update(ActivityReportEntity persisted);
+	//ActivityReportEntity update(ActivityReportEntity persisted);
 
-	List<ActivityReportEntity> findByAuthor(Integer AUTHOR);
+	List<ActivityReportEntity> findByAuthor(Integer author);
 	
-	List<ActivityReportEntity> findByTaskId(Integer TASK_ID);
+	List<ActivityReportEntity> findByTaskId(Integer taskId);
 	
-	List<ActivityReportEntity> findByJobId(Integer JOB_ID);
+	List<ActivityReportEntity> findByJobNr(Integer jobNr);
 	
 	//TODO add some more
 }

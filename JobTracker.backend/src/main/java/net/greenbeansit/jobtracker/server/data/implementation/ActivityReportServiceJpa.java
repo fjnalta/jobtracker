@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import net.greenbeansit.jobtracker.server.data.ActivityReportDataService;
 import net.greenbeansit.jobtracker.server.data.entity.ActivityReportEntity;
-import net.greenbeansit.jobtracker.server.data.repository.ActivityReportRepository;
+import net.greenbeansit.jobtracker.server.data.repository.ActivityReportEntityRepository;
 import net.greenbeansit.jobtracker.shared.ActivityReport;
 
 @Service("activityReportService")
@@ -18,7 +18,7 @@ public class ActivityReportServiceJpa implements ActivityReportDataService
 {
 
 	@Inject
-	private ActivityReportRepository repository;
+	private ActivityReportEntityRepository repository;
 
 	@Override
 	public List<ActivityReport> getAll()
@@ -34,7 +34,7 @@ public class ActivityReportServiceJpa implements ActivityReportDataService
 	@Override
 	public ActivityReport getActivityReport(Integer reportId)
 	{
-		return convert(repository.findOne(reportId));
+		return convert(repository.findById(reportId));
 	}
 
 	@Override
@@ -73,7 +73,7 @@ public class ActivityReportServiceJpa implements ActivityReportDataService
 	@Override
 	public boolean update(ActivityReport report)
 	{
-		return repository.update(convert(report)) != null;
+		return repository.save(convert(report)) != null;
 	}
 
 	@Override
@@ -87,7 +87,7 @@ public class ActivityReportServiceJpa implements ActivityReportDataService
 	{
 		ArrayList<ActivityReport> list = new ArrayList<ActivityReport>();
 		for (ActivityReportEntity entity : repository
-				.findByJobId(jobId))
+				.findByJobNr(jobId))
 		{
 			list.add(convert(entity));
 		}
@@ -101,7 +101,7 @@ public class ActivityReportServiceJpa implements ActivityReportDataService
 		int begin = convert(entity.getBeginTime());
 		int duration = convert(entity.getEndTime()) - begin;
 		return new ActivityReport(entity.getId(), entity.getTaskId(),
-				entity.getJobId(), entity.getAuthor(), entity.getText(),
+				entity.getJobNr(), entity.getAuthor(), entity.getText(), //TODO check jobnr-posnr
 				entity.getBeginDate(), begin, duration, entity.getBreakTime());
 	}
 
@@ -113,7 +113,7 @@ public class ActivityReportServiceJpa implements ActivityReportDataService
 		Time end = convert(report.getEndTime());
 		return new ActivityReportEntity(report.getAuthor(), report.getText(),
 				report.getDate(), begin, end, report.getBreakTime(),
-				report.getTaskId(), report.getJobId());
+				report.getTaskId(), report.getJobNr(), report.getJobPosNr());
 	}
 
 	@SuppressWarnings("deprecation")

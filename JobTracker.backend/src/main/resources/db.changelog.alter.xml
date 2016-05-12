@@ -7,12 +7,13 @@
 	<changeSet id="20160509-CREATEPseudoJob" author="phil">
 		<sql>
 			<![CDATA[
-				CREATE TABLE `PSEUDO_JOB`
+				DROP TABLE IF EXISTS `pseudo_job`;
+				CREATE TABLE `pseudo_job`
 				(
-					`ID` INT NOT NULL AUTO_INCREMENT,
-					`NAME` VARCHAR(30),
-					`CUSTOMER` VARCHAR(30),
-					PRIMARY KEY (`ID`)
+					`id` INT NOT NULL AUTO_INCREMENT,
+					`name` VARCHAR(30),
+					`customer` VARCHAR(30),
+					PRIMARY KEY (`id`)
 				)
 				ENGINE = InnoDB
 				;
@@ -22,11 +23,11 @@
 	<changeSet id="20160509-CREATECustomer" author="phil">
 		<sql>
 			<![CDATA[
-				CREATE TABLE `CUSTOMER`
+				CREATE TABLE `customer`
 				(
-					`ID` INT NOT NULL AUTO_INCREMENT,
-					`NAME` VARCHAR(30),
-					PRIMARY KEY (`ID`)
+					`id` INT NOT NULL AUTO_INCREMENT,
+					`name` VARCHAR(30),
+					PRIMARY KEY (`id`)
 				)
 				ENGINE = InnoDB
 				;
@@ -36,18 +37,18 @@
 	<changeSet id="20160509-ALTERJob" author="phil">
 		<sql>
 			<![CDATA[
-				CREATE TABLE `JOB`
+				CREATE TABLE `job`
 				(
-					`JOB_NO` INT NOT NULL AUTO_INCREMENT,
-					`POS_NO` INT NOT NULL,
-					`DESCRIPTION` VARCHAR(30) NOT NULL,
-					`CUSTOMER_ID` INT,
-					`BUDGET` DECIMAL(13,4),
-					`BUDGET_USED` DECIMAL(13,4),
-					`ACCOUNTING_MODE` INT,
-					`IS_INTERN` BOOLEAN,
-					PRIMARY KEY (`JOB_NO`,`POS_NO`,`DESCRIPTION`),
-					FOREIGN KEY (`CUSTOMER_ID`) REFERENCES customer(`ID`)
+					`job_no` INT NOT NULL AUTO_INCREMENT,
+					`pos_no` INT NOT NULL,
+					`description` VARCHAR(30) NOT NULL,
+					`customer_id` INT,
+					`budget` DECIMAL(13,4),
+					`budget_used` DECIMAL(13,4),
+					`accounting_mode` INT,
+					`is_intern` BOOLEAN,
+					PRIMARY KEY (`job_no`,`pos_no`,`description`),
+					FOREIGN KEY (`customer_id`) REFERENCES customer(`id`)
 				)
 				ENGINE = InnoDB
 				;
@@ -57,14 +58,14 @@
 	<changeSet id="20160509-CREATEUser-DROPEmployee" author="phil">
 		<sql>
 			<![CDATA[
-				CREATE TABLE `USER`
+				CREATE TABLE `user`
 				(
-					`ID` INT NOT NULL AUTO_INCREMENT,
-					`NAME` VARCHAR(30),
-					`SURNAME` VARCHAR(30),
-					`SUPERVISOR` INT,
-					PRIMARY KEY (`ID`),
-					FOREIGN KEY (`SUPERVISOR`) REFERENCES user(`ID`)
+					`id` INT NOT NULL AUTO_INCREMENT,
+					`name` VARCHAR(30),
+					`surname` VARCHAR(30),
+					`supervisor` INT,
+					PRIMARY KEY (`id`),
+					FOREIGN KEY (`supervisor`) REFERENCES user(`id`)
 				)
 				ENGINE = InnoDB
 				;
@@ -74,13 +75,13 @@
 	<changeSet id="20160509-CREATEJob_Task" author="phil">
 		<sql>
 			<![CDATA[
-				CREATE TABLE `JOB_TASK`
+				CREATE TABLE `job_task`
 				(
-					`ID` INT NOT NULL AUTO_INCREMENT,
-					`JOB_ID` INT NOT NULL,
-					`NAME` VARCHAR(30),
-					PRIMARY KEY (`ID`,`JOB_ID`),
-					FOREIGN KEY (`JOB_ID`) REFERENCES job(`JOB_NO`)
+					`id` INT NOT NULL AUTO_INCREMENT,
+					`job_id` INT NOT NULL,
+					`name` VARCHAR(30),
+					PRIMARY KEY (`id`,`job_id`),
+					FOREIGN KEY (`job_id`) REFERENCES job(`job_no`)
 				)
 				ENGINE = InnoDB
 				;
@@ -90,14 +91,14 @@
 	<changeSet id="20160509-CREATEUserJob" author="phil">
 		<sql>
 			<![CDATA[
-				CREATE TABLE `USER_JOB`
+				CREATE TABLE `user_job`
 				(
-					`USER_ID` INT NOT NULL AUTO_INCREMENT,
-					`JOB_ID` INT,
-					`ROLE` INT,
-					PRIMARY KEY (`USER_ID`,`JOB_ID`),
-					FOREIGN KEY (`USER_ID`) REFERENCES user(`ID`),
-					FOREIGN KEY (`JOB_ID`) REFERENCES job(`JOB_NO`)
+					`user_id` INT NOT NULL AUTO_INCREMENT,
+					`job_id` INT,
+					`role` INT,
+					PRIMARY KEY (`user_id`,`job_id`),
+					FOREIGN KEY (`user_id`) REFERENCES user(`id`),
+					FOREIGN KEY (`job_id`) REFERENCES job(`job_no`)
 				)
 				ENGINE = InnoDB
 				;
@@ -107,14 +108,14 @@
 	<changeSet id="20160509-CREATEActivityReportTemplate" author="phil">
 		<sql>
 			<![CDATA[
-				CREATE TABLE `ACTIVITY_REPORT_TEMPLATE`
+				CREATE TABLE `activity_report_template`
 				(
-					`ID` INT NOT NULL AUTO_INCREMENT,
-					`AUTHOR` INT NOT NULL,
-					`TEXT` VARCHAR(30),
-					`TASK_ID` INT,
-					PRIMARY KEY (`ID`,`AUTHOR`),
-					FOREIGN KEY (`TASK_ID`) REFERENCES job_task(`ID`)
+					`id` INT NOT NULL AUTO_INCREMENT,
+					`author` INT NOT NULL,
+					`text` VARCHAR(30),
+					`task_id` INT,
+					PRIMARY KEY (`id`,`author`),
+					FOREIGN KEY (`task_id`) REFERENCES job_task(`id`)
 				)
 				ENGINE = InnoDB
 				;
@@ -126,16 +127,16 @@
 			<![CDATA[
 				CREATE TABLE `UTILIZATION_WEEK`
 				(
-					`ID` INT NOT NULL AUTO_INCREMENT,
-					`AUTHOR` INT NOT NULL,
-					`BEGIN` DATE,
-					`DAYS_FREE` INT,
-					`DAYS_WORK` INT,
-					`DAYS_HOLIDAY` INT,
-					`POSSIBILITY` DECIMAL(3,2),
-					`PSEUDO_JOB_ID` INT,
-					PRIMARY KEY (`ID`,`AUTHOR`),
-					FOREIGN KEY (`AUTHOR`) REFERENCES user(`ID`)
+					`id` INT NOT NULL AUTO_INCREMENT,
+					`author` INT NOT NULL,
+					`begin` DATE,
+					`days_free` INT,
+					`days_work` INT,
+					`days_holiday` INT,
+					`possibility` INT,
+					`pseudo_job_id` INT,
+					PRIMARY KEY (`id`,`author`),
+					FOREIGN KEY (`author`) REFERENCES user(`id`)
 				)
 				ENGINE = InnoDB
 				;
@@ -147,18 +148,19 @@
 			<![CDATA[
 				CREATE TABLE `ACTIVITY_REPORT`
 				(
-					`ID` INT NOT NULL AUTO_INCREMENT,
-					`AUTHOR` INT NOT NULL,
-					`TEXT` VARCHAR(30),
-					`BEGIN_DATE` DATE,
-					`BEGIN_TIME` TIME,
-					`END_DATE` DATE,
-					`END_TIME` TIME,
-					`TASK_ID` INT,
-					`JOB_ID` INT,
-					PRIMARY KEY (`ID`,`AUTHOR`),
-					FOREIGN KEY (`TASK_ID`) REFERENCES job_task(`ID`),
-					FOREIGN KEY (`JOB_ID`) REFERENCES job(`JOB_NO`)
+					`id` INT NOT NULL AUTO_INCREMENT,
+					`author` INT NOT NULL,
+					`text` VARCHAR(30),
+					`begin_date` DATE,
+					`begin_time` TIME,
+					`end_date` DATE,
+					`end_time` TIME,
+					`task_id` INT,
+					`job_no` INT,
+					`pos_no` INT,
+					PRIMARY KEY (`id`,`author`),
+					FOREIGN KEY (`task_id`) REFERENCES job_task(`id`),
+					FOREIGN KEY (`job_no`, `pos_no`) REFERENCES job(`job_no`, `pos_no`)
 				)
 				ENGINE = InnoDB
 				;
