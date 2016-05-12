@@ -18,6 +18,7 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 
 import net.greenbeansit.jobtracker.client.components.HomePage;
+import net.greenbeansit.jobtracker.client.components.ManagerPage;
 import net.greenbeansit.jobtracker.client.components.ProjectPage;
 import net.greenbeansit.jobtracker.client.controller.Controller;
 
@@ -43,12 +44,16 @@ public class Application extends Composite
 
 	@UiField
 	AnchorListItem	navProject;
+	
+	@UiField
+	AnchorListItem	navManager;
 
 	@UiField
 	NavbarNav		nav;
 	
 	@UiField
 	NavbarBrand navbarBrand;
+	
 
 	Controller		controller;
 
@@ -83,6 +88,14 @@ public class Application extends Composite
 				removeActiveContentContainer();
 
 				addWidgetAsContentPage(new ProjectPage());
+				break;
+				
+			case "manager":
+				navManager.setActive(true);
+				
+				removeActiveContentContainer();
+				
+				addWidgetAsContentPage(new ManagerPage());
 				break;
 
 			default: // home

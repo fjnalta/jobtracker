@@ -45,7 +45,8 @@
 						href="#project">
 						Projektleitung
 					</b:AnchorListItem>
-					<b:AnchorListItem iconFixedWidth="true" ui:field="navManagement">
+					<b:AnchorListItem iconFixedWidth="true" ui:field="navManager"
+						href="#manager">
 						Management
 					</b:AnchorListItem>
 				</b:NavbarNav>
