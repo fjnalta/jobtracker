@@ -26,8 +26,8 @@ import net.greenbeansit.jobtracker.shared.Job;
  * @author Max Blatt & Alexander Kirilyuk
  */
 @Path("rest/employee")
-//@Consumes(MediaType.APPLICATION_JSON)
-//@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
+@Produces(MediaType.APPLICATION_JSON)
 public interface RestService extends DirectRestService
 {
 	/**
