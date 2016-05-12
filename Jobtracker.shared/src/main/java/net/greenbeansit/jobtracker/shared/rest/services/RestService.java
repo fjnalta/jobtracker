@@ -42,7 +42,7 @@ public interface RestService extends DirectRestService
 	 */
 	@GET
 	@Path("/{userId}")
-	User getEmployee(@PathParam("userId") Integer userId);
+	User getUser(@PathParam("userId") Integer userId);
 
 	/**
 	 * Gets all {@link Job} made by the {@link User} with the following ID.

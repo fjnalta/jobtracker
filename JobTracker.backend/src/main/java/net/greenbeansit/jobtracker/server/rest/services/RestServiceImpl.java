@@ -7,6 +7,7 @@ import javax.inject.Inject;
 
 import net.greenbeansit.jobtracker.server.data.ActivityReportDataService;
 import net.greenbeansit.jobtracker.server.data.JobDataService;
+import net.greenbeansit.jobtracker.server.data.UserDataService;
 import net.greenbeansit.jobtracker.shared.ActivityReport;
 import net.greenbeansit.jobtracker.shared.ActivityReportTemplate;
 import net.greenbeansit.jobtracker.shared.User;
@@ -21,6 +22,8 @@ import net.greenbeansit.jobtracker.shared.rest.services.RestService;
 public class RestServiceImpl implements RestService
 {
 	@Inject
+	private UserDataService userService;
+	@Inject
 	private JobDataService jobService;
 	@Inject
 	private ActivityReportDataService activityService;
@@ -31,9 +34,9 @@ public class RestServiceImpl implements RestService
 	}
 
 	@Override
-	public User getEmployee(Integer user)
+	public User getUser(Integer id)
 	{
-		return null;
+		return userService.getUser(id);
 	}
 
 	@Override
