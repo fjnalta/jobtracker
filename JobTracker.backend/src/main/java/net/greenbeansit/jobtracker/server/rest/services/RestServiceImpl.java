@@ -28,17 +28,23 @@ public class RestServiceImpl implements RestService
 	@Inject
 	private ActivityReportDataService activityService;
 
+	/**
+	 * Empty Constructor for Spring mapping
+	*/
 	public RestServiceImpl()
 	{
 		
 	}
 
+	//User
 	@Override
 	public User getUser(Integer id)
 	{
 		return userService.getUser(id);
 	}
 
+	
+	//Jobs
 	@Override
 	public List<Job> getAllJobs(Integer userId)
 	{
@@ -46,6 +52,7 @@ public class RestServiceImpl implements RestService
 		return jobService.getAll();
 	}
 
+	//Activity Reports
 	@Override
 	public List<ActivityReport> getAllReports(Integer userId)
 	{
@@ -93,6 +100,7 @@ public class RestServiceImpl implements RestService
 		//TODO: Throw error if not enough permission
 	}
 
+	//Activity Report Templates
 	@Override
 	public List<ActivityReportTemplate> getAllReportTemplates(Integer userId)
 	{
