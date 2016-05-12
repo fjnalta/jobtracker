@@ -3,7 +3,7 @@
 	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:b="urn:import:org.gwtbootstrap3.client.ui"
 	xmlns:b.html="urn:import:org.gwtbootstrap3.client.ui.html" xmlns:s="urn:import:org.gwtbootstrap3.extras.select.client.ui"
 	xmlns:widgets="urn:import:net.greenbeansit.jobtracker.client.components.widgets">
-	<ui:style>
+	<ui:style type="net.greenbeansit.jobtracker.client.components.ManagerPage.ManagerPageStyle">
 	/*Container*/
 	.mainColumn {
 		padding: 0;
@@ -28,14 +28,15 @@
 		margin: 5px;
 	}
 	
-	.employeeList > a {
+	.employeeListItem {
 		padding: 5px;
-		margin: 0;
+		margin: 0px;
+		display: inline-block;
+		width: 100%;
 		background-color: #ffffff;
 	}
-	.employeeList > a :HOVER {
-		background-color: #ff5588;
-		width: 100%;
+	.employeeListItem :HOVER {
+		background-color: #ececec;
 	}
 	
 	/*Title*/
@@ -62,7 +63,7 @@
 				<b:Heading size="H3" addStyleNames="{style.title}" text="Alle Mitarbeiter" />
 			</b:Row>
 			<b:Row addStyleNames="{style.largeContainer}" ui:field="employeeList">
-
+				
 			</b:Row>
 		</b:Column>
 	</b:Container>
