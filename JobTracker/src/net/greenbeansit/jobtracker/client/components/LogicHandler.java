@@ -8,6 +8,7 @@ import org.fusesource.restygwt.client.Method;
 
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.i18n.client.DateTimeFormat;
+import com.google.gwt.user.client.Window;
 
 import net.greenbeansit.jobtracker.client.utils.rest.RestClient;
 import net.greenbeansit.jobtracker.client.utils.rest.RestClient.SuccessFunction;
@@ -62,6 +63,7 @@ public class LogicHandler {
 		this.templateList = reporttemp;
 		this.currentUser = new User();
 		this.currentUser.setId(1);
+		loadJobs();
 	}
 
 	/**
@@ -280,6 +282,7 @@ public class LogicHandler {
 				public void onFailure(Method method, Throwable exception) {
 					//TODO error handling
 					GWT.log(exception.getMessage());
+//					Window.alert(exception.getMessage());
 				}
 
 			}).getEmployeeService().getAllJobs(currentUser.getId());
