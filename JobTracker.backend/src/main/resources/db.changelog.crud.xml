@@ -27,13 +27,13 @@
 		<sql>
 			<![CDATA[
 				INSERT INTO job (job_no, pos_no, description, customer_id, budget, budget_used, accounting_mode, is_intern)
-				VALUES(100001, 001, "Support", 4, 50000, 10000, 2, false);
+				VALUES(100001, 001, "Support", 1, 50000, 10000, 2, false);
 				INSERT INTO job (job_no, pos_no, description, customer_id, budget, budget_used, accounting_mode, is_intern)
-				VALUES(100001, 002, "Installation", 4, 10000, 500, 1, false);
+				VALUES(100001, 002, "Installation", 1, 10000, 500, 1, false);
 				INSERT INTO job (job_no, pos_no, description, customer_id, budget, budget_used, accounting_mode, is_intern)
-				VALUES(100245, 001, "Support", 5, 60000, 50000, 2, false);
+				VALUES(100245, 001, "Support", 2, 60000, 50000, 2, false);
 				INSERT INTO job (job_no, pos_no, description, customer_id, budget, budget_used, accounting_mode, is_intern)
-				VALUES(100001, 003, "Kundenschulung", 5, 1000, 0, 1, false);
+				VALUES(100001, 003, "Kundenschulung", 2, 1000, 0, 1, false);
 			]]>
 		</sql>
 	</changeSet>

@@ -6,19 +6,15 @@ import org.springframework.data.repository.CrudRepository;
 
 import net.greenbeansit.jobtracker.server.data.entity.JobEntity;
 
-public interface JobEntityRepository extends CrudRepository<JobEntity, Long>
+public interface JobEntityRepository extends CrudRepository<JobEntity, Integer>
 {
 
 	void delete(JobEntity deleted);
 
 	List<JobEntity> findAll();
 
-	JobEntity findOne(Long id);
-
 	@SuppressWarnings("unchecked")
 	JobEntity save(JobEntity persisted);
-
-	//JobEntity update(JobEntity persisted);
 
 	JobEntity findByJobNrAndPosNr(Integer jobNr, Integer posNr);
 	

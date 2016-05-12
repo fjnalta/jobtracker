@@ -36,6 +36,7 @@ public class RestServiceImpl implements RestService
 	@Override
 	public List<Job> getAllJobs(Integer userId)
 	{
+		//TODO: Show only those that the user may access
 		return jobService.getAll();
 	}
 
@@ -48,8 +49,11 @@ public class RestServiceImpl implements RestService
 	@Override
 	public ActivityReport getReport(Integer userId, Integer reportId)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		ActivityReport report = activityService.getActivityReport(reportId);
+		if(report.getAuthor() == userId)
+			return report;
+		else
+			return null; //TODO: Throw error if not enough permission
 	}
 
 	@Override
@@ -62,22 +66,25 @@ public class RestServiceImpl implements RestService
 	@Override
 	public void createReport(Integer userId, ActivityReport report)
 	{
-		// TODO Auto-generated method stub
-
+		report.setAuthor(userId);
+		activityService.save(report);
 	}
 
 	@Override
 	public void updateReport(Integer userId, ActivityReport report)
 	{
-		// TODO Auto-generated method stub
-
+		if(report.getAuthor() == userId)
+			activityService.save(report);
+		//TODO: Throw error if not enough permission
 	}
 
 	@Override
 	public void deleteReport(Integer userId, Integer reportId)
 	{
-		// TODO Auto-generated method stub
-
+		ActivityReport report = activityService.getActivityReport(reportId);
+		if(report.getAuthor() == userId)
+			activityService.delete(report);
+		//TODO: Throw error if not enough permission
 	}
 
 	@Override

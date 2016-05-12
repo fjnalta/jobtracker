@@ -3,7 +3,6 @@ package net.greenbeansit.jobtracker.server.data.implementation;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.inject.Inject;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,7 +62,7 @@ public class JobServiceJpa implements JobDataService
 	}
 
 	@Override @Transactional
-	public Job getJob(Long jobId)
+	public Job getJob(Integer jobId)
 	{
 		return convert(repository.findOne(jobId));
 	}
