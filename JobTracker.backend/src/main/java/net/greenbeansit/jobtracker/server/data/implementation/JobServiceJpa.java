@@ -34,12 +34,6 @@ public class JobServiceJpa implements JobDataService
 	}
 
 	@Override @Transactional
-	public boolean update(Job job)
-	{
-		return repository.save(convert(job)) != null;
-	}
-
-	@Override @Transactional
 	public void delete(Job job)
 	{
 		repository.delete(repository
