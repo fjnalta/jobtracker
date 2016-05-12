@@ -11,6 +11,13 @@ import net.greenbeansit.jobtracker.server.data.entity.UserEntity;
 import net.greenbeansit.jobtracker.server.data.repository.UserEntityRepository;
 import net.greenbeansit.jobtracker.shared.User;
 
+/**
+ * Implementation of UserDataService {@link UserDataService}.
+ * 
+ * @author Philipp Minges
+ *
+ */
+
 @Service("userService")
 public class UserServiceJpa implements UserDataService {
 	
@@ -33,15 +40,18 @@ public class UserServiceJpa implements UserDataService {
 	}
 
 	@Override
-	public List<User> getByName(String firstname, String lastname) {
-		// TODO Auto-generated method stub
-		return null;
+	public User getByName(String firstname, String lastname) {
+		return convert(repository.findByName(firstname, lastname));
 	}
 
 	@Override
 	public List<User> getBySupervisor(Integer supervisorId) {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<User> list = new ArrayList<User>();
+		for (UserEntity entity : repository.findBySupervisor(supervisorId))
+		{
+			list.add(convert(entity));
+		}
+		return list;
 	}
 	
 	private User convert(UserEntity entity)

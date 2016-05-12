@@ -16,6 +16,6 @@ public interface UserDataService
 
 	List<User> getAll();
 	User getUser(Integer employeeId);
-	List<User> getByName(String firstname, String lastname);
+	User getByName(String firstname, String lastname);
 	List<User> getBySupervisor(Integer supervisorId);
 }
