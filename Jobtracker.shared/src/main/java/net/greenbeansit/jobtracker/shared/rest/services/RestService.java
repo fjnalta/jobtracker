@@ -28,7 +28,7 @@ import net.greenbeansit.jobtracker.shared.Job;
 @Path("rest/employee")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
-public interface EmployeeRestService extends DirectRestService
+public interface RestService extends DirectRestService
 {
 	/**
 	 * Gets the {@link User} with the following ID.
@@ -91,13 +91,13 @@ public interface EmployeeRestService extends DirectRestService
 	@GET
 	@Path("/{userId}/report/{reportId}")
 	ActivityReport getReport(@PathParam("userId") Integer userId,
-			@PathParam("reportId") Long reportId);
+			@PathParam("reportId") Integer reportId);
 
 	/**
 	 * Gets all {@link ActivityReport}s made by the {@link User} with the
 	 * following ID that are in the following period of time.
 	 * 
-	 * The pattern of the date is dd.mm.yyyy
+	 * The pattern of the date is yyyy_mm_dd
 	 * 
 	 * @param userId
 	 *            the ID of the {@link User}.
@@ -163,7 +163,7 @@ public interface EmployeeRestService extends DirectRestService
 	@DELETE
 	@Path("/{userId}/report_template/{templateId}")
 	void deleteReport(@PathParam("userId") Integer userId,
-			@PathParam("templateId") Long reportId);
+			@PathParam("templateId") Integer reportId);
 
 	/**
 	 * Gets all {@link ActivityReportTemplate}s of the {@link User} with the
@@ -201,5 +201,5 @@ public interface EmployeeRestService extends DirectRestService
 	@DELETE
 	@Path("/{userId}/report/{reportId}")
 	void deleteReportTemplate(@PathParam("userId") Integer userId,
-			@PathParam("reportId") Long templateId);
+			@PathParam("reportId") Integer templateId);
 }

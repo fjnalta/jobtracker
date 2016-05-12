@@ -1,27 +1,30 @@
 package net.greenbeansit.jobtracker.server.rest.services;
 
+import java.sql.Date;
 import java.util.List;
 
+import net.greenbeansit.jobtracker.server.data.ActivityReportDataService;
 import net.greenbeansit.jobtracker.server.data.JobDataService;
 import net.greenbeansit.jobtracker.server.data.implementation.JobServiceJpa;
 import net.greenbeansit.jobtracker.shared.ActivityReport;
 import net.greenbeansit.jobtracker.shared.ActivityReportTemplate;
 import net.greenbeansit.jobtracker.shared.User;
 import net.greenbeansit.jobtracker.shared.Job;
-import net.greenbeansit.jobtracker.shared.rest.services.EmployeeRestService;
+import net.greenbeansit.jobtracker.shared.rest.services.RestService;
 
 /**
- * Dummy implementation of the {@link EmployeeRestService} interface.
+ * Dummy implementation of the {@link RestService} interface.
  * 
  * @author Max Blatt & Alexander Kirilyuk
  */
-public class EmployeeRestServiceImpl implements EmployeeRestService
+public class RestServiceImpl implements RestService
 {
-	private JobDataService dataservice;
+	private JobDataService jobService;
+	private ActivityReportDataService activityService;
 
-	public EmployeeRestServiceImpl()
+	public RestServiceImpl()
 	{
-		dataservice = new JobServiceJpa();
+		jobService = new JobServiceJpa();
 	}
 
 	@Override
@@ -33,18 +36,17 @@ public class EmployeeRestServiceImpl implements EmployeeRestService
 	@Override
 	public List<Job> getAllJobs(Integer userId)
 	{
-		return dataservice.getAll();
+		return jobService.getAll();
 	}
 
 	@Override
 	public List<ActivityReport> getAllReports(Integer userId)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return activityService.getByUser(userId);
 	}
 
 	@Override
-	public ActivityReport getReport(Integer userId, Long reportId)
+	public ActivityReport getReport(Integer userId, Integer reportId)
 	{
 		// TODO Auto-generated method stub
 		return null;
@@ -54,8 +56,7 @@ public class EmployeeRestServiceImpl implements EmployeeRestService
 	public List<ActivityReport> getReportPeriod(Integer userId, String from,
 			String to)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return activityService.getByUserAndPeriod(userId, stringToDate(from), stringToDate(to));
 	}
 
 	@Override
@@ -73,7 +74,7 @@ public class EmployeeRestServiceImpl implements EmployeeRestService
 	}
 
 	@Override
-	public void deleteReport(Integer userId, Long reportId)
+	public void deleteReport(Integer userId, Integer reportId)
 	{
 		// TODO Auto-generated method stub
 
@@ -95,10 +96,16 @@ public class EmployeeRestServiceImpl implements EmployeeRestService
 	}
 
 	@Override
-	public void deleteReportTemplate(Integer userId, Long templateId)
+	public void deleteReportTemplate(Integer userId, Integer templateId)
 	{
 		// TODO Auto-generated method stub
 
+	}
+	
+	
+	@SuppressWarnings("deprecation")
+	private Date stringToDate(String date) {
+		return new Date(Integer.parseInt(date.substring(0, 3)),Integer.parseInt(date.substring(5, 6)), Integer.parseInt(date.substring(8, 9)));
 	}
 
 }
