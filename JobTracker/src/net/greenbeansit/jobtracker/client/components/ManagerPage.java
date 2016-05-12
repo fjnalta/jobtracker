@@ -47,12 +47,12 @@ public class ManagerPage extends Composite
 		
 		userlist = new ArrayList<User>();
 		
-		userlist.add(new User(0, "Walter", "von der Vogelweide"));
-		userlist.add(new User(0, "Peter", "Tauber"));
-		userlist.add(new User(0, "Kurt", "Beck"));
-		userlist.add(new User(0, "Rudolf", "Scharping"));
-		userlist.add(new User(0, "Peter", "Altmeier"));
-		userlist.add(new User(0, "Rainer", "Brüderle"));
+		userlist.add(new User(0, "Walter", "von der Vogelweide",0));
+		userlist.add(new User(0, "Peter", "Tauber",0));
+		userlist.add(new User(0, "Kurt", "Beck",0));
+		userlist.add(new User(0, "Rudolf", "Scharping",0));
+		userlist.add(new User(0, "Peter", "Altmeier",0));
+		userlist.add(new User(0, "Rainer", "Brüderle",0));
 		
 		//Fill the display list
 		for(User user : userlist)

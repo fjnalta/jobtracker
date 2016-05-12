@@ -53,13 +53,15 @@ public class LogicHandler {
 		temp.add(new Job(1,2,3,4,"5",6,7));
 		
 		List<ActivityReportTemplate> reporttemp = new ArrayList<ActivityReportTemplate>();
-		reporttemp.add(new ActivityReportTemplate("temp","temp2",1L));
-		reporttemp.add(new ActivityReportTemplate("temp","temp2",1L));
-		reporttemp.add(new ActivityReportTemplate("temp","temp2",1L));
-		reporttemp.add(new ActivityReportTemplate("temp","temp2",1L));
+		reporttemp.add(new ActivityReportTemplate("temp","temp2",1,0,0));
+		reporttemp.add(new ActivityReportTemplate("temp","temp2",1,0,0));
+		reporttemp.add(new ActivityReportTemplate("temp","temp2",1,0,0));
+		reporttemp.add(new ActivityReportTemplate("temp","temp2",1,0,0));
 		
 		this.jobList = temp;
 		this.templateList = reporttemp;
+		this.currentUser = new User();
+		this.currentUser.setId(1);
 	}
 
 	/**
@@ -241,10 +243,11 @@ public class LogicHandler {
 		this.updateAllObservables();
 		
 		try {
-			RestClient.build(new SuccessFunction<ActivityReport>() {
+			RestClient.build(new SuccessFunction<List<ActivityReportTemplate>>() {
 				@Override
-				public void onSuccess(Method method, ActivityReport response) {
+				public void onSuccess(Method method, List<ActivityReportTemplate> response) {
 					self.updateAllObservables();
+					self.templateList = response;
 				}
 
 				@Override
@@ -265,7 +268,6 @@ public class LogicHandler {
 	public void loadJobs() {
 		//only for dummy implementation
 		this.updateAllObservables();
-		
 		try {
 			RestClient.build(new SuccessFunction<List<Job>>() {
 				@Override
