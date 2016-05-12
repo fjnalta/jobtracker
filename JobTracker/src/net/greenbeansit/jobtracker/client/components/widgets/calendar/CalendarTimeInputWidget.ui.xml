@@ -5,133 +5,205 @@
 	xmlns:b="urn:import:org.gwtbootstrap3.client.ui" xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:g="urn:import:org.gwtbootstrap3.client.ui.gwt">
 	<ui:style>
-	
-	*{
+	* {
 		margin: 0;
 		padding: 0;
-		
 	}
 	
 	.buttonRight {
-		float: right;
-	}
-	
-	.book{
-		
-	}
-	
-	.textInput {
-		
-	}
-	
-	.buttonLeft{
 		float: left;
 	}
 	
+	.book {
+		
+	}
+	
+	.eventButton {
+		border-radius: 100%;
+		visibility: hidden;
+	}
+	
+	.textInput {
+		text-size: 6px;
+		border-left: none;
+		border-right: none;
+	}
+	
+	.buttonLeft {
+		float: right;
+	}
+	
+	.eventButton, .book {
+		margin-top: 2em;
+	}
+	
+	.buttonLeft, .buttonRight {
+		font-size: 10px;
+		line-height: 0px;
+		text-align: center;
+		padding: 0;
+		border: none;
+		margin: 0;
+	}
+	
 	.text {
+		line-height: 0px;
+		text-align: center;
+		padding: 0;
+		border: none;
+		background-color: white;
+		color: black;
 	}
 	</ui:style>
 	<b:Container fluid="true">
 		<b:Row>
-			<b:Column size="XS_3,SM_3,MD_3,LG_3">
+			<b:Column size="XS_12,SM_3,MD_3,LG_3">
 				<b:Row>
-					<b:Column size="XS_1,SM_1,MD_1,LG_1">
+					<b:Column size="XS_12,SM_12,MD_12,LG_12">
 						<b:Label addStyleNames="{style.text}">Datum</b:Label>
 					</b:Column>
 
-					<b:Column size="XS_1,SM_1,MD_1,LG_1">
-						<b:Button addStyleNames="{style.buttonLeft}" ui:field="buttonUpDateStart" />
-						<b:Button addStyleNames="{style.buttonLeft}" ui:field="buttonDownDateStart" />
+					<b:Column size="XS_12,SM_6,MD_6,LG_6">
+						<b:Row>
+							<b:Column size="XS_1,SM_1,MD_1,LG_1">
+								<b:Button addStyleNames="{style.buttonLeft}" ui:field="buttonUpDateStart" />
+								<b:Button addStyleNames="{style.buttonLeft}" ui:field="buttonDownDateStart" />
+							</b:Column>
+
+							<b:Column size="XS_6,SM_6,MD_6,LG_6">
+								<b:TextBox addStyleNames="{style.textInput}" ui:field="dateStart">06.05</b:TextBox>
+							</b:Column>
+						</b:Row>
 					</b:Column>
 
-					<b:Column size="XS_4,SM_4,MD_4,LG_4">
-						<b:TextBox addStyleNames="{style.textInput}" ui:field="dateStart">06.05</b:TextBox>
-					</b:Column>
-					
-					<b:Column size="XS_4,SM_4,MD_4,LG_4">
-						<b:TextBox addStyleNames="{style.textInput}" ui:field="dateEnd">06.05</b:TextBox>
-					</b:Column>
+					<b:Column size="XS_12,SM_6,MD_6,LG_6">
+						<b:Row>
+							<b:Column size="XS_6,SM_6,MD_6,LG_6">
+								<b:TextBox addStyleNames="{style.textInput}" ui:field="dateEnd">06.05</b:TextBox>
+							</b:Column>
 
-					<b:Column size="XS_1,SM_1,MD_1,LG_1">
-						<b:Button addStyleNames="{style.buttonRight}" ui:field="buttonUpDateEnd" />
-						<b:Button addStyleNames="{style.buttonRight}" ui:field="buttonDownDateEnd" />
+							<b:Column size="XS_1,SM_1,MD_1,LG_1">
+								<b:Button addStyleNames="{style.buttonRight}" ui:field="buttonUpDateEnd" />
+								<b:Button addStyleNames="{style.buttonRight}" ui:field="buttonDownDateEnd" />
+							</b:Column>
+						</b:Row>
 					</b:Column>
-					
 				</b:Row>
 			</b:Column>
 
-			<b:Column size="XS_3,SM_3,MD_3,LG_3">
+			<b:Column size="XS_12,SM_3,MD_3,LG_3">
 				<b:Row>
 
-					<b:Column size="XS_1,SM_1,MD_1,LG_1">
+					<b:Column size="XS_12,SM_12,MD_12,LG_12">
 						<b:Label addStyleNames="{style.text}">Uhrzeit</b:Label>
 					</b:Column>
 
-					<b:Column size="XS_1,SM_1,MD_1,LG_1">
-						<b:Button addStyleNames="{style.buttonLeft}" ui:field="buttonTimeHourUpStart" />
-						<b:Button addStyleNames="{style.buttonLeft}" ui:field="buttonTimeHourDownStart" />
+					<b:Column size="XS_12,SM_6,MD_6,LG_6">
+						<b:Row>
+							<b:Column size="XS_1,SM_1,MD_1,LG_1">
+								<b:Button addStyleNames="{style.buttonLeft}" ui:field="buttonTimeHourUpStart" />
+								<b:Button addStyleNames="{style.buttonLeft}" ui:field="buttonTimeHourDownStart" />
+							</b:Column>
+
+							<b:Column size="XS_7,SM_7,MD_7,LG_7">
+								<b:TextBox addStyleNames="{style.textInput}" ui:field="eventStart">12:00</b:TextBox>
+							</b:Column>
+
+							<b:Column size="XS_1,SM_1,MD_1,LG_1">
+								<b:Button addStyleNames="{style.buttonRight}" ui:field="buttonTimeHourUpEnd" />
+								<b:Button addStyleNames="{style.buttonRight}" ui:field="buttonTimeHourDownEnd" />
+							</b:Column>
+
+						</b:Row>
 					</b:Column>
 
-					<b:Column size="XS_3,SM_3,MD_3,LG_3">
-						<b:TextBox addStyleNames="{style.textInput}" ui:field="eventStart">12:00</b:TextBox>
+					<b:Column size="XS_12,SM_6,MD_6,LG_6">
+						<b:Row>
+
+							<b:Column size="XS_1,SM_1,MD_1,LG_1">
+								<b:Button addStyleNames="{style.buttonLeft}" ui:field="buttonTimeMinuteUpStart" />
+								<b:Button addStyleNames="{style.buttonLeft}" ui:field="buttonTimeMinuteDownStart" />
+							</b:Column>
+
+							<b:Column size="XS_7,SM_7,MD_7,LG_7">
+								<b:TextBox addStyleNames="{style.textInput}" ui:field="eventEnd">12:00</b:TextBox>
+							</b:Column>
+
+							<b:Column size="XS_1,SM_1,MD_1,LG_1">
+								<b:Button addStyleNames="{style.buttonRight}" ui:field="buttonTimeMinuteUpEnd" />
+								<b:Button addStyleNames="{style.buttonRight}" ui:field="buttonTimeMinuteDownEnd" />
+							</b:Column>
+
+						</b:Row>
 					</b:Column>
 
-					<b:Column size="XS_1,SM_1,MD_1,LG_1">
-						<b:Button addStyleNames="{style.buttonRight}" ui:field="buttonTimeMinuteUpStart" />
-						<b:Button addStyleNames="{style.buttonRight}" ui:field="buttonTimeMinuteDownStart" />
-					</b:Column>
-
-					<b:Column size="XS_1,SM_1,MD_1,LG_1">
-						<b:Button addStyleNames="{style.buttonLeft}" ui:field="buttonTimeHourUpEnd" />
-						<b:Button addStyleNames="{style.buttonLeft}" ui:field="buttonTimeHourDownEnd" />
-					</b:Column>
-
-					<b:Column size="XS_3,SM_3,MD_3,LG_3">
-						<b:TextBox addStyleNames="{style.textInput}" ui:field="eventEnd">12:00</b:TextBox>
-					</b:Column>
-
-					<b:Column size="XS_1,SM_1,MD_1,LG_1">
-						<b:Button addStyleNames="{style.buttonRight}" ui:field="buttonTimeMinuteUpEnd" />
-						<b:Button addStyleNames="{style.buttonRight}" ui:field="buttonTimeMinuteDownEnd" />
-					</b:Column>
-					
 				</b:Row>
 			</b:Column>
 
-			<b:Column size="XS_3">
-				<b:Label addStyleNames="{style.text}">Pause</b:Label>
+			<b:Column size="XS_12,SM_3,MD_3,LG_3">
 				<b:Row>
-					<b:Button addStyleNames="{style.buttonRight}" ui:field="buttonTimeHourUpPause" />
-				</b:Row>
-				<b:Row>
-					<b:Button addStyleNames="{style.buttonRight}" ui:field="buttonTimeHourDownPause" />
-				</b:Row>
-				<b:TextBox addStyleNames="{style.textInput}" ui:field="pause">12:00</b:TextBox>
-				<b:Row>
-					<b:Button addStyleNames="{style.buttonLeft}" ui:field="buttonTimeMinuteUpPause" />
-				</b:Row>
-				<b:Row>
-					<b:Button addStyleNames="{style.buttonLeft}" ui:field="buttonTimeMinuteDownPause" />
+					<b:Column size="XS_12,SM_12,MD_12,LG_12">
+						<b:Label addStyleNames="{style.text}">Pause</b:Label>
+					</b:Column>
+
+					<b:Column size="XS_12,SM_6,MD_6,LG_6">
+						<b:Row>
+
+							<b:Column size="XS_1,SM1,MD_1,LG_1">
+								<b:Button addStyleNames="{style.buttonLeft}" ui:field="buttonTimeHourUpPause" />
+								<b:Button addStyleNames="{style.buttonLeft}" ui:field="buttonTimeHourDownPause" />
+							</b:Column>
+
+							<b:Column size="XS_7,SM_7,MD_7,LG_7">
+								<b:TextBox addStyleNames="{style.textInput}" ui:field="pause">12:00</b:TextBox>
+							</b:Column>
+							<b:Column size="XS_1,SM1,MD_1,LG_1">
+								<b:Button addStyleNames="{style.buttonRight}" ui:field="buttonTimeMinuteUpPause" />
+								<b:Button addStyleNames="{style.buttonRight}" ui:field="buttonTimeMinuteDownPause" />
+							</b:Column>
+
+						</b:Row>
+					</b:Column>
+
+					<b:Column size="XS_12,SM_6,MD_6,LG_6">
+						<b:Row>
+
+							<b:Column size="XS_1,SM1,MD_1,LG_1">
+								<b:Button addStyleNames="{style.buttonLeft}" ui:field="buttonTimeHourUpDuration" />
+								<b:Button addStyleNames="{style.buttonLeft}" ui:field="buttonTimeHourDownDuration" />
+							</b:Column>
+
+							<b:Column size="XS_6,SM_6,MD_6,LG_6">
+								<b:TextBox addStyleNames="{style.textInput}" ui:field="workTime">12:00</b:TextBox>
+							</b:Column>
+
+							<b:Column size="XS_1,SM1,MD_1,LG_1">
+								<b:Button addStyleNames="{style.buttonRight}" ui:field="buttonTimeMinuteUpDuration" />
+								<b:Button addStyleNames="{style.buttonRight}" ui:field="buttonTimeMinuteDownDuration" />
+							</b:Column>
+
+						</b:Row>
+					</b:Column>
+
 				</b:Row>
 			</b:Column>
 
-			<b:Column size="XS_3">
-				<b:Label addStyleNames="{style.text}">Dauer</b:Label>
-				<b:Row>
-					<b:Button addStyleNames="{style.buttonRight}" ui:field="buttonTimeHourUpDuration" />
-				</b:Row>
-				<b:Row>
-					<b:Button addStyleNames="{style.buttonRight}" ui:field="buttonTimeHourDownDuration" />
-				</b:Row>
-				<b:TextBox addStyleNames="{style.textInput}" ui:field="workTime">12:00</b:TextBox>
-				<b:Row>
-					<b:Button addStyleNames="{style.buttonLeft}" ui:field="buttonTimeMinuteUpDuration" />
-				</b:Row>
-				<b:Row>
-					<b:Button addStyleNames="{style.buttonLeft}" ui:field="buttonTimeMinuteDownDuration" />
-				</b:Row>
-				<b:Button addStyleNames="{style.book}" text="Buchen"
-					ui:field="buttonBook" />
+			<b:Column size="XS_12,SM_3,MD_3,LG_3">
+				<b:Column size="XS_4,SM_4,MD_4,LG_4">
+					<b:Button addStyleNames="{style.eventButton}" text="+"
+						ui:field="buttonCopy" />
+				</b:Column>
+
+				<b:Column size="XS_4,SM_4,MD_4,LG_4">
+					<b:Button addStyleNames="{style.eventButton}" text="x"
+						ui:field="buttonDelete" />
+				</b:Column>
+
+				<b:Column size="XS_12,SM_4,MD_4,LG_4">
+					<b:Button addStyleNames="{style.book}" text="Buchen"
+						ui:field="buttonBook" />
+				</b:Column>
+
 			</b:Column>
 
 		</b:Row>

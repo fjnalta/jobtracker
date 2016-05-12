@@ -42,12 +42,12 @@ public class CalendarTimeLineButtons extends Composite implements CalendarObserv
 	
 	@UiHandler("buttonMonth")
 	public void onClickButtonMonth(ClickEvent event){
-		handler.calendar.setView(ViewOption.month);
+		calendarHandler.calendar.setView(ViewOption.month);
 	}
 
 	@UiHandler("buttonWeek")
 	public void onClickButtonWeek(ClickEvent event){
-		handler.calendar.setView(ViewOption.agendaWeek);
+		calendarHandler.calendar.setView(ViewOption.agendaWeek);
 		//handler.calendar.render();
 	}
 

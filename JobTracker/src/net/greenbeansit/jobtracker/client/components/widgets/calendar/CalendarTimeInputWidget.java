@@ -1,10 +1,15 @@
 package net.greenbeansit.jobtracker.client.components.widgets.calendar;
 
+import java.awt.List;
+import java.util.ArrayList;
+import java.util.Date;
 
 import org.gwtbootstrap3.client.ui.Button;
 import org.gwtbootstrap3.client.ui.TextBox;
+import org.gwtbootstrap3.client.ui.constants.IconType;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.KeyPressEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
@@ -13,6 +18,7 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 
 import net.greenbeansit.jobtracker.client.components.CalendarObserver;
+import net.greenbeansit.jobtracker.shared.ActivityReport;
 
 /**
  * The Calendar time input from keyboard
@@ -26,7 +32,7 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 
 	interface CalendarTimeInputWidgetUiBinder extends UiBinder<Widget, CalendarTimeInputWidget> {
 	}
-	
+
 	@UiField
 	Button buttonUpDateStart;
 	@UiField
@@ -60,7 +66,7 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 	Button buttonTimeMinuteUpStart;
 	@UiField
 	Button buttonTimeMinuteDownStart;
-	
+
 	@UiField
 	Button buttonTimeHourUpPause;
 	@UiField
@@ -71,25 +77,53 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 	Button buttonTimeMinuteUpPause;
 	@UiField
 	Button buttonTimeMinuteDownPause;
-	
-	
-	
+
+	@UiField
+	Button buttonTimeHourUpDuration;
+	@UiField
+	Button buttonTimeHourDownDuration;
 	@UiField
 	TextBox workTime;
+	@UiField
+	Button buttonTimeMinuteUpDuration;
+	@UiField
+	Button buttonTimeMinuteDownDuration;
 
 	@UiField
 	Button buttonBook;
 
 	public CalendarTimeInputWidget() {
 		initWidget(uiBinder.createAndBindUi(this));
-		handler.addObserver(this);
-		// buttonUpStart.setIcon(IconType.ARROW_UP);
-		// buttonDownStart.setIcon(IconType.ARROW_DOWN);
-		// buttonUpEnd.setIcon(IconType.ARROW_UP);
-		// buttonDownEnd.setIcon(IconType.ARROW_DOWN);
+		calendarHandler.addObserver(this);
+
+		buttonDownDateEnd.setIcon(IconType.ARROW_DOWN);
+		buttonDownDateStart.setIcon(IconType.ARROW_DOWN);
+		buttonTimeHourDownEnd.setIcon(IconType.ARROW_DOWN);
+		buttonTimeHourDownPause.setIcon(IconType.ARROW_DOWN);
+		buttonTimeHourDownStart.setIcon(IconType.ARROW_DOWN);
+		buttonTimeMinuteDownEnd.setIcon(IconType.ARROW_DOWN);
+		buttonTimeMinuteDownPause.setIcon(IconType.ARROW_DOWN);
+		buttonTimeMinuteDownStart.setIcon(IconType.ARROW_DOWN);
+		buttonTimeHourDownDuration.setIcon(IconType.ARROW_DOWN);
+		buttonTimeMinuteDownDuration.setIcon(IconType.ARROW_DOWN);
+
+		buttonTimeHourUpEnd.setIcon(IconType.ARROW_UP);
+		buttonTimeHourUpPause.setIcon(IconType.ARROW_UP);
+		buttonTimeHourUpStart.setIcon(IconType.ARROW_UP);
+		buttonTimeMinuteUpEnd.setIcon(IconType.ARROW_UP);
+		buttonTimeMinuteUpPause.setIcon(IconType.ARROW_UP);
+		buttonTimeMinuteUpStart.setIcon(IconType.ARROW_UP);
+		buttonUpDateEnd.setIcon(IconType.ARROW_UP);
+		buttonUpDateStart.setIcon(IconType.ARROW_UP);
+		buttonTimeHourUpDuration.setIcon(IconType.ARROW_UP);
+		buttonTimeMinuteUpDuration.setIcon(IconType.ARROW_UP);
+
 	}
 
-
+	@UiHandler("buttonBook")
+	public void clickButtonBook(ClickEvent e) {
+		
+	}
 
 	@UiHandler("eventStart")
 	public void keyPressedEventStart(KeyPressEvent event) {
@@ -216,12 +250,12 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 	}
 
 	private void workTimeIsEntered() {
-	
+
 		eventEnd.setEnabled(false);
 	}
 
 	private void enableFields() {
-		
+
 		eventEnd.setEnabled(true);
 	}
 
@@ -249,19 +283,19 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 
 	@Override
 	public void update() {
-		eventEnd.setText(addDoublePoint(handler.events.endTime));
-		eventStart.setText(addDoublePoint(handler.events.startTime));
-		pause.setText(handler.events.pause);
-		workTime.setText(handler.events.workTime);
+		eventEnd.setText(addDoublePoint(calendarHandler.events.endTime));
+		eventStart.setText(addDoublePoint(calendarHandler.events.startTime));
+		pause.setText(calendarHandler.events.pause);
+		workTime.setText(calendarHandler.events.workTime);
 	}
 
 	@Override
 	public void notifyHandler() {
-		handler.events.endTime = eventEnd.getText();
-		handler.events.startTime = eventStart.getText();
-		handler.events.pause = pause.getText();
-		handler.events.workTime = workTime.getText();
-		handler.updateObserver(this);
+		calendarHandler.events.endTime = eventEnd.getText();
+		calendarHandler.events.startTime = eventStart.getText();
+		calendarHandler.events.pause = pause.getText();
+		calendarHandler.events.workTime = workTime.getText();
+		calendarHandler.updateObserver(this);
 	}
 
 	private String removeDoublePoint(String input) {

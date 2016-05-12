@@ -9,14 +9,18 @@ public class EventDummy {
 	ActivityReport Dummy
 	private static final long	serialVersionUID	= 7682896069658320372L;
 
-	private String				description;
-	private String				identifier;
+	private Integer				id;
+	private Integer				taskId;
+	private Integer				jobNr;
+	private Integer				jobPosNr;
+	private Integer				authorId;
+	
+	private String 				jobDesc;
+	private String				text;
 	private Date				date;
 	private Integer				startTime;
 	private Integer				duration;
 	private Integer				breakTime;
-	private Long				author;
-	private Long				id;
 	 */
 	public Date eventDate;
 

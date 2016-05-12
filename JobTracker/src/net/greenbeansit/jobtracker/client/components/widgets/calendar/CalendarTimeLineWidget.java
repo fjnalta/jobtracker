@@ -43,7 +43,7 @@ public class CalendarTimeLineWidget extends Composite implements CalendarObserve
 
 	public CalendarTimeLineWidget() {
 		initWidget(uiBinder.createAndBindUi(this));
-		handler.addObserver(this);
+		calendarHandler.addObserver(this);
 		String currentDate = createDate(new Date().toString());
 		setDate(currentDate);
 		setKalenderWeek("KW`16");
@@ -51,17 +51,17 @@ public class CalendarTimeLineWidget extends Composite implements CalendarObserve
 
 	public CalendarTimeLineWidget(String firstName) {
 		initWidget(uiBinder.createAndBindUi(this));
-		handler.addObserver(this);
+		calendarHandler.addObserver(this);
 	}
 
 	@Override
 	public void update() {
-		date.setText(createDate(handler.events.eventDate.toString()));
+		date.setText(createDate(calendarHandler.events.eventDate.toString()));
 	}
 
 	@Override
 	public void notifyHandler() {
-		handler.updateObserver(this);
+		calendarHandler.updateObserver(this);
 	}
 
 	public void setKalenderWeek(String week) {

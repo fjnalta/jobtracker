@@ -5,7 +5,7 @@ package net.greenbeansit.jobtracker.client.components;
  * @author Ahmed
  */
 public interface CalendarObserver {
-	CalendarHandler handler = new CalendarHandler();
+	CalendarHandler calendarHandler = new CalendarHandler();
 	/**
 	 * 
 	 */

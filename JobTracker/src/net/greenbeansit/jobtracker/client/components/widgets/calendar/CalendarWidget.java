@@ -1,6 +1,8 @@
 package net.greenbeansit.jobtracker.client.components.widgets.calendar;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.apache.commons.io.filefilter.NotFileFilter;
 import org.gwtbootstrap3.client.ui.Row;
@@ -33,6 +35,7 @@ import com.google.gwt.user.datepicker.client.CalendarUtil;
 
 import net.greenbeansit.jobtracker.client.components.CalendarHandler;
 import net.greenbeansit.jobtracker.client.components.CalendarObserver;
+import net.greenbeansit.jobtracker.shared.ActivityReport;
 
 public class CalendarWidget extends Composite implements CalendarObserver {
 
@@ -49,9 +52,9 @@ public class CalendarWidget extends Composite implements CalendarObserver {
 
 	public CalendarWidget() {
 		initWidget(uiBinder.createAndBindUi(this));
-		
-		handler.addObserver(this);
-		
+
+		calendarHandler.addObserver(this);
+
 		Timer t = new Timer() {
 			String eventTitel = "new Event";
 			int titleNumber;
@@ -90,7 +93,7 @@ public class CalendarWidget extends Composite implements CalendarObserver {
 				config.setSelectHelper(true);
 
 				GeneralDisplay generalDisplay = new GeneralDisplay();
-				generalDisplay.setHeight(715);
+				generalDisplay.setHeight(600);
 				Header header = new Header();
 				header.setLeft("");
 				header.setCenter("");
@@ -110,10 +113,59 @@ public class CalendarWidget extends Composite implements CalendarObserver {
 				calendar = new FullCalendarCustomize("fullCalendar", ViewOption.agendaWeek, config, true);
 				calendarRow.add(calendar);
 				calendar.render();
-				handler.registerCalendar(calendar);
+				calendarHandler.registerCalendar(calendar);
+				loadActvityReports();
 			}
 			
-			
+			/**
+			 * (Yoruba)
+			 * Le ti wa ni paarẹ ti o ba ti o ti wa ni ko si ohun to nilo
+			 */
+			public void loadActvityReports(){
+				ArrayList<ActivityReport> reports = new ArrayList<ActivityReport>();
+				reports.add(new ActivityReport(0, 01, 02, 100, "ersterJob", new Date(2016, 05, 9), 480, 180, 60));
+				reports.add(new ActivityReport(1, 11, 12, 100, "zweiterJob", new Date(2016, 05, 10), 540, 180, 60));
+				reports.add(new ActivityReport(2, 21, 22, 100, "dritterJob", new Date(2016, 05, 11), 600, 180, 60));
+				reports.add(new ActivityReport(3, 31, 32, 100, "vierterJob", new Date(2016, 05, 12), 660, 180, 60));
+				addActvityReports(reports);
+				calendar.render();
+			} 
+
+			public void addActvityReports(List<ActivityReport> reports) {
+				for (ActivityReport ap : reports) {
+					Event e = new Event(ap.getId() + "", ap.getText(), true, true, true);
+					e.setStart(getISO8601StringForDate(ap.getDate(), ap.getStartTime()));
+					e.setEnd(getISO8601StringForDate(ap.getDate(), ap.getEndTime()));
+					calendar.addEvent(e);
+					calendar.render();
+				}
+			}
+
+			private String getISO8601StringForDate(Date date, int time) {
+				return date.getYear() + "-" + fillLeadingZero(date.getMonth()) + "-" + fillLeadingZero(date.getDate())
+						+ "T" + fillLeadingZero(calculateHours(time)) + ":" + fillLeadingZero(calculateMinutes(time))
+						+ ":00" + ".000Z";
+			}
+
+			/**
+			 * 
+			 * @param num
+			 * @return
+			 */
+			private String fillLeadingZero(int num) {
+				if (num < 10) {
+					return "0" + num;
+				}
+				return num + "";
+			}
+
+			private int calculateMinutes(int time) {
+				return time % 60;
+			}
+
+			private int calculateHours(int time) {
+				return time / 60;
+			}
 
 			private ClickAndHoverConfig getClickAndHoverConfig() {
 				ClickAndHoverConfig clickHoverConfig = new ClickAndHoverConfig(new ClickAndHoverEventCallback() {
@@ -133,11 +185,12 @@ public class CalendarWidget extends Composite implements CalendarObserver {
 					@Override
 					public void eventClick(JavaScriptObject calendarEvent, NativeEvent event,
 							JavaScriptObject viewObject) {
-						//Event e = new Event(calendarEvent);
-						//calendar.removeEvent(e.getId());
+						// Event e = new Event(calendarEvent);
+						// calendar.removeEvent(e.getId());
 						Event e = new Event(calendarEvent);
 						calendar.currentEvent = e;
 						notifyHandler();
+						Window.alert(e.getISOStart());
 					}
 
 					/**
@@ -145,7 +198,7 @@ public class CalendarWidget extends Composite implements CalendarObserver {
 					 */
 					@Override
 					public void dayClick(JavaScriptObject moment, NativeEvent event, JavaScriptObject viewObject) {
-						
+
 					}
 
 				});
@@ -227,14 +280,13 @@ public class CalendarWidget extends Composite implements CalendarObserver {
 
 							oldEvent.setStart(dragEvent.getISOStart());
 							oldEvent.setEnd(dragEvent.getISOEnd());
-							
-							
+
 							dragEvent.setTitle(dragEvent.getTitle() + titleNumber++);
 							calendar.addEvent(oldEvent);
 							calendar.currentEvent = dragEvent;
 							notifyHandler();
 						}
-						
+
 					}
 
 				});
@@ -249,35 +301,34 @@ public class CalendarWidget extends Composite implements CalendarObserver {
 		calendar.currentEvent.setEditable(true);
 		calendar.currentEvent.setDurationEditable(true);
 		calendar.currentEvent.setStartEditable(true);
-		calendar.currentEvent.setEnd(handler.events.endTime);
-		calendar.currentEvent.setStart(handler.events.startTime);
+		calendar.currentEvent.setEnd(calendarHandler.events.endTime);
+		calendar.currentEvent.setStart(calendarHandler.events.startTime);
 		calendar.updateEvent(calendar.currentEvent);
 		calendar.render();
 	}
 
 	@Override
 	public void notifyHandler() {
-		handler.events.endTime = timeParser(calendar.currentEvent.getISOEnd());
-		handler.events.startTime = timeParser(calendar.currentEvent.getISOStart());
-		handler.events.eventDate = dateParser(calendar.currentEvent.getISOEnd());
-		handler.updateObserver(this);
+		calendarHandler.events.endTime = timeParser(calendar.currentEvent.getISOEnd());
+		calendarHandler.events.startTime = timeParser(calendar.currentEvent.getISOStart());
+		calendarHandler.events.eventDate = dateParser(calendar.currentEvent.getISOEnd());
+		calendarHandler.updateObserver(this);
 	}
-	
-	private String timeParser(String date){
-		String [] temp = date.split("T");
-		String [] temp2 = temp[1].split(":");
+
+	private String timeParser(String date) {
+		String[] temp = date.split("T");
+		String[] temp2 = temp[1].split(":");
 		return temp2[0] + temp2[1];
 	}
-	
+
 	@SuppressWarnings("deprecation")
-	private Date dateParser(String date2){
-		String [] temp = date2.split("T");
-		String [] temp2 = temp[0].split("-");
-		int year = Integer.parseInt(temp2[0]); 
-		int month = Integer.parseInt(temp2[1])-1;
+	private Date dateParser(String date2) {
+		String[] temp = date2.split("T");
+		String[] temp2 = temp[0].split("-");
+		int year = Integer.parseInt(temp2[0]);
+		int month = Integer.parseInt(temp2[1]) - 1;
 		int date = Integer.parseInt(temp2[2]);
 		return new Date(year, month, date);
 	}
-	
-	
+
 }

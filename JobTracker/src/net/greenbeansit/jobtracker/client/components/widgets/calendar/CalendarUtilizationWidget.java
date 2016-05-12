@@ -3,20 +3,16 @@ package net.greenbeansit.jobtracker.client.components.widgets.calendar;
 import java.util.Date;
 
 import org.gwtbootstrap3.client.ui.Button;
-import org.gwtbootstrap3.client.ui.Column;
-import org.gwtbootstrap3.client.ui.Row;
 import org.gwtbootstrap3.client.ui.constants.IconType;
-import org.gwtbootstrap3.extras.fullcalendar.client.ui.ViewOption;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlexTable;
-import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.user.datepicker.client.CalendarUtil;
 
@@ -47,61 +43,67 @@ public class CalendarUtilizationWidget extends Composite implements CalendarObse
 	@UiHandler("leftButton")
 	public void clickHandlerLeftButton(ClickEvent e) {
 		createNewTimeline(-1);
-		handler.calendar.previous();
+		calendarHandler.calendar.previous();
 	}
 
 	@UiHandler("rightButton")
 	public void clickHandlerRightButton(ClickEvent e) {
 		createNewTimeline(1);
-		handler.calendar.next();
+		calendarHandler.calendar.next();
 	}
 
-	Date date;
+	// Path for the css File
+	final String suffixPath = "net-greenbeansit-jobtracker-client-components-widgets-calendar-CalendarUtilizationWidget_CalendarUtilizationWidgetUiBinderImpl_GenCss_style-";
+
+	Date currentDate;
 
 	public CalendarUtilizationWidget() {
 		initWidget(uiBinder.createAndBindUi(this));
-		date = new Date();
-		// table.setStylePrimaryName("fontColor");
-		handler.addObserver(this);
+		currentDate = new Date();
+		calendarHandler.addObserver(this);
 		leftButton.setIcon(IconType.ARROW_LEFT);
 		rightButton.setIcon(IconType.ARROW_RIGHT);
+
 		createNewTimeline(0);
 	}
 
 	/**
 	 * This method create a new TimeLine.
 	 * 
-	 * @param month
+	 * @param newMonth
 	 *            the month which is choosen, e.g. 1 means the next month, -1
-	 *            previous month
+	 *            the previous month
 	 */
 	@SuppressWarnings("deprecation")
-	public void createNewTimeline(int month) {
-
-		CalendarUtil.addMonthsToDate(date, month);
-		CalendarUtil.setToFirstDayOfMonth(date);
-
-		int monthNumber = date.getMonth();
-		int dayNumber = 0;
+	public void createNewTimeline(int newMonth) {
 		table.removeAllRows();
-		Date today = new Date();
-		while (monthNumber == date.getMonth()) {
-			table.setText(0, dayNumber, ("" + (dayNumber + 1)));
 
-			if (CalendarUtil.isSameDate(today, date)) {
+		CalendarUtil.addMonthsToDate(currentDate, newMonth);
+		CalendarUtil.setToFirstDayOfMonth(currentDate);
+		int monthNumber = currentDate.getMonth();
+		int dayNumberColumn = 0;
+		Date date = new Date();
 
-				table.setCellPadding(0);
-				table.setText(1, dayNumber, "<" + this.getDayName(date.getDay()) + ">");
+		while (monthNumber == currentDate.getMonth()) {
+			table.setWidget(0, dayNumberColumn, getBarChart(null));
+
+			Button tmp = new Button("" + (dayNumberColumn + 1) + " ");
+
+			if (CalendarUtil.isSameDate(date, currentDate)) {
+				tmp.setStyleName(this.suffixPath + "button-Day-current");
+				table.setWidget(1, dayNumberColumn, tmp);
 			} else {
-				//table.setStyleName(" fontColor");
-				table.setText(1, dayNumber, "" + this.getDayName(date.getDay()));
+				tmp.setStyleName(this.suffixPath + "button-Day");
+				table.setWidget(1, dayNumberColumn, tmp);
 			}
-			CalendarUtil.addDaysToDate(date, 1);
 
-			dayNumber++;
+			table.setText(2, dayNumberColumn, "" + this.getDayName(currentDate.getDay()));
+			CalendarUtil.addDaysToDate(currentDate, 1);
+
+			dayNumberColumn++;
 		}
-		//set to the old month!!!
-		CalendarUtil.addMonthsToDate(date, -1);
+		// set to the old month!!!
+		CalendarUtil.addMonthsToDate(currentDate, -1);
 	}
 
 	/**
@@ -141,14 +143,48 @@ public class CalendarUtilizationWidget extends Composite implements CalendarObse
 		return dayName;
 	}
 
+	/**
+	 * Get the BarChart for a day
+	 * 
+	 * @param height
+	 *            set the heigh of the Bar
+	 * @param style
+	 *            add css attribute so the widget
+	 * @return an new BarChart
+	 */
+	private VerticalPanel getBarChart(Date date) {
+		VerticalPanel vp = new VerticalPanel();
+
+		double rnd = getBarChartHeight(date);
+
+		vp.setHeight(rnd + "px");
+
+		if (rnd < 40) {
+			vp.setStyleName(this.suffixPath + "barChart", true);
+		} else {
+			vp.setStyleName(this.suffixPath + "barChartHeight", true);
+		}
+		return vp;
+	}
+
+	/**
+	 * get the barChart height of a day 
+	 * @param date
+	 * @return
+	 */
+	private double getBarChartHeight(Date date) {
+
+		return Math.random() * 50;
+	}
+
 	@Override
 	public void update() {
-		
+
 	}
 
 	@Override
 	public void notifyHandler() {
-		handler.updateObserver(this);
+		calendarHandler.updateObserver(this);
 	}
 
 }
