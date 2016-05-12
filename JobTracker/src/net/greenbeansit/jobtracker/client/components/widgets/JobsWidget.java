@@ -15,10 +15,10 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 
-import net.greenbeansit.jobtracker.client.components.HomePageObservable;
+import net.greenbeansit.jobtracker.client.components.LogicObservable;
 import net.greenbeansit.jobtracker.shared.Job;
 
-public class JobsWidget extends Composite implements HomePageObservable {
+public class JobsWidget extends Composite implements LogicObservable {
 
 	private static JobsWidgetUiBinder uiBinder = GWT.create(JobsWidgetUiBinder.class);
 

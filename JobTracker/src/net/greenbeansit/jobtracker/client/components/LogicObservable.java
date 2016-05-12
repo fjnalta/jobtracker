@@ -1,8 +1,8 @@
 package net.greenbeansit.jobtracker.client.components;
 
-public interface HomePageObservable {
+public interface LogicObservable {
 	
-	HomePageHandler handler = new HomePageHandler();
+	LogicHandler handler = new LogicHandler();
 	
 	public void update();
 	public void notifyHandler();

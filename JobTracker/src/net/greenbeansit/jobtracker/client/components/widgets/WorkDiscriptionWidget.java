@@ -17,7 +17,7 @@ import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 
-import net.greenbeansit.jobtracker.client.components.HomePageObservable;
+import net.greenbeansit.jobtracker.client.components.LogicObservable;
 import net.greenbeansit.jobtracker.shared.ActivityReportTemplate;
 
 /**
@@ -28,7 +28,7 @@ import net.greenbeansit.jobtracker.shared.ActivityReportTemplate;
  *
  */
 
-public class WorkDiscriptionWidget extends Composite implements HomePageObservable
+public class WorkDiscriptionWidget extends Composite implements LogicObservable
 {		
 
 	private static WorkDiscriptionWidgetUiBinder uiBinder = 

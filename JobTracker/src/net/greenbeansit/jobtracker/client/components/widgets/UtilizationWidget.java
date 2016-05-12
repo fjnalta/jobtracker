@@ -13,10 +13,10 @@ import com.google.gwt.user.client.ui.Widget;
 import com.googlecode.gwt.charts.client.gauge.Gauge;
 
 import net.greenbeansit.jobtracker.client.components.HomePage;
-import net.greenbeansit.jobtracker.client.components.HomePageObservable;
+import net.greenbeansit.jobtracker.client.components.LogicObservable;
 import net.greenbeansit.jobtracker.client.components.ProjectPage;
 
-public class UtilizationWidget extends Composite implements HomePageObservable{
+public class UtilizationWidget extends Composite implements LogicObservable{
 
 	private static UtilizationWidgetUiBinder uiBinder = GWT.create(UtilizationWidgetUiBinder.class);
 

@@ -23,21 +23,21 @@ import net.greenbeansit.jobtracker.shared.User;
  * @author Alexander Kirilyuk
  *
  */
-public class HomePageHandler {
+public class LogicHandler {
 
 	private ActivityReport currentReport;
-	private List<HomePageObservable> list = new ArrayList<>();
+	private List<LogicObservable> list = new ArrayList<>();
 	private List<ActivityReport> currentReportsList = new ArrayList<ActivityReport>();
 	private List<Job> jobList = new ArrayList<Job>();
 	private List<ActivityReportTemplate> templateList = new ArrayList<ActivityReportTemplate>();
 	private User currentUser;
-	private HomePageHandler self = this;
+	private LogicHandler self = this;
 
 	private Job currentJob;
 	private ActivityReportTemplate currentTemplate;
 
 	
-	public HomePageHandler(){
+	public LogicHandler(){
 		initialize();
 	}
 	/**
@@ -66,7 +66,7 @@ public class HomePageHandler {
 	 * 
 	 * @param w
 	 */
-	public void addObservable(HomePageObservable w) {
+	public void addObservable(LogicObservable w) {
 		list.add(w);
 	}
 
@@ -74,12 +74,12 @@ public class HomePageHandler {
 	 * 
 	 */
 	public void updateAllObservables() {
-		for (HomePageObservable p : list) {
+		for (LogicObservable p : list) {
 			p.update();
 		}
 	}
 	
-	public void updateObservable(HomePageObservable p){
+	public void updateObservable(LogicObservable p){
 		p.update();
 	}
 
@@ -87,7 +87,7 @@ public class HomePageHandler {
 	 * 
 	 * @param w
 	 */
-	public void deleteObservable(HomePageObservable w) {
+	public void deleteObservable(LogicObservable w) {
 		list.remove(w);
 	}
 	
@@ -97,7 +97,7 @@ public class HomePageHandler {
 	 * information they store on the handler object
 	 */
 	public void getInformations() {
-		for (HomePageObservable o : list) {
+		for (LogicObservable o : list) {
 			o.notifyHandler();
 		}
 	}
