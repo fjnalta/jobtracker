@@ -39,7 +39,7 @@
 			<![CDATA[
 				CREATE TABLE `job`
 				(
-					`job_no` INT NOT NULL AUTO_INCREMENT,
+					`job_no` INT NOT NULL,
 					`pos_no` INT NOT NULL,
 					`description` VARCHAR(30) NOT NULL,
 					`customer_id` INT,

@@ -24,7 +24,7 @@ public class UserListItem extends Composite
 	}
 
 	@UiField
-	ClearFix	anchor;
+	ClearFix	container;
 
 	@UiField
 	Span		spanName;
@@ -39,7 +39,7 @@ public class UserListItem extends Composite
 	{
 		initWidget(uiBinder.createAndBindUi(this));
 
-		spanName.setText(user.getName());
+		spanName.setText(user.getName() + " " + user.getSurname());
 		spanUtilization.setText("65 %");
 		barUtilization.setPercent(65);
 	}

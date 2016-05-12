@@ -27,7 +27,5 @@ public interface ActivityReportDataService
 
 	boolean save(ActivityReport report);
 
-	boolean update(ActivityReport report);
-
 	void delete(ActivityReport report);
 }

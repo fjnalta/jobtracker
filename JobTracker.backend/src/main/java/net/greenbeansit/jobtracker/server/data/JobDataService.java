@@ -24,7 +24,5 @@ public interface JobDataService
 
 	boolean save(Job job);
 
-	boolean update(Job job);
-
 	void delete(Job job);
 }

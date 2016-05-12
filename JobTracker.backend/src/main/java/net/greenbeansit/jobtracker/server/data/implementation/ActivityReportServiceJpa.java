@@ -71,12 +71,6 @@ public class ActivityReportServiceJpa implements ActivityReportDataService
 	}
 
 	@Override
-	public boolean update(ActivityReport report)
-	{
-		return repository.save(convert(report)) != null;
-	}
-
-	@Override
 	public void delete(ActivityReport report)
 	{
 		repository.delete(convert(report));

@@ -25,17 +25,15 @@ public class EmployeeRestServiceImpl implements EmployeeRestService
 	}
 
 	@Override
-	public User getEmployee(Integer userId)
+	public User getEmployee(Integer user)
 	{
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public List<Job> getAllJobs(Integer userId)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return dataservice.getAll();
 	}
 
 	@Override
