@@ -24,6 +24,15 @@
 		.floatright{
 		float:right;
 		}
+		.label{
+		line-height: 0px;
+		text-align: center;
+		padding: 0;
+		border: none;
+		background-color: white;
+		color: black;
+		font-size: 18px;
+	}
 	</ui:style>
 	<h:ClearFix>
 		<b:NavTabs>
@@ -41,10 +50,10 @@
 							<b:Icon type="ANCHOR" />
 						</b:Row>
 						<b:Row>
-							<b:Label text="xxxx von xxx" ui:field="labelBudget" />
+							<b:Label text="xxxx von xxx" ui:field="labelBudget" addStyleNames="{style.label}" />
 						</b:Row>
 						<b:Row>
-							<b:Label text="REST xxxxx" ui:field="labelBudgetLeft" />
+							<b:Label text="REST xxxxx" ui:field="labelBudgetLeft" addStyleNames="{style.label}" />
 						</b:Row>
 
 					</b:Column>
@@ -57,10 +66,10 @@
 
 				</b:Row>
 				<b:Row>
-					<b:Column size="XS_2,SM_2,MD_2,LG_2" offset="XS_8,SM_8,MD_8,LG_8">
-						<b:Button icon="ARROW_LEFT" ui:field="buttonNext" />
-						<b:Label text="JANUAR" ui:field="labelCurrentFocus" />
-						<b:Button icon="ARROW_RIGHT" ui:field="buttonPrevious" />
+					<b:Column size="XS_4,SM_4,MD_4,LG_4" offset="XS_6,SM_6,MD_6,LG_6">
+						<b:Button icon="ARROW_LEFT" ui:field="buttonPrevious" />
+						<b:Label text="JANUAR" ui:field="labelCurrentFocus" addStyleNames="{style.label}" />
+						<b:Button icon="ARROW_RIGHT" ui:field="buttonNext" />
 					</b:Column>
 					<b:Column size="XS_2,SM_2,MD_2,LG_2">
 						<b:Button ui:field="buttonModeWeek" addStyleNames="{style.buttonStyle}" />
