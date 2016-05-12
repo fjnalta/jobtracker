@@ -5,12 +5,10 @@ import java.util.Date;
 import java.util.List;
 
 import org.gwtbootstrap3.client.ui.Button;
-import org.gwtbootstrap3.client.ui.Icon;
 import org.gwtbootstrap3.client.ui.Label;
 import org.gwtbootstrap3.client.ui.html.ClearFix;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.dev.util.collect.HashMap;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
@@ -29,10 +27,10 @@ import com.googlecode.gwt.charts.client.corechart.PieChartOptions;
 import com.googlecode.gwt.charts.client.options.HAxis;
 import com.googlecode.gwt.charts.client.options.VAxis;
 
-import net.greenbeansit.jobtracker.client.components.ProjectPage;
+import net.greenbeansit.jobtracker.client.components.LogicObservable;
 import net.greenbeansit.jobtracker.shared.ActivityReport;
 
-public class GraphWidget extends Composite{
+public class GraphWidget extends Composite implements LogicObservable {
 
 	private static GraphWidgetUiBinder uiBinder = GWT.create(GraphWidgetUiBinder.class);
 
@@ -45,7 +43,7 @@ public class GraphWidget extends Composite{
 
 	public GraphWidget() {
 		initWidget(uiBinder.createAndBindUi(this));
-		// initialize();
+		initialize();
 	}
 
 	@UiField
@@ -59,6 +57,9 @@ public class GraphWidget extends Composite{
 
 	@UiField
 	Label labelBudgetLeft;
+	
+	@UiField
+	Label labelCurrentFocus;
 
 	@UiField
 	Button buttonModeYear;
@@ -69,32 +70,45 @@ public class GraphWidget extends Composite{
 	@UiField
 	Button buttonModeWeek;
 
+	@UiField
+	Button buttonNext;
+
+	@UiField
+	Button buttonPrevious;
+
 	private List<ActivityReport> reportList;
 
 	private LineChart linechart;
 	private PieChart piechart;
 	private Date startDate;
 	private Date endDate;
-	//private HashMap<String,String> languagePack;
+	private int maxBudget;
+	private int currentBudgetUsed;
 
 	private GraphMode currentMode;
 
 	private void initialize() {
-		/*if(this.languagePack==null){
-			languagePack.put("jan", "January");
-			languagePack.put("feb", "February");
-			languagePack.put("mar", "March");
-			languagePack.put("jan", "Januar");
-			languagePack.put("jan", "Januar");
-			languagePack.put("jan", "Januar");
-			languagePack.put("jan", "Januar");
-			languagePack.put("jan", "Januar");
-			languagePack.put("jan", "Januar");
-			languagePack.put("jan", "Januar");
-			
-			
+		// Window.alert("Initialize");
+		reportList = new ArrayList<ActivityReport>();
+
+		for (int i = 0; i < 12; i++) {
+
+			for (int a = 0; a < 28; a++) {
+				ActivityReport temp = new ActivityReport();
+				Date tempDate = new Date();
+				tempDate.setYear(tempDate.getYear() - 1);
+				tempDate.setMonth(tempDate.getMonth() + i);
+				tempDate.setDate(tempDate.getDate() - 28 + a);
+				// Window.alert(tempDate.toGMTString());
+				temp.setDate(tempDate);
+				temp.setStartTime(1);
+				temp.setDuration(480);
+				reportList.add(temp);
+			}
 		}
-		*/
+
+		// Window.alert("Initialize");
+
 		startDate = new Date();
 		startDate.setYear(startDate.getYear() - 1);
 		endDate = new Date();
@@ -122,14 +136,17 @@ public class GraphWidget extends Composite{
 		case WEEK:
 			startDate.setDate(startDate.getDate() + 7);
 			endDate.setDate(startDate.getDate() + 7);
+			showWeek();
 			break;
 		case MONTH:
 			startDate.setMonth(startDate.getMonth() + 1);
 			endDate.setMonth(endDate.getMonth() + 1);
+			showMonth();
 			break;
 		case YEAR:
 			startDate.setYear(startDate.getYear() + 1);
 			endDate.setYear(endDate.getYear() + 1);
+			showYear();
 			break;
 		default:
 			break;
@@ -142,14 +159,17 @@ public class GraphWidget extends Composite{
 		case WEEK:
 			startDate.setDate(startDate.getDate() - 7);
 			endDate.setDate(startDate.getDate() - 7);
+			showWeek();
 			break;
 		case MONTH:
 			startDate.setMonth(startDate.getMonth() - 1);
 			endDate.setMonth(endDate.getMonth() - 1);
+			showMonth();
 			break;
 		case YEAR:
 			startDate.setYear(startDate.getYear() - 1);
 			endDate.setYear(endDate.getYear() - 1);
+			showYear();
 			break;
 		default:
 			break;
@@ -161,6 +181,9 @@ public class GraphWidget extends Composite{
 		buttonModeYear.removeStyleName("active");
 		buttonModeMonth.removeStyleName("active");
 		buttonModeWeek.addStyleName("active");
+		currentMode = GraphMode.WEEK;
+		startDate = new Date();
+		startDate.setDate(startDate.getDate() - startDate.getDay() + 1);
 		showWeek();
 	}
 
@@ -169,6 +192,9 @@ public class GraphWidget extends Composite{
 		buttonModeYear.removeStyleName("active");
 		buttonModeMonth.addStyleName("active");
 		buttonModeWeek.removeStyleName("active");
+		currentMode = GraphMode.MONTH;
+		startDate = new Date();
+		startDate.setMonth(startDate.getMonth() - 1);
 		showMonth();
 	}
 
@@ -177,23 +203,57 @@ public class GraphWidget extends Composite{
 		buttonModeYear.addStyleName("active");
 		buttonModeMonth.removeStyleName("active");
 		buttonModeWeek.removeStyleName("active");
+		currentMode = GraphMode.YEAR;
+		startDate = new Date();
+		startDate.setYear(startDate.getYear() - 1);
 		showYear();
 	}
 
 	public void showWeek() {
-		currentMode = GraphMode.WEEK;
+
+		String[] weekDays = new String[] { "Mo", "Tu", "We", "Thu", "Fr", "Sa", "Sun" };
+		int[] values = new int[] { 0, 0, 0, 0, 0, 0, 0 };
+		labelCurrentFocus.setText(startDate.toGMTString() + " " + endDate.toGMTString());
+
+		for (ActivityReport report : reportList) {
+			if (report.getDate().after(startDate) && report.getDate().before(endDate)) {
+				int currentWeekDay = report.getDate().getDay();
+				if (currentWeekDay == 0) {
+					currentWeekDay = 6;
+				} else {
+					currentWeekDay -= 1;
+				}
+				values[currentWeekDay] += report.getDuration();
+			}
+		}
+
+		DataTable dataTable = DataTable.create();
+		dataTable.addColumn(ColumnType.STRING, "Month	");
+		dataTable.addColumn(ColumnType.NUMBER, "LAWL");
+		dataTable.addRows(weekDays.length);
+		for (int i = 0; i < weekDays.length; i++) {
+			dataTable.setValue(i, 0, weekDays[i]);
+		}
+		for (int row = 0; row < values.length; row++) {
+			dataTable.setValue(row, 1, values[row]);
+		}
+
+		// Set options
+		LineChartOptions options = LineChartOptions.create();
+		options.setBackgroundColor("white");
+		options.setFontName("Tahoma");
+		options.setTitle("Week Report");
+		options.setHAxis(HAxis.create("Day"));
+		options.setVAxis(VAxis.create("€"));
+		drawLineChart(dataTable, options);
+		linechart.draw(dataTable, options);
 	}
 
 	public void showMonth() {
-		currentMode = GraphMode.MONTH;
-		startDate = new Date();
-		startDate.setMonth(startDate.getMonth() - 1);
+
 	}
 
 	public void showYear() {
-		currentMode = GraphMode.YEAR;
-		startDate = new Date();
-		startDate.setYear(startDate.getYear() - 1);
 
 		int[] months = new int[12];
 		for (int i = 0; i < months.length; i++) {
@@ -201,11 +261,14 @@ public class GraphWidget extends Composite{
 		}
 
 		int[] values = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-
+		// Window.alert("showYear");
 		// load relevant data in value array
+		// Window.alert(report.);
 		for (ActivityReport report : reportList) {
+			// Window.alert(report.getDate() + " " + startDate.toGMTString() + "
+			// " + endDate.toGMTString());
 			if (report.getDate().after(startDate) && report.getDate().before(endDate)) {
-
+				// Window.alert(report.getDate().toGMTString());
 				values[Math.abs(report.getDate().getMonth() - 1)] += report.getDuration();
 			}
 		}
@@ -279,10 +342,20 @@ public class GraphWidget extends Composite{
 		initialize();
 	}
 
-	
-	/*
-	public void setLanguage(HashMap<String,String> languagePack){
-		this.languagePack = languagePack;
+	@Override
+	public void update() {
+		// TODO Auto-generated method stub
+
 	}
-*/
+
+	@Override
+	public void notifyHandler() {
+		// TODO Auto-generated method stub
+
+	}
+
+	/*
+	 * public void setLanguage(HashMap<String,String> languagePack){
+	 * this.languagePack = languagePack; }
+	 */
 }

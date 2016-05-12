@@ -58,9 +58,9 @@
 				</b:Row>
 				<b:Row>
 					<b:Column size="XS_2,SM_2,MD_2,LG_2" offset="XS_8,SM_8,MD_8,LG_8">
-						<b:Icon type="ARROW_LEFT" ui:field="buttonNext" />
+						<b:Button icon="ARROW_LEFT" ui:field="buttonNext" />
 						<b:Label text="JANUAR" ui:field="labelCurrentFocus" />
-						<b:Icon type="ARROW_RIGHT" ui:field="buttonPrevious" />
+						<b:Button icon="ARROW_RIGHT" ui:field="buttonPrevious" />
 					</b:Column>
 					<b:Column size="XS_2,SM_2,MD_2,LG_2">
 						<b:Button ui:field="buttonModeWeek" addStyleNames="{style.buttonStyle}" />
