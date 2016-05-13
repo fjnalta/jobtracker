@@ -7,13 +7,16 @@ import java.util.Date;
 import org.gwtbootstrap3.client.ui.Button;
 import org.gwtbootstrap3.client.ui.TextBox;
 import org.gwtbootstrap3.client.ui.constants.IconType;
+import org.gwtbootstrap3.extras.fullcalendar.client.ui.Event;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.KeyPressEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -122,7 +125,7 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 
 	@UiHandler("buttonBook")
 	public void clickButtonBook(ClickEvent e) {
-		
+
 	}
 
 	@UiHandler("eventStart")
@@ -164,7 +167,7 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 		notifyHandler();
 	}
 
-	private void increaseEvent(TextBox box) {
+	private void increaseEventMinutes(TextBox box) {
 		String boxText = removeDoublePoint(box.getText());
 		String hourString = removeLeadingNull(boxText.substring(0, 2));
 		String minuteString = removeLeadingNull(boxText.substring(2, boxText.length()));
@@ -192,6 +195,21 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 		box.setText(addDoublePoint(hourString + minuteString));
 	}
 
+	private void increaseEventHours(TextBox box) {
+		String boxText = removeDoublePoint(box.getText());
+		String hourString = removeLeadingNull(boxText.substring(0, 2));
+		String minuteString = boxText.substring(2, boxText.length());
+		int hours = Integer.parseInt(hourString);
+		if (hours < 23) {
+			hours++;
+		} else {
+			hours = 0;
+		}
+		hourString = "" + hours;
+		hourString = addLeadingNull(hourString);
+		box.setText(addDoublePoint(hourString + minuteString));
+	}
+
 	private String addLeadingNull(String sign) {
 		if (sign.length() < 2) {
 			return (0 + sign);
@@ -208,7 +226,7 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 		}
 	}
 
-	private void decreaseEvent(TextBox box) {
+	private void decreaseEventMinutes(TextBox box) {
 		String boxText = removeDoublePoint(box.getText());
 		String hourString = removeLeadingNull(boxText.substring(0, 2));
 		String minuteString = removeLeadingNull(boxText.substring(2, boxText.length()));
@@ -233,6 +251,21 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 		hourString = addLeadingNull(hourString);
 		minuteString = addLeadingNull(minuteString);
 
+		box.setText(addDoublePoint(hourString + minuteString));
+	}
+
+	private void decreaseEventHours(TextBox box) {
+		String boxText = removeDoublePoint(box.getText());
+		String hourString = removeLeadingNull(boxText.substring(0, 2));
+		String minuteString = boxText.substring(2, boxText.length());
+		int hours = Integer.parseInt(hourString);
+		if (hours > 0) {
+			hours--;
+		} else {
+			hours = 23;
+		}
+		hourString = "" + hours;
+		hourString = addLeadingNull(hourString);
 		box.setText(addDoublePoint(hourString + minuteString));
 	}
 
@@ -283,20 +316,32 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 
 	@Override
 	public void update() {
-		eventEnd.setText(addDoublePoint(calendarHandler.events.endTime));
-		eventStart.setText(addDoublePoint(calendarHandler.events.startTime));
-		pause.setText(calendarHandler.events.pause);
-		workTime.setText(calendarHandler.events.workTime);
+		dateStart.setText(dateParser(calendarHandler.calendar.currentEvent.getISOStart()));
+		dateEnd.setText(dateParser(calendarHandler.calendar.currentEvent.getISOStart()));
+		eventStart.setText(timeParser(calendarHandler.calendar.currentEvent.getISOStart()));
+		eventEnd.setText(timeParser(calendarHandler.calendar.currentEvent.getISOEnd()));
+		pause.setText("");
+		workTime.setText(calculateDuration());
+	}
+	
+	private Date getDateFromTextBox(){
+		String text = dateStart.getText();
+		int day = Integer.parseInt(text.substring(0, 2));
+		int month = Integer.parseInt(text.substring(3, text.length()));
+		return new Date(2016,month,day);
 	}
 
 	@Override
 	public void notifyHandler() {
-		calendarHandler.events.endTime = eventEnd.getText();
-		calendarHandler.events.startTime = eventStart.getText();
-		calendarHandler.events.pause = pause.getText();
-		calendarHandler.events.workTime = workTime.getText();
+		calendarHandler.calendar.removeEvent(calendarHandler.calendar.currentEvent.getId());
+		Event e = new Event(calendarHandler.calendar.currentEvent.getId(), calendarHandler.calendar.currentEvent.getTitle(), true, true, true);
+		e.setStart(calendarHandler.getISO8601StringForDate(getDateFromTextBox(), createTimeFromText(eventStart.getText())));
+		e.setEnd(calendarHandler.getISO8601StringForDate(getDateFromTextBox(), createTimeFromText(eventEnd.getText())));
+		calendarHandler.calendar.currentEvent = e;
+		calendarHandler.calendar.addEvent(calendarHandler.calendar.currentEvent);
 		calendarHandler.updateObserver(this);
 	}
+	
 
 	private String removeDoublePoint(String input) {
 		return input = input.replace(":", "");
@@ -306,4 +351,128 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 		return input = input.substring(0, 2) + ":" + input.substring(2, input.length());
 	}
 
+	/**
+	 * 
+	 * @param date
+	 * @return String hh:mm
+	 */
+	private String timeParser(String date) {
+		String[] temp = date.split("T");
+		String[] temp2 = temp[1].split(":");
+		return addDoublePoint(temp2[0] + temp2[1]);
+	}
+
+	private String dateParser(String date2) {
+		String[] temp = date2.split("T");
+		String[] temp2 = temp[0].split("-");
+		return temp2[2] + "." + temp2[1];
+	}
+
+	private String calculateDuration() {
+		// ToDo
+		return null;
+	}
+
+	@UiHandler("buttonTimeHourUpStart")
+	public void clickButtonTimeHourUpStart(ClickEvent e) {
+		increaseEventHours(eventStart);
+		notifyHandler();
+	}
+
+	@UiHandler("buttonTimeHourDownStart")
+	public void clickButtonTimeHourDownStart(ClickEvent e) {
+		decreaseEventHours(eventStart);
+		notifyHandler();
+	}
+
+	@UiHandler("buttonTimeMinuteUpStart")
+	public void clickButtonTimeMinuteUpStart(ClickEvent e) {
+		increaseEventMinutes(eventStart);
+		notifyHandler();
+	}
+
+	@UiHandler("buttonTimeMinuteDownStart")
+	public void clickButtonMinuteDownStart(ClickEvent e) {
+		decreaseEventMinutes(eventStart);
+		notifyHandler();
+	}
+
+	@UiHandler("buttonTimeHourUpEnd")
+	public void clickButtonTimeHourUpEnd(ClickEvent e) {
+		increaseEventHours(eventEnd);
+		notifyHandler();
+	}
+
+	@UiHandler("buttonTimeHourDownEnd")
+	public void clickButtonTimeHourDownEnd(ClickEvent e) {
+		decreaseEventHours(eventEnd);
+		notifyHandler();
+	}
+
+	@UiHandler("buttonTimeMinuteUpEnd")
+	public void clickButtonTimeMinuteUpEnd(ClickEvent e) {
+		increaseEventMinutes(eventEnd);
+		notifyHandler();
+	}
+
+	@UiHandler("buttonTimeMinuteDownEnd")
+	public void clickButtonMinuteDownEnd(ClickEvent e) {
+		decreaseEventMinutes(eventEnd);
+		notifyHandler();
+	}
+
+	@UiHandler("buttonTimeHourUpPause")
+	public void clickButtonTimeHourUpPause(ClickEvent e) {
+		increaseEventHours(pause);
+		notifyHandler();
+	}
+
+	@UiHandler("buttonTimeHourDownPause")
+	public void clickButtonTimeHourDownPause(ClickEvent e) {
+		decreaseEventHours(pause);
+		notifyHandler();
+	}
+
+	@UiHandler("buttonTimeMinuteUpPause")
+	public void clickButtonTimeMinuteUpPause(ClickEvent e) {
+		increaseEventMinutes(pause);
+		notifyHandler();
+	}
+
+	@UiHandler("buttonTimeMinuteDownPause")
+	public void clickButtonMinuteDownPause(ClickEvent e) {
+		decreaseEventMinutes(pause);
+		notifyHandler();
+	}
+
+	@UiHandler("buttonTimeHourUpDuration")
+	public void clickButtonTimeHourUpDuration(ClickEvent e) {
+		increaseEventHours(workTime);
+		notifyHandler();
+	}
+
+	@UiHandler("buttonTimeHourDownDuration")
+	public void clickButtonTimeHourDownDuration(ClickEvent e) {
+		decreaseEventHours(workTime);
+		notifyHandler();
+	}
+
+	@UiHandler("buttonTimeMinuteUpDuration")
+	public void clickButtonTimeMinuteUpDuration(ClickEvent e) {
+		increaseEventMinutes(workTime);
+		notifyHandler();
+	}
+
+	@UiHandler("buttonTimeMinuteDownDuration")
+	public void clickButtonTimeMinuteDownDuration(ClickEvent e) {
+		decreaseEventMinutes(workTime);
+		notifyHandler();
+	}
+	
+	private int createTimeFromText(String time ){
+		String[] temp2 = time.split(":");
+		int hours = Integer.parseInt(temp2[0]);
+		int minutes = Integer.parseInt(temp2[1]);
+		return (60 * hours) + minutes;
+	}
 }
