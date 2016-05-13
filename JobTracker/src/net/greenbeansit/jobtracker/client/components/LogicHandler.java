@@ -32,6 +32,7 @@ public class LogicHandler {
 	private List<Job> jobList = new ArrayList<Job>();
 	private List<ActivityReportTemplate> templateList = new ArrayList<ActivityReportTemplate>();
 	private List<User> userList = new ArrayList<User>();
+	private List<Job> selectedJobs = new ArrayList<Job>();
 	private User currentUser;
 	private LogicHandler self = this;
 
@@ -47,31 +48,13 @@ public class LogicHandler {
 	 * backend
 	 */
 	private void initialize() {
-		//this.currentJob = new Job(0,0,0,0,"",0,0);
 		List<Job> temp = new ArrayList<Job>();
-		temp.add(new Job(1,2,3,4,"5",6,7));
-		temp.add(new Job(1,2,3,4,"5",6,7));
-		temp.add(new Job(1,2,3,4,"5",6,7));
-		temp.add(new Job(1,2,3,4,"5",6,7));
-		
 		List<ActivityReportTemplate> reporttemp = new ArrayList<ActivityReportTemplate>();
-		reporttemp.add(new ActivityReportTemplate("temp","temp2",1,0,0));
-		reporttemp.add(new ActivityReportTemplate("temp","temp2",1,0,0));
-		reporttemp.add(new ActivityReportTemplate("temp","temp2",1,0,0));
-		reporttemp.add(new ActivityReportTemplate("temp","temp2",1,0,0));
 		
 		this.jobList = temp;
 		this.templateList = reporttemp;
 		this.currentUser = new User();
 		this.currentUser.setId(1);
-		loadJobs();
-		
-		userList.add(new User(0, "Walter", "von der Vogelweide",0));
-		userList.add(new User(0, "Peter", "Tauber",0));
-		userList.add(new User(0, "Kurt", "Beck",0));
-		userList.add(new User(0, "Rudolf", "Scharping",0));
-		userList.add(new User(0, "Peter", "Altmeier",0));
-		userList.add(new User(0, "Rainer", "Brüderle",0));
 	}
 
 	/**
@@ -229,6 +212,7 @@ public class LogicHandler {
 			RestClient.build(new SuccessFunction<ActivityReportTemplate>() {
 				@Override
 				public void onSuccess(Method method, ActivityReportTemplate response) {
+				
 				}
 
 				@Override
@@ -251,7 +235,6 @@ public class LogicHandler {
 	public void loadTemplates() {
 		//only for dummy implementation
 		this.updateAllObservables();
-		
 		try {
 			RestClient.build(new SuccessFunction<List<ActivityReportTemplate>>() {
 				@Override
@@ -276,14 +259,13 @@ public class LogicHandler {
 	 * on sucess call the {@link #updateAllObservables()} to update the widgets
 	 */
 	public void loadJobs() {
-		//only for dummy implementation
-		this.updateAllObservables();
 		try {
 			RestClient.build(new SuccessFunction<List<Job>>() {
 				@Override
 				public void onSuccess(Method method, List<Job> response) {
-						self.jobList = response;
-						self.updateAllObservables();
+					GWT.log(String.valueOf(response.size()));
+					self.jobList = response;
+					self.updateAllObservables();
 				}
 
 				@Override
@@ -298,15 +280,16 @@ public class LogicHandler {
 			e.printStackTrace();
 		}
 	}
-	
+	/**
+	 * Mehtod for loading All Users from the Backend
+	 */
 	public void loadUsers(){
-		this.updateAllObservables();
 		try {
 			RestClient.build(new SuccessFunction<List<User>>() {
 				@Override
 				public void onSuccess(Method method, List<User> response) {
-						self.userList = response;
-						self.updateAllObservables();
+					self.userList = response;
+					self.updateAllObservables();
 				}
 
 				@Override
@@ -318,6 +301,32 @@ public class LogicHandler {
 		} catch (Exception e) {
 			GWT.log(e.getMessage());
 		}
+	}
+	
+	/**
+	 * Load all Users based on the selected Jobs
+	 */
+	public void loadUsersForSelectedJobs(){
+		for(Job j : selectedJobs){
+			try {
+				RestClient.build(new SuccessFunction<List<User>>() {
+					@Override
+					public void onSuccess(Method method, List<User> response) {
+						self.userList = response;
+						self.updateAllObservables();
+					}
+
+					@Override
+					public void onFailure(Method method, Throwable exception) {
+						GWT.log(exception.getMessage());
+					}
+
+				}).getEmployeeService().getUsersToJob(j.getJobNr(), j.getPosNr());
+			} catch (Exception e) {
+				GWT.log(e.getMessage());
+			}
+		}
+		
 	}
 	
 	public List<User> getUsers(){
@@ -339,6 +348,12 @@ public class LogicHandler {
 	public void setCurrentTemplate(ActivityReportTemplate currentTemplate) {
 		this.currentTemplate = currentTemplate;
 		this.updateAllObservables();
+	}
+	public List<Job> getSelectedJobs() {
+		return selectedJobs;
+	}
+	public void setSelectedJobs(List<Job> selectedJobs) {
+		this.selectedJobs = selectedJobs;
 	}
 
 }

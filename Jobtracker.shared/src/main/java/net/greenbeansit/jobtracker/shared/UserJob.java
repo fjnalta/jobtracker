@@ -18,6 +18,9 @@ public class UserJob implements Serializable
 	private Integer				userId;
 	private Integer				jobNr;
 	private Integer				posNr;
+	private Integer				userId;
+	private Integer				jobNo;
+	private Integer				posNo;
 	private Integer				role;
 
 	/**
@@ -29,11 +32,19 @@ public class UserJob implements Serializable
 	 * @param role
 	 */
 	public UserJob(Integer userId, Integer jobNr, Integer posNr, Integer role)
+	public UserJob(Integer id, Integer jobId, Integer posNo, Integer role)
 	{
 		this.userId = userId;
 		this.jobNr = jobNr;
 		this.setPosNr(posNr);
+		this.userId = id;
+		this.jobNo = jobId;
+		this.posNo = posNo;
 		this.role = role;
+	}
+	
+	public UserJob(){
+		
 	}
 
 	public Integer getUserId()
@@ -48,11 +59,13 @@ public class UserJob implements Serializable
 			throw new IllegalArgumentException();
 		}
 		this.userId = userId;
+		this.userId = id;
 	}
 
 	public Integer getJobNr()
 	{
 		return jobNr;
+		return jobNo;
 	}
 
 	public void setJobNr(Integer jobNr)
@@ -72,6 +85,7 @@ public class UserJob implements Serializable
 	public void setPosNr(Integer posNr)
 	{
 		this.posNr = posNr;
+		this.jobNo = jobId;
 	}
 
 	public Integer getRole()
@@ -86,5 +100,19 @@ public class UserJob implements Serializable
 			throw new IllegalArgumentException();
 		}
 		this.role = role;
+	}
+	
+	public Integer getPosNo()
+	{
+		return posNo;
+	}
+
+	public void setPosNo(Integer posNo)
+	{
+		if (posNo == null)
+		{
+			throw new IllegalArgumentException();
+		}
+		this.posNo = posNo;
 	}
 }

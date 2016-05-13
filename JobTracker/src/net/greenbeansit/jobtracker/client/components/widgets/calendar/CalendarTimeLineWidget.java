@@ -31,9 +31,6 @@ public class CalendarTimeLineWidget extends Composite implements CalendarObserve
 
 	@UiField
 	Text kw;
-	
-
-	
 
 	private static CalendarTimeLineWidgetUiBinder uiBinder = GWT.create(CalendarTimeLineWidgetUiBinder.class);
 
@@ -56,7 +53,43 @@ public class CalendarTimeLineWidget extends Composite implements CalendarObserve
 
 	@Override
 	public void update() {
-		date.setText(createDate(calendarHandler.events.eventDate.toString()));
+		String[] sum = calendarHandler.calendar.currentEvent.getISOStart().split("T");
+		String[] sum2 = sum[0].split("-");
+		String day = sum2[2];
+		String month = getMonthName(sum2[1]);
+		date.setText(month + "`" + day);
+	}
+
+	private String getMonthName(String string) {
+		switch(string){
+		case"01":
+			return "Januar";
+		case"02":
+			return "Februar";
+		case"03":
+			return "März";
+		case"04":
+			return "April";
+		case"05":
+			return "Mai";
+		case"06":
+			return "Juni";
+		case"07":
+			return "Juli";
+		case"08":
+			return "August";
+		case"09":
+			return "September";
+		case"10":
+			return "Oktober";
+		case"11":
+			return "November";
+		case"12":
+			return "Dezember";
+		default:
+			return null;
+		}
+		
 	}
 
 	@Override
@@ -72,8 +105,8 @@ public class CalendarTimeLineWidget extends Composite implements CalendarObserve
 		date.setText(monthDate);
 	}
 
-	private String createDate(String date){
+	private String createDate(String date) {
 		return date.substring(4, 10).replace(" ", "`");
 	}
-	
+
 }
