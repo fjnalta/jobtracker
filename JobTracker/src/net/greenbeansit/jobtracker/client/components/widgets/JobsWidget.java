@@ -67,6 +67,7 @@ public class JobsWidget extends Composite implements LogicObservable {
 
 	@Override
 	public void update() {
+		allJobsOptGroup.clear();
 		this.jobList = handler.getJobList();
 		addJobs(this.jobList);
 		currentJob = handler.getCurrentJob();
