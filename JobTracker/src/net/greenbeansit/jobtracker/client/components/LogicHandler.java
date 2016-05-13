@@ -55,13 +55,6 @@ public class LogicHandler {
 		this.templateList = reporttemp;
 		this.currentUser = new User();
 		this.currentUser.setId(1);
-		
-		userList.add(new User(0, "Walter", "von der Vogelweide",0));
-		userList.add(new User(0, "Peter", "Tauber",0));
-		userList.add(new User(0, "Kurt", "Beck",0));
-		userList.add(new User(0, "Rudolf", "Scharping",0));
-		userList.add(new User(0, "Peter", "Altmeier",0));
-		userList.add(new User(0, "Rainer", "Brüderle",0));
 	}
 
 	/**
