@@ -18,6 +18,7 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 
 import net.greenbeansit.jobtracker.client.components.HomePage;
+import net.greenbeansit.jobtracker.client.components.ManagerEmployeeDetailPage;
 import net.greenbeansit.jobtracker.client.components.ManagerPage;
 import net.greenbeansit.jobtracker.client.components.ProjectPage;
 
@@ -75,34 +76,79 @@ public class Application extends Composite
 		{
 			deactivateAllNavButtons();
 
-			switch (event.getValue())
+			String[] addressSplit = event.getValue().split("/");
+			
+			switch (addressSplit[0])
 			{
 			case "project":
-				navProject.setActive(true);
-
-				removeActiveContentContainer();
-
-				addWidgetAsContentPage(new ProjectPage());
+				loadProjectPage(addressSplit);
 				break;
 				
 			case "manager":
-				navManager.setActive(true);
-				
-				removeActiveContentContainer();
-				
-				addWidgetAsContentPage(new ManagerPage());
+				loadManagerPage(addressSplit);
 				break;
 
 			default: // home
-				navHome.setActive(true);
-
-				removeActiveContentContainer();
-
-				addWidgetAsContentPage(new HomePage());
+				loadHomePage(addressSplit);
 				break;
 			}
 
 		}
+		
+		private void loadProjectPage(String[] addressSplit)
+		{
+			navProject.setActive(true);
+
+			removeActiveContentContainer();
+
+			addWidgetAsContentPage(new ProjectPage());
+		}
+		
+		private void loadManagerPage(String[] addressSplit)
+		{
+			Composite page;
+			
+			if(addressSplit.length == 3
+				&& addressSplit[1] == "employee")
+			{				
+				Integer userId;
+				
+				try
+				{
+					userId = Integer.parseInt(addressSplit[2]);
+					
+				}
+				catch(Exception ex)
+				{
+					userId = null;
+				}
+				
+				
+				if(userId != null)
+					page = new ManagerEmployeeDetailPage(userId);
+				else
+					page = new ManagerPage(); 
+			}
+			else
+				page = new ManagerPage();
+			
+			
+			navManager.setActive(true);
+			
+			removeActiveContentContainer();
+			
+			addWidgetAsContentPage(page);
+		}
+		
+		private void loadHomePage(String[] addressSplit)
+		{
+			navHome.setActive(true);
+
+			removeActiveContentContainer();
+
+			addWidgetAsContentPage(new HomePage());
+		}
+		
 
 		private void deactivateAllNavButtons()
 		{
