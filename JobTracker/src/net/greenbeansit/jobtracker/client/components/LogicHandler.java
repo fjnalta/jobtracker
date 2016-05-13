@@ -212,6 +212,7 @@ public class LogicHandler {
 			RestClient.build(new SuccessFunction<ActivityReportTemplate>() {
 				@Override
 				public void onSuccess(Method method, ActivityReportTemplate response) {
+				
 				}
 
 				@Override
@@ -306,23 +307,26 @@ public class LogicHandler {
 	 * Load all Users based on the selected Jobs
 	 */
 	public void loadUsersForSelectedJobs(){
-		try {
-			RestClient.build(new SuccessFunction<List<User>>() {
-				@Override
-				public void onSuccess(Method method, List<User> response) {
-					self.userList = response;
-					self.updateAllObservables();
-				}
+		for(Job j : selectedJobs){
+			try {
+				RestClient.build(new SuccessFunction<List<User>>() {
+					@Override
+					public void onSuccess(Method method, List<User> response) {
+						self.userList = response;
+						self.updateAllObservables();
+					}
 
-				@Override
-				public void onFailure(Method method, Throwable exception) {
-					GWT.log(exception.getMessage());
-				}
+					@Override
+					public void onFailure(Method method, Throwable exception) {
+						GWT.log(exception.getMessage());
+					}
 
-			}).getEmployeeService().getAllUser();
-		} catch (Exception e) {
-			GWT.log(e.getMessage());
+				}).getEmployeeService().getUsersToJob(j.getJobNr(), j.getPosNr());
+			} catch (Exception e) {
+				GWT.log(e.getMessage());
+			}
 		}
+		
 	}
 	
 	public List<User> getUsers(){

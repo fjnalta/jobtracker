@@ -100,7 +100,6 @@ public class ManagerPage extends Composite implements LogicObservable {
 			}
 		}
 		loadJobsToSelect();
-		
 	}
 
 	@Override

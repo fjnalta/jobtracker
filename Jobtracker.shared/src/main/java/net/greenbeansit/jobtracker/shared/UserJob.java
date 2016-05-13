@@ -35,6 +35,10 @@ public class UserJob implements Serializable
 		this.posNo = posNo;
 		this.role = role;
 	}
+	
+	public UserJob(){
+		
+	}
 
 	public Integer getId()
 	{
