@@ -56,7 +56,7 @@ public class CalendarTimeLineWidget extends Composite implements CalendarObserve
 
 	@Override
 	public void update() {
-		date.setText(createDate(calendarHandler.events.eventDate.toString()));
+		date.setText("Test");
 	}
 
 	@Override
