@@ -38,25 +38,29 @@ public class ManagerPage extends Composite implements LogicObservable {
 	List<User> userList;
 
 	public ManagerPage() {
+		userList = new ArrayList<User>();
 		initWidget(uiBinder.createAndBindUi(this));
 
 		handler.addObservable(this);
 		handler.loadUsers();
 
+		this.update();
 	}
 
 	@Override
 	public void update() {
+		userList.clear();
 		userList = handler.getUsers();
-		// Fill the display list
-		for (User user : userList) {
-			Anchor anchor = new Anchor();
-			anchor.add(new UserListItem(user));
-			anchor.setHref("#manager_detail/" + user.getId());
-			anchor.getElement().addClassName(style.employeeListItem());
+		if(userList!=null){
+			for (User user : userList) {
+				Anchor anchor = new Anchor();
+				anchor.add(new UserListItem(user));
+				anchor.setHref("#manager_detail/" + user.getId());
+				anchor.getElement().addClassName(style.employeeListItem());
 
-			employeeList.add(anchor);
-		}
+				employeeList.add(anchor);
+			}
+		}	
 	}
 
 	@Override
