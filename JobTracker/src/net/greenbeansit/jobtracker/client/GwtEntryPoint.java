@@ -16,7 +16,7 @@ public class GwtEntryPoint implements EntryPoint
 	/**
 	 * Endpoint for the restful api
 	 */
-//	private static final String SERVICE_ROOT = GWT.getHostPageBaseURL() + "rest/";
+	private static final String SERVICE_ROOT = "http://localhost:8080";
 
 	
 	/**
@@ -24,7 +24,7 @@ public class GwtEntryPoint implements EntryPoint
 	 */
 	public void onModuleLoad()
 	{
-//		Defaults.setServiceRoot(SERVICE_ROOT);
+		Defaults.setServiceRoot(SERVICE_ROOT);
 		Application app = new Application();
 
 		Panel rootPanel = RootPanel.get();
