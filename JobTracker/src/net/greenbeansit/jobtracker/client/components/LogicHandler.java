@@ -8,6 +8,7 @@ import org.fusesource.restygwt.client.Method;
 
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.i18n.client.DateTimeFormat;
+import com.google.gwt.user.client.Window;
 
 import net.greenbeansit.jobtracker.client.utils.rest.RestClient;
 import net.greenbeansit.jobtracker.client.utils.rest.RestClient.SuccessFunction;
@@ -53,13 +54,16 @@ public class LogicHandler {
 		temp.add(new Job(1,2,3,4,"5",6,7));
 		
 		List<ActivityReportTemplate> reporttemp = new ArrayList<ActivityReportTemplate>();
-		reporttemp.add(new ActivityReportTemplate("temp","temp2",1L));
-		reporttemp.add(new ActivityReportTemplate("temp","temp2",1L));
-		reporttemp.add(new ActivityReportTemplate("temp","temp2",1L));
-		reporttemp.add(new ActivityReportTemplate("temp","temp2",1L));
+		reporttemp.add(new ActivityReportTemplate("temp","temp2",1,0,0));
+		reporttemp.add(new ActivityReportTemplate("temp","temp2",1,0,0));
+		reporttemp.add(new ActivityReportTemplate("temp","temp2",1,0,0));
+		reporttemp.add(new ActivityReportTemplate("temp","temp2",1,0,0));
 		
 		this.jobList = temp;
 		this.templateList = reporttemp;
+		this.currentUser = new User();
+		this.currentUser.setId(1);
+		loadJobs();
 	}
 
 	/**
@@ -241,10 +245,11 @@ public class LogicHandler {
 		this.updateAllObservables();
 		
 		try {
-			RestClient.build(new SuccessFunction<ActivityReport>() {
+			RestClient.build(new SuccessFunction<List<ActivityReportTemplate>>() {
 				@Override
-				public void onSuccess(Method method, ActivityReport response) {
+				public void onSuccess(Method method, List<ActivityReportTemplate> response) {
 					self.updateAllObservables();
+					self.templateList = response;
 				}
 
 				@Override
@@ -265,7 +270,6 @@ public class LogicHandler {
 	public void loadJobs() {
 		//only for dummy implementation
 		this.updateAllObservables();
-		
 		try {
 			RestClient.build(new SuccessFunction<List<Job>>() {
 				@Override
@@ -278,6 +282,7 @@ public class LogicHandler {
 				public void onFailure(Method method, Throwable exception) {
 					//TODO error handling
 					GWT.log(exception.getMessage());
+//					Window.alert(exception.getMessage());
 				}
 
 			}).getEmployeeService().getAllJobs(currentUser.getId());

@@ -16,7 +16,7 @@ public interface JobDataService
 
 	List<Job> getAll();
 
-	Job getJob(Long jobId);
+	Job getJob(Integer jobId);
 
 	Job getJob(Integer jobNr, Integer posNr);
 	

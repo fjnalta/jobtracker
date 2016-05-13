@@ -3,9 +3,11 @@ package net.greenbeansit.jobtracker.server.rest.services;
 import java.sql.Date;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import net.greenbeansit.jobtracker.server.data.ActivityReportDataService;
 import net.greenbeansit.jobtracker.server.data.JobDataService;
-import net.greenbeansit.jobtracker.server.data.implementation.JobServiceJpa;
+import net.greenbeansit.jobtracker.server.data.UserDataService;
 import net.greenbeansit.jobtracker.shared.ActivityReport;
 import net.greenbeansit.jobtracker.shared.ActivityReportTemplate;
 import net.greenbeansit.jobtracker.shared.User;
@@ -19,26 +21,42 @@ import net.greenbeansit.jobtracker.shared.rest.services.RestService;
  */
 public class RestServiceImpl implements RestService
 {
+	@Inject
+	private UserDataService userService;
+	@Inject
 	private JobDataService jobService;
+	@Inject
 	private ActivityReportDataService activityService;
 
+	/**
+	 * Empty Constructor for Spring mapping
+	*/
 	public RestServiceImpl()
 	{
-		jobService = new JobServiceJpa();
+		
 	}
 
+	//User
 	@Override
-	public User getEmployee(Integer user)
-	{
-		return null;
+	public List<User> getAllUser() {
+		return userService.getAll();
 	}
-
+	
+	@Override
+	public User getUser(Integer id)
+	{
+		return userService.getUser(id);
+	}
+	
+	//Jobs
 	@Override
 	public List<Job> getAllJobs(Integer userId)
 	{
+		//TODO: Show only those that the user may access
 		return jobService.getAll();
 	}
 
+	//Activity Reports
 	@Override
 	public List<ActivityReport> getAllReports(Integer userId)
 	{
@@ -48,8 +66,11 @@ public class RestServiceImpl implements RestService
 	@Override
 	public ActivityReport getReport(Integer userId, Integer reportId)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		ActivityReport report = activityService.getActivityReport(reportId);
+		if(report.getAuthor() == userId)
+			return report;
+		else
+			return null; //TODO: Throw error if not enough permission
 	}
 
 	@Override
@@ -62,24 +83,28 @@ public class RestServiceImpl implements RestService
 	@Override
 	public void createReport(Integer userId, ActivityReport report)
 	{
-		// TODO Auto-generated method stub
-
+		report.setAuthor(userId);
+		activityService.save(report);
 	}
 
 	@Override
 	public void updateReport(Integer userId, ActivityReport report)
 	{
-		// TODO Auto-generated method stub
-
+		if(report.getAuthor() == userId)
+			activityService.save(report);
+		//TODO: Throw error if not enough permission
 	}
 
 	@Override
 	public void deleteReport(Integer userId, Integer reportId)
 	{
-		// TODO Auto-generated method stub
-
+		ActivityReport report = activityService.getActivityReport(reportId);
+		if(report.getAuthor() == userId)
+			activityService.delete(report);
+		//TODO: Throw error if not enough permission
 	}
 
+	//Activity Report Templates
 	@Override
 	public List<ActivityReportTemplate> getAllReportTemplates(Integer userId)
 	{

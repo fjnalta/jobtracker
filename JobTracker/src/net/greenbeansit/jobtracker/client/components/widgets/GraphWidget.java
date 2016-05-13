@@ -57,7 +57,7 @@ public class GraphWidget extends Composite implements LogicObservable {
 
 	@UiField
 	Label labelBudgetLeft;
-	
+
 	@UiField
 	Label labelCurrentFocus;
 
@@ -83,36 +83,56 @@ public class GraphWidget extends Composite implements LogicObservable {
 	private Date startDate;
 	private Date endDate;
 	private int maxBudget;
+
 	private int currentBudgetUsed;
+	private int currentBudgetStartFocus;
+	private int currentBudgetEndFocus;
+	private List<Integer> budgetSteps;
 
 	private GraphMode currentMode;
 
 	private void initialize() {
 		// Window.alert("Initialize");
-		reportList = new ArrayList<ActivityReport>();
 
+		maxBudget = 400000;
+		currentBudgetUsed = 230000;
+		currentBudgetEndFocus = currentBudgetUsed;
+		currentBudgetStartFocus = currentBudgetUsed;
+
+		budgetSteps = new ArrayList<Integer>();
+		reportList = new ArrayList<ActivityReport>();
+		int tempBudgt = 230000;
 		for (int i = 0; i < 12; i++) {
 
-			for (int a = 0; a < 28; a++) {
+			for (int a = 0; a < 5; a++) {
 				ActivityReport temp = new ActivityReport();
 				Date tempDate = new Date();
 				tempDate.setYear(tempDate.getYear() - 1);
 				tempDate.setMonth(tempDate.getMonth() + i);
-				tempDate.setDate(tempDate.getDate() - 28 + a);
+				tempDate.setDate(tempDate.getDate() - a);
 				// Window.alert(tempDate.toGMTString());
 				temp.setDate(tempDate);
 				temp.setStartTime(1);
 				temp.setDuration(480);
+				tempBudgt-=480;
 				reportList.add(temp);
 			}
 		}
-
+		labelBudgetLeft.setText(String.valueOf(tempBudgt));
+		
 		// Window.alert("Initialize");
 
 		startDate = new Date();
+		startDate.setHours(0);
+		startDate.setMonth(0);
+		startDate.setSeconds(0);
+		startDate.setMinutes(0);
 		startDate.setYear(startDate.getYear() - 1);
 		endDate = new Date();
-		endDate.setHours(endDate.getHours() + 1);
+		endDate.setHours(0);
+		endDate.setMinutes(0);
+		endDate.setSeconds(0);
+		endDate.setDate(endDate.getDate()+1);
 
 		ChartLoader chartLoader = new ChartLoader(ChartPackage.CORECHART);
 		chartLoader.loadApi(new Runnable() {
@@ -122,7 +142,7 @@ public class GraphWidget extends Composite implements LogicObservable {
 				// Create and attach the chart
 				linechart = new LineChart();
 				budgetContent.add(linechart);
-				showYear();
+				showWeekMode(null);
 				piechart = new PieChart();
 				activityContent.add(piechart);
 				drawPieChart();
@@ -132,43 +152,64 @@ public class GraphWidget extends Composite implements LogicObservable {
 
 	@UiHandler("buttonNext")
 	public void showNext(ClickEvent event) {
-		switch (currentMode) {
-		case WEEK:
-			startDate.setDate(startDate.getDate() + 7);
-			endDate.setDate(startDate.getDate() + 7);
-			showWeek();
-			break;
-		case MONTH:
-			startDate.setMonth(startDate.getMonth() + 1);
-			endDate.setMonth(endDate.getMonth() + 1);
-			showMonth();
-			break;
-		case YEAR:
-			startDate.setYear(startDate.getYear() + 1);
-			endDate.setYear(endDate.getYear() + 1);
-			showYear();
-			break;
-		default:
-			break;
+		if (false){
+
+		}else {
+			currentBudgetStartFocus = currentBudgetEndFocus;
+			currentBudgetEndFocus += budgetSteps.get(budgetSteps.size() - 1);
+			budgetSteps.remove(budgetSteps.size() - 1);
+			switch (currentMode) {
+			case WEEK:
+				startDate.setDate(startDate.getDate() + 7);
+				endDate.setDate(endDate.getDate()+7);
+				showWeek();
+				break;
+			case MONTH:
+				startDate.setMonth(startDate.getMonth() + 1);
+				endDate.setMonth(endDate.getMonth() + 2);
+				endDate.setDate(0);
+				if (endDate.getMonth() - startDate.getMonth() > 0) {
+					endDate.setDate(0);
+				}
+
+				showMonth();
+				break;
+			case YEAR:
+				startDate.setYear(startDate.getYear() + 1);
+				endDate.setYear(endDate.getYear() + 1);
+				showYear();
+				break;
+			default:
+				break;
+			}
 		}
 	}
 
 	@UiHandler("buttonPrevious")
 	public void showPrevious(ClickEvent event) {
+		budgetSteps.add(currentBudgetEndFocus - currentBudgetStartFocus);
+		currentBudgetEndFocus = currentBudgetStartFocus;
+
 		switch (currentMode) {
 		case WEEK:
 			startDate.setDate(startDate.getDate() - 7);
-			endDate.setDate(startDate.getDate() - 7);
+			endDate.setYear(startDate.getYear());
+			endDate.setMonth(startDate.getMonth());
+			endDate.setDate(startDate.getDate()+6);
 			showWeek();
 			break;
 		case MONTH:
+			endDate.setMonth(startDate.getMonth());
 			startDate.setMonth(startDate.getMonth() - 1);
-			endDate.setMonth(endDate.getMonth() - 1);
+			endDate.setDate(endDate.getDate() - endDate.getDate());
+			endDate.setYear(startDate.getYear());
 			showMonth();
 			break;
 		case YEAR:
+			endDate.setYear(startDate.getYear());
 			startDate.setYear(startDate.getYear() - 1);
-			endDate.setYear(endDate.getYear() - 1);
+			endDate.setMonth(0);
+			endDate.setDate(0);
 			showYear();
 			break;
 		default:
@@ -178,42 +219,72 @@ public class GraphWidget extends Composite implements LogicObservable {
 
 	@UiHandler("buttonModeWeek")
 	public void showWeekMode(ClickEvent event) {
+		reset();
 		buttonModeYear.removeStyleName("active");
 		buttonModeMonth.removeStyleName("active");
 		buttonModeWeek.addStyleName("active");
 		currentMode = GraphMode.WEEK;
-		startDate = new Date();
 		startDate.setDate(startDate.getDate() - startDate.getDay() + 1);
 		showWeek();
 	}
 
 	@UiHandler("buttonModeMonth")
 	public void showMonthMode(ClickEvent event) {
+		reset();
 		buttonModeYear.removeStyleName("active");
 		buttonModeMonth.addStyleName("active");
 		buttonModeWeek.removeStyleName("active");
 		currentMode = GraphMode.MONTH;
-		startDate = new Date();
-		startDate.setMonth(startDate.getMonth() - 1);
+		startDate.setDate(startDate.getDate() - startDate.getDate() + 1);
 		showMonth();
 	}
 
 	@UiHandler("buttonModeYear")
 	public void showYearMode(ClickEvent event) {
+		reset();
+		budgetSteps.clear();
 		buttonModeYear.addStyleName("active");
 		buttonModeMonth.removeStyleName("active");
 		buttonModeWeek.removeStyleName("active");
 		currentMode = GraphMode.YEAR;
-		startDate = new Date();
-		startDate.setYear(startDate.getYear() - 1);
+		startDate.setMonth(0);
+		startDate.setDate(1);
+		endDate.setHours(endDate.getHours() + 1);
 		showYear();
 	}
 
-	public void showWeek() {
+	private void updateFocusString() {
+		String focusString = (startDate.getDate()) + "." + (startDate.getMonth() + 1) + "."
+				+ (startDate.getYear() + 1900) + " - " + (endDate.getDate()) + "." + (endDate.getMonth() + 1) + "."
+				+ (endDate.getYear() + 1900);
+		labelCurrentFocus.setText(focusString);
+	}
+	
+	private void reset(){
+		budgetSteps.clear();
+		currentBudgetEndFocus=currentBudgetUsed;
+		currentBudgetStartFocus=currentBudgetUsed;
+		startDate = new Date();
+		startDate.setHours(0);
+		startDate.setSeconds(0);
+		startDate.setMinutes(0);
+		endDate = new Date();
+		endDate.setHours(0);
+		endDate.setMinutes(0);
+		endDate.setSeconds(0);
+		endDate.setDate(endDate.getDate()+1);
+	}
 
+	public void showWeek() {
 		String[] weekDays = new String[] { "Mo", "Tu", "We", "Thu", "Fr", "Sa", "Sun" };
-		int[] values = new int[] { 0, 0, 0, 0, 0, 0, 0 };
-		labelCurrentFocus.setText(startDate.toGMTString() + " " + endDate.toGMTString());
+		updateFocusString();
+		
+		int[] values = new int[7];
+		int[] budgetValues = new int[7];
+		for (int i = 0; i < values.length; i++) {
+			values[i] = 0;
+			budgetValues[i] = currentBudgetEndFocus;
+		}
 
 		for (ActivityReport report : reportList) {
 			if (report.getDate().after(startDate) && report.getDate().before(endDate)) {
@@ -223,9 +294,22 @@ public class GraphWidget extends Composite implements LogicObservable {
 				} else {
 					currentWeekDay -= 1;
 				}
+				Window.alert("LOAD" + startDate.toString() + " " + report.getDate().toString() + " " + endDate.toString());
 				values[currentWeekDay] += report.getDuration();
 			}
 		}
+		
+		int budgetTemp = 0;
+		for (int i = 0; i<values.length; i++) {
+			budgetTemp += values[i];
+		}
+		budgetValues[0] = budgetValues[0] - budgetTemp;
+		for(int i = 1;i<values.length;i++){
+			budgetValues[i] = budgetValues[i-1] + values[i];
+		}
+		currentBudgetStartFocus = budgetValues[0];
+		currentBudgetEndFocus = budgetValues[budgetValues.length - 1];
+
 
 		DataTable dataTable = DataTable.create();
 		dataTable.addColumn(ColumnType.STRING, "Month	");
@@ -234,8 +318,8 @@ public class GraphWidget extends Composite implements LogicObservable {
 		for (int i = 0; i < weekDays.length; i++) {
 			dataTable.setValue(i, 0, weekDays[i]);
 		}
-		for (int row = 0; row < values.length; row++) {
-			dataTable.setValue(row, 1, values[row]);
+		for (int row = 0; row < budgetValues.length; row++) {
+			dataTable.setValue(row, 1, budgetValues[row]);
 		}
 
 		// Set options
@@ -246,32 +330,90 @@ public class GraphWidget extends Composite implements LogicObservable {
 		options.setHAxis(HAxis.create("Day"));
 		options.setVAxis(VAxis.create("€"));
 		drawLineChart(dataTable, options);
-		linechart.draw(dataTable, options);
 	}
 
 	public void showMonth() {
+		updateFocusString();
+		int daysInMonth = endDate.getDate();
+		int[] dayzz = new int[daysInMonth];
+		for (int i = 0; i < dayzz.length; i++) {
+			dayzz[i] = i + 1;
+		}
+
+		int[] values = new int[daysInMonth];
+		int[] budgetValues = new int[daysInMonth];
+		for (int i = 0; i < values.length; i++) {
+			values[i] = 0;
+			budgetValues[i] = currentBudgetEndFocus;
+		}
+
+		for (ActivityReport report : reportList) {
+			if (report.getDate().after(startDate) && report.getDate().before(endDate)) {
+				values[report.getDate().getDate() - 1] += report.getDuration();
+			}
+		}
+
+		int budgetTemp = 0;
+		for (int i = values.length - 2; i >= 0; i--) {
+			budgetTemp += values[i + 1];
+			budgetValues[i] -= budgetTemp;
+		}
+
+		currentBudgetStartFocus = budgetValues[0];
+		currentBudgetEndFocus = budgetValues[budgetValues.length - 1];
+
+		DataTable dataTable = DataTable.create();
+		dataTable.addColumn(ColumnType.STRING, "Days");
+		dataTable.addColumn(ColumnType.NUMBER, "LAWL");
+		dataTable.addRows(dayzz.length);
+		for (int i = 0; i < dayzz.length; i++) {
+			dataTable.setValue(i, 0, String.valueOf(dayzz[i]));
+		}
+		for (int row = 0; row < budgetValues.length; row++) {
+			dataTable.setValue(row, 1, budgetValues[row]);
+		}
+
+		// Set options
+		LineChartOptions options = LineChartOptions.create();
+		options.setBackgroundColor("white");
+		options.setFontName("Tahoma");
+		options.setTitle("Month View");
+		options.setHAxis(HAxis.create("Days"));
+		options.setVAxis(VAxis.create("€"));
+		drawLineChart(dataTable, options);
 
 	}
 
 	public void showYear() {
+
+		updateFocusString();
 
 		int[] months = new int[12];
 		for (int i = 0; i < months.length; i++) {
 			months[i] = endDate.getMonth() - 12 + i;
 		}
 
-		int[] values = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-		// Window.alert("showYear");
-		// load relevant data in value array
-		// Window.alert(report.);
+		int[] values = new int[12];
+		int[] budgetValues = new int[12];
+		for (int i = 0; i < values.length; i++) {
+			values[i] = 0;
+			budgetValues[i] = currentBudgetEndFocus;
+		}
+
 		for (ActivityReport report : reportList) {
-			// Window.alert(report.getDate() + " " + startDate.toGMTString() + "
-			// " + endDate.toGMTString());
 			if (report.getDate().after(startDate) && report.getDate().before(endDate)) {
-				// Window.alert(report.getDate().toGMTString());
 				values[Math.abs(report.getDate().getMonth() - 1)] += report.getDuration();
 			}
 		}
+
+		int budgetTemp = 0;
+		for (int i = values.length - 2; i >= 0; i--) {
+			budgetTemp += values[i + 1];
+			budgetValues[i] -= budgetTemp;
+		}
+
+		currentBudgetStartFocus = budgetValues[0];
+		currentBudgetEndFocus = budgetValues[budgetValues.length - 1];
 
 		DataTable dataTable = DataTable.create();
 		dataTable.addColumn(ColumnType.STRING, "Year");
@@ -280,8 +422,8 @@ public class GraphWidget extends Composite implements LogicObservable {
 		for (int i = 0; i < months.length; i++) {
 			dataTable.setValue(i, 0, String.valueOf(months[i]));
 		}
-		for (int row = 0; row < values.length; row++) {
-			dataTable.setValue(row, 1, values[row]);
+		for (int row = 0; row < budgetValues.length; row++) {
+			dataTable.setValue(row, 1, budgetValues[row]);
 		}
 
 		// Set options
@@ -292,7 +434,6 @@ public class GraphWidget extends Composite implements LogicObservable {
 		options.setHAxis(HAxis.create("Year"));
 		options.setVAxis(VAxis.create("€"));
 		drawLineChart(dataTable, options);
-		linechart.draw(dataTable, options);
 	}
 
 	private void drawLineChart(DataTable table, LineChartOptions options) {

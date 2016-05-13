@@ -16,15 +16,13 @@ public interface ActivityReportTemplateDataService
 
 	List<ActivityReportTemplate> getAll();
 
-	List<ActivityReportTemplate> getBy(Long author);
+	List<ActivityReportTemplate> getBy(Integer author);
 
-	ActivityReportTemplate getTemplate(Long templateId);
+	ActivityReportTemplate getTemplate(Integer templateId);
 
-	ActivityReportTemplate getTemplate(Long author, String name);
+	ActivityReportTemplate getTemplate(Integer author, String name);
 
-	void save(ActivityReportTemplate template);
-
-	void update(ActivityReportTemplate template);
+	boolean save(ActivityReportTemplate template);
 
 	void delete(ActivityReportTemplate template);
 }
