@@ -48,18 +48,8 @@ public class LogicHandler {
 	 * backend
 	 */
 	private void initialize() {
-		//this.currentJob = new Job(0,0,0,0,"",0,0);
 		List<Job> temp = new ArrayList<Job>();
-		temp.add(new Job(1,2,3,4,"5",6,7));
-		temp.add(new Job(1,2,3,4,"5",6,7));
-		temp.add(new Job(1,2,3,4,"5",6,7));
-		temp.add(new Job(1,2,3,4,"5",6,7));
-		
 		List<ActivityReportTemplate> reporttemp = new ArrayList<ActivityReportTemplate>();
-		reporttemp.add(new ActivityReportTemplate("temp","temp2",1,0,0));
-		reporttemp.add(new ActivityReportTemplate("temp","temp2",1,0,0));
-		reporttemp.add(new ActivityReportTemplate("temp","temp2",1,0,0));
-		reporttemp.add(new ActivityReportTemplate("temp","temp2",1,0,0));
 		
 		this.jobList = temp;
 		this.templateList = reporttemp;
