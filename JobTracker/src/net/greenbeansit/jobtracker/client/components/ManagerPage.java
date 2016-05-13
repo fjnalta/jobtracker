@@ -65,7 +65,6 @@ public class ManagerPage extends Composite implements LogicObservable {
 			
 		});
 
-		this.update();
 	}
 	
 	private void getSelectedJobs(){
@@ -98,8 +97,6 @@ public class ManagerPage extends Composite implements LogicObservable {
 				employeeList.add(anchor);
 			}
 		}	
-		loadJobsToSelect();
-		selectJob.refresh();
 	}
 
 	@Override
