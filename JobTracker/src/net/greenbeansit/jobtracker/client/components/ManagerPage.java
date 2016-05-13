@@ -49,7 +49,6 @@ public class ManagerPage extends Composite implements LogicObservable {
 	List<Job> selectedJobs = new ArrayList<Job>();
 
 	public ManagerPage() {
-		userList = new ArrayList<User>();
 		initWidget(uiBinder.createAndBindUi(this));
 
 		handler.addObservable(this);
@@ -73,6 +72,8 @@ public class ManagerPage extends Composite implements LogicObservable {
 			selectedJobs.add(((SelectJobOption)j).getJob());
 		}
 	}
+	private void setSelectedJobs(){
+	}
 	
 	private void loadJobsToSelect(){
 		this.jobList.clear();
@@ -81,6 +82,7 @@ public class ManagerPage extends Composite implements LogicObservable {
 		for(Job j : this.jobList){
 			selectJob.add(new SelectJobOption(j));
 		}
+		selectJob.refresh();
 	}
 
 	@Override
@@ -96,7 +98,9 @@ public class ManagerPage extends Composite implements LogicObservable {
 
 				employeeList.add(anchor);
 			}
-		}	
+		}
+		loadJobsToSelect();
+		
 	}
 
 	@Override

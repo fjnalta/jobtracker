@@ -251,7 +251,6 @@ public class LogicHandler {
 	public void loadTemplates() {
 		//only for dummy implementation
 		this.updateAllObservables();
-		
 		try {
 			RestClient.build(new SuccessFunction<List<ActivityReportTemplate>>() {
 				@Override
@@ -276,8 +275,6 @@ public class LogicHandler {
 	 * on sucess call the {@link #updateAllObservables()} to update the widgets
 	 */
 	public void loadJobs() {
-		//only for dummy implementation
-		this.updateAllObservables();
 		try {
 			RestClient.build(new SuccessFunction<List<Job>>() {
 				@Override
@@ -299,14 +296,37 @@ public class LogicHandler {
 			e.printStackTrace();
 		}
 	}
-	
+	/**
+	 * Mehtod for loading All Users from the Backend
+	 */
 	public void loadUsers(){
-		this.updateAllObservables();
 		try {
 			RestClient.build(new SuccessFunction<List<User>>() {
 				@Override
 				public void onSuccess(Method method, List<User> response) {
-					self.userList.clear();
+					self.userList = response;
+					self.updateAllObservables();
+				}
+
+				@Override
+				public void onFailure(Method method, Throwable exception) {
+					GWT.log(exception.getMessage());
+				}
+
+			}).getEmployeeService().getAllUser();
+		} catch (Exception e) {
+			GWT.log(e.getMessage());
+		}
+	}
+	
+	/**
+	 * Load all Users based on the selected Jobs
+	 */
+	public void loadUsersForSelectedJobs(){
+		try {
+			RestClient.build(new SuccessFunction<List<User>>() {
+				@Override
+				public void onSuccess(Method method, List<User> response) {
 					self.userList = response;
 					self.updateAllObservables();
 				}
