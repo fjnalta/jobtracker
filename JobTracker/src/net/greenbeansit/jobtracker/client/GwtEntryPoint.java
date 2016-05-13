@@ -16,7 +16,7 @@ public class GwtEntryPoint implements EntryPoint
 	/**
 	 * Endpoint for the restful api
 	 */
-	private static final String SERVICE_ROOT = "http://localhost:8080";
+	private static final String SERVICE_ROOT = "http://127.0.0.1:8080";
 
 	
 	/**
