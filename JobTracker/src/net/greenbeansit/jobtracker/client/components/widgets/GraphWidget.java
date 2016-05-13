@@ -194,9 +194,9 @@ public class GraphWidget extends Composite implements LogicObservable {
 		switch (currentMode) {
 		case WEEK:
 			startDate.setDate(startDate.getDate() - 7);
-			endDate.setYear(startDate.getYear());
-			endDate.setMonth(startDate.getMonth());
-			endDate.setDate(startDate.getDate()+6);
+			this.endDate.setYear(this.startDate.getYear());
+			this.endDate.setMonth(this.startDate.getMonth());
+			this.endDate.setDate(this.startDate.getDate()+6);
 			GWT.log(endDate.toGMTString());
 			showWeek();
 			break;
@@ -290,8 +290,13 @@ public class GraphWidget extends Composite implements LogicObservable {
 
 		for (ActivityReport report : reportList) {
 			GWT.log("CurrentReport" + report.getDate().toGMTString());
-			Date tempDate = endDate;
-			tempDate.setDate(tempDate.getDate()+1);
+			Date tempDate = new Date();
+			tempDate.setDate(this.startDate.getDate()+7);
+			tempDate.setHours(this.startDate.getHours());
+			tempDate.setYear(this.startDate.getYear());
+			tempDate.setMinutes(this.startDate.getMinutes());
+			tempDate.setMonth(this.startDate.getMonth());
+			tempDate.setSeconds(this.startDate.getSeconds());
 			if (report.getDate().after(startDate) && report.getDate().before(tempDate)) {
 				GWT.log("startDate:" + startDate.toGMTString() + "-" + report.getDate().toGMTString() + "-" + tempDate.toGMTString());
 				int currentWeekDay = report.getDate().getDay();
