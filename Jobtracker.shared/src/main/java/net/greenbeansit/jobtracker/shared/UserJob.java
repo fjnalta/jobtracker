@@ -15,8 +15,9 @@ public class UserJob implements Serializable
 	 */
 	private static final long	serialVersionUID	= -6327917752248682924L;
 
-	private Integer				id;
-	private Integer				jobId;
+	private Integer				userId;
+	private Integer				jobNo;
+	private Integer				posNo;
 	private Integer				role;
 
 	/**
@@ -27,16 +28,17 @@ public class UserJob implements Serializable
 	 * @param jobId
 	 * @param role
 	 */
-	public UserJob(Integer id, Integer jobId, Integer role)
+	public UserJob(Integer id, Integer jobId, Integer posNo, Integer role)
 	{
-		this.id = id;
-		this.jobId = jobId;
+		this.userId = id;
+		this.jobNo = jobId;
+		this.posNo = posNo;
 		this.role = role;
 	}
 
 	public Integer getId()
 	{
-		return id;
+		return userId;
 	}
 
 	public void setId(Integer id)
@@ -45,12 +47,12 @@ public class UserJob implements Serializable
 		{
 			throw new IllegalArgumentException();
 		}
-		this.id = id;
+		this.userId = id;
 	}
 
 	public Integer getJobId()
 	{
-		return jobId;
+		return jobNo;
 	}
 
 	public void setJobId(Integer jobId)
@@ -59,7 +61,7 @@ public class UserJob implements Serializable
 		{
 			throw new IllegalArgumentException();
 		}
-		this.jobId = jobId;
+		this.jobNo = jobId;
 	}
 
 	public Integer getRole()
@@ -74,5 +76,19 @@ public class UserJob implements Serializable
 			throw new IllegalArgumentException();
 		}
 		this.role = role;
+	}
+	
+	public Integer getPosNo()
+	{
+		return posNo;
+	}
+
+	public void setPosNo(Integer posNo)
+	{
+		if (posNo == null)
+		{
+			throw new IllegalArgumentException();
+		}
+		this.posNo = posNo;
 	}
 }
