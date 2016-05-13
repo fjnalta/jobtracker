@@ -11,6 +11,7 @@ import net.greenbeansit.jobtracker.server.data.UserDataService;
 import net.greenbeansit.jobtracker.shared.ActivityReport;
 import net.greenbeansit.jobtracker.shared.ActivityReportTemplate;
 import net.greenbeansit.jobtracker.shared.User;
+import net.greenbeansit.jobtracker.shared.UserJob;
 import net.greenbeansit.jobtracker.shared.Job;
 import net.greenbeansit.jobtracker.shared.rest.services.RestService;
 
@@ -131,6 +132,12 @@ public class RestServiceImpl implements RestService
 	@SuppressWarnings("deprecation")
 	private Date stringToDate(String date) {
 		return new Date(Integer.parseInt(date.substring(0, 3)),Integer.parseInt(date.substring(5, 6)), Integer.parseInt(date.substring(8, 9)));
+	}
+
+	@Override
+	public List<UserJob> getUsersToJob(Integer jobNo, Integer posNo) {
+		//TODO
+		return null;
 	}
 
 }

@@ -18,12 +18,13 @@ import org.fusesource.restygwt.client.DirectRestService;
 import net.greenbeansit.jobtracker.shared.ActivityReport;
 import net.greenbeansit.jobtracker.shared.ActivityReportTemplate;
 import net.greenbeansit.jobtracker.shared.User;
+import net.greenbeansit.jobtracker.shared.UserJob;
 import net.greenbeansit.jobtracker.shared.Job;
 
 /**
  * The service for all server fuctions
  * 
- * @author Max Blatt & Alexander Kirilyuk
+ * @author Max Blatt & Alexander Kirilyuk & Philipp Minges
  */
 @Path("rest/employee")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -192,6 +193,11 @@ public interface RestService extends DirectRestService
 	@Path("/{userId}/report_template")
 	List<ActivityReportTemplate> getAllReportTemplates(
 			@PathParam("userId") Integer userId);
+	
+	//TODO - Testing
+	@GET
+	@Path("/usertojob/{jobNo}&{posNo}")
+	List<UserJob> getUsersToJob(@PathParam("jobNo") Integer jobNo, @PathParam("posNo") Integer posNo);
 
 	/**
 	 * Saves an {@link ActivityReportTemplate} with a new ID for the
@@ -214,4 +220,6 @@ public interface RestService extends DirectRestService
 	@Path("/{userId}/report_template/{reportId}")
 	void deleteReportTemplate(@PathParam("userId") Integer userId,
 			@PathParam("reportId") Integer templateId);
+	
+	
 }
