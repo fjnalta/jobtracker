@@ -285,6 +285,7 @@ public class CalendarWidget extends Composite implements CalendarObserver {
 			e.setEnd(calendarHandler.getISO8601StringForDate(ap.getDate(), ap.getEndTime()));
 			calendar.addEvent(e);
 			calendar.render();
+			calendar.currentEvent = null;
 		}
 	}
 	
