@@ -31,6 +31,7 @@ public class LogicHandler {
 	private List<ActivityReport> currentReportsList = new ArrayList<ActivityReport>();
 	private List<Job> jobList = new ArrayList<Job>();
 	private List<ActivityReportTemplate> templateList = new ArrayList<ActivityReportTemplate>();
+	private List<User> userList = new ArrayList<User>();
 	private User currentUser;
 	private LogicHandler self = this;
 
@@ -64,6 +65,13 @@ public class LogicHandler {
 		this.currentUser = new User();
 		this.currentUser.setId(1);
 		loadJobs();
+		
+		userList.add(new User(0, "Walter", "von der Vogelweide",0));
+		userList.add(new User(0, "Peter", "Tauber",0));
+		userList.add(new User(0, "Kurt", "Beck",0));
+		userList.add(new User(0, "Rudolf", "Scharping",0));
+		userList.add(new User(0, "Peter", "Altmeier",0));
+		userList.add(new User(0, "Rainer", "Brüderle",0));
 	}
 
 	/**
@@ -290,7 +298,32 @@ public class LogicHandler {
 			e.printStackTrace();
 		}
 	}
+	
+	public void loadUsers(){
+		this.updateAllObservables();
+		try {
+			RestClient.build(new SuccessFunction<List<User>>() {
+				@Override
+				public void onSuccess(Method method, List<User> response) {
+						self.userList = response;
+						self.updateAllObservables();
+				}
 
+				@Override
+				public void onFailure(Method method, Throwable exception) {
+					GWT.log(exception.getMessage());
+				}
+
+			}).getEmployeeService().getAllUser();
+		} catch (Exception e) {
+			GWT.log(e.getMessage());
+		}
+	}
+	
+	public List<User> getUsers(){
+		return this.userList;
+	}
+	
 	public Job getCurrentJob() {
 		return currentJob;
 	}

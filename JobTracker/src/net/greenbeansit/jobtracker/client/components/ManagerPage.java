@@ -18,52 +18,51 @@ import com.google.gwt.user.client.ui.Widget;
 import net.greenbeansit.jobtracker.client.components.widgets.UserListItem;
 import net.greenbeansit.jobtracker.shared.User;
 
-public class ManagerPage extends Composite
-{
+public class ManagerPage extends Composite implements LogicObservable {
 
-	private static ManagerPageUiBinder uiBinder = GWT
-			.create(ManagerPageUiBinder.class);
+	private static ManagerPageUiBinder uiBinder = GWT.create(ManagerPageUiBinder.class);
 
-	interface ManagerPageUiBinder extends UiBinder<Widget, ManagerPage>
-	{
+	interface ManagerPageUiBinder extends UiBinder<Widget, ManagerPage> {
 	}
-	
-	interface ManagerPageStyle extends CssResource
-	{
+
+	interface ManagerPageStyle extends CssResource {
 		String employeeListItem();
 	}
 
 	@UiField
 	Row employeeList;
-	
+
 	@UiField
 	ManagerPageStyle style;
-	
-	List<User> userlist;
-	
-	public ManagerPage()
-	{
+
+	List<User> userList;
+
+	public ManagerPage() {
 		initWidget(uiBinder.createAndBindUi(this));
-		
-		userlist = new ArrayList<User>();
-		
-		userlist.add(new User(0, "Walter", "von der Vogelweide",0));
-		userlist.add(new User(0, "Peter", "Tauber",0));
-		userlist.add(new User(0, "Kurt", "Beck",0));
-		userlist.add(new User(0, "Rudolf", "Scharping",0));
-		userlist.add(new User(0, "Peter", "Altmeier",0));
-		userlist.add(new User(0, "Rainer", "Brüderle",0));
-		
-		//Fill the display list
-		for(User user : userlist)
-		{
+
+		handler.addObservable(this);
+		handler.loadUsers();
+
+	}
+
+	@Override
+	public void update() {
+		userList = handler.getUsers();
+		// Fill the display list
+		for (User user : userList) {
 			Anchor anchor = new Anchor();
 			anchor.add(new UserListItem(user));
 			anchor.setHref("#manager_detail/" + user.getId());
 			anchor.getElement().addClassName(style.employeeListItem());
-			
+
 			employeeList.add(anchor);
 		}
+	}
+
+	@Override
+	public void notifyHandler() {
+		// TODO Auto-generated method stub
+
 	}
 
 }
