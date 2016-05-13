@@ -72,7 +72,7 @@
 					`id` INT NOT NULL AUTO_INCREMENT,
 					`job_no` INT NOT NULL,
 					`pos_no` INT NOT NULL,
-					`name` VARCHAR(30),
+					`name` VARCHAR(30) NOT NULL,
 					PRIMARY KEY (`id`,`job_no`,`pos_no`),
 					FOREIGN KEY (`job_no`, `pos_no`) REFERENCES job(`job_no`, `pos_no`)
 				);
@@ -84,7 +84,7 @@
 			<![CDATA[
 				CREATE TABLE `user_job`
 				(
-					`user_id` INT NOT NULL AUTO_INCREMENT,
+					`user_id` INT NOT NULL,
 					`job_no` INT NOT NULL,
 					`pos_no` INT NOT NULL,
 					`role` TINYINT,

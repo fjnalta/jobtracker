@@ -14,8 +14,31 @@ import net.greenbeansit.jobtracker.shared.User;
 public interface UserDataService
 {
 
+	/**
+	 * Returns all existing Users.
+	 * @return Users in database
+	 */
 	List<User> getAll();
+	
+	/**
+	 * Returns a User by his ID.
+	 * @param employeeId ID of requested User
+	 * @return shared User object
+	 */
 	User getUser(Integer employeeId);
+	
+	/**
+	 * Returns the first User found with the given name. If there are multiple Users with the given name, only one of them will be returned.
+	 * @param firstname their firstname
+	 * @param lastname their lastname
+	 * @return first shared User object
+	 */
 	User getByName(String firstname, String lastname);
+	
+	/**
+	 * Returns a list of users, who are supervised by a user with the given ID.
+	 * @param supervisorId ID of their supervisor
+	 * @return List of shared User objects
+	 */
 	List<User> getBySupervisor(Integer supervisorId);
 }

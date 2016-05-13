@@ -12,7 +12,8 @@ public class JobTask implements Serializable
 	private static final long	serialVersionUID	= 1834300319535257310L;
 
 	private Integer				id;
-	private Integer				jobId;
+	private Integer				jobNr;
+	private Integer				posNr;
 	private String				name;
 
 	/**
@@ -20,15 +21,16 @@ public class JobTask implements Serializable
 	 * 
 	 * @param id
 	 *            unique id for the JobTask
-	 * @param jobId
-	 *            the identifier of the jobId
+	 * @param jobNr
+	 *            the identifier of the jobNr
 	 * @param name
 	 *            the name of the Task
 	 */
-	public JobTask(Integer id, Integer jobId, String name)
+	public JobTask(Integer id, Integer jobNr, Integer posNr, String name)
 	{
 		this.id = id;
-		this.jobId = jobId;
+		this.jobNr = jobNr;
+		this.posNr = posNr;
 		this.name = name;
 	}
 
@@ -46,18 +48,28 @@ public class JobTask implements Serializable
 		this.id = id;
 	}
 
-	public Integer getJobId()
+	public Integer getJobNr()
 	{
-		return jobId;
+		return jobNr;
 	}
 
-	public void setJobId(Integer jobId)
+	public void setJobNr(Integer jobNr)
 	{
-		if (jobId == null)
+		if (jobNr == null)
 		{
 			throw new IllegalArgumentException();
 		}
-		this.jobId = jobId;
+		this.jobNr = jobNr;
+	}
+
+	public Integer getPosNr()
+	{
+		return posNr;
+	}
+
+	public void setPosNr(Integer posNr)
+	{
+		this.posNr = posNr;
 	}
 
 	public String getName()

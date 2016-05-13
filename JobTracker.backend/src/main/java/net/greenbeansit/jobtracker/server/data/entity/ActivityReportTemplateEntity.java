@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "ACTIVITY_REPORT_TEMPLATE")
+@Table(name = "activity_report_template")
 public class ActivityReportTemplateEntity implements Serializable
 {
 
@@ -65,7 +65,7 @@ public class ActivityReportTemplateEntity implements Serializable
 		this.id = id;
 	}
 
-	 @Column(name = "NAME")
+	 @Column(name = "name")
 	 public String getName()
 	 {
 	 return name;
@@ -76,7 +76,7 @@ public class ActivityReportTemplateEntity implements Serializable
 	 this.name = name;
 	 }
 
-	@Column(name = "TEXT")
+	@Column(name = "text")
 	public String getDescription()
 	{
 		return description;
@@ -87,7 +87,7 @@ public class ActivityReportTemplateEntity implements Serializable
 		this.description = description;
 	}
 
-	@Column(name = "TASK_ID")
+	@Column(name = "task_id")
 	public Integer getTaskId()
 	{
 		return taskId;
@@ -98,7 +98,7 @@ public class ActivityReportTemplateEntity implements Serializable
 		this.taskId = taskId;
 	}
 
-	@Column(name = "AUTHOR")
+	@Column(name = "author")
 	public Integer getAuthor()
 	{
 		return author;

@@ -22,7 +22,7 @@ public interface ActivityReportEntityRepository extends CrudRepository<ActivityR
 	
 	List<ActivityReportEntity> findByTaskId(Integer taskId);
 	
-	List<ActivityReportEntity> findByJobNr(Integer jobNr);
+	List<ActivityReportEntity> findByJobNrAndPosNr(Integer jobNr, Integer posNr);
 	
-	//TODO add some more
+	//TODO Mike: add from Date to Date
 }

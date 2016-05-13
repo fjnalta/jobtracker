@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "JOB_TASK")
+@Table(name = "job_task")
 public class JobTaskEntity implements Serializable
 {
 
@@ -22,7 +22,8 @@ public class JobTaskEntity implements Serializable
 	@GeneratedValue
 	private Integer				id;
 
-	private Integer				jobId;
+	private Integer				jobNr;
+	private Integer				posNr;
 	private String				name;
 
 	public Integer getId()
@@ -35,18 +36,29 @@ public class JobTaskEntity implements Serializable
 		this.id = id;
 	}
 
-	@Column(name = "JOB_ID")
-	public Integer getJobId()
+	@Column(name = "job_no")
+	public Integer getJobNr()
 	{
-		return jobId;
+		return jobNr;
 	}
 
-	public void setJobId(Integer jobId)
+	public void setJobNr(Integer jobNr)
 	{
-		this.jobId = jobId;
+		this.jobNr = jobNr;
 	}
 
-	@Column(name = "NAME")
+	@Column(name = "pos_no")
+	public Integer getPosNr()
+	{
+		return posNr;
+	}
+
+	public void setPosNr(Integer posNr)
+	{
+		this.posNr = posNr;
+	}
+
+	@Column(name = "name")
 	public String getName()
 	{
 		return name;

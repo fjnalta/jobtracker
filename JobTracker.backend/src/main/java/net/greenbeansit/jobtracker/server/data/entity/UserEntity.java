@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "USER")
+@Table(name = "user")
 public class UserEntity implements Serializable
 {
 
@@ -25,6 +25,26 @@ public class UserEntity implements Serializable
 	private String				name;
 	private String				surname;
 	private Integer				supervisor;
+	
+	public UserEntity()
+	{
+		
+	}
+	
+	public UserEntity(Integer id, String name, String surname, Integer supervisor)
+	{
+		this.id = id;
+		this.name = name;
+		this.surname = surname;
+		this.supervisor = supervisor;
+	}
+	
+	public UserEntity(String name, String surname, Integer supervisor)
+	{
+		this.name = name;
+		this.surname = surname;
+		this.supervisor = supervisor;
+	}
 
 	public Integer getId()
 	{
@@ -36,7 +56,7 @@ public class UserEntity implements Serializable
 		this.id = id;
 	}
 
-	@Column(name = "NAME")
+	@Column(name = "name")
 	public String getName()
 	{
 		return name;
@@ -47,7 +67,7 @@ public class UserEntity implements Serializable
 		this.name = name;
 	}
 
-	@Column(name = "SURNAME")
+	@Column(name = "surname")
 	public String getSurname()
 	{
 		return surname;
@@ -58,7 +78,7 @@ public class UserEntity implements Serializable
 		this.surname = surname;
 	}
 
-	@Column(name = "SUPERVISOR")
+	@Column(name = "supervisor")
 	public Integer getSupervisor()
 	{
 		return supervisor;

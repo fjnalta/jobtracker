@@ -4,12 +4,10 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "USER_JOB")
+@Table(name = "user_job")
 public class UserJobEntity implements Serializable
 {
 
@@ -18,35 +16,46 @@ public class UserJobEntity implements Serializable
 	 */
 	private static final long	serialVersionUID	= 1371314200909587258L;
 
-	@Id
-	@GeneratedValue
-	private Integer				id;
-
-	private Integer				jobId;
+	private Integer				userId;
+	private Integer				jobNr;
+	private Integer				posNr;
 	private Integer				role;
 
-	public Integer getId()
+
+	@Column(name = "user_id")
+	public Integer getUserId()
 	{
-		return id;
+		return userId;
 	}
 
-	public void setId(Integer id)
+	public void setUserId(Integer userId)
 	{
-		this.id = id;
+		this.userId = userId;
 	}
 
-	@Column(name = "JOB_ID")
-	public Integer getJobId()
+	@Column(name = "job_no")
+	public Integer getJobNr()
 	{
-		return jobId;
+		return jobNr;
 	}
 
-	public void setJobId(Integer jobId)
+	public void setJobNr(Integer jobNr)
 	{
-		this.jobId = jobId;
+		this.jobNr = jobNr;
 	}
 
-	@Column(name = "ROLE")
+	@Column(name = "pos_no")
+	public Integer getPosNr()
+	{
+		return posNr;
+	}
+
+	public void setPosNr(Integer posNr)
+	{
+		this.posNr = posNr;
+	}
+
+	@Column(name = "role")
 	public Integer getRole()
 	{
 		return role;

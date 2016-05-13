@@ -60,11 +60,12 @@ public class JobServiceJpa implements JobDataService
 		}
 		return list;
 	}
-
+	
 	@Override @Transactional
-	public Job getJob(Integer jobId)
+	public List<Job> getByUser(Integer userId)
 	{
-		return convert(repository.findOne(jobId));
+		// TODO Mike: Implement when UserJobService is implemented.
+		return null;
 	}
 
 	private Job convert(JobEntity entity)

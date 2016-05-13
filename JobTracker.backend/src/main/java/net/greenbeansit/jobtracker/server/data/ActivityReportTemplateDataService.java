@@ -14,10 +14,24 @@ import net.greenbeansit.jobtracker.shared.ActivityReportTemplate;
 public interface ActivityReportTemplateDataService
 {
 
+	/**
+	 * Returns all ActivityReportTemplates. Only for debugging purposes.
+	 * @return List of all templates
+	 */
 	List<ActivityReportTemplate> getAll();
 
+	/**
+	 * Retrieves a List of all Templates written by given author.
+	 * @param author ID of the author
+	 * @return List of their templates
+	 */
 	List<ActivityReportTemplate> getBy(Integer author);
 
+	/**
+	 * TODO Mike: JavaDocs for all DataServices
+	 * @param templateId
+	 * @return
+	 */
 	ActivityReportTemplate getTemplate(Integer templateId);
 
 	ActivityReportTemplate getTemplate(Integer author, String name);

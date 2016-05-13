@@ -15,51 +15,63 @@ public class UserJob implements Serializable
 	 */
 	private static final long	serialVersionUID	= -6327917752248682924L;
 
-	private Integer				id;
-	private Integer				jobId;
+	private Integer				userId;
+	private Integer				jobNr;
+	private Integer				posNr;
 	private Integer				role;
 
 	/**
 	 * Initializes a new instance of the {@link UserJob} class
 	 * 
-	 * @param id
+	 * @param userId
 	 *            the unique identifier
-	 * @param jobId
+	 * @param jobNr
 	 * @param role
 	 */
-	public UserJob(Integer id, Integer jobId, Integer role)
+	public UserJob(Integer userId, Integer jobNr, Integer posNr, Integer role)
 	{
-		this.id = id;
-		this.jobId = jobId;
+		this.userId = userId;
+		this.jobNr = jobNr;
+		this.setPosNr(posNr);
 		this.role = role;
 	}
 
-	public Integer getId()
+	public Integer getUserId()
 	{
-		return id;
+		return userId;
 	}
 
-	public void setId(Integer id)
+	public void setUserId(Integer userId)
 	{
-		if (id == null)
+		if (userId == null)
 		{
 			throw new IllegalArgumentException();
 		}
-		this.id = id;
+		this.userId = userId;
 	}
 
-	public Integer getJobId()
+	public Integer getJobNr()
 	{
-		return jobId;
+		return jobNr;
 	}
 
-	public void setJobId(Integer jobId)
+	public void setJobNr(Integer jobNr)
 	{
-		if (jobId == null)
+		if (jobNr == null)
 		{
 			throw new IllegalArgumentException();
 		}
-		this.jobId = jobId;
+		this.jobNr = jobNr;
+	}
+
+	public Integer getPosNr()
+	{
+		return posNr;
+	}
+
+	public void setPosNr(Integer posNr)
+	{
+		this.posNr = posNr;
 	}
 
 	public Integer getRole()

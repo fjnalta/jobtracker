@@ -9,10 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import liquibase.datatype.core.DecimalType;
-
 @Entity
-@Table(name = "UTILIZATION_WEEK")
+@Table(name = "utilization_week")
 public class UtilizationWeekEntity implements Serializable
 {
 
@@ -32,6 +30,38 @@ public class UtilizationWeekEntity implements Serializable
 	private Integer				daysHoliday;
 	private Integer				possibilty;
 	private Integer				pseudoJobId;
+	
+	public UtilizationWeekEntity()
+	{
+		
+	}
+	
+	public UtilizationWeekEntity(Integer id, Integer author, Date begin,
+			Integer daysFree, Integer daysWork, Integer daysHoliday,
+			Integer possibility, Integer pseudoJobId)
+	{
+		this.id = id;
+		this.author = author;
+		this.begin = begin;
+		this.daysFree = daysFree;
+		this.daysWork = daysWork;
+		this.daysHoliday = daysHoliday;
+		this.possibilty = possibility;
+		this.pseudoJobId = pseudoJobId;
+	}
+	
+	public UtilizationWeekEntity(Integer author, Date begin,
+			Integer daysFree, Integer daysWork, Integer daysHoliday,
+			Integer possibility, Integer pseudoJobId)
+	{
+		this.author = author;
+		this.begin = begin;
+		this.daysFree = daysFree;
+		this.daysWork = daysWork;
+		this.daysHoliday = daysHoliday;
+		this.possibilty = possibility;
+		this.pseudoJobId = pseudoJobId;
+	}
 
 	public Integer getId()
 	{
@@ -43,7 +73,7 @@ public class UtilizationWeekEntity implements Serializable
 		this.id = id;
 	}
 
-	@Column(name = "AUTHOR")
+	@Column(name = "author")
 	public Integer getAuthor()
 	{
 		return author;
@@ -54,7 +84,7 @@ public class UtilizationWeekEntity implements Serializable
 		this.author = author;
 	}
 
-	@Column(name = "BEGIN")
+	@Column(name = "begin")
 	public Date getBegin()
 	{
 		return begin;
@@ -65,7 +95,7 @@ public class UtilizationWeekEntity implements Serializable
 		this.begin = begin;
 	}
 
-	@Column(name = "DAYS_FREE")
+	@Column(name = "days_free")
 	public Integer getDaysFree()
 	{
 		return daysFree;
@@ -76,7 +106,7 @@ public class UtilizationWeekEntity implements Serializable
 		this.daysFree = daysFree;
 	}
 
-	@Column(name = "DAYS_WORK")
+	@Column(name = "days_work")
 	public Integer getDaysWork()
 	{
 		return daysWork;
@@ -87,7 +117,7 @@ public class UtilizationWeekEntity implements Serializable
 		this.daysWork = daysWork;
 	}
 
-	@Column(name = "DAYS_HOLIDAY")
+	@Column(name = "days_holiday")
 	public Integer getDaysHoliday()
 	{
 		return daysHoliday;
@@ -98,7 +128,7 @@ public class UtilizationWeekEntity implements Serializable
 		this.daysHoliday = daysHoliday;
 	}
 
-	@Column(name = "POSSIBILITY")
+	@Column(name = "possibility")
 	public Integer getPossibilty()
 	{
 		return possibilty;
@@ -109,7 +139,7 @@ public class UtilizationWeekEntity implements Serializable
 		this.possibilty = possibilty;
 	}
 
-	@Column(name = "PSEUDO_JOB_ID")
+	@Column(name = "pseudo_job_id")
 	public Integer getPseudoJobId()
 	{
 		return pseudoJobId;

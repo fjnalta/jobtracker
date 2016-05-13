@@ -77,11 +77,11 @@ public class ActivityReportServiceJpa implements ActivityReportDataService
 	}
 
 	@Override
-	public List<ActivityReport> getByJob(Integer jobId)
+	public List<ActivityReport> getByJob(Integer jobNr, Integer posNr)
 	{
 		ArrayList<ActivityReport> list = new ArrayList<ActivityReport>();
 		for (ActivityReportEntity entity : repository
-				.findByJobNr(jobId))
+				.findByJobNrAndPosNr(jobNr, posNr))
 		{
 			list.add(convert(entity));
 		}

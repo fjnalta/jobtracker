@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "PSEUDO_JOB")
+@Table(name = "pseudo_job")
 public class PseudoJobEntity implements Serializable
 {
 
@@ -24,6 +24,18 @@ public class PseudoJobEntity implements Serializable
 
 	private String				name;
 	private String				customer;
+	
+	public PseudoJobEntity() 
+	{
+		
+	}
+	
+	public PseudoJobEntity(Integer id, String name, String customer)
+	{
+		this.id = id;
+		this.name = name;
+		this.customer = customer;
+	}
 
 	public Integer getId()
 	{
@@ -35,7 +47,7 @@ public class PseudoJobEntity implements Serializable
 		this.id = id;
 	}
 
-	@Column(name = "NAME")
+	@Column(name = "name")
 	public String getName()
 	{
 		return name;
@@ -46,7 +58,7 @@ public class PseudoJobEntity implements Serializable
 		this.name = name;
 	}
 
-	@Column(name = "CUSTOMER")
+	@Column(name = "customer")
 	public String getCustomer()
 	{
 		return customer;

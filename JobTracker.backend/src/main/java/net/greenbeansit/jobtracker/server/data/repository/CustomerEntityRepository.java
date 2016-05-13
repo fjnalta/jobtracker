@@ -6,7 +6,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import net.greenbeansit.jobtracker.server.data.entity.CustomerEntity;
 
-public interface CustomerRepository extends CrudRepository<CustomerEntity, Integer>
+public interface CustomerEntityRepository extends CrudRepository<CustomerEntity, Integer>
 {
 
 	void delete(CustomerEntity deleted);
@@ -18,5 +18,5 @@ public interface CustomerRepository extends CrudRepository<CustomerEntity, Integ
 
 	CustomerEntity findById(Integer id);
 	
-	List<CustomerEntity> findByName(String name);
+	CustomerEntity findByName(String name);
 }

@@ -9,7 +9,7 @@ import javax.persistence.IdClass;
 import javax.persistence.Table;
 
 @Entity @IdClass(JobEntityId.class)
-@Table(name = "JOB")
+@Table(name = "job")
 // TODO Mike: Implement NamedQueries for Job
 // @NamedQueries( { @NamedQuery(name = "ActivityReportTemplate.findAll", query =
 // "SELECT p FROM Person p"),
@@ -57,6 +57,7 @@ public class JobEntity implements Serializable
 		this.desc = desc;
 		this.maxBudget = maxBudget;
 		this.usedBudget = usedBudget;
+		this.isIntern = false;
 	}
 
 	

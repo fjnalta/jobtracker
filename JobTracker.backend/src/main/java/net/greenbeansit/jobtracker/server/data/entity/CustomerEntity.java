@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "CUSTOMER")
+@Table(name = "customer")
 public class CustomerEntity implements Serializable
 {
 
@@ -34,7 +34,7 @@ public class CustomerEntity implements Serializable
 		this.id = id;
 	}
 
-	@Column(name = "NAME")
+	@Column(name = "name")
 	public String getName()
 	{
 		return name;

@@ -9,10 +9,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.print.attribute.standard.DateTimeAtCompleted;
 
 @Entity
-@Table(name = "ACTIVITY_REPORT")
+@Table(name = "activity_report")
 public class ActivityReportEntity implements Serializable
 {
 
@@ -66,7 +65,7 @@ public class ActivityReportEntity implements Serializable
 		this.id = id;
 	}
 
-	@Column(name = "AUTHOR")
+	@Column(name = "author")
 	public Integer getAuthor()
 	{
 		return author;
@@ -77,7 +76,7 @@ public class ActivityReportEntity implements Serializable
 		this.author = author;
 	}
 
-	@Column(name = "TEXT")
+	@Column(name = "text")
 	public String getText()
 	{
 		return text;
@@ -88,7 +87,7 @@ public class ActivityReportEntity implements Serializable
 		this.text = text;
 	}
 
-	@Column(name = "BEGIN_DATE")
+	@Column(name = "begin_date")
 	public Date getBeginDate()
 	{
 		return beginDate;
@@ -99,7 +98,7 @@ public class ActivityReportEntity implements Serializable
 		this.beginDate = beginDate;
 	}
 
-	@Column(name = "BEGIN_TIME")
+	@Column(name = "begin_time")
 	public Time getBeginTime()
 	{
 		return beginTime;
@@ -110,7 +109,7 @@ public class ActivityReportEntity implements Serializable
 		this.beginTime = beginTime;
 	}
 
-	@Column(name = "END_DATE")
+	@Column(name = "end_date")
 	public Date getEndDate()
 	{
 		return endDate;
@@ -121,7 +120,7 @@ public class ActivityReportEntity implements Serializable
 		this.endDate = endDate;
 	}
 
-	@Column(name = "END_TIME")
+	@Column(name = "end_time")
 	public Time getEndTime()
 	{
 		return endTime;
@@ -132,7 +131,7 @@ public class ActivityReportEntity implements Serializable
 		this.endTime = endTime;
 	}
 
-	@Column(name = "TASK_ID")
+	@Column(name = "task_id")
 	public Integer getTaskId()
 	{
 		return taskId;
@@ -143,7 +142,7 @@ public class ActivityReportEntity implements Serializable
 		this.taskId = taskId;
 	}
 
-	@Column(name = "BREAK_TIME")
+	@Column(name = "break_time")
 	public Integer getBreakTime()
 	{
 		return breakTime;
@@ -154,7 +153,7 @@ public class ActivityReportEntity implements Serializable
 		this.breakTime = breakTime;
 	}
 
-	@Column(name = "JOB_NO")
+	@Column(name = "job_no")
 	public Integer getJobNr()
 	{
 		return jobNr;
@@ -165,7 +164,7 @@ public class ActivityReportEntity implements Serializable
 		this.jobNr = jobNr;
 	}
 
-	@Column(name = "POS_NO")
+	@Column(name = "pos_no")
 	public Integer getPosNr()
 	{
 		return posNr;

@@ -23,7 +23,7 @@ public interface ActivityReportDataService
 
 	List<ActivityReport> getByUser(Integer authorId);
 	
-	List<ActivityReport> getByJob(Integer jobId);
+	List<ActivityReport> getByJob(Integer jobNr, Integer posNr);
 
 	boolean save(ActivityReport report);
 
