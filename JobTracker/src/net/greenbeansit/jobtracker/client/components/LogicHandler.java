@@ -64,7 +64,6 @@ public class LogicHandler {
 		this.templateList = reporttemp;
 		this.currentUser = new User();
 		this.currentUser.setId(1);
-		loadJobs();
 		
 		userList.add(new User(0, "Walter", "von der Vogelweide",0));
 		userList.add(new User(0, "Peter", "Tauber",0));
@@ -282,8 +281,9 @@ public class LogicHandler {
 			RestClient.build(new SuccessFunction<List<Job>>() {
 				@Override
 				public void onSuccess(Method method, List<Job> response) {
-						self.jobList = response;
-						self.updateAllObservables();
+					GWT.log(String.valueOf(response.size()));
+					self.jobList = response;
+					self.updateAllObservables();
 				}
 
 				@Override
@@ -305,8 +305,9 @@ public class LogicHandler {
 			RestClient.build(new SuccessFunction<List<User>>() {
 				@Override
 				public void onSuccess(Method method, List<User> response) {
-						self.userList = response;
-						self.updateAllObservables();
+					self.userList.clear();
+					self.userList = response;
+					self.updateAllObservables();
 				}
 
 				@Override
