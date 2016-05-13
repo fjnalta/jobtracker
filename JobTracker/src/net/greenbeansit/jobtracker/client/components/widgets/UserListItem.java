@@ -34,14 +34,25 @@ public class UserListItem extends Composite
 
 	@UiField
 	ProgressBar	barUtilization;
+	
+	private User user;
 
 	public UserListItem(User user)
 	{
 		initWidget(uiBinder.createAndBindUi(this));
-
+		
+		this.user = user;
 		spanName.setText(user.getName() + " " + user.getSurname());
 		spanUtilization.setText("65 %");
 		barUtilization.setPercent(65);
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 }

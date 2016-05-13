@@ -51,10 +51,7 @@
 				<b:Heading size="H4" text="Filter" addStyleNames="{style.title}" />
 				<b.html:Span text="Job:" />
 				<s:MultipleSelect liveSearch="true"
-					liveSearchPlaceholder="Jobname">
-					<s:Option text="001|555|VW Intern" />
-					<s:Option text="002|544|HeidCement" />
-					<s:Option text="001|533|BASF"/>
+					liveSearchPlaceholder="Jobname" ui:field="selectJob">
 				</s:MultipleSelect>
 			</b:Row>
 		</b:Column>

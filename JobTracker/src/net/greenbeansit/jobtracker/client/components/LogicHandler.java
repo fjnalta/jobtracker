@@ -32,6 +32,7 @@ public class LogicHandler {
 	private List<Job> jobList = new ArrayList<Job>();
 	private List<ActivityReportTemplate> templateList = new ArrayList<ActivityReportTemplate>();
 	private List<User> userList = new ArrayList<User>();
+	private List<Job> selectedJobs = new ArrayList<Job>();
 	private User currentUser;
 	private LogicHandler self = this;
 
@@ -340,6 +341,12 @@ public class LogicHandler {
 	public void setCurrentTemplate(ActivityReportTemplate currentTemplate) {
 		this.currentTemplate = currentTemplate;
 		this.updateAllObservables();
+	}
+	public List<Job> getSelectedJobs() {
+		return selectedJobs;
+	}
+	public void setSelectedJobs(List<Job> selectedJobs) {
+		this.selectedJobs = selectedJobs;
 	}
 
 }
