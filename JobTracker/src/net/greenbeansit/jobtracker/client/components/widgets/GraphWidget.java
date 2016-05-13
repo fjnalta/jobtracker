@@ -116,6 +116,7 @@ public class GraphWidget extends Composite implements LogicObservable {
 				temp.setDuration(480);
 				tempBudgt-=480;
 				reportList.add(temp);
+				GWT.log(tempDate.toGMTString());
 			}
 		}
 		labelBudgetLeft.setText(String.valueOf(tempBudgt));
@@ -193,9 +194,10 @@ public class GraphWidget extends Composite implements LogicObservable {
 		switch (currentMode) {
 		case WEEK:
 			startDate.setDate(startDate.getDate() - 7);
-			endDate.setYear(startDate.getYear());
-			endDate.setMonth(startDate.getMonth());
-			endDate.setDate(startDate.getDate()+6);
+			this.endDate.setYear(this.startDate.getYear());
+			this.endDate.setMonth(this.startDate.getMonth());
+			this.endDate.setDate(this.startDate.getDate()+6);
+			GWT.log(endDate.toGMTString());
 			showWeek();
 			break;
 		case MONTH:
@@ -287,14 +289,22 @@ public class GraphWidget extends Composite implements LogicObservable {
 		}
 
 		for (ActivityReport report : reportList) {
-			if (report.getDate().after(startDate) && report.getDate().before(endDate)) {
+			GWT.log("CurrentReport" + report.getDate().toGMTString());
+			Date tempDate = new Date();
+			tempDate.setDate(this.startDate.getDate()+7);
+			tempDate.setHours(this.startDate.getHours());
+			tempDate.setYear(this.startDate.getYear());
+			tempDate.setMinutes(this.startDate.getMinutes());
+			tempDate.setMonth(this.startDate.getMonth());
+			tempDate.setSeconds(this.startDate.getSeconds());
+			if (report.getDate().after(startDate) && report.getDate().before(tempDate)) {
+				GWT.log("startDate:" + startDate.toGMTString() + "-" + report.getDate().toGMTString() + "-" + tempDate.toGMTString());
 				int currentWeekDay = report.getDate().getDay();
 				if (currentWeekDay == 0) {
 					currentWeekDay = 6;
 				} else {
 					currentWeekDay -= 1;
 				}
-				Window.alert("LOAD" + startDate.toString() + " " + report.getDate().toString() + " " + endDate.toString());
 				values[currentWeekDay] += report.getDuration();
 			}
 		}

@@ -1,5 +1,6 @@
 package net.greenbeansit.jobtracker.client.components.widgets;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.gwtbootstrap3.client.ui.html.ClearFix;
@@ -39,6 +40,7 @@ public class JobsWidget extends Composite implements LogicObservable {
 	OptGroup allJobsOptGroup;
 
 	private Job currentJob;
+	private List<Job> jobList = new ArrayList<Job>();
 
 	public JobsWidget() {
 		initWidget(uiBinder.createAndBindUi(this));
@@ -53,6 +55,7 @@ public class JobsWidget extends Composite implements LogicObservable {
 				notifyHandler();
 			}
 		});
+		handler.loadJobs();
 	}
 
 	private void addJobs(List<Job> jobList) {
@@ -64,7 +67,9 @@ public class JobsWidget extends Composite implements LogicObservable {
 
 	@Override
 	public void update() {
-		addJobs(handler.getJobList());
+		allJobsOptGroup.clear();
+		this.jobList = handler.getJobList();
+		addJobs(this.jobList);
 		currentJob = handler.getCurrentJob();
 		if (currentJob != null) {
 
@@ -75,6 +80,7 @@ public class JobsWidget extends Composite implements LogicObservable {
 				}
 			}
 		}
+		selectJob.refresh();
 
 	}
 
