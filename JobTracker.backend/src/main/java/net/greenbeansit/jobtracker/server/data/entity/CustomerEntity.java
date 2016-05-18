@@ -18,12 +18,11 @@ public class CustomerEntity implements Serializable
 	 */
 	private static final long	serialVersionUID	= 3842559068860954254L;
 
-	@Id
-	@GeneratedValue
 	private Integer				id;
-
 	private String				name;
 
+	@Id
+	@GeneratedValue
 	public Integer getId()
 	{
 		return id;
