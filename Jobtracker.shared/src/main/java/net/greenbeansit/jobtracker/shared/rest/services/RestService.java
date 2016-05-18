@@ -13,20 +13,15 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import net.greenbeansit.jobtracker.shared.*;
 import org.fusesource.restygwt.client.DirectRestService;
-
-import net.greenbeansit.jobtracker.shared.ActivityReport;
-import net.greenbeansit.jobtracker.shared.ActivityReportTemplate;
-import net.greenbeansit.jobtracker.shared.User;
-import net.greenbeansit.jobtracker.shared.UserJob;
-import net.greenbeansit.jobtracker.shared.Job;
 
 /**
  * The service for all server fuctions
  * 
  * @author Max Blatt & Alexander Kirilyuk & Philipp Minges
  */
-@Path("rest/employee")
+@Path("rest")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public interface RestService extends DirectRestService
@@ -40,7 +35,7 @@ public interface RestService extends DirectRestService
 	 *             if there are no Users.
 	 */
 	@GET
-	@Path("/")
+	@Path("/employee")
 	List<User> getAllUser();
 	
 	/**
@@ -75,7 +70,7 @@ public interface RestService extends DirectRestService
 	 * Gets all {@link ActivityReport}s made by the {@link User} with the
 	 * following ID.
 	 * 
-	 * @param employeeId
+	 * @param userId
 	 *            the ID of the {@link User}.
 	 * @return a List of {@link ActivityReport}s.
 	 * 
@@ -129,6 +124,16 @@ public interface RestService extends DirectRestService
 			@PathParam("userId") Integer userId, @PathParam("from")String from, @PathParam("to")String to);
 
 	/**
+	 * Gets all {@link Customer}s
+	 *
+	 * @throws NotFoundException
+	 *             if there are no Customers.
+	 */
+	@GET
+	@Path("/customer")
+	List<Customer> getAllCustomer();
+
+	/**
 	 * Creates a given {@code ActivityReport} on the server for the
 	 * {@link User}
 	 * 
@@ -167,7 +172,7 @@ public interface RestService extends DirectRestService
 	 * 
 	 * @param userId
 	 *            the ID of {@link User}
-	 * @param report
+	 * @param reportId
 	 *            the ID of the {@link ActivityReport} that should be deleted.
 	 * 
 	 * @throws NotFoundException

@@ -6,13 +6,10 @@ import java.util.List;
 import javax.inject.Inject;
 
 import net.greenbeansit.jobtracker.server.data.ActivityReportDataService;
+import net.greenbeansit.jobtracker.server.data.CustomerDataService;
 import net.greenbeansit.jobtracker.server.data.JobDataService;
 import net.greenbeansit.jobtracker.server.data.UserDataService;
-import net.greenbeansit.jobtracker.shared.ActivityReport;
-import net.greenbeansit.jobtracker.shared.ActivityReportTemplate;
-import net.greenbeansit.jobtracker.shared.User;
-import net.greenbeansit.jobtracker.shared.UserJob;
-import net.greenbeansit.jobtracker.shared.Job;
+import net.greenbeansit.jobtracker.shared.*;
 import net.greenbeansit.jobtracker.shared.rest.services.RestService;
 
 /**
@@ -28,6 +25,8 @@ public class RestServiceImpl implements RestService
 	private JobDataService jobService;
 	@Inject
 	private ActivityReportDataService activityService;
+	@Inject
+	private CustomerDataService customerService;
 
 	/**
 	 * Empty Constructor for Spring mapping
@@ -68,7 +67,7 @@ public class RestServiceImpl implements RestService
 	public ActivityReport getReport(Integer userId, Integer reportId)
 	{
 		ActivityReport report = activityService.getActivityReport(reportId);
-		if(report.getAuthor() == userId)
+		if(report.getAuthor().equals(userId))
 			return report;
 		else
 			return null; //TODO: Throw error if not enough permission
@@ -91,7 +90,7 @@ public class RestServiceImpl implements RestService
 	@Override
 	public void updateReport(Integer userId, ActivityReport report)
 	{
-		if(report.getAuthor() == userId)
+		if(report.getAuthor().equals(userId))
 			activityService.save(report);
 		//TODO: Throw error if not enough permission
 	}
@@ -100,7 +99,7 @@ public class RestServiceImpl implements RestService
 	public void deleteReport(Integer userId, Integer reportId)
 	{
 		ActivityReport report = activityService.getActivityReport(reportId);
-		if(report.getAuthor() == userId)
+		if(report.getAuthor().equals(userId))
 			activityService.delete(report);
 		//TODO: Throw error if not enough permission
 	}
@@ -126,6 +125,12 @@ public class RestServiceImpl implements RestService
 	{
 		// TODO Auto-generated method stub
 
+	}
+
+	//Customer
+	@Override
+	public List<Customer> getAllCustomer() {
+		return customerService.getAll();
 	}
 	
 	
