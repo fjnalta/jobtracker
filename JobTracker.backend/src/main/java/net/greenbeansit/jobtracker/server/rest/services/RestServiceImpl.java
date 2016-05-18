@@ -132,8 +132,13 @@ public class RestServiceImpl implements RestService
 	public List<Customer> getAllCustomer() {
 		return customerService.getAll();
 	}
-	
-	
+
+	@Override
+	public Customer getCustomer(Integer id) {
+		return customerService.getById(id);
+	}
+
+
 	@SuppressWarnings("deprecation")
 	private Date stringToDate(String date) {
 		return new Date(Integer.parseInt(date.substring(0, 3)),Integer.parseInt(date.substring(5, 6)), Integer.parseInt(date.substring(8, 9)));

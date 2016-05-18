@@ -134,17 +134,14 @@ public interface RestService extends DirectRestService
 	List<Customer> getAllCustomer();
 
 	/**
-	 * Creates a given {@code ActivityReport} on the server for the
-	 * {@link User}
-	 * 
-	 * @param userId
-	 *            the ID of {@link User}.
-	 * @param report
-	 *            {@code ActivityReport} to send.
-	 * 
-	 * @throws NotFoundException
-	 *             if the employeeId does not exist.
+	 * Gives all {@link Customer}s with the given id
+	 * @param id
+	 * 		the ID of the {@link Customer}.
 	 */
+	@GET
+	@Path("/customer/{id}")
+	Customer getCustomer(@PathParam("id") Integer id);
+
 	@POST
 	@Path("/{userId}/report/")
 	void createReport(@PathParam("userId") Integer userId,
