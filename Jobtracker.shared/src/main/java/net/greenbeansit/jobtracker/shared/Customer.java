@@ -15,9 +15,14 @@ public class Customer implements Serializable
 	private Integer				id;
 	private String				name;
 
+
+	public Customer(){
+
+	}
+
 	/**
 	 * Initializes a new instance of the {@link Customer} class
-	 * 
+	 *
 	 * @param id
 	 *            the identifier of the customer
 	 * @param name
