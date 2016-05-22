@@ -5,10 +5,10 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import net.greenbeansit.jobtracker.server.data.ActivityReportDataService;
-import net.greenbeansit.jobtracker.server.data.CustomerDataService;
-import net.greenbeansit.jobtracker.server.data.JobDataService;
-import net.greenbeansit.jobtracker.server.data.UserDataService;
+import net.greenbeansit.jobtracker.server.data.activityReport.ActivityReportDataService;
+import net.greenbeansit.jobtracker.server.data.customer.CustomerDataService;
+import net.greenbeansit.jobtracker.server.data.job.JobDataService;
+import net.greenbeansit.jobtracker.server.data.user.UserDataService;
 import net.greenbeansit.jobtracker.shared.*;
 import net.greenbeansit.jobtracker.shared.rest.services.RestService;
 
