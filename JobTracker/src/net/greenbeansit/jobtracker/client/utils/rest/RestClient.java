@@ -8,6 +8,7 @@ import org.fusesource.restygwt.client.callback.CallbackAware;
 import com.google.gwt.core.client.GWT;
 
 import net.greenbeansit.jobtracker.shared.*;
+import net.greenbeansit.jobtracker.shared.rest.services.ManagerPageRestService;
 import net.greenbeansit.jobtracker.shared.rest.services.RestService;
 
 /**
@@ -19,6 +20,7 @@ import net.greenbeansit.jobtracker.shared.rest.services.RestService;
 public class RestClient<R> {
 
 	private static RestService EMPLOYEE_SERVICE = GWT.create(RestService.class);
+	private static ManagerPageRestService MANAGER_PAGE_SERVICE = GWT.create(ManagerPageRestService.class);
 
 	private MethodCallback<R> callback;
 
@@ -88,6 +90,11 @@ public class RestClient<R> {
 	public RestService getEmployeeService()
 	{
 		return setCallback(EMPLOYEE_SERVICE);
+	}
+	
+	public ManagerPageRestService getManagerPageService()
+	{
+		return setCallback(MANAGER_PAGE_SERVICE);
 	}
 
 }
