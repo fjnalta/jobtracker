@@ -282,7 +282,7 @@ public class ManagerPage extends Composite
 		@Override
 		public Integer getUserId()
 		{
-			return 0; // TODO: Get real user ID.
+			return 1; // TODO: Get real user ID.
 		}
 
 	}
