@@ -276,7 +276,6 @@ public class ManagerPage extends Composite
 		@Override
 		public List<Job> getUserJobs()
 		{
-			//TEst
 			return userJobs;
 		}
 
