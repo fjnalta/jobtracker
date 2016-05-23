@@ -38,7 +38,7 @@ public interface RestService extends DirectRestService
 	@GET
 	@Path("/users")
 	List<User> getAllUser();
-	
+
 	/**
 	 * Gets the {@link User} with the following ID.
 	 * 
@@ -80,8 +80,7 @@ public interface RestService extends DirectRestService
 	 */
 	@GET
 	@Path("/users/{userId}/reports")
-	List<ActivityReport> getAllReports(
-			@PathParam("userId") Integer userId);
+	List<ActivityReport> getAllReports(@PathParam("userId") Integer userId);
 
 	/**
 	 * 
@@ -119,8 +118,8 @@ public interface RestService extends DirectRestService
 	 */
 	@GET
 	@Path("/users/{userId}/reportPeriod/{from-to}")
-	List<ActivityReport> getReportPeriod(
-			@PathParam("userId") Integer userId, @PathParam("from-to")String fromto);
+	List<ActivityReport> getReportPeriod(@PathParam("userId") Integer userId,
+			@PathParam("from-to") String fromto);
 
 	/**
 	 * Gets all {@link Customer}s
@@ -134,26 +133,27 @@ public interface RestService extends DirectRestService
 
 	/**
 	 * Gives all {@link Customer}s with the given id
+	 * 
 	 * @param id
-	 * 		the ID of the {@link Customer}.
+	 *            the ID of the {@link Customer}.
 	 */
 	@GET
 	@Path("/customers/id/{id}")
 	Customer getCustomer(@PathParam("id") Integer id);
-	
+
 	@GET
 	@Path("/customers/{name}")
 	Customer getCustomer(@PathParam("name") String name);
 
 	/**
 	 * Saves an {@link ActivityReport} to the database.
-	 * @param userId 
+	 * 
+	 * @param userId
 	 * @param report
 	 */
 	@POST
 	@Path("/users/{userId}/reports/")
-	void saveReport(@PathParam("userId") Integer userId,
-			ActivityReport report);
+	void saveReport(@PathParam("userId") Integer userId, ActivityReport report);
 
 	@DELETE
 	@Path("/users/{userId}/reports/{reportId}")
@@ -175,16 +175,44 @@ public interface RestService extends DirectRestService
 	@Path("/users/{userId}/report_templates")
 	List<ActivityReportTemplate> getAllReportTemplates(
 			@PathParam("userId") Integer userId);
-	
+
 	/**
-	 * Retrieves all users and their role as {@link UserJob} entities for a specific job.
-	 * @param jobNo 3 to 6 digits job number.
-	 * @param posNo 3 digit position number.
+	 * Retrieves all users and their role as {@link UserJob} entities for a
+	 * specific job.
+	 * 
+	 * @param jobNo
+	 *            3 to 6 digits job number.
+	 * @param posNo
+	 *            3 digit position number.
 	 * @return a List of {@link UserJob}s.
 	 */
 	@GET
 	@Path("/usertojob/{jobNo}&{posNo}")
-	List<UserJob> getUsersToJob(@PathParam("jobNo") Integer jobNo, @PathParam("posNo") Integer posNo);
+	List<UserJob> getUsersToJob(@PathParam("jobNo") Integer jobNo,
+			@PathParam("posNo") Integer posNo);
+
+	/**
+	 * Returns the utilization of an employee for the given month.
+	 * @param userId user
+	 * @param year year
+	 * @param month month
+	 * @return percent value (0-100 (and even more))
+	 */
+	@GET
+	@Path("/users/{userId}/utilization/{year}/{month}")
+	Integer getUtilizationMonth(@PathParam("userId") Integer userId,
+			@PathParam("year") Integer year, @PathParam("month") Integer month);
+
+	/**
+	 * Returns the utilization of an employee for the given year.
+	 * @param userId user
+	 * @param year year
+	 * @return percent value (0-100 (and even more))
+	 */
+	@GET
+	@Path("/users/{userId}/utilization/{year}")
+	Integer getUtilizationYear(@PathParam("userId") Integer userId,
+			@PathParam("year") Integer year);
 
 	/**
 	 * Saves an {@link ActivityReportTemplate} with a new ID for the
@@ -205,49 +233,55 @@ public interface RestService extends DirectRestService
 
 	/**
 	 * Removes the specified {@link ActivityReportTemplate} from the database.
-	 * @param userId author of the template.
-	 * @param templateId id of the template.
+	 * 
+	 * @param userId
+	 *            author of the template.
+	 * @param templateId
+	 *            id of the template.
 	 */
 	@DELETE
 	@Path("/users/{userId}/report_templates/{templateId}")
 	void deleteReportTemplate(@PathParam("userId") Integer userId,
 			@PathParam("templateId") Integer templateId);
-	
+
 	/**
-	 * Gets the employees who have the user with the following ID as
-	 * supervisor.
+	 * Gets the employees who have the user with the following ID as supervisor.
 	 * 
-	 * @param supervisorId the ID of the supervisor user.
+	 * @param supervisorId
+	 *            the ID of the supervisor user.
 	 * @return a {@link List} of {@link User}.
 	 */
 	@GET
 	@Path("manager/employees/{supervisorId}")
-	ManagerPageRestServiceResponse getEmployees(@PathParam("supervisorId") Integer supervisorId);
-	
+	ManagerPageRestServiceResponse getEmployees(
+			@PathParam("supervisorId") Integer supervisorId);
+
 	/**
-	 * Response for the {@link ManagerPageRestService#getEmployees(Integer)} request.
+	 * Response for the {@link ManagerPageRestService#getEmployees(Integer)}
+	 * request.
 	 */
 	public class ManagerPageRestServiceResponse
 	{
-		private List<User> employees;
-		private List<Job> jobs;
-		
+		private List<User>	employees;
+		private List<Job>	jobs;
+
 		public ManagerPageRestServiceResponse()
 		{
-			
+
 		}
-		
-		public ManagerPageRestServiceResponse(List<User> employees, List<Job> jobs) 
+
+		public ManagerPageRestServiceResponse(List<User> employees,
+				List<Job> jobs)
 		{
 			this.employees = employees;
 			this.jobs = jobs;
 		}
-		
+
 		public List<User> getEmployees()
 		{
 			return employees;
 		}
-		
+
 		public List<Job> getJobs()
 		{
 			return jobs;
