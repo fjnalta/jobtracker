@@ -1,5 +1,6 @@
 package net.greenbeansit.jobtracker.server.data.user;
 
+import java.sql.Date;
 import java.util.List;
 
 import net.greenbeansit.jobtracker.shared.User;
@@ -41,4 +42,13 @@ public interface UserDataService
 	 * @return List of shared User objects
 	 */
 	List<User> getBySupervisor(Integer supervisorId);
+	
+	/**
+	 * Returns the utilization of the given User.
+	 * @param employeeId ID of User
+	 * @param from from which date included 
+	 * @param to to which date included
+	 * @return utilization percentage
+	 */
+	Integer getUtilization(Integer employeeId, Date from, Date to);
 }

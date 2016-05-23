@@ -178,4 +178,23 @@ public class RestServiceImpl implements RestService
 		return new ManagerPageRestServiceResponse(users, jobs);
 	}
 
+	@Override
+	public Integer getUtilizationMonth(Integer userId, Integer year,
+			Integer month)
+	{
+		//Sooooo dirty...
+		Date from = new Date(year, month, 1);
+		Date to = new Date(year, month, 30);
+		return userService.getUtilization(userId, from, to);
+	}
+
+	@Override
+	public Integer getUtilizationYear(Integer userId, Integer year)
+	{
+		//Oh gaaaaawd...
+		Date from = new Date(year, 1, 1);
+		Date to = new Date(year, 12, 30);
+		return userService.getUtilization(userId, from, to);
+	}
+
 }
