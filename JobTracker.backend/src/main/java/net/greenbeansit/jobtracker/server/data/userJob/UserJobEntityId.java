@@ -10,7 +10,7 @@ public class UserJobEntityId implements Serializable
 	private static final long serialVersionUID = -3667654994571278026L;
 	private Integer				userId;
 	private Integer				jobNr;
-	private String				posNr;
+	private Integer				posNr;
 	public Integer getUserId()
 	{
 		return userId;
@@ -27,11 +27,11 @@ public class UserJobEntityId implements Serializable
 	{
 		this.jobNr = jobNr;
 	}
-	public String getPosNr()
+	public Integer getPosNr()
 	{
 		return posNr;
 	}
-	public void setPosNr(String posNr)
+	public void setPosNr(Integer posNr)
 	{
 		this.posNr = posNr;
 	}

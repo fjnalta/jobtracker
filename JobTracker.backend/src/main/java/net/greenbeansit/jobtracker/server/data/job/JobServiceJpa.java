@@ -3,12 +3,15 @@ package net.greenbeansit.jobtracker.server.data.job;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import net.greenbeansit.jobtracker.server.data.userJob.UserJobDataService;
 import net.greenbeansit.jobtracker.shared.Job;
+import net.greenbeansit.jobtracker.shared.UserJob;
 
 @Service("jobService")
 public class JobServiceJpa implements JobDataService
@@ -16,6 +19,9 @@ public class JobServiceJpa implements JobDataService
 
 	@Autowired
 	private JobEntityRepository repository;
+	
+	@Inject
+	private UserJobDataService userJobService;
 
 	@Override @Transactional
 	public Job getJob(Integer jobNr, Integer posNr)
@@ -61,8 +67,12 @@ public class JobServiceJpa implements JobDataService
 	@Override @Transactional
 	public List<Job> getByUser(Integer userId)
 	{
-		// TODO Mike: Implement when UserJobService is implemented.
-		return null;
+		List<Job> jobs = new ArrayList<Job>();
+		for(UserJob relation : userJobService.getByUserId(userId))
+		{
+			jobs.add(getJob(relation.getJobNr(), relation.getPosNo()));
+		}
+		return jobs;
 	}
 
 	private Job convert(JobEntity entity)
