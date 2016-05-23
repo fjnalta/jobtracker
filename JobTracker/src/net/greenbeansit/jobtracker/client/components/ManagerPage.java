@@ -23,6 +23,7 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 
 import net.greenbeansit.jobtracker.client.components.widgets.UserListItem;
+import net.greenbeansit.jobtracker.client.utils.rest.NotifyHelper;
 import net.greenbeansit.jobtracker.client.utils.rest.RestClient;
 import net.greenbeansit.jobtracker.client.utils.rest.RestClient.SuccessFunction;
 import net.greenbeansit.jobtracker.shared.Job;
@@ -198,6 +199,7 @@ public class ManagerPage extends Composite
 						public void onFailure(Method method,
 								Throwable exception)
 						{
+							NotifyHelper.errorMessage(exception.toString());
 							GWT.log(exception.getMessage());
 							exception.printStackTrace();
 						}
