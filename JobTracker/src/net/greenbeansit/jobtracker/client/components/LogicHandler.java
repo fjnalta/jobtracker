@@ -158,7 +158,7 @@ public class LogicHandler {
 				GWT.log(exception.getMessage());
 			}
 
-		}).getEmployeeService().getReportPeriod(currentUser.getId(), fromString, toString);
+		}).getEmployeeService().getReportPeriod(currentUser.getId(), fromString+"-"+toString);
 	}
 	/**
 	 * Function for saving an ActivityReport to the backend. It first collects all needed information,
@@ -192,7 +192,7 @@ public class LogicHandler {
 						GWT.log(exception.getMessage());
 					}
 
-				}).getEmployeeService().createReport(currentUser.getId(), tempReport);
+				}).getEmployeeService().saveReport(currentUser.getId(), tempReport);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

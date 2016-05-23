@@ -6,9 +6,14 @@ import java.util.List;
 import javax.inject.Inject;
 
 import net.greenbeansit.jobtracker.server.data.activityReport.ActivityReportDataService;
+import net.greenbeansit.jobtracker.server.data.activityReportTemplate.ActivityReportTemplateDataService;
 import net.greenbeansit.jobtracker.server.data.customer.CustomerDataService;
 import net.greenbeansit.jobtracker.server.data.job.JobDataService;
+import net.greenbeansit.jobtracker.server.data.jobTask.JobTaskDataService;
+import net.greenbeansit.jobtracker.server.data.pseudoJob.PseudoJobDataService;
 import net.greenbeansit.jobtracker.server.data.user.UserDataService;
+import net.greenbeansit.jobtracker.server.data.userJob.UserJobDataService;
+import net.greenbeansit.jobtracker.server.data.utilizationWeek.UtilizationWeekDataService;
 import net.greenbeansit.jobtracker.shared.*;
 import net.greenbeansit.jobtracker.shared.rest.services.RestService;
 
@@ -20,13 +25,23 @@ import net.greenbeansit.jobtracker.shared.rest.services.RestService;
 public class RestServiceImpl implements RestService
 {
 	@Inject
-	private UserDataService userService;
+	private ActivityReportDataService activityReportService;
+	@Inject
+	private ActivityReportTemplateDataService activityReportTemplateService;
+	@Inject
+	private CustomerDataService customerService;
 	@Inject
 	private JobDataService jobService;
 	@Inject
-	private ActivityReportDataService activityService;
+	private JobTaskDataService jobTaskService;
 	@Inject
-	private CustomerDataService customerService;
+	private PseudoJobDataService pseudoJobService;
+	@Inject
+	private UserDataService userService;
+	@Inject
+	private UserJobDataService userJobService;
+	@Inject
+	private UtilizationWeekDataService utilizationWeekService;
 
 	/**
 	 * Empty Constructor for Spring mapping
@@ -53,54 +68,40 @@ public class RestServiceImpl implements RestService
 	public List<Job> getAllJobs(Integer userId)
 	{
 		//TODO: Show only those that the user may access
-		return jobService.getAll();
+		return jobService.getByUser(userId);
 	}
 
 	//Activity Reports
 	@Override
 	public List<ActivityReport> getAllReports(Integer userId)
 	{
-		return activityService.getByUser(userId);
+		return activityReportService.getByUser(userId);
 	}
 
 	@Override
 	public ActivityReport getReport(Integer userId, Integer reportId)
 	{
-		ActivityReport report = activityService.getActivityReport(reportId);
+		ActivityReport report = activityReportService.getActivityReport(reportId);
 		if(report.getAuthor().equals(userId))
 			return report;
 		else
 			return null; //TODO: Throw error if not enough permission
 	}
 
-	@Override
-	public List<ActivityReport> getReportPeriod(Integer userId, String from,
-			String to)
-	{
-		return activityService.getByUserAndPeriod(userId, stringToDate(from), stringToDate(to));
-	}
 
 	@Override
-	public void createReport(Integer userId, ActivityReport report)
+	public void saveReport(Integer userId, ActivityReport report)
 	{
 		report.setAuthor(userId);
-		activityService.save(report);
-	}
-
-	@Override
-	public void updateReport(Integer userId, ActivityReport report)
-	{
-		if(report.getAuthor().equals(userId))
-			activityService.save(report);
-		//TODO: Throw error if not enough permission
+		activityReportService.save(report);
 	}
 
 	@Override
 	public void deleteReport(Integer userId, Integer reportId)
 	{
-		ActivityReport report = activityService.getActivityReport(reportId);
+		ActivityReport report = activityReportService.getActivityReport(reportId);
 		if(report.getAuthor().equals(userId))
-			activityService.delete(report);
+			activityReportService.delete(report);
 		//TODO: Throw error if not enough permission
 	}
 
@@ -108,23 +109,23 @@ public class RestServiceImpl implements RestService
 	@Override
 	public List<ActivityReportTemplate> getAllReportTemplates(Integer userId)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return activityReportTemplateService.getBy(userId);
 	}
 
 	@Override
 	public void saveReportTemplate(Integer userId,
 			ActivityReportTemplate template)
 	{
-		// TODO Auto-generated method stub
-
+		template.setAuthor(userId);
+		activityReportTemplateService.save(template);
 	}
 
 	@Override
 	public void deleteReportTemplate(Integer userId, Integer templateId)
 	{
-		// TODO Auto-generated method stub
-
+		ActivityReportTemplate template = activityReportTemplateService.getTemplate(templateId);
+		if(template.getAuthor().equals(userId))
+			activityReportTemplateService.delete(template);
 	}
 
 	//Customer
@@ -146,8 +147,19 @@ public class RestServiceImpl implements RestService
 
 	@Override
 	public List<UserJob> getUsersToJob(Integer jobNo, Integer posNo) {
-		//TODO
-		return null;
+		return userJobService.getByJobNrAndPosNr(jobNo, posNo);
+	}
+
+	@Override
+	public List<ActivityReport> getReportPeriod(Integer userId, String fromto)
+	{
+		return activityReportService.getByUserAndPeriod(userId, stringToDate(fromto.substring(0, 9)), stringToDate(fromto.substring(11, 20)));
+	}
+
+	@Override
+	public Customer getCustomer(String name)
+	{
+		return customerService.getByName(name);
 	}
 
 }
