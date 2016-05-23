@@ -14,6 +14,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import net.greenbeansit.jobtracker.shared.*;
+
 import org.fusesource.restygwt.client.DirectRestService;
 
 /**
@@ -212,5 +213,44 @@ public interface RestService extends DirectRestService
 	void deleteReportTemplate(@PathParam("userId") Integer userId,
 			@PathParam("templateId") Integer templateId);
 	
+	/**
+	 * Gets the employees who have the user with the following ID as
+	 * supervisor.
+	 * 
+	 * @param supervisorId the ID of the supervisor user.
+	 * @return a {@link List} of {@link User}.
+	 */
+	@GET
+	@Path("manager/employees/{supervisorId}")
+	ManagerPageRestServiceResponse getEmployees(@PathParam("supervisorId") Integer supervisorId);
 	
+	/**
+	 * Response for the {@link ManagerPageRestService#getEmployees(Integer)} request.
+	 */
+	public class ManagerPageRestServiceResponse
+	{
+		private List<User> employees;
+		private List<Job> jobs;
+		
+		public ManagerPageRestServiceResponse()
+		{
+			
+		}
+		
+		public ManagerPageRestServiceResponse(List<User> employees, List<Job> jobs) 
+		{
+			this.employees = employees;
+			this.jobs = jobs;
+		}
+		
+		public List<User> getEmployees()
+		{
+			return employees;
+		}
+		
+		public List<Job> getJobs()
+		{
+			return jobs;
+		}
+	}
 }
