@@ -2,10 +2,139 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
              xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:b="urn:import:org.gwtbootstrap3.client.ui"
              xmlns:b.html="urn:import:org.gwtbootstrap3.client.ui.html"
-             xmlns:s="urn:import:org.gwtbootstrap3.extras.select.client.ui">
+             xmlns:s="urn:import:org.gwtbootstrap3.extras.select.client.ui"
+             xmlns:widgets="urn:import:net.greenbeansit.jobtracker.client.components.widgets"
+             xmlns:select="urn:import:org.gwtbootstrap3.extras.select.client.ui"
+             xmlns:b3="urn:import:org.gwtbootstrap3.extras.slider.client.ui">
     <ui:style>
+        /*Container*/
+        .mainColumn {
+            padding: 0;
+        }
+
+        .largeContainer {
+            margin-top: 10px;
+            margin-bottom: 10px;
+            margin-left: 10px;
+            margin-right: 10px;
+            padding: 10px;
+            background-color: #ffffff;
+        }
+
+        .smallContainer {
+            margin: 10px 10px;
+            padding: 10px;
+            background-color: #ffffff;
+        }
+
+        .textArea {
+            max-width: 100%;
+            min-width: 100%;
+            min-height: 35px;
+        }
+
+        .percentageText {
+            min-width: 45px;
+        }
+
+        .button {
+            font-size: 10px;
+            line-height: 0px;
+            text-align: center;
+            padding: 0;
+            border: none;
+            margin: 0;
+            margin-top: auto;
+        }
+
+        /*Title*/
+        .title {
+            float: right;
+            margin: 0;
+        }
     </ui:style>
     <b:Container fluid="true">
-
+        <b:Column size="XS_12,SM_12,MD_4,LG_4" addStyleNames="{style.mainColumn}">
+            <b:Row addStyleNames="{style.smallContainer}">
+                <b:NavTabs>
+                    <b:TabListItem active="true" dataTarget="#newProject" text="neues Projekt"/>
+                    <b:TabListItem dataTarget="#myProjects" text="meine Projekte"/>
+                </b:NavTabs>
+                <b:TabContent>
+                    <b:TabPane active="true" b:id="newProject">
+                        <b:Form>
+                            <b:FieldSet>
+                                <b:FormGroup>
+                                    <b:FormLabel for="projectName">Projektname</b:FormLabel>
+                                    <b:TextBox placeholder="Bitte eintragen..." b:id="projectName"
+                                               ui:field="textIdentifier"/>
+                                </b:FormGroup>
+                                <b:FormGroup>
+                                    <b:FormLabel for="projectDesc">Projektbeschreibung</b:FormLabel>
+                                    <b:TextArea placeholder="Bitte eintragen..." b:id="projectDesc"
+                                                addStyleNames="{style.textArea}" ui:field="textDiscription"/>
+                                </b:FormGroup>
+                            </b:FieldSet>
+                        </b:Form>
+                    </b:TabPane>
+                    <b:TabPane b:id="myProjects">
+                        <b:Form>
+                            <b:FieldSet>
+                                <b:FormGroup>
+                                    <b:FormLabel for="projectName">Projektname</b:FormLabel>
+                                    <select:Select title="Projekt auswählen..." b:id="projectName">
+                                        <select:Option/>
+                                    </select:Select>
+                                </b:FormGroup>
+                                <b:FormGroup>
+                                    <b:FormLabel for="projectDesc">Projektbeschreibung</b:FormLabel>
+                                    <b:TextArea placeholder="Bitte eintragen..." b:id="projectDesc"
+                                                addStyleNames="{style.textArea}" readOnly="true"/>
+                                </b:FormGroup>
+                            </b:FieldSet>
+                        </b:Form>
+                    </b:TabPane>
+                </b:TabContent>
+                <b:FormGroup>
+                    <b:FormLabel for="customer">Kunde</b:FormLabel>
+                    <select:Select b:id="customer">
+                        <select:Option/>
+                    </select:Select>
+                </b:FormGroup>
+                <b:FormGroup>
+                    <b:FormLabel for="job">JobNr.</b:FormLabel>
+                    <select:Select b:id="job">
+                        <select:Option/>
+                    </select:Select>
+                </b:FormGroup>
+                <b:FormGroup>
+                    <b:FormLabel for="slider">Wahrscheinlichkeit</b:FormLabel>
+                    <b:Column size="XS_9,SM_9,MD_9,LG_9">
+                        <b3:Slider b:id="slider" ui:field="mySlider" width="100%" enabled="true" min="0" max="100"
+                                   step="1" value="50"/>
+                    </b:Column>
+                    <b:Column size="XS_2,SM_2,MD_2,LG_2">
+                        <b:TextBox b:id="percentagePossibility" ui:field="possibilityPercentage" readOnly="true"
+                        addStyleNames="{style.percentageText}"/>
+                    </b:Column>
+                    <b:Column size="XS_1,SM_1,MD_1,LG_1">
+                        <b:Row>
+                            <b:Button addStyleNames="{style.button}" ui:field="buttonUp"/>
+                        </b:Row>
+                        <b:Row>
+                            <b:Button addStyleNames="{style.button}" ui:field="buttonDown"/>
+                        </b:Row>
+                    </b:Column>
+                </b:FormGroup>
+            </b:Row>
+            <b:Row addStyleNames="{style.smallContainer}">
+                <widgets:UtilizationWidget></widgets:UtilizationWidget>
+            </b:Row>
+        </b:Column>
+        <b:Column size="XS_12,SM_12,MD_8,LG_8" addStyleNames="{style.mainColumn}">
+            <b:Row addStyleNames="{style.largeContainer}">
+                <!-- Add multiple Calendars here-->
+            </b:Row>
+        </b:Column>
     </b:Container>
 </ui:UiBinder>
