@@ -18,10 +18,9 @@ public class ActivityReport implements Serializable
 	private Integer				id;
 	private Integer				taskId;
 	private Integer				jobNr;
-	private Integer				jobPosNr;
+	private Integer				posNr;
 	private Integer				authorId;
 	
-	private String 				jobDesc;
 	private String				text;
 	private Date				date;
 	private Integer				startTime;
@@ -182,20 +181,12 @@ public class ActivityReport implements Serializable
 		this.taskId = taskId;
 	}
 
-	public String getJobDesc() {
-		return jobDesc;
+	public Integer getPosNr() {
+		return posNr;
 	}
 
-	public void setJobDesc(String jobDesc) {
-		this.jobDesc = jobDesc;
-	}
-
-	public Integer getJobPosNr() {
-		return jobPosNr;
-	}
-
-	public void setJobPosNr(Integer jobPosNr) {
-		this.jobPosNr = jobPosNr;
+	public void setPosNr(Integer jobPosNr) {
+		this.posNr = jobPosNr;
 	}
 
 	public Integer getJobNr() {

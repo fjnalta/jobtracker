@@ -81,14 +81,14 @@ public class WorkDiscriptionWidget extends Composite implements LogicObservable
 	public void saveTemplate(final ClickEvent e){
 		ActivityReportTemplate template = new ActivityReportTemplate();
 		template.setId(0);
-		template.setDescription(textDiscription.getText());
+		template.setText(textDiscription.getText());
 		template.setTemplateName(textName.getText());
 		handler.saveTemplate(template);
 	}
 	
 	@UiHandler("buttonLoad")
 	public void loadTemplate(final ClickEvent e){
-		textDiscription.setText(selectedTemplate.getDescription());
+		textDiscription.setText(selectedTemplate.getText());
 		textName.setText(selectedTemplate.getTemplateName());
 	}
 
@@ -111,7 +111,7 @@ public class WorkDiscriptionWidget extends Composite implements LogicObservable
 	public void notifyHandler() {
 		ActivityReportTemplate template = new ActivityReportTemplate();
 		template.setId(0);
-		template.setDescription(textDiscription.getText());
+		template.setText(textDiscription.getText());
 		template.setTemplateName(textName.getText());
 		handler.setCurrentTemplate(template);
 	}

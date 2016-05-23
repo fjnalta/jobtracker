@@ -72,6 +72,6 @@ public class ActivityReportTemplateServiceJpa implements ActivityReportTemplateD
 	{
 		if (report == null)
 			return null;
-		return new ActivityReportTemplateEntity(report.getId(),report.getTemplateName(),report.getDescription(), report.getTaskId(), report.getAuthor());
+		return new ActivityReportTemplateEntity(report.getId(),report.getTemplateName(),report.getText(), report.getTaskId(), report.getAuthor());
 	}
 }

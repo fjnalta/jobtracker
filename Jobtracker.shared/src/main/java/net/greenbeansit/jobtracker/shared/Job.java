@@ -10,12 +10,14 @@ import java.io.Serializable;
 public class Job implements Serializable {
 	private static final long serialVersionUID = -3379608733084915877L;
 
-	private Integer jobNr, posNr;
+	private Integer jobNr;
+	private Integer posNr;
 	private Integer payMode;
 	private Integer customerID;
 	private String desc;
 	private Integer maxBudget;
 	private Integer usedBudget;
+	private boolean isIntern;
 	
 	/**
 	 * Initializes a new instance of the {@link Job} class with all its fields
@@ -125,6 +127,16 @@ public class Job implements Serializable {
 
 	public Integer getCustomerID() {
 		return customerID;
+	}
+
+	public boolean isIntern()
+	{
+		return isIntern;
+	}
+
+	public void setIntern(boolean isIntern)
+	{
+		this.isIntern = isIntern;
 	}
 
 	public String toString() {

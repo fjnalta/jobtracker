@@ -18,7 +18,7 @@ public class ActivityReportTemplate implements Serializable
 	 */
 
 	private String				templateName;
-	private String				description;
+	private String				text;
 	private Integer				id;
 	private Integer				taskId;
 	private Integer				author;
@@ -31,9 +31,9 @@ public class ActivityReportTemplate implements Serializable
 
 	}
 
-	public ActivityReportTemplate(String templateName, String description, Integer id, Integer taskId, Integer author) {
+	public ActivityReportTemplate(String templateName, String text, Integer id, Integer taskId, Integer author) {
 		this.templateName = templateName;
-		this.description = description;
+		this.text = text;
 		this.id = id;
 		this.taskId = taskId;
 		this.author = author;
@@ -63,14 +63,14 @@ public class ActivityReportTemplate implements Serializable
 		this.id = id;
 	}
 
-	public String getDescription()
+	public String getText()
 	{
-		return description;
+		return text;
 	}
 
-	public void setDescription(String description)
+	public void setText(String text)
 	{
-		this.description = description;
+		this.text = text;
 	}
 
 	public Integer getTaskId()
