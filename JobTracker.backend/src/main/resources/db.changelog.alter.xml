@@ -152,4 +152,11 @@
 			]]>
 		</sql>
 	</changeSet>
+	<changeSet id="20160523-ALTERActivityReport" author="mike">
+		<sql>
+			<![CDATA[
+				ALTER TABLE activity_report ADD COLUMN break_time SMALLINT;
+			]]>
+		</sql>
+	</changeSet>
 </databaseChangeLog>
