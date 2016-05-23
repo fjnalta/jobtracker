@@ -8,10 +8,31 @@ public class JobEntityId implements Serializable
 	 * 
 	 */
 	private static final long serialVersionUID = -5692670503370732054L;
-	@SuppressWarnings("unused")
 	private Integer				jobNr;
-	@SuppressWarnings("unused")
 	private Integer				posNr;
-	@SuppressWarnings("unused")
 	private String				desc;
+	public Integer getJobNr()
+	{
+		return jobNr;
+	}
+	public void setJobNr(Integer jobNr)
+	{
+		this.jobNr = jobNr;
+	}
+	public Integer getPosNr()
+	{
+		return posNr;
+	}
+	public void setPosNr(Integer posNr)
+	{
+		this.posNr = posNr;
+	}
+	public String getDesc()
+	{
+		return desc;
+	}
+	public void setDesc(String desc)
+	{
+		this.desc = desc;
+	}
 }

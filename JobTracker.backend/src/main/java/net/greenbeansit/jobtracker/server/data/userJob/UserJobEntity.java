@@ -4,9 +4,13 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.Table;
 
-@Entity
+import net.greenbeansit.jobtracker.server.data.userJob.UserJobEntityId;
+
+@Entity @IdClass(UserJobEntityId.class)
 @Table(name = "user_job")
 public class UserJobEntity implements Serializable
 {
@@ -22,7 +26,7 @@ public class UserJobEntity implements Serializable
 	private Integer				role;
 
 
-	@Column(name = "user_id")
+	@Id @Column(name = "user_id", nullable = false)
 	public Integer getUserId()
 	{
 		return userId;
@@ -33,7 +37,7 @@ public class UserJobEntity implements Serializable
 		this.userId = userId;
 	}
 
-	@Column(name = "job_no")
+	@Id @Column(name = "job_no", nullable = false)
 	public Integer getJobNr()
 	{
 		return jobNr;
@@ -44,7 +48,7 @@ public class UserJobEntity implements Serializable
 		this.jobNr = jobNr;
 	}
 
-	@Column(name = "pos_no")
+	@Id @Column(name = "pos_no", nullable = false)
 	public Integer getPosNr()
 	{
 		return posNr;
