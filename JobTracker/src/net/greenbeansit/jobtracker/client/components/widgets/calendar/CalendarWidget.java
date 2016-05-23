@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.commons.io.filefilter.NotFileFilter;
 import org.gwtbootstrap3.client.ui.Row;
 import org.gwtbootstrap3.extras.fullcalendar.client.ui.AgendaOptions;
 import org.gwtbootstrap3.extras.fullcalendar.client.ui.CalendarConfig;
