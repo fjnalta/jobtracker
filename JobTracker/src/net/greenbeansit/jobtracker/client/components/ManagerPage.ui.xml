@@ -40,7 +40,13 @@
 	}
 	
 	/*Title*/
-	.title {
+	.titleLeft {
+		float: left;
+		margin-top: 5px;
+		margin-bottom: 5px;
+	}
+	
+	.titleRight {
 		float: right;
 		margin: 0;
 	}
@@ -48,8 +54,7 @@
 	<b:Container fluid="true">
 		<b:Column size="XS_12,SM_12,MD_4,LG_4" addStyleNames="{style.mainColumn}">
 			<b:Row addStyleNames="{style.smallContainer}">
-				<b:Heading size="H4" text="Filter" addStyleNames="{style.title}" />
-				<b.html:Span text="Job:" />
+				<b:Heading size="H4" text="Filter" addStyleNames="{style.titleLeft}" />
 				<s:MultipleSelect liveSearch="true"
 					liveSearchPlaceholder="Jobname" ui:field="selectJob">
 				</s:MultipleSelect>
@@ -57,7 +62,7 @@
 		</b:Column>
 		<b:Column size="XS_12,SM_12,MD_8,LG_8" addStyleNames="{style.mainColumn}">
 			<b:Row addStyleNames="{style.largeContainer}">
-				<b:Heading size="H3" addStyleNames="{style.title}" text="Alle Mitarbeiter" />
+				<b:Heading size="H3" addStyleNames="{style.titleRight}" text="Alle Mitarbeiter" />
 			</b:Row>
 			<b:Row addStyleNames="{style.largeContainer}" ui:field="employeeList">
 				
