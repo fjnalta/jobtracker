@@ -38,7 +38,8 @@
 						href="#home">
 						Home
 					</b:AnchorListItem>
-					<b:AnchorListItem iconFixedWidth="true" ui:field="navKapa">
+					<b:AnchorListItem iconFixedWidth="true" ui:field="navKapa"
+						href="#kapa">
 						Kapaplanung
 					</b:AnchorListItem>
 					<b:AnchorListItem iconFixedWidth="true" ui:field="navProject"

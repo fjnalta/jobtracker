@@ -1,5 +1,6 @@
 package net.greenbeansit.jobtracker.client;
 
+import net.greenbeansit.jobtracker.client.components.*;
 import org.gwtbootstrap3.client.ui.AnchorListItem;
 import org.gwtbootstrap3.client.ui.Container;
 import org.gwtbootstrap3.client.ui.Image;
@@ -17,159 +18,149 @@ import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 
-import net.greenbeansit.jobtracker.client.components.HomePage;
-import net.greenbeansit.jobtracker.client.components.ManagerEmployeeDetailPage;
-import net.greenbeansit.jobtracker.client.components.ManagerPage;
-import net.greenbeansit.jobtracker.client.components.ProjectPage;
-
 /**
  * Represents the main widget of the application.
  */
-public class Application extends Composite
-{
-	private static ApplicationUiBinder uiBinder = GWT
-			.create(ApplicationUiBinder.class);
+public class Application extends Composite {
+    private static ApplicationUiBinder uiBinder = GWT
+            .create(ApplicationUiBinder.class);
 
-	@UiTemplate("Application.ui.xml")
-	interface ApplicationUiBinder extends UiBinder<Widget, Application>
-	{
+    @UiTemplate("Application.ui.xml")
+    interface ApplicationUiBinder extends UiBinder<Widget, Application> {
 
-	}
+    }
 
-	@UiField
-	Container		mainContainer;
+    @UiField
+    Container mainContainer;
 
-	@UiField
-	AnchorListItem	navHome;
+    @UiField
+    AnchorListItem navHome;
 
-	@UiField
-	AnchorListItem	navProject;
-	
-	@UiField
-	AnchorListItem	navManager;
+    @UiField
+    AnchorListItem navProject;
 
-	@UiField
-	NavbarNav		nav;
-	
-	@UiField
-	NavbarBrand navbarBrand;
+    @UiField
+    AnchorListItem navManager;
 
-	public Application()
-	{
-		initWidget(uiBinder.createAndBindUi(this));
+    @UiField
+    AnchorListItem navKapa;
 
-		//Add navbar logo
-		navbarBrand.add(new Image("jobtracker/assets/images/navbar_logo.png"));
-		
-		History.addValueChangeHandler(new HistoryValueChangeHandler());
+    @UiField
+    NavbarNav nav;
 
-		History.fireCurrentHistoryState();
+    @UiField
+    NavbarBrand navbarBrand;
 
-	}
+    public Application() {
+        initWidget(uiBinder.createAndBindUi(this));
 
-	private class HistoryValueChangeHandler
-			implements ValueChangeHandler<String>
-	{
+        //Add navbar logo
+        navbarBrand.add(new Image("jobtracker/assets/images/navbar_logo.png"));
 
-		@Override
-		public void onValueChange(ValueChangeEvent<String> event)
-		{
-			deactivateAllNavButtons();
+        History.addValueChangeHandler(new HistoryValueChangeHandler());
 
-			String[] addressSplit = event.getValue().split("/");
-			
-			switch (addressSplit[0])
-			{
-			case "project":
-				loadProjectPage(addressSplit);
-				break;
-				
-			case "manager":
-				loadManagerPage(addressSplit);
-				break;
+        History.fireCurrentHistoryState();
 
-			default: // home
-				loadHomePage(addressSplit);
-				break;
-			}
+    }
 
-		}
-		
-		private void loadProjectPage(String[] addressSplit)
-		{
-			navProject.setActive(true);
+    private class HistoryValueChangeHandler
+            implements ValueChangeHandler<String> {
 
-			removeActiveContentContainer();
+        @Override
+        public void onValueChange(ValueChangeEvent<String> event) {
+            deactivateAllNavButtons();
 
-			addWidgetAsContentPage(new ProjectPage());
-		}
-		
-		private void loadManagerPage(String[] addressSplit)
-		{
-			Composite page;
-			
-			if(addressSplit.length == 3
-				&& addressSplit[1] == "employee")
-			{				
-				Integer userId;
-				
-				try
-				{
-					userId = Integer.parseInt(addressSplit[2]);
-					
-				}
-				catch(Exception ex)
-				{
-					userId = null;
-				}
-				
-				
-				if(userId != null)
-					page = new ManagerEmployeeDetailPage(userId);
-				else
-					page = new ManagerPage(); 
-			}
-			else
-				page = new ManagerPage();
-			
-			
-			navManager.setActive(true);
-			
-			removeActiveContentContainer();
-			
-			addWidgetAsContentPage(page);
-		}
-		
-		private void loadHomePage(String[] addressSplit)
-		{
-			navHome.setActive(true);
+            String[] addressSplit = event.getValue().split("/");
 
-			removeActiveContentContainer();
+            switch (addressSplit[0]) {
+                case "project":
+                    loadProjectPage(addressSplit);
+                    break;
 
-			addWidgetAsContentPage(new HomePage());
-		}
-		
+                case "manager":
+                    loadManagerPage(addressSplit);
+                    break;
 
-		private void deactivateAllNavButtons()
-		{
-			for (int i = 0; i < nav.getWidgetCount(); i++)
-			{
-				Widget widget = nav.getWidget(i);
-				if (widget instanceof AnchorListItem)
-					((AnchorListItem) widget).setActive(false);
-			}
-		}
+                case "kapa":
+                    loadKapaPage(addressSplit);
+                    break;
 
-		private void removeActiveContentContainer()
-		{
-			for (int i = 1; i < mainContainer.getWidgetCount(); i++)
-				mainContainer.remove(i);
+                default: // home
+                    loadHomePage(addressSplit);
+                    break;
+            }
 
-		}
+        }
 
-		private void addWidgetAsContentPage(Widget widget)
-		{
-			mainContainer.add(widget);
-		}
-	}
+        private void loadProjectPage(String[] addressSplit) {
+            navProject.setActive(true);
+
+            removeActiveContentContainer();
+
+            addWidgetAsContentPage(new ProjectPage());
+        }
+
+        private void loadManagerPage(String[] addressSplit) {
+            Composite page;
+
+            if (addressSplit.length == 3
+                    && addressSplit[1] == "employee") {
+                Integer userId;
+
+                try {
+                    userId = Integer.parseInt(addressSplit[2]);
+
+                } catch (Exception ex) {
+                    userId = null;
+                }
+
+
+                if (userId != null)
+                    page = new ManagerEmployeeDetailPage(userId);
+                else
+                    page = new ManagerPage();
+            } else
+                page = new ManagerPage();
+
+
+            navManager.setActive(true);
+
+            removeActiveContentContainer();
+
+            addWidgetAsContentPage(page);
+        }
+
+        private void loadKapaPage(String[] addressSplit) {
+            navKapa.setActive(true);
+            removeActiveContentContainer();
+            addWidgetAsContentPage(new KapaPage());
+        }
+
+        private void loadHomePage(String[] addressSplit) {
+            navHome.setActive(true);
+
+            removeActiveContentContainer();
+
+            addWidgetAsContentPage(new HomePage());
+        }
+
+
+        private void deactivateAllNavButtons() {
+            for (int i = 0; i < nav.getWidgetCount(); i++) {
+                Widget widget = nav.getWidget(i);
+                if (widget instanceof AnchorListItem)
+                    ((AnchorListItem) widget).setActive(false);
+            }
+        }
+
+        private void removeActiveContentContainer() {
+            for (int i = 1; i < mainContainer.getWidgetCount(); i++)
+                mainContainer.remove(i);
+
+        }
+
+        private void addWidgetAsContentPage(Widget widget) {
+            mainContainer.add(widget);
+        }
+    }
 }
