@@ -166,12 +166,16 @@ public class RestServiceImpl implements RestService
 		for(User user : users)
 		{
 			List<Job> temp = jobService.getByUser(user.getId());
-			if(!jobs.containsAll(temp)) //Performance optimizing for bigger collections
+			if (temp != null)
 			{
-				for(Job job : temp)
+				if (!jobs.containsAll(temp)) // Performance optimizing for
+												// bigger collections
 				{
-					if(!jobs.contains(job))
-						jobs.add(job);
+					for (Job job : temp)
+					{
+						if (!jobs.contains(job))
+							jobs.add(job);
+					}
 				}
 			}
 		}

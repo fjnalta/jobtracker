@@ -66,4 +66,18 @@
 			]]>
 		</sql>
 	</changeSet>
+	<changeSet id="20160523-user_job-7" author="mike">
+		<sql>
+			<![CDATA[
+				INSERT INTO user_job (user_id, job_no, pos_no)
+				VALUES(2, 100001, 002),
+				(3, 100001, 002),
+				(4, 100245, 001),
+				(3, 100245, 001),
+				(5, 100001, 002),
+				(6, 100001, 002),
+				(5, 100001, 001);
+			]]>
+		</sql>
+	</changeSet>
 </databaseChangeLog>
