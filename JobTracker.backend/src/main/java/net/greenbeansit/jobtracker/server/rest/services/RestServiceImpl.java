@@ -33,15 +33,9 @@ public class RestServiceImpl implements RestService
 	@Inject
 	private JobDataService jobService;
 	@Inject
-	private JobTaskDataService jobTaskService;
-	@Inject
-	private PseudoJobDataService pseudoJobService;
-	@Inject
 	private UserDataService userService;
 	@Inject
 	private UserJobDataService userJobService;
-	@Inject
-	private UtilizationWeekDataService utilizationWeekService;
 
 	/**
 	 * Empty Constructor for Spring mapping

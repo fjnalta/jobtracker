@@ -38,9 +38,10 @@ public interface ManagerPageRestService extends DirectRestService
 		private List<User> employees;
 		private List<Job> jobs;
 		
-		public Response() 
+		public Response(List<User> employees, List<Job> jobs) 
 		{
-			
+			this.employees = employees;
+			this.jobs = jobs;
 		}
 		
 		public List<User> getEmployees()
