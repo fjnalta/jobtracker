@@ -333,5 +333,11 @@ public interface RestService extends DirectRestService
 		{
 			this.posNr = posNr;
 		}
+		
+		public boolean matchesJob(Job job)
+		{
+			return posNr.equals(job.getPosNr())
+					&& jobNr.equals(job.getJobNr());
+		}
 	}
 }
