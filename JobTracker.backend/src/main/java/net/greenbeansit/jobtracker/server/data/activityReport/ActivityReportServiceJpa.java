@@ -104,7 +104,7 @@ public class ActivityReportServiceJpa implements ActivityReportDataService
 		Time begin = convert(report.getStartTime());
 		Time end = convert(report.getEndTime());
 		return new ActivityReportEntity(report.getAuthor(), report.getText(),
-				report.getDate(), begin, end, report.getBreakTime(),
+				new java.sql.Date(report.getDate().getTime()), begin, end, report.getBreakTime(),
 				report.getTaskId(), report.getJobNr(), report.getPosNr());
 	}
 
