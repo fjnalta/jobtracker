@@ -82,14 +82,13 @@ public class WorkDiscriptionWidget extends Composite implements LogicObservable
 	@UiHandler("buttonSave")
 	public void saveTemplate(final ClickEvent e){
 		ActivityReportTemplate template = new ActivityReportTemplate();
-		template.setTaskId(0);
 		if(textDiscription.getText().length()>0&&textName.getText().length()>0){
 			template.setText(textDiscription.getText());
 			template.setName(textName.getText());
 			template.setTaskId(null);
 			handler.saveTemplate(template);
 		}else{
-			NotifyHelper.errorMessage("fill in the missing fields");
+			NotifyHelper.errorMessage("Fill missing fields");
 		}	
 	}
 	
@@ -117,9 +116,14 @@ public class WorkDiscriptionWidget extends Composite implements LogicObservable
 	@Override
 	public void notifyLogicHandler() {
 		ActivityReportTemplate template = new ActivityReportTemplate();
-		template.setTaskId(0);
-		template.setText(textDiscription.getText());
-		template.setName(textName.getText());
-		handler.setCurrentTemplate(template);
+		if(textDiscription.getText().length()>0&&textName.getText().length()>0){
+			template.setText(textDiscription.getText());
+			template.setName(textName.getText());
+			template.setTaskId(null);
+			handler.setCurrentTemplate(template);
+		}else{
+			NotifyHelper.errorMessage("Please select template");
+			handler.setCurrentTemplate(null);
+		}	
 	}
 }

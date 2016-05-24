@@ -17,6 +17,7 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 
 import net.greenbeansit.jobtracker.client.components.LogicObservable;
+import net.greenbeansit.jobtracker.client.utils.rest.NotifyHelper;
 import net.greenbeansit.jobtracker.shared.Job;
 
 public class JobsWidget extends Composite implements LogicObservable {
@@ -39,7 +40,7 @@ public class JobsWidget extends Composite implements LogicObservable {
 	@UiField
 	OptGroup allJobsOptGroup;
 
-	private Job currentJob;
+	private Job currentJob = null;
 	private List<Job> jobList = new ArrayList<Job>();
 
 	public JobsWidget() {
@@ -86,6 +87,11 @@ public class JobsWidget extends Composite implements LogicObservable {
 
 	@Override
 	public void notifyLogicHandler() {
-		handler.setCurrentJob(currentJob);
+		if(currentJob != null){
+			handler.setCurrentJob(currentJob);
+		}
+		else{
+			NotifyHelper.errorMessage("Please select job");
+		}
 	}
 }

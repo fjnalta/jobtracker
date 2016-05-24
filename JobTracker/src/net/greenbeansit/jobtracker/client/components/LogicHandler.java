@@ -201,7 +201,7 @@ public class LogicHandler {
 
 			tempReport.setText(currentTemplate.getText());
 			// TODO handle different JobTasks
-			tempReport.setTaskId(null);
+			tempReport.setTaskId(currentTemplate.getTaskId());
 
 			tempReport.setAuthor(currentUser.getId());
 			
