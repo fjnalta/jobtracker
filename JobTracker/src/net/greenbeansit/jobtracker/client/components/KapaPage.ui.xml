@@ -147,7 +147,7 @@
                 <b:Heading size="H3" addStyleNames="{style.titleRight}" ui:field="dateHeading"/>
             </b:Row>
             <b:Row addStyleNames="{style.largeContainer}">
-                <b:Heading size="H3" addStyleNames="{style.titleRight}" text="[INSERT_UTILIZATION_WIDGET]"/>
+                <b:Heading size="H3" addStyleNames="{style.titleRight}" text=""/>
             </b:Row>
             <b:Row addStyleNames="{style.largeContainer}" ui:field="content">
                 <!-- Full Calendar -->
