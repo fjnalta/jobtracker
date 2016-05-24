@@ -73,7 +73,7 @@
 		</b:Row>
 		<b:Row addStyleNames="{style.row}">
 			<b:InputGroup>
-				<b:InputGroupAddon addStyleNames="{style.addonLeft}">Pause von</b:InputGroupAddon>
+				<b:InputGroupAddon addStyleNames="{style.addonLeft}">Pause</b:InputGroupAddon>
 				<b:TextBox ui:field="pause" height="43px">12:00</b:TextBox>
 				<b:InputGroupButton>
 					<b:VerticalButtonGroup>
@@ -91,7 +91,7 @@
 							ui:field="buttonTimeMinuteDownPause" />
 					</b:VerticalButtonGroup>
 				</b:InputGroupButton>
-				<b:InputGroupAddon>bis</b:InputGroupAddon>
+				<b:InputGroupAddon>Dauer</b:InputGroupAddon>
 				<b:TextBox ui:field="workTime" height="43px">13:00</b:TextBox>
 				<b:InputGroupButton>
 					<b:VerticalButtonGroup>
