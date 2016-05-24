@@ -21,6 +21,7 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 
 import net.greenbeansit.jobtracker.client.components.CalendarObserver;
+import net.greenbeansit.jobtracker.client.components.LogicObservable;
 import net.greenbeansit.jobtracker.shared.ActivityReport;
 
 /**
@@ -29,7 +30,7 @@ import net.greenbeansit.jobtracker.shared.ActivityReport;
  * @author Jonathan
  *
  */
-public class CalendarTimeInputWidget extends Composite implements CalendarObserver {
+public class CalendarTimeInputWidget extends Composite implements CalendarObserver, LogicObservable {
 
 	private static CalendarTimeInputWidgetUiBinder uiBinder = GWT.create(CalendarTimeInputWidgetUiBinder.class);
 
@@ -247,11 +248,10 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 		}
 		hourString = "" + hours;
 		minuteString = "" + minutes;
-
 		hourString = addLeadingNull(hourString);
 		minuteString = addLeadingNull(minuteString);
-
 		box.setText(addDoublePoint(hourString + minuteString));
+
 	}
 
 	private void decreaseEventHours(TextBox box) {
@@ -320,28 +320,29 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 		dateEnd.setText(dateParser(calendarHandler.calendar.currentEvent.getISOStart()));
 		eventStart.setText(timeParser(calendarHandler.calendar.currentEvent.getISOStart()));
 		eventEnd.setText(timeParser(calendarHandler.calendar.currentEvent.getISOEnd()));
-		pause.setText("");
+		pause.setText("01:00");
 		workTime.setText(calculateDuration());
 	}
-	
-	private Date getDateFromTextBox(){
+
+	private Date getDateFromTextBox() {
 		String text = dateStart.getText();
 		int day = Integer.parseInt(text.substring(0, 2));
 		int month = Integer.parseInt(text.substring(3, text.length()));
-		return new Date(2016,month,day);
+		return new Date(2016, month, day);
 	}
 
 	@Override
 	public void notifyHandler() {
 		calendarHandler.calendar.removeEvent(calendarHandler.calendar.currentEvent.getId());
-		Event e = new Event(calendarHandler.calendar.currentEvent.getId(), calendarHandler.calendar.currentEvent.getTitle(), true, true, true);
-		e.setStart(calendarHandler.getISO8601StringForDate(getDateFromTextBox(), createTimeFromText(eventStart.getText())));
+		Event e = new Event(calendarHandler.calendar.currentEvent.getId(),
+				calendarHandler.calendar.currentEvent.getTitle(), true, true, true);
+		e.setStart(calendarHandler.getISO8601StringForDate(getDateFromTextBox(),
+				createTimeFromText(eventStart.getText())));
 		e.setEnd(calendarHandler.getISO8601StringForDate(getDateFromTextBox(), createTimeFromText(eventEnd.getText())));
 		calendarHandler.calendar.currentEvent = e;
 		calendarHandler.calendar.addEvent(calendarHandler.calendar.currentEvent);
 		calendarHandler.updateObserver(this);
 	}
-	
 
 	private String removeDoublePoint(String input) {
 		return input = input.replace(":", "");
@@ -369,8 +370,10 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 	}
 
 	private String calculateDuration() {
-		// ToDo
-		return null;
+		int start = createTimeFromText(eventStart.getText());
+		int end = createTimeFromText(eventEnd.getText());
+		int duration = end - start;
+		return addLeadingNull(duration/60+"") +":" +addLeadingNull("" + duration%60);
 	}
 
 	@UiHandler("buttonTimeHourUpStart")
@@ -469,10 +472,31 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 		notifyHandler();
 	}
 	
-	private int createTimeFromText(String time ){
+	@UiHandler("buttonBook")
+	public void buttonBookClicked(ClickEvent e){
+		int startTime = createTimeFromText(eventStart.getText());
+		int duration = createTimeFromText(workTime.getText());
+		int breakTime = createTimeFromText(pause.getText());
+		Date date = new Date();
+		ActivityReport tmp = new ActivityReport(0, 0, 0, 0, "", date, startTime, duration, breakTime);
+		handler.saveReport(tmp);
+	}
+	
+	private int createTimeFromText(String time) {
 		String[] temp2 = time.split(":");
 		int hours = Integer.parseInt(temp2[0]);
 		int minutes = Integer.parseInt(temp2[1]);
 		return (60 * hours) + minutes;
 	}
+
+	public boolean verifyTime() {
+		int start = createTimeFromText(eventStart.getText());
+		int end = createTimeFromText(eventEnd.getText());
+		if (start > end)
+			return false;
+		if (end < start)
+			return false;
+		return true;
+	}
+
 }
