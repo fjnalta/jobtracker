@@ -24,4 +24,11 @@ public final class NotifyHelper
 		settings.setType(NotifyType.DANGER);
 		Notify.notify(message, settings);
 	}
+	
+	public static void successMessage(String message)
+	{
+		NotifySettings settings = NotifySettings.newSettings();
+		settings.setType(NotifyType.SUCCESS);
+		Notify.notify(message, settings);
+	}
 }

@@ -55,7 +55,7 @@ public class LogicHandler {
 		this.jobList = temp;
 		this.templateList = reporttemp;
 		this.currentUser = new User();
-		this.currentUser.setId(1);
+		this.currentUser.setId(2);
 	}
 
 	/**
@@ -234,6 +234,8 @@ public class LogicHandler {
 				@Override
 				public void onSuccess(Method method, ActivityReportTemplate response) {
 					templateList.add(temp);
+					self.updateAllObservables();
+					NotifyHelper.successMessage("Template saved successfully!");
 				}
 
 				@Override

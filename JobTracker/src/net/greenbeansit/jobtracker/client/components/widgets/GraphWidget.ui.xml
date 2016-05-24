@@ -81,7 +81,6 @@
 					<h:ClearFix ui:field="activityContent">
 					</h:ClearFix>
 					</b:Column>
-
 				</b:Row>
 			</b:TabPane>
 			<b:TabPane b:id="tab3">
