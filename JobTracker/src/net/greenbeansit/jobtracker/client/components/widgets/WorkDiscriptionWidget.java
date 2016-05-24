@@ -86,6 +86,7 @@ public class WorkDiscriptionWidget extends Composite implements LogicObservable
 		if(textDiscription.getText().length()>0&&textName.getText().length()>0){
 			template.setText(textDiscription.getText());
 			template.setName(textName.getText());
+			template.setTaskId(null);
 			handler.saveTemplate(template);
 		}else{
 			NotifyHelper.errorMessage("fill in the missing fields");
