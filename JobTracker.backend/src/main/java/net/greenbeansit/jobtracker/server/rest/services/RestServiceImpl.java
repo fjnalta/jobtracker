@@ -90,6 +90,7 @@ public class RestServiceImpl implements RestService
 	{
 		report.setAuthor(userId);
 		activityReportService.save(report);
+		userService.updateYearUtilization(userId, report.getDate().getYear());
 	}
 
 	@Override
@@ -168,10 +169,10 @@ public class RestServiceImpl implements RestService
 			List<Job> temp = jobService.getByUser(user.getId());
 			if (temp != null)
 			{
-				List<Integer> keys = new ArrayList<Integer>();
+				List<JobID> keys = new ArrayList<JobID>();
 				for (Job job : temp)
 				{
-					keys.add(job.getJobNr()*1000+job.getPosNr());
+					keys.add(new JobID(job.getJobNr(), job.getPosNr()));
 					if (!jobs.contains(job))
 						jobs.add(job);
 				}

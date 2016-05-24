@@ -288,4 +288,40 @@ public interface RestService extends DirectRestService
 			return jobs;
 		}
 	}
+	
+	public class JobID
+	{
+		private Integer jobNr, posNr;
+		
+		public JobID()
+		{
+			
+		}
+		
+		public JobID(Integer jobNr, Integer posNr)
+		{
+			this.setJobNr(jobNr);
+			this.setPosNr(posNr);
+		}
+
+		public Integer getJobNr()
+		{
+			return jobNr;
+		}
+
+		public void setJobNr(Integer jobNr)
+		{
+			this.jobNr = jobNr;
+		}
+
+		public Integer getPosNr()
+		{
+			return posNr;
+		}
+
+		public void setPosNr(Integer posNr)
+		{
+			this.posNr = posNr;
+		}
+	}
 }

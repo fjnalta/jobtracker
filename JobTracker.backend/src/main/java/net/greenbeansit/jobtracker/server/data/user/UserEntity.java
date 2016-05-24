@@ -26,6 +26,7 @@ public class UserEntity implements Serializable
 	private String				surname;
 	private Integer				supervisor;
 	private Integer				utilization;
+	private Integer				utilizationYear;
 	
 	public UserEntity()
 	{
@@ -99,6 +100,17 @@ public class UserEntity implements Serializable
 	public void setUtilization(Integer utilization)
 	{
 		this.utilization = utilization;
+	}
+
+	@Column(name = "utilization_year")
+	public Integer getUtilizationYear()
+	{
+		return utilizationYear;
+	}
+
+	public void setUtilizationYear(Integer utilizationYear)
+	{
+		this.utilizationYear = utilizationYear;
 	}
 
 }
