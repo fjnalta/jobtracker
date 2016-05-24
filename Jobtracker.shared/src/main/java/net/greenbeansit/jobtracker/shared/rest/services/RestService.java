@@ -64,7 +64,7 @@ public interface RestService extends DirectRestService
 	 *             if the employeeId does not exist.
 	 */
 	@GET
-	@Path("/users/{userId}/job")
+	@Path("/users/{userId}/jobs")
 	List<Job> getAllJobs(@PathParam("userId") Integer userId);
 
 	/**
@@ -97,7 +97,7 @@ public interface RestService extends DirectRestService
 	 *             if the employeeId or the reportId does not exist.
 	 */
 	@GET
-	@Path("/users/{userId}/report/{reportId}")
+	@Path("/users/{userId}/reports/{reportId}")
 	ActivityReport getReport(@PathParam("userId") Integer userId,
 			@PathParam("reportId") Integer reportId);
 
