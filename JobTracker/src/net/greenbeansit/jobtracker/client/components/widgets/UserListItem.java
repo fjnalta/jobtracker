@@ -42,9 +42,18 @@ public class UserListItem extends Composite
 		initWidget(uiBinder.createAndBindUi(this));
 		
 		this.user = user;
-		spanName.setText(user.getName() + " " + user.getSurname());
-		spanUtilization.setText("65 %");
-		barUtilization.setPercent(65);
+		spanName.setText(user.getSurname() + ", " + user.getName());
+		
+		if(user.getUtilization() != null)
+			displayUtilization(user.getUtilization());
+		else
+			displayUtilization(0);
+	}
+	
+	private void displayUtilization(int utilization)
+	{
+		spanUtilization.setText(utilization + " %");
+		barUtilization.setPercent(utilization);
 	}
 
 	public User getUser() {

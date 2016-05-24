@@ -7,12 +7,17 @@ import java.util.List;
 
 import org.fusesource.restygwt.client.Method;
 import org.gwtbootstrap3.client.ui.Anchor;
+import org.gwtbootstrap3.client.ui.Button;
+import org.gwtbootstrap3.client.ui.Heading;
 import org.gwtbootstrap3.client.ui.Row;
+import org.gwtbootstrap3.client.ui.html.ClearFix;
 import org.gwtbootstrap3.extras.select.client.ui.MultipleSelect;
 import org.gwtbootstrap3.extras.select.client.ui.Option;
 import org.gwtbootstrap3.extras.select.client.ui.Select;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.resources.client.CssResource;
@@ -20,6 +25,7 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.Widget;
 
 import net.greenbeansit.jobtracker.client.components.widgets.UserListItem;
@@ -28,12 +34,16 @@ import net.greenbeansit.jobtracker.client.utils.rest.RestClient;
 import net.greenbeansit.jobtracker.client.utils.rest.RestClient.SuccessFunction;
 import net.greenbeansit.jobtracker.shared.Job;
 import net.greenbeansit.jobtracker.shared.User;
+import net.greenbeansit.jobtracker.shared.rest.services.RestService.JobID;
 import net.greenbeansit.jobtracker.shared.rest.services.RestService.ManagerPageRestServiceResponse;
 
 public class ManagerPage extends Composite
 {
 	private static ManagerPageUiBinder	uiBinder	= GWT
 			.create(ManagerPageUiBinder.class);
+
+	private static final String			ARROW_UP	= "\u25B2";
+	private static final String			ARROW_DOWN	= "\u25BC";
 
 	@UiField
 	Row									employeeList;
@@ -44,12 +54,24 @@ public class ManagerPage extends Composite
 	@UiField
 	MultipleSelect						selectJob;
 
+	@UiField
+	Heading								columnHeaderNameArrow;
+
+	@UiField
+	Heading								columnHeaderUtilizationArrow;
+
+	@UiField
+	ClearFix							columnHeaderName;
+
+	@UiField
+	ClearFix							columnHeaderUtilization;
+
 	private ManagerPageHelperService	helperService;
 	private SortMode					sortMode	= SortMode.ALPHABETICAL_UP;
-	
-	private List<Job> currentFilter;
 
-	
+	private List<Job>					currentFilter;
+	private List<User>					currentUserList;
+
 	public ManagerPage()
 	{
 		initWidget(uiBinder.createAndBindUi(this));
@@ -67,14 +89,67 @@ public class ManagerPage extends Composite
 
 				for (Option option : selectJob.getSelectedItems())
 					filter.add(((JobSelectOption) option).getJob());
-				
+
 				currentFilter = filter;
-				
-				fillEmployeeList(helperService.getUser(sortMode, filter));
+
+				fillEmployeeList(helperService.filterUser(filter));
 			}
 		});
+
+		// Register click events
+		columnHeaderName.addDomHandler(new ClickHandler()
+		{
+			@Override
+			public void onClick(ClickEvent event)
+			{
+				if (sortMode == SortMode.ALPHABETICAL_UP)
+				{
+					sortMode = SortMode.ALPHABETICAL_DOWN;
+					sortList();
+
+					columnHeaderNameArrow.setText(ARROW_DOWN);
+				} else
+				{
+					sortMode = SortMode.ALPHABETICAL_UP;
+					sortList();
+
+					columnHeaderNameArrow.setText(ARROW_UP);
+				}
+
+				columnHeaderUtilizationArrow.setText("");
+			}
+		}, ClickEvent.getType());
+
+		columnHeaderUtilization.addDomHandler(new ClickHandler()
+		{
+			@Override
+			public void onClick(ClickEvent event)
+			{
+				if (sortMode == SortMode.UTILIZATION_UP)
+				{
+					sortMode = SortMode.UTILIZATION_DOWN;
+					sortList();
+
+					columnHeaderUtilizationArrow.setText(ARROW_DOWN);
+				} else
+				{
+					sortMode = SortMode.UTILIZATION_UP;
+					sortList();
+					
+					columnHeaderUtilizationArrow.setText(ARROW_UP);
+				}
+				
+				columnHeaderNameArrow.setText("");
+			}
+		}, ClickEvent.getType());
 	}
 
+	private void sortList()
+	{
+		currentUserList = helperService.sortUser(currentUserList, sortMode);
+
+		fillEmployeeList(currentUserList);
+	}
 
 	private void fillEmployeeList(List<User> employees)
 	{
@@ -94,10 +169,10 @@ public class ManagerPage extends Composite
 	private void fillJobList(List<Job> jobs)
 	{
 		selectJob.clear();
-		
+
 		for (Job job : jobs)
 			selectJob.add(new JobSelectOption(job));
-		
+
 		selectJob.refresh();
 	}
 
@@ -127,10 +202,12 @@ public class ManagerPage extends Composite
 
 	enum SortMode
 	{
-		ALPHABETICAL_UP, UTILIZATION_DOWN
+		ALPHABETICAL_UP, ALPHABETICAL_DOWN, UTILIZATION_UP, UTILIZATION_DOWN
 	}
 
-	interface ManagerPageUiBinder extends UiBinder<Widget, ManagerPage> { }
+	interface ManagerPageUiBinder extends UiBinder<Widget, ManagerPage>
+	{
+	}
 
 	interface ManagerPageStyle extends CssResource
 	{
@@ -139,26 +216,11 @@ public class ManagerPage extends Composite
 
 	interface ManagerPageHelperService
 	{
-		/**
-		 * Gets users which are employees of the current user which work on the
-		 * following jobs and are sorted in the following way.
-		 * 
-		 * @param sortmode
-		 *            the {@link SortMode} that is used to sort the users.
-		 * @param filter
-		 *            a List of {@link Job}s that is used as a filter. If the
-		 *            value is null, no filter will be applied.
-		 * @return a List of {@link User}s.
-		 */
-		List<User> getUser(SortMode sortmode, List<Job> filter);
+		List<User> sortUser(List<User> user, SortMode sortmode);
 
-		/**
-		 * Gets all {@link Job}s which are associated to the employees of the
-		 * current user.
-		 * 
-		 * @return a List of {@link Job}s.
-		 */
-		List<Job> getUserJobs();
+		List<User> filterUser(List<Job> filter);
+
+		List<User> filterAndSortUser(List<Job> filter, SortMode sortmode);
 
 		/**
 		 * Gets the ID of the current {@link User}.
@@ -166,6 +228,8 @@ public class ManagerPage extends Composite
 		 * @return an integer object.
 		 */
 		Integer getUserId();
+
+		boolean isDataLoaded();
 	}
 
 	/**
@@ -175,8 +239,10 @@ public class ManagerPage extends Composite
 	 */
 	class ManagerPageHelperServiceImpl implements ManagerPageHelperService
 	{
-		private List<User>	user		= new ArrayList<User>();
-		private List<Job>	userJobs	= new ArrayList<Job>();
+		private List<User>	cachedUser	= new ArrayList<User>();
+		private List<Job>	cachedJobs	= new ArrayList<Job>();
+
+		private boolean		dataLoaded	= false;
 
 		public ManagerPageHelperServiceImpl()
 		{
@@ -192,17 +258,18 @@ public class ManagerPage extends Composite
 						public void onSuccess(Method method,
 								ManagerPageRestServiceResponse response)
 						{
-							userJobs = response.getJobs();
-							if (userJobs == null)
-								userJobs = new ArrayList<Job>();
+							cachedJobs = response.getJobs();
+							if (cachedJobs == null)
+								cachedJobs = new ArrayList<Job>();
 
-							user = response.getEmployees();
-							if (user == null)
-								user = new ArrayList<User>();
+							cachedUser = response.getEmployees();
+							if (cachedUser == null)
+								cachedUser = new ArrayList<User>();
 
-							// set lists
-							fillEmployeeList(user);
-							fillJobList(userJobs);
+							fillEmployeeList(filterAndSortUser(null, sortMode));
+							fillJobList(cachedJobs);
+
+							dataLoaded = true;
 						}
 
 						@Override
@@ -217,16 +284,17 @@ public class ManagerPage extends Composite
 		}
 
 		@Override
-		public List<User> getUser(SortMode sortmode, List<Job> filter)
+		public Integer getUserId()
 		{
-			sortUser(sortmode);
-
-			return applyFilter(filter);
+			return 1; // TODO: Get real user ID.
 		}
 
-		private void sortUser(SortMode sortmode)
+		@Override
+		public List<User> sortUser(List<User> user, SortMode sortmode)
 		{
-			// sort
+			if (user == null)
+				user = cachedUser;
+
 			switch (sortmode)
 			{
 			case ALPHABETICAL_UP:
@@ -240,6 +308,47 @@ public class ManagerPage extends Composite
 
 						if (compareRes == 0)
 							compareRes = o1.getName().compareTo(o2.getName());
+
+						return compareRes;
+					}
+				});
+				break;
+			case ALPHABETICAL_DOWN:
+				Collections.sort(user, new Comparator<User>()
+				{
+					@Override
+					public int compare(User o1, User o2)
+					{
+						int compareRes = o1.getSurname()
+								.compareTo(o2.getSurname()) * -1;
+
+						if (compareRes == 0)
+							compareRes = o1.getName().compareTo(o2.getName()) * -1;
+
+						return compareRes;
+					}
+				});
+				break;
+			case UTILIZATION_UP:
+				Collections.sort(user, new Comparator<User>()
+				{
+					@Override
+					public int compare(User o1, User o2)
+					{
+						int compareRes = Integer.compare(o1.getId(),
+								o2.getId()) * -1;
+
+						if (compareRes == 0)
+						{
+							compareRes = o1.getSurname()
+									.compareTo(o2.getSurname()) * -1;
+
+							if (compareRes == 0)
+							{
+								compareRes = o1.getName()
+										.compareTo(o2.getName()) * -1;
+							}
+						}
 
 						return compareRes;
 					}
@@ -271,30 +380,54 @@ public class ManagerPage extends Composite
 				});
 				break;
 			}
+
+			return user;
 		}
 
-		private List<User> applyFilter(List<Job> filter)
+		@Override
+		public List<User> filterUser(List<Job> filter)
 		{
-			List<User> filteredUser = new ArrayList<User>();
-			for (User employee : user)
+			if (filter != null && filter.size() > 0)
 			{
-				// TODO: apply filter
-				filteredUser.add(employee);
+				List<User> filteredUser = new ArrayList<User>();
+				for (User userInstance : cachedUser)
+				{
+					if (matchesFilter(userInstance, filter))
+						filteredUser.add(userInstance);
+				}
+
+				return filteredUser;
+			} else
+				return cachedUser;
+		}
+
+		private boolean matchesFilter(User employee, List<Job> filter)
+		{
+			if (employee.getAssignedJobs() == null)
+				employee.setAssignedJobs(new ArrayList<JobID>());
+
+			for (Job filterJob : filter)
+			{
+				for (JobID assignedJobId : employee.getAssignedJobs())
+				{
+					if (assignedJobId.matchesJob(filterJob))
+						return true;
+				}
 			}
 
-			return filteredUser;
+			return false;
 		}
 
 		@Override
-		public List<Job> getUserJobs()
+		public List<User> filterAndSortUser(List<Job> filter, SortMode sortmode)
 		{
-			return userJobs;
+			return sortUser(filterUser(filter), sortmode);
 		}
 
 		@Override
-		public Integer getUserId()
+		public boolean isDataLoaded()
 		{
-			return 1; // TODO: Get real user ID.
+			return dataLoaded;
 		}
 
 	}
