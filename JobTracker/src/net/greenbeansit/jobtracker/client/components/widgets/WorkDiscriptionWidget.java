@@ -107,7 +107,7 @@ public class WorkDiscriptionWidget extends Composite implements LogicObservable
 	}
 
 	@Override
-	public void update() {
+	public void updateObservable() {
 		selectTemplate.clear();
 		addTemplates(handler.getTemplateList());
 		selectTemplate.refresh();
@@ -115,7 +115,7 @@ public class WorkDiscriptionWidget extends Composite implements LogicObservable
 
 
 	@Override
-	public void notifyHandler() {
+	public void notifyLogicHandler() {
 		ActivityReportTemplate template = new ActivityReportTemplate();
 		template.setTaskId(0);
 		template.setText(textDiscription.getText());

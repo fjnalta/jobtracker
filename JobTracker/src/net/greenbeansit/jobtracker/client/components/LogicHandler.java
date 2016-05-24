@@ -71,12 +71,12 @@ public class LogicHandler {
 	 */
 	public void updateAllObservables() {
 		for (LogicObservable p : list) {
-			p.update();
+			p.updateObservable();
 		}
 	}
 	
 	public void updateObservable(LogicObservable p){
-		p.update();
+		p.updateObservable();
 	}
 
 	/**
@@ -94,7 +94,7 @@ public class LogicHandler {
 	 */
 	public void getInformations() {
 		for (LogicObservable o : list) {
-			o.notifyHandler();
+			o.notifyLogicHandler();
 		}
 	}
 
@@ -145,6 +145,8 @@ public class LogicHandler {
 			@Override
 			public void onSuccess(Method method, List<ActivityReport> response) {
 				self.currentReportsList = response;
+				self.updateAllObservables();
+				NotifyHelper.successMessage(response.toString());
 			}
 
 			@Override

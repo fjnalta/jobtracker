@@ -494,13 +494,13 @@ public class GraphWidget extends Composite implements LogicObservable {
 	}
 
 	@Override
-	public void update() {
+	public void updateObservable() {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void notifyHandler() {
+	public void notifyLogicHandler() {
 		// TODO Auto-generated method stub
 
 	}

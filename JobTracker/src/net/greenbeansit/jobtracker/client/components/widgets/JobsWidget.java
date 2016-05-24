@@ -52,7 +52,7 @@ public class JobsWidget extends Composite implements LogicObservable {
 			@Override
 			public void onValueChange(ValueChangeEvent<String> event) {
 				currentJob = ((SelectJobOption) selectJob.getSelectedItem()).getJob();
-				notifyHandler();
+				notifyLogicHandler();
 			}
 		});
 		handler.loadJobs();
@@ -66,7 +66,7 @@ public class JobsWidget extends Composite implements LogicObservable {
 	}
 
 	@Override
-	public void update() {
+	public void updateObservable() {
 		allJobsOptGroup.clear();
 		this.jobList = handler.getJobList();
 		addJobs(this.jobList);
@@ -85,7 +85,7 @@ public class JobsWidget extends Composite implements LogicObservable {
 	}
 
 	@Override
-	public void notifyHandler() {
+	public void notifyLogicHandler() {
 		handler.setCurrentJob(currentJob);
 	}
 }
