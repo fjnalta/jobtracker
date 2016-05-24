@@ -3,18 +3,22 @@
 	xmlns:g="urn:import:org.gwtbootstrap3.client.ui" xmlns:a="urn:import:com.google.gwt.user.client.ui">
 	<ui:style src="css/Calendar.css" />
 	
-	<a:ScrollPanel>
-		<g:Container>
-			<g:Column width="5%" size="XS_12,SM_12,MD_4,LG_1">
+	<g:Container fluid="true">
+		<g:Row>
+			<g:Column width="5%" size="XS_1,SM_1,MD_1,LG_1">
 				<g:Button ui:field="leftButton" addStyleNames="{style.button-arrow}" />
 			</g:Column>
-			<g:Column width="90%" size="XS_12,SM_12,MD_4,LG_8">
-				<a:FlexTable ui:field="table" addStyleNames="{style.important}" />
+
+			<g:Column width="90%" size="XS_8,SM_8,MD_8,LG_8">
+				<a:ScrollPanel>
+					<a:FlexTable ui:field="table" addStyleNames="{style.important}" />
+				</a:ScrollPanel>
 			</g:Column>
-			<g:Column width="5%" size="XS_12,SM_12,MD_4,LG_1">
+
+			<g:Column width="5%" size="XS_1,SM_1,MD_1,LG_1">
 				<g:Button ui:field="rightButton" addStyleNames="{style.button-arrow}" />
 			</g:Column>
-		</g:Container>
-	</a:ScrollPanel>
+		</g:Row>
+	</g:Container>
 
 </ui:UiBinder> 
