@@ -31,7 +31,7 @@
 		border: none;
 		background-color: white;
 		color: black;
-		font-size: 18px;
+		font-size: 15px;
 	}
 	</ui:style>
 	<h:ClearFix>
@@ -46,9 +46,6 @@
 				<b:Row>
 					<b:Column size="XS_2,SM_2,MD_2,LG_2" offset="XS_10,SM_10,MD_10,LG_10"
 						addStyleNames="{style.floatright}">
-						<b:Row>
-							<b:Icon type="ANCHOR" />
-						</b:Row>
 						<b:Row>
 							<b:Label text="xxxx von xxx" ui:field="labelBudget" addStyleNames="{style.label}" />
 						</b:Row>
