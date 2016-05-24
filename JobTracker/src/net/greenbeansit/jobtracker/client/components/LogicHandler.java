@@ -198,7 +198,7 @@ public class LogicHandler {
 
 			tempReport.setText(currentTemplate.getText());
 			// TODO handle different JobTasks
-			tempReport.setTaskId(currentTemplate.getTaskId());
+			tempReport.setTaskId(null);
 
 			tempReport.setAuthor(currentUser.getId());
 			
@@ -206,7 +206,7 @@ public class LogicHandler {
 				RestClient.build(new SuccessFunction<ActivityReport>() {
 					@Override
 					public void onSuccess(Method method, ActivityReport response) {
-						
+						NotifyHelper.successMessage("Template saved");
 					}
 
 					@Override
