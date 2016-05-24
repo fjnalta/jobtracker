@@ -151,7 +151,7 @@ public class LogicHandler {
 
 			@Override
 			public void onFailure(Method method, Throwable exception) {
-				NotifyHelper.errorMessage("FAILED " + exception.getMessage());
+				NotifyHelper.errorMessage("FAILED: " + exception.getMessage());
 				GWT.log(exception.getMessage());
 			}
 

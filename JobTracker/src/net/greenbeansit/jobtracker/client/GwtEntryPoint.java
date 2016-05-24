@@ -31,4 +31,8 @@ public class GwtEntryPoint implements EntryPoint
 
 		rootPanel.add(app);
 	}
+	
+	static {
+        Defaults.setDateFormat(null);
+    }
 }

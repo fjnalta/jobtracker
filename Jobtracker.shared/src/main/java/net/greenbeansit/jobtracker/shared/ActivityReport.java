@@ -13,8 +13,6 @@ import java.util.Date;
 public class ActivityReport implements Serializable
 {
 
-	private static final long	serialVersionUID	= 7682896069658320372L;
-
 	private Integer				id;
 	private Integer				taskId;
 	private Integer				jobNr;
