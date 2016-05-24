@@ -139,7 +139,7 @@ public class RestServiceImpl implements RestService
 
 	@SuppressWarnings("deprecation")
 	private Date stringToDate(String date) {
-		return new Date(Integer.parseInt(date.substring(0, 3)),Integer.parseInt(date.substring(5, 6)), Integer.parseInt(date.substring(8, 9)));
+		return new Date(Integer.parseInt(date.substring(0, 4))-1900,Integer.parseInt(date.substring(5, 7))-1, Integer.parseInt(date.substring(8)));
 	}
 
 	@Override
@@ -150,7 +150,7 @@ public class RestServiceImpl implements RestService
 	@Override
 	public List<ActivityReport> getReportPeriod(Integer userId, String fromto)
 	{
-		return activityReportService.getByUserAndPeriod(userId, stringToDate(fromto.substring(0, 9)), stringToDate(fromto.substring(11, 20)));
+		return activityReportService.getByUserAndPeriod(userId, stringToDate(fromto.substring(0, 10)), stringToDate(fromto.substring(11)));
 	}
 
 	@Override
@@ -187,8 +187,8 @@ public class RestServiceImpl implements RestService
 			Integer month)
 	{
 		//Sooooo dirty...
-		Date from = new Date(year, month, 1);
-		Date to = new Date(year, month, 30);
+		Date from = new Date(year-1900, month-1, 1);
+		Date to = new Date(year-1900, month-1, 30);
 		return userService.getUtilization(userId, from, to);
 	}
 
@@ -196,8 +196,8 @@ public class RestServiceImpl implements RestService
 	public Integer getUtilizationYear(Integer userId, Integer year)
 	{
 		//Oh gaaaaawd...
-		Date from = new Date(year, 1, 1);
-		Date to = new Date(year, 12, 30);
+		Date from = new Date(year-1900, 0, 1);
+		Date to = new Date(year-1900, 11, 30);
 		return userService.getUtilization(userId, from, to);
 	}
 }
