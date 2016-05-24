@@ -18,15 +18,17 @@ import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.resources.client.CssResource;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 
 import net.greenbeansit.jobtracker.client.components.widgets.UserListItem;
+import net.greenbeansit.jobtracker.client.utils.rest.NotifyHelper;
 import net.greenbeansit.jobtracker.client.utils.rest.RestClient;
 import net.greenbeansit.jobtracker.client.utils.rest.RestClient.SuccessFunction;
 import net.greenbeansit.jobtracker.shared.Job;
 import net.greenbeansit.jobtracker.shared.User;
-import net.greenbeansit.jobtracker.shared.rest.services.ManagerPageRestService;
+import net.greenbeansit.jobtracker.shared.rest.services.RestService.ManagerPageRestServiceResponse;
 
 public class ManagerPage extends Composite
 {
@@ -166,8 +168,8 @@ public class ManagerPage extends Composite
 	 */
 	class ManagerPageHelperServiceImpl implements ManagerPageHelperService
 	{
-		private List<User>	user;
-		private List<Job>	userJobs;
+		private List<User>	user = new ArrayList<User>();
+		private List<Job>	userJobs = new ArrayList<Job>();
 
 		public ManagerPageHelperServiceImpl()
 		{
@@ -177,37 +179,44 @@ public class ManagerPage extends Composite
 		private void loadServerData()
 		{
 			RestClient.build(
-					new SuccessFunction<ManagerPageRestService.Response>()
+					new SuccessFunction<ManagerPageRestServiceResponse>()
 					{
 
 						@Override
 						public void onSuccess(Method method,
-								ManagerPageRestService.Response response)
+								ManagerPageRestServiceResponse response)
 						{
 							userJobs = response.getJobs();
+							if(userJobs == null)
+								userJobs = new ArrayList<Job>();
+							
 							user = response.getEmployees();
+							if(user == null)
+								user = new ArrayList<User>();
 						}
 
 						@Override
 						public void onFailure(Method method,
 								Throwable exception)
 						{
+							NotifyHelper.errorMessage(exception.toString());
 							GWT.log(exception.getMessage());
+							exception.printStackTrace();
 						}
-					}).getManagerPageService().getEmployees(getUserId());
+					}).getEmployeeService().getEmployees(getUserId());
 		}
 
 		@Override
 		public List<User> getUser(SortMode sortmode, List<Job> filter)
 		{
 			sortUser(sortmode);
-			
+
 			return applyFilter(filter);
 		}
-		
+
 		private void sortUser(SortMode sortmode)
 		{
-			//sort
+			// sort
 			switch (sortmode)
 			{
 			case ALPHABETICAL_UP:
@@ -257,15 +266,15 @@ public class ManagerPage extends Composite
 		private List<User> applyFilter(List<Job> filter)
 		{
 			List<User> filteredUser = new ArrayList<User>();
-			for(User employee : user)
+			for (User employee : user)
 			{
-				//TODO: apply filter
+				// TODO: apply filter
 				filteredUser.add(employee);
 			}
-			
+
 			return filteredUser;
 		}
-		
+
 		@Override
 		public List<Job> getUserJobs()
 		{
@@ -275,7 +284,7 @@ public class ManagerPage extends Composite
 		@Override
 		public Integer getUserId()
 		{
-			return 0; // TODO: Get real user ID.
+			return 1; // TODO: Get real user ID.
 		}
 
 	}

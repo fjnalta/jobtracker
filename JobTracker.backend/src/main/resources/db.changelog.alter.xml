@@ -155,14 +155,14 @@
 	<changeSet id="20160523-ALTERActivityReport" author="mike">
 		<sql>
 			<![CDATA[
-				ALTER TABLE `activity_report` ADD COLUMN `break_time` SMALLINT;
+				ALTER TABLE `activity_report` ADD COLUMN `break_time` INT;
 			]]>
 		</sql>
 	</changeSet>
 	<changeSet id="20160523-ALTERUser" author="mike">
 		<sql>
 			<![CDATA[
-				ALTER TABLE `user` ADD COLUMN `utilization` TINYINT UNSIGNED;
+				ALTER TABLE `user` ADD COLUMN `utilization` INT UNSIGNED;
 			]]>
 		</sql>
 	</changeSet>

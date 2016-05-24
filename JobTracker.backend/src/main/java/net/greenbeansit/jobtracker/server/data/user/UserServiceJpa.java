@@ -1,11 +1,16 @@
 package net.greenbeansit.jobtracker.server.data.user;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.inject.Inject;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import net.greenbeansit.jobtracker.server.data.activityReport.ActivityReportDataService;
+import net.greenbeansit.jobtracker.shared.ActivityReport;
 import net.greenbeansit.jobtracker.shared.User;
 
 /**
@@ -20,7 +25,9 @@ public class UserServiceJpa implements UserDataService
 {
 
 	@Autowired
-	private UserEntityRepository repository;
+	private UserEntityRepository		repository;
+	@Inject
+	private ActivityReportDataService	reportService;
 
 	@Override
 	public List<User> getAll()
@@ -36,7 +43,7 @@ public class UserServiceJpa implements UserDataService
 	@Override
 	public User getUser(Integer id)
 	{
-		return convert(repository.findOne(id));
+		return convert(repository.findById(id));
 	}
 
 	@Override
@@ -64,13 +71,30 @@ public class UserServiceJpa implements UserDataService
 				entity.getSupervisor());
 	}
 
-//	Not needed
-	
-//	private UserEntity convert(User user)
-//	{
-//		if (user == null)
-//			return null;
-//		return new UserEntity(user.getId(), user.getName(), user.getSurname(),
-//				user.getSupervisor());
-//	}
+	@SuppressWarnings("deprecation")
+	@Override
+	public Integer getUtilization(Integer employeeId, Date from, Date to)
+	{
+		List<ActivityReport> reports = reportService
+				.getByUserAndPeriod(employeeId, from, to);
+		// This is going to be so dirty.
+		int averageHours = (int) (((((to.getDay() - to.getDay()) + 1)
+				+ (to.getMonth() - from.getMonth()) * 30) * 8) * (5f / 7f));
+		int actualHours = 0;
+		for (ActivityReport report : reports)
+		{
+			actualHours += report.getDuration();
+		}
+		return (actualHours * 100) / averageHours;
+	}
+
+	// Not needed
+
+	// private UserEntity convert(User user)
+	// {
+	// if (user == null)
+	// return null;
+	// return new UserEntity(user.getId(), user.getName(), user.getSurname(),
+	// user.getSupervisor());
+	// }
 }

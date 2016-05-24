@@ -10,6 +10,5 @@ public interface UserEntityRepository extends CrudRepository<UserEntity, Integer
 	List<UserEntity> findAll();
 	UserEntity findByName(String name, String surname);
 	List<UserEntity> findBySupervisor(Integer id);
-	List<UserEntity> findById(Integer id);
-
+	UserEntity findById(Integer id);
 }
