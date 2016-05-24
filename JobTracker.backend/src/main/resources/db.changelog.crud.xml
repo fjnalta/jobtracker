@@ -93,4 +93,13 @@
 			]]>
 		</sql>
 	</changeSet>
+	<changeSet id="20160523-activity_report_template-6" author="alex">
+		<sql>
+			<![CDATA[
+				INSERT INTO activity_report_template (author, name, text)
+				VALUES(2, "Wartung", "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua."),
+				(2, "Einarbeiten", "At vero eos et accusam et justo duo dolores et ea rebum.");
+			]]>
+		</sql>
+	</changeSet>
 </databaseChangeLog>

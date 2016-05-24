@@ -235,7 +235,7 @@ public class LogicHandler {
 			RestClient.build(new SuccessFunction<ActivityReportTemplate>() {
 				@Override
 				public void onSuccess(Method method, ActivityReportTemplate response) {
-					templateList.add(temp);
+					self.loadTemplates();
 					self.updateAllObservables();
 					NotifyHelper.successMessage("Template saved successfully!");
 				}
