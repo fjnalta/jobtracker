@@ -20,7 +20,6 @@
             padding: 10px;
             background-color: #ffffff;
         }
-
         .smallContainer {
             margin: 10px 10px;
             padding: 10px;
@@ -34,25 +33,33 @@
         }
 
         .percentageText {
-            min-width: 45px;
+            min-width: 50px;
+            height: 43px;
         }
 
-        .button {
-            font-size: 10px;
-            line-height: 0px;
-            text-align: center;
-            padding: 0;
-            border: none;
-            margin: 0;
-            margin-top: auto;
+        .possibilitySlider {
+            padding-top: 12px;
         }
-        .titleRight {
-            float: right;
-            margin: 0;
+
+        .buttonTop {
+            border-radius: 4px 4px 0px 0px !important;
+        }
+
+        .buttonDown {
+            border-radius: 0px 0px 4px 4px !important;
+        }
+
+        .smallColumn {
+            padding-left: 2px;
         }
 
         /*Title*/
         .title {
+            float: right;
+            margin: 0;
+        }
+
+        .titleRight {
             float: right;
             margin: 0;
         }
@@ -113,21 +120,21 @@
                 </b:FormGroup>
                 <b:FormGroup>
                     <b:FormLabel for="slider">Wahrscheinlichkeit</b:FormLabel>
-                    <b:Column size="XS_9,SM_9,MD_9,LG_9">
+                    <b:Column size="XS_9,SM_9,MD_9,LG_9" addStyleNames="{style.possibilitySlider}">
                         <b3:Slider b:id="slider" ui:field="mySlider" width="100%" enabled="true" min="0" max="100"
                                    step="25" value="50"/>
                     </b:Column>
                     <b:Column size="XS_2,SM_2,MD_2,LG_2">
                         <b:TextBox b:id="percentagePossibility" ui:field="possibilityPercentage" readOnly="true"
-                        addStyleNames="{style.percentageText}"/>
+                                   addStyleNames="{style.percentageText}"/>
                     </b:Column>
-                    <b:Column size="XS_1,SM_1,MD_1,LG_1">
-                        <b:Row>
-                            <b:Button addStyleNames="{style.button}" ui:field="buttonUp"/>
-                        </b:Row>
-                        <b:Row>
-                            <b:Button addStyleNames="{style.button}" ui:field="buttonDown"/>
-                        </b:Row>
+                    <b:Column size="XS_1,SM_1,MD_1,LG_1" addStyleNames="{style.smallColumn}">
+                        <b:VerticalButtonGroup>
+                            <b:Button size="EXTRA_SMALL" addStyleNames="{style.buttonTop}"
+                                      ui:field="buttonUp"/>
+                            <b:Button size="EXTRA_SMALL" addStyleNames="{style.buttonDown}"
+                                      ui:field="buttonDown"/>
+                        </b:VerticalButtonGroup>
                     </b:Column>
                 </b:FormGroup>
             </b:Row>
