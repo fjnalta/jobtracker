@@ -46,7 +46,10 @@ public class ManagerPage extends Composite
 
 	private ManagerPageHelperService	helperService;
 	private SortMode					sortMode	= SortMode.ALPHABETICAL_UP;
+	
+	private List<Job> currentFilter;
 
+	
 	public ManagerPage()
 	{
 		initWidget(uiBinder.createAndBindUi(this));
@@ -64,24 +67,20 @@ public class ManagerPage extends Composite
 
 				for (Option option : selectJob.getSelectedItems())
 					filter.add(((JobSelectOption) option).getJob());
-
-				updateList(filter);
+				
+				currentFilter = filter;
+				
+				fillEmployeeList(helperService.getUser(sortMode, filter));
 			}
 		});
-
-		for (Job job : helperService.getUserJobs())
-			selectJob.add(new JobSelectOption(job));
-
-		updateList(null);
 	}
 
-	private void updateList(List<Job> filter)
-	{
-		List<User> userList = helperService.getUser(sortMode, filter);
 
+	private void fillEmployeeList(List<User> employees)
+	{
 		// Insert list item widgets
 		employeeList.clear();
-		for (User user : userList)
+		for (User user : employees)
 		{
 			Anchor anchor = new Anchor();
 			anchor.add(new UserListItem(user));
@@ -90,6 +89,16 @@ public class ManagerPage extends Composite
 
 			employeeList.add(anchor);
 		}
+	}
+
+	private void fillJobList(List<Job> jobs)
+	{
+		selectJob.clear();
+		
+		for (Job job : jobs)
+			selectJob.add(new JobSelectOption(job));
+		
+		selectJob.refresh();
 	}
 
 	/**
@@ -121,9 +130,7 @@ public class ManagerPage extends Composite
 		ALPHABETICAL_UP, UTILIZATION_DOWN
 	}
 
-	interface ManagerPageUiBinder extends UiBinder<Widget, ManagerPage>
-	{
-	}
+	interface ManagerPageUiBinder extends UiBinder<Widget, ManagerPage> { }
 
 	interface ManagerPageStyle extends CssResource
 	{
@@ -168,8 +175,8 @@ public class ManagerPage extends Composite
 	 */
 	class ManagerPageHelperServiceImpl implements ManagerPageHelperService
 	{
-		private List<User>	user = new ArrayList<User>();
-		private List<Job>	userJobs = new ArrayList<Job>();
+		private List<User>	user		= new ArrayList<User>();
+		private List<Job>	userJobs	= new ArrayList<Job>();
 
 		public ManagerPageHelperServiceImpl()
 		{
@@ -178,21 +185,24 @@ public class ManagerPage extends Composite
 
 		private void loadServerData()
 		{
-			RestClient.build(
-					new SuccessFunction<ManagerPageRestServiceResponse>()
+			RestClient
+					.build(new SuccessFunction<ManagerPageRestServiceResponse>()
 					{
-
 						@Override
 						public void onSuccess(Method method,
 								ManagerPageRestServiceResponse response)
 						{
 							userJobs = response.getJobs();
-							if(userJobs == null)
+							if (userJobs == null)
 								userJobs = new ArrayList<Job>();
-							
+
 							user = response.getEmployees();
-							if(user == null)
+							if (user == null)
 								user = new ArrayList<User>();
+
+							// set lists
+							fillEmployeeList(user);
+							fillJobList(userJobs);
 						}
 
 						@Override
