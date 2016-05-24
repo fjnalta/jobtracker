@@ -4,7 +4,7 @@ public interface LogicObservable {
 	
 	LogicHandler handler = new LogicHandler();
 	
-	public void update();
-	public void notifyHandler();
+	public void updateObservable();
+	public void notifyLogicHandler();
 
 }

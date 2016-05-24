@@ -65,7 +65,7 @@ public class CalendarHandler implements LogicObservable {
 	}
 
 	@Override
-	public void update() {
+	public void updateObservable() {
 		updateAllObservables();
 	}
 
@@ -76,7 +76,7 @@ public class CalendarHandler implements LogicObservable {
 	}
 
 	@Override
-	public void notifyHandler() {
+	public void notifyLogicHandler() {
 		handler.updateAllObservables();
 	}
 	
