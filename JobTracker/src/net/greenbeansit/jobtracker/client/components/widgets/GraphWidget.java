@@ -101,7 +101,7 @@ public class GraphWidget extends Composite implements LogicObservable {
 
 		budgetSteps = new ArrayList<Integer>();
 		reportList = new ArrayList<ActivityReport>();
-		int tempBudgt = 230000;
+		
 		for (int i = 0; i < 12; i++) {
 
 			for (int a = 0; a < 5; a++) {
@@ -114,13 +114,10 @@ public class GraphWidget extends Composite implements LogicObservable {
 				temp.setDate(tempDate);
 				temp.setStartTime(1);
 				temp.setDuration(480);
-				tempBudgt-=480;
 				reportList.add(temp);
 				GWT.log(tempDate.toGMTString());
 			}
 		}
-		labelBudgetLeft.setText(String.valueOf(tempBudgt));
-		
 		// Window.alert("Initialize");
 
 		startDate = new Date();
@@ -260,6 +257,8 @@ public class GraphWidget extends Composite implements LogicObservable {
 				+ (startDate.getYear() + 1900) + " - " + (endDate.getDate()) + "." + (endDate.getMonth() + 1) + "."
 				+ (endDate.getYear() + 1900);
 		labelCurrentFocus.setText(focusString);
+		labelBudgetLeft.setText("Budget left: " + String.valueOf(maxBudget-currentBudgetStartFocus));
+		labelBudget.setText(String.valueOf(currentBudgetStartFocus)+ " von " + String.valueOf(maxBudget));
 	}
 	
 	private void reset(){
@@ -279,7 +278,7 @@ public class GraphWidget extends Composite implements LogicObservable {
 
 	public void showWeek() {
 		String[] weekDays = new String[] { "Mo", "Tu", "We", "Thu", "Fr", "Sa", "Sun" };
-		updateFocusString();
+
 		
 		int[] values = new int[7];
 		int[] budgetValues = new int[7];
@@ -319,11 +318,12 @@ public class GraphWidget extends Composite implements LogicObservable {
 		}
 		currentBudgetStartFocus = budgetValues[0];
 		currentBudgetEndFocus = budgetValues[budgetValues.length - 1];
-
+	
+		updateFocusString();
 
 		DataTable dataTable = DataTable.create();
 		dataTable.addColumn(ColumnType.STRING, "Month	");
-		dataTable.addColumn(ColumnType.NUMBER, "LAWL");
+		dataTable.addColumn(ColumnType.NUMBER, "Project");
 		dataTable.addRows(weekDays.length);
 		for (int i = 0; i < weekDays.length; i++) {
 			dataTable.setValue(i, 0, weekDays[i]);
@@ -343,7 +343,6 @@ public class GraphWidget extends Composite implements LogicObservable {
 	}
 
 	public void showMonth() {
-		updateFocusString();
 		int daysInMonth = endDate.getDate();
 		int[] dayzz = new int[daysInMonth];
 		for (int i = 0; i < dayzz.length; i++) {
@@ -371,10 +370,12 @@ public class GraphWidget extends Composite implements LogicObservable {
 
 		currentBudgetStartFocus = budgetValues[0];
 		currentBudgetEndFocus = budgetValues[budgetValues.length - 1];
+		
+		updateFocusString();
 
 		DataTable dataTable = DataTable.create();
 		dataTable.addColumn(ColumnType.STRING, "Days");
-		dataTable.addColumn(ColumnType.NUMBER, "LAWL");
+		dataTable.addColumn(ColumnType.NUMBER, "Project");
 		dataTable.addRows(dayzz.length);
 		for (int i = 0; i < dayzz.length; i++) {
 			dataTable.setValue(i, 0, String.valueOf(dayzz[i]));
@@ -395,9 +396,6 @@ public class GraphWidget extends Composite implements LogicObservable {
 	}
 
 	public void showYear() {
-
-		updateFocusString();
-
 		int[] months = new int[12];
 		for (int i = 0; i < months.length; i++) {
 			months[i] = endDate.getMonth() - 12 + i;
@@ -424,10 +422,12 @@ public class GraphWidget extends Composite implements LogicObservable {
 
 		currentBudgetStartFocus = budgetValues[0];
 		currentBudgetEndFocus = budgetValues[budgetValues.length - 1];
-
+		
+		updateFocusString();
+		
 		DataTable dataTable = DataTable.create();
 		dataTable.addColumn(ColumnType.STRING, "Year");
-		dataTable.addColumn(ColumnType.NUMBER, "LAWL");
+		dataTable.addColumn(ColumnType.NUMBER, "Project");
 		dataTable.addRows(months.length);
 		for (int i = 0; i < months.length; i++) {
 			dataTable.setValue(i, 0, String.valueOf(months[i]));
