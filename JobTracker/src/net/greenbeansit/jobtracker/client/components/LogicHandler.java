@@ -10,6 +10,7 @@ import com.google.gwt.core.shared.GWT;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.Window;
 
+import net.greenbeansit.jobtracker.client.components.widgets.calendar.CalendarWidget;
 import net.greenbeansit.jobtracker.client.utils.rest.NotifyHelper;
 import net.greenbeansit.jobtracker.client.utils.rest.RestClient;
 import net.greenbeansit.jobtracker.client.utils.rest.RestClient.SuccessFunction;
@@ -39,6 +40,7 @@ public class LogicHandler {
 
 	private Job currentJob;
 	private ActivityReportTemplate currentTemplate;
+	private CalendarWidget calendar;
 
 	
 	public LogicHandler(){
@@ -146,7 +148,8 @@ public class LogicHandler {
 			public void onSuccess(Method method, List<ActivityReport> response) {
 				self.currentReportsList = response;
 				self.updateAllObservables();
-				NotifyHelper.successMessage(response.toString());
+				NotifyHelper.successMessage("Reports loaded from backend");
+				calendar.updateObservable();
 			}
 
 			@Override
@@ -380,6 +383,12 @@ public class LogicHandler {
 	}
 	public void setSelectedJobs(List<Job> selectedJobs) {
 		this.selectedJobs = selectedJobs;
+	}
+	public CalendarWidget getCalendar() {
+		return calendar;
+	}
+	public void setCalendar(CalendarWidget calendar) {
+		this.calendar = calendar;
 	}
 
 }

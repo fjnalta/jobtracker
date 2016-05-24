@@ -35,6 +35,7 @@ import com.google.gwt.user.datepicker.client.CalendarUtil;
 import net.greenbeansit.jobtracker.client.components.CalendarHandler;
 import net.greenbeansit.jobtracker.client.components.CalendarObserver;
 import net.greenbeansit.jobtracker.client.components.LogicObservable;
+import net.greenbeansit.jobtracker.client.utils.rest.NotifyHelper;
 import net.greenbeansit.jobtracker.shared.ActivityReport;
 
 public class CalendarWidget extends Composite implements CalendarObserver,LogicObservable {
@@ -54,7 +55,7 @@ public class CalendarWidget extends Composite implements CalendarObserver,LogicO
 		initWidget(uiBinder.createAndBindUi(this));
 
 		calendarHandler.addObserver(this);
-		//handler.addObservable(this);
+		handler.setCalendar(this);
 
 		Timer t = new Timer() {
 			String eventTitel = "new Event";
@@ -117,7 +118,7 @@ public class CalendarWidget extends Composite implements CalendarObserver,LogicO
 				
 				calendarHandler.registerCalendar(calendar);
 				handler.loadAllReports();
-				addActvityReports(handler.getCurrentReportsList());
+				loadActvityReports();
 			}
 
 			private ClickAndHoverConfig getClickAndHoverConfig() {
@@ -247,10 +248,10 @@ public class CalendarWidget extends Composite implements CalendarObserver,LogicO
 		};
 		t.schedule(0);
 	}
-
+	
+	
 	@Override
 	public void update() {
-		
 		calendar.render();
 	}
 
@@ -261,20 +262,21 @@ public class CalendarWidget extends Composite implements CalendarObserver,LogicO
 
 
 
-//
-//	/**
-//	 * (Yoruba) Le ti wa ni paarẹ ti o ba ti o ti wa ni ko si ohun to nilo
-//	 */
-//	public void loadActvityReports() {
-//		ArrayList<ActivityReport> reports = new ArrayList<ActivityReport>();
-//		reports.add(new ActivityReport(0, 01, 312302, 303, 1, "ersterJob", new Date(2016, 05, 9), 480, 180, 60));
-//		reports.add(new ActivityReport(1, 11, 123412, 404, 1, "zweiterJob", new Date(2016, 05, 10), 540, 180, 60));
-//		reports.add(new ActivityReport(2, 21, 124522, 101, 1, "dritterJob", new Date(2016, 05, 11), 600, 180, 60));
-//		reports.add(new ActivityReport(3, 31, 315422, 123, 1, "vierterJob", new Date(2016, 05, 12), 660, 180, 60));
-//		addActvityReports(reports);
-//		calendar.render();
-//	}
-//	
+	
+	/**
+	 * (Yoruba) Le ti wa ni paarẹ ti o ba ti o ti wa ni ko si ohun to nilo
+	 */
+	public void loadActvityReports() {
+		ArrayList<ActivityReport> reports = new ArrayList<ActivityReport>();
+		reports.add(new ActivityReport(0, 01, 312302, 303, 1, "ersterJob", new Date(116, 05, 9), 480, 180, 60));
+		reports.add(new ActivityReport(1, 11, 123412, 404, 1, "zweiterJob", new Date(116, 05, 10), 540, 180, 60));
+		reports.add(new ActivityReport(2, 21, 124522, 101, 1, "dritterJob", new Date(116, 05, 11), 600, 180, 60));
+		reports.add(new ActivityReport(3, 31, 315422, 123, 1, "vierterJob", new Date(116, 05, 12), 660, 180, 60));
+
+		addActvityReports(reports);
+		calendar.render();
+	}
+	
 	
 	/**
 	 * Adds ActivityReports to the calendar. 
@@ -284,19 +286,23 @@ public class CalendarWidget extends Composite implements CalendarObserver,LogicO
 		if(!reports.isEmpty()){
 			for (ActivityReport ap : reports) {
 				Event e = new Event(ap.getId() + "", ap.getText(), true, true, true);
+				ap.getDate().setYear(2016);
 				e.setStart(calendarHandler.getISO8601StringForDate(ap.getDate(), ap.getStartTime()));
 				e.setEnd(calendarHandler.getISO8601StringForDate(ap.getDate(), ap.getEndTime()));
 				calendar.addEvent(e);
 				calendar.render();
 				calendar.currentEvent = null;
+				GWT.log("Added Event" + ap.getText() + ":" + ap.getDate());
 			}
 		}
+		calendar.render();
 		
 	}
 
 	@Override
 	public void updateObservable() {
 		addActvityReports(handler.getCurrentReportsList());
+		calendar.render();
 	}
 
 	@Override
