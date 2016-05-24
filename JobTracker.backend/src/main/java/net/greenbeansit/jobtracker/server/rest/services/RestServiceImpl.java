@@ -117,10 +117,10 @@ public class RestServiceImpl implements RestService
 	}
 
 	@Override
-	public void deleteReportTemplate(Integer userId, Integer templateId)
+	public void deleteReportTemplate(Integer author, String name)
 	{
-		ActivityReportTemplate template = activityReportTemplateService.getTemplate(templateId);
-		if(template.getAuthor().equals(userId))
+		ActivityReportTemplate template = activityReportTemplateService.getTemplate(author, name);
+		if(template.getAuthor().equals(author) && template.getName().equals(name))
 			activityReportTemplateService.delete(template);
 	}
 
@@ -199,5 +199,4 @@ public class RestServiceImpl implements RestService
 		Date to = new Date(year, 12, 30);
 		return userService.getUtilization(userId, from, to);
 	}
-
 }

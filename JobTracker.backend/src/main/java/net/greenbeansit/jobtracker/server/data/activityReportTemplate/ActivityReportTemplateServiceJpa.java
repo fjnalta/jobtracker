@@ -29,18 +29,13 @@ public class ActivityReportTemplateServiceJpa implements ActivityReportTemplateD
 	@Override
 	public List<ActivityReportTemplate> getBy(Integer author)
 	{
+		System.out.println("called " + author);
 		ArrayList<ActivityReportTemplate> list = new ArrayList<ActivityReportTemplate>();
 		for (ActivityReportTemplateEntity entity : repository.findByAuthor(author))
 		{
 			list.add(convert(entity));
 		}
 		return list;
-	}
-
-	@Override
-	public ActivityReportTemplate getTemplate(Integer templateId)
-	{
-		return convert(repository.findById(templateId));
 	}
 
 	@Override
@@ -65,13 +60,15 @@ public class ActivityReportTemplateServiceJpa implements ActivityReportTemplateD
 	{
 		if (entity == null)
 			return null;
-		return new ActivityReportTemplate(entity.getName(),entity.getDescription(),entity.getId(), entity.getTaskId(), entity.getAuthor());
+		return new ActivityReportTemplate(entity.getName(),entity.getText(), entity.getTaskId(), entity.getAuthor());
 	}
 
 	private ActivityReportTemplateEntity convert(ActivityReportTemplate report)
 	{
-		if (report == null)
+		if (report == null) {
+			System.out.println("isnull");
 			return null;
-		return new ActivityReportTemplateEntity(report.getId(),report.getTemplateName(),report.getText(), report.getTaskId(), report.getAuthor());
+		}
+		return new ActivityReportTemplateEntity(report.getName(),report.getText(), report.getTaskId(), report.getAuthor());
 	}
 }

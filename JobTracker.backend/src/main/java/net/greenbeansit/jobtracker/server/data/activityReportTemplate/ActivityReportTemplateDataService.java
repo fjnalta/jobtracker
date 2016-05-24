@@ -29,10 +29,10 @@ public interface ActivityReportTemplateDataService
 
 	/**
 	 * TODO Mike: JavaDocs for all DataServices
-	 * @param templateId
+	 * @param author, name
 	 * @return
 	 */
-	ActivityReportTemplate getTemplate(Integer templateId);
+//	ActivityReportTemplate getTemplate(Integer templateId);
 
 	ActivityReportTemplate getTemplate(Integer author, String name);
 
