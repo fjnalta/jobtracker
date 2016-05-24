@@ -115,7 +115,7 @@
                     <b:FormLabel for="slider">Wahrscheinlichkeit</b:FormLabel>
                     <b:Column size="XS_9,SM_9,MD_9,LG_9">
                         <b3:Slider b:id="slider" ui:field="mySlider" width="100%" enabled="true" min="0" max="100"
-                                   step="1" value="50"/>
+                                   step="25" value="50"/>
                     </b:Column>
                     <b:Column size="XS_2,SM_2,MD_2,LG_2">
                         <b:TextBox b:id="percentagePossibility" ui:field="possibilityPercentage" readOnly="true"

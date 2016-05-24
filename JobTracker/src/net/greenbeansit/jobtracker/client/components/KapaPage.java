@@ -55,16 +55,16 @@ public class KapaPage extends Composite {
 
     @UiHandler("buttonUp")
     void onClickUp(ClickEvent e) {
-        if (mySlider.getValue() < 100)
-            mySlider.setValue(mySlider.getValue() + 1);
+        if (mySlider.getValue() < 76)
+            mySlider.setValue(mySlider.getValue() + 25);
         //refresh percentage TextBox
         possibilityPercentage.setText(mySlider.getValue().toString());
     }
 
     @UiHandler("buttonDown")
     void onClickDown(ClickEvent e) {
-        if (mySlider.getValue() > 0)
-            mySlider.setValue(mySlider.getValue() - 1);
+        if (mySlider.getValue() > 24)
+            mySlider.setValue(mySlider.getValue() - 25);
         possibilityPercentage.setText(mySlider.getValue().toString());
     }
 
