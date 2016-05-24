@@ -88,6 +88,22 @@ public class UserServiceJpa implements UserDataService
 		return (actualHours * 100) / averageHours;
 	}
 
+	@Override
+	public Integer getYearUtilization(Integer employeeId)
+	{
+		return repository.findById(employeeId).getUtilization();
+	}
+
+	@Override
+	public void updateYearUtilization(Integer employeeId, Integer year)
+	{
+		UserEntity user = repository.findById(employeeId);
+		user.setUtilization(getUtilization(employeeId,
+				new Date(year, 1, 1), new Date(year, 12, 30)));
+		user.setUtilizationYear(year);
+		repository.save(user);
+	}
+
 	// Not needed
 
 	// private UserEntity convert(User user)

@@ -64,7 +64,7 @@ public interface RestService extends DirectRestService
 	 *             if the employeeId does not exist.
 	 */
 	@GET
-	@Path("/users/{userId}/job")
+	@Path("/users/{userId}/jobs")
 	List<Job> getAllJobs(@PathParam("userId") Integer userId);
 
 	/**
@@ -97,7 +97,7 @@ public interface RestService extends DirectRestService
 	 *             if the employeeId or the reportId does not exist.
 	 */
 	@GET
-	@Path("/users/{userId}/report/{reportId}")
+	@Path("/users/{userId}/reports/{reportId}")
 	ActivityReport getReport(@PathParam("userId") Integer userId,
 			@PathParam("reportId") Integer reportId);
 
@@ -228,8 +228,7 @@ public interface RestService extends DirectRestService
 	 */
 	@POST
 	@Path("/users/{userId}/report_templates/")
-	void saveReportTemplate(@PathParam("userId") Integer userId,
-			ActivityReportTemplate template);
+	void saveReportTemplate(@PathParam("userId") Integer userId, ActivityReportTemplate template);
 
 	/**
 	 * Removes the specified {@link ActivityReportTemplate} from the database.
@@ -240,12 +239,13 @@ public interface RestService extends DirectRestService
 	 *            id of the template.
 	 */
 	@DELETE
-	@Path("/users/{userId}/report_templates/{templateId}")
-	void deleteReportTemplate(@PathParam("userId") Integer userId,
-			@PathParam("templateId") Integer templateId);
+	@Path("/users/{userId}/report_templates/{templateName}")
+	void deleteReportTemplate(@PathParam("userId") Integer author,
+			@PathParam("templateName") String name);
 
 	/**
 	 * Gets the employees who have the user with the following ID as supervisor.
+	 * Additionally all {@link User}s will have their List assignedJobs filled with their assigned jobs.
 	 * 
 	 * @param supervisorId
 	 *            the ID of the supervisor user.
@@ -285,6 +285,42 @@ public interface RestService extends DirectRestService
 		public List<Job> getJobs()
 		{
 			return jobs;
+		}
+	}
+	
+	public class JobID
+	{
+		private Integer jobNr, posNr;
+		
+		public JobID()
+		{
+			
+		}
+		
+		public JobID(Integer jobNr, Integer posNr)
+		{
+			this.setJobNr(jobNr);
+			this.setPosNr(posNr);
+		}
+
+		public Integer getJobNr()
+		{
+			return jobNr;
+		}
+
+		public void setJobNr(Integer jobNr)
+		{
+			this.jobNr = jobNr;
+		}
+
+		public Integer getPosNr()
+		{
+			return posNr;
+		}
+
+		public void setPosNr(Integer posNr)
+		{
+			this.posNr = posNr;
 		}
 	}
 }

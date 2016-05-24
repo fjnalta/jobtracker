@@ -9,9 +9,9 @@ public interface ActivityReportTemplateEntityRepository extends CrudRepository<A
 
 	void delete(ActivityReportTemplateEntity deleted);
 
-	List<ActivityReportTemplateEntity> findAll();
+//	List<ActivityReportTemplateEntity> findAll();
 
-	ActivityReportTemplateEntity findById(Integer id);
+//	ActivityReportTemplateEntity findById(Integer id);
 
 	@SuppressWarnings("unchecked")
 	ActivityReportTemplateEntity save(ActivityReportTemplateEntity persisted);
@@ -19,4 +19,5 @@ public interface ActivityReportTemplateEntityRepository extends CrudRepository<A
 	List<ActivityReportTemplateEntity> findByAuthor(Integer author);
 	
 	ActivityReportTemplateEntity findByAuthorAndName(Integer author, String name);
+//	ActivityReportTemplateEntity findByAuthor(Integer author);
 }

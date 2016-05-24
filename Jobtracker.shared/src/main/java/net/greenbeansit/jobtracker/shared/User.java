@@ -1,6 +1,9 @@
 package net.greenbeansit.jobtracker.shared;
 
 import java.io.Serializable;
+import java.util.List;
+
+import net.greenbeansit.jobtracker.shared.rest.services.RestService.JobID;
 
 /**
  * Represents a normal user with no extra rights.
@@ -16,6 +19,8 @@ public class User implements Serializable
 	private Integer				id;
 	private String				name, surname;
 	private Integer				supervisor;
+	private Integer				utilization;
+	private List<JobID>			assignedJobs;
 
 	/**
 	 * Initializes a new instance of the {@link User} class.
@@ -79,5 +84,25 @@ public class User implements Serializable
 			throw new IllegalArgumentException();
 		}
 		this.supervisor = supervisor;
+	}
+
+	public Integer getUtilization()
+	{
+		return utilization;
+	}
+
+	public void setUtilization(Integer utilization)
+	{
+		this.utilization = utilization;
+	}
+
+	public List<JobID> getAssignedJobs()
+	{
+		return assignedJobs;
+	}
+
+	public void setAssignedJobs(List<JobID> assignedJobs)
+	{
+		this.assignedJobs = assignedJobs;
 	}
 }

@@ -22,7 +22,7 @@ import net.greenbeansit.jobtracker.shared.rest.services.RestService.ManagerPageR
 /**
  * Dummy implementation of the {@link RestService} interface.
  * 
- * @author Max Blatt & Alexander Kirilyuk
+ * @author Max Blatt & Alexander Kirilyuk & Philipp Minges
  */
 public class RestServiceImpl implements RestService
 {
@@ -90,6 +90,7 @@ public class RestServiceImpl implements RestService
 	{
 		report.setAuthor(userId);
 		activityReportService.save(report);
+		userService.updateYearUtilization(userId, report.getDate().getYear());
 	}
 
 	@Override
@@ -117,10 +118,10 @@ public class RestServiceImpl implements RestService
 	}
 
 	@Override
-	public void deleteReportTemplate(Integer userId, Integer templateId)
+	public void deleteReportTemplate(Integer author, String name)
 	{
-		ActivityReportTemplate template = activityReportTemplateService.getTemplate(templateId);
-		if(template.getAuthor().equals(userId))
+		ActivityReportTemplate template = activityReportTemplateService.getTemplate(author, name);
+		if(template.getAuthor().equals(author) && template.getName().equals(name))
 			activityReportTemplateService.delete(template);
 	}
 
@@ -138,7 +139,7 @@ public class RestServiceImpl implements RestService
 
 	@SuppressWarnings("deprecation")
 	private Date stringToDate(String date) {
-		return new Date(Integer.parseInt(date.substring(0, 3)),Integer.parseInt(date.substring(5, 6)), Integer.parseInt(date.substring(8, 9)));
+		return new Date(Integer.parseInt(date.substring(0, 4))-1900,Integer.parseInt(date.substring(5, 7))-1, Integer.parseInt(date.substring(8)));
 	}
 
 	@Override
@@ -149,7 +150,7 @@ public class RestServiceImpl implements RestService
 	@Override
 	public List<ActivityReport> getReportPeriod(Integer userId, String fromto)
 	{
-		return activityReportService.getByUserAndPeriod(userId, stringToDate(fromto.substring(0, 9)), stringToDate(fromto.substring(11, 20)));
+		return activityReportService.getByUserAndPeriod(userId, stringToDate(fromto.substring(0, 10)), stringToDate(fromto.substring(11)));
 	}
 
 	@Override
@@ -168,15 +169,14 @@ public class RestServiceImpl implements RestService
 			List<Job> temp = jobService.getByUser(user.getId());
 			if (temp != null)
 			{
-				if (!jobs.containsAll(temp)) // Performance optimizing for
-												// bigger collections
+				List<JobID> keys = new ArrayList<JobID>();
+				for (Job job : temp)
 				{
-					for (Job job : temp)
-					{
-						if (!jobs.contains(job))
-							jobs.add(job);
-					}
+					keys.add(new JobID(job.getJobNr(), job.getPosNr()));
+					if (!jobs.contains(job))
+						jobs.add(job);
 				}
+				user.setAssignedJobs(keys);
 			}
 		}
 		return new ManagerPageRestServiceResponse(users, jobs);
@@ -187,8 +187,8 @@ public class RestServiceImpl implements RestService
 			Integer month)
 	{
 		//Sooooo dirty...
-		Date from = new Date(year, month, 1);
-		Date to = new Date(year, month, 30);
+		Date from = new Date(year-1900, month-1, 1);
+		Date to = new Date(year-1900, month-1, 30);
 		return userService.getUtilization(userId, from, to);
 	}
 
@@ -196,9 +196,8 @@ public class RestServiceImpl implements RestService
 	public Integer getUtilizationYear(Integer userId, Integer year)
 	{
 		//Oh gaaaaawd...
-		Date from = new Date(year, 1, 1);
-		Date to = new Date(year, 12, 30);
+		Date from = new Date(year-1900, 0, 1);
+		Date to = new Date(year-1900, 11, 30);
 		return userService.getUtilization(userId, from, to);
 	}
-
 }

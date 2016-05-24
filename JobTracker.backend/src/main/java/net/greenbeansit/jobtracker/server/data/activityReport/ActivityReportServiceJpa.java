@@ -78,7 +78,7 @@ public class ActivityReportServiceJpa implements ActivityReportDataService
 	{
 		ArrayList<ActivityReport> list = new ArrayList<ActivityReport>();
 		for (ActivityReportEntity entity : repository
-				.findByJobNrAndPosNr(jobNr, posNr))
+				.findByJobNoAndPosNo(jobNr, posNr))
 		{
 			list.add(convert(entity));
 		}
@@ -92,7 +92,7 @@ public class ActivityReportServiceJpa implements ActivityReportDataService
 		int begin = convert(entity.getBeginTime());
 		int duration = convert(entity.getEndTime()) - begin;
 		return new ActivityReport(entity.getId(), entity.getTaskId(),
-				entity.getJobNr(), entity.getAuthor(), entity.getText(), //TODO check jobnr-posnr
+				entity.getJobNo(), entity.getAuthor(), entity.getText(), //TODO check jobnr-posnr
 				entity.getBeginDate(), begin, duration, entity.getBreakTime());
 	}
 

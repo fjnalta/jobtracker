@@ -166,4 +166,11 @@
 			]]>
 		</sql>
 	</changeSet>
+	<changeSet id="20160524-ALTERUser" author="mike">
+		<sql>
+			<![CDATA[
+				ALTER TABLE `user` ADD COLUMN `utilization_year` INT;
+			]]>
+		</sql>
+	</changeSet>
 </databaseChangeLog>
