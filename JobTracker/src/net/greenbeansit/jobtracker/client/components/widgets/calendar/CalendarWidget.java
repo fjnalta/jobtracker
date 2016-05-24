@@ -34,9 +34,10 @@ import com.google.gwt.user.datepicker.client.CalendarUtil;
 
 import net.greenbeansit.jobtracker.client.components.CalendarHandler;
 import net.greenbeansit.jobtracker.client.components.CalendarObserver;
+import net.greenbeansit.jobtracker.client.components.LogicObservable;
 import net.greenbeansit.jobtracker.shared.ActivityReport;
 
-public class CalendarWidget extends Composite implements CalendarObserver {
+public class CalendarWidget extends Composite implements CalendarObserver,LogicObservable {
 
 	private static CalendarWidgetUiBinder uiBinder = GWT.create(CalendarWidgetUiBinder.class);
 
@@ -53,6 +54,7 @@ public class CalendarWidget extends Composite implements CalendarObserver {
 		initWidget(uiBinder.createAndBindUi(this));
 
 		calendarHandler.addObserver(this);
+		//handler.addObservable(this);
 
 		Timer t = new Timer() {
 			String eventTitel = "new Event";
@@ -81,7 +83,6 @@ public class CalendarWidget extends Composite implements CalendarObserver {
 
 			@Override
 			public void run() {
-
 				config = new CalendarConfig();
 				config.setLangauge(Language.German);
 				config.setClickHoverConfig(getClickAndHoverConfig());
@@ -115,7 +116,7 @@ public class CalendarWidget extends Composite implements CalendarObserver {
 				calendar.render();
 				
 				calendarHandler.registerCalendar(calendar);
-				loadActvityReports();
+				handler.loadAllReports();
 			}
 
 			private ClickAndHoverConfig getClickAndHoverConfig() {
@@ -248,6 +249,7 @@ public class CalendarWidget extends Composite implements CalendarObserver {
 
 	@Override
 	public void update() {
+		
 		calendar.render();
 	}
 
@@ -278,14 +280,28 @@ public class CalendarWidget extends Composite implements CalendarObserver {
 	 * @param reports List of ActivityReports
 	 */
 	public void addActvityReports(List<ActivityReport> reports) {
-		for (ActivityReport ap : reports) {
-			Event e = new Event(ap.getId() + "", ap.getText(), true, true, true);
-			e.setStart(calendarHandler.getISO8601StringForDate(ap.getDate(), ap.getStartTime()));
-			e.setEnd(calendarHandler.getISO8601StringForDate(ap.getDate(), ap.getEndTime()));
-			calendar.addEvent(e);
-			calendar.render();
-			calendar.currentEvent = null;
+		if(!reports.isEmpty()){
+			for (ActivityReport ap : reports) {
+				Event e = new Event(ap.getId() + "", ap.getText(), true, true, true);
+				e.setStart(calendarHandler.getISO8601StringForDate(ap.getDate(), ap.getStartTime()));
+				e.setEnd(calendarHandler.getISO8601StringForDate(ap.getDate(), ap.getEndTime()));
+				calendar.addEvent(e);
+				calendar.render();
+				calendar.currentEvent = null;
+			}
 		}
+		
+	}
+
+	@Override
+	public void updateObservable() {
+		addActvityReports(handler.getCurrentReportsList());
+	}
+
+	@Override
+	public void notifyLogicHandler() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 

@@ -18,6 +18,7 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 
 import net.greenbeansit.jobtracker.client.components.LogicObservable;
+import net.greenbeansit.jobtracker.client.utils.rest.NotifyHelper;
 import net.greenbeansit.jobtracker.shared.ActivityReportTemplate;
 
 /**
@@ -68,6 +69,7 @@ public class WorkDiscriptionWidget extends Composite implements LogicObservable
 				selectedTemplate = ((SelectTemplateOption)selectTemplate.getSelectedItem()).getTemplate();
 			}
 		});
+		handler.loadTemplates();
 	}
 
 
@@ -81,9 +83,14 @@ public class WorkDiscriptionWidget extends Composite implements LogicObservable
 	public void saveTemplate(final ClickEvent e){
 		ActivityReportTemplate template = new ActivityReportTemplate();
 		template.setTaskId(0);
-		template.setText(textDiscription.getText());
-		template.setName(textName.getText());
-		handler.saveTemplate(template);
+		if(textDiscription.getText().length()>0&&textName.getText().length()>0){
+			template.setText(textDiscription.getText());
+			template.setName(textName.getText());
+			template.setTaskId(null);
+			handler.saveTemplate(template);
+		}else{
+			NotifyHelper.errorMessage("fill in the missing fields");
+		}	
 	}
 	
 	@UiHandler("buttonLoad")
@@ -100,7 +107,7 @@ public class WorkDiscriptionWidget extends Composite implements LogicObservable
 	}
 
 	@Override
-	public void update() {
+	public void updateObservable() {
 		selectTemplate.clear();
 		addTemplates(handler.getTemplateList());
 		selectTemplate.refresh();
@@ -108,7 +115,7 @@ public class WorkDiscriptionWidget extends Composite implements LogicObservable
 
 
 	@Override
-	public void notifyHandler() {
+	public void notifyLogicHandler() {
 		ActivityReportTemplate template = new ActivityReportTemplate();
 		template.setTaskId(0);
 		template.setText(textDiscription.getText());

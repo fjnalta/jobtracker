@@ -10,6 +10,7 @@ import com.google.gwt.core.shared.GWT;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.Window;
 
+import net.greenbeansit.jobtracker.client.utils.rest.NotifyHelper;
 import net.greenbeansit.jobtracker.client.utils.rest.RestClient;
 import net.greenbeansit.jobtracker.client.utils.rest.RestClient.SuccessFunction;
 import net.greenbeansit.jobtracker.shared.ActivityReport;
@@ -54,7 +55,7 @@ public class LogicHandler {
 		this.jobList = temp;
 		this.templateList = reporttemp;
 		this.currentUser = new User();
-		this.currentUser.setId(1);
+		this.currentUser.setId(2);
 	}
 
 	/**
@@ -70,12 +71,12 @@ public class LogicHandler {
 	 */
 	public void updateAllObservables() {
 		for (LogicObservable p : list) {
-			p.update();
+			p.updateObservable();
 		}
 	}
 	
 	public void updateObservable(LogicObservable p){
-		p.update();
+		p.updateObservable();
 	}
 
 	/**
@@ -93,7 +94,7 @@ public class LogicHandler {
 	 */
 	public void getInformations() {
 		for (LogicObservable o : list) {
-			o.notifyHandler();
+			o.notifyLogicHandler();
 		}
 	}
 
@@ -136,6 +137,26 @@ public class LogicHandler {
 	public ActivityReport getCurrentReport() {
 		return currentReport;
 	}
+	/**
+	 * Function for loading all Reports for the current user
+	 */
+	public void loadAllReports(){
+		RestClient.build(new SuccessFunction<List<ActivityReport>>() {
+			@Override
+			public void onSuccess(Method method, List<ActivityReport> response) {
+				self.currentReportsList = response;
+				self.updateAllObservables();
+				NotifyHelper.successMessage(response.toString());
+			}
+
+			@Override
+			public void onFailure(Method method, Throwable exception) {
+				NotifyHelper.errorMessage(exception.getMessage());
+				GWT.log(exception.getMessage());
+			}
+
+		}).getEmployeeService().getAllReports(currentUser.getId());
+	}
 	
 	/**
 	 * Function for loading a set of {@link ActivityReport} between the specified start and end time
@@ -155,6 +176,7 @@ public class LogicHandler {
 
 			@Override
 			public void onFailure(Method method, Throwable exception) {
+				NotifyHelper.errorMessage(exception.getMessage());
 				GWT.log(exception.getMessage());
 			}
 
@@ -189,6 +211,7 @@ public class LogicHandler {
 
 					@Override
 					public void onFailure(Method method, Throwable exception) {
+						NotifyHelper.errorMessage(exception.getMessage());
 						GWT.log(exception.getMessage());
 					}
 
@@ -198,7 +221,7 @@ public class LogicHandler {
 			}
 			
 		} else {
-			// TODO error Handling
+			NotifyHelper.errorMessage("Please fill in the missing fields");
 		}
 	}
 	/**
@@ -206,18 +229,20 @@ public class LogicHandler {
 	 * @param template {@link ActivityReportTemplate} to save
 	 */
 	public void saveTemplate(ActivityReportTemplate template) {
-		templateList.add(template);
+		final ActivityReportTemplate temp = template;
 		updateAllObservables();
 		try {
 			RestClient.build(new SuccessFunction<ActivityReportTemplate>() {
 				@Override
 				public void onSuccess(Method method, ActivityReportTemplate response) {
-				
+					templateList.add(temp);
+					self.updateAllObservables();
+					NotifyHelper.successMessage("Template saved successfully!");
 				}
 
 				@Override
 				public void onFailure(Method method, Throwable exception) {
-					//TODO error handling
+					NotifyHelper.errorMessage(exception.getMessage());
 					GWT.log(exception.getMessage());
 				}
 
@@ -233,19 +258,18 @@ public class LogicHandler {
 	 */
 	
 	public void loadTemplates() {
-		//only for dummy implementation
 		this.updateAllObservables();
 		try {
 			RestClient.build(new SuccessFunction<List<ActivityReportTemplate>>() {
 				@Override
-				public void onSuccess(Method method, List<ActivityReportTemplate> response) {
-					self.updateAllObservables();
+				public void onSuccess(Method method, List<ActivityReportTemplate> response) {		
 					self.templateList = response;
+					self.updateAllObservables();
 				}
 
 				@Override
 				public void onFailure(Method method, Throwable exception) {
-					//TODO error handling
+					NotifyHelper.errorMessage(exception.getMessage());
 					GWT.log(exception.getMessage());
 				}
 
@@ -270,7 +294,7 @@ public class LogicHandler {
 
 				@Override
 				public void onFailure(Method method, Throwable exception) {
-					//TODO error handling
+					NotifyHelper.errorMessage(exception.getMessage());
 					GWT.log(exception.getMessage());
 //					Window.alert(exception.getMessage());
 				}
@@ -294,6 +318,7 @@ public class LogicHandler {
 
 				@Override
 				public void onFailure(Method method, Throwable exception) {
+					NotifyHelper.errorMessage(exception.getMessage());
 					GWT.log(exception.getMessage());
 				}
 
@@ -318,6 +343,7 @@ public class LogicHandler {
 
 					@Override
 					public void onFailure(Method method, Throwable exception) {
+						NotifyHelper.errorMessage(exception.getMessage());
 						GWT.log(exception.getMessage());
 					}
 

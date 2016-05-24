@@ -62,7 +62,7 @@
 		<sql>
 			<![CDATA[
 				INSERT INTO activity_report (author, text, begin_date, begin_time, end_time, break_time, job_no, pos_no)
-				VALUES(1, "Ein paar Dinge erledigt.", '2016-05-23', '08:00:00', '16:00:00', 30, 100245, 001);
+				VALUES(2, "Ein paar Dinge erledigt.", '2016-05-22', '08:00:00', '16:00:00', 30, 100245, 001);
 			]]>
 		</sql>
 	</changeSet>
@@ -77,6 +77,19 @@
 				(5, 100001, 002),
 				(6, 100001, 002),
 				(5, 100001, 001);
+			]]>
+		</sql>
+	</changeSet>
+	<changeSet id="20160524-activity_report-8" author="alex">
+		<sql>
+			<![CDATA[
+				INSERT INTO activity_report (author, text, begin_date, begin_time, end_time, break_time, job_no, pos_no)
+				VALUES(2, "Ein paar Dinge erledigt.", '2016-05-22', '08:00:00', '16:00:00', 30, 100245, 001),
+				(2, "Ein paar Dinge erledigt.", '2016-05-21', '08:00:00', '16:00:00', 30, 100245, 001),
+				(2, "Ein paar Dinge erledigt.", '2016-05-13', '08:00:00', '16:00:00', 30, 100245, 001),
+				(2, "Ein paar Dinge erledigt.", '2016-05-14', '08:00:00', '16:00:00', 30, 100245, 001),
+				(2, "Ein paar Dinge erledigt.", '2016-05-15', '08:00:00', '16:00:00', 30, 100245, 001),
+				(2, "Ein paar Dinge erledigt.", '2016-05-16', '08:00:00', '16:00:00', 30, 100245, 001);
 			]]>
 		</sql>
 	</changeSet>

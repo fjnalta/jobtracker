@@ -499,4 +499,16 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 		return true;
 	}
 
+	@Override
+	public void updateObservable() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void notifyLogicHandler() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
