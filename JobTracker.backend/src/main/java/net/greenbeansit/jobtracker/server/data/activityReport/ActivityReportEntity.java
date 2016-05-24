@@ -63,6 +63,7 @@ public class ActivityReportEntity implements Serializable
 		this.taskId = taskId;
 		this.jobNo = jobNo;
 		this.posNo = posNo;
+		this.breakTime = breakTime;
 	}
 
 	public Integer getId()
