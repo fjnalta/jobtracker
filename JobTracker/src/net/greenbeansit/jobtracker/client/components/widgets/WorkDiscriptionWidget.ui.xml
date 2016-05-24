@@ -50,7 +50,7 @@
 		<b:Row addStyleNames="{style.row}">
 			<b:Button type="PRIMARY" dataToggle="COLLAPSE" dataTarget="#collapseTemplate"
 				text="Vorlagen" />
-			<b:Collapse b:id="collapseTemplate" addStyleNames="{style.collapse}">
+			<b:Collapse b:id="collapseTemplate" addStyleNames="{style.collapse}" toggle="false">
 				<b:FormGroup>
 					<b:TextBox placeholder="Name der Vorlage" b:id="textTemplateName" ui:field="textName"/>
 					<b:Button text="Als Vorlage speichern" addStyleNames="{style.button}"

@@ -88,9 +88,10 @@ public class RestServiceImpl implements RestService
 	@Override
 	public void saveReport(Integer userId, ActivityReport report)
 	{
-		report.setAuthor(userId);
+//		report.setAuthor(userId);
 		activityReportService.save(report);
 		userService.updateYearUtilization(userId, report.getDate().getYear());
+		System.out.println(report);
 	}
 
 	@Override

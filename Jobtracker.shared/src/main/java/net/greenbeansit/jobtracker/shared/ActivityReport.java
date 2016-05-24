@@ -84,24 +84,24 @@ public class ActivityReport implements Serializable
 		this.text = text;
 	}
 
-	public int getDuration()
+	public Integer getDuration()
 	{
 		return duration;
 	}
 
-	public void setDuration(int duration)
+	public void setDuration(Integer duration)
 	{
 		if (duration < 1 || startTime + duration > 1440)
 			throw (new IllegalArgumentException());
 		this.duration = duration;
 	}
 
-	public int getStartTime()
+	public Integer getStartTime()
 	{
 		return startTime;
 	}
 
-	public void setStartTime(int startTime)
+	public void setStartTime(Integer startTime)
 	{
 		if (startTime >= 1440)
 			throw (new IllegalArgumentException());
@@ -109,12 +109,12 @@ public class ActivityReport implements Serializable
 		this.startTime = startTime;
 	}
 
-	public int getEndTime()
+	public Integer getEndTime()
 	{
 		return startTime + duration;
 	}
 
-	public void setEndTime(int endTime)
+	public void setEndTime(Integer endTime)
 	{
 		if (endTime - startTime <= 0)
 			throw (new IllegalArgumentException());
@@ -144,7 +144,7 @@ public class ActivityReport implements Serializable
 	}
 
 	@SuppressWarnings("deprecation")
-	public void setDate(int year, int month, int day)
+	public void setDate(Integer year, Integer month, Integer day)
 	{
 		this.date = new Date(year, month, day);
 	}
