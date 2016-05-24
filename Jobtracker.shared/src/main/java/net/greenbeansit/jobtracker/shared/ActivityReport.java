@@ -71,6 +71,7 @@ public class ActivityReport implements Serializable
 		this.setPosNr(posNr);
 		this.setAuthor(authorId);
 		this.setText(text);
+		
 		this.setDate(date);
 		this.setStartTime(startTime);
 		this.setDuration(duration);

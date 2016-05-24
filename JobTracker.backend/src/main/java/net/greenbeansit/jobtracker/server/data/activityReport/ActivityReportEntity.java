@@ -2,7 +2,7 @@ package net.greenbeansit.jobtracker.server.data.activityReport;
 
 import java.io.Serializable;
 import java.sql.Time;
-import java.util.Date;
+import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

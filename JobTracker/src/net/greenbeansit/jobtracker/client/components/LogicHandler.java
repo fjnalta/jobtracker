@@ -151,7 +151,7 @@ public class LogicHandler {
 
 			@Override
 			public void onFailure(Method method, Throwable exception) {
-				NotifyHelper.errorMessage(exception.getMessage());
+				NotifyHelper.errorMessage("FAILED " + exception.getMessage());
 				GWT.log(exception.getMessage());
 			}
 
@@ -176,7 +176,7 @@ public class LogicHandler {
 
 			@Override
 			public void onFailure(Method method, Throwable exception) {
-				NotifyHelper.errorMessage(exception.getMessage());
+				NotifyHelper.errorMessage("FAILED " + exception.getMessage());
 				GWT.log(exception.getMessage());
 			}
 
@@ -198,7 +198,7 @@ public class LogicHandler {
 
 			tempReport.setText(currentTemplate.getText());
 			// TODO handle different JobTasks
-			tempReport.setTaskId(0);
+			tempReport.setTaskId(currentTemplate.getTaskId());
 
 			tempReport.setAuthor(currentUser.getId());
 			
@@ -206,12 +206,12 @@ public class LogicHandler {
 				RestClient.build(new SuccessFunction<ActivityReport>() {
 					@Override
 					public void onSuccess(Method method, ActivityReport response) {
-
+						
 					}
 
 					@Override
 					public void onFailure(Method method, Throwable exception) {
-						NotifyHelper.errorMessage(exception.getMessage());
+						NotifyHelper.errorMessage("FAILED" + exception.getMessage());
 						GWT.log(exception.getMessage());
 					}
 
