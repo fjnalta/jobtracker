@@ -76,8 +76,13 @@
 				</b:Row>
 			</b:TabPane>
 			<b:TabPane b:id="tab2">
-				<h:ClearFix ui:field="activityContent">
-				</h:ClearFix>
+				<b:Row>
+					<b:Column size="XS_12,SM_12,MD_12,LG_12">
+					<h:ClearFix ui:field="activityContent">
+					</h:ClearFix>
+					</b:Column>
+
+				</b:Row>
 			</b:TabPane>
 			<b:TabPane b:id="tab3">
 				<h:ClearFix ui:field="workerContent">
