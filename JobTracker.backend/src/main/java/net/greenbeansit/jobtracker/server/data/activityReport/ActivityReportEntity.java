@@ -24,15 +24,25 @@ public class ActivityReportEntity implements Serializable
 	@GeneratedValue
 	private Integer				id;
 
+	@Column(name = "author")
 	private Integer				author;
+	@Column(name = "text")
 	private String				text;
+	@Column(name = "begin_date")
 	private Date				beginDate;
+	@Column(name = "begin_time")
 	private Time				beginTime;
+	@Column(name = "end_date")
 	private Date				endDate;
+	@Column(name = "end_time")
 	private Time				endTime;
+	@Column(name = "break_time")
 	private Integer				breakTime;
+	@Column(name = "task_id")
 	private Integer				taskId;
+	@Column(name = "job_no")
 	private Integer				jobNo;
+	@Column(name = "pos_no")
 	private Integer				posNo;
 
 	public ActivityReportEntity()
@@ -65,7 +75,7 @@ public class ActivityReportEntity implements Serializable
 		this.id = id;
 	}
 
-	@Column(name = "author")
+	
 	public Integer getAuthor()
 	{
 		return author;
@@ -76,7 +86,7 @@ public class ActivityReportEntity implements Serializable
 		this.author = author;
 	}
 
-	@Column(name = "text")
+	
 	public String getText()
 	{
 		return text;
@@ -87,7 +97,7 @@ public class ActivityReportEntity implements Serializable
 		this.text = text;
 	}
 
-	@Column(name = "begin_date")
+	
 	public Date getBeginDate()
 	{
 		return beginDate;
@@ -98,7 +108,7 @@ public class ActivityReportEntity implements Serializable
 		this.beginDate = beginDate;
 	}
 
-	@Column(name = "begin_time")
+	
 	public Time getBeginTime()
 	{
 		return beginTime;
@@ -109,7 +119,7 @@ public class ActivityReportEntity implements Serializable
 		this.beginTime = beginTime;
 	}
 
-	@Column(name = "end_date")
+	
 	public Date getEndDate()
 	{
 		return endDate;
@@ -120,7 +130,7 @@ public class ActivityReportEntity implements Serializable
 		this.endDate = endDate;
 	}
 
-	@Column(name = "end_time")
+	
 	public Time getEndTime()
 	{
 		return endTime;
@@ -142,7 +152,7 @@ public class ActivityReportEntity implements Serializable
 		this.taskId = taskId;
 	}
 
-	@Column(name = "break_time")
+	
 	public Integer getBreakTime()
 	{
 		return breakTime;
@@ -153,7 +163,7 @@ public class ActivityReportEntity implements Serializable
 		this.breakTime = breakTime;
 	}
 
-	@Column(name = "job_no")
+	
 	public Integer getJobNo()
 	{
 		return jobNo;
@@ -164,7 +174,7 @@ public class ActivityReportEntity implements Serializable
 		this.jobNo = jobNo;
 	}
 
-	@Column(name = "pos_no")
+	
 	public Integer getPosNo()
 	{
 		return posNo;
