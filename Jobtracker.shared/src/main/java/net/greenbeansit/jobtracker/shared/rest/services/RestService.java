@@ -286,6 +286,17 @@ public interface RestService extends DirectRestService
 		{
 			return jobs;
 		}
+
+		public void setEmployees(List<User> employees)
+		{
+			this.employees = employees;
+		}
+
+		public void setJobs(List<Job> jobs)
+		{
+			this.jobs = jobs;
+		}
+		
 	}
 	
 	public class JobID
