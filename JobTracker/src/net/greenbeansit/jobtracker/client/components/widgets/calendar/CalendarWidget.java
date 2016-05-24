@@ -264,10 +264,10 @@ public class CalendarWidget extends Composite implements CalendarObserver {
 	 */
 	public void loadActvityReports() {
 		ArrayList<ActivityReport> reports = new ArrayList<ActivityReport>();
-		reports.add(new ActivityReport(0, 01, 02, 100, "ersterJob", new Date(2016, 05, 9), 480, 180, 60));
-		reports.add(new ActivityReport(1, 11, 12, 100, "zweiterJob", new Date(2016, 05, 10), 540, 180, 60));
-		reports.add(new ActivityReport(2, 21, 22, 100, "dritterJob", new Date(2016, 05, 11), 600, 180, 60));
-		reports.add(new ActivityReport(3, 31, 32, 100, "vierterJob", new Date(2016, 05, 12), 660, 180, 60));
+		reports.add(new ActivityReport(0, 01, 312302, 303, 1, "ersterJob", new Date(2016, 05, 9), 480, 180, 60));
+		reports.add(new ActivityReport(1, 11, 123412, 404, 1, "zweiterJob", new Date(2016, 05, 10), 540, 180, 60));
+		reports.add(new ActivityReport(2, 21, 124522, 101, 1, "dritterJob", new Date(2016, 05, 11), 600, 180, 60));
+		reports.add(new ActivityReport(3, 31, 315422, 123, 1, "vierterJob", new Date(2016, 05, 12), 660, 180, 60));
 		addActvityReports(reports);
 		calendar.render();
 	}

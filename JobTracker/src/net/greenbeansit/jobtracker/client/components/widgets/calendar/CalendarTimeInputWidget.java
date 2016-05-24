@@ -478,7 +478,7 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 		int duration = createTimeFromText(workTime.getText());
 		int breakTime = createTimeFromText(pause.getText());
 		Date date = new Date();
-		ActivityReport tmp = new ActivityReport(0, 0, 0, 0, "", date, startTime, duration, breakTime);
+		ActivityReport tmp = new ActivityReport(0, 0, 0, 0, 0, "", date, startTime, duration, breakTime);
 		handler.saveReport(tmp);
 	}
 	
