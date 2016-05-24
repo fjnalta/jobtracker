@@ -137,7 +137,7 @@
         </b:Column>
         <b:Column size="XS_12,SM_12,MD_8,LG_8" addStyleNames="{style.mainColumn}">
             <b:Row addStyleNames="{style.largeContainer}">
-                <b:Heading size="H3" addStyleNames="{style.titleRight}" text="Datum" ui:field="dateHeading"/>
+                <b:Heading size="H3" addStyleNames="{style.titleRight}" ui:field="dateHeading"/>
             </b:Row>
             <b:Row addStyleNames="{style.largeContainer}">
                 <b:Heading size="H3" addStyleNames="{style.titleRight}" text="[INSERT_UTILIZATION_WIDGET]"/>

@@ -5,9 +5,11 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 import org.gwtbootstrap3.client.ui.Button;
+import org.gwtbootstrap3.client.ui.Heading;
 import org.gwtbootstrap3.client.ui.Row;
 import org.gwtbootstrap3.client.ui.TextBox;
 import org.gwtbootstrap3.client.ui.constants.IconType;
@@ -25,6 +27,8 @@ public class KapaPage extends Composite {
 
     private static KapaPageUiBinder uiBinder = GWT.create(KapaPageUiBinder.class);
 
+    FullCalendar fc = new FullCalendar("kapaCalendar", ViewOption.agendaWeek, false);
+
     @UiField
     Button buttonUp;
 
@@ -39,6 +43,9 @@ public class KapaPage extends Composite {
 
     @UiField
     Row content;
+
+    @UiField
+    Heading dateHeading;
 
     @UiHandler("mySlider")
     void onSlide(SlideEvent<Double> event) {
@@ -72,11 +79,7 @@ public class KapaPage extends Composite {
         buttonUp.setIcon(IconType.ARROW_UP);
         //set Slider
         possibilityPercentage.setText(mySlider.getValue().toString());
-        loadCalendar();
-    }
-
-    private void loadCalendar() {
-        FullCalendar fc = new FullCalendar("some_unique_id", ViewOption.agendaWeek, false);
+        //load calendar
         content.add(fc);
     }
 }
