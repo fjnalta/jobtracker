@@ -10,7 +10,7 @@ private ActivityReportTemplate template;
 	
 	public SelectTemplateOption(ActivityReportTemplate template){
 		this.template = template;
-		this.setText(template.getTemplateName());
+		this.setText(template.getName());
 	}
 
 	public ActivityReportTemplate getTemplate() {

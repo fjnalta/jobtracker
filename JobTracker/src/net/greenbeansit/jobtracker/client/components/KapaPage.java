@@ -5,11 +5,16 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 import org.gwtbootstrap3.client.ui.Button;
+import org.gwtbootstrap3.client.ui.Heading;
+import org.gwtbootstrap3.client.ui.Row;
 import org.gwtbootstrap3.client.ui.TextBox;
 import org.gwtbootstrap3.client.ui.constants.IconType;
+import org.gwtbootstrap3.extras.fullcalendar.client.ui.FullCalendar;
+import org.gwtbootstrap3.extras.fullcalendar.client.ui.ViewOption;
 import org.gwtbootstrap3.extras.slider.client.ui.Slider;
 import org.gwtbootstrap3.extras.slider.client.ui.base.event.SlideEvent;
 
@@ -17,11 +22,12 @@ import org.gwtbootstrap3.extras.slider.client.ui.base.event.SlideEvent;
  * Created by Philipp Minges on 23.05.16.
  */
 public class KapaPage extends Composite {
-    interface KapaPageUiBinder extends UiBinder<Widget, KapaPage>
-    {
+    interface KapaPageUiBinder extends UiBinder<Widget, KapaPage> {
     }
 
     private static KapaPageUiBinder uiBinder = GWT.create(KapaPageUiBinder.class);
+
+    FullCalendar fc = new FullCalendar("kapaCalendar", ViewOption.agendaWeek, false);
 
     @UiField
     Button buttonUp;
@@ -35,16 +41,20 @@ public class KapaPage extends Composite {
     @UiField
     Slider mySlider;
 
+    @UiField
+    Row content;
+
+    @UiField
+    Heading dateHeading;
+
     @UiHandler("mySlider")
-    void onSlide(SlideEvent<Double> event)
-    {
+    void onSlide(SlideEvent<Double> event) {
         possibilityPercentage.setText(event.getValue().toString());
 
     }
 
     @UiHandler("buttonUp")
-    void onClickUp(ClickEvent e)
-    {
+    void onClickUp(ClickEvent e) {
         if (mySlider.getValue() < 100)
             mySlider.setValue(mySlider.getValue() + 1);
         //refresh percentage TextBox
@@ -52,27 +62,24 @@ public class KapaPage extends Composite {
     }
 
     @UiHandler("buttonDown")
-    void onClickDown(ClickEvent e)
-    {
+    void onClickDown(ClickEvent e) {
         if (mySlider.getValue() > 0)
             mySlider.setValue(mySlider.getValue() - 1);
         possibilityPercentage.setText(mySlider.getValue().toString());
     }
 
-    public KapaPage()
-    {
+    public KapaPage() {
         initWidget(uiBinder.createAndBindUi(this));
         initialize();
     }
 
-    private void initialize()
-    {
+    private void initialize() {
         //set Buttons
         buttonDown.setIcon(IconType.ARROW_DOWN);
         buttonUp.setIcon(IconType.ARROW_UP);
         //set Slider
         possibilityPercentage.setText(mySlider.getValue().toString());
+        //load calendar
+        content.add(fc);
     }
-
-
 }

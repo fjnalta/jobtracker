@@ -240,9 +240,9 @@ public interface RestService extends DirectRestService
 	 *            id of the template.
 	 */
 	@DELETE
-	@Path("/users/{userId}/report_templates/{templateId}")
-	void deleteReportTemplate(@PathParam("userId") Integer userId,
-			@PathParam("templateId") Integer templateId);
+	@Path("/users/{userId}/report_templates/{templateName}")
+	void deleteReportTemplate(@PathParam("userId") Integer author,
+			@PathParam("templateName") String name);
 
 	/**
 	 * Gets the employees who have the user with the following ID as supervisor.
