@@ -168,15 +168,14 @@ public class RestServiceImpl implements RestService
 			List<Job> temp = jobService.getByUser(user.getId());
 			if (temp != null)
 			{
-				if (!jobs.containsAll(temp)) // Performance optimizing for
-												// bigger collections
+				List<Integer> keys = new ArrayList<Integer>();
+				for (Job job : temp)
 				{
-					for (Job job : temp)
-					{
-						if (!jobs.contains(job))
-							jobs.add(job);
-					}
+					keys.add(job.getJobNr()*1000+job.getPosNr());
+					if (!jobs.contains(job))
+						jobs.add(job);
 				}
+				user.setAssignedJobs(keys);
 			}
 		}
 		return new ManagerPageRestServiceResponse(users, jobs);

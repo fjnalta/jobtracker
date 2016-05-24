@@ -246,6 +246,7 @@ public interface RestService extends DirectRestService
 
 	/**
 	 * Gets the employees who have the user with the following ID as supervisor.
+	 * Additionally all {@link User}s will have their List assignedJobs filled with their assigned jobs.
 	 * 
 	 * @param supervisorId
 	 *            the ID of the supervisor user.

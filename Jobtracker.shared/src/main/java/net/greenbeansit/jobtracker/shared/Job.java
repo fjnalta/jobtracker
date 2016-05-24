@@ -143,8 +143,15 @@ public class Job implements Serializable {
 		return this.jobNr + "-" + this.posNr + "-" + this.payMode + "|" + this.customerID + "|" + this.desc;
 	}
 
-	public boolean equals(Job otherJob) {
-		return this.jobNr == otherJob.jobNr && this.posNr == otherJob.posNr && this.desc.equals(otherJob.getDesc());
+	public boolean equals(Object obj) {
+		if(obj == null)
+			return false;
+		else if (obj instanceof Job)
+		{
+			Job temp = (Job) obj;
+			return this.jobNr.equals(temp.jobNr) && this.posNr.equals(temp.posNr);
+		} else
+			return false;
 	}
 
 }
