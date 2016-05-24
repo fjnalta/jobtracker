@@ -70,23 +70,76 @@
 		width: 100%;
 		margin: 0;
 	}
+	.infoFieldHeading {
+		margin: 5px;
+	}
+	.infoFieldContainer {
+		margin: 10px;
+	}
+	.infoFieldLabel {
+		width: 30%;
+		float: left;
+		display: inline-block;
+		text-align: left;
+		color: black;
+	}
+	.infoFieldValue {
+		width: 70%;
+		float: right;
+		display: inline-block;
+		text-align: right;
+		color: gray;
+	}
 	</ui:style>
 	<b:Container fluid="true">
 		<b:Row addStyleNames="{style.headerRow}">
 			<g:Anchor text="&lt; Alle Mitarbeiter" href="#manager"
 				addStyleNames="{style.anchorBackward}" />
-			<b:Heading size="H3" addStyleNames="{style.title}" text="[NAME_EMPLOYEE]"
+			<b:Heading size="H3" addStyleNames="{style.title}" text="Jesus Christus"
 				ui:field="titleEmployeeName" />
 		</b:Row>
 		<b:Row addStyleNames="{style.bottomRow}">
 			<b:Column size="XS_12,SM_12,MD_4,LG_4" addStyleNames="{style.mainColumn}">
 				<b:Row addStyleNames="{style.smallContainer}">
-
+					<b:Heading size="H4" text="Information" addStyleNames="{style.infoFieldHeading}"/>
+					<b.html:ClearFix addStyleNames="{style.infoFieldContainer}">
+						<b.html:Span text="Name:" addStyleNames="{style.infoFieldLabel}"/>
+						<b.html:Span text="Christus" ui:field="textEmployeeName" addStyleNames="{style.infoFieldValue}"/>
+					</b.html:ClearFix>
+					<b.html:ClearFix addStyleNames="{style.infoFieldContainer}">
+						<b.html:Span text="Vorname:" addStyleNames="{style.infoFieldLabel}"/>
+						<b.html:Span text="Jesus" ui:field="textEmployeeSurName" addStyleNames="{style.infoFieldValue}"/>
+					</b.html:ClearFix>
+					<b.html:ClearFix addStyleNames="{style.infoFieldContainer}">
+						<b.html:Span text="Abteilung:" addStyleNames="{style.infoFieldLabel}"/>
+						<b.html:Span text="Kundendienst" ui:field="textEmployeeDivision" addStyleNames="{style.infoFieldValue}"/>
+					</b.html:ClearFix>
+				</b:Row>
+				<b:Row addStyleNames="{style.smallContainer}">
+					<widgets:UtilizationWidget/>
 				</b:Row>
 			</b:Column>
 			<b:Column size="XS_12,SM_12,MD_8,LG_8" addStyleNames="{style.mainColumn}">
 				<b:Row addStyleNames="{style.largeContainer}">
+					<b:NavTabs>
+						<b:TabListItem active="true" dataTarget="#tab1"
+							text="Tätigkeiten" />
+						<b:TabListItem dataTarget="#tab2" text="Stundennachweis" />
+						<b:TabListItem dataTarget="#tab3" text="Kapaplanung" />
+					</b:NavTabs>
+					<b:TabContent>
+						<b:TabPane b:id="tab1">
+							<b.html:ClearFix ui:field="activityChartContainer">
+								
+							</b.html:ClearFix>
+						</b:TabPane>
+						<b:TabPane b:id="tab2">
 
+						</b:TabPane>
+						<b:TabPane b:id="tab3">
+
+						</b:TabPane>
+					</b:TabContent>
 				</b:Row>
 			</b:Column>
 		</b:Row>
