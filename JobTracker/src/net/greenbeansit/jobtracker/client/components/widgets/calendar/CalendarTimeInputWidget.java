@@ -2,7 +2,9 @@ package net.greenbeansit.jobtracker.client.components.widgets.calendar;
 
 import java.awt.List;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 import org.gwtbootstrap3.client.ui.Button;
 import org.gwtbootstrap3.client.ui.TextBox;
@@ -317,15 +319,15 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 	@Override
 	public void update() {
 		dateStart.setText(dateParser(calendarHandler.calendar.currentEvent.getISOStart()));
-		dateEnd.setText(dateParser(calendarHandler.calendar.currentEvent.getISOStart()));
+		dateEnd.setText(dateParser(calendarHandler.calendar.currentEvent.getISOEnd()));
 		eventStart.setText(timeParser(calendarHandler.calendar.currentEvent.getISOStart()));
 		eventEnd.setText(timeParser(calendarHandler.calendar.currentEvent.getISOEnd()));
 		pause.setText("01:00");
 		workTime.setText(calculateDuration());
 	}
 
-	private Date getDateFromTextBox() {
-		String text = dateStart.getText();
+	private Date getDateFromTextBox(TextBox box) {
+		String text = box.getText();
 		int day = Integer.parseInt(text.substring(0, 2));
 		int month = Integer.parseInt(text.substring(3, text.length()));
 		return new Date(2016, month, day);
@@ -333,12 +335,13 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 
 	@Override
 	public void notifyHandler() {
+		//Window.alert(calendarHandler.getISO8601StringForDate(getDateFromTextBox(dateStart), createTimeFromText(eventEnd.getText())));
 		calendarHandler.calendar.removeEvent(calendarHandler.calendar.currentEvent.getId());
 		Event e = new Event(calendarHandler.calendar.currentEvent.getId(),
 				calendarHandler.calendar.currentEvent.getTitle(), true, true, true);
-		e.setStart(calendarHandler.getISO8601StringForDate(getDateFromTextBox(),
+		e.setStart(calendarHandler.getISO8601StringForDate(getDateFromTextBox(dateStart),
 				createTimeFromText(eventStart.getText())));
-		e.setEnd(calendarHandler.getISO8601StringForDate(getDateFromTextBox(), createTimeFromText(eventEnd.getText())));
+		e.setEnd(calendarHandler.getISO8601StringForDate(getDateFromTextBox(dateEnd), createTimeFromText(eventEnd.getText())));
 		calendarHandler.calendar.currentEvent = e;
 		calendarHandler.calendar.addEvent(calendarHandler.calendar.currentEvent);
 		calendarHandler.updateObserver(this);
@@ -472,15 +475,41 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 		notifyHandler();
 	}
 	
+	@UiHandler("buttonUpDateStart")
+	public void buttonUpDateStartClicked(ClickEvent e){
+		increaseDate(dateStart);
+		notifyHandler();
+	}
+	
+	@UiHandler("buttonDownDateStart")
+	public void buttonDownDateStartClicked(ClickEvent e){
+		decreaseDate(dateStart);
+		notifyHandler();
+	}
+	
+	@UiHandler("buttonDownDateEnd")
+	public void buttonDownDateEndClicked(ClickEvent e){
+		decreaseDate(dateEnd);
+		notifyHandler();
+	}
+	
+	@UiHandler("buttonUpDateEnd")
+	public void buttonUpDateEndClicked(ClickEvent e){
+		increaseDate(dateEnd);
+		notifyHandler();
+	}
+	
 	@UiHandler("buttonBook")
 	public void buttonBookClicked(ClickEvent e){
 		int startTime = createTimeFromText(eventStart.getText());
 		int duration = createTimeFromText(workTime.getText());
 		int breakTime = createTimeFromText(pause.getText());
-		Date date = new Date();
-		ActivityReport tmp = new ActivityReport(0, 0, 0, 0, 0, "", date, startTime, duration, breakTime);
+		Date date = getDateFromBox(dateStart);
+		ActivityReport tmp = new ActivityReport(0, 0, 0, 0, 0,"", date, startTime, duration, breakTime);
 		handler.saveReport(tmp);
 	}
+	
+	
 	
 	private int createTimeFromText(String time) {
 		String[] temp2 = time.split(":");
@@ -510,5 +539,24 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 		// TODO Auto-generated method stub
 		
 	}
+	
 
+	private Date getDateFromBox(TextBox dateTextBox){
+		int year = 116;
+		String[] split = dateTextBox.getText().split("\\.");
+		int month = Integer.parseInt(split[1]);
+		int day = Integer.parseInt(split[0]);
+		return new Date(year,month,day);
+	}
+	
+	public String increaseDate(TextBox dateTextBox){
+		Date dt = getDateFromBox(dateTextBox);
+		dt.setDate(dt.getDate()+1);
+		return dt.getDate() + "." + dt.getMonth();
+	}
+	
+	public String decreaseDate(TextBox dateTextBox){
+		return null;
+	}
+	
 }
