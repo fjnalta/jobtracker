@@ -89,8 +89,9 @@ public class ActivityReportServiceJpa implements ActivityReportDataService
 	{
 		if (entity == null)
 			return null;
-		int begin = convert(entity.getBeginTime());
-		int duration = convert(entity.getEndTime()) - begin;
+		Integer begin = convert(entity.getBeginTime());
+		System.out.println(entity.getBeginTime());
+		Integer duration = convert(entity.getEndTime()) - begin;
 		return new ActivityReport(entity.getId(), entity.getTaskId(),
 				entity.getJobNo(), entity.getAuthor(), entity.getText(), //TODO check jobnr-posnr
 				entity.getBeginDate(), begin, duration, entity.getBreakTime());
