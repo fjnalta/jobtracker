@@ -68,8 +68,8 @@
         <b:Column size="XS_12,SM_12,MD_4,LG_4" addStyleNames="{style.mainColumn}">
             <b:Row addStyleNames="{style.smallContainer}">
                 <b:NavTabs>
-                    <b:TabListItem active="true" dataTarget="#newProject" text="neues Projekt"/>
-                    <b:TabListItem dataTarget="#myProjects" text="meine Projekte"/>
+                    <b:TabListItem active="true" dataTarget="#newProject" text="Neues Projekt"/>
+                    <b:TabListItem dataTarget="#myProjects" text="Meine Projekte"/>
                 </b:NavTabs>
                 <b:TabContent>
                     <b:TabPane active="true" b:id="newProject">
