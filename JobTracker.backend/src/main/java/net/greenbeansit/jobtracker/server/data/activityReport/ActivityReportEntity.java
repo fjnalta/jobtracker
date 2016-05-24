@@ -32,8 +32,8 @@ public class ActivityReportEntity implements Serializable
 	private Time				endTime;
 	private Integer				breakTime;
 	private Integer				taskId;
-	private Integer				jobNr;
-	private Integer				posNr;
+	private Integer				jobNo;
+	private Integer				posNo;
 
 	public ActivityReportEntity()
 	{
@@ -42,7 +42,7 @@ public class ActivityReportEntity implements Serializable
 
 	public ActivityReportEntity(Integer author, String text, Date beginDate,
 			Time beginTime, Time endTime, Integer breakTime, Integer taskId,
-			Integer jobNr, Integer posNr)
+			Integer jobNo, Integer posNo)
 	{
 		this.author = author;
 		this.text = text;
@@ -51,8 +51,8 @@ public class ActivityReportEntity implements Serializable
 		this.endDate = null;
 		this.endTime = endTime;
 		this.taskId = taskId;
-		this.jobNr = jobNr;
-		this.posNr = posNr;
+		this.jobNo = jobNo;
+		this.posNo = posNo;
 	}
 
 	public Integer getId()
@@ -154,25 +154,25 @@ public class ActivityReportEntity implements Serializable
 	}
 
 	@Column(name = "job_no")
-	public Integer getJobNr()
+	public Integer getJobNo()
 	{
-		return jobNr;
+		return jobNo;
 	}
 
-	public void setJobNr(Integer jobNr)
+	public void setJobNo(Integer jobNo)
 	{
-		this.jobNr = jobNr;
+		this.jobNo = jobNo;
 	}
 
 	@Column(name = "pos_no")
-	public Integer getPosNr()
+	public Integer getPosNo()
 	{
-		return posNr;
+		return posNo;
 	}
 
-	public void setPosNr(Integer posNr)
+	public void setPosNo(Integer posNo)
 	{
-		this.posNr = posNr;
+		this.posNo = posNo;
 	}
 
 }
