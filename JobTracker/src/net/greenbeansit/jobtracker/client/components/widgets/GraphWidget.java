@@ -457,28 +457,28 @@ public class GraphWidget extends Composite implements LogicObservable {
 		dataTable.addColumn(ColumnType.STRING, "Task");
 		dataTable.addColumn(ColumnType.NUMBER, "Hours per Day");
 		dataTable.addRows(5);
-		dataTable.setValue(0, 0, "Work");
+		dataTable.setValue(0, 0, "Task 1");
 		dataTable.setValue(0, 1, 11);
-		dataTable.setValue(1, 0, "Sleep");
+		dataTable.setValue(1, 0, "Task 2");
 		dataTable.setValue(1, 1, 7);
-		dataTable.setValue(2, 0, "Watch TV");
+		dataTable.setValue(2, 0, "Task  3");
 		dataTable.setValue(2, 1, 3);
-		dataTable.setValue(3, 0, "Eat");
+		dataTable.setValue(3, 0, "Task 4");
 		dataTable.setValue(3, 1, 2);
-		dataTable.setValue(4, 0, "Commute");
+		dataTable.setValue(4, 0, "Task 5");
 		dataTable.setValue(4, 1, 1);
 
 		// Set options
 		PieChartOptions options = PieChartOptions.create();
-		options.setBackgroundColor("#f0f0f0");
 
 		// options.setColors(colors);
 		options.setFontName("Tahoma");
 		options.setIs3D(false);
+		options.setBackgroundColor("white");
 		options.setPieResidueSliceColor("#000000");
 		options.setPieResidueSliceLabel("Others");
 		options.setSliceVisibilityThreshold(0.1);
-		options.setTitle("So, how was your day?");
+		options.setTitle("Project utilization");
 
 		// Draw the chart
 		piechart.draw(dataTable, options);
