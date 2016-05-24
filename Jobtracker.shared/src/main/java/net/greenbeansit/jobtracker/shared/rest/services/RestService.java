@@ -228,8 +228,7 @@ public interface RestService extends DirectRestService
 	 */
 	@POST
 	@Path("/users/{userId}/report_templates/")
-	void saveReportTemplate(@PathParam("userId") Integer userId,
-			ActivityReportTemplate template);
+	void saveReportTemplate(@PathParam("userId") Integer userId, ActivityReportTemplate template);
 
 	/**
 	 * Removes the specified {@link ActivityReportTemplate} from the database.

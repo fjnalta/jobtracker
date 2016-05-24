@@ -22,7 +22,7 @@ import net.greenbeansit.jobtracker.shared.rest.services.RestService.ManagerPageR
 /**
  * Dummy implementation of the {@link RestService} interface.
  * 
- * @author Max Blatt & Alexander Kirilyuk
+ * @author Max Blatt & Alexander Kirilyuk & Philipp Minges
  */
 public class RestServiceImpl implements RestService
 {
