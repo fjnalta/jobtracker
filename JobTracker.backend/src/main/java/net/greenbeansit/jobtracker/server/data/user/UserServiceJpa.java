@@ -98,8 +98,8 @@ public class UserServiceJpa implements UserDataService
 	public void updateYearUtilization(Integer employeeId, Integer year)
 	{
 		UserEntity user = repository.findById(employeeId);
-		user.setUtilization(getUtilization(employeeId,
-				new Date(year, 1, 1), new Date(year, 12, 30)));
+		user.setUtilization(Math.max(0, getUtilization(employeeId,
+				new Date(year-1900, 0, 1), new Date(year-1900, 11, 30))));
 		user.setUtilizationYear(year);
 		repository.save(user);
 	}

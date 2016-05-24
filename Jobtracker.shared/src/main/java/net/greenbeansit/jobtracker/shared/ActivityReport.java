@@ -20,7 +20,7 @@ public class ActivityReport implements Serializable
 	private Integer				jobNr;
 	private Integer				posNr;
 	private Integer				authorId;
-	
+
 	private String				text;
 	private Date				date;
 	private Integer				startTime;
@@ -44,8 +44,10 @@ public class ActivityReport implements Serializable
 	 *            id of this ActivityReport.
 	 * @param taskId
 	 *            id of the corresponding task.
-	 * @param jobId
-	 *            id of the corresponding job.
+	 * @param jobNr
+	 *            jobNr of the corresponding job.
+	 * @param posNr
+	 *            posNr of the corresponding job
 	 * @param authorId
 	 *            of the author.
 	 * @param text
@@ -60,12 +62,13 @@ public class ActivityReport implements Serializable
 	 *            duration of breaks in minutes.
 	 */
 	public ActivityReport(Integer id, Integer taskId, Integer jobNr,
-			Integer authorId, String text, Date date, Integer startTime,
-			Integer duration, Integer breakTime)
+			Integer posNr, Integer authorId, String text, Date date,
+			Integer startTime, Integer duration, Integer breakTime)
 	{
 		this.setId(id);
 		this.setTaskId(taskId);
 		this.setJobNr(jobNr);
+		this.setPosNr(posNr);
 		this.setAuthor(authorId);
 		this.setText(text);
 		this.setDate(date);
@@ -91,8 +94,8 @@ public class ActivityReport implements Serializable
 
 	public void setDuration(Integer duration)
 	{
-		if (duration < 1 || startTime + duration > 1440)
-			throw (new IllegalArgumentException());
+		// if (duration < 1 || this.startTime + duration > 1440)
+		// throw (new IllegalArgumentException());
 		this.duration = duration;
 	}
 
@@ -103,8 +106,8 @@ public class ActivityReport implements Serializable
 
 	public void setStartTime(Integer startTime)
 	{
-		if (startTime >= 1440)
-			throw (new IllegalArgumentException());
+		// if (startTime >= 1440)
+		// throw (new IllegalArgumentException());
 
 		this.startTime = startTime;
 	}
@@ -116,9 +119,10 @@ public class ActivityReport implements Serializable
 
 	public void setEndTime(Integer endTime)
 	{
-		if (endTime - startTime <= 0)
-			throw (new IllegalArgumentException());
-		this.duration = endTime - startTime;
+		if (this.startTime != null)
+			this.duration = endTime - this.startTime;
+		// if (endTime - startTime <= 0)
+		// throw (new IllegalArgumentException());
 	}
 
 	public Integer getAuthor()
@@ -146,7 +150,7 @@ public class ActivityReport implements Serializable
 	@SuppressWarnings("deprecation")
 	public void setDate(Integer year, Integer month, Integer day)
 	{
-		this.date = new Date(year, month, day);
+		this.date = new Date(year - 1900, month - 1, day);
 	}
 
 	public Integer getBreakTime()
@@ -156,8 +160,8 @@ public class ActivityReport implements Serializable
 
 	public void setBreakTime(Integer breakTime)
 	{
-		if (breakTime < 0)
-			throw (new IllegalArgumentException());
+//		if (breakTime < 0)
+//			throw (new IllegalArgumentException());
 		this.breakTime = breakTime;
 	}
 
@@ -181,19 +185,23 @@ public class ActivityReport implements Serializable
 		this.taskId = taskId;
 	}
 
-	public Integer getPosNr() {
+	public Integer getPosNr()
+	{
 		return posNr;
 	}
 
-	public void setPosNr(Integer jobPosNr) {
+	public void setPosNr(Integer jobPosNr)
+	{
 		this.posNr = jobPosNr;
 	}
 
-	public Integer getJobNr() {
+	public Integer getJobNr()
+	{
 		return jobNr;
 	}
 
-	public void setJobNr(Integer jobNr) {
+	public void setJobNr(Integer jobNr)
+	{
 		this.jobNr = jobNr;
 	}
 
