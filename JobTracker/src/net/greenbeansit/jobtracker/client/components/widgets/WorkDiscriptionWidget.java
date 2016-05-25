@@ -118,7 +118,6 @@ public class WorkDiscriptionWidget extends Composite implements LogicObservable
 		ActivityReportTemplate template = new ActivityReportTemplate();
 		if(textDiscription.getText().length()>0){
 			template.setText(textDiscription.getText());
-			template.setName(textName.getText());
 			template.setTaskId(null);
 			handler.setCurrentTemplate(template);
 		}else{
