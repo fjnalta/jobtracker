@@ -42,10 +42,9 @@ public class FullCalendarCustomize extends FullCalendar {
 		return super.createHandlerManager();
 	}
 
-	Event currentEvent;
+	ActivityReportEvent currentEvent;
 
-	@Override
-	public void addEvent(Event event) {
+	public void addEvent(ActivityReportEvent event) {
 		// TODO Auto-generated method stub
 		super.addEvent(event);
 		this.currentEvent = event;

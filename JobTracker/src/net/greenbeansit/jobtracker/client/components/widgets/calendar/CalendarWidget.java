@@ -58,7 +58,7 @@ public class CalendarWidget extends Composite implements CalendarObserver,LogicO
 		handler.setCalendar(this);
 
 		Timer t = new Timer() {
-			String eventTitel = "new Event";
+			String eventTitel = "Job Description";
 			int titleNumber;
 			String eventID;
 
@@ -77,9 +77,9 @@ public class CalendarWidget extends Composite implements CalendarObserver,LogicO
 			 *            Title of the Event.
 			 * @return new Event
 			 */
-			private Event createEvent(String title) {
+			private ActivityReportEvent createEvent(String title) {
 				updateId();
-				return (new Event(eventID, title));
+				return (new ActivityReportEvent(eventID, title));
 			}
 
 			@Override
@@ -118,7 +118,6 @@ public class CalendarWidget extends Composite implements CalendarObserver,LogicO
 				
 				calendarHandler.registerCalendar(calendar);
 				handler.loadAllReports();
-				loadActvityReports();
 			}
 
 			private ClickAndHoverConfig getClickAndHoverConfig() {
@@ -141,7 +140,7 @@ public class CalendarWidget extends Composite implements CalendarObserver,LogicO
 							JavaScriptObject viewObject) {
 						// Event e = new Event(calendarEvent);
 						// calendar.removeEvent(e.getId());
-						Event e = new Event(calendarEvent);
+						ActivityReportEvent e = new ActivityReportEvent(calendarEvent);
 						calendar.currentEvent = e;
 						notifyHandler();
 					}
@@ -165,7 +164,7 @@ public class CalendarWidget extends Composite implements CalendarObserver,LogicO
 					public void select(JavaScriptObject start, JavaScriptObject end, NativeEvent event,
 							JavaScriptObject viewObject) {
 						updateId();
-						Event tmp = new Event(eventID, eventTitel);
+						ActivityReportEvent tmp = new ActivityReportEvent(eventID, eventTitel);
 						tmp.setStart(start);
 						tmp.setEnd(end);
 						unselect(viewObject, event);
@@ -228,8 +227,8 @@ public class CalendarWidget extends Composite implements CalendarObserver,LogicO
 						// .alert(nativeEvent.getCharCode() + " " + '\u0061');
 						if (nativeEvent.getAltKey()) {
 							updateId();
-							Event dragEvent = new Event(calendarEvent);
-							Event oldEvent = createEvent(dragEvent.getTitle());
+							ActivityReportEvent dragEvent = new ActivityReportEvent(calendarEvent);
+							ActivityReportEvent oldEvent = createEvent(dragEvent.getTitle());
 
 							oldEvent.setStart(dragEvent.getISOStart());
 							oldEvent.setEnd(dragEvent.getISOEnd());
@@ -263,19 +262,7 @@ public class CalendarWidget extends Composite implements CalendarObserver,LogicO
 
 
 	
-	/**
-	 * (Yoruba) Le ti wa ni paarẹ ti o ba ti o ti wa ni ko si ohun to nilo
-	 */
-	public void loadActvityReports() {
-		ArrayList<ActivityReport> reports = new ArrayList<ActivityReport>();
-		reports.add(new ActivityReport(0, 01, 312302, 303, 1, "ersterJob", new Date(116, 05, 9), 480, 180, 60));
-		reports.add(new ActivityReport(1, 11, 123412, 404, 1, "zweiterJob", new Date(116, 05, 10), 540, 180, 60));
-		reports.add(new ActivityReport(2, 21, 124522, 101, 1, "dritterJob", new Date(116, 05, 11), 600, 180, 60));
-		reports.add(new ActivityReport(3, 31, 315422, 123, 1, "vierterJob", new Date(116, 05, 12), 660, 180, 60));
 
-		addActvityReports(reports);
-		calendar.render();
-	}
 	
 	
 	/**
@@ -285,7 +272,7 @@ public class CalendarWidget extends Composite implements CalendarObserver,LogicO
 	public void addActvityReports(List<ActivityReport> reports) {
 		if(!reports.isEmpty()){
 			for (ActivityReport ap : reports) {
-				Event e = new Event(ap.getId() + "", ap.getText(), true, true, true);
+				ActivityReportEvent e = new ActivityReportEvent(ap,ap.getId() + "", ap.getText(), true, true, true);
 				ap.getDate().setYear(2016);
 				e.setStart(calendarHandler.getISO8601StringForDate(ap.getDate(), ap.getStartTime()));
 				e.setEnd(calendarHandler.getISO8601StringForDate(ap.getDate(), ap.getEndTime()));

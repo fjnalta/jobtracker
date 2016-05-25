@@ -17,17 +17,7 @@
 	}
 	
 	.scrollPanel {
-		scrollbar-3dlight-color: red;
-		scrollbar-arrow-color: white;
-		scrollbar-base-color: grey;
-		scrollbar-darkshadow-color: yellow;
-		scrollbar-face-color: black;
-		scrollbar-highlight-color: greeb;
-		scrollbar-shadow-color: blue;
-		margin-left: -10px;
-		margin-right: -10px;
-		margin-top: 0;
-		margin-bottom: 0;
+		
 	}
 	
 	</ui:style>
