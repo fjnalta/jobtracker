@@ -29,7 +29,9 @@
 	border: none;
 	border-radius: 20px;
 }
-
+.label-week{
+	color:orange;
+}
 td {
 	padding-top: 0;
 	margin-top: 0;
