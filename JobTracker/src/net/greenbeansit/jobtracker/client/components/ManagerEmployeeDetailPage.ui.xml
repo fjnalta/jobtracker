@@ -123,8 +123,8 @@
 				<b:Row addStyleNames="{style.largeContainer}">
 					<b:NavTabs>
 						<b:TabListItem active="true" dataTarget="#tab1"
-							text="Tätigkeiten" />
-						<b:TabListItem dataTarget="#tab2" text="Stundennachweis" />
+							text="Projekte" />
+						<b:TabListItem dataTarget="#tab2" text="Tätigkeiten" />
 						<b:TabListItem dataTarget="#tab3" text="Kapaplanung" />
 					</b:NavTabs>
 					<b:TabContent>
