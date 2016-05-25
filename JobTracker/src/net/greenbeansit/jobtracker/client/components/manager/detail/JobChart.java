@@ -97,7 +97,7 @@ public class JobChart extends Composite
 					@Override
 					public void onReady(ReadyEvent event)
 					{
-						piechart.redraw();
+						
 					}
 				});
 			}

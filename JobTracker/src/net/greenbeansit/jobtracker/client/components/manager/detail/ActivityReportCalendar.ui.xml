@@ -6,7 +6,6 @@
 		margin: 5px;
 	}
 	</ui:style>
-	<h:ClearFix ui:field="activityChartContainer" addStyleNames="{style.container}">
-
+	<h:ClearFix ui:field="container" addStyleNames="{style.container}">
 	</h:ClearFix>
 </ui:UiBinder> 
