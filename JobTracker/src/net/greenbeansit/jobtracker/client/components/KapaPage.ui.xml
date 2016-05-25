@@ -20,6 +20,7 @@
             padding: 10px;
             background-color: #ffffff;
         }
+
         .smallContainer {
             margin: 10px 10px;
             padding: 10px;
@@ -53,6 +54,11 @@
             padding-left: 2px;
         }
 
+        .button {
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+
         /*Title*/
         .title {
             float: right;
@@ -67,7 +73,7 @@
     <b:Container fluid="true">
         <b:Column size="XS_12,SM_12,MD_4,LG_4" addStyleNames="{style.mainColumn}">
             <b:Row addStyleNames="{style.smallContainer}">
-                <b:NavTabs>
+                <b:NavTabs justified="true">
                     <b:TabListItem active="true" dataTarget="#newProject" text="Neues Projekt"/>
                     <b:TabListItem dataTarget="#myProjects" text="Meine Projekte"/>
                 </b:NavTabs>
@@ -81,7 +87,7 @@
                                                ui:field="textIdentifier"/>
                                 </b:FormGroup>
                                 <b:FormGroup>
-                                    <b:FormLabel for="projectDesc">Projektbeschreibung</b:FormLabel>
+                                    <b:FormLabel for="projectDesc">Tätigkeitsbeschreibung</b:FormLabel>
                                     <b:TextArea placeholder="Bitte eintragen..." b:id="projectDesc"
                                                 addStyleNames="{style.textArea}" ui:field="textDiscription"/>
                                 </b:FormGroup>
@@ -98,7 +104,7 @@
                                     </select:Select>
                                 </b:FormGroup>
                                 <b:FormGroup>
-                                    <b:FormLabel for="projectDesc">Projektbeschreibung</b:FormLabel>
+                                    <b:FormLabel for="projectDesc">Tätigkeitsbeschreibung</b:FormLabel>
                                     <b:TextArea placeholder="Bitte eintragen..." b:id="projectDesc"
                                                 addStyleNames="{style.textArea}" readOnly="true"/>
                                 </b:FormGroup>
@@ -106,18 +112,34 @@
                         </b:Form>
                     </b:TabPane>
                 </b:TabContent>
-                <b:FormGroup>
-                    <b:FormLabel for="customer">Kunde</b:FormLabel>
-                    <select:Select b:id="customer">
-                        <select:Option/>
-                    </select:Select>
-                </b:FormGroup>
-                <b:FormGroup>
-                    <b:FormLabel for="job">JobNr.</b:FormLabel>
-                    <select:Select b:id="job">
-                        <select:Option/>
-                    </select:Select>
-                </b:FormGroup>
+                <b:NavTabs justified="true">
+                    <b:TabListItem active="true" dataTarget="#createCustomer" text="Kunde erstellen"/>
+                    <b:TabListItem dataTarget="#loadCustomer" text="Kunde wählen"/>
+                </b:NavTabs>
+                <b:TabContent>
+                    <b:TabPane active="true" b:id="createCustomer">
+                        <b:Form>
+                            <b:FieldSet>
+                                <b:FormGroup>
+                                    <b:FormLabel>Kundenname</b:FormLabel>
+                                    <b:TextBox placeholder="Bitte eintragen..."/>
+                                </b:FormGroup>
+                            </b:FieldSet>
+                        </b:Form>
+                    </b:TabPane>
+                    <b:TabPane b:id="loadCustomer">
+                        <b:Form>
+                            <b:FieldSet>
+                                <b:FormGroup>
+                                    <b:FormLabel>Kunde</b:FormLabel>
+                                    <select:Select title="Kunde auswählen...">
+                                        <select:Option/>
+                                    </select:Select>
+                                </b:FormGroup>
+                            </b:FieldSet>
+                        </b:Form>
+                    </b:TabPane>
+                </b:TabContent>
                 <b:FormGroup>
                     <b:FormLabel for="slider">Wahrscheinlichkeit</b:FormLabel>
                     <b:Column size="XS_9,SM_9,MD_9,LG_9" addStyleNames="{style.possibilitySlider}">
@@ -151,6 +173,9 @@
             </b:Row>
             <b:Row addStyleNames="{style.largeContainer}" ui:field="content">
                 <!-- Full Calendar -->
+            </b:Row>
+            <b:Row addStyleNames="{style.largeContainer}">
+                <b:Button type="PRIMARY" text="Buchen" pull="RIGHT"/>
             </b:Row>
         </b:Column>
     </b:Container>
