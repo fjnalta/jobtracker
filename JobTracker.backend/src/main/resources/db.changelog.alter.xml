@@ -1,12 +1,12 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
 
-	<changeSet id="20160509-CREATEPseudoJob" author="phil">
-		<sql>
-			<![CDATA[
+    <changeSet id="20160509-CREATEPseudoJob" author="phil">
+        <sql>
+            <![CDATA[
 				DROP TABLE IF EXISTS `pseudo_job`;
 				CREATE TABLE `pseudo_job`
 				(
@@ -16,11 +16,11 @@
 					PRIMARY KEY (`id`)
 				);
 			]]>
-		</sql>
-	</changeSet>
-	<changeSet id="20160509-CREATECustomer" author="phil">
-		<sql>
-			<![CDATA[
+        </sql>
+    </changeSet>
+    <changeSet id="20160509-CREATECustomer" author="phil">
+        <sql>
+            <![CDATA[
 				CREATE TABLE `customer`
 				(
 					`id` INT NOT NULL AUTO_INCREMENT,
@@ -28,11 +28,11 @@
 					PRIMARY KEY (`id`)
 				);
 			]]>
-		</sql>
-	</changeSet>
-	<changeSet id="20160509-ALTERJob" author="phil">
-		<sql>
-			<![CDATA[
+        </sql>
+    </changeSet>
+    <changeSet id="20160509-ALTERJob" author="phil">
+        <sql>
+            <![CDATA[
 				CREATE TABLE `job`
 				(
 					`job_no` INT NOT NULL,
@@ -47,11 +47,11 @@
 					FOREIGN KEY (`customer_id`) REFERENCES customer(`id`)
 				);
 			]]>
-		</sql>
-	</changeSet>
-	<changeSet id="20160509-CREATEUser-DROPEmployee" author="phil">
-		<sql>
-			<![CDATA[
+        </sql>
+    </changeSet>
+    <changeSet id="20160509-CREATEUser-DROPEmployee" author="phil">
+        <sql>
+            <![CDATA[
 				CREATE TABLE `user`
 				(
 					`id` INT NOT NULL AUTO_INCREMENT,
@@ -62,11 +62,11 @@
 					FOREIGN KEY (`supervisor`) REFERENCES user(`id`)
 				);
 			]]>
-		</sql>
-	</changeSet>
-	<changeSet id="20160509-CREATEJob_Task" author="phil">
-		<sql>
-			<![CDATA[
+        </sql>
+    </changeSet>
+    <changeSet id="20160509-CREATEJob_Task" author="phil">
+        <sql>
+            <![CDATA[
 				CREATE TABLE `job_task`
 				(
 					`id` INT NOT NULL AUTO_INCREMENT,
@@ -77,11 +77,11 @@
 					FOREIGN KEY (`job_no`, `pos_no`) REFERENCES job(`job_no`, `pos_no`)
 				);
 			]]>
-		</sql>
-	</changeSet>
-	<changeSet id="20160509-CREATEUserJob" author="phil">
-		<sql>
-			<![CDATA[
+        </sql>
+    </changeSet>
+    <changeSet id="20160509-CREATEUserJob" author="phil">
+        <sql>
+            <![CDATA[
 				CREATE TABLE `user_job`
 				(
 					`user_id` INT NOT NULL,
@@ -93,11 +93,11 @@
 					FOREIGN KEY (`job_no`, `pos_no`) REFERENCES job(`job_no`, `pos_no`)
 				);
 			]]>
-		</sql>
-	</changeSet>
-	<changeSet id="20160509-CREATEActivityReportTemplate" author="phil">
-		<sql>
-			<![CDATA[
+        </sql>
+    </changeSet>
+    <changeSet id="20160509-CREATEActivityReportTemplate" author="phil">
+        <sql>
+            <![CDATA[
 				CREATE TABLE `activity_report_template`
 				(
 					`author` INT NOT NULL,
@@ -108,11 +108,11 @@
 					FOREIGN KEY (`task_id`) REFERENCES job_task(`id`)
 				);
 			]]>
-		</sql>
-	</changeSet>
-	<changeSet id="20160509-CREATEUtilizationWeek" author="phil">
-		<sql>
-			<![CDATA[
+        </sql>
+    </changeSet>
+    <changeSet id="20160509-CREATEUtilizationWeek" author="phil">
+        <sql>
+            <![CDATA[
 				CREATE TABLE `utilization_week`
 				(
 					`id` INT NOT NULL AUTO_INCREMENT,
@@ -128,11 +128,11 @@
 					FOREIGN KEY (`pseudo_job_id`) REFERENCES pseudo_job(`id`)
 				);
 			]]>
-		</sql>
-	</changeSet>
-	<changeSet id="20160509-ALTERActivityReport" author="phil">
-		<sql>
-			<![CDATA[
+        </sql>
+    </changeSet>
+    <changeSet id="20160509-ALTERActivityReport" author="phil">
+        <sql>
+            <![CDATA[
 				CREATE TABLE `activity_report`
 				(
 					`id` INT NOT NULL AUTO_INCREMENT,
@@ -150,27 +150,43 @@
 					FOREIGN KEY (`job_no`, `pos_no`) REFERENCES job(`job_no`, `pos_no`)
 				);
 			]]>
-		</sql>
-	</changeSet>
-	<changeSet id="20160523-ALTERActivityReport" author="mike">
-		<sql>
-			<![CDATA[
+        </sql>
+    </changeSet>
+    <changeSet id="20160523-ALTERActivityReport" author="mike">
+        <sql>
+            <![CDATA[
 				ALTER TABLE `activity_report` ADD COLUMN `break_time` INT;
 			]]>
-		</sql>
-	</changeSet>
-	<changeSet id="20160523-ALTERUser" author="mike">
-		<sql>
-			<![CDATA[
+        </sql>
+    </changeSet>
+    <changeSet id="20160523-ALTERUser" author="mike">
+        <sql>
+            <![CDATA[
 				ALTER TABLE `user` ADD COLUMN `utilization` INT UNSIGNED;
 			]]>
-		</sql>
-	</changeSet>
-	<changeSet id="20160524-ALTERUser" author="mike">
-		<sql>
-			<![CDATA[
+        </sql>
+    </changeSet>
+    <changeSet id="20160524-ALTERUser" author="mike">
+        <sql>
+            <![CDATA[
 				ALTER TABLE `user` ADD COLUMN `utilization_year` INT;
 			]]>
-		</sql>
-	</changeSet>
+        </sql>
+    </changeSet>
+    <changeSet id="20160524-ALTERPseudo_Job" author="phil">
+        <sql>
+            <![CDATA[
+				ALTER TABLE `pseudo_job` ADD COLUMN `possibility` INT NOT NULL;
+				ALTER TABLE `pseudo_job` ADD COLUMN `job_no` INT;
+			]]>
+        </sql>
+    </changeSet>
+    <changeSet id="20160524-AddForeignKeyPseudo_Job" author="phil">
+        <sql>
+            <![CDATA[
+				ALTER TABLE `pseudo_job`
+                ADD FOREIGN KEY (`job_no`) REFERENCES job(`job_no`);
+			]]>
+        </sql>
+    </changeSet>
 </databaseChangeLog>
