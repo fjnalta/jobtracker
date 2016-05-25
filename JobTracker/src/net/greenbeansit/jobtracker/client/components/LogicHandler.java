@@ -209,7 +209,7 @@ public class LogicHandler {
 				RestClient.build(new SuccessFunction<ActivityReport>() {
 					@Override
 					public void onSuccess(Method method, ActivityReport response) {
-						NotifyHelper.successMessage("Template saved");
+						NotifyHelper.successMessage("Report saved");
 					}
 
 					@Override
