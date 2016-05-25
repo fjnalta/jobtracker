@@ -11,7 +11,7 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 
-import net.greenbeansit.jobtracker.client.components.ProjectPage;
+import net.greenbeansit.jobtracker.client.components.project.ProjectPage;
 
 public class ProjectBudgetBar extends Composite
 {
