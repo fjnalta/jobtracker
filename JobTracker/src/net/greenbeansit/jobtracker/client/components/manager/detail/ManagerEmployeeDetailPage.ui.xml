@@ -121,21 +121,21 @@
 			</b:Column>
 			<b:Column size="XS_12,SM_12,MD_8,LG_8" addStyleNames="{style.mainColumn}">
 				<b:Row addStyleNames="{style.largeContainer}">
-					<b:NavTabs>
+					<b:NavTabs ui:field="tabControl">
 						<b:TabListItem active="true" dataTarget="#tab1"
-							text="Projekte" />
-						<b:TabListItem dataTarget="#tab2" text="Tätigkeiten" />
-						<b:TabListItem dataTarget="#tab3" text="Kapaplanung" />
+							text="Projekte" ui:field="tabProject"/>
+						<b:TabListItem dataTarget="#tab2" text="Tätigkeiten" ui:field="tabReport"/>
+						<b:TabListItem dataTarget="#tab3" text="Kapaplanung" ui:field="tabCapacity"/>
 					</b:NavTabs>
 					<b:TabContent>
 						<b:TabPane b:id="tab1" active="true">
 							<d:JobChart></d:JobChart>
 						</b:TabPane>
 						<b:TabPane b:id="tab2">
-
+							<d:ActivityReportCalendar ui:field="reportCalendar"></d:ActivityReportCalendar>
 						</b:TabPane>
 						<b:TabPane b:id="tab3">
-
+							<d:CapacityCalendar ui:field="capacityCalendar"></d:CapacityCalendar>
 						</b:TabPane>
 					</b:TabContent>
 				</b:Row>
