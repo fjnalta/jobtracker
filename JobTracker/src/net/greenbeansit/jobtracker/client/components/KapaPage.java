@@ -27,7 +27,7 @@ public class KapaPage extends Composite {
 
     private static KapaPageUiBinder uiBinder = GWT.create(KapaPageUiBinder.class);
 
-    FullCalendar fc = new FullCalendar("kapaCalendar", ViewOption.agendaWeek, false);
+    FullCalendar fc = new FullCalendar("kapaCalendar", ViewOption.month, false);
 
     @UiField
     Button buttonUp;
