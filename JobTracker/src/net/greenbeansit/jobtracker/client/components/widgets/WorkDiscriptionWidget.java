@@ -109,6 +109,18 @@ public class WorkDiscriptionWidget extends Composite implements LogicObservable
 	public void updateObservable() {
 		selectTemplate.clear();
 		addTemplates(handler.getTemplateList());
+		ActivityReportTemplate currentTemplate = handler.getCurrentTemplate();
+		if(handler.getCurrentTemplate()!=null){
+			if(currentTemplate.getName()!=null){
+				textName.setText(currentTemplate.getName());
+			}
+			if(currentTemplate.getText()!=null){
+				textDiscription.setText(currentTemplate.getText());
+			}
+			if(currentTemplate.getTaskId()!=null){
+				textIdentifier.setText(String.valueOf(currentTemplate.getTaskId()));
+			}
+		}
 		selectTemplate.refresh();
 	}
 
@@ -119,6 +131,7 @@ public class WorkDiscriptionWidget extends Composite implements LogicObservable
 		if(textDiscription.getText().length()>0){
 			template.setText(textDiscription.getText());
 			template.setTaskId(null);
+			template.setName(textName.getText());
 			handler.setCurrentTemplate(template);
 		}else{
 			NotifyHelper.errorMessage("Please select template");

@@ -50,6 +50,7 @@ public class CalendarWidget extends Composite implements CalendarObserver,LogicO
 
 	FullCalendarCustomize calendar;
 	CalendarConfig config;
+	List<ActivityReportEvent> eventList = new ArrayList<ActivityReportEvent>();
 
 	public CalendarWidget() {
 		initWidget(uiBinder.createAndBindUi(this));
@@ -142,6 +143,12 @@ public class CalendarWidget extends Composite implements CalendarObserver,LogicO
 						// calendar.removeEvent(e.getId());
 						ActivityReportEvent e = new ActivityReportEvent(calendarEvent);
 						calendar.currentEvent = e;
+						for(ActivityReportEvent a : eventList) {
+							if (a.getId().equals(e.getId())) {
+								GWT.log("current Report set: " + a.getAp().getJobNr());
+								handler.setCurrentReport(a.getAp());
+							}
+						}
 						notifyHandler();
 					}
 
@@ -277,6 +284,7 @@ public class CalendarWidget extends Composite implements CalendarObserver,LogicO
 				e.setStart(calendarHandler.getISO8601StringForDate(ap.getDate(), ap.getStartTime()));
 				e.setEnd(calendarHandler.getISO8601StringForDate(ap.getDate(), ap.getEndTime()));
 				calendar.addEvent(e);
+				this.eventList.add(e);
 				calendar.render();
 				calendar.currentEvent = null;
 				GWT.log("Added Event" + ap.getText() + ":" + ap.getDate());
