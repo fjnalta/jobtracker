@@ -102,6 +102,24 @@ public class LogicHandler {
 
 	public void setCurrentReport(ActivityReport report) {
 		this.currentReport = report;
+		Job tempJob = new Job();
+		tempJob.setJobNr(report.getJobNr());
+		tempJob.setPosNr(report.getPosNr());
+		for(Job j : jobList){
+			if(j.equals(tempJob)){
+				this.currentJob = j;
+				GWT.log("WTF" + j.getJobNr() +" " + j.getPosNr());
+			}
+		}
+		ActivityReportTemplate tempTemplate = new ActivityReportTemplate();
+		GWT.log(report.getAuthor()+" ");
+		tempTemplate.setAuthor(report.getAuthor());
+		GWT.log(report.getText());
+		tempTemplate.setText(report.getText());
+		GWT.log(report.getTaskId() + " ");
+		tempTemplate.setTaskId(report.getTaskId());
+		this.currentTemplate = tempTemplate;
+		this.updateAllObservables();
 	}
 
 	public List<ActivityReport> getCurrentReportsList() {
