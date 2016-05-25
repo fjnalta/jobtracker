@@ -25,7 +25,6 @@ public class ActivityReportTemplateServiceJpa implements ActivityReportTemplateD
 
     @Override
     public List<ActivityReportTemplate> getBy(Integer author) {
-        System.out.println("called " + author);
         ArrayList<ActivityReportTemplate> list = new ArrayList<ActivityReportTemplate>();
         for (ActivityReportTemplateEntity entity : repository.findByAuthor(author)) {
             list.add(convert(entity));
