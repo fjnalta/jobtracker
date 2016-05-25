@@ -173,20 +173,4 @@
 			]]>
         </sql>
     </changeSet>
-    <changeSet id="20160524-ALTERPseudo_Job" author="phil">
-        <sql>
-            <![CDATA[
-				ALTER TABLE `pseudo_job` ADD COLUMN `possibility` INT NOT NULL;
-				ALTER TABLE `pseudo_job` ADD COLUMN `job_no` INT;
-			]]>
-        </sql>
-    </changeSet>
-    <changeSet id="20160524-AddForeignKeyPseudo_Job" author="phil">
-        <sql>
-            <![CDATA[
-				ALTER TABLE `pseudo_job`
-                ADD FOREIGN KEY (`job_no`) REFERENCES job(`job_no`);
-			]]>
-        </sql>
-    </changeSet>
 </databaseChangeLog>
