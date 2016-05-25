@@ -1,6 +1,9 @@
 package net.greenbeansit.jobtracker.client;
 
 import net.greenbeansit.jobtracker.client.components.*;
+import net.greenbeansit.jobtracker.client.components.manager.ManagerPage;
+import net.greenbeansit.jobtracker.client.components.manager.detail.ManagerEmployeeDetailPage;
+
 import org.gwtbootstrap3.client.ui.AnchorListItem;
 import org.gwtbootstrap3.client.ui.Container;
 import org.gwtbootstrap3.client.ui.Image;

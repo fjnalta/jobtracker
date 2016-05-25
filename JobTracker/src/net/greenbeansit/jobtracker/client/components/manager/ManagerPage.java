@@ -1,4 +1,4 @@
-package net.greenbeansit.jobtracker.client.components;
+package net.greenbeansit.jobtracker.client.components.manager;
 
 import java.util.ArrayList;
 import java.util.Collections;
