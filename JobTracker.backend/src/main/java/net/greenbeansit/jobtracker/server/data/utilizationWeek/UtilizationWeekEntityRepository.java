@@ -19,6 +19,4 @@ public interface UtilizationWeekEntityRepository extends CrudRepository<Utilizat
 	List<UtilizationWeekEntity> findByAuthor(Integer author);
 	
 	List<UtilizationWeekEntity> findByPseudoJobId(Integer pseudoJobId);
-	
-	//TODO Mike: add from Date to Date
 }

@@ -27,5 +27,11 @@ public interface UserJobDataService
 	 */
 	List<UserJob> getByUserId(Integer userId);
 	
+	/**
+	 * Retrieves all UserJob relations for a given job and pos number.
+	 * @param jobNr 3 to 6 digits
+	 * @param posNr 3 digits
+	 * @return List of UserJob relations
+	 */
 	List<UserJob> getByJobNrAndPosNr(Integer jobNr, Integer posNr);
 }

@@ -203,5 +203,11 @@ public class ActivityReport implements Serializable
 	{
 		this.jobNr = jobNr;
 	}
+	
+	@Override
+	public String toString()
+	{
+		return "{id:"+id+", taskId:"+taskId+", jobNr:"+jobNr+", posNr:"+posNr+", authorId:"+authorId+", text:"+text+", date:"+date.toString()+", startTime:"+startTime+", duration:"+duration+", breakTime:"+breakTime+"}";
+	}
 
 }

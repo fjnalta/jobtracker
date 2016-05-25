@@ -10,12 +10,7 @@ import javax.persistence.Table;
 
 @Entity @IdClass(JobEntityId.class)
 @Table(name = "job")
-// TODO Mike: Implement NamedQueries for Job
-// @NamedQueries( { @NamedQuery(name = "ActivityReportTemplate.findAll", query =
-// "SELECT p FROM Person p"),
-// @NamedQuery(name = "Person.findPerson", query = "SELECT p FROM Person p where
-// p.name=:name and p.age=:age")
-// })
+
 public class JobEntity implements Serializable
 {
 

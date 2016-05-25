@@ -27,7 +27,16 @@ public interface PseudoJobDataService
 	 */
 	PseudoJob getById(Integer pseudoJobId);
 	
-	boolean save(PseudoJob report);
+	/**
+	 * Saves a PseudoJob to the database.
+	 * @param pseudoJob entity to be saved
+	 * @return true if successful
+	 */
+	boolean save(PseudoJob pseudoJob);
 
-	void delete(PseudoJob report);
+	/**
+	 * Removes a PseudoJob from the database.
+	 * @param pseudoJob PseudoJob to be deleted
+	 */
+	void delete(PseudoJob pseudoJob);
 }

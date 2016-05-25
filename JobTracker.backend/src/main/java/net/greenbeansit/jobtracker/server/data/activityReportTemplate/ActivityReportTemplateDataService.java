@@ -28,15 +28,23 @@ public interface ActivityReportTemplateDataService
 	List<ActivityReportTemplate> getBy(Integer author);
 
 	/**
-	 * TODO Mike: JavaDocs for all DataServices
-	 * @param author, name
-	 * @return
+	 * Retrieve a template by it's author and unique name
+	 * @param author ID of the author
+	 * @param name name of the template
+	 * @return a template, if it exists
 	 */
-//	ActivityReportTemplate getTemplate(Integer templateId);
-
 	ActivityReportTemplate getTemplate(Integer author, String name);
 
+	/**
+	 * Saves a template to the database.
+	 * @param template template to be saved
+	 * @return true if successful
+	 */
 	boolean save(ActivityReportTemplate template);
 
+	/**
+	 * Deletes a template from the database.
+	 * @param template
+	 */
 	void delete(ActivityReportTemplate template);
 }
