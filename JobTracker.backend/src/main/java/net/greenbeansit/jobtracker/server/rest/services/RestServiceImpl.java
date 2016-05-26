@@ -37,6 +37,8 @@ public class RestServiceImpl implements RestService {
     private UserDataService userService;
     @Inject
     private UserJobDataService userJobService;
+    @Inject
+    private PseudoJobDataService pseudoService;
 
     /**
      * Empty Constructor for Spring mapping
@@ -166,15 +168,16 @@ public class RestServiceImpl implements RestService {
         return new ManagerPageRestServiceResponse(users, jobs);
     }
 
-    //TODO
     @Override
     public List<PseudoJob> getAllPseudoJobs(Integer userId) {
-        return null;
+        //TODO - need get all by userId
+        return pseudoService.getAll();
     }
 
     @Override
     public void savePseudoJob(Integer userId, PseudoJob pseudoJob) {
-
+        //TODO - not needed?
+        pseudoService.save(pseudoJob);
     }
 
     @Override
