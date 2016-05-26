@@ -1,4 +1,4 @@
-package net.greenbeansit.jobtracker.client.components;
+package net.greenbeansit.jobtracker.client.components.manager.detail;
 
 import org.gwtbootstrap3.client.ui.html.ClearFix;
 
@@ -14,32 +14,39 @@ import com.googlecode.gwt.charts.client.ColumnType;
 import com.googlecode.gwt.charts.client.DataTable;
 import com.googlecode.gwt.charts.client.corechart.PieChart;
 import com.googlecode.gwt.charts.client.corechart.PieChartOptions;
+import com.googlecode.gwt.charts.client.event.ReadyEvent;
+import com.googlecode.gwt.charts.client.event.ReadyHandler;
 
-public class ManagerEmployeeDetailPage extends Composite
+public class JobChart extends Composite
 {
 
-	private static ManagerEmployeeDetailPageUiBinder	uiBinder	= GWT
-			.create(ManagerEmployeeDetailPageUiBinder.class);
+	private static JobChartUiBinder uiBinder = GWT
+			.create(JobChartUiBinder.class);
 
+	interface JobChartUiBinder extends UiBinder<Widget, JobChart>
+	{
+	}
+	
 	@UiField
 	ClearFix											activityChartContainer;
-
-	PieChart piechart;
 	
-	public ManagerEmployeeDetailPage(Integer userId)
+	PieChart piechart;
+
+	public JobChart()
 	{
 		initWidget(uiBinder.createAndBindUi(this));
-		
-		
+		initActivityChart();
 	}
-
+	
 	@Override
 	protected void onLoad()
 	{
-		initActivityChart();
+		
+		
 		super.onLoad();
 	}
 
+	
 	private void initActivityChart()
 	{
 		ChartLoader chartLoader = new ChartLoader(ChartPackage.CORECHART);
@@ -83,12 +90,17 @@ public class ManagerEmployeeDetailPage extends Composite
 
 				// Draw the chart
 				piechart.draw(dataTable, options);
+				
+				piechart.addReadyHandler(new ReadyHandler()
+				{
+					
+					@Override
+					public void onReady(ReadyEvent event)
+					{
+						
+					}
+				});
 			}
 		});
-	}
-
-	interface ManagerEmployeeDetailPageUiBinder
-			extends UiBinder<Widget, ManagerEmployeeDetailPage>
-	{
 	}
 }

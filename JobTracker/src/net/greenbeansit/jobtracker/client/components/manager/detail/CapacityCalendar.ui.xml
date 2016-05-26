@@ -1,0 +1,11 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:h="urn:import:org.gwtbootstrap3.client.ui.html">
+	<ui:style>
+	.container {
+		margin: 5px;
+	}
+	</ui:style>
+	<h:ClearFix ui:field="container" addStyleNames="{style.container}">
+	</h:ClearFix>
+</ui:UiBinder> 

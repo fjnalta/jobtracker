@@ -2,7 +2,7 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:b="urn:import:org.gwtbootstrap3.client.ui"
 	xmlns:b.html="urn:import:org.gwtbootstrap3.client.ui.html" xmlns:s="urn:import:org.gwtbootstrap3.extras.select.client.ui"
-	xmlns:widgets="urn:import:net.greenbeansit.jobtracker.client.components.widgets">
+	xmlns:widgets="urn:import:net.greenbeansit.jobtracker.client.components.widgets" xmlns:d="urn:import:net.greenbeansit.jobtracker.client.components.manager.detail">
 	<ui:style>
 	/*Container*/
 	.headerRow {
@@ -121,23 +121,21 @@
 			</b:Column>
 			<b:Column size="XS_12,SM_12,MD_8,LG_8" addStyleNames="{style.mainColumn}">
 				<b:Row addStyleNames="{style.largeContainer}">
-					<b:NavTabs>
+					<b:NavTabs ui:field="tabControl">
 						<b:TabListItem active="true" dataTarget="#tab1"
-							text="Tätigkeiten" />
-						<b:TabListItem dataTarget="#tab2" text="Stundennachweis" />
-						<b:TabListItem dataTarget="#tab3" text="Kapaplanung" />
+							text="Projekte" ui:field="tabProject"/>
+						<b:TabListItem dataTarget="#tab2" text="Tätigkeiten" ui:field="tabReport"/>
+						<b:TabListItem dataTarget="#tab3" text="Kapaplanung" ui:field="tabCapacity"/>
 					</b:NavTabs>
 					<b:TabContent>
-						<b:TabPane b:id="tab1">
-							<b.html:ClearFix ui:field="activityChartContainer">
-								
-							</b.html:ClearFix>
+						<b:TabPane b:id="tab1" active="true">
+							<d:JobChart></d:JobChart>
 						</b:TabPane>
 						<b:TabPane b:id="tab2">
-
+							<d:ActivityReportCalendar ui:field="reportCalendar"></d:ActivityReportCalendar>
 						</b:TabPane>
 						<b:TabPane b:id="tab3">
-
+							<d:CapacityCalendar ui:field="capacityCalendar"></d:CapacityCalendar>
 						</b:TabPane>
 					</b:TabContent>
 				</b:Row>
