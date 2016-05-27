@@ -22,17 +22,14 @@ public class PseudoJobEntity implements Serializable {
     private Integer id;
 
     private String name;
-    private String customer;
     private Integer author;
 
     public PseudoJobEntity() {
 
     }
 
-    public PseudoJobEntity(Integer id, String name, String customer) {
-        this.id = id;
+    public PseudoJobEntity(String name, Integer author) {
         this.name = name;
-        this.customer = customer;
         this.author = author;
     }
 
@@ -51,15 +48,6 @@ public class PseudoJobEntity implements Serializable {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    @Column(name = "customer")
-    public String getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(String customer) {
-        this.customer = customer;
     }
 
     @Column(name = "author")
