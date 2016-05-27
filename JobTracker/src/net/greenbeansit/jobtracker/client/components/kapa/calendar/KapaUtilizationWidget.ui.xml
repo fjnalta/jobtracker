@@ -6,7 +6,7 @@
     <h:ClearFix ui:field="container">
         <g:Row>
             <g:Column size="XS_1,SM_1,MD_1,LG_1">
-                <g:Button ui:field="leftButton" addStyleNames="{style.button-arrow}"/>
+                <g:Button ui:field="leftButton" addStyleNames="{style.button-arrow}" pull="LEFT"/>
             </g:Column>
             <g:Column size="XS_10,SM_10,MD_10,LG_10">
                 <a:ScrollPanel>
@@ -14,7 +14,7 @@
                 </a:ScrollPanel>
             </g:Column>
             <g:Column size="XS_1,SM_1,MD_1,LG_1">
-                <g:Button ui:field="rightButton" addStyleNames="{style.button-arrow}"/>
+                <g:Button ui:field="rightButton" addStyleNames="{style.button-arrow}" pull="RIGHT"/>
             </g:Column>
         </g:Row>
     </h:ClearFix>
