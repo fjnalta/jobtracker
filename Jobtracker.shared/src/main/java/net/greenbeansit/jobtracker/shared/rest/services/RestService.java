@@ -234,6 +234,14 @@ public interface RestService extends DirectRestService {
     @Path("project/{userId}/jobs")
     ProjectPageRestServiceResponse getProjectPageData(
     		@PathParam("userId") Integer userId);
+    
+    /**
+     * (De-)Activates the budget lock on a given job.
+     * @param lock true when enabling the lock, false when disabling
+     */
+    @PUT
+    @Path("project/{jobId}/lock/{bool}")
+    void setJobLock(@PathParam("bool") boolean lock);
 
     /**
      * Handle get, save and delete Pseudo Jobs for capacity planning

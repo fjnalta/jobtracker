@@ -22,7 +22,7 @@ import net.greenbeansit.jobtracker.shared.rest.services.RestService.ManagerPageR
 /**
  * Dummy implementation of the {@link RestService} interface.
  *
- * @author Max Blatt & Alexander Kirilyuk & Philipp Minges
+ * @author Max Blatt & Alexander Kirilyuk & Philipp Minges & Mike Hukiewitz
  */
 public class RestServiceImpl implements RestService {
     @Inject
@@ -199,6 +199,12 @@ public class RestServiceImpl implements RestService {
 			}
 		}
 		return new ProjectPageRestServiceResponse(jobs, customers);
+	}
+	
+	@Override
+	public void setJobLock(boolean lock)
+	{
+		// TODO Auto-generated method stub
 	}
 
     @Override
