@@ -1,28 +1,29 @@
 package net.greenbeansit.jobtracker.server.rest.services;
 
-import java.sql.Date;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.inject.Inject;
-
 import net.greenbeansit.jobtracker.server.data.activityReport.ActivityReportDataService;
 import net.greenbeansit.jobtracker.server.data.activityReportTemplate.ActivityReportTemplateDataService;
 import net.greenbeansit.jobtracker.server.data.customer.CustomerDataService;
 import net.greenbeansit.jobtracker.server.data.job.JobDataService;
+<<<<<<< HEAD
 
 import net.greenbeansit.jobtracker.server.data.activityReport.ActivityReportDataService;
 import net.greenbeansit.jobtracker.server.data.activityReportTemplate.ActivityReportTemplateDataService;
 import net.greenbeansit.jobtracker.server.data.customer.CustomerDataService;
 import net.greenbeansit.jobtracker.server.data.job.JobDataService;
 import net.greenbeansit.jobtracker.server.data.jobTask.JobTaskDataService;
+=======
+>>>>>>> 75d62e6fe521de4d98c9079fdd02451aa84faee9
 import net.greenbeansit.jobtracker.server.data.pseudoJob.PseudoJobDataService;
 import net.greenbeansit.jobtracker.server.data.user.UserDataService;
 import net.greenbeansit.jobtracker.server.data.userJob.UserJobDataService;
 import net.greenbeansit.jobtracker.server.data.utilizationWeek.UtilizationWeekDataService;
 import net.greenbeansit.jobtracker.shared.*;
 import net.greenbeansit.jobtracker.shared.rest.services.RestService;
-import net.greenbeansit.jobtracker.shared.rest.services.RestService.ManagerPageRestServiceResponse;
+
+import javax.inject.Inject;
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Dummy implementation of the {@link RestService} interface.
