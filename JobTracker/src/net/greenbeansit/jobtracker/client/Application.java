@@ -1,14 +1,6 @@
 package net.greenbeansit.jobtracker.client;
 
-<<<<<<< HEAD
-=======
-import net.greenbeansit.jobtracker.client.components.*;
-import net.greenbeansit.jobtracker.client.components.kapa.KapaPage;
-import net.greenbeansit.jobtracker.client.components.manager.ManagerPage;
-import net.greenbeansit.jobtracker.client.components.manager.detail.ManagerEmployeeDetailPage;
-import net.greenbeansit.jobtracker.client.components.project.ProjectPage;
 
->>>>>>> 75d62e6fe521de4d98c9079fdd02451aa84faee9
 import org.gwtbootstrap3.client.ui.AnchorListItem;
 import org.gwtbootstrap3.client.ui.Container;
 import org.gwtbootstrap3.client.ui.Image;
