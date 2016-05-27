@@ -5,7 +5,8 @@
              xmlns:widgets="urn:import:net.greenbeansit.jobtracker.client.components.widgets"
              xmlns:select="urn:import:org.gwtbootstrap3.extras.select.client.ui"
              xmlns:b3="urn:import:org.gwtbootstrap3.extras.slider.client.ui"
-             xmlns:widgets2="urn:import:net.greenbeansit.jobtracker.client.components.kapa.calendar">
+             xmlns:widgets2="urn:import:net.greenbeansit.jobtracker.client.components.kapa.calendar"
+             xmlns:widgets3="urn:import:net.greenbeansit.jobtracker.client.components.kapa.widgets">
     <ui:style>
         /*Container*/
         .mainColumn {
@@ -66,82 +67,28 @@
     <b:Container fluid="true">
         <b:Column size="XS_12,SM_12,MD_4,LG_4" addStyleNames="{style.mainColumn}">
             <b:Row addStyleNames="{style.smallContainer}">
-                <b:NavTabs justified="true">
-                    <b:TabListItem dataTarget="#myProjects" active="true" text="Meine Projekte"/>
-                    <b:TabListItem dataTarget="#newProject" text="Neues Projekt"/>
-                </b:NavTabs>
-                <b:TabContent>
-                    <b:TabPane b:id="myProjects" active="true">
-                        <b:Form>
-                            <b:FieldSet>
-                                <b:FormGroup>
-                                    <b:FormLabel for="projectName">Projektname</b:FormLabel>
-                                    <select:Select title="Projekt auswählen..." b:id="projectName" ui:field="selectJob">
-                                        <select:Option/>
-                                        <s:OptGroup label="Meine Projekte" ui:field="myJobsOptGroup">
-                                        </s:OptGroup>
-                                        <s:OptGroup label="Alle anderen" ui:field="allJobsOptGroup">
-                                        </s:OptGroup>
-                                    </select:Select>
-                                </b:FormGroup>
-                                <b:FormGroup>
-                                    <b:FormLabel for="projectDesc">Tätigkeitsbeschreibung</b:FormLabel>
-                                    <b:TextArea placeholder="Bitte eintragen..." b:id="projectDesc"
-                                                addStyleNames="{style.textArea}"/>
-                                </b:FormGroup>
-                            </b:FieldSet>
-                        </b:Form>
-                    </b:TabPane>
-                    <b:TabPane b:id="newProject">
-                        <b:Form>
-                            <b:FieldSet>
-                                <b:FormGroup>
-                                    <b:FormLabel for="projectName">Projektname</b:FormLabel>
-                                    <b:TextBox placeholder="Bitte eintragen..." b:id="projectName"
-                                               ui:field="textIdentifier"/>
-                                </b:FormGroup>
-                                <b:Button type="PRIMARY" text="Speichern" ui:field="buttonSave" addStyleNames="{style.buttonSave}"/>
-                            </b:FieldSet>
-                        </b:Form>
-                    </b:TabPane>
-                </b:TabContent>
-                <b:FormGroup>
-                    <b:FormLabel for="slider">Wahrscheinlichkeit</b:FormLabel>
-                    <b:Column size="XS_9,SM_9,MD_9,LG_9" addStyleNames="{style.possibilitySlider}">
-                        <b3:Slider b:id="slider" ui:field="mySlider" width="100%" enabled="true" min="0" max="100"
-                                   step="25" value="50"/>
-                    </b:Column>
-                    <b:Column size="XS_2,SM_2,MD_2,LG_2">
-                        <b:TextBox b:id="percentagePossibility" ui:field="possibilityPercentage" readOnly="true"
-                                   addStyleNames="{style.buttonText}"/>
-                    </b:Column>
-                    <b:Column size="XS_1,SM_1,MD_1,LG_1" addStyleNames="{style.smallColumn}">
-                        <b:VerticalButtonGroup>
-                            <b:Button size="EXTRA_SMALL" addStyleNames="{style.buttonTop}"
-                                      ui:field="buttonUp"/>
-                            <b:Button size="EXTRA_SMALL" addStyleNames="{style.buttonDown}"
-                                      ui:field="buttonDown"/>
-                        </b:VerticalButtonGroup>
-                    </b:Column>
-                </b:FormGroup>
+                <!-- Left Navigation -->
+                <widgets3:KapaNav></widgets3:KapaNav>
             </b:Row>
             <b:Row addStyleNames="{style.smallContainer}">
+                <!-- Utilization Widget -->
                 <widgets:UtilizationWidget></widgets:UtilizationWidget>
             </b:Row>
         </b:Column>
         <b:Column size="XS_12,SM_12,MD_8,LG_8" addStyleNames="{style.mainColumn}">
             <b:Row addStyleNames="{style.largeContainer}">
+                <!-- Calendar Heading -->
                 <b:Heading size="H3" addStyleNames="{style.titleRight}" ui:field="dateHeading" text="[INSERT_DATE]"/>
             </b:Row>
             <b:Row addStyleNames="{style.largeContainer}">
-                <!--
+                <!-- UtilizationWidget -->
                 <widgets2:KapaUtilizationWidget />
-                -->
             </b:Row>
             <b:Row addStyleNames="{style.largeContainer}" ui:field="content">
                 <!-- Full Calendar -->
             </b:Row>
             <b:Row addStyleNames="{style.largeContainer}">
+                <!-- Buttons and Input -->
                 <b:InputGroup>
                     <b:TextBox b:id="projectStart" readOnly="true" ui:field="projectStart" addStyleNames="{style.buttonText}">YEAR</b:TextBox>
                     <b:InputGroupButton>
