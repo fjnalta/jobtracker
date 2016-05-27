@@ -18,6 +18,7 @@ public class Job implements Serializable {
 	private Integer maxBudget;
 	private Integer usedBudget;
 	private boolean isIntern;
+	private boolean isLocked;
 	
 	/**
 	 * Initializes a new instance of the {@link Job} class with all its fields
@@ -46,7 +47,7 @@ public class Job implements Serializable {
 	 * @param usedBudget
 	 *            the currently used budget for the job
 	 */
-	public Job(int jobNr, int posNr, Integer payMode, Integer customerID, String desc, int maxBudget, int usedBudget) {
+	public Job(int jobNr, int posNr, Integer payMode, Integer customerID, String desc, int maxBudget, int usedBudget, boolean isLocked) {
 		this.maxBudget = maxBudget;
 		this.usedBudget = usedBudget;
 		this.jobNr = jobNr;
@@ -54,6 +55,7 @@ public class Job implements Serializable {
 		this.payMode = payMode;
 		this.customerID = customerID;
 		this.desc = desc;
+		this.setLocked(isLocked);
 	}
 
 	/**
@@ -152,6 +154,16 @@ public class Job implements Serializable {
 			return this.jobNr.equals(temp.jobNr) && this.posNr.equals(temp.posNr);
 		} else
 			return false;
+	}
+
+	public boolean isLocked()
+	{
+		return isLocked;
+	}
+
+	public void setLocked(boolean isLocked)
+	{
+		this.isLocked = isLocked;
 	}
 
 }

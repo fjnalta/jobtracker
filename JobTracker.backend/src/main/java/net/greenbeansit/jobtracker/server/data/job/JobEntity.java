@@ -34,7 +34,9 @@ public class JobEntity implements Serializable
 	@Column(name = "budget_used")
 	private Integer				usedBudget;
 	@Column(name = "is_intern")
-	private boolean				isIntern;
+	private boolean				intern;
+	@Column(name = "is_locked")
+	private boolean				locked;
 
 	public JobEntity()
 	{
@@ -43,7 +45,7 @@ public class JobEntity implements Serializable
 
 	public JobEntity(Integer jobNr, Integer posNr, Integer accountingMode,
 			Integer customerID, String desc, Integer maxBudget,
-			Integer usedBudget)
+			Integer usedBudget, boolean isLocked)
 	{
 		this.jobNr = jobNr;
 		this.posNr = posNr;
@@ -52,7 +54,8 @@ public class JobEntity implements Serializable
 		this.desc = desc;
 		this.maxBudget = maxBudget;
 		this.usedBudget = usedBudget;
-		this.isIntern = false;
+		this.intern = false;
+		this.locked = isLocked;
 	}
 
 	
@@ -133,13 +136,23 @@ public class JobEntity implements Serializable
 	}
 
 	
-	public boolean isIntern()
+	public boolean getIntern()
 	{
-		return isIntern;
+		return intern;
 	}
 
 	public void setIntern(boolean isIntern)
 	{
-		this.isIntern = isIntern;
+		this.intern = isIntern;
+	}
+	
+	public boolean getLocked()
+	{
+		return locked;
+	}
+
+	public void setLocked(boolean isLocked)
+	{
+		this.locked = isLocked;
 	}
 }

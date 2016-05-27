@@ -175,4 +175,11 @@
 			]]>
         </sql>
     </changeSet>
+    <changeSet id="20160527-ALTERJob" author="mike">
+        <sql>
+            <![CDATA[
+				ALTER TABLE `job` ADD COLUMN `is_locked` BOOLEAN;
+			]]>
+        </sql>
+    </changeSet>
 </databaseChangeLog>

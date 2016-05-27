@@ -202,9 +202,11 @@ public class RestServiceImpl implements RestService {
 	}
 	
 	@Override
-	public void setJobLock(boolean lock)
+	public void setJobLock(Integer jobNo, Integer posNo, boolean lock)
 	{
-		// TODO Auto-generated method stub
+		Job job = jobService.getJob(jobNo, posNo);
+		job.setLocked(lock);
+		jobService.save(job);
 	}
 
     @Override
