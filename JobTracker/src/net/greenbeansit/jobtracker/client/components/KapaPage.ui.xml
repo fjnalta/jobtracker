@@ -50,6 +50,10 @@
             border-radius: 0px 0px 4px 4px !important;
         }
 
+        .buttonSave {
+            margin-bottom: 5px;
+        }
+
         .smallColumn {
             padding-left: 2px;
         }
@@ -107,11 +111,7 @@
                                     <b:TextBox placeholder="Bitte eintragen..." b:id="projectName"
                                                ui:field="textIdentifier"/>
                                 </b:FormGroup>
-                                <b:FormGroup>
-                                    <b:FormLabel for="projectDesc">Tätigkeitsbeschreibung</b:FormLabel>
-                                    <b:TextArea placeholder="Bitte eintragen..." b:id="projectDesc"
-                                                addStyleNames="{style.textArea}" ui:field="textDiscription"/>
-                                </b:FormGroup>
+                                <b:Button type="PRIMARY" text="Speichern" ui:field="buttonSave" addStyleNames="{style.buttonSave}"/>
                             </b:FieldSet>
                         </b:Form>
                     </b:TabPane>
