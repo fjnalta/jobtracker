@@ -84,7 +84,7 @@
 		color: black;
 	}
 	.infoFieldValue {
-		width: 70%;
+		width: 60%;
 		float: right;
 		display: inline-block;
 		text-align: right;
