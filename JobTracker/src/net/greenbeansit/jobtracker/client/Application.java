@@ -1,15 +1,16 @@
 package net.greenbeansit.jobtracker.client;
 
 import net.greenbeansit.jobtracker.client.components.*;
+import net.greenbeansit.jobtracker.client.components.kapa.KapaPage;
 import net.greenbeansit.jobtracker.client.components.manager.ManagerPage;
 import net.greenbeansit.jobtracker.client.components.manager.detail.ManagerEmployeeDetailPage;
+import net.greenbeansit.jobtracker.client.components.project.ProjectPage;
 
 import org.gwtbootstrap3.client.ui.AnchorListItem;
 import org.gwtbootstrap3.client.ui.Container;
 import org.gwtbootstrap3.client.ui.Image;
 import org.gwtbootstrap3.client.ui.NavbarBrand;
 import org.gwtbootstrap3.client.ui.NavbarNav;
-import org.gwtbootstrap3.extras.notify.client.ui.Notify;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;

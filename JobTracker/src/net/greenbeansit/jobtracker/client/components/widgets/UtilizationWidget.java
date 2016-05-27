@@ -14,7 +14,7 @@ import com.googlecode.gwt.charts.client.gauge.Gauge;
 
 import net.greenbeansit.jobtracker.client.components.HomePage;
 import net.greenbeansit.jobtracker.client.components.LogicObservable;
-import net.greenbeansit.jobtracker.client.components.ProjectPage;
+import net.greenbeansit.jobtracker.client.components.project.ProjectPage;
 
 public class UtilizationWidget extends Composite implements LogicObservable{
 

@@ -4,7 +4,7 @@
 	xmlns:b.html="urn:import:org.gwtbootstrap3.client.ui.html" xmlns:s="urn:import:org.gwtbootstrap3.extras.select.client.ui"
 	xmlns:widgets="urn:import:net.greenbeansit.jobtracker.client.components.widgets">
 	<ui:style
-		type="net.greenbeansit.jobtracker.client.components.manager.ManagerPage.ManagerPageStyle">
+		type="net.greenbeansit.jobtracker.client.components.project.ProjectPage.ProjectPageStyle">
 		/*Container*/
 		.mainColumn {
 			padding: 0;
@@ -25,11 +25,11 @@
 			background-color: #ffffff;
 		}
 		
-		.employeeList {
+		.projectList {
 			margin: 5px;
 		}
 		
-		.employeeListItem {
+		.projectListItem {
 			padding: 0px;
 			margin: 0px;
 			display: inline-block;
@@ -37,7 +37,7 @@
 			background-color: #ffffff;
 		}
 		
-		.employeeListItem :HOVER {
+		.projectListItem :HOVER {
 			background-color: #ececec;
 		}
 		
@@ -68,7 +68,7 @@
 			text-align: left;
 		}
 		
-		.columnHeaderUtilization {
+		.columnHeaderBudget {
 			width: 70%;
 			text-align: left;
 		}
@@ -88,14 +88,14 @@
 			<b:Row addStyleNames="{style.smallContainer}">
 				<b:Heading size="H4" text="Filter" addStyleNames="{style.titleLeft}" />
 				<s:MultipleSelect liveSearch="true"
-					liveSearchPlaceholder="Jobname" ui:field="selectJob">
+					liveSearchPlaceholder="Kunde" ui:field="selectCustomer">
 				</s:MultipleSelect>
 			</b:Row>
 		</b:Column>
 		<b:Column size="XS_12,SM_12,MD_8,LG_8" addStyleNames="{style.mainColumn}">
 			<b:Row addStyleNames="{style.largeContainer}">
 				<b:Heading size="H3" addStyleNames="{style.titleRight}"
-					text="Alle Mitarbeiter" />
+					text="Alle Projekte" />
 			</b:Row>
 			<b:Row addStyleNames="{style.largeContainer}">
 				<b.html:ClearFix addStyleNames="{style.columnHeader} {style.columnHeaderName}"
@@ -105,11 +105,11 @@
 						ui:field="columnHeaderNameArrow" />
 				</b.html:ClearFix>
 				<b.html:ClearFix
-					addStyleNames="{style.columnHeader} {style.columnHeaderUtilization}"
-					ui:field="columnHeaderUtilization">
+					addStyleNames="{style.columnHeader} {style.columnHeaderBudget}"
+					ui:field="columnHeaderBudget">
 					<b:Heading size="H4" text="Auslastung" addStyleNames="{style.columnTitle}" />
 					<b:Heading size="H4" text="" addStyleNames="{style.columnTitle}"
-						ui:field="columnHeaderUtilizationArrow" />
+						ui:field="columnHeaderBudgetArrow" />
 				</b.html:ClearFix>
 			</b:Row>
 			<b:Row addStyleNames="{style.largeContainer}" ui:field="employeeList" />

@@ -1,23 +1,20 @@
 package net.greenbeansit.jobtracker.server.rest.services;
 
-import java.sql.Date;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.inject.Inject;
-
 import net.greenbeansit.jobtracker.server.data.activityReport.ActivityReportDataService;
 import net.greenbeansit.jobtracker.server.data.activityReportTemplate.ActivityReportTemplateDataService;
 import net.greenbeansit.jobtracker.server.data.customer.CustomerDataService;
 import net.greenbeansit.jobtracker.server.data.job.JobDataService;
-import net.greenbeansit.jobtracker.server.data.jobTask.JobTaskDataService;
 import net.greenbeansit.jobtracker.server.data.pseudoJob.PseudoJobDataService;
 import net.greenbeansit.jobtracker.server.data.user.UserDataService;
 import net.greenbeansit.jobtracker.server.data.userJob.UserJobDataService;
 import net.greenbeansit.jobtracker.server.data.utilizationWeek.UtilizationWeekDataService;
 import net.greenbeansit.jobtracker.shared.*;
 import net.greenbeansit.jobtracker.shared.rest.services.RestService;
-import net.greenbeansit.jobtracker.shared.rest.services.RestService.ManagerPageRestServiceResponse;
+
+import javax.inject.Inject;
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Dummy implementation of the {@link RestService} interface.
@@ -37,6 +34,8 @@ public class RestServiceImpl implements RestService {
     private UserDataService userService;
     @Inject
     private UserJobDataService userJobService;
+    @Inject
+    private PseudoJobDataService pseudoService;
 
     /**
      * Empty Constructor for Spring mapping
@@ -166,20 +165,16 @@ public class RestServiceImpl implements RestService {
         return new ManagerPageRestServiceResponse(users, jobs);
     }
 
-    //TODO
     @Override
     public List<PseudoJob> getAllPseudoJobs(Integer userId) {
-        return null;
+        //TODO - need get all by userId
+        return pseudoService.getAll();
     }
 
     @Override
     public void savePseudoJob(Integer userId, PseudoJob pseudoJob) {
-
-    }
-
-    @Override
-    public void deletePseudoJob(Integer userId, Integer pseudoJobId) {
-
+        pseudoJob.setAuthor(userId);
+        pseudoService.save(pseudoJob);
     }
 
     @Override

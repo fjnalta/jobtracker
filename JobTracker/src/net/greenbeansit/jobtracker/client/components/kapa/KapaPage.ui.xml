@@ -5,7 +5,8 @@
              xmlns:s="urn:import:org.gwtbootstrap3.extras.select.client.ui"
              xmlns:widgets="urn:import:net.greenbeansit.jobtracker.client.components.widgets"
              xmlns:select="urn:import:org.gwtbootstrap3.extras.select.client.ui"
-             xmlns:b3="urn:import:org.gwtbootstrap3.extras.slider.client.ui">
+             xmlns:b3="urn:import:org.gwtbootstrap3.extras.slider.client.ui"
+             xmlns:widgets2="urn:import:net.greenbeansit.jobtracker.client.components.kapa.calendar">
     <ui:style>
         /*Container*/
         .mainColumn {
@@ -50,6 +51,10 @@
             border-radius: 0px 0px 4px 4px !important;
         }
 
+        .buttonSave {
+            margin-bottom: 5px;
+        }
+
         .smallColumn {
             padding-left: 2px;
         }
@@ -74,11 +79,32 @@
         <b:Column size="XS_12,SM_12,MD_4,LG_4" addStyleNames="{style.mainColumn}">
             <b:Row addStyleNames="{style.smallContainer}">
                 <b:NavTabs justified="true">
-                    <b:TabListItem active="true" dataTarget="#newProject" text="Neues Projekt"/>
-                    <b:TabListItem dataTarget="#myProjects" text="Meine Projekte"/>
+                    <b:TabListItem dataTarget="#myProjects" active="true" text="Meine Projekte"/>
+                    <b:TabListItem dataTarget="#newProject" text="Neues Projekt"/>
                 </b:NavTabs>
                 <b:TabContent>
-                    <b:TabPane active="true" b:id="newProject">
+                    <b:TabPane b:id="myProjects" active="true">
+                        <b:Form>
+                            <b:FieldSet>
+                                <b:FormGroup>
+                                    <b:FormLabel for="projectName">Projektname</b:FormLabel>
+                                    <select:Select title="Projekt auswählen..." b:id="projectName" ui:field="selectJob">
+                                        <select:Option/>
+                                        <s:OptGroup label="Meine Projekte" ui:field="myJobsOptGroup">
+                                        </s:OptGroup>
+                                        <s:OptGroup label="Alle anderen" ui:field="allJobsOptGroup">
+                                        </s:OptGroup>
+                                    </select:Select>
+                                </b:FormGroup>
+                                <b:FormGroup>
+                                    <b:FormLabel for="projectDesc">Tätigkeitsbeschreibung</b:FormLabel>
+                                    <b:TextArea placeholder="Bitte eintragen..." b:id="projectDesc"
+                                                addStyleNames="{style.textArea}"/>
+                                </b:FormGroup>
+                            </b:FieldSet>
+                        </b:Form>
+                    </b:TabPane>
+                    <b:TabPane b:id="newProject">
                         <b:Form>
                             <b:FieldSet>
                                 <b:FormGroup>
@@ -86,56 +112,7 @@
                                     <b:TextBox placeholder="Bitte eintragen..." b:id="projectName"
                                                ui:field="textIdentifier"/>
                                 </b:FormGroup>
-                                <b:FormGroup>
-                                    <b:FormLabel for="projectDesc">Tätigkeitsbeschreibung</b:FormLabel>
-                                    <b:TextArea placeholder="Bitte eintragen..." b:id="projectDesc"
-                                                addStyleNames="{style.textArea}" ui:field="textDiscription"/>
-                                </b:FormGroup>
-                            </b:FieldSet>
-                        </b:Form>
-                    </b:TabPane>
-                    <b:TabPane b:id="myProjects">
-                        <b:Form>
-                            <b:FieldSet>
-                                <b:FormGroup>
-                                    <b:FormLabel for="projectName">Projektname</b:FormLabel>
-                                    <select:Select title="Projekt auswählen..." b:id="projectName">
-                                        <select:Option/>
-                                    </select:Select>
-                                </b:FormGroup>
-                                <b:FormGroup>
-                                    <b:FormLabel for="projectDesc">Tätigkeitsbeschreibung</b:FormLabel>
-                                    <b:TextArea placeholder="Bitte eintragen..." b:id="projectDesc"
-                                                addStyleNames="{style.textArea}" readOnly="true"/>
-                                </b:FormGroup>
-                            </b:FieldSet>
-                        </b:Form>
-                    </b:TabPane>
-                </b:TabContent>
-                <b:NavTabs justified="true">
-                    <b:TabListItem active="true" dataTarget="#createCustomer" text="Kunde erstellen"/>
-                    <b:TabListItem dataTarget="#loadCustomer" text="Kunde wählen"/>
-                </b:NavTabs>
-                <b:TabContent>
-                    <b:TabPane active="true" b:id="createCustomer">
-                        <b:Form>
-                            <b:FieldSet>
-                                <b:FormGroup>
-                                    <b:FormLabel>Kundenname</b:FormLabel>
-                                    <b:TextBox placeholder="Bitte eintragen..."/>
-                                </b:FormGroup>
-                            </b:FieldSet>
-                        </b:Form>
-                    </b:TabPane>
-                    <b:TabPane b:id="loadCustomer">
-                        <b:Form>
-                            <b:FieldSet>
-                                <b:FormGroup>
-                                    <b:FormLabel>Kunde</b:FormLabel>
-                                    <select:Select title="Kunde auswählen...">
-                                        <select:Option/>
-                                    </select:Select>
-                                </b:FormGroup>
+                                <b:Button type="PRIMARY" text="Speichern" ui:field="buttonSave" addStyleNames="{style.buttonSave}"/>
                             </b:FieldSet>
                         </b:Form>
                     </b:TabPane>
@@ -169,7 +146,9 @@
                 <b:Heading size="H3" addStyleNames="{style.titleRight}" ui:field="dateHeading"/>
             </b:Row>
             <b:Row addStyleNames="{style.largeContainer}">
-                <b:Heading size="H3" addStyleNames="{style.titleRight}" text=""/>
+                <!--
+                <widgets2:KapaUtilizationWidget />
+                -->
             </b:Row>
             <b:Row addStyleNames="{style.largeContainer}" ui:field="content">
                 <!-- Full Calendar -->
