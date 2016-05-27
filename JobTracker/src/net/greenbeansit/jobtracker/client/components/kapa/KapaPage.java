@@ -43,7 +43,7 @@ public class KapaPage extends Composite implements CalendarObserver, LogicObserv
     Select selectJob;
 
     @UiField
-    Button buttonUp, buttonDown, buttonUpYearStart, buttonDownYearStart,
+    Button  buttonUp, buttonDown, buttonUpYearStart, buttonDownYearStart,
             buttonUpCalendarWeekStart, buttonDownCalendarWeekStart,
             buttonUpYearEnd, buttonDownYearEnd, buttonUpDayWeek,
             buttonDownDayWeek, buttonUpCalendarWeekEnd, buttonDownCalendarWeekEnd,
@@ -67,18 +67,6 @@ public class KapaPage extends Composite implements CalendarObserver, LogicObserv
         possibilityPercentage.setText(event.getValue().toString());
     }
 
-    @UiHandler("buttonSave")
-    public void savePseudoJob(final ClickEvent e){
-        PseudoJob template = new PseudoJob();
-        if(textIdentifier.getText().length()>0){
-            template.setName(textIdentifier.getText());
-            //TODO implement LogicHandler savePseudoJob
-            //handler.savePseudoJob(template);
-        }else{
-            NotifyHelper.errorMessage("Fill missing fields");
-        }
-    }
-
     @UiHandler("buttonUp")
     void onClickUp(ClickEvent e) {
         if (mySlider.getValue() < 76)
@@ -92,6 +80,18 @@ public class KapaPage extends Composite implements CalendarObserver, LogicObserv
         if (mySlider.getValue() > 24)
             mySlider.setValue(mySlider.getValue() - 25);
         possibilityPercentage.setText(mySlider.getValue().toString());
+    }
+
+    @UiHandler("buttonSave")
+    public void savePseudoJob(final ClickEvent e){
+        PseudoJob template = new PseudoJob();
+        if(textIdentifier.getText().length()>0){
+            template.setName(textIdentifier.getText());
+            //TODO implement LogicHandler savePseudoJob
+            //handler.savePseudoJob(template);
+        }else{
+            NotifyHelper.errorMessage("Fill missing fields");
+        }
     }
 
     private List<Job> jobList = new ArrayList<Job>();
@@ -123,6 +123,7 @@ public class KapaPage extends Composite implements CalendarObserver, LogicObserv
     }
 
     private void initialize() {
+        //set Buttons
         setButtons();
         //set Slider
         possibilityPercentage.setText(mySlider.getValue().toString());
