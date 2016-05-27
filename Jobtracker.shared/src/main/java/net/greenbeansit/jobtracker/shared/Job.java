@@ -37,7 +37,7 @@ public class Job implements Serializable {
 	 * @param posNr
 	 *            the position no.
 	 * @param payMode
-	 *            the payMode as a String.
+	 *            0 = NF, 1 = TM, 2 = FP
 	 * @param customerID
 	 *            the unique identifier for the customer
 	 * @param desc
@@ -142,7 +142,24 @@ public class Job implements Serializable {
 	}
 
 	public String toString() {
-		return this.jobNr + "-" + this.posNr + "-" + this.payMode + "|" + this.customerID + "|" + this.desc;
+		String payMode;
+		switch(this.payMode)
+		{
+			case 0:
+				payMode = "NF";
+				break;
+			case 1:
+				payMode = "TM";
+				break;
+			case 2:
+				payMode = "FP";
+				break;
+			default:
+				payMode = "UNDEFINED";
+		}
+			
+		//TODO: String format
+		return this.jobNr + "-" + this.posNr + "-" + payMode + " | " + this.customerID + " | " + this.desc;
 	}
 
 	public boolean equals(Object obj) {

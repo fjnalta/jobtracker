@@ -225,4 +225,22 @@ public class RestServiceImpl implements RestService {
         Date to = new Date(year - 1900, 11, 30);
         return userService.getUtilization(userId, from, to);
     }
+    
+    @SuppressWarnings("deprecation")
+	@Override
+	public List<Integer> getUtilizationDays(Integer userId, Integer year,
+			Integer month)
+	{
+		List<Integer> utilization = new ArrayList<Integer>();
+		List<ActivityReport> reports = activityReportService.getByUser(userId);
+		for(ActivityReport report : reports)
+		{
+			Integer index = report.getDate().getDate();
+			if(utilization.get(index) == null)
+				utilization.set(index, (int) (report.getDuration()*(10f/48f))); //8 hours are 100%
+			else
+				utilization.set(index, utilization.get(index) + (int) (report.getDuration()*(10f/48f)));
+		}
+		return utilization;
+	}
 }

@@ -200,6 +200,23 @@ public interface RestService extends DirectRestService
 			@PathParam("year") Integer year, @PathParam("month") Integer month);
 
 	/**
+	 * Returns the utilization of an employee as a {@link List} for each day for
+	 * the given month.
+	 *
+	 * @param userId
+	 *            user
+	 * @param year
+	 *            year
+	 * @param month
+	 *            month
+	 * @return List of Integer where the index is the corresponding day
+	 */
+	@GET
+	@Path("/users/{userId}/utilizationDays/{year}/{month}")
+	List<Integer> getUtilizationDays(@PathParam("userId") Integer userId,
+			@PathParam("year") Integer year, @PathParam("month") Integer month);
+
+	/**
 	 * Returns the utilization of an employee for the given year.
 	 *
 	 * @param userId

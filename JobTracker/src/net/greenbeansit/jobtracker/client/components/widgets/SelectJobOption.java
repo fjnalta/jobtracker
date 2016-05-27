@@ -11,7 +11,7 @@ public class SelectJobOption extends Option{
 	
 	public SelectJobOption(Job job){
 		this.setJob(job);
-		this.setText("JobNr: " + String.valueOf(job.getJobNr()) + " | Descr: " + job.getDesc());
+		this.setText(job.toString());
 	}
 
 	public Job getJob() {
