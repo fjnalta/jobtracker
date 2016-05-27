@@ -38,6 +38,7 @@ public class LogicHandler {
 	private User currentUser;
 	private LogicHandler self = this;
 
+
 	private Job currentJob;
 	private ActivityReportTemplate currentTemplate;
 	private CalendarWidget calendar;
@@ -102,6 +103,24 @@ public class LogicHandler {
 
 	public void setCurrentReport(ActivityReport report) {
 		this.currentReport = report;
+		Job tempJob = new Job();
+		tempJob.setJobNr(report.getJobNr());
+		tempJob.setPosNr(report.getPosNr());
+		for(Job j : jobList){
+			if(j.equals(tempJob)){
+				this.currentJob = j;
+				GWT.log("WTF" + j.getJobNr() +" " + j.getPosNr());
+			}
+		}
+		ActivityReportTemplate tempTemplate = new ActivityReportTemplate();
+		GWT.log(report.getAuthor()+" ");
+		tempTemplate.setAuthor(report.getAuthor());
+		GWT.log(report.getText());
+		tempTemplate.setText(report.getText());
+		GWT.log(report.getTaskId() + " ");
+		tempTemplate.setTaskId(report.getTaskId());
+		this.currentTemplate = tempTemplate;
+		this.updateAllObservables();
 	}
 
 	public List<ActivityReport> getCurrentReportsList() {
@@ -175,6 +194,7 @@ public class LogicHandler {
 			@Override
 			public void onSuccess(Method method, List<ActivityReport> response) {
 				self.currentReportsList = response;
+				self.updateAllObservables();
 			}
 
 			@Override
@@ -357,7 +377,19 @@ public class LogicHandler {
 		}
 		
 	}
-	
+
+	public List<ActivityReport> getReportsForDay(Date day){
+		List<ActivityReport> reportList = new ArrayList<ActivityReport>();
+		for(ActivityReport p : currentReportsList){
+
+			if(p.getDate().getDate()==day.getDate()&&p.getDate().getYear()==day.getYear()&&p.getDate().getMonth()==day.getMonth()){
+				reportList.add(p);
+				GWT.log("getReportsForDay: added " + p.getJobNr() + p.getText() + p.getDate().toString());
+			}
+		}
+		return reportList;
+	}
+
 	public List<User> getUsers(){
 		return this.userList;
 	}

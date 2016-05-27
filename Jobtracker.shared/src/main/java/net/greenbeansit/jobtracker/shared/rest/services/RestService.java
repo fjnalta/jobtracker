@@ -247,19 +247,6 @@ public interface RestService extends DirectRestService
 			ActivityReportTemplate template);
 
 	/**
-	 * Removes the specified {@link ActivityReportTemplate} from the database.
-	 *
-	 * @param userId
-	 *            author of the template.
-	 * @param templateId
-	 *            id of the template.
-	 */
-	@DELETE
-	@Path("/users/{userId}/report_templates/{templateName}")
-	void deleteReportTemplate(@PathParam("userId") Integer author,
-			@PathParam("templateName") String name);
-
-	/**
 	 * Gets the employees who have the user with the following ID as supervisor.
 	 * Additionally all {@link User}s will have their List assignedJobs filled
 	 * with their assigned jobs.
@@ -317,6 +304,17 @@ public interface RestService extends DirectRestService
 	@Path("users/{userId}/pseudoJobs/{pseudoJobId}")
 	void deletePseudoJob(@PathParam("userId") Integer userId,
 			@PathParam("pseudoJobId") Integer pseudoJobId);
+			
+	/**
+     * Removes the specified {@link ActivityReportTemplate} from the database.
+     *
+     * @param author     author of the template.
+     * @param name       name of the template.
+     */
+    @DELETE
+    @Path("/users/{userId}/report_templates/{templateName}")
+    void deleteReportTemplate(@PathParam("userId") Integer author,
+                              @PathParam("templateName") String name);
 
 	/**
 	 * Response for the {@link ManagerPageRestService#getEmployees(Integer)}

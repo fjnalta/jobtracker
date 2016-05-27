@@ -5,7 +5,8 @@
              xmlns:s="urn:import:org.gwtbootstrap3.extras.select.client.ui"
              xmlns:widgets="urn:import:net.greenbeansit.jobtracker.client.components.widgets"
              xmlns:select="urn:import:org.gwtbootstrap3.extras.select.client.ui"
-             xmlns:b3="urn:import:org.gwtbootstrap3.extras.slider.client.ui">
+             xmlns:b3="urn:import:org.gwtbootstrap3.extras.slider.client.ui"
+             xmlns:widgets2="urn:import:net.greenbeansit.jobtracker.client.components.kapa.calendar">
     <ui:style>
         /*Container*/
         .mainColumn {
@@ -48,6 +49,10 @@
 
         .buttonDown {
             border-radius: 0px 0px 4px 4px !important;
+        }
+
+        .buttonSave {
+            margin-bottom: 5px;
         }
 
         .smallColumn {
@@ -107,11 +112,7 @@
                                     <b:TextBox placeholder="Bitte eintragen..." b:id="projectName"
                                                ui:field="textIdentifier"/>
                                 </b:FormGroup>
-                                <b:FormGroup>
-                                    <b:FormLabel for="projectDesc">Tätigkeitsbeschreibung</b:FormLabel>
-                                    <b:TextArea placeholder="Bitte eintragen..." b:id="projectDesc"
-                                                addStyleNames="{style.textArea}" ui:field="textDiscription"/>
-                                </b:FormGroup>
+                                <b:Button type="PRIMARY" text="Speichern" ui:field="buttonSave" addStyleNames="{style.buttonSave}"/>
                             </b:FieldSet>
                         </b:Form>
                     </b:TabPane>
@@ -145,7 +146,9 @@
                 <b:Heading size="H3" addStyleNames="{style.titleRight}" ui:field="dateHeading"/>
             </b:Row>
             <b:Row addStyleNames="{style.largeContainer}">
-                <b:Heading size="H3" addStyleNames="{style.titleRight}" text=""/>
+                <!--
+                <widgets2:KapaUtilizationWidget />
+                -->
             </b:Row>
             <b:Row addStyleNames="{style.largeContainer}" ui:field="content">
                 <!-- Full Calendar -->
