@@ -22,7 +22,6 @@ import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.user.datepicker.client.CalendarUtil;
 
 import net.greenbeansit.jobtracker.client.components.CalendarObserver;
-import net.greenbeansit.jobtracker.client.components.widgets.calendar.inputfield.UButton;
 
 /**
  * Shows the Utilization per Day of the month above the Calendar
