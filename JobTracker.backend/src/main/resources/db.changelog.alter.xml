@@ -182,4 +182,11 @@
 			]]>
         </sql>
     </changeSet>
+    <changeSet id="20160527-ALTERPseudo_JobADDAuthor" author="phil">
+        <sql>
+            <![CDATA[
+				ALTER TABLE `pseudo_job` ADD COLUMN `author` INT;
+			]]>
+        </sql>
+    </changeSet>
 </databaseChangeLog>
