@@ -10,6 +10,11 @@ import net.greenbeansit.jobtracker.server.data.activityReport.ActivityReportData
 import net.greenbeansit.jobtracker.server.data.activityReportTemplate.ActivityReportTemplateDataService;
 import net.greenbeansit.jobtracker.server.data.customer.CustomerDataService;
 import net.greenbeansit.jobtracker.server.data.job.JobDataService;
+
+import net.greenbeansit.jobtracker.server.data.activityReport.ActivityReportDataService;
+import net.greenbeansit.jobtracker.server.data.activityReportTemplate.ActivityReportTemplateDataService;
+import net.greenbeansit.jobtracker.server.data.customer.CustomerDataService;
+import net.greenbeansit.jobtracker.server.data.job.JobDataService;
 import net.greenbeansit.jobtracker.server.data.jobTask.JobTaskDataService;
 import net.greenbeansit.jobtracker.server.data.pseudoJob.PseudoJobDataService;
 import net.greenbeansit.jobtracker.server.data.user.UserDataService;
@@ -176,7 +181,7 @@ public class RestServiceImpl implements RestService {
 
     @Override
     public void savePseudoJob(Integer userId, PseudoJob pseudoJob) {
-        //TODO - not needed?
+        pseudoJob.setAuthor(userId);
         pseudoService.save(pseudoJob);
     }
 
