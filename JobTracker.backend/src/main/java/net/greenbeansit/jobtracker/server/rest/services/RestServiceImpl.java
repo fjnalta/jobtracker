@@ -182,8 +182,24 @@ public class RestServiceImpl implements RestService {
 
     @Override
     public void deletePseudoJob(Integer userId, Integer pseudoJobId) {
-
+    	pseudoService.delete(pseudoService.getById(pseudoJobId));
     }
+    
+	@Override
+	public ProjectPageRestServiceResponse getProjectPageData(Integer userId)
+	{
+		List<Job> jobs = jobService.getByUser(userId);
+		List<Customer> customers = new ArrayList<Customer>();
+		for(Job job : jobs)
+		{
+			Customer customer = customerService.getById(job.getCustomerID());
+			if(customer != null && !customers.contains(customer))
+			{
+				customers.add(customerService.getById(job.getCustomerID()));
+			}
+		}
+		return new ProjectPageRestServiceResponse(jobs, customers);
+	}
 
     @Override
     public Integer getUtilizationMonth(Integer userId, Integer year,

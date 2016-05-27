@@ -148,4 +148,15 @@ public class UtilizationWeek implements Serializable {
         }
         this.pseudoJobId = pseudoJobId;
     }
+    
+    public boolean equals(Object obj) {
+		if(obj == null)
+			return false;
+		else if (obj instanceof UtilizationWeek)
+		{
+			UtilizationWeek temp = (UtilizationWeek) obj;
+			return this.id.equals(temp.id);
+		} else
+			return false;
+	}
 }

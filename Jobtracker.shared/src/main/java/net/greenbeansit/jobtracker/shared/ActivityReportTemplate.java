@@ -78,4 +78,15 @@ public class ActivityReportTemplate implements Serializable
 	{
 		this.author = author;
 	}
+	
+	public boolean equals(Object obj) {
+		if(obj == null)
+			return false;
+		else if (obj instanceof ActivityReportTemplate)
+		{
+			ActivityReportTemplate temp = (ActivityReportTemplate) obj;
+			return this.author.equals(temp.author) && this.name.equals(temp.name);
+		} else
+			return false;
+	}
 }

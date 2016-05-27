@@ -61,4 +61,15 @@ public class Customer implements Serializable
 		}
 		this.name = name;
 	}
+	
+	public boolean equals(Object obj) {
+		if(obj == null)
+			return false;
+		else if (obj instanceof Customer)
+		{
+			Customer temp = (Customer) obj;
+			return this.id.equals(temp.id);
+		} else
+			return false;
+	}
 }

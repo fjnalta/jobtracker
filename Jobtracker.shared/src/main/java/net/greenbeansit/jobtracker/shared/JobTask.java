@@ -85,4 +85,15 @@ public class JobTask implements Serializable
 		}
 		this.name = name;
 	}
+	
+	public boolean equals(Object obj) {
+		if(obj == null)
+			return false;
+		else if (obj instanceof JobTask)
+		{
+			JobTask temp = (JobTask) obj;
+			return this.id.equals(temp.id);
+		} else
+			return false;
+	}
 }

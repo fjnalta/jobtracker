@@ -105,4 +105,15 @@ public class User implements Serializable
 	{
 		this.assignedJobs = assignedJobs;
 	}
+	
+	public boolean equals(Object obj) {
+		if(obj == null)
+			return false;
+		else if (obj instanceof User)
+		{
+			User temp = (User) obj;
+			return this.id.equals(temp.id);
+		} else
+			return false;
+	}
 }

@@ -36,9 +36,10 @@ public class UserJob implements Serializable
 		this.posNo = posNo;
 		this.role = role;
 	}
-	
-	public UserJob(){
-		
+
+	public UserJob()
+	{
+
 	}
 
 	public Integer getUserId()
@@ -92,7 +93,7 @@ public class UserJob implements Serializable
 		}
 		this.role = role;
 	}
-	
+
 	public Integer getPosNo()
 	{
 		return posNo;
@@ -105,5 +106,20 @@ public class UserJob implements Serializable
 			throw new IllegalArgumentException();
 		}
 		this.posNo = posNo;
+	}
+
+	public boolean equals(Object obj)
+	{
+		if (obj == null)
+			return false;
+		else if (obj instanceof UserJob)
+		{
+			UserJob temp = (UserJob) obj;
+			return this.userId.equals(temp.userId)
+					&& this.jobNo.equals(temp.jobNo)
+					&& this.posNo.equals(temp.posNo)
+					&& this.role.equals(temp.role);
+		} else
+			return false;
 	}
 }
