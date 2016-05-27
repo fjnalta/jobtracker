@@ -5,7 +5,8 @@
              xmlns:s="urn:import:org.gwtbootstrap3.extras.select.client.ui"
              xmlns:widgets="urn:import:net.greenbeansit.jobtracker.client.components.widgets"
              xmlns:select="urn:import:org.gwtbootstrap3.extras.select.client.ui"
-             xmlns:b3="urn:import:org.gwtbootstrap3.extras.slider.client.ui">
+             xmlns:b3="urn:import:org.gwtbootstrap3.extras.slider.client.ui"
+             xmlns:widgets2="urn:import:net.greenbeansit.jobtracker.client.components.kapa.calendar">
     <ui:style>
         /*Container*/
         .mainColumn {
@@ -145,7 +146,9 @@
                 <b:Heading size="H3" addStyleNames="{style.titleRight}" ui:field="dateHeading"/>
             </b:Row>
             <b:Row addStyleNames="{style.largeContainer}">
-                <b:Heading size="H3" addStyleNames="{style.titleRight}" text=""/>
+                <!--
+                <widgets2:KapaUtilizationWidget />
+                -->
             </b:Row>
             <b:Row addStyleNames="{style.largeContainer}" ui:field="content">
                 <!-- Full Calendar -->
