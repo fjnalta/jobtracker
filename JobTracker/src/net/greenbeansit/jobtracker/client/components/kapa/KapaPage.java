@@ -1,4 +1,4 @@
-package net.greenbeansit.jobtracker.client.components;
+package net.greenbeansit.jobtracker.client.components.kapa;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -9,6 +9,7 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
+import net.greenbeansit.jobtracker.client.components.LogicObservable;
 import net.greenbeansit.jobtracker.client.components.widgets.SelectJobOption;
 import net.greenbeansit.jobtracker.client.utils.rest.NotifyHelper;
 import net.greenbeansit.jobtracker.shared.Job;
@@ -32,31 +33,19 @@ import java.util.List;
 public class KapaPage extends Composite implements LogicObservable {
 
     @UiField
-    OptGroup myJobsOptGroup;
-
-    @UiField
-    OptGroup allJobsOptGroup;
+    OptGroup myJobsOptGroup,allJobsOptGroup;
 
     @UiField
     Select selectJob;
 
     @UiField
-    Button buttonUp;
+    Button buttonUp, buttonDown, buttonSave;
 
     @UiField
-    Button buttonDown;
-
-    @UiField
-    Button buttonSave;
-
-    @UiField
-    TextBox possibilityPercentage;
+    TextBox possibilityPercentage, textIdentifier;
 
     @UiField
     Slider mySlider;
-
-    @UiField
-    TextBox textIdentifier;
 
     @UiField
     Row content;
