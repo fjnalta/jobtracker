@@ -7,7 +7,6 @@ import org.gwtbootstrap3.client.ui.Anchor;
 import org.gwtbootstrap3.client.ui.Heading;
 import org.gwtbootstrap3.client.ui.Row;
 import org.gwtbootstrap3.client.ui.html.ClearFix;
-import org.gwtbootstrap3.client.ui.html.Span;
 import org.gwtbootstrap3.extras.select.client.ui.MultipleSelect;
 import org.gwtbootstrap3.extras.select.client.ui.Option;
 
@@ -19,7 +18,6 @@ import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.resources.client.CssResource;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.uibinder.client.UiTemplate;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -173,12 +171,10 @@ public class ProjectPage extends Composite
 		jobList.clear();
 		for (Job job : jobs)
 		{
-			Anchor anchor = new Anchor();
-			anchor.add(new ProjectBudgetBar(job));
-			anchor.setHref("#project/job/" + job.getPosNr());
-			anchor.getElement().addClassName(style.jobListItem());
-
-			jobList.add(anchor);
+			JobListItem item = new JobListItem(job);
+			item.getElement().addClassName(style.jobListItem());
+			
+			jobList.add(item);
 		}
 	}
 
