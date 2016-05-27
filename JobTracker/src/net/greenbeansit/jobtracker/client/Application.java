@@ -107,7 +107,7 @@ public class Application extends Composite
 		{
 			Composite page;
 
-			if (addressSplit.length == 3 && addressSplit[1] == "employee")
+			if (addressSplit.length == 3 && addressSplit[1] == "job")
 			{
 				Integer jobId;
 
