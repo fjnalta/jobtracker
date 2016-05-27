@@ -34,7 +34,7 @@ public class KapaPage extends Composite implements LogicObservable {
     private Job currentJob = null;
 
     @UiField
-    OptGroup otherJobsOptGroup;
+    OptGroup myJobsOptGroup;
 
     @UiField
     OptGroup allJobsOptGroup;
