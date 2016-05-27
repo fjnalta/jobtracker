@@ -19,6 +19,13 @@ public interface PseudoJobDataService
 	 * @return PseudoJobs in database
 	 */
 	List<PseudoJob> getAll();
+
+	/**
+	 * Returns all existing PseudoJobs for given
+	 * @param author
+	 * @return PseudoJobs in database
+	 */
+	List<PseudoJob> getAllByAuthor(Integer author);
 	
 	/**
 	 * Returns a PseudoJob by its ID.

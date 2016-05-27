@@ -1,12 +1,11 @@
 package net.greenbeansit.jobtracker.server.data.pseudoJob;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import net.greenbeansit.jobtracker.shared.PseudoJob;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import net.greenbeansit.jobtracker.shared.PseudoJob;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Implementation of PseudoJobDataService {@link PseudoJobDataService}.
@@ -25,6 +24,16 @@ public class PseudoJobServiceJpa implements PseudoJobDataService {
 	public List<PseudoJob> getAll() {
 		ArrayList<PseudoJob> list = new ArrayList<PseudoJob>();
 		for (PseudoJobEntity entity : repository.findAll())
+		{
+			list.add(convert(entity));
+		}
+		return list;
+	}
+
+	@Override
+	public List<PseudoJob> getAllByAuthor(Integer author) {
+		ArrayList<PseudoJob> list = new ArrayList<PseudoJob>();
+		for (PseudoJobEntity entity : repository.findByAuthor(author))
 		{
 			list.add(convert(entity));
 		}
@@ -53,14 +62,13 @@ public class PseudoJobServiceJpa implements PseudoJobDataService {
 	{
 		if (entity == null)
 			return null;
-		
-		return new PseudoJob(entity.getId(), entity.getName(), entity.getName(), entity.getCustomer());
+		return new PseudoJob(entity.getId(), entity.getName(), entity.getAuthor());
 	}
 
 	private PseudoJobEntity convert(PseudoJob pseudoJob)
 	{
 		if (pseudoJob == null)
 			return null;
-		return new PseudoJobEntity(pseudoJob.getId(), pseudoJob.getName(), pseudoJob.getPseudoJob());
+		return new PseudoJobEntity(pseudoJob.getName(), pseudoJob.getAuthor());
 	}
 }
