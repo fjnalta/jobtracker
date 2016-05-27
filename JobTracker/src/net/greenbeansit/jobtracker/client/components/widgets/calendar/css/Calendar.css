@@ -30,7 +30,10 @@
 	border-radius: 20px;
 }
 .label-week{
-	color:orange;
+	opacity:1;
+}
+.label-not-week{
+	opacity:0.3;
 }
 td {
 	padding-top: 0;
