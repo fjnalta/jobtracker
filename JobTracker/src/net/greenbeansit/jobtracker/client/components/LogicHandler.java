@@ -38,6 +38,7 @@ public class LogicHandler {
 	private User currentUser;
 	private LogicHandler self = this;
 
+
 	private Job currentJob;
 	private ActivityReportTemplate currentTemplate;
 	private CalendarWidget calendar;
@@ -193,6 +194,7 @@ public class LogicHandler {
 			@Override
 			public void onSuccess(Method method, List<ActivityReport> response) {
 				self.currentReportsList = response;
+				self.updateAllObservables();
 			}
 
 			@Override
@@ -375,7 +377,19 @@ public class LogicHandler {
 		}
 		
 	}
-	
+
+	public List<ActivityReport> getReportsForDay(Date day){
+		List<ActivityReport> reportList = new ArrayList<ActivityReport>();
+		for(ActivityReport p : currentReportsList){
+
+			if(p.getDate().getDate()==day.getDate()&&p.getDate().getYear()==day.getYear()&&p.getDate().getMonth()==day.getMonth()){
+				reportList.add(p);
+				GWT.log("getReportsForDay: added " + p.getJobNr() + p.getText() + p.getDate().toString());
+			}
+		}
+		return reportList;
+	}
+
 	public List<User> getUsers(){
 		return this.userList;
 	}

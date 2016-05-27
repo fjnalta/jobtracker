@@ -34,7 +34,7 @@
             min-height: 35px;
         }
 
-        .percentageText {
+        .buttonText {
             min-width: 50px;
             height: 43px;
         }
@@ -57,11 +57,6 @@
 
         .smallColumn {
             padding-left: 2px;
-        }
-
-        .button {
-            margin-top: 5px;
-            margin-bottom: 5px;
         }
 
         /*Title*/
@@ -125,7 +120,7 @@
                     </b:Column>
                     <b:Column size="XS_2,SM_2,MD_2,LG_2">
                         <b:TextBox b:id="percentagePossibility" ui:field="possibilityPercentage" readOnly="true"
-                                   addStyleNames="{style.percentageText}"/>
+                                   addStyleNames="{style.buttonText}"/>
                     </b:Column>
                     <b:Column size="XS_1,SM_1,MD_1,LG_1" addStyleNames="{style.smallColumn}">
                         <b:VerticalButtonGroup>
@@ -154,7 +149,54 @@
                 <!-- Full Calendar -->
             </b:Row>
             <b:Row addStyleNames="{style.largeContainer}">
-                <b:Button type="PRIMARY" text="Buchen" pull="RIGHT"/>
+                <b:InputGroup>
+                    <b:TextBox b:id="projectStart" readOnly="true" ui:field="projectStart" addStyleNames="{style.buttonText}">YEAR</b:TextBox>
+                    <b:InputGroupButton>
+                        <b:VerticalButtonGroup>
+                            <b:Button size="EXTRA_SMALL" addStyleNames="{style.buttonTop}"
+                                      ui:field="buttonUpYearStart" />
+                            <b:Button size="EXTRA_SMALL" addStyleNames="{style.buttonDown}"
+                                      ui:field="buttonDownYearStart" />
+                        </b:VerticalButtonGroup>
+                    </b:InputGroupButton>
+                    <b:TextBox b:id="projectStart" readOnly="true" ui:field="projectStartKw" addStyleNames="{style.buttonText}">KW</b:TextBox>
+                    <b:InputGroupButton>
+                        <b:VerticalButtonGroup>
+                            <b:Button size="EXTRA_SMALL" addStyleNames="{style.buttonTop}"
+                                      ui:field="buttonUpCalendarWeekStart" />
+                            <b:Button size="EXTRA_SMALL" addStyleNames="{style.buttonDown}"
+                                      ui:field="buttonDownCalendarWeekStart" />
+                        </b:VerticalButtonGroup>
+                    </b:InputGroupButton>
+                    <b:TextBox b:id="projectStart" readOnly="true" ui:field="projectEnd" addStyleNames="{style.buttonText}">YEAR</b:TextBox>
+                    <b:InputGroupButton>
+                        <b:VerticalButtonGroup>
+                            <b:Button size="EXTRA_SMALL" addStyleNames="{style.buttonTop}"
+                                      ui:field="buttonUpYearEnd" />
+                            <b:Button size="EXTRA_SMALL" addStyleNames="{style.buttonDown}"
+                                      ui:field="buttonDownYearEnd" />
+                        </b:VerticalButtonGroup>
+                    </b:InputGroupButton>
+                    <b:TextBox b:id="projectStart" readOnly="true" ui:field="projectEndKw" addStyleNames="{style.buttonText}">KW</b:TextBox>
+                    <b:InputGroupButton>
+                        <b:VerticalButtonGroup>
+                            <b:Button size="EXTRA_SMALL" addStyleNames="{style.buttonTop}"
+                                      ui:field="buttonUpCalendarWeekEnd" />
+                            <b:Button size="EXTRA_SMALL" addStyleNames="{style.buttonDown}"
+                                      ui:field="buttonDownCalendarWeekEnd" />
+                        </b:VerticalButtonGroup>
+                    </b:InputGroupButton>
+                    <b:TextBox b:id="dayWeek" readOnly="true" ui:field="dayWeek" addStyleNames="{style.buttonText}">05</b:TextBox>
+                    <b:InputGroupButton>
+                        <b:VerticalButtonGroup>
+                            <b:Button size="EXTRA_SMALL" addStyleNames="{style.buttonTop}"
+                                      ui:field="buttonUpDayWeek" />
+                            <b:Button size="EXTRA_SMALL" addStyleNames="{style.buttonDown}"
+                                      ui:field="buttonDownDayWeek" />
+                        </b:VerticalButtonGroup>
+                    </b:InputGroupButton>
+                    <b:Button type="PRIMARY" text="Buchen" pull="RIGHT"/>
+                </b:InputGroup>
             </b:Row>
         </b:Column>
     </b:Container>

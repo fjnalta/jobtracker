@@ -25,11 +25,11 @@
 			background-color: #ffffff;
 		}
 		
-		.projectList {
+		.jobList {
 			margin: 5px;
 		}
 		
-		.projectListItem {
+		.jobListItem {
 			padding: 0px;
 			margin: 0px;
 			display: inline-block;
@@ -37,7 +37,7 @@
 			background-color: #ffffff;
 		}
 		
-		.projectListItem :HOVER {
+		.jobListItem :HOVER {
 			background-color: #ececec;
 		}
 		
@@ -112,7 +112,7 @@
 						ui:field="columnHeaderBudgetArrow" />
 				</b.html:ClearFix>
 			</b:Row>
-			<b:Row addStyleNames="{style.largeContainer}" ui:field="employeeList" />
+			<b:Row addStyleNames="{style.largeContainer}" ui:field="jobList" />
 		</b:Column>
 	</b:Container>
 </ui:UiBinder> 

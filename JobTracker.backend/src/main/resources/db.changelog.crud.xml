@@ -102,4 +102,27 @@
 			]]>
 		</sql>
 	</changeSet>
+	<changeSet id="20160527-job-7" author="mike">
+		<sql>
+			<![CDATA[
+				INSERT INTO job (job_no, pos_no, description, customer_id, budget, budget_used, accounting_mode, is_intern)
+				VALUES(201001, 026, "Jobtracker - Backend", 1, 12000, 8241, 2, false),
+				(201001, 025, "Jobtracker - Frontend", 1, 25000, 3512, 2, false),
+				(201001, 027, "Jobtracker - Shared", 1, 2000, 1805, 2, false)
+			]]>
+		</sql>
+	</changeSet>
+	<changeSet id="20160527-user_job-8" author="mike">
+		<sql>
+			<![CDATA[
+				INSERT INTO user_job (user_id, job_no, pos_no)
+				VALUES(2, 201001, 025),
+				(2, 201001, 026),
+				(2, 201001, 027),
+				(2, 100001, 001),
+				(2, 100245, 001),
+				(2, 100001, 003);
+			]]>
+		</sql>
+	</changeSet>
 </databaseChangeLog>

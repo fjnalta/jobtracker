@@ -209,5 +209,16 @@ public class ActivityReport implements Serializable
 	{
 		return "{id:"+id+", taskId:"+taskId+", jobNr:"+jobNr+", posNr:"+posNr+", authorId:"+authorId+", text:"+text+", date:"+date.toString()+", startTime:"+startTime+", duration:"+duration+", breakTime:"+breakTime+"}";
 	}
+	
+	public boolean equals(Object obj) {
+		if(obj == null)
+			return false;
+		else if (obj instanceof ActivityReport)
+		{
+			ActivityReport temp = (ActivityReport) obj;
+			return this.id.equals(temp.id);
+		} else
+			return false;
+	}
 
 }

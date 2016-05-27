@@ -19,7 +19,7 @@ import java.util.List;
 /**
  * Dummy implementation of the {@link RestService} interface.
  *
- * @author Max Blatt & Alexander Kirilyuk & Philipp Minges
+ * @author Max Blatt & Alexander Kirilyuk & Philipp Minges & Mike Hukiewitz
  */
 public class RestServiceImpl implements RestService {
     @Inject
@@ -178,6 +178,35 @@ public class RestServiceImpl implements RestService {
     }
 
     @Override
+    public void deletePseudoJob(Integer userId, Integer pseudoJobId) {
+    	pseudoService.delete(pseudoService.getById(pseudoJobId));
+    }
+    
+	@Override
+	public ProjectPageRestServiceResponse getProjectPageData(Integer userId)
+	{
+		List<Job> jobs = jobService.getByUser(userId);
+		List<Customer> customers = new ArrayList<Customer>();
+		for(Job job : jobs)
+		{
+			Customer customer = customerService.getById(job.getCustomerID());
+			if(customer != null && !customers.contains(customer))
+			{
+				customers.add(customerService.getById(job.getCustomerID()));
+			}
+		}
+		return new ProjectPageRestServiceResponse(jobs, customers);
+	}
+	
+	@Override
+	public void setJobLock(Integer jobNo, Integer posNo, boolean lock)
+	{
+		Job job = jobService.getJob(jobNo, posNo);
+		job.setLocked(lock);
+		jobService.save(job);
+	}
+
+    @Override
     public Integer getUtilizationMonth(Integer userId, Integer year,
                                        Integer month) {
         //Sooooo dirty...
@@ -193,4 +222,22 @@ public class RestServiceImpl implements RestService {
         Date to = new Date(year - 1900, 11, 30);
         return userService.getUtilization(userId, from, to);
     }
+    
+    @SuppressWarnings("deprecation")
+	@Override
+	public List<Integer> getUtilizationDays(Integer userId, Integer year,
+			Integer month)
+	{
+		List<Integer> utilization = new ArrayList<Integer>();
+		List<ActivityReport> reports = activityReportService.getByUser(userId);
+		for(ActivityReport report : reports)
+		{
+			Integer index = report.getDate().getDate();
+			if(utilization.get(index) == null)
+				utilization.set(index, (int) (report.getDuration()*(10f/48f))); //8 hours are 100%
+			else
+				utilization.set(index, utilization.get(index) + (int) (report.getDuration()*(10f/48f)));
+		}
+		return utilization;
+	}
 }

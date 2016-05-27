@@ -60,6 +60,6 @@ public class PseudoJobServiceJpa implements PseudoJobDataService {
 	{
 		if (pseudoJob == null)
 			return null;
-		return new PseudoJobEntity(pseudoJob.getId(), pseudoJob.getName(), pseudoJob.getCustomer());
+		return new PseudoJobEntity(pseudoJob.getId(), pseudoJob.getName(), pseudoJob.getPseudoJob());
 	}
 }

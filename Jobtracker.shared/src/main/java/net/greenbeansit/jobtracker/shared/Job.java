@@ -17,7 +17,8 @@ public class Job implements Serializable {
 	private String desc;
 	private Integer maxBudget;
 	private Integer usedBudget;
-	private boolean isIntern;
+	private Boolean isIntern;
+	private Boolean isLocked;
 	
 	/**
 	 * Initializes a new instance of the {@link Job} class with all its fields
@@ -36,7 +37,7 @@ public class Job implements Serializable {
 	 * @param posNr
 	 *            the position no.
 	 * @param payMode
-	 *            the payMode as a String.
+	 *            0 = NF, 1 = TM, 2 = FP
 	 * @param customerID
 	 *            the unique identifier for the customer
 	 * @param desc
@@ -46,7 +47,7 @@ public class Job implements Serializable {
 	 * @param usedBudget
 	 *            the currently used budget for the job
 	 */
-	public Job(int jobNr, int posNr, Integer payMode, Integer customerID, String desc, int maxBudget, int usedBudget) {
+	public Job(int jobNr, int posNr, Integer payMode, Integer customerID, String desc, int maxBudget, int usedBudget, Boolean isLocked) {
 		this.maxBudget = maxBudget;
 		this.usedBudget = usedBudget;
 		this.jobNr = jobNr;
@@ -54,6 +55,7 @@ public class Job implements Serializable {
 		this.payMode = payMode;
 		this.customerID = customerID;
 		this.desc = desc;
+		this.setLocked(isLocked);
 	}
 
 	/**
@@ -129,18 +131,35 @@ public class Job implements Serializable {
 		return customerID;
 	}
 
-	public boolean isIntern()
+	public Boolean isIntern()
 	{
 		return isIntern;
 	}
 
-	public void setIntern(boolean isIntern)
+	public void setIntern(Boolean isIntern)
 	{
 		this.isIntern = isIntern;
 	}
 
 	public String toString() {
-		return this.jobNr + "-" + this.posNr + "-" + this.payMode + "|" + this.customerID + "|" + this.desc;
+		String payMode;
+		switch(this.payMode)
+		{
+			case 0:
+				payMode = "NF";
+				break;
+			case 1:
+				payMode = "TM";
+				break;
+			case 2:
+				payMode = "FP";
+				break;
+			default:
+				payMode = "UNDEFINED";
+		}
+			
+		//TODO: String format
+		return this.jobNr + "-" + this.posNr + "-" + payMode + " | " + this.customerID + " | " + this.desc;
 	}
 
 	public boolean equals(Object obj) {
@@ -152,6 +171,16 @@ public class Job implements Serializable {
 			return this.jobNr.equals(temp.jobNr) && this.posNr.equals(temp.posNr);
 		} else
 			return false;
+	}
+
+	public Boolean isLocked()
+	{
+		return isLocked;
+	}
+
+	public void setLocked(Boolean isLocked)
+	{
+		this.isLocked = isLocked;
 	}
 
 }

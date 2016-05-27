@@ -175,7 +175,14 @@
 			]]>
         </sql>
     </changeSet>
-    <changeSet id="20160527-ALTERPseudo_JobADDAuthor" author="phil">
+    <changeSet id="20160527-ALTERJob" author="mike">
+        <sql>
+            <![CDATA[
+				ALTER TABLE `job` ADD COLUMN `is_locked` BOOLEAN;
+			]]>
+        </sql>
+    </changeSet>
+     <changeSet id="20160527-ALTERPseudo_JobADDAuthor" author="phil">
         <sql>
             <![CDATA[
 				ALTER TABLE `pseudo_job` ADD COLUMN `author` INT;

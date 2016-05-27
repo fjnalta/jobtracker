@@ -14,7 +14,7 @@ public class PseudoJob implements Serializable {
     private static final long serialVersionUID = -2051156787516002689L;
     private Integer id;
     private String  name;
-    private String  customer;
+    private String  PseudoJob;
     private Integer author;
 
     public PseudoJob() {
@@ -26,13 +26,13 @@ public class PseudoJob implements Serializable {
      *
      * @param id       the identifier
      * @param name     the name of the PseudoJob
-     * @param customer name of the customer
+     * @param PseudoJob name of the PseudoJob
      */
-    public PseudoJob(Integer id, String name, String customer)
+    public PseudoJob(Integer id, String name, String PseudoJob)
     {
         this.id = id;
         this.name = name;
-        this.customer = customer;
+        this.PseudoJob = PseudoJob;
         this.author = author;
     }
 
@@ -60,17 +60,28 @@ public class PseudoJob implements Serializable {
         this.name = name;
     }
 
-    public String getCustomer()
+    public String getPseudoJob()
     {
-        return customer;
+        return PseudoJob;
     }
 
-    public void setCustomer(String customer)
+    public void setPseudoJob(String PseudoJob)
     {
-        if (customer == "")
+        if (PseudoJob == "")
             throw new IllegalArgumentException();
-        this.customer = customer;
+        this.PseudoJob = PseudoJob;
     }
+    
+    public boolean equals(Object obj) {
+		if(obj == null)
+			return false;
+		else if (obj instanceof PseudoJob)
+		{
+			PseudoJob temp = (PseudoJob) obj;
+			return this.id.equals(temp.id);
+		} else
+			return false;
+	}
 
     public Integer getAuthor() {
         return author;
