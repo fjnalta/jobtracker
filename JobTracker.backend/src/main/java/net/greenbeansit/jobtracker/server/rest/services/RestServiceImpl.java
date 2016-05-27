@@ -173,13 +173,11 @@ public class RestServiceImpl implements RestService {
 
     @Override
     public List<PseudoJob> getAllPseudoJobs(Integer userId) {
-        //TODO - need get all by userId
-        return pseudoService.getAll();
+        return pseudoService.getAllByAuthor(userId);
     }
 
     @Override
     public void savePseudoJob(Integer userId, PseudoJob pseudoJob) {
-        pseudoJob.setAuthor(userId);
         pseudoService.save(pseudoJob);
     }
 
