@@ -35,6 +35,7 @@ public class LogicHandler {
 	private List<ActivityReportTemplate> templateList = new ArrayList<ActivityReportTemplate>();
 	private List<User> userList = new ArrayList<User>();
 	private List<Job> selectedJobs = new ArrayList<Job>();
+	private List<Integer> utilizationList = new ArrayList<Integer>();
 	private User currentUser;
 	private LogicHandler self = this;
 
@@ -355,7 +356,7 @@ public class LogicHandler {
 	 * Load all Users based on the selected Jobs
 	 */
 	public void loadUsersForSelectedJobs(){
-		for(Job j : selectedJobs){
+		for(Job j : selectedJobs) {
 			try {
 				RestClient.build(new SuccessFunction<List<User>>() {
 					@Override
@@ -375,19 +376,42 @@ public class LogicHandler {
 				GWT.log(e.getMessage());
 			}
 		}
-		
+	}
+
+	public void loadUtilization(int year, int month){
+		try {
+			RestClient.build(new SuccessFunction<List<Integer>>() {
+				@Override
+				public void onSuccess(Method method, List<Integer> response) {
+					self.utilizationList = response;
+					self.updateAllObservables();
+				}
+
+				@Override
+				public void onFailure(Method method, Throwable exception) {
+					NotifyHelper.errorMessage(exception.getMessage());
+					GWT.log(exception.getMessage());
+				}
+
+			}).getEmployeeService().getUtilizationDays(currentUser.getId(),year,month);
+		} catch (Exception e) {
+			GWT.log(e.getMessage());
+		}
 	}
 
 	public List<ActivityReport> getReportsForDay(Date day){
 		List<ActivityReport> reportList = new ArrayList<ActivityReport>();
 		for(ActivityReport p : currentReportsList){
-
 			if(p.getDate().getDate()==day.getDate()&&p.getDate().getYear()==day.getYear()&&p.getDate().getMonth()==day.getMonth()){
 				reportList.add(p);
 				GWT.log("getReportsForDay: added " + p.getJobNr() + p.getText() + p.getDate().toString());
 			}
 		}
 		return reportList;
+	}
+
+	public List<Integer> getUtilizationList(){
+		return this.utilizationList;
 	}
 
 	public List<User> getUsers(){
