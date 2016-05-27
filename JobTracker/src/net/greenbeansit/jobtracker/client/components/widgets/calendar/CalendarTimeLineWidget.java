@@ -83,7 +83,7 @@ public class CalendarTimeLineWidget extends Composite implements CalendarObserve
 		int dayInt = Integer.parseInt(sum2[2]);
 		
 		setDate(month + "`" + day);
-		Window.alert(yearInt +" "+ monthInt+ " " + dayInt);
+		//Window.alert(yearInt +" "+ monthInt+ " " + dayInt);
 		setCalenderWeek(getCalendarWeek(yearInt, monthInt, dayInt));
 		
 	}
