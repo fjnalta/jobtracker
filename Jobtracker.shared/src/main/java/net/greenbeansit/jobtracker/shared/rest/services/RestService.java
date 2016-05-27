@@ -216,12 +216,24 @@ public interface RestService extends DirectRestService {
      * Additionally all {@link User}s will have their List assignedJobs filled with their assigned jobs.
      *
      * @param supervisorId the ID of the supervisor user.
-     * @return a {@link List} of {@link User}.
+     * @return a {@link ManagerPageRestServiceResponse}.
      */
     @GET
-    @Path("manager/employees/{supervisorId}")
+    @Path("manager/{supervisorId}/employees")
     ManagerPageRestServiceResponse getEmployees(
             @PathParam("supervisorId") Integer supervisorId);
+    
+    /**
+     * Gets all {@link Job}s of the user with the following ID and the union of all
+     * associated customers.
+     *
+     * @param userId the ID of the user.
+     * @return a {@link ProjectPageRestServiceResponse}.
+     */
+    @GET
+    @Path("project/{userId}/jobs")
+    ProjectPageRestServiceResponse getProjectPageData(
+    		@PathParam("userId") Integer userId);
 
     /**
      * Handle get, save and delete Pseudo Jobs for capacity planning
@@ -244,7 +256,8 @@ public interface RestService extends DirectRestService {
      * Response for the {@link ManagerPageRestService#getEmployees(Integer)}
      * request.
      */
-    public class ManagerPageRestServiceResponse {
+    public class ManagerPageRestServiceResponse
+    {
         private List<User> employees;
         private List<Job> jobs;
 
@@ -308,5 +321,43 @@ public interface RestService extends DirectRestService {
             return posNr.equals(job.getPosNr())
                     && jobNr.equals(job.getJobNr());
         }
+    }
+    
+    public class ProjectPageRestServiceResponse
+    {
+    	private List<Job> jobs;
+    	private List<Customer> customers;
+    	
+    	public ProjectPageRestServiceResponse()
+    	{
+    		
+    	}
+    	
+    	public ProjectPageRestServiceResponse(List<Job> jobs, List<Customer> customers)
+    	{
+    		this.jobs = jobs;
+    		this.customers = customers;
+    	}
+
+		public List<Job> getJobs()
+		{
+			return jobs;
+		}
+
+		public void setJobs(List<Job> jobs)
+		{
+			this.jobs = jobs;
+		}
+
+		public List<Customer> getCustomers()
+		{
+			return customers;
+		}
+
+		public void setCustomers(List<Customer> customers)
+		{
+			this.customers = customers;
+		}
+    	
     }
 }
