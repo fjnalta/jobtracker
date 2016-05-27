@@ -17,7 +17,7 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 
 import net.greenbeansit.jobtracker.client.components.HomePage;
-import net.greenbeansit.jobtracker.client.components.KapaPage;
+import net.greenbeansit.jobtracker.client.components.kapa.KapaPage;
 import net.greenbeansit.jobtracker.client.components.manager.ManagerPage;
 import net.greenbeansit.jobtracker.client.components.manager.detail.ManagerEmployeeDetailPage;
 import net.greenbeansit.jobtracker.client.components.project.ProjectPage;
