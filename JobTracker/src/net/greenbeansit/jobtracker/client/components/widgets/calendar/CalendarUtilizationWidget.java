@@ -7,10 +7,10 @@ import java.util.List;
 import org.gwtbootstrap3.client.ui.Button;
 import org.gwtbootstrap3.client.ui.Label;
 import org.gwtbootstrap3.client.ui.constants.IconType;
-import org.gwtbootstrap3.client.ui.html.Text;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
@@ -22,6 +22,7 @@ import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.user.datepicker.client.CalendarUtil;
 
 import net.greenbeansit.jobtracker.client.components.CalendarObserver;
+import net.greenbeansit.jobtracker.client.components.widgets.calendar.inputfield.UButton;
 
 /**
  * Shows the Utilization per Day of the month above the Calendar
@@ -35,6 +36,15 @@ public class CalendarUtilizationWidget extends Composite implements CalendarObse
 
 	interface CalendarUtilizationWidgetUiBinder extends UiBinder<Widget, CalendarUtilizationWidget> {
 	}
+
+	// Path for the css File
+	private final String SUFFIXPATH = "net-greenbeansit-jobtracker-client-components-widgets-calendar-CalendarUtilizationWidget_CalendarUtilizationWidgetUiBinderImpl_GenCss_style-";
+
+	private Date tmpDate;
+	private Date calcDate;
+	boolean calcUtilization = false;
+	int calcMonth;
+	List<VerticalPanel> list;
 
 	@UiField
 	FlexTable table;
@@ -57,15 +67,6 @@ public class CalendarUtilizationWidget extends Composite implements CalendarObse
 		calendarHandler.calendar.next();
 	}
 
-	// Path for the css File
-	private final String suffixPath = "net-greenbeansit-jobtracker-client-components-widgets-calendar-CalendarUtilizationWidget_CalendarUtilizationWidgetUiBinderImpl_GenCss_style-";
-
-	private Date tmpDate;
-	private Date calcDate;
-	boolean calcUtilization = false;
-	int calcMonth;
-	List<VerticalPanel> list;
-
 	@SuppressWarnings("deprecation")
 	public CalendarUtilizationWidget() {
 		initWidget(uiBinder.createAndBindUi(this));
@@ -78,9 +79,6 @@ public class CalendarUtilizationWidget extends Composite implements CalendarObse
 		createNewTimeline(0);
 	}
 
-	
-
-	
 	/**
 	 * This method create a new TimeLine.
 	 * 
@@ -90,52 +88,73 @@ public class CalendarUtilizationWidget extends Composite implements CalendarObse
 	 */
 	@SuppressWarnings("deprecation")
 	private void createNewTimeline(int days) {
-		table.removeAllRows();
-		
+		this.table.removeAllRows();
+
 		CalendarUtil.addDaysToDate(calcDate, days);
-		tmpDate = CalendarUtil.copyDate(calcDate);
-		CalendarUtil.setToFirstDayOfMonth(tmpDate);			
+		this.tmpDate = CalendarUtil.copyDate(calcDate);
+		CalendarUtil.setToFirstDayOfMonth(this.tmpDate);
+
 		Date date = new Date();
-		
-		//int dayNumber = calcDate.getDate();
 		int monthNumber = calcDate.getMonth();
 		int dayNumberColumn = 0;
+		int element = 0;
+
 		
-		if(this.calcMonth != this.calcDate.getMonth()){
+		if (this.calcMonth != this.calcDate.getMonth()) {
 			this.calcUtilization = true;
 			this.calcMonth = this.calcDate.getMonth();
 			this.list = createBarChartList();
-		}else{
+		} else {
 			this.calcUtilization = false;
 		}
-		int element = 0;
-		while (monthNumber == tmpDate.getMonth()) {
 
-			table.setWidget(0, dayNumberColumn, list.get(element++));				
+		while (monthNumber == this.tmpDate.getMonth()) {
 
-			Button tmp = new Button("" + (dayNumberColumn + 1) + " ");
-
-			if (CalendarUtil.isSameDate(date, tmpDate)) {
-				tmp.setStyleName(this.suffixPath + "button-Day-current");
-				table.setWidget(1, dayNumberColumn, tmp);
-			} else {
-				tmp.setStyleName(this.suffixPath + "button-Day");
-				table.setWidget(1, dayNumberColumn, tmp);
-			}
-
-			if(calcDate.getDate() <=  (dayNumberColumn+1) && (calcDate.getDate()+6) >=  (dayNumberColumn+1)){
-				Label lbl = new Label("" + this.getDayName(tmpDate.getDay()));
-				lbl.setStyleName(this.suffixPath + "label-week");
-				table.setWidget(2, dayNumberColumn, lbl);
-			}else{
-				table.setText(2, dayNumberColumn, "" + this.getDayName(tmpDate.getDay()));
-			}
-			CalendarUtil.addDaysToDate(tmpDate, 1);
-
-			dayNumberColumn++;
+			createFirstRow(dayNumberColumn, element++);
+			createSecondRow(dayNumberColumn, date);
+			createThirdRow(dayNumberColumn++);
+			CalendarUtil.addDaysToDate(this.tmpDate, 1);
+			
 		}
-		// set to the old month!!!
-		CalendarUtil.addMonthsToDate(tmpDate, -1);
+	}
+
+	private void createFirstRow(int dayNumberColumn,int element) {
+		this.table.setWidget(0, dayNumberColumn, list.get(element));
+	}
+
+	private void createSecondRow(int dayNumberColumn, Date date) {
+		UButton tmpBtn = new UButton((dayNumberColumn + 1) + "", CalendarUtil.copyDate(this.tmpDate));
+		
+		tmpBtn.addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+
+				// TODO Calendar Jumo to the Day
+			}
+		});
+		
+		if (CalendarUtil.isSameDate(date, this.tmpDate)) {
+			tmpBtn.setStyleName(this.SUFFIXPATH + "button-Day-current");
+			this.table.setWidget(1, dayNumberColumn, tmpBtn);
+		} else {
+			tmpBtn.setStyleName(this.SUFFIXPATH + "button-Day");
+			this.table.setWidget(1, dayNumberColumn, tmpBtn);
+		}
+	}
+	
+	@SuppressWarnings("deprecation")
+	private void createThirdRow(int dayNumberColumn) {
+		
+		Label lbl = new Label("" + this.getDayName(tmpDate.getDay()));
+		if (this.calcDate.getDate() <= (dayNumberColumn + 1)
+				&& (this.calcDate.getDate() + 6) >= (dayNumberColumn + 1)) {
+			lbl.setStyleName(this.SUFFIXPATH + "label-week");
+			this.table.setWidget(2, dayNumberColumn, lbl);
+			
+		} else {
+			lbl.setStyleName(this.SUFFIXPATH + "label-not-week");
+			this.table.setWidget(2, dayNumberColumn, lbl);
+		}
 	}
 
 	/**
@@ -192,21 +211,22 @@ public class CalendarUtilizationWidget extends Composite implements CalendarObse
 		vp.setHeight(rnd + "px");
 
 		if (rnd < 40) {
-			vp.setStyleName(this.suffixPath + "barChart", true);
+			vp.setStyleName(this.SUFFIXPATH + "barChart", true);
 		} else {
-			vp.setStyleName(this.suffixPath + "barChartHeight", true);
+			vp.setStyleName(this.SUFFIXPATH + "barChartHeight", true);
 		}
 		return vp;
 	}
-	private List<VerticalPanel> createBarChartList(){
-		
+
+	private List<VerticalPanel> createBarChartList() {
+
 		List<VerticalPanel> list = new ArrayList<VerticalPanel>();
-		
+
 		for (int element = 0; element <= 32; element++) {
-			
+
 			list.add(getBarChart(null));
 		}
-		
+
 		return list;
 	}
 
