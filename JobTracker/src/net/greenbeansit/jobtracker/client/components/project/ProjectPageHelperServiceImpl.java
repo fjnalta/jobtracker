@@ -5,8 +5,16 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import org.fusesource.restygwt.client.Method;
+
+import com.google.gwt.core.client.GWT;
+
+import net.greenbeansit.jobtracker.client.utils.rest.NotifyHelper;
+import net.greenbeansit.jobtracker.client.utils.rest.RestClient;
+import net.greenbeansit.jobtracker.client.utils.rest.RestClient.SuccessFunction;
 import net.greenbeansit.jobtracker.shared.Customer;
 import net.greenbeansit.jobtracker.shared.Job;
+import net.greenbeansit.jobtracker.shared.rest.services.RestService.ProjectPageRestServiceResponse;
 
 class ProjectPageHelperServiceImpl implements ProjectPageHelperService
 {
@@ -23,12 +31,37 @@ class ProjectPageHelperServiceImpl implements ProjectPageHelperService
 
 	public ProjectPageHelperServiceImpl(Callback initCallback)
 	{
+		cachedJobs = new ArrayList<Job>();
+		cachedCustomers = new ArrayList<Customer>();
+		
 		initialize(initCallback);
 	}
 
-	private void initialize(Callback initCallback)
+	private void initialize(final Callback initCallback)
 	{
-		// RestClient.build<.....
+		RestClient.build(new SuccessFunction<ProjectPageRestServiceResponse>()
+		{
+
+			@Override
+			public void onSuccess(Method method,
+					ProjectPageRestServiceResponse response)
+			{
+				if(response.getJobs() != null)
+					cachedJobs = response.getJobs();
+
+				if(response.getCustomers() != null)
+					cachedCustomers = response.getCustomers();
+				
+				initCallback.onSuccess();
+			}
+
+			@Override
+			public void onFailure(Method method, Throwable exception)
+			{
+				GWT.log(exception.getMessage());
+				initCallback.onFailure(exception);
+			}
+		});
 	}
 
 	@Override
