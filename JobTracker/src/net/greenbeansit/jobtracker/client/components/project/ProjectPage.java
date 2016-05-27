@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.gwtbootstrap3.client.ui.Anchor;
+import org.gwtbootstrap3.client.ui.Heading;
 import org.gwtbootstrap3.client.ui.Row;
 import org.gwtbootstrap3.client.ui.html.ClearFix;
 import org.gwtbootstrap3.client.ui.html.Span;
@@ -18,6 +19,7 @@ import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.resources.client.CssResource;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.uibinder.client.UiTemplate;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -37,8 +39,6 @@ public class ProjectPage extends Composite
 
 	interface ProjectPageStyle extends CssResource
 	{
-		String projectListItem();
-
 		String jobListItem();
 	}
 
@@ -61,10 +61,10 @@ public class ProjectPage extends Composite
 	ClearFix							columnHeaderBudget;
 
 	@UiField
-	Span								columnHeaderNameArrow;
+	Heading								columnHeaderNameArrow;
 
 	@UiField
-	Span								columnHeaderBudgetArrow;
+	Heading								columnHeaderBudgetArrow;
 
 	private ProjectPageHelperService	helperService;
 	private ProjectPageSortMode			sortMode	= ProjectPageSortMode.NAME_UP;
