@@ -463,7 +463,6 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 
 	@Override
 	public void notifyHandler() {
-		Window.alert(getDateFromBox(dateStart).toString());
 		calendarHandler.calendar.removeEvent(calendarHandler.calendar.currentEvent.getId());
 		
 		ActivityReportEvent e = new ActivityReportEvent(calendarHandler.calendar.currentEvent.getAp(),calendarHandler.calendar.currentEvent.getId(),
