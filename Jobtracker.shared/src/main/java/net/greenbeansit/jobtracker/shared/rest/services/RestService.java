@@ -203,8 +203,8 @@ public interface RestService extends DirectRestService {
     /**
      * Removes the specified {@link ActivityReportTemplate} from the database.
      *
-     * @param userId     author of the template.
-     * @param templateId id of the template.
+     * @param author     author of the template.
+     * @param name       name of the template.
      */
     @DELETE
     @Path("/users/{userId}/report_templates/{templateName}")
@@ -234,11 +234,6 @@ public interface RestService extends DirectRestService {
     @POST
     @Path("users/{userId}/pseudoJobs/")
     void savePseudoJob(@PathParam("userId") Integer userId, PseudoJob pseudoJob);
-
-    @DELETE
-    @Path("users/{userId}/pseudoJobs/{pseudoJobId}")
-    void deletePseudoJob(@PathParam("userId") Integer userId,
-                         @PathParam("pseudoJobId") Integer pseudoJobId);
 
     /**
      * Response for the {@link ManagerPageRestService#getEmployees(Integer)}

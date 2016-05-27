@@ -15,6 +15,7 @@ public class PseudoJob implements Serializable {
     private Integer id;
     private String  name;
     private String  customer;
+    private Integer author;
 
     public PseudoJob() {
 
@@ -32,6 +33,7 @@ public class PseudoJob implements Serializable {
         this.id = id;
         this.name = name;
         this.customer = customer;
+        this.author = author;
     }
 
     public Integer getId()
@@ -70,4 +72,13 @@ public class PseudoJob implements Serializable {
         this.customer = customer;
     }
 
+    public Integer getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(Integer author) {
+        if(author == null)
+            throw new IllegalArgumentException();
+        this.author = author;
+    }
 }
