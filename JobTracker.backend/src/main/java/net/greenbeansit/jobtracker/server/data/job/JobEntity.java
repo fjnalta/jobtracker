@@ -34,9 +34,9 @@ public class JobEntity implements Serializable
 	@Column(name = "budget_used")
 	private Integer				usedBudget;
 	@Column(name = "is_intern")
-	private boolean				intern;
+	private Boolean				intern;
 	@Column(name = "is_locked")
-	private boolean				locked;
+	private Boolean				locked;
 
 	public JobEntity()
 	{
@@ -136,22 +136,22 @@ public class JobEntity implements Serializable
 	}
 
 	
-	public boolean getIntern()
+	public Boolean getIntern()
 	{
 		return intern;
 	}
 
-	public void setIntern(boolean isIntern)
+	public void setIntern(Boolean isIntern)
 	{
 		this.intern = isIntern;
 	}
 	
-	public boolean getLocked()
+	public Boolean getLocked()
 	{
 		return locked;
 	}
 
-	public void setLocked(boolean isLocked)
+	public void setLocked(Boolean isLocked)
 	{
 		this.locked = isLocked;
 	}
