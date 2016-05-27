@@ -74,11 +74,32 @@
         <b:Column size="XS_12,SM_12,MD_4,LG_4" addStyleNames="{style.mainColumn}">
             <b:Row addStyleNames="{style.smallContainer}">
                 <b:NavTabs justified="true">
-                    <b:TabListItem active="true" dataTarget="#newProject" text="Neues Projekt"/>
-                    <b:TabListItem dataTarget="#myProjects" text="Meine Projekte"/>
+                    <b:TabListItem dataTarget="#myProjects" active="true" text="Meine Projekte"/>
+                    <b:TabListItem dataTarget="#newProject" text="Neues Projekt"/>
                 </b:NavTabs>
                 <b:TabContent>
-                    <b:TabPane active="true" b:id="newProject">
+                    <b:TabPane b:id="myProjects" active="true">
+                        <b:Form>
+                            <b:FieldSet>
+                                <b:FormGroup>
+                                    <b:FormLabel for="projectName">Projektname</b:FormLabel>
+                                    <select:Select title="Projekt auswählen..." b:id="projectName" ui:field="selectJob">
+                                        <select:Option/>
+                                        <s:OptGroup label="Meine Projekte" ui:field="myJobsOptGroup">
+                                        </s:OptGroup>
+                                        <s:OptGroup label="Alle anderen" ui:field="allJobsOptGroup">
+                                        </s:OptGroup>
+                                    </select:Select>
+                                </b:FormGroup>
+                                <b:FormGroup>
+                                    <b:FormLabel for="projectDesc">Tätigkeitsbeschreibung</b:FormLabel>
+                                    <b:TextArea placeholder="Bitte eintragen..." b:id="projectDesc"
+                                                addStyleNames="{style.textArea}"/>
+                                </b:FormGroup>
+                            </b:FieldSet>
+                        </b:Form>
+                    </b:TabPane>
+                    <b:TabPane b:id="newProject">
                         <b:Form>
                             <b:FieldSet>
                                 <b:FormGroup>
@@ -90,51 +111,6 @@
                                     <b:FormLabel for="projectDesc">Tätigkeitsbeschreibung</b:FormLabel>
                                     <b:TextArea placeholder="Bitte eintragen..." b:id="projectDesc"
                                                 addStyleNames="{style.textArea}" ui:field="textDiscription"/>
-                                </b:FormGroup>
-                            </b:FieldSet>
-                        </b:Form>
-                    </b:TabPane>
-                    <b:TabPane b:id="myProjects">
-                        <b:Form>
-                            <b:FieldSet>
-                                <b:FormGroup>
-                                    <b:FormLabel for="projectName">Projektname</b:FormLabel>
-                                    <select:Select title="Projekt auswählen..." b:id="projectName">
-                                        <select:Option/>
-                                    </select:Select>
-                                </b:FormGroup>
-                                <b:FormGroup>
-                                    <b:FormLabel for="projectDesc">Tätigkeitsbeschreibung</b:FormLabel>
-                                    <b:TextArea placeholder="Bitte eintragen..." b:id="projectDesc"
-                                                addStyleNames="{style.textArea}" readOnly="true"/>
-                                </b:FormGroup>
-                            </b:FieldSet>
-                        </b:Form>
-                    </b:TabPane>
-                </b:TabContent>
-                <b:NavTabs justified="true">
-                    <b:TabListItem active="true" dataTarget="#createCustomer" text="Kunde erstellen"/>
-                    <b:TabListItem dataTarget="#loadCustomer" text="Kunde wählen"/>
-                </b:NavTabs>
-                <b:TabContent>
-                    <b:TabPane active="true" b:id="createCustomer">
-                        <b:Form>
-                            <b:FieldSet>
-                                <b:FormGroup>
-                                    <b:FormLabel>Kundenname</b:FormLabel>
-                                    <b:TextBox placeholder="Bitte eintragen..."/>
-                                </b:FormGroup>
-                            </b:FieldSet>
-                        </b:Form>
-                    </b:TabPane>
-                    <b:TabPane b:id="loadCustomer">
-                        <b:Form>
-                            <b:FieldSet>
-                                <b:FormGroup>
-                                    <b:FormLabel>Kunde</b:FormLabel>
-                                    <select:Select title="Kunde auswählen...">
-                                        <select:Option/>
-                                    </select:Select>
                                 </b:FormGroup>
                             </b:FieldSet>
                         </b:Form>
