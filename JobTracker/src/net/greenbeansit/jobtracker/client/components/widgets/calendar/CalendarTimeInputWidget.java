@@ -126,11 +126,6 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 
 	}
 
-	@UiHandler("buttonBook")
-	public void clickButtonBook(ClickEvent e) {
-
-	}
-
 	@UiHandler("eventStart")
 	public void keyPressedEventStart(KeyPressEvent event) {
 		String before = eventStart.getText().replace(":", "");

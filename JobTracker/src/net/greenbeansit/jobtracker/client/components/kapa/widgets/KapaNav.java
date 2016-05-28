@@ -74,8 +74,10 @@ public class KapaNav extends Composite implements LogicObservable {
         PseudoJob template = new PseudoJob();
         if(textIdentifier.getText().length()>0){
             template.setName(textIdentifier.getText());
+            template.setAuthor(0);
+            template.setId(0);
             //TODO - implement LogicHandler savePseudoJob
-            //handler.savePseudoJob(template);
+            handler.savePseudoJob(template);
         }else{
             NotifyHelper.errorMessage("Fill missing fields");
         }
