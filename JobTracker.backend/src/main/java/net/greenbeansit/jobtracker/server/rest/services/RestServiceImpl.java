@@ -232,7 +232,7 @@ public class RestServiceImpl implements RestService {
 	public List<Integer> getUtilizationDays(Integer userId, Integer year,
 			Integer month)
 	{
-		List<Integer> utilization = new ArrayList<Integer>();
+		List<Integer> utilization = new ArrayList<Integer>(31);
 		List<ActivityReport> reports = activityReportService.getByUser(userId);
 		for(ActivityReport report : reports)
 		{
