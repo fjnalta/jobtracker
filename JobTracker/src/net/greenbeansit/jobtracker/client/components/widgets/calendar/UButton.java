@@ -15,8 +15,6 @@ public class UButton extends Button {
 	public UButton(String txt, Date d) {
 		super(txt);
 		this.date = d;
-
+		
 	}
-	
-
 }

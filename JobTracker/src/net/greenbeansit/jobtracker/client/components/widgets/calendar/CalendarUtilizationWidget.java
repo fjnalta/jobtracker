@@ -22,6 +22,7 @@ import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.user.datepicker.client.CalendarUtil;
 
 import net.greenbeansit.jobtracker.client.components.CalendarObserver;
+import net.greenbeansit.jobtracker.client.components.LogicObservable;
 
 /**
  * Shows the Utilization per Day of the month above the Calendar
@@ -29,7 +30,7 @@ import net.greenbeansit.jobtracker.client.components.CalendarObserver;
  * @author ahmed
  *
  */
-public class CalendarUtilizationWidget extends Composite implements CalendarObserver {
+public class CalendarUtilizationWidget extends Composite implements CalendarObserver,LogicObservable {
 
 	private static CalendarUtilizationWidgetUiBinder uiBinder = GWT.create(CalendarUtilizationWidgetUiBinder.class);
 
@@ -189,7 +190,6 @@ public class CalendarUtilizationWidget extends Composite implements CalendarObse
 			dayName = "Sa";
 			break;
 		}
-
 		return dayName;
 	}
 
@@ -202,14 +202,12 @@ public class CalendarUtilizationWidget extends Composite implements CalendarObse
 	 *            add css attribute so the widget
 	 * @return an new BarChart
 	 */
-	private VerticalPanel getBarChart(Date date) {
+	private VerticalPanel getBarChart(int number) {
 		VerticalPanel vp = new VerticalPanel();
 
-		double rnd = getBarChartHeight(date);
+		vp.setHeight((double)number + "px");
 
-		vp.setHeight(rnd + "px");
-
-		if (rnd < 40) {
+		if (number < 100) {
 			vp.setStyleName(this.SUFFIXPATH + "barChart", true);
 		} else {
 			vp.setStyleName(this.SUFFIXPATH + "barChartHeight", true);
@@ -219,26 +217,20 @@ public class CalendarUtilizationWidget extends Composite implements CalendarObse
 
 	private List<VerticalPanel> createBarChartList() {
 
+		//List<Integer> utilizationList = handler.get();
+		
 		List<VerticalPanel> list = new ArrayList<VerticalPanel>();
 
 		for (int element = 0; element <= 32; element++) {
 
-			list.add(getBarChart(null));
+		//	list.add(getBarChart(utilizationList.get(index)));
+
 		}
 
 		return list;
 	}
 
-	/**
-	 * get the barChart height of a day
-	 * 
-	 * @param date
-	 * @return
-	 */
-	private double getBarChartHeight(Date date) {
 
-		return Math.random() * 50;
-	}
 
 	/**
 	 * Get an Date, which is set to the first day of the current week (Sunday)
@@ -263,6 +255,18 @@ public class CalendarUtilizationWidget extends Composite implements CalendarObse
 	public void notifyHandler() {
 		calendarHandler.updateObserver(this);
 
+	}
+
+	@Override
+	public void updateObservable() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void notifyLogicHandler() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
