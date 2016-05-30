@@ -25,6 +25,14 @@
 	<inherits name="org.fusesource.restygwt.RestyGWT"/>
 	<inherits name="org.gwtbootstrap3.extras.notify.Notify"/>
 	<inherits name="org.gwtbootstrap3.extras.slider.Slider"/>
+	<inherits name="com.google.gwt.logging.Logging" />
+	
+	<!-- Properties -->
+	<set-property name="gwt.logging.logLevel" value="INFO" />
+	<set-property name="gwt.logging.enabled" value="TRUE" />
+	<set-property name="gwt.logging.developmentModeHandler" value="ENABLED" />
+	<set-property name="gwt.logging.systemHandler" value="DISABLED" />
+	<set-property name="gwt.logging.consoleHandler" value="ENABLED"/>
 	
 	<!-- Specify the app entry point class. -->
 	<entry-point class='net.greenbeansit.jobtracker.client.GwtEntryPoint' />
