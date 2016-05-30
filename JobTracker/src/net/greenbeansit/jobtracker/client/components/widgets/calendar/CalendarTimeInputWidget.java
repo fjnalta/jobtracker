@@ -223,35 +223,31 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 
 	@UiHandler("buttonTimeHourUpPause")
 	public void clickButtonTimeHourUpPause(ClickEvent e) {
-		increasePauseDurationHours(pause);
-		calculateDuration();
+		increasePauseHours(pause);
 		notifyHandler();
 	}
 
 	@UiHandler("buttonTimeHourDownPause")
 	public void clickButtonTimeHourDownPause(ClickEvent e) {
 		decreasePauseDurationHours(pause);
-		changeEndByPause();
 		notifyHandler();
 	}
 
 	@UiHandler("buttonTimeMinuteUpPause")
 	public void clickButtonTimeMinuteUpPause(ClickEvent e) {
-		increasePauseDurationMinutes(pause);
-		changeEndByPause();
+		increasePauseMinutes(pause);
 		notifyHandler();
 	}
 
 	@UiHandler("buttonTimeMinuteDownPause")
 	public void clickButtonMinuteDownPause(ClickEvent e) {
 		decreasePauseMinutes(pause);
-		changeEndByPause();
 		notifyHandler();
 	}
 
 	@UiHandler("buttonTimeHourUpDuration")
 	public void clickButtonTimeHourUpDuration(ClickEvent e) {
-		increasePauseDurationHours(workTime);
+		increaseDurationHours(workTime);
 		changeEndByDuration();
 		notifyHandler();
 	}
@@ -265,7 +261,7 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 
 	@UiHandler("buttonTimeMinuteUpDuration")
 	public void clickButtonTimeMinuteUpDuration(ClickEvent e) {
-		increasePauseDurationMinutes(workTime);
+		increaseDurationMinutes(workTime);
 		changeEndByDuration();
 		notifyHandler();
 	}
@@ -320,7 +316,7 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 
 		eventStart.setText(getTimeForBoxFromISOString(arp.getISOStart()));
 		eventEnd.setText(getTimeForBoxFromISOString(arp.getISOEnd()));
-
+		GWT.log("Pause -> " + createTimeForTextBox(arp.getBreak()));
 		pause.setText(createTimeForTextBox(arp.getBreak()));
 
 		workTime.setText(calculateDuration());
@@ -394,6 +390,67 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 		hourString = addLeadingNull(hourString);
 		minuteString = addLeadingNull(minuteString);
 
+		box.setText(addDoublePoint(hourString + minuteString));
+	}
+
+	/**
+	 * Increase the pause minutes.
+	 * 
+	 * @param box
+	 */
+	private void increasePauseMinutes(TextBox box) {
+		String boxText = removeDoublePoint(box.getText());
+		String hourString = removeLeadingNull(boxText.substring(0, 2));
+		String minuteString = removeLeadingNull(boxText.substring(2, boxText.length()));
+
+		int duration = createTimeFromText(workTime.getText());
+		int lengthPause = createTimeFromText(pause.getText());
+
+		int hours = Integer.parseInt(hourString);
+		int minutes = Integer.parseInt(minuteString);
+		if (duration-1 > lengthPause) {
+			if (minutes < 59) {
+				minutes++;
+			} else {
+				hours++;
+				minutes = 0;
+			}
+			if (hours > 23) {
+				hours = 23;
+				minutes = 59;
+			}
+		}
+
+		hourString = "" + hours;
+		minuteString = "" + minutes;
+
+		hourString = addLeadingNull(hourString);
+		minuteString = addLeadingNull(minuteString);
+
+		box.setText(addDoublePoint(hourString + minuteString));
+	}
+
+	/**
+	 * Increase the pause.
+	 * 
+	 * @param box
+	 */
+	private void increasePauseHours(TextBox box) {
+		String boxText = removeDoublePoint(box.getText());
+		String hourString = removeLeadingNull(boxText.substring(0, 2));
+		String minuteString = boxText.substring(2, boxText.length());
+		int hours = Integer.parseInt(hourString);
+		int duration = createTimeFromText(workTime.getText());
+		int lengthPause = createTimeFromText(pause.getText());
+		if (duration-60 > lengthPause) {
+			if (hours < 23) {
+				hours++;
+			} else {
+				hours = 23;
+			}
+		}
+		hourString = "" + hours;
+		hourString = addLeadingNull(hourString);
 		box.setText(addDoublePoint(hourString + minuteString));
 	}
 
@@ -606,17 +663,11 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 	}
 
 	/**
-	 * Calculates a new End for the Event when the pause change.
-	 */
-	private void changeEndByPause() {
-		// ToDo?
-	}
-	
-	/**
-	 * Increase the pause and duration minutes until the time is 23:59.
+	 * Increase the duration minutes until the time is 23:59.
+	 * 
 	 * @param box
 	 */
-	private void increasePauseDurationMinutes(TextBox box) {
+	private void increaseDurationMinutes(TextBox box) {
 		String boxText = removeDoublePoint(box.getText());
 		String hourString = removeLeadingNull(boxText.substring(0, 2));
 		String minuteString = removeLeadingNull(boxText.substring(2, boxText.length()));
@@ -645,10 +696,11 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 	}
 
 	/**
-	 *Increase the pause and duration time until the time is  23.XX hours. 
+	 * Increase the duration time until the time is 23.XX hours.
+	 * 
 	 * @param box
 	 */
-	private void increasePauseDurationHours(TextBox box) {
+	private void increaseDurationHours(TextBox box) {
 		String boxText = removeDoublePoint(box.getText());
 		String hourString = removeLeadingNull(boxText.substring(0, 2));
 		String minuteString = boxText.substring(2, boxText.length());
@@ -807,11 +859,11 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 		}
 	}
 
-	private void makeCopyDeleteButtonsVisible() {
+	public void makeCopyDeleteButtonsVisible() {
 
 	}
 
-	private void makeCopyDeleteButtonsHidden() {
+	public void makeCopyDeleteButtonsHidden() {
 
 	}
 }
