@@ -77,7 +77,7 @@ public class CalendarUtilizationWidget extends Composite implements CalendarObse
 		calendarHandler.addObserver(this);
 		this.leftButton.setIcon(IconType.ARROW_LEFT);
 		this.rightButton.setIcon(IconType.ARROW_RIGHT);
-		createNewTimeline(0);
+		//createNewTimeline(0);
 	}
 
 	/**
@@ -219,13 +219,12 @@ public class CalendarUtilizationWidget extends Composite implements CalendarObse
 
 	private List<VerticalPanel> createBarChartList() {
 
-		List<Integer> utilizationList = handler.getUtilizationList();
-
+		//List<Integer> utilizationList = handler.getUtilizationList();
 		List<VerticalPanel> list = new ArrayList<VerticalPanel>();
 
 		for (int element = 0; element <= 32; element++) {
 
-			list.add(getBarChart(utilizationList.get(element)));
+			//list.add(getBarChart(utilizationList.get(element)));
 
 		}
 
@@ -257,11 +256,10 @@ public class CalendarUtilizationWidget extends Composite implements CalendarObse
 
 	}
 
-	
 	@Override
 	public void updateObservable() {
 		
-		list = createBarChartList();
+	//	list = createBarChartList();
 	}
 
 	@Override
