@@ -14,7 +14,6 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -69,10 +68,12 @@ public class CalendarUtilizationWidget extends Composite implements CalendarObse
 
 	@SuppressWarnings("deprecation")
 	public CalendarUtilizationWidget() {
+		
 		initWidget(uiBinder.createAndBindUi(this));
 		this.tmpDate = new Date();
 		this.calcDate = getFirstDayOfWeek();
 		this.calcMonth = -1;
+		handler.loadUtilization(tmpDate.getYear()+1900, tmpDate.getMonth()+1);
 		calendarHandler.addObserver(this);
 		this.leftButton.setIcon(IconType.ARROW_LEFT);
 		this.rightButton.setIcon(IconType.ARROW_RIGHT);
@@ -103,7 +104,8 @@ public class CalendarUtilizationWidget extends Composite implements CalendarObse
 		if (this.calcMonth != this.calcDate.getMonth()) {
 			this.calcUtilization = true;
 			this.calcMonth = this.calcDate.getMonth();
-			this.list = createBarChartList();
+			handler.loadUtilization(2016, calcMonth + 1);
+			
 		} else {
 			this.calcUtilization = false;
 		}
@@ -217,20 +219,18 @@ public class CalendarUtilizationWidget extends Composite implements CalendarObse
 
 	private List<VerticalPanel> createBarChartList() {
 
-		//List<Integer> utilizationList = handler.get();
-		
+		List<Integer> utilizationList = handler.getUtilizationList();
+
 		List<VerticalPanel> list = new ArrayList<VerticalPanel>();
 
 		for (int element = 0; element <= 32; element++) {
 
-		//	list.add(getBarChart(utilizationList.get(index)));
+			list.add(getBarChart(utilizationList.get(element)));
 
 		}
 
 		return list;
 	}
-
-
 
 	/**
 	 * Get an Date, which is set to the first day of the current week (Sunday)
@@ -257,10 +257,11 @@ public class CalendarUtilizationWidget extends Composite implements CalendarObse
 
 	}
 
+	
 	@Override
 	public void updateObservable() {
-		// TODO Auto-generated method stub
 		
+		list = createBarChartList();
 	}
 
 	@Override
