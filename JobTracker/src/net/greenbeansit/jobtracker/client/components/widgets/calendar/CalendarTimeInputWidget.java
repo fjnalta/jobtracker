@@ -168,96 +168,112 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 	@UiHandler("buttonTimeHourUpStart")
 	public void clickButtonTimeHourUpStart(ClickEvent e) {
 		increaseEventHours(eventStart);
+		increaseDateByTime(eventStart, dateStart);
 		notifyHandler();
 	}
 
 	@UiHandler("buttonTimeHourDownStart")
 	public void clickButtonTimeHourDownStart(ClickEvent e) {
 		decreaseEventHours(eventStart);
+		decreaseDateByTime(eventStart, dateStart);
 		notifyHandler();
 	}
 
 	@UiHandler("buttonTimeMinuteUpStart")
 	public void clickButtonTimeMinuteUpStart(ClickEvent e) {
 		increaseEventMinutes(eventStart);
+		increaseDateByTime(eventStart, dateStart);
 		notifyHandler();
 	}
 
 	@UiHandler("buttonTimeMinuteDownStart")
 	public void clickButtonMinuteDownStart(ClickEvent e) {
 		decreaseEventMinutes(eventStart);
+		decreaseDateByTime(eventStart, dateStart);
 		notifyHandler();
 	}
 
 	@UiHandler("buttonTimeHourUpEnd")
 	public void clickButtonTimeHourUpEnd(ClickEvent e) {
 		increaseEventHours(eventEnd);
+		increaseDateByTime(eventEnd, dateEnd);
 		notifyHandler();
 	}
 
 	@UiHandler("buttonTimeHourDownEnd")
 	public void clickButtonTimeHourDownEnd(ClickEvent e) {
 		decreaseEventHours(eventEnd);
+		decreaseDateByTime(eventEnd, dateEnd);
 		notifyHandler();
 	}
 
 	@UiHandler("buttonTimeMinuteUpEnd")
 	public void clickButtonTimeMinuteUpEnd(ClickEvent e) {
 		increaseEventMinutes(eventEnd);
+		increaseDateByTime(eventEnd, dateEnd);
 		notifyHandler();
 	}
 
 	@UiHandler("buttonTimeMinuteDownEnd")
 	public void clickButtonMinuteDownEnd(ClickEvent e) {
 		decreaseEventMinutes(eventEnd);
+		decreaseDateByTime(eventEnd, dateEnd);
 		notifyHandler();
 	}
 
 	@UiHandler("buttonTimeHourUpPause")
 	public void clickButtonTimeHourUpPause(ClickEvent e) {
 		increaseEventHours(pause);
+		increaseDateByTime(eventEnd, dateEnd);
 		notifyHandler();
 	}
 
 	@UiHandler("buttonTimeHourDownPause")
 	public void clickButtonTimeHourDownPause(ClickEvent e) {
 		decreaseEventHours(pause);
+		decreaseDateByTime(eventEnd, dateEnd);
 		notifyHandler();
 	}
 
 	@UiHandler("buttonTimeMinuteUpPause")
 	public void clickButtonTimeMinuteUpPause(ClickEvent e) {
 		increaseEventMinutes(pause);
+		increaseDateByTime(eventEnd, dateEnd);
 		notifyHandler();
 	}
 
 	@UiHandler("buttonTimeMinuteDownPause")
 	public void clickButtonMinuteDownPause(ClickEvent e) {
 		decreaseEventMinutes(pause);
+		decreaseDateByTime(eventEnd, dateEnd);
 		notifyHandler();
 	}
 
 	@UiHandler("buttonTimeHourUpDuration")
 	public void clickButtonTimeHourUpDuration(ClickEvent e) {
 		increaseEventHours(workTime);
+		increaseDateByTime(eventEnd, dateEnd);
 		notifyHandler();
 	}
 
 	@UiHandler("buttonTimeHourDownDuration")
 	public void clickButtonTimeHourDownDuration(ClickEvent e) {
 		decreaseEventHours(workTime);
+		decreaseDateByTime(eventEnd, dateEnd);
 		notifyHandler();
 	}
 
 	@UiHandler("buttonTimeMinuteUpDuration")
 	public void clickButtonTimeMinuteUpDuration(ClickEvent e) {
 		increaseEventMinutes(workTime);
+		increaseDateByTime(eventEnd, dateEnd);
 		notifyHandler();
 	}
 
 	@UiHandler("buttonTimeMinuteDownDuration")
 	public void clickButtonTimeMinuteDownDuration(ClickEvent e) {
 		decreaseEventMinutes(workTime);
+		decreaseDateByTime(eventEnd, dateEnd);
 		notifyHandler();
 	}
 	
@@ -319,7 +335,7 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 
 		hourString = addLeadingNull(hourString);
 		minuteString = addLeadingNull(minuteString);
-
+		
 		box.setText(addDoublePoint(hourString + minuteString));
 	}
 
@@ -441,11 +457,12 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 
 	@Override
 	public void update() {
-		dateStart.setText(dateParser(calendarHandler.calendar.currentEvent.getISOStart()));
-		dateEnd.setText(dateParser(calendarHandler.calendar.currentEvent.getISOEnd()));
-		eventStart.setText(timeParser(calendarHandler.calendar.currentEvent.getISOStart()));
-		eventEnd.setText(timeParser(calendarHandler.calendar.currentEvent.getISOEnd()));
-		pause.setText("00:00");
+		ActivityReportEvent arp = calendarHandler.calendar.currentEvent;
+		dateStart.setText(dateParser(arp.getISOStart()));
+		dateEnd.setText(dateParser(arp.getISOEnd()));
+		eventStart.setText(timeParser(arp.getISOStart()));
+		eventEnd.setText(timeParser(arp.getISOEnd()));
+		pause.setText(arp.getAp().getBreakTime()/60 + ":" + arp.getAp().getBreakTime()%60);
 		workTime.setText(calculateDuration());
 	}
 
@@ -455,9 +472,19 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 		int month = Integer.parseInt(text.substring(3, text.length()));
 		return new Date(2016, month, day);
 	}
+	
+	private void increaseDateByTime(TextBox timeBox, TextBox dateBox){
+			
+//			increaseDate(dateBox);
+	}
+	
+	private void decreaseDateByTime(TextBox timeBox, TextBox dateBox){
 
+//			decreaseDate(dateBox);
+	}
 	@Override
 	public void notifyHandler() {
+		
 		calendarHandler.calendar.removeEvent(calendarHandler.calendar.currentEvent.getId());
 		
 		ActivityReportEvent e = new ActivityReportEvent(calendarHandler.calendar.currentEvent.getAp(),calendarHandler.calendar.currentEvent.getId(),
@@ -501,7 +528,8 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 	private String calculateDuration() {
 		int start = createTimeFromText(eventStart.getText());
 		int end = createTimeFromText(eventEnd.getText());
-		int duration = end - start;
+		int pause = createTimeFromText(workTime.getText());
+		int duration = end - start + pause;
 		return addLeadingNull(duration/60+"") +":" +addLeadingNull("" + duration%60);
 	}
 
@@ -540,7 +568,8 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 		Date dt = getDateFromBox(dateTextBox);
 		dt.setDate(dt.getDate()+1);
 		int month = dt.getMonth() ;
-		dateTextBox.setText(dt.getDate() + "." + addLeadingNull(month+""));
+		GWT.log(month + " " + dt.getDate());
+		dateTextBox.setText(addLeadingNull(dt.getDate()+"") + "." + addLeadingNull(month+""));
 	}
 	
 	public String decreaseDate(TextBox dateTextBox){
