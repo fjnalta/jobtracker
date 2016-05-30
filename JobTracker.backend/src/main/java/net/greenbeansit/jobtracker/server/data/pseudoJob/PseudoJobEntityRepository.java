@@ -14,5 +14,7 @@ public interface PseudoJobEntityRepository extends CrudRepository<PseudoJobEntit
 
 	List<PseudoJobEntity> findAll();
 
+	List<PseudoJobEntity> findByAuthor(Integer author);
+
 	PseudoJobEntity findById(Integer id);
 }

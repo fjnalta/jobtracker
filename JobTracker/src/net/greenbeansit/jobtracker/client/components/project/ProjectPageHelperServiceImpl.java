@@ -61,7 +61,7 @@ class ProjectPageHelperServiceImpl implements ProjectPageHelperService
 				GWT.log(exception.getMessage());
 				initCallback.onFailure(exception);
 			}
-		});
+		}).getEmployeeService().getProjectPageData(getUserId());
 	}
 
 	@Override
@@ -205,5 +205,10 @@ class ProjectPageHelperServiceImpl implements ProjectPageHelperService
 		return cachedCustomers;
 	}
 
+	
+	private int getUserId()
+	{
+		return 2;
+	}
 }
 

@@ -34,69 +34,19 @@ import java.util.List;
 /**
  * Created by Philipp Minges on 23.05.16.
  */
-public class KapaPage extends Composite implements CalendarObserver, LogicObservable {
+public class KapaPage extends Composite implements CalendarObserver {
 
     @UiField
-    OptGroup myJobsOptGroup,allJobsOptGroup;
-
-    @UiField
-    Select selectJob;
-
-    @UiField
-    Button  buttonUp, buttonDown, buttonUpYearStart, buttonDownYearStart,
+    Button  buttonUpYearStart, buttonDownYearStart,
             buttonUpCalendarWeekStart, buttonDownCalendarWeekStart,
             buttonUpYearEnd, buttonDownYearEnd, buttonUpDayWeek,
-            buttonDownDayWeek, buttonUpCalendarWeekEnd, buttonDownCalendarWeekEnd,
-            buttonSave;
-
-    @UiField
-    TextBox possibilityPercentage, textIdentifier;
-
-    @UiField
-    Slider mySlider;
+            buttonDownDayWeek, buttonUpCalendarWeekEnd, buttonDownCalendarWeekEnd;
 
     @UiField
     Row content;
 
     @UiField
     Heading dateHeading;
-
-    @UiHandler("mySlider")
-    void onSlide(SlideEvent<Double> event)
-    {
-        possibilityPercentage.setText(event.getValue().toString());
-    }
-
-    @UiHandler("buttonUp")
-    void onClickUp(ClickEvent e) {
-        if (mySlider.getValue() < 76)
-            mySlider.setValue(mySlider.getValue() + 25);
-        //refresh percentage TextBox
-        possibilityPercentage.setText(mySlider.getValue().toString());
-    }
-
-    @UiHandler("buttonDown")
-    void onClickDown(ClickEvent e) {
-        if (mySlider.getValue() > 24)
-            mySlider.setValue(mySlider.getValue() - 25);
-        possibilityPercentage.setText(mySlider.getValue().toString());
-    }
-
-    @UiHandler("buttonSave")
-    public void savePseudoJob(final ClickEvent e){
-        PseudoJob template = new PseudoJob();
-        if(textIdentifier.getText().length()>0){
-            template.setName(textIdentifier.getText());
-            //TODO implement LogicHandler savePseudoJob
-            //handler.savePseudoJob(template);
-        }else{
-            NotifyHelper.errorMessage("Fill missing fields");
-        }
-    }
-
-    private List<Job> jobList = new ArrayList<Job>();
-    private List<PseudoJob> pseudoJobList = new ArrayList<PseudoJob>();
-    private Job currentJob = null;
 
     interface KapaPageUiBinder extends UiBinder<Widget, KapaPage> {
     }
@@ -108,61 +58,13 @@ public class KapaPage extends Composite implements CalendarObserver, LogicObserv
     public KapaPage() {
         initWidget(uiBinder.createAndBindUi(this));
         initialize();
-
-        handler.addObservable(this);
-        handler.updateObservable(this);
-        selectJob.addValueChangeHandler(new ValueChangeHandler<String>() {
-
-            @Override
-            public void onValueChange(ValueChangeEvent<String> event) {
-                currentJob = ((SelectJobOption) selectJob.getSelectedItem()).getJob();
-                notifyLogicHandler();
-            }
-        });
-        handler.loadJobs();
     }
 
     private void initialize() {
         //set Buttons
         setButtons();
-        //set Slider
-        possibilityPercentage.setText(mySlider.getValue().toString());
         //load calendar
         content.add(fc);
-    }
-
-    private void addJobs(List<Job> jobList) {
-        for (Job currentJob : jobList) {
-            SelectJobOption tempOption = new SelectJobOption(currentJob);
-            allJobsOptGroup.add(tempOption);
-        }
-    }
-
-    @Override
-    public void updateObservable() {
-        allJobsOptGroup.clear();
-        this.jobList = handler.getJobList();
-        addJobs(this.jobList);
-        currentJob = handler.getCurrentJob();
-        if (currentJob != null) {
-            for (Option opt : selectJob.getItems()) {
-                ((SelectJobOption) opt).setSelected(false);
-                if (((SelectJobOption) opt).getJob().equals(currentJob)) {
-                    opt.setSelected(true);
-                }
-            }
-        }
-        selectJob.refresh();
-    }
-
-    @Override
-    public void notifyLogicHandler() {
-        if(currentJob != null){
-            handler.setCurrentJob(currentJob);
-        }
-        else{
-            NotifyHelper.errorMessage("Please select job");
-        }
     }
 
     @Override
@@ -176,8 +78,6 @@ public class KapaPage extends Composite implements CalendarObserver, LogicObserv
     }
 
     private void setButtons(){
-        buttonDown.setIcon(IconType.ARROW_DOWN);
-        buttonUp.setIcon(IconType.ARROW_UP);
 
         buttonUpYearStart.setIcon(IconType.ARROW_UP);
         buttonDownYearStart.setIcon(IconType.ARROW_DOWN);

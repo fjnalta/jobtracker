@@ -1,23 +1,18 @@
 package net.greenbeansit.jobtracker.client.components;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
-import org.fusesource.restygwt.client.Method;
-
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.i18n.client.DateTimeFormat;
-import com.google.gwt.user.client.Window;
-
 import net.greenbeansit.jobtracker.client.components.widgets.calendar.CalendarWidget;
 import net.greenbeansit.jobtracker.client.utils.rest.NotifyHelper;
 import net.greenbeansit.jobtracker.client.utils.rest.RestClient;
 import net.greenbeansit.jobtracker.client.utils.rest.RestClient.SuccessFunction;
-import net.greenbeansit.jobtracker.shared.ActivityReport;
-import net.greenbeansit.jobtracker.shared.ActivityReportTemplate;
-import net.greenbeansit.jobtracker.shared.Job;
-import net.greenbeansit.jobtracker.shared.User;
+import net.greenbeansit.jobtracker.shared.*;
+import org.fusesource.restygwt.client.Method;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 /**
  * Controller class which provide CRUD funtionallity for the HomePage including
  * save new Reports, new ReportTemplates, and load Reports from backend. Also it coordinates 
@@ -35,6 +30,7 @@ public class LogicHandler {
 	private List<ActivityReportTemplate> templateList = new ArrayList<ActivityReportTemplate>();
 	private List<User> userList = new ArrayList<User>();
 	private List<Job> selectedJobs = new ArrayList<Job>();
+	private List<PseudoJob> pseudoJobList = new ArrayList<PseudoJob>();
 	private List<Integer> utilizationList = new ArrayList<Integer>();
 	private User currentUser;
 	private LogicHandler self = this;
@@ -55,9 +51,11 @@ public class LogicHandler {
 	private void initialize() {
 		List<Job> temp = new ArrayList<Job>();
 		List<ActivityReportTemplate> reporttemp = new ArrayList<ActivityReportTemplate>();
+		List<PseudoJob> pseudoJobreport = new ArrayList<PseudoJob>();
 		
 		this.jobList = temp;
 		this.templateList = reporttemp;
+		this.pseudoJobList = pseudoJobreport;
 		this.currentUser = new User();
 		this.currentUser.setId(2);
 	}
@@ -219,8 +217,10 @@ public class LogicHandler {
 			tempReport.setJobNr(currentJob.getJobNr());
 			tempReport.setPosNr(currentJob.getPosNr());
 			tempReport.setText(currentJob.getDesc());
+			if(currentTemplate.getText()!=null){
+				tempReport.setText(currentTemplate.getText());
+			}
 
-			tempReport.setText(currentTemplate.getText());
 			// TODO handle different JobTasks
 			tempReport.setTaskId(currentTemplate.getTaskId());
 
@@ -275,6 +275,35 @@ public class LogicHandler {
 			e.printStackTrace();
 		}
 	}
+
+	//TODO - does not work
+	/**
+	 * Trys to save a pseudoJob to the backend
+	 * @param pseudoJob {@link PseudoJob} to save
+	 */
+	public void savePseudoJob(PseudoJob pseudoJob) {
+		final PseudoJob temp = pseudoJob;
+		updateAllObservables();
+		try {
+			RestClient.build(new SuccessFunction<PseudoJob>() {
+				@Override
+				public void onSuccess(Method method, PseudoJob response) {
+					self.loadPseudoJobs();
+					self.updateAllObservables();
+					NotifyHelper.successMessage("PseudoJob saved successfully!");
+				}
+
+				@Override
+				public void onFailure(Method method, Throwable exception) {
+					NotifyHelper.errorMessage(exception.getMessage());
+					GWT.log(exception.getMessage());
+				}
+
+			}).getEmployeeService().savePseudoJob(currentUser.getId(), pseudoJob);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 	
 	/**
 	 * Try to load all {@link ActivityReportTemplate} from the backend
@@ -286,7 +315,7 @@ public class LogicHandler {
 		try {
 			RestClient.build(new SuccessFunction<List<ActivityReportTemplate>>() {
 				@Override
-				public void onSuccess(Method method, List<ActivityReportTemplate> response) {		
+				public void onSuccess(Method method, List<ActivityReportTemplate> response) {
 					self.templateList = response;
 					self.updateAllObservables();
 				}
@@ -297,11 +326,39 @@ public class LogicHandler {
 					GWT.log(exception.getMessage());
 				}
 
-			}).getEmployeeService().getAllReportTemplates(currentUser.getId());
+			}).getEmployeeService().getAllPseudoJobs(currentUser.getId());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
+
+	/**
+	 * Try to load all {@link PseudoJob} from the backend
+	 * On success is calls {@link #updateAllObservables()}to update the widgets
+	 */
+
+	public void loadPseudoJobs() {
+		this.updateAllObservables();
+		try {
+			RestClient.build(new SuccessFunction<List<PseudoJob>>() {
+				@Override
+				public void onSuccess(Method method, List<PseudoJob> response) {
+					self.pseudoJobList = response;
+					self.updateAllObservables();
+				}
+
+				@Override
+				public void onFailure(Method method, Throwable exception) {
+					NotifyHelper.errorMessage(exception.getMessage());
+					GWT.log(exception.getMessage());
+				}
+
+			}).getEmployeeService().getAllPseudoJobs(currentUser.getId());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	/**
 	 * Try to load all {@link Job} from the backend
 	 * on sucess call the {@link #updateAllObservables()} to update the widgets

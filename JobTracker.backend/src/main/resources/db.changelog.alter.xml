@@ -189,4 +189,11 @@
 			]]>
         </sql>
     </changeSet>
+    <changeSet id="20160528-ALTERPseudo_JobRemoveCustomer" author="phil">
+        <sql>
+            <![CDATA[
+                ALTER TABLE `pseudo_job` DROP COLUMN `customer`;
+            ]]>
+        </sql>
+    </changeSet>
 </databaseChangeLog>
