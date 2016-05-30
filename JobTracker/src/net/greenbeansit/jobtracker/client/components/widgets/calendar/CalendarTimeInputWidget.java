@@ -462,7 +462,7 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 		dateEnd.setText(dateParser(arp.getISOEnd()));
 		eventStart.setText(timeParser(arp.getISOStart()));
 		eventEnd.setText(timeParser(arp.getISOEnd()));
-		pause.setText(arp.getAp().getBreakTime()/60 + ":" + arp.getAp().getBreakTime()%60);
+		pause.setText(arp.getAp().getBreakTime()/60 + ":" + arp.getAp().getBreakTime());
 		workTime.setText(calculateDuration());
 	}
 

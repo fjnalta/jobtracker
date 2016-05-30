@@ -74,7 +74,7 @@
 		<b:Row addStyleNames="{style.row}">
 			<b:InputGroup>
 				<b:InputGroupAddon addStyleNames="{style.addonLeft}">Pause</b:InputGroupAddon>
-				<b:TextBox ui:field="pause" height="43px">12:00</b:TextBox>
+				<b:TextBox ui:field="pause" height="43px">00:00</b:TextBox>
 				<b:InputGroupButton>
 					<b:VerticalButtonGroup>
 						<b:Button size="EXTRA_SMALL" addStyleNames="{style.buttonCenter}"
