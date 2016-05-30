@@ -2,6 +2,8 @@ package net.greenbeansit.jobtracker.server.data.job;
 
 import java.io.Serializable;
 
+import net.greenbeansit.jobtracker.server.data.userJob.UserJobEntityId;
+
 public class JobEntityId implements Serializable
 {
 	/**
@@ -34,5 +36,23 @@ public class JobEntityId implements Serializable
 	public void setDesc(String desc)
 	{
 		this.desc = desc;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if(obj == null)
+			return false;
+		else if (obj instanceof JobEntityId)
+		{
+			JobEntityId temp = (JobEntityId) obj;
+			return this.jobNr.equals(temp.jobNr) && this.posNr.equals(temp.posNr);
+		} else
+			return false;
+	}
+	
+	@Override
+	public int hashCode()
+	{
+		return super.hashCode();
 	}
 }

@@ -24,6 +24,11 @@ public class GwtEntryPoint implements EntryPoint
 	 */
 	public void onModuleLoad()
 	{
+		GWT.setUncaughtExceptionHandler(new GWT.UncaughtExceptionHandler() {
+		        public void onUncaughtException(Throwable e) {
+		          GWT.log(e.toString());
+		      }
+		});
 		Defaults.setServiceRoot(SERVICE_ROOT);
 		Application app = new Application();
 
