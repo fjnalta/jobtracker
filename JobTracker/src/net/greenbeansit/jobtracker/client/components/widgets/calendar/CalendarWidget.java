@@ -145,7 +145,6 @@ public class CalendarWidget extends Composite implements CalendarObserver,LogicO
 						calendar.currentEvent = e;
 						for(ActivityReportEvent a : eventList) {
 							if (a.getId().equals(e.getId())) {
-								GWT.log("current Report set: " + a.getAp().getJobNr());
 								handler.setCurrentReport(a.getAp());
 							}
 						}
@@ -280,14 +279,14 @@ public class CalendarWidget extends Composite implements CalendarObserver,LogicO
 		if(!reports.isEmpty()){
 			for (ActivityReport ap : reports) {
 				ActivityReportEvent e = new ActivityReportEvent(ap,ap.getId() + "", ap.getText(), true, true, true);
-				ap.getDate().setYear(2016);
+				ap.getDate().setYear((2016-1900));
 				e.setStart(calendarHandler.getISO8601StringForDate(ap.getDate(), ap.getStartTime()));
 				e.setEnd(calendarHandler.getISO8601StringForDate(ap.getDate(), ap.getEndTime()));
 				calendar.addEvent(e);
 				this.eventList.add(e);
 				calendar.render();
 				calendar.currentEvent = null;
-				GWT.log("Added Event" + ap.getText() + ":" + ap.getDate());
+
 			}
 		}
 		calendar.render();

@@ -73,11 +73,11 @@ public class CalendarUtilizationWidget extends Composite implements CalendarObse
 		this.tmpDate = new Date();
 		this.calcDate = getFirstDayOfWeek();
 		this.calcMonth = -1;
-		handler.loadUtilization(tmpDate.getYear()+1900, tmpDate.getMonth()+1);
+		//handler.loadUtilization(tmpDate.getYear()+1900, tmpDate.getMonth()+1);
 		calendarHandler.addObserver(this);
 		this.leftButton.setIcon(IconType.ARROW_LEFT);
 		this.rightButton.setIcon(IconType.ARROW_RIGHT);
-		//createNewTimeline(0);
+		createNewTimeline(0);
 	}
 
 	/**
@@ -104,7 +104,8 @@ public class CalendarUtilizationWidget extends Composite implements CalendarObse
 		if (this.calcMonth != this.calcDate.getMonth()) {
 			this.calcUtilization = true;
 			this.calcMonth = this.calcDate.getMonth();
-			handler.loadUtilization(2016, calcMonth + 1);
+			list = this.createBarChartList();
+			//handler.loadUtilization(2016, calcMonth + 1);
 			
 		} else {
 			this.calcUtilization = false;
@@ -204,12 +205,12 @@ public class CalendarUtilizationWidget extends Composite implements CalendarObse
 	 *            add css attribute so the widget
 	 * @return an new BarChart
 	 */
-	private VerticalPanel getBarChart(int number) {
+	private VerticalPanel getBarChart(double number) {
 		VerticalPanel vp = new VerticalPanel();
 
 		vp.setHeight((double)number + "px");
 
-		if (number < 100) {
+		if (number < 40) {
 			vp.setStyleName(this.SUFFIXPATH + "barChart", true);
 		} else {
 			vp.setStyleName(this.SUFFIXPATH + "barChartHeight", true);
@@ -225,7 +226,7 @@ public class CalendarUtilizationWidget extends Composite implements CalendarObse
 		for (int element = 0; element <= 32; element++) {
 
 			//list.add(getBarChart(utilizationList.get(element)));
-
+			list.add(getBarChart(Math.random()*50));
 		}
 
 		return list;

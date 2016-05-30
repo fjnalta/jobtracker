@@ -18,12 +18,10 @@ public class ActivityReportEvent extends Event{
 
 	public ActivityReportEvent(String id, String title) {
 		super(id, title);
-		// TODO Auto-generated constructor stub
 	}
 
 	public ActivityReportEvent(JavaScriptObject jso) {
 		super(jso);
-		// TODO Auto-generated constructor stub
 	}
 
 	public ActivityReport getAp() {

@@ -80,27 +80,6 @@ public class CalendarHandler implements LogicObservable {
 		handler.updateAllObservables();
 	}
 	
-	public String getTimeAsText(int all){
-		int hours = all/60;
-		int minutes = all%60;
-		return hours + "" + minutes;
-	}
-	
-	public int createTimeFromText(String date ){
-		String[] temp = date.split("T");
-		String[] temp2 = temp[1].split(":");
-		int hours = Integer.parseInt(temp2[0]);
-		int minutes = Integer.parseInt(temp2[1]);
-		return (60 * hours) + minutes;
-	}
-	
-	public int timeParserForISO(String date) {
-		String[] temp2 = date.split(":");
-		int hours = Integer.parseInt(temp2[0]);
-		int minutes = Integer.parseInt(temp2[1]);
-		return (60 * hours) + minutes;
-	}
-	
 	/**
 	 * 
 	 * @param date
@@ -108,7 +87,7 @@ public class CalendarHandler implements LogicObservable {
 	 * @return yyyy-mm-ddThh:mm:ss.000Z
 	 */
 	public String getISO8601StringForDate(Date date, int time) {
-		return date.getYear() + "-" + fillLeadingZero(date.getMonth()) + "-" + fillLeadingZero(date.getDate()) + "T"
+		return (date.getYear()+1900) + "-" + fillLeadingZero((date.getMonth()+1)) + "-" + fillLeadingZero(date.getDate()) + "T"
 				+ fillLeadingZero(calculateHours(time)) + ":" + fillLeadingZero(calculateMinutes(time)) + ":00"
 				+ ".000Z";
 	}
