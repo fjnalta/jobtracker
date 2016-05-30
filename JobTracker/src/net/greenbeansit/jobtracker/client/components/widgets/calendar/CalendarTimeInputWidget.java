@@ -160,192 +160,215 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 			enableFields();
 		}
 		if (workTime.getText().length() > 3) {
-			
+
 		}
 		notifyHandler();
 	}
-	
+
 	@UiHandler("buttonTimeHourUpStart")
 	public void clickButtonTimeHourUpStart(ClickEvent e) {
 		increaseEventHours(eventStart);
+		increaseDateTimeUpHour(eventStart, dateStart);
 		notifyHandler();
 	}
 
 	@UiHandler("buttonTimeHourDownStart")
 	public void clickButtonTimeHourDownStart(ClickEvent e) {
 		decreaseEventHours(eventStart);
+		decreaseDateTimeDownHour(eventStart, dateStart);
 		notifyHandler();
 	}
 
 	@UiHandler("buttonTimeMinuteUpStart")
 	public void clickButtonTimeMinuteUpStart(ClickEvent e) {
 		increaseEventMinutes(eventStart);
+		increaseDateTimeUpMinute(eventStart, dateStart);
 		notifyHandler();
 	}
 
 	@UiHandler("buttonTimeMinuteDownStart")
 	public void clickButtonMinuteDownStart(ClickEvent e) {
 		decreaseEventMinutes(eventStart);
+		decreaseDateTimeDownMinute(eventStart, dateStart);
 		notifyHandler();
 	}
 
 	@UiHandler("buttonTimeHourUpEnd")
 	public void clickButtonTimeHourUpEnd(ClickEvent e) {
 		increaseEventHours(eventEnd);
+		increaseDateTimeUpHour(eventEnd, dateEnd);
 		notifyHandler();
 	}
 
 	@UiHandler("buttonTimeHourDownEnd")
 	public void clickButtonTimeHourDownEnd(ClickEvent e) {
 		decreaseEventHours(eventEnd);
+		decreaseDateTimeDownHour(eventEnd, dateEnd);
 		notifyHandler();
 	}
 
 	@UiHandler("buttonTimeMinuteUpEnd")
 	public void clickButtonTimeMinuteUpEnd(ClickEvent e) {
 		increaseEventMinutes(eventEnd);
+		increaseDateTimeUpMinute(eventEnd, dateEnd);
 		notifyHandler();
 	}
 
 	@UiHandler("buttonTimeMinuteDownEnd")
 	public void clickButtonMinuteDownEnd(ClickEvent e) {
 		decreaseEventMinutes(eventEnd);
+		decreaseDateTimeDownMinute(eventEnd, dateEnd);
 		notifyHandler();
 	}
 
 	@UiHandler("buttonTimeHourUpPause")
 	public void clickButtonTimeHourUpPause(ClickEvent e) {
-		increaseEventHours(pause);
+		increasePauseDurationHours(pause);
+		calculateDuration();
 		notifyHandler();
 	}
 
 	@UiHandler("buttonTimeHourDownPause")
 	public void clickButtonTimeHourDownPause(ClickEvent e) {
-		decreaseEventHours(pause);
+		decreasePauseDurationHours(pause);
+		changeEndByPause();
 		notifyHandler();
 	}
 
 	@UiHandler("buttonTimeMinuteUpPause")
 	public void clickButtonTimeMinuteUpPause(ClickEvent e) {
-		increaseEventMinutes(pause);
+		increasePauseDurationMinutes(pause);
+		changeEndByPause();
 		notifyHandler();
 	}
 
 	@UiHandler("buttonTimeMinuteDownPause")
 	public void clickButtonMinuteDownPause(ClickEvent e) {
-		decreaseEventMinutes(pause);
+		decreasePauseDurationMinutes(pause);
+		changeEndByPause();
 		notifyHandler();
 	}
 
 	@UiHandler("buttonTimeHourUpDuration")
 	public void clickButtonTimeHourUpDuration(ClickEvent e) {
-		increaseEventHours(workTime);
+		increasePauseDurationHours(workTime);
+		changeEndByDuration();
 		notifyHandler();
 	}
 
 	@UiHandler("buttonTimeHourDownDuration")
 	public void clickButtonTimeHourDownDuration(ClickEvent e) {
-		decreaseEventHours(workTime);
+		decreasePauseDurationHours(workTime);
+		changeEndByDuration();
 		notifyHandler();
 	}
 
 	@UiHandler("buttonTimeMinuteUpDuration")
 	public void clickButtonTimeMinuteUpDuration(ClickEvent e) {
-		increaseEventMinutes(workTime);
+		increasePauseDurationMinutes(workTime);
+		changeEndByDuration();
 		notifyHandler();
 	}
 
 	@UiHandler("buttonTimeMinuteDownDuration")
 	public void clickButtonTimeMinuteDownDuration(ClickEvent e) {
-		decreaseEventMinutes(workTime);
+		decreasePauseDurationMinutes(workTime);
+		changeEndByDuration();
 		notifyHandler();
 	}
-	
+
 	@UiHandler("buttonUpDateStart")
-	public void buttonUpDateStartClicked(ClickEvent e){
+	public void buttonUpDateStartClicked(ClickEvent e) {
 		increaseDate(dateStart);
 		notifyHandler();
 	}
-	
+
 	@UiHandler("buttonDownDateStart")
-	public void buttonDownDateStartClicked(ClickEvent e){
+	public void buttonDownDateStartClicked(ClickEvent e) {
 		decreaseDate(dateStart);
 		notifyHandler();
 	}
-	
+
 	@UiHandler("buttonDownDateEnd")
-	public void buttonDownDateEndClicked(ClickEvent e){
+	public void buttonDownDateEndClicked(ClickEvent e) {
 		decreaseDate(dateEnd);
 		notifyHandler();
 	}
-	
+
 	@UiHandler("buttonUpDateEnd")
-	public void buttonUpDateEndClicked(ClickEvent e){
+	public void buttonUpDateEndClicked(ClickEvent e) {
 		increaseDate(dateEnd);
 		notifyHandler();
 	}
-	
+
 	@UiHandler("buttonBook")
-	public void buttonBookClicked(ClickEvent e){
+	public void buttonBookClicked(ClickEvent e) {
 		int startTime = createTimeFromText(eventStart.getText());
 		int duration = createTimeFromText(workTime.getText());
 		int breakTime = createTimeFromText(pause.getText());
 		Date date = getDateFromBox(dateStart);
-		ActivityReport tmp = new ActivityReport(0, 0, 0, 0, 0,"", date, startTime, duration, breakTime);
+		ActivityReport tmp = new ActivityReport(0, 0, 0, 0, 0, "", date, startTime, duration, breakTime);
 		handler.saveReport(tmp);
 	}
 
 	@Override
 	public void update() {
 		ActivityReportEvent arp = calendarHandler.calendar.currentEvent;
+
 		dateStart.setText(getDateForBoxFromISOString(arp.getISOStart()));
 		dateEnd.setText(getDateForBoxFromISOString(arp.getISOEnd()));
+
 		eventStart.setText(getTimeForBoxFromISOString(arp.getISOStart()));
 		eventEnd.setText(getTimeForBoxFromISOString(arp.getISOEnd()));
-		pause.setText("00:00");
+
+		pause.setText(createTimeForTextBox(arp.getBreak()));
+
 		workTime.setText(calculateDuration());
 	}
 
 	@Override
 	public void notifyHandler() {
-		
+
 		calendarHandler.calendar.removeEvent(calendarHandler.calendar.currentEvent.getId());
-		
-		ActivityReportEvent e = new ActivityReportEvent(calendarHandler.calendar.currentEvent.getAp(),calendarHandler.calendar.currentEvent.getId(),
-				calendarHandler.calendar.currentEvent.getTitle(), true, true, true);
-		
+
+		ActivityReportEvent e = new ActivityReportEvent(calendarHandler.calendar.currentEvent.getAp(),
+				calendarHandler.calendar.currentEvent.getId(), calendarHandler.calendar.currentEvent.getTitle(), true,
+				true, true);
+
 		e.setStart(calendarHandler.getISO8601StringForDate(getDateFromBox(dateStart),
 				createTimeFromText(eventStart.getText())));
-		
-		e.setEnd(calendarHandler.getISO8601StringForDate(getDateFromBox(dateEnd), createTimeFromText(eventEnd.getText())));
-		
+
+		e.setEnd(calendarHandler.getISO8601StringForDate(getDateFromBox(dateEnd),
+				createTimeFromText(eventEnd.getText())));
+
+		e.setBreak(createTimeFromText(pause.getText()));
+
 		calendarHandler.calendar.currentEvent = e;
-	
+
 		calendarHandler.calendar.addEvent(calendarHandler.calendar.currentEvent);
 		calendarHandler.updateObserver(this);
+	}
+
+	@Override
+	public void updateObservable() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void notifyLogicHandler() {
+		// TODO Auto-generated method stub
+
 	}
 
 	private String removeDoublePoint(String input) {
 		return input = input.replace(":", "");
 	}
 
-	public String addDoublePoint(String input) {
+	private String addDoublePoint(String input) {
 		return input = input.substring(0, 2) + ":" + input.substring(2, input.length());
 	}
 
-	
-	@Override
-	public void updateObservable() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void notifyLogicHandler() {
-		// TODO Auto-generated method stub
-		
-	}
-	
 	private void increaseEventMinutes(TextBox box) {
 		String boxText = removeDoublePoint(box.getText());
 		String hourString = removeLeadingNull(boxText.substring(0, 2));
@@ -370,7 +393,7 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 
 		hourString = addLeadingNull(hourString);
 		minuteString = addLeadingNull(minuteString);
-		
+
 		box.setText(addDoublePoint(hourString + minuteString));
 	}
 
@@ -415,8 +438,7 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 		box.setText(addDoublePoint(hourString + minuteString));
 
 	}
-	
-	
+
 	private void decreaseEventHours(TextBox box) {
 		String boxText = removeDoublePoint(box.getText());
 		String hourString = removeLeadingNull(boxText.substring(0, 2));
@@ -447,10 +469,10 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 		}
 	}
 
-	private String addLeadingNullToInteger(int sign){
-		return addLeadingNull(sign+"");
+	private String addLeadingNullToInteger(int sign) {
+		return addLeadingNull(sign + "");
 	}
-	
+
 	private String removeLeadingNull(String sign) {
 		if (sign.startsWith("0") && !(sign.equals("00"))) {
 			return sign.replace("0", "");
@@ -458,7 +480,7 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 			return sign;
 		}
 	}
-	
+
 	private void inputLengthIsToLong(String before, KeyPressEvent event) {
 		if (before.length() > 3) {
 			event.preventDefault();
@@ -472,66 +494,256 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 	private void enableFields() {
 		eventEnd.setEnabled(true);
 	}
-	private int getHours(String time) {
-		return Integer.parseInt(time.substring(0, 2));
-	}
 
-	private int getMinutes(String time) {
-		return Integer.parseInt(time.substring(2, time.length()));
-	}
-	
+	/**
+	 * 
+	 * @param text
+	 *            "hh:mm"
+	 * @return time int int
+	 */
 	private int createTimeFromText(String text) {
 		String[] split = text.split(":");
 		int hours = Integer.parseInt(split[0]);
 		int minutes = Integer.parseInt(split[1]);
-		return 60*hours + minutes;
+		return 60 * hours + minutes;
 	}
 
+	/**
+	 * Creates a date object from a string.
+	 * 
+	 * @param dateStart
+	 *            String "dd.mm"
+	 * @return Date Object
+	 */
 	private Date getDateFromBox(TextBox dateStart) {
 		String[] split = dateStart.getText().split("\\.");
-		/*
-		 * year 2016-1900
-		 * month 0 ... 11
-		 * day 1 ... 31
-		 */
 		int day = Integer.parseInt(split[0]);
-		int month = Integer.parseInt(split[1])-1;
-		int year = 2016-1900;
-		
-		return new Date(year,month,day);
+		int month = Integer.parseInt(split[1]) - 1;
+		int year = 2016 - 1900;
+		return new Date(year, month, day);
 	}
-	
+
+	/**
+	 * Creates the time for a textbox.
+	 * 
+	 * @param isoStart
+	 *            ISO-String"yyyy-mm-ddThh:mm:ss.000Z"
+	 * @return "hh:mm"
+	 */
 	private String getTimeForBoxFromISOString(String isoStart) {
 		String[] splitAtT = isoStart.split("T");
 		String[] splitAtDoublePoint = splitAtT[1].split(":");
 		return addLeadingNull(splitAtDoublePoint[0]) + ":" + addLeadingNull(splitAtDoublePoint[1]);
- 	}
+	}
 
+	/**
+	 * Creates a date for a textbox.
+	 * 
+	 * @param isoStart
+	 *            ISO-String "yyyy-mm-ddThh:mm:ss.000Z"
+	 * @return "dd.mm"
+	 */
 	private String getDateForBoxFromISOString(String isoStart) {
 		String[] splitAtT = isoStart.split("T");
 		String[] splitAtDoublePoint = splitAtT[0].split("-");
 		return addLeadingNull(splitAtDoublePoint[2]) + "." + addLeadingNull(splitAtDoublePoint[1]);
 	}
-	
+
+	/**
+	 * Calculates the duration of an event.
+	 * 
+	 * @return the duration "hh:mm"
+	 */
 	private String calculateDuration() {
 		int startOfEvent = createTimeFromText(eventStart.getText());
 		int endOfEvent = createTimeFromText(eventEnd.getText());
-		int duration = endOfEvent - startOfEvent;
-		return addLeadingNullToInteger(duration/60) + ":" + addLeadingNullToInteger(duration%60);
+		int eventPause = createTimeFromText(pause.getText());
+		int duration = endOfEvent - startOfEvent + eventPause;
+		return addLeadingNullToInteger(duration / 60) + ":" + addLeadingNullToInteger(duration % 60);
 	}
-	
-	private void increaseDate(TextBox dateTextBox){
+
+	/**
+	 * decrease the day by one.
+	 * 
+	 * @param dateTextBox
+	 *            "dd.mm"
+	 */
+	private void increaseDate(TextBox dateTextBox) {
+		GWT.log("Content increase dateTextBox -> " + dateTextBox.getText());
 		Date dt = getDateFromBox(dateTextBox);
-		dt.setDate(dt.getDate()+1);
-		int month = dt.getMonth()+1 ;
-		dateTextBox.setText(addLeadingNull(dt.getDate()+"") + "." + addLeadingNull(month+""));
+		dt.setDate(dt.getDate() + 1);
+		int month = dt.getMonth() + 1;
+		GWT.log("Date increased is -> " + addLeadingNull(dt.getDate() + "") + "." + addLeadingNull(month + ""));
+		dateTextBox.setText(addLeadingNull(dt.getDate() + "") + "." + addLeadingNull(month + ""));
 	}
-	
-	private void decreaseDate(TextBox dateTextBox){
+
+	/**
+	 * Increase the date by one day.
+	 * 
+	 * @param dateTextBox
+	 */
+	private void decreaseDate(TextBox dateTextBox) {
+		GWT.log("Content decrease dateTextBox -> " + dateTextBox.getText());
 		Date dt = getDateFromBox(dateTextBox);
-		dt.setDate(dt.getDate()-1);
-		int month = dt.getMonth()+1 ;
-		dateTextBox.setText(addLeadingNull(dt.getDate()+"") + "." + addLeadingNull(month+""));	
+		dt.setDate(dt.getDate() - 1);
+		int month = dt.getMonth() + 1;
+		GWT.log("Date decreased is -> " + addLeadingNull(dt.getDate() + "") + "." + addLeadingNull(month + ""));
+		dateTextBox.setText(addLeadingNull(dt.getDate() + "") + "." + addLeadingNull(month + ""));
 	}
-	
+
+	/**
+	 * 
+	 * @param time
+	 *            in Integer
+	 * @return String "hh:mm"
+	 */
+	private String createTimeForTextBox(int time) {
+		return addLeadingNullToInteger(time / 60) + ":" + addLeadingNullToInteger(time % 60);
+	}
+
+	/**
+	 * Calculates a new End for the Event when the duration change.
+	 */
+	private void changeEndByDuration() {
+		int newEnd = createTimeFromText(eventStart.getText()) + createTimeFromText(workTime.getText());
+		eventEnd.setText(createTimeForTextBox(newEnd));
+	}
+
+	/**
+	 * Calculates a new End for the Event when the pause change.
+	 */
+	private void changeEndByPause() {
+		// ToDo?
+	}
+
+	private void increasePauseDurationMinutes(TextBox box) {
+		String boxText = removeDoublePoint(box.getText());
+		String hourString = removeLeadingNull(boxText.substring(0, 2));
+		String minuteString = removeLeadingNull(boxText.substring(2, boxText.length()));
+
+		int hours = Integer.parseInt(hourString);
+		int minutes = Integer.parseInt(minuteString);
+
+		if (minutes < 59) {
+			minutes++;
+		} else {
+			hours++;
+			minutes = 0;
+		}
+		if (hours > 23) {
+			hours = 23;
+			minutes = 59;
+		}
+
+		hourString = "" + hours;
+		minuteString = "" + minutes;
+
+		hourString = addLeadingNull(hourString);
+		minuteString = addLeadingNull(minuteString);
+
+		box.setText(addDoublePoint(hourString + minuteString));
+	}
+
+	private void increasePauseDurationHours(TextBox box) {
+		String boxText = removeDoublePoint(box.getText());
+		String hourString = removeLeadingNull(boxText.substring(0, 2));
+		String minuteString = boxText.substring(2, boxText.length());
+		int hours = Integer.parseInt(hourString);
+		if (hours < 23) {
+			hours++;
+		} else {
+			hours = 23;
+		}
+		hourString = "" + hours;
+		hourString = addLeadingNull(hourString);
+		box.setText(addDoublePoint(hourString + minuteString));
+	}
+
+	private void decreasePauseDurationMinutes(TextBox box) {
+		String boxText = removeDoublePoint(box.getText());
+		String hourString = removeLeadingNull(boxText.substring(0, 2));
+		String minuteString = removeLeadingNull(boxText.substring(2, boxText.length()));
+
+		int hours = Integer.parseInt(hourString);
+		int minutes = Integer.parseInt(minuteString);
+
+		if (minutes > 0) {
+			minutes--;
+		} else {
+			if (hours > 0) {
+				hours--;
+				minutes = 59;
+			} else {
+				hours = 0;
+				minutes = 0;
+			}
+		}
+		hourString = "" + hours;
+		minuteString = "" + minutes;
+		hourString = addLeadingNull(hourString);
+		minuteString = addLeadingNull(minuteString);
+		box.setText(addDoublePoint(hourString + minuteString));
+
+	}
+
+	private void decreasePauseDurationHours(TextBox box) {
+		String boxText = removeDoublePoint(box.getText());
+		String hourString = removeLeadingNull(boxText.substring(0, 2));
+		String minuteString = boxText.substring(2, boxText.length());
+		int hours = Integer.parseInt(hourString);
+		if (hours > 0) {
+			hours--;
+		} else {
+			hours = 0;
+		}
+		hourString = "" + hours;
+		hourString = addLeadingNull(hourString);
+		box.setText(addDoublePoint(hourString + minuteString));
+	}
+
+	private void decreaseDateTimeDownHour(TextBox box, TextBox dateBox) {
+		int boxTime = createTimeFromText(box.getText());
+		GWT.log("Increase BoxTimeUpHour " + boxTime + (boxTime > 0 && boxTime < 60));
+		if (boxTime <= 1439 && boxTime >= 1381) {
+			GWT.log("before decreaseDateByHour(dateBox)" + dateBox.getText());
+			decreaseDate(dateBox);
+			GWT.log("before decreaseDatebyHour(dateBox)" + dateBox.getText());
+		}
+	}
+
+	private void decreaseDateTimeDownMinute(TextBox box, TextBox dateBox) {
+		int boxTime = createTimeFromText(box.getText());
+		if (boxTime == 1439) {
+			GWT.log("before decreaseDateByMinute(dateBox)" + dateBox.getText());
+			decreaseDate(dateBox);
+			GWT.log("before decreaseDateByMinite(dateBox)" + dateBox.getText());
+		}
+	}
+
+	private void increaseDateTimeUpMinute(TextBox box, TextBox dateBox) {
+		int boxTime = createTimeFromText(box.getText());
+		if (boxTime == 0) {
+			GWT.log("before increaseDateByMinute(dateBox)" + dateBox.getText());
+			increaseDate(dateBox);
+			GWT.log("before increaseDateByinute(dateBox)" + dateBox.getText());
+		}
+	}
+
+	private void increaseDateTimeUpHour(TextBox box, TextBox dateBox) {
+		int boxTime = createTimeFromText(box.getText());
+		GWT.log("Increase BoxTimeUpHour " + boxTime + "\n\r bool->" + (boxTime <= 1439 && boxTime >= 1381));
+		if (boxTime < 60 && boxTime > 0) {
+			GWT.log("before increaseDateByHour(dateBox)" + dateBox.getText());
+			increaseDate(dateBox);
+			GWT.log("before increaseDateByHour(dateBox)" + dateBox.getText());
+		}
+	}
+
+	private void makeCopyDeleteButtonsVisible() {
+
+	}
+
+	private void makeCopyDeleteButtonsHidden() {
+
+	}
 }

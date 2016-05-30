@@ -6,14 +6,16 @@ import com.google.gwt.core.client.JavaScriptObject;
 
 import net.greenbeansit.jobtracker.shared.ActivityReport;
 
-public class ActivityReportEvent extends Event{
-	
+public class ActivityReportEvent extends Event {
+
 	private ActivityReport ap;
-	
-	public ActivityReportEvent(ActivityReport ap,String id, String title, boolean isEditable, boolean isStartEditable,
+	private int breakTime;
+
+	public ActivityReportEvent(ActivityReport ap, String id, String title, boolean isEditable, boolean isStartEditable,
 			boolean isDurationEditable) {
 		super(id, title, isEditable, isStartEditable, isDurationEditable);
 		this.ap = ap;
+		
 	}
 
 	public ActivityReportEvent(String id, String title) {
@@ -31,6 +33,13 @@ public class ActivityReportEvent extends Event{
 	public void setAp(ActivityReport ap) {
 		this.ap = ap;
 	}
-	
-	
+
+	public int getBreak() {
+		return this.breakTime;
+	}
+
+	public void setBreak(int breakTime) {
+		this.breakTime = breakTime;
+	}
+
 }
