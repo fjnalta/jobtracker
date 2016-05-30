@@ -244,7 +244,7 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 
 	@UiHandler("buttonTimeMinuteDownPause")
 	public void clickButtonMinuteDownPause(ClickEvent e) {
-		decreasePauseDurationMinutes(pause);
+		decreasePauseMinutes(pause);
 		changeEndByPause();
 		notifyHandler();
 	}
@@ -272,7 +272,7 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 
 	@UiHandler("buttonTimeMinuteDownDuration")
 	public void clickButtonTimeMinuteDownDuration(ClickEvent e) {
-		decreasePauseDurationMinutes(workTime);
+		decreaseDurationMinutes(workTime);
 		changeEndByDuration();
 		notifyHandler();
 	}
@@ -569,11 +569,9 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 	 *            "dd.mm"
 	 */
 	private void increaseDate(TextBox dateTextBox) {
-		GWT.log("Content increase dateTextBox -> " + dateTextBox.getText());
 		Date dt = getDateFromBox(dateTextBox);
 		dt.setDate(dt.getDate() + 1);
 		int month = dt.getMonth() + 1;
-		GWT.log("Date increased is -> " + addLeadingNull(dt.getDate() + "") + "." + addLeadingNull(month + ""));
 		dateTextBox.setText(addLeadingNull(dt.getDate() + "") + "." + addLeadingNull(month + ""));
 	}
 
@@ -583,11 +581,9 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 	 * @param dateTextBox
 	 */
 	private void decreaseDate(TextBox dateTextBox) {
-		GWT.log("Content decrease dateTextBox -> " + dateTextBox.getText());
 		Date dt = getDateFromBox(dateTextBox);
 		dt.setDate(dt.getDate() - 1);
 		int month = dt.getMonth() + 1;
-		GWT.log("Date decreased is -> " + addLeadingNull(dt.getDate() + "") + "." + addLeadingNull(month + ""));
 		dateTextBox.setText(addLeadingNull(dt.getDate() + "") + "." + addLeadingNull(month + ""));
 	}
 
@@ -615,7 +611,11 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 	private void changeEndByPause() {
 		// ToDo?
 	}
-
+	
+	/**
+	 * Increase the pause and duration minutes until the time is 23:59.
+	 * @param box
+	 */
 	private void increasePauseDurationMinutes(TextBox box) {
 		String boxText = removeDoublePoint(box.getText());
 		String hourString = removeLeadingNull(boxText.substring(0, 2));
@@ -644,6 +644,10 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 		box.setText(addDoublePoint(hourString + minuteString));
 	}
 
+	/**
+	 *Increase the pause and duration time until the time is  23.XX hours. 
+	 * @param box
+	 */
 	private void increasePauseDurationHours(TextBox box) {
 		String boxText = removeDoublePoint(box.getText());
 		String hourString = removeLeadingNull(boxText.substring(0, 2));
@@ -659,7 +663,12 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 		box.setText(addDoublePoint(hourString + minuteString));
 	}
 
-	private void decreasePauseDurationMinutes(TextBox box) {
+	/**
+	 * decrease the pause minutes until the time is 00:00.
+	 * 
+	 * @param box
+	 */
+	private void decreasePauseMinutes(TextBox box) {
 		String boxText = removeDoublePoint(box.getText());
 		String hourString = removeLeadingNull(boxText.substring(0, 2));
 		String minuteString = removeLeadingNull(boxText.substring(2, boxText.length()));
@@ -686,6 +695,50 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 
 	}
 
+	/**
+	 * decreas the minutes of duration until it is 00:01.
+	 * 
+	 * @param box
+	 */
+	private void decreaseDurationMinutes(TextBox box) {
+		String boxText = removeDoublePoint(box.getText());
+		String hourString = removeLeadingNull(boxText.substring(0, 2));
+		String minuteString = removeLeadingNull(boxText.substring(2, boxText.length()));
+
+		int hours = Integer.parseInt(hourString);
+		int minutes = Integer.parseInt(minuteString);
+
+		if (hours > 0) {
+			if (minutes > 0) {
+				minutes--;
+			} else {
+				hours--;
+				minutes = 59;
+			}
+		} else {
+			if (minutes > 1) {
+				hours = 0;
+				minutes--;
+			} else {
+				hours = 0;
+				minutes = 1;
+			}
+		}
+		hourString = "" + hours;
+		minuteString = "" + minutes;
+		hourString =
+
+		addLeadingNull(hourString);
+		minuteString = addLeadingNull(minuteString);
+		box.setText(addDoublePoint(hourString + minuteString));
+
+	}
+
+	/**
+	 * Decrease the pause or duration hours.
+	 * 
+	 * @param box
+	 */
 	private void decreasePauseDurationHours(TextBox box) {
 		String boxText = removeDoublePoint(box.getText());
 		String hourString = removeLeadingNull(boxText.substring(0, 2));
@@ -701,41 +754,56 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 		box.setText(addDoublePoint(hourString + minuteString));
 	}
 
+	/**
+	 * decrease the date of dateBox if the decreased time is between 23.01 and
+	 * 23.59.
+	 * 
+	 * @param box
+	 * @param dateBox
+	 */
 	private void decreaseDateTimeDownHour(TextBox box, TextBox dateBox) {
 		int boxTime = createTimeFromText(box.getText());
-		GWT.log("Increase BoxTimeUpHour " + boxTime + (boxTime > 0 && boxTime < 60));
 		if (boxTime <= 1439 && boxTime >= 1381) {
-			GWT.log("before decreaseDateByHour(dateBox)" + dateBox.getText());
 			decreaseDate(dateBox);
-			GWT.log("before decreaseDatebyHour(dateBox)" + dateBox.getText());
 		}
 	}
 
+	/**
+	 * decrease the date if the decreased time is 23.59.
+	 * 
+	 * @param box
+	 * @param dateBox
+	 */
 	private void decreaseDateTimeDownMinute(TextBox box, TextBox dateBox) {
 		int boxTime = createTimeFromText(box.getText());
 		if (boxTime == 1439) {
-			GWT.log("before decreaseDateByMinute(dateBox)" + dateBox.getText());
 			decreaseDate(dateBox);
-			GWT.log("before decreaseDateByMinite(dateBox)" + dateBox.getText());
 		}
 	}
 
+	/**
+	 * increase the date if the increased time is 00:00.
+	 * 
+	 * @param box
+	 * @param dateBox
+	 */
 	private void increaseDateTimeUpMinute(TextBox box, TextBox dateBox) {
 		int boxTime = createTimeFromText(box.getText());
 		if (boxTime == 0) {
-			GWT.log("before increaseDateByMinute(dateBox)" + dateBox.getText());
 			increaseDate(dateBox);
-			GWT.log("before increaseDateByinute(dateBox)" + dateBox.getText());
 		}
 	}
 
+	/**
+	 * increase the date if the increased time is between 00:01 and 00:59.
+	 * 
+	 * @param box
+	 * @param dateBox
+	 */
 	private void increaseDateTimeUpHour(TextBox box, TextBox dateBox) {
 		int boxTime = createTimeFromText(box.getText());
-		GWT.log("Increase BoxTimeUpHour " + boxTime + "\n\r bool->" + (boxTime <= 1439 && boxTime >= 1381));
 		if (boxTime < 60 && boxTime > 0) {
-			GWT.log("before increaseDateByHour(dateBox)" + dateBox.getText());
 			increaseDate(dateBox);
-			GWT.log("before increaseDateByHour(dateBox)" + dateBox.getText());
 		}
 	}
 
