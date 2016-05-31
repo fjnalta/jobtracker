@@ -56,6 +56,9 @@
 		.columnHeader {
 			background-color: #ffffff;
 			display: inline-block;
+			padding: 5px;
+			height: 32px;
+			overflow: hidden;
 		}
 		
 		.columnHeader:HOVER {
@@ -64,17 +67,24 @@
 		}
 		
 		.columnHeaderName {
-			width: 30%;
+			width: 45%;
 			text-align: left;
 		}
 		
 		.columnHeaderBudget {
-			width: 70%;
+			width: 45%;
 			text-align: left;
 		}
 		
+		.columnHeaderLocked {
+			width: 10%;
+			text-align: center;
+			float: right;
+		}
+		
 		.columnTitle {
-			margin: 5px;
+			margin: 0px;
+			padding: 0px;
 			display: inline-block;
 			-webkit-touch-callout: none; /* iOS Safari */
 			-webkit-user-select: none; /* Chrome/Safari/Opera */
@@ -104,12 +114,17 @@
 					<b:Heading size="H4" text="" addStyleNames="{style.columnTitle}"
 						ui:field="columnHeaderNameArrow" />
 				</b.html:ClearFix>
-				<b.html:ClearFix
-					addStyleNames="{style.columnHeader} {style.columnHeaderBudget}"
+				<b.html:ClearFix addStyleNames="{style.columnHeader} {style.columnHeaderBudget}"
 					ui:field="columnHeaderBudget">
 					<b:Heading size="H4" text="Auslastung" addStyleNames="{style.columnTitle}" />
 					<b:Heading size="H4" text="" addStyleNames="{style.columnTitle}"
 						ui:field="columnHeaderBudgetArrow" />
+				</b.html:ClearFix>
+				<b.html:ClearFix addStyleNames="{style.columnHeader} {style.columnHeaderLocked}"
+					ui:field="columnHeaderLocked">
+					<b:Icon type="LOCK" />
+					<b:Heading size="H4" text="" addStyleNames="{style.columnTitle}"
+						ui:field="columnHeaderLockedArrow" />
 				</b.html:ClearFix>
 			</b:Row>
 			<b:Row addStyleNames="{style.largeContainer}" ui:field="jobList" />

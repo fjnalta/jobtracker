@@ -9,7 +9,6 @@ import org.fusesource.restygwt.client.Method;
 
 import com.google.gwt.core.client.GWT;
 
-import net.greenbeansit.jobtracker.client.utils.rest.NotifyHelper;
 import net.greenbeansit.jobtracker.client.utils.rest.RestClient;
 import net.greenbeansit.jobtracker.client.utils.rest.RestClient.SuccessFunction;
 import net.greenbeansit.jobtracker.shared.Customer;
@@ -25,15 +24,14 @@ class ProjectPageHelperServiceImpl implements ProjectPageHelperService
 		void onFailure(Throwable error);
 	}
 
-	private List<Job>				cachedJobs;
-	private List<Customer>			cachedCustomers;
-
+	private List<Job>		cachedJobs;
+	private List<Customer>	cachedCustomers;
 
 	public ProjectPageHelperServiceImpl(Callback initCallback)
 	{
 		cachedJobs = new ArrayList<Job>();
 		cachedCustomers = new ArrayList<Customer>();
-		
+
 		initialize(initCallback);
 	}
 
@@ -46,12 +44,12 @@ class ProjectPageHelperServiceImpl implements ProjectPageHelperService
 			public void onSuccess(Method method,
 					ProjectPageRestServiceResponse response)
 			{
-				if(response.getJobs() != null)
+				if (response.getJobs() != null)
 					cachedJobs = response.getJobs();
 
-				if(response.getCustomers() != null)
+				if (response.getCustomers() != null)
 					cachedCustomers = response.getCustomers();
-				
+
 				initCallback.onSuccess();
 			}
 
@@ -105,7 +103,7 @@ class ProjectPageHelperServiceImpl implements ProjectPageHelperService
 			});
 			break;
 
-		default: // USED_BUDGET_PERCENT_UP:
+		case USED_BUDGET_PERCENT_UP:
 			Collections.sort(jobs, new Comparator<Job>()
 			{
 				@Override
@@ -115,8 +113,30 @@ class ProjectPageHelperServiceImpl implements ProjectPageHelperService
 				}
 			});
 			break;
+
+		case LOCKED_DOWN:
+			Collections.sort(jobs, new Comparator<Job>()
+			{
+				@Override
+				public int compare(Job o1, Job o2)
+				{
+					return compareJobsByLocked(o2, o1);
+				}
+			});
+			break;
+
+		default: // LOCKED_UP
+			Collections.sort(jobs, new Comparator<Job>()
+			{
+				@Override
+				public int compare(Job o1, Job o2)
+				{
+					return compareJobsByLocked(o1, o2);
+				}
+			});
+			break;
 		}
-		
+
 		return jobs;
 	}
 
@@ -139,12 +159,12 @@ class ProjectPageHelperServiceImpl implements ProjectPageHelperService
 
 		return compareRes;
 	}
-	
+
 	private int compareJobsByBudget(Job o1, Job o2)
 	{
 		int compareRes = Double.compare(getUsedBudgetPercent(o1),
 				getUsedBudgetPercent(o2));
-		if(compareRes == 0)
+		if (compareRes == 0)
 		{
 			compareRes = Integer.compare(o1.getJobNr(), o2.getJobNr());
 			if (compareRes == 0)
@@ -156,37 +176,75 @@ class ProjectPageHelperServiceImpl implements ProjectPageHelperService
 				}
 			}
 		}
-		
+
 		return compareRes;
+	}
+
+	private int compareJobsByLocked(Job o1, Job o2)
+	{
+		int compareRes = compareBoolean(o1.isLocked(), o2.isLocked());
+		if (compareRes == 0)
+		{
+			compareRes = Integer.compare(o1.getJobNr(), o2.getJobNr());
+			if (compareRes == 0)
+			{
+				compareRes = Integer.compare(o1.getPosNr(), o2.getPosNr());
+				if (compareRes == 0)
+				{
+					compareRes = o1.getDesc().compareTo(o2.getDesc());
+				}
+			}
+		}
+
+		return compareRes;
+	}
+
+	private int compareBoolean(Boolean b1, Boolean b2)
+	{
+		if (b1 == null)
+		{
+			if (b2 == null)
+				return 0;
+			else
+				return -1;
+		} else if (b2 != null)
+		{
+			return Boolean.compare(b1, b2);
+		} else
+		{
+			return 1;
+		}
 	}
 
 	public double getUsedBudgetPercent(Job job)
 	{
-		return job.getUsedBudget() / job.getMaxBudget();
+		if(job.getUsedBudget() == null)
+			return 0;
+		else if(job.getMaxBudget() == null)
+			return 0;
+		else
+			return job.getUsedBudget() / job.getMaxBudget();
 	}
 
-	
 	@Override
 	public List<Job> filterJobs(List<Customer> filter)
 	{
-		if(filter != null
-				&& filter.size() > 0)
+		if (filter != null && filter.size() > 0)
 		{
 			List<Job> filteredJobs = new ArrayList<Job>();
-			
-			for(Job job : cachedJobs)
+
+			for (Job job : cachedJobs)
 			{
-				for(Customer customer : cachedCustomers)
+				for (Customer customer : cachedCustomers)
 				{
-					if(job.getCustomerID() == customer.getId())
+					if (job.getCustomerID() == customer.getId())
 						filteredJobs.add(job);
-						
+
 				}
 			}
-			
+
 			return filteredJobs;
-		}
-		else
+		} else
 		{
 			return cachedJobs;
 		}
@@ -205,10 +263,8 @@ class ProjectPageHelperServiceImpl implements ProjectPageHelperService
 		return cachedCustomers;
 	}
 
-	
 	private int getUserId()
 	{
 		return 2;
 	}
 }
-
