@@ -316,7 +316,6 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 
 		eventStart.setText(getTimeForBoxFromISOString(arp.getISOStart()));
 		eventEnd.setText(getTimeForBoxFromISOString(arp.getISOEnd()));
-		GWT.log("Pause -> " + createTimeForTextBox(arp.getBreak()));
 		pause.setText(createTimeForTextBox(arp.getBreak()));
 
 		workTime.setText(calculateDuration());
@@ -807,7 +806,7 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 	}
 
 	/**
-	 * decrease the date of dateBox if the decreased time is between 23.01 and
+	 * decrease the date of dateBox if the decreased time is between 23.00 and
 	 * 23.59.
 	 * 
 	 * @param box
@@ -815,7 +814,7 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 	 */
 	private void decreaseDateTimeDownHour(TextBox box, TextBox dateBox) {
 		int boxTime = createTimeFromText(box.getText());
-		if (boxTime <= 1439 && boxTime >= 1381) {
+		if (boxTime <= 1439 && boxTime >= 1380) {
 			decreaseDate(dateBox);
 		}
 	}
@@ -847,14 +846,14 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 	}
 
 	/**
-	 * increase the date if the increased time is between 00:01 and 00:59.
+	 * increase the date if the increased time is between 00:01 and 01:00.
 	 * 
 	 * @param box
 	 * @param dateBox
 	 */
 	private void increaseDateTimeUpHour(TextBox box, TextBox dateBox) {
 		int boxTime = createTimeFromText(box.getText());
-		if (boxTime < 60 && boxTime > 0) {
+		if (boxTime < 60 && boxTime >= 0) {
 			increaseDate(dateBox);
 		}
 	}
