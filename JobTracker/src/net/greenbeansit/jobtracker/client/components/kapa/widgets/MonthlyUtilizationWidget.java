@@ -1,15 +1,18 @@
-package net.greenbeansit.jobtracker.client.components.kapa.calendar;
+package net.greenbeansit.jobtracker.client.components.kapa.widgets;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
+import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import net.greenbeansit.jobtracker.client.components.CalendarObserver;
+import net.greenbeansit.jobtracker.client.components.widgets.calendar.FullCalendarCustomize;
 import org.gwtbootstrap3.client.ui.Button;
 import org.gwtbootstrap3.client.ui.constants.IconType;
 
@@ -22,11 +25,11 @@ import java.util.List;
  *
  * @author Philipp
  */
-public class KapaUtilizationWidget extends Composite implements CalendarObserver {
+public class MonthlyUtilizationWidget extends Composite {
 
     private static CalendarUtilizationWidgetUiBinder uiBinder = GWT.create(CalendarUtilizationWidgetUiBinder.class);
 
-    interface CalendarUtilizationWidgetUiBinder extends UiBinder<Widget, KapaUtilizationWidget> {
+    interface CalendarUtilizationWidgetUiBinder extends UiBinder<Widget, MonthlyUtilizationWidget> {
     }
 
     @UiField
@@ -56,13 +59,19 @@ public class KapaUtilizationWidget extends Composite implements CalendarObserver
     private String[] months = {"Jan", "Feb", "Mar", "Apr", "Mai", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dez"};
     private List<VerticalPanel> list;
 
-    public KapaUtilizationWidget() {
+    public MonthlyUtilizationWidget() {
         initWidget(uiBinder.createAndBindUi(this));
+
+        Timer timer = new Timer() {
+            @Override
+            public void run() {
+                createNewTimeline();
+            }
+        };
+        timer.schedule(0);
 
         this.leftButton.setIcon(IconType.ARROW_LEFT);
         this.rightButton.setIcon(IconType.ARROW_RIGHT);
-
-        createNewTimeline();
     }
 
     /**
@@ -75,13 +84,13 @@ public class KapaUtilizationWidget extends Composite implements CalendarObserver
         for (int i = 0; i < 12; i++) {
             //add barcharts to first row
             table.setWidget(0, i, list.get(i));
-            //and month names to second row
-            table.setText(1, i, months[i]);
-//            if(calendarHandler.calendar.getDate().getMonth() == i)
-//            {
-//                table.getWidget(1, i).setHeight("100");
-//            }
-
+            //and month buttons to second row
+            table.setWidget(1, i, new Button(months[i], new ClickHandler() {
+                @Override
+                public void onClick(ClickEvent event) {
+                    // TODO - go to specific month
+                }
+            }));
         }
     }
 
@@ -126,14 +135,4 @@ public class KapaUtilizationWidget extends Composite implements CalendarObserver
         //TODO read utilization from DB
         return Math.random() * 50;
     }
-
-    @Override
-    public void update() {
-    }
-
-    @Override
-    public void notifyHandler() {
-        calendarHandler.updateObserver(this);
-    }
-
 }

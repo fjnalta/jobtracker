@@ -27,11 +27,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Shows the left Navigation in KapaPage
+ * Shows the left Navigation in CapacityPage
  *
  * @author Philipp
  */
-public class KapaNav extends Composite implements LogicObservable {
+public class CapacityNav extends Composite implements LogicObservable {
 
     @UiField
     Select selectJob;
@@ -82,7 +82,7 @@ public class KapaNav extends Composite implements LogicObservable {
         }
     }
 
-    interface KapaNavUiBinder extends UiBinder<Widget, KapaNav> {
+    interface KapaNavUiBinder extends UiBinder<Widget, CapacityNav> {
     }
 
     private static KapaNavUiBinder uiBinder = GWT.create(KapaNavUiBinder.class);
@@ -90,7 +90,7 @@ public class KapaNav extends Composite implements LogicObservable {
     private List<Job> jobList = new ArrayList<Job>();
     private Job currentJob = null;
 
-    public KapaNav() {
+    public CapacityNav() {
         initWidget(uiBinder.createAndBindUi(this));
         initialize();
 
