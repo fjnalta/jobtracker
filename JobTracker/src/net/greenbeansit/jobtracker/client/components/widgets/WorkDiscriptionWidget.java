@@ -128,19 +128,19 @@ public class WorkDiscriptionWidget extends Composite implements LogicObservable
 	@Override
 	public void notifyLogicHandler() {
 		ActivityReportTemplate template = new ActivityReportTemplate();
+		template.setName(null);
+		template.setTaskId(null);
+		template.setText(null);
+		if(!textIdentifier.getText().isEmpty()){
+			//template.setTaskId();
+		}
 		if(!textDiscription.getText().isEmpty()){
 			template.setText(textDiscription.getText());
-			template.setTaskId(null);
-			if(!textName.getText().isEmpty()){
-				template.setName(textName.getText());
-			}else{
-				template.setName(null);
-			}
-			GWT.log("Template set successfully");
-			handler.setCurrentTemplate(template);
-		}else{
-			NotifyHelper.errorMessage("Please fill in template");
-			handler.setCurrentTemplate(null);
-		}	
+
+		}
+		if(!textName.getText().isEmpty()){
+			template.setName(textName.getText());
+		}
+		handler.setCurrentTemplate(template);
 	}
 }

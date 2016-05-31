@@ -223,11 +223,7 @@ public class LogicHandler {
 		if (currentTemplate != null && currentJob != null && currentUser != null) {
 			tempReport.setJobNr(currentJob.getJobNr());
 			tempReport.setPosNr(currentJob.getPosNr());
-			tempReport.setText(currentJob.getDesc());
-			if(!currentTemplate.getText().isEmpty()){
-				tempReport.setText(currentTemplate.getText());
-			}
-
+			tempReport.setText(currentTemplate.getText());
 			// TODO handle different JobTasks
 			tempReport.setTaskId(currentTemplate.getTaskId());
 

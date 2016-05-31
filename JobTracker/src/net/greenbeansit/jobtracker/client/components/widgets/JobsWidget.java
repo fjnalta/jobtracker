@@ -91,7 +91,8 @@ public class JobsWidget extends Composite implements LogicObservable {
 			handler.setCurrentJob(currentJob);
 		}
 		else{
-			NotifyHelper.errorMessage("Please select job");
+			Job temp = new Job(null,null,null,null,null,null,null,null);
+			handler.setCurrentJob(temp);
 		}
 	}
 }

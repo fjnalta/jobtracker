@@ -47,7 +47,7 @@ public class Job implements Serializable {
 	 * @param usedBudget
 	 *            the currently used budget for the job
 	 */
-	public Job(int jobNr, int posNr, Integer payMode, Integer customerID, String desc, int maxBudget, int usedBudget, Boolean isLocked) {
+	public Job(Integer jobNr, Integer posNr, Integer payMode, Integer customerID, String desc, Integer maxBudget, Integer usedBudget, Boolean isLocked) {
 		this.maxBudget = maxBudget;
 		this.usedBudget = usedBudget;
 		this.jobNr = jobNr;
@@ -115,11 +115,11 @@ public class Job implements Serializable {
 		return desc;
 	}
 
-	public int getJobNr() {
+	public Integer getJobNr() {
 		return jobNr;
 	}
 
-	public int getPosNr() {
+	public Integer getPosNr() {
 		return posNr;
 	}
 
