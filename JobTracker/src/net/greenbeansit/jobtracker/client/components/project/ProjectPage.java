@@ -18,6 +18,7 @@ import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.resources.client.CssResource;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -71,7 +72,7 @@ public class ProjectPage extends Composite
 	Heading								columnHeaderLockedArrow;
 
 	private ProjectPageHelperService	helperService;
-	private ProjectPageSortMode			sortMode	= ProjectPageSortMode.NAME_UP;
+	private ProjectPageSortMode			sortMode;
 	private List<Customer>				currentFilter;
 	private List<Job>					currentJobList;
 
@@ -79,6 +80,10 @@ public class ProjectPage extends Composite
 	{
 		initWidget(uiBinder.createAndBindUi(this));
 
+		//initial sort mode
+		sortMode = ProjectPageSortMode.NAME_UP;
+		columnHeaderNameArrow.setText(ARROW_UP);
+		
 		// Add handler
 		selectCustomer
 				.addValueChangeHandler(new ValueChangeHandler<List<String>>()
@@ -95,7 +100,9 @@ public class ProjectPage extends Composite
 
 						currentFilter = filter;
 
-						fillJobList(helperService.filterJobs(filter));
+						currentJobList = helperService.filterAndSortJobs(filter, sortMode);
+						
+						fillJobList(currentJobList);
 					}
 				});
 
@@ -166,7 +173,7 @@ public class ProjectPage extends Composite
 
 					columnHeaderLockedArrow.setText(ARROW_UP);
 				}
-
+				
 				columnHeaderNameArrow.setText("");
 				columnHeaderBudgetArrow.setText("");
 			}
@@ -198,7 +205,6 @@ public class ProjectPage extends Composite
 
 	private void fillJobList(List<Job> jobs)
 	{
-
 		// Insert list item widgets
 		jobList.clear();
 		for (Job job : jobs)

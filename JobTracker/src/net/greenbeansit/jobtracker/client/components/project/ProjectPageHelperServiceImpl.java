@@ -65,13 +65,15 @@ class ProjectPageHelperServiceImpl implements ProjectPageHelperService
 	@Override
 	public List<Job> sortJobs(List<Job> jobs, ProjectPageSortMode sortmode)
 	{
-		if (jobs == null)
-			jobs = cachedJobs;
+		List<Job> jobsToSort = jobs;
+		
+		if (jobsToSort == null)
+			jobsToSort = cachedJobs;
 
 		switch (sortmode)
 		{
 		case NAME_UP:
-			Collections.sort(jobs, new Comparator<Job>()
+			Collections.sort(jobsToSort, new Comparator<Job>()
 			{
 				@Override
 				public int compare(Job o1, Job o2)
@@ -90,7 +92,7 @@ class ProjectPageHelperServiceImpl implements ProjectPageHelperService
 			break;
 
 		case NAME_DOWN:
-			Collections.sort(jobs, new Comparator<Job>()
+			Collections.sort(jobsToSort, new Comparator<Job>()
 			{
 				@Override
 				public int compare(Job o1, Job o2)
@@ -109,7 +111,7 @@ class ProjectPageHelperServiceImpl implements ProjectPageHelperService
 			break;
 
 		case USED_BUDGET_PERCENT_UP:
-			Collections.sort(jobs, new Comparator<Job>()
+			Collections.sort(jobsToSort, new Comparator<Job>()
 			{
 				@Override
 				public int compare(Job o1, Job o2)
@@ -128,7 +130,7 @@ class ProjectPageHelperServiceImpl implements ProjectPageHelperService
 			break;
 			
 		case USED_BUDGET_PERCENT_DOWN:
-			Collections.sort(jobs, new Comparator<Job>()
+			Collections.sort(jobsToSort, new Comparator<Job>()
 			{
 				@Override
 				public int compare(Job o1, Job o2)
@@ -146,7 +148,7 @@ class ProjectPageHelperServiceImpl implements ProjectPageHelperService
 			});
 			break;
 		case LOCKED_DOWN:
-			Collections.sort(jobs, new Comparator<Job>()
+			Collections.sort(jobsToSort, new Comparator<Job>()
 			{
 				@Override
 				public int compare(Job o1, Job o2)
@@ -165,7 +167,7 @@ class ProjectPageHelperServiceImpl implements ProjectPageHelperService
 			break;
 
 		default: // LOCKED_UP
-			Collections.sort(jobs, new Comparator<Job>()
+			Collections.sort(jobsToSort, new Comparator<Job>()
 			{
 				@Override
 				public int compare(Job o1, Job o2)
@@ -184,7 +186,7 @@ class ProjectPageHelperServiceImpl implements ProjectPageHelperService
 			break;
 		}
 
-		return jobs;
+		return jobsToSort;
 	}
 
 	private int compareJobsByName(Job o1, Job o2)
@@ -245,14 +247,10 @@ class ProjectPageHelperServiceImpl implements ProjectPageHelperService
 		{
 			List<Job> filteredJobs = new ArrayList<Job>();
 
-			for (Job job : cachedJobs)
+			for(Job job : cachedJobs)
 			{
-				for (Customer customer : cachedCustomers)
-				{
-					if (job.getCustomerID() == customer.getId())
-						filteredJobs.add(job);
-
-				}
+				if(matchesFilter(job, filter))
+					filteredJobs.add(job);
 			}
 
 			return filteredJobs;
@@ -260,6 +258,17 @@ class ProjectPageHelperServiceImpl implements ProjectPageHelperService
 		{
 			return cachedJobs;
 		}
+	}
+	
+	private boolean matchesFilter(Job job, List<Customer> filter)
+	{
+		for (Customer customer : filter)
+		{
+			if (job.getCustomerID() == customer.getId())
+				return true;
+		}
+		
+		return false;
 	}
 
 	@Override
