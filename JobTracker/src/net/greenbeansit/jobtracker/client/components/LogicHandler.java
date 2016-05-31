@@ -17,6 +17,9 @@ import java.util.List;
  * Controller class which provide CRUD funtionallity for the HomePage including
  * save new Reports, new ReportTemplates, and load Reports from backend. Also it coordinates 
  * and synchronizes all widgets on the HomePage
+ *
+ * The workflow: the widget call the function load<SOMETHING>. The load method then calls the updateObservable function
+ * on sucess. The updateObservable function must implement the get<SOMETHING> function.
  * 
  * @author Alexander Kirilyuk
  *
@@ -100,6 +103,10 @@ public class LogicHandler {
 		}
 	}
 
+	/**
+	 * sets the current active activity Report
+	 * @param report report to be set as active
+     */
 	public void setCurrentReport(ActivityReport report) {
 		this.currentReport = report;
 		Job tempJob = new Job();
@@ -217,7 +224,7 @@ public class LogicHandler {
 			tempReport.setJobNr(currentJob.getJobNr());
 			tempReport.setPosNr(currentJob.getPosNr());
 			tempReport.setText(currentJob.getDesc());
-			if(currentTemplate.getText()!=null){
+			if(!currentTemplate.getText().isEmpty()){
 				tempReport.setText(currentTemplate.getText());
 			}
 
@@ -261,6 +268,7 @@ public class LogicHandler {
 				public void onSuccess(Method method, ActivityReportTemplate response) {
 					self.loadTemplates();
 					self.updateAllObservables();
+					GWT.log("Template saved");
 					NotifyHelper.successMessage("Template saved successfully!");
 				}
 
@@ -386,7 +394,7 @@ public class LogicHandler {
 		}
 	}
 	/**
-	 * Mehtod for loading All Users from the Backend
+	 * Method for loading All Users from the Backend
 	 */
 	public void loadUsers(){
 		try {
@@ -435,6 +443,11 @@ public class LogicHandler {
 		}
 	}
 
+	/**
+	 * Mehtod for loading the utilization for a specified month from the backend
+	 * @param year
+	 * @param month
+     */
 	public void loadUtilization(int year, int month){
 		try {
 			RestClient.build(new SuccessFunction<List<Integer>>() {
@@ -456,6 +469,11 @@ public class LogicHandler {
 		}
 	}
 
+	/**
+	 * Function for
+	 * @param day Date objet with the date of the day, the function should load the reports for
+	 * @return the list with the reports for a day
+     */
 	public List<ActivityReport> getReportsForDay(Date day){
 		List<ActivityReport> reportList = new ArrayList<ActivityReport>();
 		for(ActivityReport p : currentReportsList){
