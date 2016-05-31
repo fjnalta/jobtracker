@@ -217,7 +217,13 @@ class ProjectPageHelperServiceImpl implements ProjectPageHelperService
 
 	private int compareJobsByLocked(Job o1, Job o2)
 	{
-		int compareRes = Boolean.compare(o1.isLocked(), o2.isLocked());
+		int compareRes;
+		if(o1.isLocked() == null)
+			compareRes = -1;
+		else if(o2.isLocked() == null)
+			compareRes = 1;
+		else
+			compareRes = Boolean.compare(o1.isLocked(), o2.isLocked());
 
 		return compareRes;
 	}
