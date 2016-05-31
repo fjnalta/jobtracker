@@ -76,7 +76,15 @@ class ProjectPageHelperServiceImpl implements ProjectPageHelperService
 				@Override
 				public int compare(Job o1, Job o2)
 				{
-					return compareJobsByName(o1, o2);
+					int compareRes = compareJobsByName(o1, o2);
+					
+					if(compareRes == 0)
+						compareRes = compareJobsByBudget(o1, o2);
+					
+					if(compareRes == 0)
+						compareRes = compareJobsByLocked(o1, o2);
+					
+					return compareRes;
 				}
 			});
 			break;
@@ -87,18 +95,15 @@ class ProjectPageHelperServiceImpl implements ProjectPageHelperService
 				@Override
 				public int compare(Job o1, Job o2)
 				{
-					return compareJobsByName(o2, o1);
-				}
-			});
-			break;
-
-		case USED_BUDGET_PERCENT_DOWN:
-			Collections.sort(jobs, new Comparator<Job>()
-			{
-				@Override
-				public int compare(Job o1, Job o2)
-				{
-					return compareJobsByBudget(o2, o1);
+					int compareRes = compareJobsByName(o2, o1);
+					
+					if(compareRes == 0)
+						compareRes = compareJobsByBudget(o2, o1);
+					
+					if(compareRes == 0)
+						compareRes = compareJobsByLocked(o2, o1);
+					
+					return compareRes;
 				}
 			});
 			break;
@@ -109,18 +114,52 @@ class ProjectPageHelperServiceImpl implements ProjectPageHelperService
 				@Override
 				public int compare(Job o1, Job o2)
 				{
-					return compareJobsByBudget(o1, o2);
+					int compareRes = compareJobsByBudget(o1, o2);
+					
+					if(compareRes == 0)
+						compareRes = compareJobsByName(o1, o2);
+					
+					if(compareRes == 0)
+						compareRes = compareJobsByLocked(o1, o2);
+					
+					return compareRes;
 				}
 			});
 			break;
-
+			
+		case USED_BUDGET_PERCENT_DOWN:
+			Collections.sort(jobs, new Comparator<Job>()
+			{
+				@Override
+				public int compare(Job o1, Job o2)
+				{
+					int compareRes = compareJobsByBudget(o2, o1);
+					
+					if(compareRes == 0)
+						compareRes = compareJobsByName(o1, o2);
+					
+					if(compareRes == 0)
+						compareRes = compareJobsByLocked(o1, o2);
+					
+					return compareRes;
+				}
+			});
+			break;
 		case LOCKED_DOWN:
 			Collections.sort(jobs, new Comparator<Job>()
 			{
 				@Override
 				public int compare(Job o1, Job o2)
 				{
-					return compareJobsByLocked(o2, o1);
+					int compareRes = compareJobsByLocked(o2, o1);
+					
+					if(compareRes == 0)
+						compareRes = compareJobsByName(o1, o2);
+					
+					if(compareRes == 0)
+						compareRes = compareJobsByBudget(o1, o2);
+					
+					return compareRes;
 				}
 			});
 			break;
@@ -131,7 +170,15 @@ class ProjectPageHelperServiceImpl implements ProjectPageHelperService
 				@Override
 				public int compare(Job o1, Job o2)
 				{
-					return compareJobsByLocked(o1, o2);
+					int compareRes = compareJobsByLocked(o1, o2);
+					
+					if(compareRes == 0)
+						compareRes = compareJobsByName(o1, o2);
+					
+					if(compareRes == 0)
+						compareRes = compareJobsByBudget(o1, o2);
+					
+					return compareRes;
 				}
 			});
 			break;
@@ -148,12 +195,12 @@ class ProjectPageHelperServiceImpl implements ProjectPageHelperService
 			compareRes = Integer.compare(o1.getPosNr(), o2.getPosNr());
 			if (compareRes == 0)
 			{
-				compareRes = o1.getDesc().compareTo(o2.getDesc());
-				if (compareRes == 0)
-				{
-					compareRes = Double.compare(getUsedBudgetPercent(o1),
-							getUsedBudgetPercent(o2));
-				}
+				if(o1.getDesc() == null)
+					compareRes = -1;
+				else if(o2.getDesc() == null)
+					compareRes = 1;
+				else
+					compareRes = o1.getDesc().compareTo(o2.getDesc());
 			}
 		}
 
@@ -164,37 +211,13 @@ class ProjectPageHelperServiceImpl implements ProjectPageHelperService
 	{
 		int compareRes = Double.compare(getUsedBudgetPercent(o1),
 				getUsedBudgetPercent(o2));
-		if (compareRes == 0)
-		{
-			compareRes = Integer.compare(o1.getJobNr(), o2.getJobNr());
-			if (compareRes == 0)
-			{
-				compareRes = Integer.compare(o1.getPosNr(), o2.getPosNr());
-				if (compareRes == 0)
-				{
-					compareRes = o1.getDesc().compareTo(o2.getDesc());
-				}
-			}
-		}
 
 		return compareRes;
 	}
 
 	private int compareJobsByLocked(Job o1, Job o2)
 	{
-		int compareRes = compareBoolean(o1.isLocked(), o2.isLocked());
-		if (compareRes == 0)
-		{
-			compareRes = Integer.compare(o1.getJobNr(), o2.getJobNr());
-			if (compareRes == 0)
-			{
-				compareRes = Integer.compare(o1.getPosNr(), o2.getPosNr());
-				if (compareRes == 0)
-				{
-					compareRes = o1.getDesc().compareTo(o2.getDesc());
-				}
-			}
-		}
+		int compareRes = Boolean.compare(o1.isLocked(), o2.isLocked());
 
 		return compareRes;
 	}
@@ -216,6 +239,50 @@ class ProjectPageHelperServiceImpl implements ProjectPageHelperService
 		}
 	}
 
+	private int compareDouble(Double d1, Double d2)
+	{
+		if (d1 == null)
+		{
+			if (d2 == null)
+				return 0;
+			else
+				return -1;
+		} else if (d2 != null)
+		{
+			if(d1 > d2)
+				return 1;
+			else if(d2 < d1)
+				return -1;
+			else
+				return 0;
+		} else
+		{
+			return 1;
+		}
+	}
+	
+	private int compareInteger(Integer i1, Integer i2)
+	{
+		if (i1 == null)
+		{
+			if (i2 == null)
+				return 0;
+			else
+				return -1;
+		} else if (i2 != null)
+		{
+			if(i1 > i2)
+				return 1;
+			else if(i2 < i1)
+				return -1;
+			else
+				return 0;
+		} else
+		{
+			return 1;
+		}
+	}
+	
 	public double getUsedBudgetPercent(Job job)
 	{
 		if(job.getUsedBudget() == null)
@@ -223,7 +290,7 @@ class ProjectPageHelperServiceImpl implements ProjectPageHelperService
 		else if(job.getMaxBudget() == null)
 			return 0;
 		else
-			return job.getUsedBudget() / job.getMaxBudget();
+			return (double)job.getUsedBudget() / job.getMaxBudget();
 	}
 
 	@Override
