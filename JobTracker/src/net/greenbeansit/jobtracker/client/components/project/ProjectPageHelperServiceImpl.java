@@ -221,67 +221,6 @@ class ProjectPageHelperServiceImpl implements ProjectPageHelperService
 
 		return compareRes;
 	}
-
-	private int compareBoolean(Boolean b1, Boolean b2)
-	{
-		if (b1 == null)
-		{
-			if (b2 == null)
-				return 0;
-			else
-				return -1;
-		} else if (b2 != null)
-		{
-			return Boolean.compare(b1, b2);
-		} else
-		{
-			return 1;
-		}
-	}
-
-	private int compareDouble(Double d1, Double d2)
-	{
-		if (d1 == null)
-		{
-			if (d2 == null)
-				return 0;
-			else
-				return -1;
-		} else if (d2 != null)
-		{
-			if(d1 > d2)
-				return 1;
-			else if(d2 < d1)
-				return -1;
-			else
-				return 0;
-		} else
-		{
-			return 1;
-		}
-	}
-	
-	private int compareInteger(Integer i1, Integer i2)
-	{
-		if (i1 == null)
-		{
-			if (i2 == null)
-				return 0;
-			else
-				return -1;
-		} else if (i2 != null)
-		{
-			if(i1 > i2)
-				return 1;
-			else if(i2 < i1)
-				return -1;
-			else
-				return 0;
-		} else
-		{
-			return 1;
-		}
-	}
 	
 	public double getUsedBudgetPercent(Job job)
 	{
