@@ -68,7 +68,7 @@ public class MonthlyUtilizationWidget extends Composite {
                 createNewTimeline();
             }
         };
-        timer.schedule(0);
+        timer.schedule(300);
 
         this.leftButton.setIcon(IconType.ARROW_LEFT);
         this.rightButton.setIcon(IconType.ARROW_RIGHT);
