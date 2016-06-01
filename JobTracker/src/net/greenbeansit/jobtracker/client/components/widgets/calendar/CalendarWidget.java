@@ -38,9 +38,17 @@ import net.greenbeansit.jobtracker.client.components.LogicObservable;
 import net.greenbeansit.jobtracker.client.utils.rest.NotifyHelper;
 import net.greenbeansit.jobtracker.shared.ActivityReport;
 
-public class CalendarWidget extends Composite implements CalendarObserver,LogicObservable {
+/**
+ * Displays the {@link CalendarWidget} and it {@link ActivityReportEvents}
+ * 
+ * @author Jonathan Brenner
+ *
+ */
+public class CalendarWidget extends Composite implements CalendarObserver, LogicObservable {
 
 	private static CalendarWidgetUiBinder uiBinder = GWT.create(CalendarWidgetUiBinder.class);
+
+	private int eventID;
 
 	interface CalendarWidgetUiBinder extends UiBinder<Widget, CalendarWidget> {
 	}
@@ -52,6 +60,9 @@ public class CalendarWidget extends Composite implements CalendarObserver,LogicO
 	CalendarConfig config;
 	List<ActivityReportEvent> eventList = new ArrayList<ActivityReportEvent>();
 
+	/**
+	 * Initializes a new instance of the CalendarWidget and sets the settings.
+	 */
 	public CalendarWidget() {
 		initWidget(uiBinder.createAndBindUi(this));
 
@@ -61,14 +72,14 @@ public class CalendarWidget extends Composite implements CalendarObserver,LogicO
 		Timer t = new Timer() {
 			String eventTitel = "Job Description";
 			int titleNumber;
-			String eventID;
 
 			/**
 			 * refresh the ID variable. It should be call everytime you create a
 			 * new event.
 			 */
 			private void updateId() {
-				eventID = "" + System.currentTimeMillis() + new Date().toString();
+				eventID++;
+				;
 			}
 
 			/**
@@ -78,9 +89,15 @@ public class CalendarWidget extends Composite implements CalendarObserver,LogicO
 			 *            Title of the Event.
 			 * @return new Event
 			 */
+			private ActivityReportEvent createEvent(String id, String title) {
+				eventID = Integer.parseInt(id);
+				updateId();
+				return (new ActivityReportEvent(id, title));
+			}
+
 			private ActivityReportEvent createEvent(String title) {
 				updateId();
-				return (new ActivityReportEvent(eventID, title));
+				return (new ActivityReportEvent(eventID + "", title));
 			}
 
 			@Override
@@ -90,11 +107,10 @@ public class CalendarWidget extends Composite implements CalendarObserver,LogicO
 				config.setClickHoverConfig(getClickAndHoverConfig());
 				config.setSelectConfig(getSelectConfig());
 				config.setDragResizeConfig(getDragAndResizeConfig());
-				
+
 				config.setSelectable(true);
 				config.setSelectHelper(true);
-				
-				
+
 				GeneralDisplay generalDisplay = new GeneralDisplay();
 				generalDisplay.setHeight(600);
 				Header header = new Header();
@@ -116,7 +132,7 @@ public class CalendarWidget extends Composite implements CalendarObserver,LogicO
 				calendar = new FullCalendarCustomize("fullCalendar", ViewOption.agendaWeek, config, true);
 				calendarRow.add(calendar);
 				calendar.render();
-				
+
 				calendarHandler.registerCalendar(calendar);
 				handler.loadAllReports();
 			}
@@ -143,7 +159,7 @@ public class CalendarWidget extends Composite implements CalendarObserver,LogicO
 						// calendar.removeEvent(e.getId());
 						ActivityReportEvent e = new ActivityReportEvent(calendarEvent);
 						calendar.currentEvent = e;
-						for(ActivityReportEvent a : eventList) {
+						for (ActivityReportEvent a : eventList) {
 							if (a.getId().equals(e.getId())) {
 								handler.setCurrentReport(a.getAp());
 							}
@@ -165,18 +181,139 @@ public class CalendarWidget extends Composite implements CalendarObserver,LogicO
 
 			private SelectConfig getSelectConfig() {
 				SelectConfig selectConfig = new SelectConfig(new SelectEventCallback() {
-
+					/**
+					 * Creates a new {@link Event} or splits it into several if
+					 * it over several days
+					 */
 					@Override
 					public void select(JavaScriptObject start, JavaScriptObject end, NativeEvent event,
 							JavaScriptObject viewObject) {
+
+						GWT.log(start.toString() + "\n\rdraw\n\r" + calendar.getCurrentView().toString());
+						/*
+						 * Thu Jun 02 2016 08:15:00 GMT+0000
+						 *
+						 */
 						updateId();
-						ActivityReportEvent tmp = new ActivityReportEvent(eventID, eventTitel);
-						tmp.setStart(start);
-						tmp.setEnd(end);
+						ActivityReportEvent tmp = new ActivityReportEvent(eventID + "", eventTitel + eventID);
+						if (calendar.getCurrentView().toString().equals("month")) {
+							String[] splitStart = start.toString().split(" ");
+							String startYear = splitStart[3];
+							String startMonth = addLeadingNull((getMonth(splitStart[1]) + 1) + "");
+							String startDay = splitStart[2];
+							Date neweEventDateStart = new Date(Integer.parseInt(startYear), getMonth(splitStart[1]),
+									(Integer.parseInt(splitStart[2])));
+
+							String[] splitEnd = end.toString().split(" ");
+							String endYear = splitEnd[3];
+							String endMonth = addLeadingNull((getMonth(splitEnd[1]) + 1) + "");
+							Date newEventDateEnd = new Date(Integer.parseInt(endYear), getMonth(splitEnd[1]),
+									(Integer.parseInt(splitEnd[2])));
+							newEventDateEnd.setDate(newEventDateEnd.getDate() - 1);
+							String endDay = addLeadingNull(newEventDateEnd.getDate() + "");
+
+							int st = Integer.parseInt(startDay);
+							int ed = Integer.parseInt(endDay);
+							String eventStandardStart = startYear + "-" + startMonth + "-" + startDay
+									+ "T08:00:00.000Z";
+							String eventStandardEnd = startYear + "-" + startMonth + "-" + startDay + "T16:00:00.000Z";
+							if (neweEventDateStart.before(newEventDateEnd)) {
+								if (neweEventDateStart.getDay() != 1 && neweEventDateStart.getDay() != 0) {
+									tmp.setStart(eventStandardStart);
+									tmp.setEnd(eventStandardEnd);
+									addEvent(tmp, viewObject, event);
+								}
+
+								while (neweEventDateStart.before(newEventDateEnd)) {
+									neweEventDateStart.setDate(neweEventDateStart.getDate() + 1);
+									startDay = addLeadingNull("" + neweEventDateStart.getDate());
+									startMonth = addLeadingNull("" + (neweEventDateStart.getMonth() + 1));
+									startYear = "" + neweEventDateStart.getYear();
+
+									if (neweEventDateStart.getDay() != 1 && neweEventDateStart.getDay() != 0) {
+										GWT.log(neweEventDateStart.toString() + "\n\ragain\n\r"
+												+ newEventDateEnd.toString() + "\n\r"
+												+ neweEventDateStart.before(newEventDateEnd));
+										ActivityReportEvent tempEvent = new ActivityReportEvent(eventID + "",
+												eventTitel + eventID);
+
+										eventStandardStart = startYear + "-" + startMonth + "-" + startDay
+												+ "T08:00:00.000Z";
+										eventStandardEnd = startYear + "-" + startMonth + "-" + startDay
+												+ "T16:00:00.000Z";
+
+										tempEvent.setStart(eventStandardStart);
+										tempEvent.setEnd(eventStandardEnd);
+
+										addEvent(tempEvent, viewObject, event);
+										updateId();
+									}
+
+								}
+							} else {
+								eventStandardEnd = startYear + "-" + startMonth + "-" + endDay + "T16:00:00.000Z";
+								tmp.setStart(eventStandardStart);
+								tmp.setEnd(eventStandardEnd);
+								addEvent(tmp, viewObject, event);
+							}
+						} else {
+							tmp.setStart(start);
+							tmp.setEnd(end);
+							addEvent(tmp, viewObject, event);
+						}
+
+						notifyHandler();
+					}
+
+					private void addEvent(ActivityReportEvent tmp, JavaScriptObject viewObject, NativeEvent event) {
 						unselect(viewObject, event);
 						calendar.addEvent(tmp);
 						calendar.currentEvent = tmp;
-						notifyHandler();
+					}
+
+					private String addLeadingNull(String sign) {
+						if (sign.length() < 2) {
+							return (0 + sign);
+						} else {
+							return sign;
+						}
+					}
+
+					/**
+					 * Get the Month from a String.
+					 * 
+					 * @param string
+					 *            the month as a {@link String} e.g. "Jan"
+					 * @return a {@link int} from 0 to 11 ( january - december)
+					 */
+					private int getMonth(String string) {
+						switch (string) {
+						case "Jan":
+							return 0;
+						case "Feb":
+							return 1;
+						case "Mar":
+							return 2;
+						case "Apr":
+							return 3;
+						case "May":
+							return 4;
+						case "Jun":
+							return 5;
+						case "Jul":
+							return 6;
+						case "Aug":
+							return 7;
+						case "Sep":
+							return 8;
+						case "Oct":
+							return 9;
+						case "Nov":
+							return 10;
+						case "Dev":
+							return 11;
+						}
+						return 12;
 					}
 
 					@Override
@@ -193,34 +330,28 @@ public class CalendarWidget extends Composite implements CalendarObserver,LogicO
 
 					@Override
 					public void eventResizeStop(JavaScriptObject calendarEvent, NativeEvent nativeEvent) {
-						// System.out.println("eventResizeStop");
 						notifyHandler();
-
 					}
 
 					@Override
 					public void eventResizeStart(JavaScriptObject calendarEvent, NativeEvent nativeEvent) {
-						// System.out.println("eventResizeStart");
 						notifyHandler();
 					}
 
 					@Override
 					public void eventResize(JavaScriptObject calendarEvent, JavaScriptObject revertFunction,
 							NativeEvent nativeEvent) {
-						// System.out.println("eventResize");
 						notifyHandler();
 					}
 
 					@Override
 					public void eventDrop(JavaScriptObject calendarEvent, JavaScriptObject revertFunction,
 							NativeEvent nativeEvent) {
-						// System.out.println("eventResize");
 						notifyHandler();
 					}
 
 					@Override
 					public void eventDragStop(JavaScriptObject calendarEvent, NativeEvent nativeEvent) {
-						// System.out.println("eventResize");
 						notifyHandler();
 					}
 
@@ -234,7 +365,7 @@ public class CalendarWidget extends Composite implements CalendarObserver,LogicO
 						if (nativeEvent.getAltKey()) {
 							updateId();
 							ActivityReportEvent dragEvent = new ActivityReportEvent(calendarEvent);
-							ActivityReportEvent oldEvent = createEvent(dragEvent.getTitle());
+							ActivityReportEvent oldEvent = createEvent(dragEvent.getId(), dragEvent.getTitle());
 
 							oldEvent.setStart(dragEvent.getISOStart());
 							oldEvent.setEnd(dragEvent.getISOEnd());
@@ -253,8 +384,7 @@ public class CalendarWidget extends Composite implements CalendarObserver,LogicO
 		};
 		t.schedule(0);
 	}
-	
-	
+
 	@Override
 	public void update() {
 		calendar.render();
@@ -265,32 +395,30 @@ public class CalendarWidget extends Composite implements CalendarObserver,LogicO
 		calendarHandler.updateObserver(this);
 	}
 
-
-
-	
-
-	
-	
 	/**
-	 * Adds ActivityReports to the calendar. 
-	 * @param reports List of ActivityReports
+	 * This Metho adds {@link ActivityReport}s from a {@link List} to the
+	 * calendar.
+	 * 
+	 * @param reports
+	 *            {@link List} of {@link ActivityReport}s
 	 */
 	public void addActvityReports(List<ActivityReport> reports) {
-		if(!reports.isEmpty()){
+		if (!reports.isEmpty()) {
 			for (ActivityReport ap : reports) {
-				ActivityReportEvent e = new ActivityReportEvent(ap,ap.getId() + "", ap.getText(), true, true, true);
-				ap.getDate().setYear((2016-1900));
+				ActivityReportEvent e = new ActivityReportEvent(ap, ap.getId() + "", ap.getText(), true, true, true);
+				ap.getDate().setYear((2016 - 1900));
 				e.setStart(calendarHandler.getISO8601StringForDate(ap.getDate(), ap.getStartTime()));
 				e.setEnd(calendarHandler.getISO8601StringForDate(ap.getDate(), ap.getEndTime()));
 				calendar.addEvent(e);
 				this.eventList.add(e);
+				eventID = Integer.parseInt(e.getId());
 				calendar.render();
 				calendar.currentEvent = null;
 
 			}
 		}
 		calendar.render();
-		
+
 	}
 
 	@Override
@@ -302,9 +430,6 @@ public class CalendarWidget extends Composite implements CalendarObserver,LogicO
 	@Override
 	public void notifyLogicHandler() {
 		// TODO Auto-generated method stub
-		
 	}
-	
-
 
 }
