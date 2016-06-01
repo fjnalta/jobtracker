@@ -16,12 +16,22 @@ import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 
+/**
+ * Displays the planned capacity of an employee.
+ * 
+ * @author Max Blatt
+ */
 public class CapacityCalendar extends Composite
 {
 
 	private static CapacityCalendarUiBinder uiBinder = GWT
 			.create(CapacityCalendarUiBinder.class);
 
+	/**
+	 * UiBinder for {@link CapacityCalendar}.
+	 * 
+	 * @author Max Blatt
+	 */
 	interface CapacityCalendarUiBinder
 			extends UiBinder<Widget, CapacityCalendar>
 	{
@@ -33,6 +43,9 @@ public class CapacityCalendar extends Composite
 	FullCalendar calendar;
 	CalendarConfig config;
 	
+	/**
+	 * Initializes a new instance of the {@link CapacityCalendar} class.
+	 */
 	public CapacityCalendar()
 	{
 		initWidget(uiBinder.createAndBindUi(this));
@@ -48,6 +61,9 @@ public class CapacityCalendar extends Composite
 		timer.schedule(0);
 	}
 
+	/**
+	 * Initializes the calendar.
+	 */
 	private void initCalendar()
 	{
 		config = new CalendarConfig();
@@ -64,6 +80,9 @@ public class CapacityCalendar extends Composite
 		container.add(calendar);
 	}
 
+	/**
+	 * Tells the calendar to redraw itself.
+	 */
 	public void onDisplayed()
 	{
 		Timer timer = new Timer()
