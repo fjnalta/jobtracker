@@ -30,8 +30,9 @@ import java.util.List;
 
 /**
  * Shows the left Navigation in CapacityPage
+ * This class handles the selection and view of Reports
  *
- * @author Philipp
+ * @author Philipp Minges
  */
 public class CapacityNav extends Composite implements LogicObservable {
 
@@ -83,10 +84,10 @@ public class CapacityNav extends Composite implements LogicObservable {
         }
     }
 
-    interface KapaNavUiBinder extends UiBinder<Widget, CapacityNav> {
+    interface CapacityNavUiBinder extends UiBinder<Widget, CapacityNav> {
     }
 
-    private static KapaNavUiBinder uiBinder = GWT.create(KapaNavUiBinder.class);
+    private static CapacityNavUiBinder uiBinder = GWT.create(CapacityNavUiBinder.class);
 
     private List<Job> jobList = new ArrayList<Job>();
     private List<PseudoJob> pJobList = new ArrayList<PseudoJob>();
@@ -103,24 +104,29 @@ public class CapacityNav extends Composite implements LogicObservable {
         Timer timer = new Timer() {
             @Override
             public void run() {
-                initialize();
+                initializeUIElements();
                 selectJob.addValueChangeHandler(new ValueChangeHandler<String>() {
                     @Override
                     public void onValueChange(ValueChangeEvent<String> event) {
-                        currentJob = ((SelectJobOption) selectJob.getSelectedItem()).getJob();
-                        notifyLogicHandler();
+                        if (selectJob.getSelectedItem().getText().contains("Pseudo")) {
+                            currentPJob = ((SelectJobOption) selectJob.getSelectedItem()).getPjob();
+                            notifyLogicHandler();
+                        }
+                        if (!selectJob.getSelectedItem().getText().contains("Pseudo")) {
+                            currentJob = ((SelectJobOption) selectJob.getSelectedItem()).getJob();
+                            notifyLogicHandler();
+                        }
                     }
                 });
             }
         };
-
         timer.schedule(100);
 
         handler.loadJobs();
         handler.loadPseudoJobs();
     }
 
-    private void initialize() {
+    private void initializeUIElements() {
         buttonDown.setIcon(IconType.ARROW_DOWN);
         buttonUp.setIcon(IconType.ARROW_UP);
         possibilityPercentage.setText(mySlider.getValue().toString());
@@ -145,30 +151,29 @@ public class CapacityNav extends Composite implements LogicObservable {
         allJobsOptGroup.clear();
         myJobsOptGroup.clear();
 
+        this.pJobList = handler.getPseudoJobList();
         this.jobList = handler.getJobList();
+
+        addPseudoJobs(this.pJobList);
         addJobs(this.jobList);
+
+        currentPJob = handler.getCurrentPseudoJob();
         currentJob = handler.getCurrentJob();
-        if (currentJob != null) {
+        if (currentJob != null || currentPJob != null) {
             for (Option option : selectJob.getItems()) {
                 ((SelectJobOption) option).setSelected(false);
-                if (((SelectJobOption) option).getJob().equals(currentJob)) {
-                    option.setSelected(true);
+
+                if (((SelectJobOption) option).getText().contains("Pseudo")) {
+                    if (((SelectJobOption) option).getPjob().equals(currentPJob)) {
+                        option.setSelected(true);
+                    }
+                } else {
+                    if (((SelectJobOption) option).getJob().equals(currentJob)) {
+                        option.setSelected(true);
+                    }
                 }
             }
         }
-
-        this.pJobList = handler.getPseudoJobList();
-        addPseudoJobs(this.pJobList);
-        currentPJob = handler.getCurrentPseudoJob();
-        if (currentPJob != null) {
-            for (Option opt : selectJob.getItems()) {
-                ((SelectJobOption) opt).setSelected(false);
-                if (((SelectJobOption) opt).getPjob().equals(currentPJob)) {
-                    opt.setSelected(true);
-                }
-            }
-        }
-
         selectJob.refresh();
     }
 
@@ -176,9 +181,11 @@ public class CapacityNav extends Composite implements LogicObservable {
     public void notifyLogicHandler() {
         if (currentJob != null) {
             handler.setCurrentJob(currentJob);
+            handler.setCurrentPJob(null);
         }
-//        if (currentPJob != null) {
-//            handler.setCurrentPJob(currentPJob);
-//        }
+        if (currentPJob != null) {
+            handler.setCurrentPJob(currentPJob);
+            handler.setCurrentJob(null);
+        }
     }
 }
