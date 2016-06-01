@@ -28,14 +28,34 @@ import net.greenbeansit.jobtracker.client.utils.rest.NotifyHelper;
 import net.greenbeansit.jobtracker.shared.Job;
 import net.greenbeansit.jobtracker.shared.User;
 
+/**
+ * Displays the employees of the current user in a list.
+ * 
+ * @author Max Blatt
+ */
 public class ManagerPage extends Composite
 {
+	/**
+	 * UiBinder for the {@link ManagerPage}.
+	 * 
+	 * @author Max Blatt
+	 */
 	interface ManagerPageUiBinder extends UiBinder<Widget, ManagerPage>
 	{
 	}
 
+	/**
+	 * Provides access to the inline style in the ui.xml.
+	 * 
+	 * @author Max Blatt
+	 */
 	interface ManagerPageStyle extends CssResource
 	{
+		/**
+		 * Gets the name of the style for the employeeListItem.
+		 * 
+		 * @return a String.
+		 */
 		String employeeListItem();
 	}
 
@@ -73,6 +93,9 @@ public class ManagerPage extends Composite
 	private List<User>					currentUserList;
 
 	
+	/**
+	 * Initializes a new instance of the {@link ManagerPage}.
+	 */
 	public ManagerPage()
 	{
 		initWidget(uiBinder.createAndBindUi(this));
@@ -161,6 +184,9 @@ public class ManagerPage extends Composite
 		});
 	}
 
+	/**
+	 * Sorts the employees and refills the container using {@link ManagerPage#fillEmployeeList(List)}. 
+	 */
 	private void sortList()
 	{
 		currentUserList = helperService.sortUser(currentUserList, sortMode);
@@ -168,6 +194,11 @@ public class ManagerPage extends Composite
 		fillEmployeeList(currentUserList);
 	}
 
+	/**
+	 * Refills the container with {@link UserListItem}s based on the following list.
+	 * 
+	 * @param employees the list of employees that should be displayed.
+	 */
 	private void fillEmployeeList(List<User> employees)
 	{
 		// Insert list item widgets
@@ -183,6 +214,11 @@ public class ManagerPage extends Composite
 		}
 	}
 
+	/**
+	 * Fills the filter {@link Select} with {@link JobSelectOption}s based on the following {@link Job} list.
+	 * 
+	 * @param jobs the {@link Job}s that should be displayed.
+	 */
 	private void fillJobList(List<Job> jobs)
 	{
 		selectJob.clear();
