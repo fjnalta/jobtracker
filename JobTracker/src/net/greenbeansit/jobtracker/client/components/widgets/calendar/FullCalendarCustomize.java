@@ -1,23 +1,12 @@
 package net.greenbeansit.jobtracker.client.components.widgets.calendar;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
-import java.util.TimeZone;
-
+import com.google.gwt.event.shared.HandlerManager;
+import net.greenbeansit.jobtracker.client.components.kapa.data.CapacityReportEvent;
+import net.greenbeansit.jobtracker.shared.UtilizationWeek;
 import org.gwtbootstrap3.extras.fullcalendar.client.ui.CalendarConfig;
-import org.gwtbootstrap3.extras.fullcalendar.client.ui.Event;
 import org.gwtbootstrap3.extras.fullcalendar.client.ui.FullCalendar;
 import org.gwtbootstrap3.extras.fullcalendar.client.ui.Header;
 import org.gwtbootstrap3.extras.fullcalendar.client.ui.ViewOption;
-
-import com.google.gwt.event.shared.HandlerManager;
-import com.google.gwt.user.client.Window;
-
-import net.greenbeansit.jobtracker.shared.ActivityReport;
 
 public class FullCalendarCustomize extends FullCalendar {
 
@@ -43,6 +32,7 @@ public class FullCalendarCustomize extends FullCalendar {
 	}
 
 	ActivityReportEvent currentEvent;
+	public CapacityReportEvent capacityEvent;
 
 	public void addEvent(ActivityReportEvent event) {
 		// TODO Auto-generated method stub
