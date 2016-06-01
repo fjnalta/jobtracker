@@ -104,11 +104,14 @@ public class MonthlyUtilizationWidget extends Composite implements CalendarObser
             //add barcharts to first row
             table.setWidget(0, i, list.get(i));
             //and month buttons to second row
+            final int calendarMonth = i;
             table.setWidget(1, i, new Button(months[i], new ClickHandler() {
                 @Override
                 public void onClick(ClickEvent event) {
-
-                    // TODO - go to specific month
+                    Date currentDate = calendarHandler.calendar.getDate();
+                    currentDate.setMonth(calendarMonth);
+                    calendarHandler.calendar.goToDate(currentDate);
+                    notifyHandler();
                 }
             }));
         }
