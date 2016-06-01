@@ -25,7 +25,7 @@ import java.util.List;
 /**
  * Created by Philipp Minges on 31.05.16.
  */
-public class CapacityCalendarWidget extends Composite implements CalendarObserver,LogicObservable {
+public class CapacityCalendarWidget extends Composite implements CalendarObserver, LogicObservable {
 
     @UiField
     Container container;
@@ -157,21 +157,18 @@ public class CapacityCalendarWidget extends Composite implements CalendarObserve
                         CapacityReportEvent e = new CapacityReportEvent(calendarEvent);
                         fullcalendar.capacityEvent = e;
                         for(CapacityReportEvent a : eventList) {
-                            if (a.getId().equals(e.getId())) {
+                            if (a.getDescription().equals(e.getDescription())) {
                                 handler.setCurrentReport(a.getUw());
                             }
                         }
-
-                        // TODO - open description widget
                         notifyHandler();
                     }
 
                     /**
-                     * Create new Event in Calendar
+                     * Not needed
                      */
                     @Override
                     public void dayClick(JavaScriptObject moment, NativeEvent event, JavaScriptObject viewObject) {
-
                     }
 
                 });
