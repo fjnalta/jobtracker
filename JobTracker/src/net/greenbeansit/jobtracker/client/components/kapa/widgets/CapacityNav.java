@@ -11,11 +11,13 @@ import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
+import net.greenbeansit.jobtracker.client.components.CalendarObserver;
 import net.greenbeansit.jobtracker.client.components.LogicObservable;
 import net.greenbeansit.jobtracker.client.components.widgets.SelectJobOption;
 import net.greenbeansit.jobtracker.client.utils.rest.NotifyHelper;
 import net.greenbeansit.jobtracker.shared.Job;
 import net.greenbeansit.jobtracker.shared.PseudoJob;
+import net.greenbeansit.jobtracker.shared.UtilizationWeek;
 import org.gwtbootstrap3.client.ui.Button;
 import org.gwtbootstrap3.client.ui.TextBox;
 import org.gwtbootstrap3.client.ui.constants.IconType;
@@ -34,7 +36,7 @@ import java.util.List;
  *
  * @author Philipp Minges
  */
-public class CapacityNav extends Composite implements LogicObservable {
+public class CapacityNav extends Composite implements LogicObservable, CalendarObserver {
 
     @UiField
     Select selectJob;
@@ -94,6 +96,8 @@ public class CapacityNav extends Composite implements LogicObservable {
 
     private PseudoJob currentPJob = null;
     private Job currentJob = null;
+
+    private UtilizationWeek currentReport;
 
     public CapacityNav() {
         initWidget(uiBinder.createAndBindUi(this));
@@ -157,6 +161,7 @@ public class CapacityNav extends Composite implements LogicObservable {
         addPseudoJobs(this.pJobList);
         addJobs(this.jobList);
 
+        //Set select Job
         currentPJob = handler.getCurrentPseudoJob();
         currentJob = handler.getCurrentJob();
         if (currentJob != null || currentPJob != null) {
@@ -175,6 +180,17 @@ public class CapacityNav extends Composite implements LogicObservable {
             }
         }
         selectJob.refresh();
+    }
+
+    @Override
+    public void update() {
+        this.currentReport = handler.getCurrentUtilizationWeek();
+        textIdentifier.setText(currentReport.getText());
+    }
+
+    @Override
+    public void notifyHandler() {
+
     }
 
     @Override
