@@ -3,7 +3,7 @@ package net.greenbeansit.jobtracker.shared;
 import java.io.Serializable;
 
 /**
- * Represents a PseudoJob for the Capazity planning
+ * Represents a PseudoJob for the Capacity planning
  *
  * @author Philipp Minges
  */
