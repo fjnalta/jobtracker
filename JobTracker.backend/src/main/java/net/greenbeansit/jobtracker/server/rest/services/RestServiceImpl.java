@@ -13,13 +13,8 @@ import net.greenbeansit.jobtracker.server.data.job.JobDataService;
 import net.greenbeansit.jobtracker.server.data.pseudoJob.PseudoJobDataService;
 import net.greenbeansit.jobtracker.server.data.user.UserDataService;
 import net.greenbeansit.jobtracker.server.data.userJob.UserJobDataService;
-import net.greenbeansit.jobtracker.shared.ActivityReport;
-import net.greenbeansit.jobtracker.shared.ActivityReportTemplate;
-import net.greenbeansit.jobtracker.shared.Customer;
-import net.greenbeansit.jobtracker.shared.Job;
-import net.greenbeansit.jobtracker.shared.PseudoJob;
-import net.greenbeansit.jobtracker.shared.User;
-import net.greenbeansit.jobtracker.shared.UserJob;
+import net.greenbeansit.jobtracker.server.data.utilizationWeek.UtilizationWeekDataService;
+import net.greenbeansit.jobtracker.shared.*;
 import net.greenbeansit.jobtracker.shared.rest.services.RestService;
 
 /**
@@ -42,6 +37,8 @@ public class RestServiceImpl implements RestService {
     private UserJobDataService userJobService;
     @Inject
     private PseudoJobDataService pseudoService;
+    @Inject
+    private UtilizationWeekDataService utilizationWeekService;
 
     /**
      * Empty Constructor for Spring mapping
@@ -75,6 +72,11 @@ public class RestServiceImpl implements RestService {
     }
 
     @Override
+    public List<UtilizationWeek> getAllUtilizationWeeks(Integer userId) {
+        return null;
+    }
+
+    @Override
     public ActivityReport getReport(Integer userId, Integer reportId) {
         ActivityReport report = activityReportService.getActivityReport(reportId);
         if (report.getAuthor().equals(userId))
@@ -90,6 +92,11 @@ public class RestServiceImpl implements RestService {
         activityReportService.save(report);
         userService.updateYearUtilization(userId, report.getDate().getYear());
         System.out.println(report);
+    }
+
+    @Override
+    public void saveUtilizationWeek(Integer userId, UtilizationWeek report) {
+        utilizationWeekService.save(report);
     }
 
     @Override
