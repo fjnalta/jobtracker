@@ -12,7 +12,6 @@ import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.uibinder.client.UiTemplate;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
@@ -26,16 +25,21 @@ import net.greenbeansit.jobtracker.client.components.project.detail.ProjectDetai
 
 /**
  * Represents the main widget of the application.
+ * 
+ * @author Max Blatt
  */
 public class Application extends Composite
 {
 	private static ApplicationUiBinder uiBinder = GWT
 			.create(ApplicationUiBinder.class);
 
-	@UiTemplate("Application.ui.xml")
+	/**
+	 * UiBinder for {@link Application}.
+	 * 
+	 * @author Max Blatt
+	 */
 	interface ApplicationUiBinder extends UiBinder<Widget, Application>
 	{
-
 	}
 
 	@UiField
@@ -59,6 +63,9 @@ public class Application extends Composite
 	@UiField
 	NavbarBrand		navbarBrand;
 
+	/**
+	 * Initializes a new instance of the {@link Application} class.
+	 */
 	public Application()
 	{
 		initWidget(uiBinder.createAndBindUi(this));
@@ -72,6 +79,11 @@ public class Application extends Composite
 
 	}
 
+	/**
+	 * Event listener that listens for history events.
+	 * 
+	 * @author Max Blatt
+	 */
 	private class HistoryValueChangeHandler
 			implements ValueChangeHandler<String>
 	{
@@ -94,7 +106,7 @@ public class Application extends Composite
 				break;
 
 			case "kapa":
-				loadKapaPage(addressSplit);
+				loadCapacityPage(addressSplit);
 				break;
 
 			default: // home
@@ -104,6 +116,11 @@ public class Application extends Composite
 
 		}
 
+		/**
+		 * Initializes the {@link ProjectPage} as the new active page.
+		 * 
+		 * @param addressSplit the URL that led to this page.
+		 */
 		private void loadProjectPage(String[] addressSplit)
 		{
 			Composite page;
@@ -136,6 +153,11 @@ public class Application extends Composite
 			addWidgetAsContentPage(page);
 		}
 
+		/**
+		 * Initializes the {@link ManagerPage} as the new active page.
+		 * 
+		 * @param addressSplit the URL that led to this page.
+		 */
 		private void loadManagerPage(String[] addressSplit)
 		{
 			Composite page;
@@ -167,13 +189,23 @@ public class Application extends Composite
 			addWidgetAsContentPage(page);
 		}
 
-		private void loadKapaPage(String[] addressSplit)
+		/**
+		 * Initializes the {@link CapacityPage} as the new active page.
+		 * 
+		 * @param addressSplit the URL that led to this page.
+		 */
+		private void loadCapacityPage(String[] addressSplit)
 		{
 			navKapa.setActive(true);
 			removeActiveContentContainer();
 			addWidgetAsContentPage(new CapacityPage());
 		}
 
+		/**
+		 * Initializes the {@link HomePage} as the new active page.
+		 * 
+		 * @param addressSplit the URL that led to this page.
+		 */
 		private void loadHomePage(String[] addressSplit)
 		{
 			navHome.setActive(true);
@@ -183,6 +215,9 @@ public class Application extends Composite
 			addWidgetAsContentPage(new HomePage());
 		}
 
+		/**
+		 * Deactivates all buttons in the navbar.
+		 */
 		private void deactivateAllNavButtons()
 		{
 			for (int i = 0; i < nav.getWidgetCount(); i++)
@@ -193,13 +228,20 @@ public class Application extends Composite
 			}
 		}
 
+		/**
+		 * Removes all elements except the navbar from the mainContainer. 
+		 */
 		private void removeActiveContentContainer()
 		{
 			for (int i = 1; i < mainContainer.getWidgetCount(); i++)
 				mainContainer.remove(i);
-
 		}
-
+		
+		/**
+		 * Adds the following {@link Widget} to the mainContainer.
+		 * 
+		 * @param widget the {@link Widget} that should be added.
+		 */
 		private void addWidgetAsContentPage(Widget widget)
 		{
 			mainContainer.add(widget);
