@@ -2,13 +2,13 @@ package net.greenbeansit.jobtracker.client.components;
 
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.i18n.client.DateTimeFormat;
-import net.greenbeansit.jobtracker.client.components.widgets.UtilizationWidget;
 import net.greenbeansit.jobtracker.client.components.widgets.calendar.CalendarWidget;
 import net.greenbeansit.jobtracker.client.utils.rest.NotifyHelper;
 import net.greenbeansit.jobtracker.client.utils.rest.RestClient;
 import net.greenbeansit.jobtracker.client.utils.rest.RestClient.SuccessFunction;
 import net.greenbeansit.jobtracker.shared.*;
 import org.fusesource.restygwt.client.Method;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -28,7 +28,8 @@ import java.util.List;
 public class LogicHandler {
 
 	private ActivityReport currentReport;
-	private UtilizationWeek currentCapacityReport;
+	private ActivityReportTemplate currentTemplate;
+	private UtilizationWeek currentUtilizationWeek;
 
 	private List<LogicObservable> list = new ArrayList<>();
 	private List<ActivityReport> currentReportsList = new ArrayList<ActivityReport>();
@@ -40,10 +41,6 @@ public class LogicHandler {
 
 	private Job currentJob;
 	private PseudoJob currentPJob;
-	private UtilizationWeek currentUtilizationWeek;
-
-	private ActivityReportTemplate currentTemplate;
-
 
 	private List<UtilizationWeek> utilizationWeekList = new ArrayList<UtilizationWeek>();
 
@@ -147,19 +144,14 @@ public class LogicHandler {
 	 * @param report report to be set as active
 	 */
 	public void setCurrentReport(UtilizationWeek report) {
-		this.currentCapacityReport = report;
-		UtilizationWeek tempJob = new UtilizationWeek();
+		UtilizationWeek tempUtilizationWeek = new UtilizationWeek();
+		tempUtilizationWeek.setText(report.getText());
 		for(UtilizationWeek j : utilizationWeekList){
-			if(j.equals(tempJob)){
+			if(j.getText().equals(tempUtilizationWeek.getText())){
 				this.setCurrentUtilizationWeek(j);
 			}
 		}
-		UtilizationWeek tempTemplate = new UtilizationWeek();
-		tempTemplate.setAuthor(report.getAuthor());
-		tempTemplate.setText(report.getText());
-		tempTemplate.setPossibility(report.getPossibility());
-		GWT.log("current selected report :" + report.toString());
-		this.currentCapacityReport = tempTemplate;
+		this.currentUtilizationWeek = report;
 		this.updateAllObservables();
 	}
 
@@ -230,6 +222,14 @@ public class LogicHandler {
      */
 	public void setCurrentUser(User currentUser) {
 		this.currentUser = currentUser;
+	}
+
+	/**
+	 * get the currently set {@link UtilizationWeek}
+	 * @return currrent set {@link UtilizationWeek} object
+	 */
+	public UtilizationWeek getCurrentUtilizationWeek() {
+		return currentUtilizationWeek;
 	}
 
 	/**
@@ -318,6 +318,44 @@ public class LogicHandler {
 					}
 
 				}).getEmployeeService().saveReport(currentUser.getId(), tempReport);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else {
+			NotifyHelper.errorMessage("Please fill in the missing fields");
+		}
+	}
+
+	/**
+	 * Function for saving an UtilizationWeek to the backend. It first collects all needed information,
+	 * then if everything is correct it will try to save it.
+	 * On success is calls {@link #updateAllObservables()}to update the widgets
+	 * @param reportDummy a {@link UtilizationWeek} object with set time parameters
+	 */
+	public void saveUtilizationWeek(UtilizationWeek reportDummy) {
+		getInformations();
+		UtilizationWeek tempReport = reportDummy;
+
+		if (currentUtilizationWeek != null && currentUser != null) {
+			tempReport.setText(currentUtilizationWeek.getText());
+			tempReport.setAuthor(currentUtilizationWeek.getAuthor());
+			tempReport.setPseudoJobId(currentUtilizationWeek.getPseudoJobId());
+			tempReport.setPossibility(currentUtilizationWeek.getPossibility());
+			try {
+				RestClient.build(new SuccessFunction<UtilizationWeek>() {
+					@Override
+					public void onSuccess(Method method, UtilizationWeek response) {
+						LogicHandler.this.updateAllObservables();
+						NotifyHelper.successMessage("Report saved");
+					}
+
+					@Override
+					public void onFailure(Method method, Throwable exception) {
+						NotifyHelper.errorMessage("FAILED" + exception.getMessage());
+						GWT.log(exception.getMessage());
+					}
+
+				}).getEmployeeService().saveUtilizationWeek(currentUser.getId(), tempReport);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
