@@ -15,22 +15,47 @@ import com.google.gwt.user.client.ui.Widget;
 
 import net.greenbeansit.jobtracker.shared.Job;
 
+/**
+ * Helps to display a {@link Job} in the list of the {@link ProjectPage}.
+ * 
+ * @author Max Blatt
+ */
 public class ProjectBudgetBar extends Composite
 {
 
 	private static ProjectBudgetBarUiBinder uiBinder = GWT
 			.create(ProjectBudgetBarUiBinder.class);
 
+	/**
+	 * UiBinder for {@link ProjectBudgetBar}.
+	 * 
+	 * @author Max Blatt
+	 */
 	interface ProjectBudgetBarUiBinder
 			extends UiBinder<Widget, ProjectBudgetBar>
 	{
 
 	}
 
+	/**
+	 * Gets access to the inline styles defined in the ui.xml.
+	 * 
+	 * @author Max Blatt
+	 */
 	interface ProjectBudgetBarStyle extends CssResource
 	{
+		/**
+		 * Gets the name of the iconLocked style.
+		 * 
+		 * @return a String.
+		 */
 		String iconLocked();
 
+		/**
+		 * Gets the name of the iconUnLocked style.
+		 * 
+		 * @return a String.
+		 */
 		String iconUnLocked();
 	}
 
@@ -46,6 +71,12 @@ public class ProjectBudgetBar extends Composite
 	@UiField
 	ProjectBudgetBarStyle	style;
 
+	
+	/**
+	 * Initializes a new instance of the {@link ProjectBudgetBar} class.
+	 * 
+	 * @param job the {@link Job} that should be displayed.
+	 */
 	public ProjectBudgetBar(Job job)
 	{
 		initWidget(uiBinder.createAndBindUi(this));

@@ -10,12 +10,23 @@ import com.google.gwt.user.client.ui.Widget;
 
 import net.greenbeansit.jobtracker.shared.Job;
 
+/**
+ * Wrapper around the {@link ProjectBudgetBar} that allows it to be used as
+ * HTML anchor.
+ *  
+ * @author Max Blatt
+ */
 public class JobListItem extends Composite
 {
 
 	private static JobListItemUiBinder uiBinder = GWT
 			.create(JobListItemUiBinder.class);
 
+	/**
+	 * UiBinder for {@link JobListItem}.
+	 * 
+	 * @author Max Blatt
+	 */
 	interface JobListItemUiBinder extends UiBinder<Widget, JobListItem>
 	{
 	}
@@ -23,6 +34,12 @@ public class JobListItem extends Composite
 	@UiField
 	Anchor	anchor;
 
+	
+	/**
+	 * Initializes a new instance of the {@link JobListItem} class.
+	 * 
+	 * @param job the {@link Job} that should be displayed.
+	 */
 	public JobListItem(Job job)
 	{
 		initWidget(uiBinder.createAndBindUi(this));

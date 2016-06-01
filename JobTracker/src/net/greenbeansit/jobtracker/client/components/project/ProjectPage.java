@@ -3,12 +3,12 @@ package net.greenbeansit.jobtracker.client.components.project;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.gwtbootstrap3.client.ui.Anchor;
 import org.gwtbootstrap3.client.ui.Heading;
 import org.gwtbootstrap3.client.ui.Row;
 import org.gwtbootstrap3.client.ui.html.ClearFix;
 import org.gwtbootstrap3.extras.select.client.ui.MultipleSelect;
 import org.gwtbootstrap3.extras.select.client.ui.Option;
+import org.gwtbootstrap3.extras.select.client.ui.Select;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -18,7 +18,6 @@ import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.resources.client.CssResource;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -27,17 +26,38 @@ import net.greenbeansit.jobtracker.client.utils.rest.NotifyHelper;
 import net.greenbeansit.jobtracker.shared.Customer;
 import net.greenbeansit.jobtracker.shared.Job;
 
+/**
+ * Displays a list of all {@link Job}s in which the current user is the project
+ * leader.
+ * 
+ * @author Max Blatt
+ */
 public class ProjectPage extends Composite
 {
 	private static ProjectPageUiBinder uiBinder = GWT
 			.create(ProjectPageUiBinder.class);
 
+	/**
+	 * UiBinder for the {@link ProjectPage}.
+	 * 
+	 * @author Max Blatt
+	 */
 	interface ProjectPageUiBinder extends UiBinder<Widget, ProjectPage>
 	{
 	}
 
+	/**
+	 * Provides access to the inline styles defined in the ui.xml.
+	 * 
+	 * @author Max Blatt
+	 */
 	interface ProjectPageStyle extends CssResource
 	{
+		/**
+		 * Gets the name of the jobListItem style.
+		 * 
+		 * @return a String.
+		 */
 		String jobListItem();
 	}
 
@@ -76,14 +96,18 @@ public class ProjectPage extends Composite
 	private List<Customer>				currentFilter;
 	private List<Job>					currentJobList;
 
+	/**
+	 * Initializes a new instance of the ProjectPage and loads the required data
+	 * from the server.
+	 */
 	public ProjectPage()
 	{
 		initWidget(uiBinder.createAndBindUi(this));
 
-		//initial sort mode
+		// initial sort mode
 		sortMode = ProjectPageSortMode.NAME_UP;
 		columnHeaderNameArrow.setText(ARROW_UP);
-		
+
 		// Add handler
 		selectCustomer
 				.addValueChangeHandler(new ValueChangeHandler<List<String>>()
@@ -100,8 +124,9 @@ public class ProjectPage extends Composite
 
 						currentFilter = filter;
 
-						currentJobList = helperService.filterAndSortJobs(filter, sortMode);
-						
+						currentJobList = helperService.filterAndSortJobs(filter,
+								sortMode);
+
 						fillJobList(currentJobList);
 					}
 				});
@@ -173,7 +198,7 @@ public class ProjectPage extends Composite
 
 					columnHeaderLockedArrow.setText(ARROW_UP);
 				}
-				
+
 				columnHeaderNameArrow.setText("");
 				columnHeaderBudgetArrow.setText("");
 			}
@@ -196,6 +221,10 @@ public class ProjectPage extends Composite
 		});
 	}
 
+	/**
+	 * Sorts the current {@link Job}s by the current {@link ProjectPageSortMode}
+	 * and refills the list using {@link ProjectPage#fillJobList(List)}.
+	 */
 	private void sortList()
 	{
 		currentJobList = helperService.sortJobs(currentJobList, sortMode);
@@ -203,6 +232,12 @@ public class ProjectPage extends Composite
 		fillJobList(currentJobList);
 	}
 
+	/**
+	 * Clears the list container and refills it with {@link JobListItem}s based
+	 * on the following list of {@link Job}s.
+	 * 
+	 * @param jobs the list of {@link Job}s that should be displayed.
+	 */
 	private void fillJobList(List<Job> jobs)
 	{
 		// Insert list item widgets
@@ -216,6 +251,11 @@ public class ProjectPage extends Composite
 		}
 	}
 
+	/**
+	 * Fills the filter {@link Select} with the following {@link Customer}s.
+	 *  
+	 * @param customers a list of {@link Customer}s.
+	 */
 	private void fillCustomerList(List<Customer> customers)
 	{
 		selectCustomer.clear();
