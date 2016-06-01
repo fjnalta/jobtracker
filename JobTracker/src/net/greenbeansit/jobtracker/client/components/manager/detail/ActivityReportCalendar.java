@@ -3,32 +3,37 @@ package net.greenbeansit.jobtracker.client.components.manager.detail;
 import java.util.Date;
 
 import org.gwtbootstrap3.client.ui.html.ClearFix;
-import org.gwtbootstrap3.extras.fullcalendar.client.ui.AgendaOptions;
 import org.gwtbootstrap3.extras.fullcalendar.client.ui.CalendarConfig;
 import org.gwtbootstrap3.extras.fullcalendar.client.ui.FullCalendar;
 import org.gwtbootstrap3.extras.fullcalendar.client.ui.GeneralDisplay;
-import org.gwtbootstrap3.extras.fullcalendar.client.ui.Header;
 import org.gwtbootstrap3.extras.fullcalendar.client.ui.Language;
 import org.gwtbootstrap3.extras.fullcalendar.client.ui.ViewOption;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.safehtml.shared.SafeHtml;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.Timer;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.RenderableStamper;
 import com.google.gwt.user.client.ui.Widget;
 
-import net.greenbeansit.jobtracker.client.components.widgets.calendar.FullCalendarCustomize;
+import net.greenbeansit.jobtracker.shared.ActivityReport;
 
+/**
+ * Displays the {@link ActivityReport}s of an employee.
+ * 
+ * @author Max Blatt
+ */
 public class ActivityReportCalendar extends Composite
 {
 
 	private static ActivityReportCalendarUiBinder uiBinder = GWT
 			.create(ActivityReportCalendarUiBinder.class);
 
+	/**
+	 * UiBinder for {@link ActivityReportCalendar}.
+	 * 
+	 * @author Max Blatt
+	 */
 	interface ActivityReportCalendarUiBinder
 			extends UiBinder<Widget, ActivityReportCalendar>
 	{
@@ -42,6 +47,10 @@ public class ActivityReportCalendar extends Composite
 	FullCalendar calendar;
 	CalendarConfig config;
 
+	
+	/**
+	 * Initializes a new instance of the {@link ActivityReportCalendar} class.
+	 */
 	public ActivityReportCalendar()
 	{
 		initWidget(uiBinder.createAndBindUi(this));
@@ -55,10 +64,11 @@ public class ActivityReportCalendar extends Composite
 			}
 		};
 		timer.schedule(0);
-		
-		
 	}
 	
+	/**
+	 * Initializes the calendar.
+	 */
 	private void initCalendar()
 	{
 		config = new CalendarConfig();
@@ -75,6 +85,9 @@ public class ActivityReportCalendar extends Composite
 		container.add(calendar);
 	}
 
+	/**
+	 * Tells the calendar to redraw itself.
+	 */
 	public void onDisplayed()
 	{
 		Timer timer = new Timer()

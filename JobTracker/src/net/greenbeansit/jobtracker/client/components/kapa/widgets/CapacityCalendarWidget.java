@@ -70,7 +70,7 @@ public class CapacityCalendarWidget extends Composite {
 
         config.setGeneralDisplay(generalDisplay);
 
-        fullcalendar = new FullCalendarCustomize("CapacityCalendarWidget", ViewOption.month, config, false);
+        fullcalendar = new FullCalendarCustomize("CapacityCalendarWidget", ViewOption.month, config, true);
         fullcalendar.goToDate(new Date());
         calendar.add(fullcalendar);
 

@@ -71,3 +71,26 @@ td {
 	background-color: orange;
 	
 }
+
+.weeklyUtilization {
+	height: 100%;
+	width: 100%;
+	margin-top: 75px;
+	text-align: left;
+}
+
+.barChartHorizontal {
+	width: 7px;
+	text-align: center;
+	display: inline-block;
+	background-color: #00AAAA;
+	border-radius: 25px;
+}
+
+.barChartHeightHorizontal {
+	width: 7px;
+	text-align: center;
+	display: inline-block;
+	background-color: #ff8c00;
+	border-radius: 25px;
+}

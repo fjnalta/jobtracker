@@ -17,16 +17,30 @@ import net.greenbeansit.jobtracker.shared.rest.services.RestService.JobID;
 import net.greenbeansit.jobtracker.shared.rest.services.RestService.ManagerPageRestServiceResponse;
 
 /**
- * Dummy implementation of {@link ManagerPageHelperService}.
+ * Implementation of {@link ManagerPageHelperService}.
  * 
  * @author Max Blatt
  */
 class ManagerPageHelperServiceImpl implements ManagerPageHelperService
 {
+	/**
+	 * Callback listener for the {@link ManagerPageHelperServiceImpl}.
+	 * 
+	 * @author Max Blatt.
+	 */
 	interface Callback
 	{
+		/**
+		 * Is invoked if the data was loaded successfully from the server.
+		 */
 		void onSuccess();
 
+		/**
+		 * Is invoked if the data could not be loaded from the server.
+		 * 
+		 * @param error
+		 *            the {@link Throwable} that describes the error.
+		 */
 		void onFailure(Throwable error);
 	}
 
@@ -35,12 +49,26 @@ class ManagerPageHelperServiceImpl implements ManagerPageHelperService
 
 	private boolean		dataLoaded	= false;
 
+	/**
+	 * Initializes a new instance of the {@link ManagerPageHelperServiceImpl}
+	 * class.
+	 * 
+	 * @param initCallback
+	 *            the {@link Callback} that will be called after the
+	 *            asynchronous process has been finished.
+	 */
 	public ManagerPageHelperServiceImpl(Callback initCallback)
 	{
 		loadServerData(initCallback);
 	}
 
-	
+	/**
+	 * Starts the asynchronous loading process.
+	 * 
+	 * @param initCallback
+	 *            the {@link Callback} that will be called after the
+	 *            asynchronous process has been finished.
+	 */
 	private void loadServerData(final Callback initCallback)
 	{
 		RestClient.build(new SuccessFunction<ManagerPageRestServiceResponse>()
@@ -75,7 +103,7 @@ class ManagerPageHelperServiceImpl implements ManagerPageHelperService
 	@Override
 	public Integer getUserId()
 	{
-		return 1; // TODO: Get real user ID.
+		return 1; // TODO: Replace hard-coded user ID.
 	}
 
 	@Override
@@ -186,6 +214,17 @@ class ManagerPageHelperServiceImpl implements ManagerPageHelperService
 			return cachedUser;
 	}
 
+	/**
+	 * Checks whether the following {@link User} contains at least one reference
+	 * to a {@link Job} in the following filter list.
+	 * 
+	 * @param employee
+	 *            the {@link User} whose {@link Job}s references should be
+	 *            checked.
+	 * @param filter
+	 *            the list of {@link Job}s that should be applied.
+	 * @return true if a reference was found. Otherwise false.
+	 */
 	private boolean matchesFilter(User employee, List<Job> filter)
 	{
 		if (employee.getAssignedJobs() == null)
@@ -215,7 +254,7 @@ class ManagerPageHelperServiceImpl implements ManagerPageHelperService
 	{
 		return dataLoaded;
 	}
-	
+
 	@Override
 	public List<Job> getJobs()
 	{

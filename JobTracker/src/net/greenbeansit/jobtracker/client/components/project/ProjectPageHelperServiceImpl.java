@@ -15,18 +15,46 @@ import net.greenbeansit.jobtracker.shared.Customer;
 import net.greenbeansit.jobtracker.shared.Job;
 import net.greenbeansit.jobtracker.shared.rest.services.RestService.ProjectPageRestServiceResponse;
 
+/**
+ * Implementation of {@link ProjectPageHelperService}.
+ * 
+ * @author Max Blatt
+ */
 class ProjectPageHelperServiceImpl implements ProjectPageHelperService
 {
+	/**
+	 * Callback listener for the REST Services of the
+	 * {@link ProjectPageHelperServiceImpl}.
+	 * 
+	 * @author Max Blatt
+	 */
 	interface Callback
 	{
+		/**
+		 * Is invoked if the data was loaded successfully from the server.
+		 */
 		void onSuccess();
 
+		/**
+		 * Is invoked if the data could not be loaded from the server.
+		 * 
+		 * @param error
+		 *            the {@link Throwable} that describes the error.
+		 */
 		void onFailure(Throwable error);
 	}
 
 	private List<Job>		cachedJobs;
 	private List<Customer>	cachedCustomers;
 
+	/**
+	 * Initializes a new instance of the {@link ProjectPageHelperServiceImpl}
+	 * class and starts loading the required data from the server.
+	 * 
+	 * @param initCallback
+	 *            the {@link Callback} that will be called after the
+	 *            asynchronous process has been finished.
+	 */
 	public ProjectPageHelperServiceImpl(Callback initCallback)
 	{
 		cachedJobs = new ArrayList<Job>();
@@ -35,6 +63,13 @@ class ProjectPageHelperServiceImpl implements ProjectPageHelperService
 		initialize(initCallback);
 	}
 
+	/**
+	 * Starts the asynchronous loading process.
+	 * 
+	 * @param initCallback
+	 *            the {@link Callback} that will be called after the
+	 *            asynchronous process has been finished.
+	 */
 	private void initialize(final Callback initCallback)
 	{
 		RestClient.build(new SuccessFunction<ProjectPageRestServiceResponse>()
@@ -66,7 +101,7 @@ class ProjectPageHelperServiceImpl implements ProjectPageHelperService
 	public List<Job> sortJobs(List<Job> jobs, ProjectPageSortMode sortmode)
 	{
 		List<Job> jobsToSort = jobs;
-		
+
 		if (jobsToSort == null)
 			jobsToSort = cachedJobs;
 
@@ -79,13 +114,13 @@ class ProjectPageHelperServiceImpl implements ProjectPageHelperService
 				public int compare(Job o1, Job o2)
 				{
 					int compareRes = compareJobsByName(o1, o2);
-					
-					if(compareRes == 0)
+
+					if (compareRes == 0)
 						compareRes = compareJobsByBudget(o1, o2);
-					
-					if(compareRes == 0)
+
+					if (compareRes == 0)
 						compareRes = compareJobsByLocked(o1, o2);
-					
+
 					return compareRes;
 				}
 			});
@@ -98,13 +133,13 @@ class ProjectPageHelperServiceImpl implements ProjectPageHelperService
 				public int compare(Job o1, Job o2)
 				{
 					int compareRes = compareJobsByName(o2, o1);
-					
-					if(compareRes == 0)
+
+					if (compareRes == 0)
 						compareRes = compareJobsByBudget(o2, o1);
-					
-					if(compareRes == 0)
+
+					if (compareRes == 0)
 						compareRes = compareJobsByLocked(o2, o1);
-					
+
 					return compareRes;
 				}
 			});
@@ -117,18 +152,18 @@ class ProjectPageHelperServiceImpl implements ProjectPageHelperService
 				public int compare(Job o1, Job o2)
 				{
 					int compareRes = compareJobsByBudget(o1, o2);
-					
-					if(compareRes == 0)
+
+					if (compareRes == 0)
 						compareRes = compareJobsByName(o1, o2);
-					
-					if(compareRes == 0)
+
+					if (compareRes == 0)
 						compareRes = compareJobsByLocked(o1, o2);
-					
+
 					return compareRes;
 				}
 			});
 			break;
-			
+
 		case USED_BUDGET_PERCENT_DOWN:
 			Collections.sort(jobsToSort, new Comparator<Job>()
 			{
@@ -136,13 +171,13 @@ class ProjectPageHelperServiceImpl implements ProjectPageHelperService
 				public int compare(Job o1, Job o2)
 				{
 					int compareRes = compareJobsByBudget(o2, o1);
-					
-					if(compareRes == 0)
+
+					if (compareRes == 0)
 						compareRes = compareJobsByName(o1, o2);
-					
-					if(compareRes == 0)
+
+					if (compareRes == 0)
 						compareRes = compareJobsByLocked(o1, o2);
-					
+
 					return compareRes;
 				}
 			});
@@ -154,13 +189,13 @@ class ProjectPageHelperServiceImpl implements ProjectPageHelperService
 				public int compare(Job o1, Job o2)
 				{
 					int compareRes = compareJobsByLocked(o2, o1);
-					
-					if(compareRes == 0)
+
+					if (compareRes == 0)
 						compareRes = compareJobsByName(o1, o2);
-					
-					if(compareRes == 0)
+
+					if (compareRes == 0)
 						compareRes = compareJobsByBudget(o1, o2);
-					
+
 					return compareRes;
 				}
 			});
@@ -173,13 +208,13 @@ class ProjectPageHelperServiceImpl implements ProjectPageHelperService
 				public int compare(Job o1, Job o2)
 				{
 					int compareRes = compareJobsByLocked(o1, o2);
-					
-					if(compareRes == 0)
+
+					if (compareRes == 0)
 						compareRes = compareJobsByName(o1, o2);
-					
-					if(compareRes == 0)
+
+					if (compareRes == 0)
 						compareRes = compareJobsByBudget(o1, o2);
-					
+
 					return compareRes;
 				}
 			});
@@ -189,6 +224,18 @@ class ProjectPageHelperServiceImpl implements ProjectPageHelperService
 		return jobsToSort;
 	}
 
+	/**
+	 * Compares two {@link Job}s by their name attributes (jobNr, posNr and
+	 * desc).
+	 * 
+	 * @param o1
+	 *            the first {@link Job}.
+	 * @param o2
+	 *            the second {@link Job}.
+	 * @return 0 if both objects are equal. A value greater than 0 if o1 should
+	 *         be displayed higher than o2. A value smaller than 0 if o1 should
+	 *         be displayed below o2.
+	 */
 	private int compareJobsByName(Job o1, Job o2)
 	{
 		int compareRes = Integer.compare(o1.getJobNr(), o2.getJobNr());
@@ -197,9 +244,9 @@ class ProjectPageHelperServiceImpl implements ProjectPageHelperService
 			compareRes = Integer.compare(o1.getPosNr(), o2.getPosNr());
 			if (compareRes == 0)
 			{
-				if(o1.getDesc() == null)
+				if (o1.getDesc() == null)
 					compareRes = -1;
-				else if(o2.getDesc() == null)
+				else if (o2.getDesc() == null)
 					compareRes = 1;
 				else
 					compareRes = o1.getDesc().compareTo(o2.getDesc());
@@ -209,6 +256,17 @@ class ProjectPageHelperServiceImpl implements ProjectPageHelperService
 		return compareRes;
 	}
 
+	/**
+	 * Compares two {@link Job}s by their used budget in percent.
+	 * 
+	 * @param o1
+	 *            the first {@link Job}.
+	 * @param o2
+	 *            the second {@link Job}.
+	 * @return 0 if both objects are equal. A value greater than 0 if o1 should
+	 *         be displayed higher than o2. A value smaller than 0 if o1 should
+	 *         be displayed below o2.
+	 */
 	private int compareJobsByBudget(Job o1, Job o2)
 	{
 		int compareRes = Double.compare(getUsedBudgetPercent(o1),
@@ -217,27 +275,39 @@ class ProjectPageHelperServiceImpl implements ProjectPageHelperService
 		return compareRes;
 	}
 
+	/**
+	 * Compares two {@link Job}s by their isLocked attribute.
+	 * 
+	 * @param o1
+	 *            the first {@link Job}.
+	 * @param o2
+	 *            the second {@link Job}.
+	 * @return 0 if both objects are equal. A value greater than 0 if o1 should
+	 *         be displayed higher than o2. A value smaller than 0 if o1 should
+	 *         be displayed below o2.
+	 */
 	private int compareJobsByLocked(Job o1, Job o2)
 	{
 		int compareRes;
-		if(o1.isLocked() == null)
+		if (o1.isLocked() == null)
 			compareRes = -1;
-		else if(o2.isLocked() == null)
+		else if (o2.isLocked() == null)
 			compareRes = 1;
 		else
 			compareRes = Boolean.compare(o1.isLocked(), o2.isLocked());
 
 		return compareRes;
 	}
-	
+
+	@Override
 	public double getUsedBudgetPercent(Job job)
 	{
-		if(job.getUsedBudget() == null)
+		if (job.getUsedBudget() == null)
 			return 0;
-		else if(job.getMaxBudget() == null)
+		else if (job.getMaxBudget() == null)
 			return 0;
 		else
-			return (double)job.getUsedBudget() / job.getMaxBudget();
+			return (double) job.getUsedBudget() / job.getMaxBudget();
 	}
 
 	@Override
@@ -247,9 +317,9 @@ class ProjectPageHelperServiceImpl implements ProjectPageHelperService
 		{
 			List<Job> filteredJobs = new ArrayList<Job>();
 
-			for(Job job : cachedJobs)
+			for (Job job : cachedJobs)
 			{
-				if(matchesFilter(job, filter))
+				if (matchesFilter(job, filter))
 					filteredJobs.add(job);
 			}
 
@@ -259,7 +329,17 @@ class ProjectPageHelperServiceImpl implements ProjectPageHelperService
 			return cachedJobs;
 		}
 	}
-	
+
+	/**
+	 * Checks if the following {@link Job} contains a reference to at least one
+	 * {@link Customer} in the following filter list.
+	 * 
+	 * @param job
+	 *            the {@link Job} that should be checked.
+	 * @param filter
+	 *            the {@link List} of {@link Customer}s that should be applied.
+	 * @return true if a reference does exist. Otherwise false.
+	 */
 	private boolean matchesFilter(Job job, List<Customer> filter)
 	{
 		for (Customer customer : filter)
@@ -267,7 +347,7 @@ class ProjectPageHelperServiceImpl implements ProjectPageHelperService
 			if (job.getCustomerID() == customer.getId())
 				return true;
 		}
-		
+
 		return false;
 	}
 
@@ -284,8 +364,12 @@ class ProjectPageHelperServiceImpl implements ProjectPageHelperService
 		return cachedCustomers;
 	}
 
+	/**
+	 * Gets the ID of the current user.
+	 * @return
+	 */
 	private int getUserId()
 	{
-		return 2;
+		return 2;//TODO: Remove hard-coded user ID.
 	}
 }

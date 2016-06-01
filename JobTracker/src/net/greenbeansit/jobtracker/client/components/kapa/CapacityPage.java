@@ -34,7 +34,7 @@ public class CapacityPage extends Composite {
                 initialize();
             }
         };
-        timer.schedule(10);
+        timer.schedule(300);
     }
 
     private void initialize() {

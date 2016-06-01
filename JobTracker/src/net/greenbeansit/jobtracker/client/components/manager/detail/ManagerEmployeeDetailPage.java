@@ -11,30 +11,52 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 
+/**
+ * Shows detailed information about an employee to the user.
+ * 
+ * @author Max Blatt
+ */
 public class ManagerEmployeeDetailPage extends Composite
 {
 
-	private static ManagerEmployeeDetailPageUiBinder	uiBinder	= GWT
+	private static ManagerEmployeeDetailPageUiBinder uiBinder = GWT
 			.create(ManagerEmployeeDetailPageUiBinder.class);
 
-	@UiField
-	ActivityReportCalendar								reportCalendar;
+	/**
+	 * UiBinder for the {@link ManagerEmployeeDetailPage}.
+	 * 
+	 * @author Max Blatt
+	 */
+	interface ManagerEmployeeDetailPageUiBinder
+			extends UiBinder<Widget, ManagerEmployeeDetailPage>
+	{
+	}
 
 	@UiField
-	CapacityCalendar									capacityCalendar;
+	ActivityReportCalendar	reportCalendar;
 
 	@UiField
-	NavTabs												tabControl;
+	CapacityCalendar		capacityCalendar;
 
 	@UiField
-	TabListItem											tabProject;
+	NavTabs					tabControl;
 
 	@UiField
-	TabListItem											tabReport;
+	TabListItem				tabProject;
 
 	@UiField
-	TabListItem											tabCapacity;
+	TabListItem				tabReport;
 
+	@UiField
+	TabListItem				tabCapacity;
+
+	/**
+	 * Initializes a new instance of the {@link ManagerEmployeeDetailPage}
+	 * class.
+	 * 
+	 * @param userId
+	 *            the ID of the employee that should be displayed.
+	 */
 	public ManagerEmployeeDetailPage(Integer userId)
 	{
 		initWidget(uiBinder.createAndBindUi(this));
@@ -56,10 +78,5 @@ public class ManagerEmployeeDetailPage extends Composite
 				capacityCalendar.onDisplayed();
 			}
 		});
-	}
-
-	interface ManagerEmployeeDetailPageUiBinder
-			extends UiBinder<Widget, ManagerEmployeeDetailPage>
-	{
 	}
 }

@@ -5,7 +5,6 @@ import org.gwtbootstrap3.client.ui.html.ClearFix;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 import com.googlecode.gwt.charts.client.ChartLoader;
@@ -17,36 +16,45 @@ import com.googlecode.gwt.charts.client.corechart.PieChartOptions;
 import com.googlecode.gwt.charts.client.event.ReadyEvent;
 import com.googlecode.gwt.charts.client.event.ReadyHandler;
 
+import net.greenbeansit.jobtracker.shared.Job;
+
+/**
+ * Displays the {@link Job}s of an employee.
+ * 
+ * @author Max Blatt
+ */
 public class JobChart extends Composite
 {
 
 	private static JobChartUiBinder uiBinder = GWT
 			.create(JobChartUiBinder.class);
 
+	/**
+	 * UiBinder for the {@link JobChartUiBinder}.
+	 * 
+	 * @author Max Blatt
+	 */
 	interface JobChartUiBinder extends UiBinder<Widget, JobChart>
 	{
 	}
-	
-	@UiField
-	ClearFix											activityChartContainer;
-	
-	PieChart piechart;
 
+	@UiField
+	ClearFix	activityChartContainer;
+
+	PieChart	piechart;
+
+	/**
+	 * Initializes a new instance of the {@link JobChart} class.
+	 */
 	public JobChart()
 	{
 		initWidget(uiBinder.createAndBindUi(this));
 		initActivityChart();
 	}
-	
-	@Override
-	protected void onLoad()
-	{
-		
-		
-		super.onLoad();
-	}
 
-	
+	/**
+	 * Initializes the pieChart.
+	 */
 	private void initActivityChart()
 	{
 		ChartLoader chartLoader = new ChartLoader(ChartPackage.CORECHART);
@@ -57,7 +65,7 @@ public class JobChart extends Composite
 			{
 				piechart = new PieChart();
 				activityChartContainer.add(piechart);
-				
+
 				// Prepare the data
 				DataTable dataTable = DataTable.create();
 				dataTable.addColumn(ColumnType.STRING, "Name");
@@ -86,18 +94,18 @@ public class JobChart extends Composite
 				options.setSliceVisibilityThreshold(0.1);
 				options.setWidth(500);
 				options.setHeight(500);
-//				options.setTitle("");
+				// options.setTitle("");
 
 				// Draw the chart
 				piechart.draw(dataTable, options);
-				
+
 				piechart.addReadyHandler(new ReadyHandler()
 				{
-					
+
 					@Override
 					public void onReady(ReadyEvent event)
 					{
-						
+
 					}
 				});
 			}
