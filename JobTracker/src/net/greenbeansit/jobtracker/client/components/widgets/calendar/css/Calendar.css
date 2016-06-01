@@ -84,7 +84,8 @@ td {
 	text-align: center;
 	display: inline-block;
 	background-color: #00AAAA;
-	border-radius: 25px;
+	border-radius: 10px;
+	margin-bottom: 40px;
 }
 
 .barChartHeightHorizontal {
@@ -92,5 +93,6 @@ td {
 	text-align: center;
 	display: inline-block;
 	background-color: #ff8c00;
-	border-radius: 25px;
+	border-radius: 10px;
+	margin-bottom: 40px;
 }
