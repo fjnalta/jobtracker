@@ -36,8 +36,6 @@ public class LogicHandler {
 	private List<PseudoJob> pseudoJobList = new ArrayList<PseudoJob>();
 	private List<Integer> utilizationList = new ArrayList<Integer>();
 	private User currentUser;
-	private LogicHandler self = this;
-
 
 	private Job currentJob;
 	private PseudoJob currentPJob;
@@ -215,8 +213,8 @@ public class LogicHandler {
 			@Override
 			public void onSuccess(Method method, List<ActivityReport> response) {
 				NotifyHelper.successMessage("Reports loaded from backend");
-				self.setCurrentReportsList(response);
-				self.updateAllObservables();
+				LogicHandler.this.setCurrentReportsList(response);
+				LogicHandler.this.updateAllObservables();
 				calendar.updateObservable();
 			}
 
@@ -243,8 +241,8 @@ public class LogicHandler {
 		RestClient.build(new SuccessFunction<List<ActivityReport>>() {
 			@Override
 			public void onSuccess(Method method, List<ActivityReport> response) {
-				self.setCurrentReportsList(response);
-				self.updateAllObservables();
+				LogicHandler.this.setCurrentReportsList(response);
+				LogicHandler.this.updateAllObservables();
 			}
 
 			@Override
@@ -275,7 +273,7 @@ public class LogicHandler {
 				RestClient.build(new SuccessFunction<ActivityReport>() {
 					@Override
 					public void onSuccess(Method method, ActivityReport response) {
-						self.updateAllObservables();
+						LogicHandler.this.updateAllObservables();
 						NotifyHelper.successMessage("Report saved");
 					}
 
@@ -307,8 +305,8 @@ public class LogicHandler {
 			RestClient.build(new SuccessFunction<ActivityReportTemplate>() {
 				@Override
 				public void onSuccess(Method method, ActivityReportTemplate response) {
-					self.loadTemplates();
-					self.updateAllObservables();
+					LogicHandler.this.loadTemplates();
+					LogicHandler.this.updateAllObservables();
 					GWT.log("Template saved");
 					NotifyHelper.successMessage("Template saved successfully!");
 				}
@@ -336,8 +334,8 @@ public class LogicHandler {
 			RestClient.build(new SuccessFunction<PseudoJob>() {
 				@Override
 				public void onSuccess(Method method, PseudoJob response) {
-					self.loadPseudoJobs();
-					self.updateAllObservables();
+					LogicHandler.this.loadPseudoJobs();
+					LogicHandler.this.updateAllObservables();
 					NotifyHelper.successMessage("PseudoJob saved successfully!");
 				}
 
@@ -364,8 +362,8 @@ public class LogicHandler {
 				@Override
 				public void onSuccess(Method method, List<ActivityReportTemplate> response) {
 					GWT.log("loaded templates");
-					self.setTemplateList(response);
-					self.updateAllObservables();
+					LogicHandler.this.setTemplateList(response);
+					LogicHandler.this.updateAllObservables();
 
 				}
 				@Override
@@ -390,8 +388,8 @@ public class LogicHandler {
 				@Override
 				public void onSuccess(Method method, List<PseudoJob> response) {
 					GWT.log("loaded all pseudoJobs successfully");
-					self.setPseudoJobList(response);
-					self.updateAllObservables();
+					LogicHandler.this.setPseudoJobList(response);
+					LogicHandler.this.updateAllObservables();
 				}
 
 				@Override
@@ -415,8 +413,8 @@ public class LogicHandler {
 				@Override
 				public void onSuccess(Method method, List<Job> response) {
 					GWT.log("loaded all jobs successfully");
-					self.setJobList(response);
-					self.updateAllObservables();
+					LogicHandler.this.setJobList(response);
+					LogicHandler.this.updateAllObservables();
 				}
 
 				@Override
@@ -440,8 +438,8 @@ public class LogicHandler {
 			RestClient.build(new SuccessFunction<List<User>>() {
 				@Override
 				public void onSuccess(Method method, List<User> response) {
-					self.setUserList(response);
-					self.updateAllObservables();
+					LogicHandler.this.setUserList(response);
+					LogicHandler.this.updateAllObservables();
 				}
 
 				@Override
@@ -465,8 +463,8 @@ public class LogicHandler {
 				RestClient.build(new SuccessFunction<List<User>>() {
 					@Override
 					public void onSuccess(Method method, List<User> response) {
-						self.setUserList(response);
-						self.updateAllObservables();
+						LogicHandler.this.setUserList(response);
+						LogicHandler.this.updateAllObservables();
 					}
 
 					@Override
@@ -492,8 +490,8 @@ public class LogicHandler {
 			RestClient.build(new SuccessFunction<List<Integer>>() {
 				@Override
 				public void onSuccess(Method method, List<Integer> response) {
-					self.setUtilizationList(response);
-					self.updateAllObservables();
+					LogicHandler.this.setUtilizationList(response);
+					LogicHandler.this.updateAllObservables();
 				}
 
 				@Override
