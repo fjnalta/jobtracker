@@ -2,6 +2,7 @@ package net.greenbeansit.jobtracker.client.components;
 
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.i18n.client.DateTimeFormat;
+import net.greenbeansit.jobtracker.client.components.widgets.UtilizationWidget;
 import net.greenbeansit.jobtracker.client.components.widgets.calendar.CalendarWidget;
 import net.greenbeansit.jobtracker.client.utils.rest.NotifyHelper;
 import net.greenbeansit.jobtracker.client.utils.rest.RestClient;
@@ -27,6 +28,8 @@ import java.util.List;
 public class LogicHandler {
 
 	private ActivityReport currentReport;
+	private UtilizationWeek currentCapacityReport;
+
 	private List<LogicObservable> list = new ArrayList<>();
 	private List<ActivityReport> currentReportsList = new ArrayList<ActivityReport>();
 	private List<Job> jobList = new ArrayList<Job>();
@@ -37,8 +40,15 @@ public class LogicHandler {
 
 	private Job currentJob;
 	private PseudoJob currentPJob;
+	private UtilizationWeek currentUtilizationWeek;
 
 	private ActivityReportTemplate currentTemplate;
+
+
+	private List<UtilizationWeek> utilizationWeekList = new ArrayList<UtilizationWeek>();
+
+
+
 	private CalendarWidget calendar;
 
 	/**
@@ -132,11 +142,37 @@ public class LogicHandler {
 	}
 
 	/**
+	 * sets the current active activity Report this function is needed for showing the current selected report and the
+	 * stored information in it on all widgets
+	 * @param report report to be set as active
+	 */
+	public void setCurrentReport(UtilizationWeek report) {
+		this.currentCapacityReport = report;
+		UtilizationWeek tempJob = new UtilizationWeek();
+		for(UtilizationWeek j : utilizationWeekList){
+			if(j.equals(tempJob)){
+				this.setCurrentUtilizationWeek(j);
+			}
+		}
+		UtilizationWeek tempTemplate = new UtilizationWeek();
+		tempTemplate.setAuthor(report.getAuthor());
+		tempTemplate.setText(report.getText());
+		tempTemplate.setPossibility(report.getPossibility());
+		GWT.log("current selected report :" + report.toString());
+		this.currentCapacityReport = tempTemplate;
+		this.updateAllObservables();
+	}
+
+	/**
 	 * function for getting the currently loaded reports
 	 * @return List<ActivityReport> object with the current loaded reports
      */
 	public List<ActivityReport> getCurrentReportsList() {
 		return currentReportsList;
+	}
+
+	public List<UtilizationWeek> getCurrentCapacityReportsList(){
+		return utilizationWeekList;
 	}
 
 	/**
@@ -508,6 +544,14 @@ public class LogicHandler {
      */
 	public void setCurrentJob(Job currentJob) {
 		this.currentJob = currentJob;
+	}
+
+	/**
+	 * set the current selected {@link Job}
+	 * @param currentJob {@link Job} object to be set
+	 */
+	public void setCurrentUtilizationWeek(UtilizationWeek currentJob) {
+		this.currentUtilizationWeek = currentJob;
 	}
 
 	/**
