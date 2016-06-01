@@ -29,6 +29,7 @@ public class JerseyApplication extends SpringBootServletInitializer
 			SpringApplicationBuilder application)
 	{
 		return application.sources(JerseyApplication.class);
+
 	}
 
 	public static void main(String[] args)

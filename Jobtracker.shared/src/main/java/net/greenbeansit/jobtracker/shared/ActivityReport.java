@@ -7,7 +7,7 @@ import java.util.Date;
  * Shared representation of an Activity (Taetigkeitsbericht (TB)). Is used in
  * frontend logic and used as a medium between frontend and backend.
  * 
- * @authorId Mike Hukiewitz & Alex
+ * @author Mike Hukiewitz & Alex
  *
  */
 public class ActivityReport implements Serializable
@@ -76,21 +76,37 @@ public class ActivityReport implements Serializable
 		this.setBreakTime(breakTime);
 	}
 
+	/**
+	 * Method for getting the text attribute
+	 * @return String text of the activity report
+     */
 	public String getText()
 	{
 		return text;
 	}
 
+	/**
+	 * Method for setting the text attribute
+	 * @param text text to set for the ActivityReport
+     */
 	public void setText(String text)
 	{
 		this.text = text;
 	}
 
+	/**
+	 * Method for getting the duration attribute in minutes
+	 * @return Integer of the duration attribute in minutes
+     */
 	public Integer getDuration()
 	{
 		return duration;
 	}
 
+	/**
+	 * Set the duration parameter with an Integer in minutes
+	 * @param duration Integer value of the duration in minutes to be set
+     */
 	public void setDuration(Integer duration)
 	{
 		// if (duration < 1 || this.startTime + duration > 1440)
@@ -98,24 +114,37 @@ public class ActivityReport implements Serializable
 		this.duration = duration;
 	}
 
+	/**
+	 *
+	 * @return the Interger value of the attribute startTime in minutes
+     */
 	public Integer getStartTime()
 	{
 		return startTime;
 	}
 
+	/**
+	 * set the value of the attribute startTime in minutes
+	 * @param startTime the Integer value to be set
+     */
 	public void setStartTime(Integer startTime)
 	{
-		// if (startTime >= 1440)
-		// throw (new IllegalArgumentException());
-
 		this.startTime = startTime;
 	}
 
+	/**
+	 *get the Integer value of the endTime. This value is calculated out of the startTime and the durartion value
+	 * @return Integer value of the endTime in minutes
+     */
 	public Integer getEndTime()
 	{
 		return startTime + duration;
 	}
 
+	/**
+	 * set the endTime of the report in minutes
+	 * @param endTime Integer value in minutes of the endTime
+     */
 	public void setEndTime(Integer endTime)
 	{
 		if (this.startTime != null)
@@ -124,11 +153,19 @@ public class ActivityReport implements Serializable
 		// throw (new IllegalArgumentException());
 	}
 
+	/**
+	 * method for getting the authorID
+	 * @return Integer value of authorId
+     */
 	public Integer getAuthor()
 	{
 		return authorId;
 	}
 
+	/**
+	 * set the corresponding author with the authorID
+	 * @param authorId Integer value of an athorID to be set
+     */
 	public void setAuthor(Integer authorId)
 	{
 		if (authorId == null)
@@ -136,11 +173,19 @@ public class ActivityReport implements Serializable
 		this.authorId = authorId;
 	}
 
+	/**
+	 * get the date of the report
+	 * @return Date object with the date of the report
+     */
 	public Date getDate()
 	{
 		return date;
 	}
 
+	/**
+	 * Set the date of the report
+	 * @param date Date object with the date, the report will be saved to
+     */
 	public void setDate(Date date)
 	{
 		this.date = date;
@@ -152,11 +197,19 @@ public class ActivityReport implements Serializable
 		this.date = new Date(year - 1900, month - 1, day);
 	}
 
+	/**
+	 * get the breaktime in minutes
+	 * @return Integer value of the breakTime in minutes
+     */
 	public Integer getBreakTime()
 	{
 		return breakTime;
 	}
 
+	/**
+	 * set the breakTime in minutes
+	 * @param breakTime Integer value of the breakTime in minutes
+     */
 	public void setBreakTime(Integer breakTime)
 	{
 //		if (breakTime < 0)
@@ -164,52 +217,94 @@ public class ActivityReport implements Serializable
 		this.breakTime = breakTime;
 	}
 
+	/**
+	 * get the ID of the report
+	 * @return Integer value of the id of this report
+     */
 	public Integer getId()
 	{
 		return id;
 	}
 
+	/**
+	 * set the ID of the report
+	 * @param id the Integer value of the ID
+     */
 	public void setId(Integer id)
 	{
 		this.id = id;
 	}
 
+	/**
+	 * get the corresponding TaskID which is associated with this report
+	 * @return Interger taskID
+     */
 	public Integer getTaskId()
 	{
 		return taskId;
 	}
 
+	/**
+	 * set the corresponding taskID to this report
+	 * @param taskId Integer value of the taskID
+     */
 	public void setTaskId(Integer taskId)
 	{
 		this.taskId = taskId;
 	}
 
+	/**
+	 * get the posNr value corresponding with this report
+	 * @return Integer value of the posNr
+     */
 	public Integer getPosNr()
 	{
 		return posNr;
 	}
 
+	/**
+	 * set the corresponding posNr for this report
+	 * @param jobPosNr Integer value of the posNr
+     */
 	public void setPosNr(Integer jobPosNr)
 	{
 		this.posNr = jobPosNr;
 	}
 
+	/**
+	 * get the corresponding jobNr of this report
+	 * @return Integer value of the corresponding jobNr
+     */
 	public Integer getJobNr()
 	{
 		return jobNr;
 	}
 
+	/**
+	 * set the corrresponding jobNr for this report
+	 * @param jobNr Interger value of the corresponding jobNr
+     */
 	public void setJobNr(Integer jobNr)
 	{
 		this.jobNr = jobNr;
 	}
-	
+
+	/**
+	 * To sting method, returns the {id + taskid + jobNr + posNr + authorId + text + date + startTime + dureaition+
+	 * breakTime }
+	 * @return String object with all values of the report
+     */
 	@Override
 	public String toString()
 	{
 		return "{id:"+id+", taskId:"+taskId+", jobNr:"+jobNr+", posNr:"+posNr+", authorId:"+authorId+", text:"+text+", date:"+date.toString()+", startTime:"+startTime+", duration:"+duration+", breakTime:"+breakTime+"}";
 	}
-	
+
+	/**
+	 * Method for comparing two reports between each other
+	 * @param obj other report object you want to compare
+	 * @return true if reports are equal, false if not
+     */
 	public boolean equals(Object obj) {
 		if(obj == null)
 			return false;
