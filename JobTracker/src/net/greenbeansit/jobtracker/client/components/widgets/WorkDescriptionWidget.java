@@ -30,15 +30,15 @@ import net.greenbeansit.jobtracker.shared.ActivityReportTemplate;
  *
  */
 
-public class WorkDiscriptionWidget extends Composite implements LogicObservable
+public class WorkDescriptionWidget extends Composite implements LogicObservable
 {		
 
-	private static WorkDiscriptionWidgetUiBinder uiBinder = 
-			GWT.create(WorkDiscriptionWidgetUiBinder.class);
+	private static WorkDescriptionWidgetUiBinder uiBinder =
+			GWT.create(WorkDescriptionWidgetUiBinder.class);
 
-	interface WorkDiscriptionWidgetUiBinder extends UiBinder<Widget, WorkDiscriptionWidget>
+	interface WorkDescriptionWidgetUiBinder extends UiBinder<Widget, WorkDescriptionWidget>
 	{
-		
+
 	}
 	
 	@UiField 
@@ -64,7 +64,7 @@ public class WorkDiscriptionWidget extends Composite implements LogicObservable
 	 * selectTemplate Select object
 	 * Then the constructor calls the {@link LogicHandler#loadTemplates()} method load the Templates from the Backend
 	 */
-	public WorkDiscriptionWidget()
+	public WorkDescriptionWidget()
 	{	
 		initWidget(uiBinder.createAndBindUi(this));
 		handler.addObservable(this);

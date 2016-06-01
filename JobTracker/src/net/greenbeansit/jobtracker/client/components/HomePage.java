@@ -10,7 +10,7 @@ import com.google.gwt.user.client.ui.Widget;
 
 import net.greenbeansit.jobtracker.client.components.widgets.JobsWidget;
 import net.greenbeansit.jobtracker.client.components.widgets.UtilizationWidget;
-import net.greenbeansit.jobtracker.client.components.widgets.WorkDiscriptionWidget;
+import net.greenbeansit.jobtracker.client.components.widgets.WorkDescriptionWidget;
 import net.greenbeansit.jobtracker.client.components.widgets.calendar.CalendarWidget;
 import net.greenbeansit.jobtracker.shared.ActivityReport;
 import net.greenbeansit.jobtracker.shared.Job;
@@ -49,7 +49,7 @@ public class HomePage extends Composite
 
 	@UiField
 	Row						rowWork;
-	WorkDiscriptionWidget	workWidget;
+	WorkDescriptionWidget workWidget;
 
 	private Job				currentJob;
 	private Job[]			allJobs;
@@ -77,7 +77,7 @@ public class HomePage extends Composite
 		jobsWidget = new JobsWidget();
 		rowJobs.add(jobsWidget);
 
-		workWidget = new WorkDiscriptionWidget();
+		workWidget = new WorkDescriptionWidget();
 		rowWork.add(workWidget);
 	}
 

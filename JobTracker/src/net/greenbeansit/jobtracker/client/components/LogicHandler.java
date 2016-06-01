@@ -8,13 +8,13 @@ import net.greenbeansit.jobtracker.client.utils.rest.RestClient;
 import net.greenbeansit.jobtracker.client.utils.rest.RestClient.SuccessFunction;
 import net.greenbeansit.jobtracker.shared.*;
 import org.fusesource.restygwt.client.Method;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+
 /**
- * Controller class which provide CRUD funtionallity for the HomePage including
+ * Controller class which provide CRUD functionality for the HomePage including
  * save new Reports, new ReportTemplates, and load Reports from backend. Also it coordinates 
  * and synchronizes all widgets on the HomePage
  *
