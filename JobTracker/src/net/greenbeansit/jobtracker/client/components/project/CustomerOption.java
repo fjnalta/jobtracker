@@ -10,7 +10,7 @@ class CustomerOption extends Option
 	
 	public CustomerOption(Customer customer)
 	{
-		this.setTitle(customer.getName());
+		this.setText(customer.getName());
 		this.customer = customer;
 	}
 	

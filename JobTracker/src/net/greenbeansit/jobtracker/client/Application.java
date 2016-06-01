@@ -18,7 +18,7 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 
 import net.greenbeansit.jobtracker.client.components.HomePage;
-import net.greenbeansit.jobtracker.client.components.kapa.KapaPage;
+import net.greenbeansit.jobtracker.client.components.kapa.CapacityPage;
 import net.greenbeansit.jobtracker.client.components.manager.ManagerPage;
 import net.greenbeansit.jobtracker.client.components.manager.detail.ManagerEmployeeDetailPage;
 import net.greenbeansit.jobtracker.client.components.project.ProjectPage;
@@ -171,7 +171,7 @@ public class Application extends Composite
 		{
 			navKapa.setActive(true);
 			removeActiveContentContainer();
-			addWidgetAsContentPage(new KapaPage());
+			addWidgetAsContentPage(new CapacityPage());
 		}
 
 		private void loadHomePage(String[] addressSplit)

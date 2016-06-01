@@ -1,20 +1,21 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:h="urn:import:org.gwtbootstrap3.client.ui.html"
 	xmlns:b="urn:import:org.gwtbootstrap3.client.ui">
-	<ui:style>
+	<ui:style type="net.greenbeansit.jobtracker.client.components.project.ProjectBudgetBar.ProjectBudgetBarStyle">
 	.container {
-		padding: 5px;
+		padding: 5px 0px;
 		height: 30px;
 	}
 	
 	.spanName {
-		width: 30%;
+		padding-left: 5px;
+		width: 45%;
 		overflow: hidden;
 		float: left;
 	}
 	
 	.barBudgetContainer {
-		width: 60%;
+		width: 45%;
 		height: 80%;
 		margin-top: auto;
 		margin-bottom: auto;
@@ -25,21 +26,41 @@
 		display: inline-block;
 	}
 	
+	.barBudget {
+		margin: 0;
+		overflow: hidden;
+	}
+	
 	.spanBudget {
 		width: 10%;
 		overflow: hidden;
 		float: right;
 		text-align: right;
 	}
+	.iconLock-base {
+		width: 10%;
+		display: inline-block;
+		float: right;
+		padding: 3px 5px 0px 5px;
+		text-align: center;
+		overflow: hidden;
+	}
+	.iconLocked {
+		color: red;
+	}
+	.iconUnLocked {
+		color: green;
+	}
 	</ui:style>
 	<h:ClearFix addStyleNames="{style.container}" ui:field="container">
 		<h:Span ui:field="spanName" addStyleNames="{style.spanName}" />
 		<h:ClearFix addStyleNames="{style.barBudgetContainer}">
-			<b:Progress>
-				<b:ProgressBar ui:field="barBudget"/>
+			<b:Progress addStyleNames="{style.barBudget}">
+				<b:ProgressBar ui:field="barBudget" />
 			</b:Progress>
 		</h:ClearFix>
 		<h:Span ui:field="spanBudget" addStyleNames="{style.spanBudget}" />
+		<b:Icon ui:field="iconLocked" type="LOCK" addStyleNames="{style.iconLock-base}"/>
 	</h:ClearFix>
 </ui:UiBinder>
 

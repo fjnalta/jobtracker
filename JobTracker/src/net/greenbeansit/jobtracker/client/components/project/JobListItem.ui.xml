@@ -6,35 +6,13 @@
 	.container {
 		display: inline-block;
 	}
-	.button {
-		border-color: transparent;
-		background: white;
-		color: lightgray;
-		width: 10%;
-		padding: 0;
-		margin: 0;
-	}
-	
-	.button :HOVER {
-		border-color: gray;
-		background: white;
-		color: gray;
-	}
-	
-	.button :ACTIVE {
-		border-color: gray;
-		background: gray;
-		color: darkgray;
-	}
 	
 	.anchor {
-		width: 90%;
+		width: 100%;
 		display: inline-block;
 	}
 	</ui:style>
 	<h:ClearFix addStyleNames="{style.container}">
 		<gwtbootstrap3:Anchor ui:field="anchor" addStyleNames="{style.anchor}"/>
-		<gwtbootstrap3:Button icon="LOCK" ui:field="button" addStyleNames="{style.button}"
-			dataLoadingText="..." />
 	</h:ClearFix>
 </ui:UiBinder> 

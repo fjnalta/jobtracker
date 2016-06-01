@@ -46,5 +46,12 @@ interface ProjectPageHelperService
 	 * @return a list of {@link Customer}s.
 	 */
 	List<Customer> getCustomers();
+	
+	/**
+	 * Gets the percentag of the of the used budget of the following job.
+	 * 
+	 * @param job
+	 * @return a value between 100 and 0.
+	 */
+	double getUsedBudgetPercent(Job job);
 }
-
