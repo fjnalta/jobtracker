@@ -31,8 +31,6 @@ public class LogicHandler {
 	private List<ActivityReport> currentReportsList = new ArrayList<ActivityReport>();
 	private List<Job> jobList = new ArrayList<Job>();
 	private List<ActivityReportTemplate> templateList = new ArrayList<ActivityReportTemplate>();
-	private List<User> userList = new ArrayList<User>();
-	private List<Job> selectedJobs = new ArrayList<Job>();
 	private List<PseudoJob> pseudoJobList = new ArrayList<PseudoJob>();
 	private List<Integer> utilizationList = new ArrayList<Integer>();
 	private User currentUser;
@@ -431,56 +429,6 @@ public class LogicHandler {
 	}
 
 	/**
-	 * Method for loading All Users from the Backend
-	 */
-	public void loadUsers(){
-		try {
-			RestClient.build(new SuccessFunction<List<User>>() {
-				@Override
-				public void onSuccess(Method method, List<User> response) {
-					LogicHandler.this.setUserList(response);
-					LogicHandler.this.updateAllObservables();
-				}
-
-				@Override
-				public void onFailure(Method method, Throwable exception) {
-					NotifyHelper.errorMessage(exception.getMessage());
-					GWT.log(exception.getMessage());
-				}
-
-			}).getEmployeeService().getAllUser();
-		} catch (Exception e) {
-			GWT.log(e.getMessage());
-		}
-	}
-	
-	/**
-	 * Load all Users based on the selected Jobs
-	 */
-	public void loadUsersForSelectedJobs(){
-		for(Job j : selectedJobs) {
-			try {
-				RestClient.build(new SuccessFunction<List<User>>() {
-					@Override
-					public void onSuccess(Method method, List<User> response) {
-						LogicHandler.this.setUserList(response);
-						LogicHandler.this.updateAllObservables();
-					}
-
-					@Override
-					public void onFailure(Method method, Throwable exception) {
-						NotifyHelper.errorMessage(exception.getMessage());
-						GWT.log(exception.getMessage());
-					}
-
-				}).getEmployeeService().getUsersToJob(j.getJobNr(), j.getPosNr());
-			} catch (Exception e) {
-				GWT.log(e.getMessage());
-			}
-		}
-	}
-
-	/**
 	 * Method for loading the utilization for a specified month from the backend
 	 * @param year year of the utilization to show
 	 * @param month month of the utilization to show
@@ -539,14 +487,6 @@ public class LogicHandler {
 	}
 
 	/**
-	 * get the currently loaded userList
-	 * @return List<User>
-     */
-	public List<User> getUsers(){
-		return this.userList;
-	}
-
-	/**
 	 * get the current selected {@link Job}
 	 * @return currently selected {@link Job} object
      */
@@ -587,22 +527,6 @@ public class LogicHandler {
 	}
 
 	/**
-	 * return the actual selectedJobs
-	 * @return List<Job> with the current selected Jobs
-     */
-	public List<Job> getSelectedJobs() {
-		return selectedJobs;
-	}
-
-	/**
-	 * set the current selected Jobs
-	 * @param selectedJobs List<Job> with the selected jobs
-     */
-	public void setSelectedJobs(List<Job> selectedJobs) {
-		this.selectedJobs = selectedJobs;
-	}
-
-	/**
 	 * gets the calendar widget corresponding to the logic handler
 	 * @return {@link CalendarWidget} object
      */
@@ -616,22 +540,6 @@ public class LogicHandler {
      */
 	public void setCalendar(CalendarWidget calendar) {
 		this.calendar = calendar;
-	}
-
-	/**
-	 * get the loaded userlist
-	 * @return List<User> object with all loaded {@link User}
-	 */
-	public List<User> getUserList() {
-		return userList;
-	}
-
-	/**
-	 * set the users list
-	 * @param userList List<User> object to set
-     */
-	public void setUserList(List<User> userList) {
-		this.userList = userList;
 	}
 
 	/**
