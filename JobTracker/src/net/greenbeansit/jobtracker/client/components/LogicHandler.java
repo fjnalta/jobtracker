@@ -2,6 +2,7 @@ package net.greenbeansit.jobtracker.client.components;
 
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.i18n.client.DateTimeFormat;
+import net.greenbeansit.jobtracker.client.components.kapa.widgets.CapacityCalendarWidget;
 import net.greenbeansit.jobtracker.client.components.widgets.calendar.CalendarWidget;
 import net.greenbeansit.jobtracker.client.utils.rest.NotifyHelper;
 import net.greenbeansit.jobtracker.client.utils.rest.RestClient;
@@ -45,7 +46,7 @@ public class LogicHandler {
 	private List<UtilizationWeek> utilizationWeekList = new ArrayList<UtilizationWeek>();
 
 
-
+	private CapacityCalendarWidget capacityCalendar;
 	private CalendarWidget calendar;
 
 	/**
@@ -622,6 +623,14 @@ public class LogicHandler {
      */
 	public void setCalendar(CalendarWidget calendar) {
 		this.calendar = calendar;
+	}
+
+	public void setCalendar(CapacityCalendarWidget calendar) {
+		this.capacityCalendar = calendar;
+	}
+
+	public CapacityCalendarWidget getCapacityCalendar(){
+		return this.capacityCalendar;
 	}
 
 	/**
