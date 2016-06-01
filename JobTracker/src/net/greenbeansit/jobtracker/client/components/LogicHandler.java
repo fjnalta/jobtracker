@@ -159,14 +159,6 @@ public class LogicHandler {
 		return jobList;
 	}
 
-	public List<PseudoJob> getPseudoJobList(){
-		return pseudoJobList;
-	}
-
-	public void setPseudoJobList(List<PseudoJob> pJobList) {
-		this.pseudoJobList = pJobList;
-	}
-
 	/**
 	 * function for setting the currently loaded jobs
 	 * @param jobList List<Job> object with the current loaded jobs
