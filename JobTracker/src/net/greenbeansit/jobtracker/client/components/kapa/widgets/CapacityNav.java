@@ -7,6 +7,8 @@ import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
+import com.google.gwt.user.client.Timer;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 import net.greenbeansit.jobtracker.client.components.LogicObservable;
@@ -37,7 +39,7 @@ public class CapacityNav extends Composite implements LogicObservable {
     Select selectJob;
 
     @UiField
-    OptGroup myJobsOptGroup,allJobsOptGroup;
+    OptGroup myJobsOptGroup, allJobsOptGroup;
 
     @UiField
     Button buttonUp, buttonDown, buttonSave;
@@ -49,8 +51,7 @@ public class CapacityNav extends Composite implements LogicObservable {
     Slider mySlider;
 
     @UiHandler("mySlider")
-    void onSlide(SlideEvent<Double> event)
-    {
+    void onSlide(SlideEvent<Double> event) {
         possibilityPercentage.setText(event.getValue().toString());
     }
 
@@ -70,14 +71,14 @@ public class CapacityNav extends Composite implements LogicObservable {
     }
 
     @UiHandler("buttonSave")
-    public void savePseudoJob(final ClickEvent e){
+    public void savePseudoJob(final ClickEvent e) {
         PseudoJob template = new PseudoJob();
-        if(textIdentifier.getText().length()>0){
+        if (textIdentifier.getText().length() > 0) {
             template.setName(textIdentifier.getText());
             template.setAuthor(handler.getCurrentUser().getId());
             template.setId(0);
             handler.savePseudoJob(template);
-        }else{
+        } else {
             NotifyHelper.errorMessage("Fill missing fields");
         }
     }
@@ -88,26 +89,38 @@ public class CapacityNav extends Composite implements LogicObservable {
     private static KapaNavUiBinder uiBinder = GWT.create(KapaNavUiBinder.class);
 
     private List<Job> jobList = new ArrayList<Job>();
+    private List<PseudoJob> pJobList = new ArrayList<PseudoJob>();
+
+    private PseudoJob currentPJob = null;
     private Job currentJob = null;
 
     public CapacityNav() {
         initWidget(uiBinder.createAndBindUi(this));
-        initialize();
 
         handler.addObservable(this);
         handler.updateObservable(this);
-        selectJob.addValueChangeHandler(new ValueChangeHandler<String>() {
 
+        Timer timer = new Timer() {
             @Override
-            public void onValueChange(ValueChangeEvent<String> event) {
-                currentJob = ((SelectJobOption) selectJob.getSelectedItem()).getJob();
-                notifyLogicHandler();
+            public void run() {
+                initialize();
+                selectJob.addValueChangeHandler(new ValueChangeHandler<String>() {
+                    @Override
+                    public void onValueChange(ValueChangeEvent<String> event) {
+                        currentJob = ((SelectJobOption) selectJob.getSelectedItem()).getJob();
+                        notifyLogicHandler();
+                    }
+                });
             }
-        });
+        };
+
+        timer.schedule(100);
+
         handler.loadJobs();
+        handler.loadPseudoJobs();
     }
 
-    private void initialize(){
+    private void initialize() {
         buttonDown.setIcon(IconType.ARROW_DOWN);
         buttonUp.setIcon(IconType.ARROW_UP);
         possibilityPercentage.setText(mySlider.getValue().toString());
@@ -120,30 +133,52 @@ public class CapacityNav extends Composite implements LogicObservable {
         }
     }
 
+    private void addPseudoJobs(List<PseudoJob> pJobList) {
+        for (PseudoJob currentPJob : pJobList) {
+            SelectJobOption tempOption = new SelectJobOption(currentPJob);
+            myJobsOptGroup.add(tempOption);
+        }
+    }
+
     @Override
     public void updateObservable() {
         allJobsOptGroup.clear();
+        myJobsOptGroup.clear();
+
         this.jobList = handler.getJobList();
         addJobs(this.jobList);
         currentJob = handler.getCurrentJob();
         if (currentJob != null) {
+            for (Option option : selectJob.getItems()) {
+                ((SelectJobOption) option).setSelected(false);
+                if (((SelectJobOption) option).getJob().equals(currentJob)) {
+                    option.setSelected(true);
+                }
+            }
+        }
+
+        this.pJobList = handler.getPseudoJobList();
+        addPseudoJobs(this.pJobList);
+        currentPJob = handler.getCurrentPseudoJob();
+        if (currentPJob != null) {
             for (Option opt : selectJob.getItems()) {
                 ((SelectJobOption) opt).setSelected(false);
-                if (((SelectJobOption) opt).getJob().equals(currentJob)) {
+                if (((SelectJobOption) opt).getPjob().equals(currentPJob)) {
                     opt.setSelected(true);
                 }
             }
         }
+
         selectJob.refresh();
     }
 
     @Override
     public void notifyLogicHandler() {
-        if(currentJob != null){
+        if (currentJob != null) {
             handler.setCurrentJob(currentJob);
         }
-        else{
-            NotifyHelper.errorMessage("Please select job");
-        }
+//        if (currentPJob != null) {
+//            handler.setCurrentPJob(currentPJob);
+//        }
     }
 }

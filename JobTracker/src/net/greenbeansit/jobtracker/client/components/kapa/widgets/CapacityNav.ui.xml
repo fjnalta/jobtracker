@@ -61,6 +61,25 @@
                         <b:TextArea placeholder="Bitte eintragen..." b:id="projectDesc"
                                     addStyleNames="{style.textArea}"/>
                     </b:FormGroup>
+                    <b:FormGroup>
+                        <b:FormLabel for="slider">Wahrscheinlichkeit</b:FormLabel>
+                        <b:Column size="XS_9,SM_9,MD_9,LG_9" addStyleNames="{style.possibilitySlider}">
+                            <b3:Slider b:id="slider" ui:field="mySlider" width="100%" enabled="true" min="0" max="100"
+                                       step="25" value="50"/>
+                        </b:Column>
+                        <b:Column size="XS_2,SM_2,MD_2,LG_2">
+                            <b:TextBox b:id="percentagePossibility" ui:field="possibilityPercentage" readOnly="true"
+                                       addStyleNames="{style.buttonText}"/>
+                        </b:Column>
+                        <b:Column size="XS_1,SM_1,MD_1,LG_1" addStyleNames="{style.smallColumn}">
+                            <b:VerticalButtonGroup>
+                                <b:Button size="EXTRA_SMALL" addStyleNames="{style.buttonTop}"
+                                          ui:field="buttonUp"/>
+                                <b:Button size="EXTRA_SMALL" addStyleNames="{style.buttonDown}"
+                                          ui:field="buttonDown"/>
+                            </b:VerticalButtonGroup>
+                        </b:Column>
+                    </b:FormGroup>
                 </b:FieldSet>
             </b:Form>
         </b:TabPane>
@@ -78,24 +97,5 @@
             </b:Form>
         </b:TabPane>
     </b:TabContent>
-    <b:FormGroup>
-        <b:FormLabel for="slider">Wahrscheinlichkeit</b:FormLabel>
-        <b:Column size="XS_9,SM_9,MD_9,LG_9" addStyleNames="{style.possibilitySlider}">
-            <b3:Slider b:id="slider" ui:field="mySlider" width="100%" enabled="true" min="0" max="100"
-                       step="25" value="50"/>
-        </b:Column>
-        <b:Column size="XS_2,SM_2,MD_2,LG_2">
-            <b:TextBox b:id="percentagePossibility" ui:field="possibilityPercentage" readOnly="true"
-                       addStyleNames="{style.buttonText}"/>
-        </b:Column>
-        <b:Column size="XS_1,SM_1,MD_1,LG_1" addStyleNames="{style.smallColumn}">
-            <b:VerticalButtonGroup>
-                <b:Button size="EXTRA_SMALL" addStyleNames="{style.buttonTop}"
-                          ui:field="buttonUp"/>
-                <b:Button size="EXTRA_SMALL" addStyleNames="{style.buttonDown}"
-                          ui:field="buttonDown"/>
-            </b:VerticalButtonGroup>
-        </b:Column>
-    </b:FormGroup>
     </h:ClearFix>
 </ui:UiBinder>

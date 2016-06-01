@@ -40,6 +40,8 @@ public class LogicHandler {
 
 
 	private Job currentJob;
+	private PseudoJob currentPJob;
+
 	private ActivityReportTemplate currentTemplate;
 	private CalendarWidget calendar;
 
@@ -139,6 +141,14 @@ public class LogicHandler {
 
 	public List<Job> getJobList() {
 		return jobList;
+	}
+
+	public List<PseudoJob> getPseudoJobList(){
+		return pseudoJobList;
+	}
+
+	public void setPseudoJobList(List<PseudoJob> pJobList) {
+		this.pseudoJobList = pJobList;
 	}
 
 	public void setJobList(List<Job> jobList) {
@@ -342,19 +352,16 @@ public class LogicHandler {
 	 */
 
 	public void loadPseudoJobs() {
-		this.updateAllObservables();
 		try {
 			RestClient.build(new SuccessFunction<List<PseudoJob>>() {
 				@Override
 				public void onSuccess(Method method, List<PseudoJob> response) {
 					self.pseudoJobList = response;
-					self.updateAllObservables();
 				}
 
 				@Override
 				public void onFailure(Method method, Throwable exception) {
 					NotifyHelper.errorMessage(exception.getMessage());
-					GWT.log(exception.getMessage());
 				}
 
 			}).getEmployeeService().getAllPseudoJobs(currentUser.getId());
@@ -491,6 +498,14 @@ public class LogicHandler {
 	
 	public Job getCurrentJob() {
 		return currentJob;
+	}
+
+	public PseudoJob getCurrentPseudoJob(){
+		return currentPJob;
+	}
+
+	public void setCurrentPJob(PseudoJob currentPJob) {
+		this.currentPJob = currentPJob;
 	}
 
 	public void setCurrentJob(Job currentJob) {
