@@ -228,28 +228,4 @@ public class ManagerPage extends Composite
 
 		selectJob.refresh();
 	}
-
-	/**
-	 * Extends the class {@link Option} and helps to display a {@link Job} in a
-	 * {@link Select} widget.
-	 * 
-	 * @author Max Blatt
-	 */
-	class JobSelectOption extends Option
-	{
-		private Job job;
-
-		public JobSelectOption(Job job)
-		{
-			this.job = job;
-
-			this.setText(job.getJobNr() + "|" + job.getPosNr() + "|"
-					+ job.getDesc());
-		}
-
-		public Job getJob()
-		{
-			return job;
-		}
-	}
 }
