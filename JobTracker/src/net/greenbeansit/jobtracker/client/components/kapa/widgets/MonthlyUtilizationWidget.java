@@ -23,11 +23,20 @@ import java.util.List;
 /**
  * Shows the utilization per month above the calendar
  *
- * @author Philipp
+ * @author Philipp Minges
  */
-public class MonthlyUtilizationWidget extends Composite {
+public class MonthlyUtilizationWidget extends Composite implements CalendarObserver {
 
     private static CalendarUtilizationWidgetUiBinder uiBinder = GWT.create(CalendarUtilizationWidgetUiBinder.class);
+
+    @Override
+    public void update() {
+    }
+
+    @Override
+    public void notifyHandler() {
+        calendarHandler.updateObserver(this);
+    }
 
     interface CalendarUtilizationWidgetUiBinder extends UiBinder<Widget, MonthlyUtilizationWidget> {
     }
@@ -44,13 +53,15 @@ public class MonthlyUtilizationWidget extends Composite {
     @UiHandler("leftButton")
     public void clickHandlerLeftButton(ClickEvent e) {
         createNewTimeline();
-//		calendarHandler.calendar.previous();
+		calendarHandler.calendar.previous();
+        notifyHandler();
     }
 
     @UiHandler("rightButton")
     public void clickHandlerRightButton(ClickEvent e) {
         createNewTimeline();
-//		calendarHandler.calendar.next();
+		calendarHandler.calendar.next();
+        notifyHandler();
     }
 
     // Path for the css File
@@ -59,7 +70,12 @@ public class MonthlyUtilizationWidget extends Composite {
     private String[] months = {"Jan", "Feb", "Mar", "Apr", "Mai", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dez"};
     private List<VerticalPanel> list;
 
+    private int year, month;
+
     public MonthlyUtilizationWidget() {
+
+        calendarHandler.addObserver(this);
+
         initWidget(uiBinder.createAndBindUi(this));
 
         Timer timer = new Timer() {
@@ -69,6 +85,9 @@ public class MonthlyUtilizationWidget extends Composite {
             }
         };
         timer.schedule(300);
+
+//        calendarHandler.calendar.getDate();
+
 
         this.leftButton.setIcon(IconType.ARROW_LEFT);
         this.rightButton.setIcon(IconType.ARROW_RIGHT);
@@ -88,6 +107,7 @@ public class MonthlyUtilizationWidget extends Composite {
             table.setWidget(1, i, new Button(months[i], new ClickHandler() {
                 @Override
                 public void onClick(ClickEvent event) {
+
                     // TODO - go to specific month
                 }
             }));

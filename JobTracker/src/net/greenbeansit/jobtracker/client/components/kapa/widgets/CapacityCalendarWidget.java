@@ -39,6 +39,8 @@ public class CapacityCalendarWidget extends Composite implements CalendarObserve
     @Override
     public void update() {
         fullcalendar.render();
+        GWT.log(fullcalendar.getDate().getMonth() +"");
+        month.setSubText(monthToString(fullcalendar.getDate().getMonth()));
     }
 
     @Override
@@ -48,7 +50,7 @@ public class CapacityCalendarWidget extends Composite implements CalendarObserve
 
     @Override
     public void updateObservable() {
-        addActvityReports(handler.getCurrentCapacityReportsList());
+//        addActvityReports(handler.getCurrentCapacityReportsList());
         fullcalendar.render();
     }
 
@@ -70,8 +72,9 @@ public class CapacityCalendarWidget extends Composite implements CalendarObserve
 
 
     public CapacityCalendarWidget() {
-//        calendarHandler.addObserver(this);
-//        handler.setCalendar(this);
+
+        calendarHandler.addObserver(this);
+        handler.setCalendar(this);
 
         initWidget(uiBinder.createAndBindUi(this));
 
@@ -131,8 +134,6 @@ public class CapacityCalendarWidget extends Composite implements CalendarObserve
 
                 calendarHandler.registerCalendar(fullcalendar);
                 fullcalendar.render();
-
-
                 month.setSubText(monthToString(fullcalendar.getDate().getMonth()));
             }
 
