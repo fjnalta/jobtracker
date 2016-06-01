@@ -64,7 +64,6 @@ public class HomePage extends Composite
 	public HomePage()
 	{
 		this.currentUserId = 1;
-
 		initWidget(uiBinder.createAndBindUi(this));
 		initialize();
 	}
