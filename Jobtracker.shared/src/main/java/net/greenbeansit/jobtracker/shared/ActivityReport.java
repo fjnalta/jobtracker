@@ -290,7 +290,7 @@ public class ActivityReport implements Serializable
 	}
 
 	/**
-	 * To sting method, returns the {id + taskid + jobNr + posNr + authorId + text + date + startTime + dureaition+
+	 * To sting method, returns the {id + taskid + jobNr + posNr + authorId + text + date + startTime + duration+
 	 * breakTime }
 	 * @return String object with all values of the report
      */
