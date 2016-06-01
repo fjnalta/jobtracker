@@ -19,7 +19,7 @@ import java.util.List;
  * and synchronizes all widgets on the HomePage
  *
  * The workflow: the widget call the function load<SOMETHING>. The load method then calls the updateObservable function
- * on sucess. The updateObservable function must implement the get<SOMETHING> function.
+ * on success. The updateObservable function must implement the get<SOMETHING> function.
  * 
  * @author Alexander Kirilyuk
  *

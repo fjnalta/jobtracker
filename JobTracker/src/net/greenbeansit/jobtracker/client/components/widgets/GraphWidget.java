@@ -30,6 +30,11 @@ import com.googlecode.gwt.charts.client.options.VAxis;
 import net.greenbeansit.jobtracker.client.components.LogicObservable;
 import net.greenbeansit.jobtracker.shared.ActivityReport;
 
+/**
+ * Widget for vizualization of the project budget
+ *
+ *@author Alexander Kirilyuk
+ */
 public class GraphWidget extends Composite implements LogicObservable {
 
 	private static GraphWidgetUiBinder uiBinder = GWT.create(GraphWidgetUiBinder.class);
@@ -37,10 +42,16 @@ public class GraphWidget extends Composite implements LogicObservable {
 	interface GraphWidgetUiBinder extends UiBinder<Widget, GraphWidget> {
 	}
 
+	/**
+	 * enum for the different view modes of the graph
+	 */
 	public static enum GraphMode {
 		WEEK, MONTH, YEAR
 	}
 
+	/**
+	 * standard constrcutor
+	 */
 	public GraphWidget() {
 		initWidget(uiBinder.createAndBindUi(this));
 		initialize();
@@ -91,8 +102,10 @@ public class GraphWidget extends Composite implements LogicObservable {
 
 	private GraphMode currentMode;
 
+	/**
+	 *function for initializing the graph widget
+	 */
 	private void initialize() {
-		// Window.alert("Initialize");
 
 		maxBudget = 400000;
 		currentBudgetUsed = 230000;
@@ -110,7 +123,6 @@ public class GraphWidget extends Composite implements LogicObservable {
 				tempDate.setYear(tempDate.getYear() - 1);
 				tempDate.setMonth(tempDate.getMonth() + i);
 				tempDate.setDate(tempDate.getDate() - a);
-				// Window.alert(tempDate.toGMTString());
 				temp.setDate(tempDate);
 				temp.setStartTime(1);
 				temp.setDuration(480);
@@ -118,7 +130,6 @@ public class GraphWidget extends Composite implements LogicObservable {
 				GWT.log(tempDate.toGMTString());
 			}
 		}
-		// Window.alert("Initialize");
 
 		startDate = new Date();
 		startDate.setHours(0);

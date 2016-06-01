@@ -20,6 +20,10 @@ import net.greenbeansit.jobtracker.client.components.LogicObservable;
 import net.greenbeansit.jobtracker.client.utils.rest.NotifyHelper;
 import net.greenbeansit.jobtracker.shared.Job;
 
+/**
+ * The Widget for selecting the different Jobs for a Report
+ * @author Alexander Kirilyuk
+ */
 public class JobsWidget extends Composite implements LogicObservable {
 
 	private static JobsWidgetUiBinder uiBinder = GWT.create(JobsWidgetUiBinder.class);
@@ -43,11 +47,16 @@ public class JobsWidget extends Composite implements LogicObservable {
 	private Job currentJob = null;
 	private List<Job> jobList = new ArrayList<Job>();
 
+	/**
+	 * standard constructor for the JobsWidget class
+	 * it initializes the uiBinder, registers itselft to the LogicHandler and add a valueChangeHandler to the liveSearch
+	 * selectJob
+	 * After that it calls the handler.loadJobs() to load the jobs from the backend
+	 */
 	public JobsWidget() {
 		initWidget(uiBinder.createAndBindUi(this));
 
 		handler.addObservable(this);
-		handler.updateObservable(this);
 		selectJob.addValueChangeHandler(new ValueChangeHandler<String>() {
 
 			@Override
@@ -59,6 +68,10 @@ public class JobsWidget extends Composite implements LogicObservable {
 		handler.loadJobs();
 	}
 
+	/**
+	 * method for loading the jobs to the LiveSearch
+	 * @param jobList List<Job> with the Jobs to load
+     */
 	private void addJobs(List<Job> jobList) {
 		for (Job currentJob : jobList) {
 			SelectJobOption tempOption = new SelectJobOption(currentJob);
@@ -66,6 +79,10 @@ public class JobsWidget extends Composite implements LogicObservable {
 		}
 	}
 
+	/**
+	 * Interface method of the {@link LogicObservable}
+	 * Needed for updating the widget on new data.
+	 */
 	@Override
 	public void updateObservable() {
 		allJobsOptGroup.clear();
@@ -73,7 +90,6 @@ public class JobsWidget extends Composite implements LogicObservable {
 		addJobs(this.jobList);
 		currentJob = handler.getCurrentJob();
 		if (currentJob != null) {
-
 			for (Option opt : selectJob.getItems()) {
 				((SelectJobOption) opt).setSelected(false);
 				if (((SelectJobOption) opt).getJob().equals(currentJob)) {
@@ -85,6 +101,10 @@ public class JobsWidget extends Composite implements LogicObservable {
 
 	}
 
+	/**
+	 * Interface method of the {@link LogicObservable}
+	 * Needet to submit the selected job to LogicHandler
+	 */
 	@Override
 	public void notifyLogicHandler() {
 		if(currentJob != null){
