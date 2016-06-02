@@ -32,6 +32,9 @@ import net.greenbeansit.jobtracker.server.rest.services.RestServiceImpl;
 public class JerseyConfig extends ResourceConfig
 {
 
+	/**
+	 * Initializes a new Instance of a Jersey Config
+	 */
 	public JerseyConfig()
 	{
 		packages("net.greenbeansit.jobtracker.server.services");
