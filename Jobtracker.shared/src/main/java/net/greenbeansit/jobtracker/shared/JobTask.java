@@ -17,6 +17,13 @@ public class JobTask implements Serializable
 	private String				name;
 
 	/**
+	 * Empty Constructor for internal purposes
+	 */
+	public JobTask(){
+
+	}
+
+	/**
 	 * Initializes a new instance of the {@link JobTask} class
 	 * 
 	 * @param id
