@@ -97,7 +97,15 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 
 	@UiField
 	Button buttonBook;
+	@UiField
+	Button buttonCopy;
+	@UiField
+	Button buttonDelete;
 
+	/**
+	 * Initializes a new instance of the CalendarTimeInputWidget and sets the
+	 * Image of the Buttons. 
+	 */
 	public CalendarTimeInputWidget() {
 		initWidget(uiBinder.createAndBindUi(this));
 		calendarHandler.addObserver(this);
@@ -303,7 +311,8 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 		int duration = createTimeFromText(workTime.getText());
 		int breakTime = createTimeFromText(pause.getText());
 		Date date = getDateFromBox(dateStart);
-		ActivityReport tmp = new ActivityReport(0, 0, 0, 0, 0, "", date, startTime, duration, breakTime);
+		ActivityReport tmp = new ActivityReport(Integer.parseInt(calendarHandler.calendar.currentEvent.getId() + ""), 0,
+				0, 0, 0, "", date, startTime, duration, breakTime);
 		handler.saveReport(tmp);
 	}
 
@@ -341,6 +350,9 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 		calendarHandler.calendar.currentEvent = e;
 
 		calendarHandler.calendar.addEvent(calendarHandler.calendar.currentEvent);
+
+		e.overlapsOtherEvent();
+
 		calendarHandler.updateObserver(this);
 	}
 
@@ -407,7 +419,7 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 
 		int hours = Integer.parseInt(hourString);
 		int minutes = Integer.parseInt(minuteString);
-		if (duration-1 > lengthPause) {
+		if (duration - 1 > lengthPause) {
 			if (minutes < 59) {
 				minutes++;
 			} else {
@@ -441,7 +453,7 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 		int hours = Integer.parseInt(hourString);
 		int duration = createTimeFromText(workTime.getText());
 		int lengthPause = createTimeFromText(pause.getText());
-		if (duration-60 > lengthPause) {
+		if (duration - 60 > lengthPause) {
 			if (hours < 23) {
 				hours++;
 			} else {
@@ -859,10 +871,12 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 	}
 
 	public void makeCopyDeleteButtonsVisible() {
-
+		buttonCopy.setVisible(true);
+		buttonDelete.setVisible(true);
 	}
 
 	public void makeCopyDeleteButtonsHidden() {
-
+		buttonCopy.setVisible(false);
+		buttonDelete.setVisible(false);
 	}
 }

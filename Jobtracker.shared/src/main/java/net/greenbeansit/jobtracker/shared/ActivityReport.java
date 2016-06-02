@@ -195,6 +195,12 @@ public class ActivityReport implements Serializable
 		this.date = date;
 	}
 
+	/**
+	 * set Date with integer values
+	 * @param year Integer year value
+	 * @param month	Integer month value
+     * @param day Integer day value
+     */
 	@SuppressWarnings("deprecation")
 	public void setDate(Integer year, Integer month, Integer day)
 	{
@@ -294,7 +300,7 @@ public class ActivityReport implements Serializable
 	}
 
 	/**
-	 * To sting method, returns the {id + taskid + jobNr + posNr + authorId + text + date + startTime + dureaition+
+	 * To sting method, returns the {id + taskid + jobNr + posNr + authorId + text + date + startTime + duration+
 	 * breakTime }
 	 * @return String object with all values of the report
      */

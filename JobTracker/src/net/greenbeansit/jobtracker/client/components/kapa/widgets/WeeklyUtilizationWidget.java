@@ -77,12 +77,13 @@ public class WeeklyUtilizationWidget extends Composite {
 
         double rnd = getBarChartHeight(date);
 
-        vp.setHeight(rnd + "px");
+        vp.setHeight("7px");
+        vp.setWidth(rnd + "px");
 
         if (rnd < 40) {
-            vp.setStyleName(this.suffixPath + "barChart", true);
+            vp.setStyleName(this.suffixPath + "barChartHorizontal", true);
         } else {
-            vp.setStyleName(this.suffixPath + "barChartHeight", true);
+            vp.setStyleName(this.suffixPath + "barChartHeightHorizontal", true);
         }
         return vp;
     }

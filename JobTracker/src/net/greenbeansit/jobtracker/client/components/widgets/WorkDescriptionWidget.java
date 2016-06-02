@@ -2,6 +2,7 @@ package net.greenbeansit.jobtracker.client.components.widgets;
 
 import java.util.List;
 
+import net.greenbeansit.jobtracker.client.components.LogicHandler;
 import org.gwtbootstrap3.client.ui.TextArea;
 import org.gwtbootstrap3.client.ui.TextBox;
 import org.gwtbootstrap3.extras.select.client.ui.OptGroup;
@@ -29,15 +30,15 @@ import net.greenbeansit.jobtracker.shared.ActivityReportTemplate;
  *
  */
 
-public class WorkDiscriptionWidget extends Composite implements LogicObservable
+public class WorkDescriptionWidget extends Composite implements LogicObservable
 {		
 
-	private static WorkDiscriptionWidgetUiBinder uiBinder = 
-			GWT.create(WorkDiscriptionWidgetUiBinder.class);
+	private static WorkDescriptionWidgetUiBinder uiBinder =
+			GWT.create(WorkDescriptionWidgetUiBinder.class);
 
-	interface WorkDiscriptionWidgetUiBinder extends UiBinder<Widget, WorkDiscriptionWidget>
+	interface WorkDescriptionWidgetUiBinder extends UiBinder<Widget, WorkDescriptionWidget>
 	{
-		
+
 	}
 	
 	@UiField 
@@ -56,13 +57,17 @@ public class WorkDiscriptionWidget extends Composite implements LogicObservable
 	TextBox textName;
 	
 	ActivityReportTemplate selectedTemplate;
-	
-	public WorkDiscriptionWidget()
+
+	/**
+	 * Standard constructor, first register this object to LogicHandler
+	 * then add a ValueChangeHandler on the select for handling the selection of different templates from the
+	 * selectTemplate Select object
+	 * Then the constructor calls the {@link LogicHandler#loadTemplates()} method load the Templates from the Backend
+	 */
+	public WorkDescriptionWidget()
 	{	
 		initWidget(uiBinder.createAndBindUi(this));
-		
 		handler.addObservable(this);
-		handler.updateObservable(this);
 		selectTemplate.addValueChangeHandler(new ValueChangeHandler<String>() {
 			@Override
 			public void onValueChange(ValueChangeEvent<String> event) {
@@ -72,13 +77,11 @@ public class WorkDiscriptionWidget extends Composite implements LogicObservable
 		handler.loadTemplates();
 	}
 
-
-	@Override
-	protected void onAttach() {
-		// TODO Auto-generated method stub
-		super.onAttach();
-	}
-	
+	/**
+	 * Method for saving a created template to the backend.
+	 * It uses the {@link LogicHandler#saveTemplate(ActivityReportTemplate)} method
+	 * @param e ClickEvent e
+     */
 	@UiHandler("buttonSave")
 	public void saveTemplate(final ClickEvent e){
 		ActivityReportTemplate template = new ActivityReportTemplate();
@@ -91,20 +94,32 @@ public class WorkDiscriptionWidget extends Composite implements LogicObservable
 			NotifyHelper.errorMessage("Fill missing fields");
 		}	
 	}
-	
+
+	/**
+	 * Method for loading a selected template to the textFields
+	 * @param e
+     */
 	@UiHandler("buttonLoad")
 	public void loadTemplate(final ClickEvent e){
 		textDiscription.setText(selectedTemplate.getText());
 		textName.setText(selectedTemplate.getName());
 	}
 
-	
+	/**
+	 * add new Templates to the selectTemplate field
+	 * @param templateList
+     */
 	public void addTemplates(List<ActivityReportTemplate> templateList){
 		for(ActivityReportTemplate t : templateList){
 			selectTemplate.add(new SelectTemplateOption(t));
 		}
 	}
 
+	/**
+	 * Interface method of the {@link LogicObservable}
+	 * Is in charge for updating this widget on new data
+	 *
+	 */
 	@Override
 	public void updateObservable() {
 		selectTemplate.clear();
@@ -124,7 +139,10 @@ public class WorkDiscriptionWidget extends Composite implements LogicObservable
 		selectTemplate.refresh();
 	}
 
-
+	/**
+	 * Interface method of the {@link LogicObservable}
+	 * In charge for submitting the current template inforamtions to the {@link LogicHandler}
+	 */
 	@Override
 	public void notifyLogicHandler() {
 		ActivityReportTemplate template = new ActivityReportTemplate();

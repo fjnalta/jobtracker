@@ -30,17 +30,44 @@ import com.googlecode.gwt.charts.client.options.VAxis;
 import net.greenbeansit.jobtracker.client.components.LogicObservable;
 import net.greenbeansit.jobtracker.shared.ActivityReport;
 
+/**
+ * Widget for vizualization of the project budget
+ *
+ *@author Alexander Kirilyuk
+ */
 public class GraphWidget extends Composite implements LogicObservable {
 
 	private static GraphWidgetUiBinder uiBinder = GWT.create(GraphWidgetUiBinder.class);
 
+	/**
+	 * UiBinder Interface for {@link GraphWidget}
+	 *
+	 * @author Alexander Kirilyuk
+	 */
 	interface GraphWidgetUiBinder extends UiBinder<Widget, GraphWidget> {
 	}
 
+	/**
+	 * enum for the different view modes of the graph
+	 */
 	public static enum GraphMode {
-		WEEK, MONTH, YEAR
+		/**
+		 * week mode
+		 */
+		WEEK,
+		/**
+		 * moth mode
+		 */
+		MONTH,
+		/**
+		 * year mode
+		 */
+		YEAR
 	}
 
+	/**
+	 * standard constrcutor
+	 */
 	public GraphWidget() {
 		initWidget(uiBinder.createAndBindUi(this));
 		initialize();
@@ -91,8 +118,10 @@ public class GraphWidget extends Composite implements LogicObservable {
 
 	private GraphMode currentMode;
 
+	/**
+	 *function for initializing the graph widget
+	 */
 	private void initialize() {
-		// Window.alert("Initialize");
 
 		maxBudget = 400000;
 		currentBudgetUsed = 230000;
@@ -110,7 +139,6 @@ public class GraphWidget extends Composite implements LogicObservable {
 				tempDate.setYear(tempDate.getYear() - 1);
 				tempDate.setMonth(tempDate.getMonth() + i);
 				tempDate.setDate(tempDate.getDate() - a);
-				// Window.alert(tempDate.toGMTString());
 				temp.setDate(tempDate);
 				temp.setStartTime(1);
 				temp.setDuration(480);
@@ -118,7 +146,6 @@ public class GraphWidget extends Composite implements LogicObservable {
 				GWT.log(tempDate.toGMTString());
 			}
 		}
-		// Window.alert("Initialize");
 
 		startDate = new Date();
 		startDate.setHours(0);
@@ -148,6 +175,10 @@ public class GraphWidget extends Composite implements LogicObservable {
 		});
 	}
 
+	/**
+	 * event handling for buttonNext, shows the next time span
+	 * @param event ClickEvent of the Button
+     */
 	@UiHandler("buttonNext")
 	public void showNext(ClickEvent event) {
 		if (false){
@@ -183,6 +214,10 @@ public class GraphWidget extends Composite implements LogicObservable {
 		}
 	}
 
+	/**
+	 * Event handling for the buttonPrevious, shows the previous time span
+	 * @param event CLickEvent of the button
+     */
 	@UiHandler("buttonPrevious")
 	public void showPrevious(ClickEvent event) {
 		budgetSteps.add(currentBudgetEndFocus - currentBudgetStartFocus);
@@ -216,6 +251,10 @@ public class GraphWidget extends Composite implements LogicObservable {
 		}
 	}
 
+	/**
+	 * Event handling for the buttonModeWeek, switches the graph to week mode
+	 * @param event ClickEvent of the button
+     */
 	@UiHandler("buttonModeWeek")
 	public void showWeekMode(ClickEvent event) {
 		reset();
@@ -227,6 +266,10 @@ public class GraphWidget extends Composite implements LogicObservable {
 		showWeek();
 	}
 
+	/**
+	 * Event handling for the buttonModeMonth, switches the graph to month mode
+	 * @param event ClickEvent of the button
+     */
 	@UiHandler("buttonModeMonth")
 	public void showMonthMode(ClickEvent event) {
 		reset();
@@ -238,6 +281,10 @@ public class GraphWidget extends Composite implements LogicObservable {
 		showMonth();
 	}
 
+	/**
+	 * Event handling for the buttonModeYear, switches the graph to year mode
+	 * @param event
+     */
 	@UiHandler("buttonModeYear")
 	public void showYearMode(ClickEvent event) {
 		reset();
@@ -252,6 +299,9 @@ public class GraphWidget extends Composite implements LogicObservable {
 		showYear();
 	}
 
+	/**
+	 * Method for updating the focus string to the actual date
+	 */
 	private void updateFocusString() {
 		String focusString = (startDate.getDate()) + "." + (startDate.getMonth() + 1) + "."
 				+ (startDate.getYear() + 1900) + " - " + (endDate.getDate()) + "." + (endDate.getMonth() + 1) + "."
@@ -260,7 +310,10 @@ public class GraphWidget extends Composite implements LogicObservable {
 		labelBudgetLeft.setText("Budget left: " + String.valueOf(maxBudget-currentBudgetStartFocus));
 		labelBudget.setText(String.valueOf(currentBudgetStartFocus)+ " von " + String.valueOf(maxBudget));
 	}
-	
+
+	/**
+	 * Method for resetting the graph widget
+	 */
 	private void reset(){
 		budgetSteps.clear();
 		currentBudgetEndFocus=currentBudgetUsed;
@@ -276,6 +329,9 @@ public class GraphWidget extends Composite implements LogicObservable {
 		endDate.setDate(endDate.getDate()+1);
 	}
 
+	/**
+	 * method for the vizualization of the week mode
+	 */
 	public void showWeek() {
 		String[] weekDays = new String[] { "Mo", "Tu", "We", "Thu", "Fr", "Sa", "Sun" };
 
@@ -342,6 +398,9 @@ public class GraphWidget extends Composite implements LogicObservable {
 		drawLineChart(dataTable, options);
 	}
 
+	/**
+	 * method for the vizualization of the month mode
+	 */
 	public void showMonth() {
 		int daysInMonth = endDate.getDate();
 		int[] dayzz = new int[daysInMonth];
@@ -395,6 +454,9 @@ public class GraphWidget extends Composite implements LogicObservable {
 
 	}
 
+	/**
+	 * method for the vizualization of the year mode
+	 */
 	public void showYear() {
 		int[] months = new int[12];
 		for (int i = 0; i < months.length; i++) {
@@ -446,11 +508,19 @@ public class GraphWidget extends Composite implements LogicObservable {
 		drawLineChart(dataTable, options);
 	}
 
+	/**
+	 * Method for drawing a line chart
+	 * @param table a DataTable object with the data do draw
+	 * @param options a LineChartsOptions object with the options of the line chart
+     */
 	private void drawLineChart(DataTable table, LineChartOptions options) {
 		// Draw the chart
 		linechart.draw(table, options);
 	}
 
+	/**
+	 * Method for drawing a pie chart
+	 */
 	private void drawPieChart() {
 		// Prepare the data
 		DataTable dataTable = DataTable.create();
@@ -485,28 +555,37 @@ public class GraphWidget extends Composite implements LogicObservable {
 
 	}
 
+	/**
+	 * set the current reports
+	 * @param reports
+     */
 	public void setReportList(List<ActivityReport> reports) {
 		this.reportList = reports;
 	}
 
+	/**
+	 * function for rendering the charts
+	 */
 	public void render() {
 		initialize();
 	}
 
+	/**
+	 * Interface method of {@link LogicObservable}
+	 */
 	@Override
 	public void updateObservable() {
 		// TODO Auto-generated method stub
 
 	}
 
+	/**
+	 * Interface method of {@link LogicObservable}
+	 */
 	@Override
 	public void notifyLogicHandler() {
 		// TODO Auto-generated method stub
 
 	}
 
-	/*
-	 * public void setLanguage(HashMap<String,String> languagePack){
-	 * this.languagePack = languagePack; }
-	 */
 }

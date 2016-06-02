@@ -2,6 +2,7 @@ package net.greenbeansit.jobtracker.client.components;
 
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.i18n.client.DateTimeFormat;
+import net.greenbeansit.jobtracker.client.components.kapa.widgets.CapacityCalendarWidget;
 import net.greenbeansit.jobtracker.client.components.widgets.calendar.CalendarWidget;
 import net.greenbeansit.jobtracker.client.utils.rest.NotifyHelper;
 import net.greenbeansit.jobtracker.client.utils.rest.RestClient;
@@ -13,13 +14,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+
 /**
- * Controller class which provide CRUD funtionallity for the HomePage including
+ * Controller class which provide CRUD functionality for the HomePage including
  * save new Reports, new ReportTemplates, and load Reports from backend. Also it coordinates 
  * and synchronizes all widgets on the HomePage
  *
  * The workflow: the widget call the function load<SOMETHING>. The load method then calls the updateObservable function
- * on sucess. The updateObservable function must implement the get<SOMETHING> function.
+ * on success. The updateObservable function must implement the get<SOMETHING> function.
  * 
  * @author Alexander Kirilyuk
  *
@@ -27,25 +29,29 @@ import java.util.List;
 public class LogicHandler {
 
 	private ActivityReport currentReport;
+	private ActivityReportTemplate currentTemplate;
+	private UtilizationWeek currentUtilizationWeek;
+
 	private List<LogicObservable> list = new ArrayList<>();
 	private List<ActivityReport> currentReportsList = new ArrayList<ActivityReport>();
 	private List<Job> jobList = new ArrayList<Job>();
 	private List<ActivityReportTemplate> templateList = new ArrayList<ActivityReportTemplate>();
-	private List<User> userList = new ArrayList<User>();
-	private List<Job> selectedJobs = new ArrayList<Job>();
 	private List<PseudoJob> pseudoJobList = new ArrayList<PseudoJob>();
 	private List<Integer> utilizationList = new ArrayList<Integer>();
 	private User currentUser;
-	private LogicHandler self = this;
-
 
 	private Job currentJob;
 	private PseudoJob currentPJob;
 
-	private ActivityReportTemplate currentTemplate;
+	private List<UtilizationWeek> utilizationWeekList = new ArrayList<UtilizationWeek>();
+
+
+	private CapacityCalendarWidget capacityCalendar;
 	private CalendarWidget calendar;
 
-	
+	/**
+	 * Standart constructor of this class
+	 */
 	public LogicHandler(){
 		initialize();
 	}
@@ -66,29 +72,33 @@ public class LogicHandler {
 	}
 
 	/**
-	 * 
-	 * @param w
+	 * Add one ObservableClass to the logicHandler
+	 * @param w the Observable to add
 	 */
 	public void addObservable(LogicObservable w) {
 		list.add(w);
 	}
 
 	/**
-	 * 
+	 * Update all registered observables
 	 */
 	public void updateAllObservables() {
 		for (LogicObservable p : list) {
 			p.updateObservable();
 		}
 	}
-	
+
+	/**
+	 * update one single observable
+	 * @param p the observable to update
+     */
 	public void updateObservable(LogicObservable p){
 		p.updateObservable();
 	}
 
 	/**
-	 * 
-	 * @param w
+	 * delete one observable from the observable list
+	 * @param w observable to delete
 	 */
 	public void deleteObservable(LogicObservable w) {
 		list.remove(w);
@@ -106,7 +116,8 @@ public class LogicHandler {
 	}
 
 	/**
-	 * sets the current active activity Report
+	 * sets the current active activity Report this function is needed for showing the current selected report and the
+	 * stored information in it on all widgets
 	 * @param report report to be set as active
      */
 	public void setCurrentReport(ActivityReport report) {
@@ -116,61 +127,120 @@ public class LogicHandler {
 		tempJob.setPosNr(report.getPosNr());
 		for(Job j : jobList){
 			if(j.equals(tempJob)){
-				this.currentJob = j;
-				GWT.log("WTF" + j.getJobNr() +" " + j.getPosNr());
+				this.setCurrentJob(j);
 			}
 		}
 		ActivityReportTemplate tempTemplate = new ActivityReportTemplate();
-		GWT.log(report.getAuthor()+" ");
 		tempTemplate.setAuthor(report.getAuthor());
-		GWT.log(report.getText());
 		tempTemplate.setText(report.getText());
-		GWT.log(report.getTaskId() + " ");
 		tempTemplate.setTaskId(report.getTaskId());
+		GWT.log("current selected report :" + report.toString());
 		this.currentTemplate = tempTemplate;
 		this.updateAllObservables();
 	}
 
+	/**
+	 * sets the current active activity Report this function is needed for showing the current selected report and the
+	 * stored information in it on all widgets
+	 * @param report report to be set as active
+	 */
+	public void setCurrentReport(UtilizationWeek report) {
+		UtilizationWeek tempUtilizationWeek = new UtilizationWeek();
+		tempUtilizationWeek.setText(report.getText());
+		for(UtilizationWeek j : utilizationWeekList){
+			if(j.getText().equals(tempUtilizationWeek.getText())){
+				this.setCurrentUtilizationWeek(j);
+			}
+		}
+		this.currentUtilizationWeek = report;
+		this.updateAllObservables();
+	}
+
+	/**
+	 * function for getting the currently loaded reports
+	 * @return List<ActivityReport> object with the current loaded reports
+     */
 	public List<ActivityReport> getCurrentReportsList() {
 		return currentReportsList;
 	}
 
+	/**
+	 * get the current capacity report list
+	 * @return List<UtilizationWeek> object
+     */
+	public List<UtilizationWeek> getCurrentCapacityReportsList(){
+		return utilizationWeekList;
+	}
+
+	/**
+	 * function for setting the currently loaded reports
+	 * @param currentReportsList the List<ActivityReport> object with the reports
+     */
 	public void setCurrentReportsList(List<ActivityReport> currentReportsList) {
 		this.currentReportsList = currentReportsList;
 	}
 
+	/**
+	 * function for getting the currently loaded jobs
+	 * @return List<Job> object with the current loaded jobs
+     */
 	public List<Job> getJobList() {
 		return jobList;
 	}
 
-	public List<PseudoJob> getPseudoJobList(){
-		return pseudoJobList;
-	}
-
-	public void setPseudoJobList(List<PseudoJob> pJobList) {
-		this.pseudoJobList = pJobList;
-	}
-
+	/**
+	 * function for setting the currently loaded jobs
+	 * @param jobList List<Job> object with the current loaded jobs
+     */
 	public void setJobList(List<Job> jobList) {
 		this.jobList = jobList;
 	}
 
+	/**
+	 * function for getting the currently loaded templates
+	 * @return List<ActivityReportTemplate> object with the currently loaded {@link ActivityReportTemplate}
+     */
 	public List<ActivityReportTemplate> getTemplateList() {
 		return templateList;
 	}
 
+	/**
+	 * function for setting the currently loaded templates
+	 * @param templateList List<ActivityReportTemplate> object with the
+	 *                       {@link ActivityReportTemplate} to be saved
+     */
 	public void setTemplateList(List<ActivityReportTemplate> templateList) {
 		this.templateList = templateList;
 	}
 
+	/**
+	 * function for getting the currently active user
+	 * @return User object of the current user
+     */
 	public User getCurrentUser() {
 		return currentUser;
 	}
 
+	/**
+	 * set the current active user
+	 * @param currentUser {@link User}User object of the current user
+     */
 	public void setCurrentUser(User currentUser) {
 		this.currentUser = currentUser;
 	}
 
+	/**
+	 * get the currently set {@link UtilizationWeek}
+	 * @return currrent set {@link UtilizationWeek} object
+	 */
+	public UtilizationWeek getCurrentUtilizationWeek() {
+		return currentUtilizationWeek;
+	}
+
+	/**
+	 * get the currently set {@link ActivityReport}
+	 * @return currrent set {@link ActivityReport} object
+     */
 	public ActivityReport getCurrentReport() {
 		return currentReport;
 	}
@@ -181,9 +251,9 @@ public class LogicHandler {
 		RestClient.build(new SuccessFunction<List<ActivityReport>>() {
 			@Override
 			public void onSuccess(Method method, List<ActivityReport> response) {
-				self.currentReportsList = response;
-				self.updateAllObservables();
 				NotifyHelper.successMessage("Reports loaded from backend");
+				LogicHandler.this.setCurrentReportsList(response);
+				LogicHandler.this.updateAllObservables();
 				calendar.updateObservable();
 			}
 
@@ -198,6 +268,7 @@ public class LogicHandler {
 	
 	/**
 	 * Function for loading a set of {@link ActivityReport} between the specified start and end time
+	 * On success is calls {@link #updateAllObservables()}to update the widgets
 	 * @param from Date object which specifies the start time
 	 * @param to Date object which specifiels the end time
 	 */
@@ -209,8 +280,8 @@ public class LogicHandler {
 		RestClient.build(new SuccessFunction<List<ActivityReport>>() {
 			@Override
 			public void onSuccess(Method method, List<ActivityReport> response) {
-				self.currentReportsList = response;
-				self.updateAllObservables();
+				LogicHandler.this.setCurrentReportsList(response);
+				LogicHandler.this.updateAllObservables();
 			}
 
 			@Override
@@ -224,6 +295,7 @@ public class LogicHandler {
 	/**
 	 * Function for saving an ActivityReport to the backend. It first collects all needed information,
 	 * then if everything is correct it will try to save it.
+	 * On success is calls {@link #updateAllObservables()}to update the widgets
 	 * @param reportDummy a {@link ActivityReport} object with set time parameters
 	 */
 	public void saveReport(ActivityReport reportDummy) {
@@ -234,15 +306,13 @@ public class LogicHandler {
 			tempReport.setJobNr(currentJob.getJobNr());
 			tempReport.setPosNr(currentJob.getPosNr());
 			tempReport.setText(currentTemplate.getText());
-			// TODO handle different JobTasks
 			tempReport.setTaskId(currentTemplate.getTaskId());
-
 			tempReport.setAuthor(currentUser.getId());
-			
 			try {
 				RestClient.build(new SuccessFunction<ActivityReport>() {
 					@Override
 					public void onSuccess(Method method, ActivityReport response) {
+						LogicHandler.this.updateAllObservables();
 						NotifyHelper.successMessage("Report saved");
 					}
 
@@ -256,13 +326,53 @@ public class LogicHandler {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			
 		} else {
 			NotifyHelper.errorMessage("Please fill in the missing fields");
 		}
 	}
+
+	/**
+	 * Function for saving an UtilizationWeek to the backend. It first collects all needed information,
+	 * then if everything is correct it will try to save it.
+	 * On success is calls {@link #updateAllObservables()}to update the widgets
+	 * @param reportDummy a {@link UtilizationWeek} object with set time parameters
+	 */
+	public void saveUtilizationWeek(UtilizationWeek reportDummy) {
+		getInformations();
+		UtilizationWeek tempReport = reportDummy;
+
+		if (currentUtilizationWeek != null && currentUser != null) {
+			tempReport.setText(currentUtilizationWeek.getText());
+			tempReport.setAuthor(currentUtilizationWeek.getAuthor());
+			tempReport.setPseudoJobId(currentUtilizationWeek.getPseudoJobId());
+			tempReport.setPossibility(currentUtilizationWeek.getPossibility());
+			try {
+				RestClient.build(new SuccessFunction<UtilizationWeek>() {
+					@Override
+					public void onSuccess(Method method, UtilizationWeek response) {
+						LogicHandler.this.updateAllObservables();
+						NotifyHelper.successMessage("Report saved");
+					}
+
+					@Override
+					public void onFailure(Method method, Throwable exception) {
+						NotifyHelper.errorMessage("FAILED" + exception.getMessage());
+						GWT.log(exception.getMessage());
+					}
+
+				}).getEmployeeService().saveUtilizationWeek(currentUser.getId(), tempReport);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else {
+			NotifyHelper.errorMessage("Please fill in the missing fields");
+		}
+	}
+
 	/**
 	 * Trys to save a template to the backend
+	 * On success is calls {@link #updateAllObservables()}to update the widgets
+	 * and calls {@link #loadTemplates()} to load the new templates list from the backend
 	 * @param template {@link ActivityReportTemplate} to save
 	 */
 	public void saveTemplate(ActivityReportTemplate template) {
@@ -272,8 +382,8 @@ public class LogicHandler {
 			RestClient.build(new SuccessFunction<ActivityReportTemplate>() {
 				@Override
 				public void onSuccess(Method method, ActivityReportTemplate response) {
-					self.loadTemplates();
-					self.updateAllObservables();
+					LogicHandler.this.loadTemplates();
+					LogicHandler.this.updateAllObservables();
 					GWT.log("Template saved");
 					NotifyHelper.successMessage("Template saved successfully!");
 				}
@@ -290,7 +400,6 @@ public class LogicHandler {
 		}
 	}
 
-	//TODO - does not work
 	/**
 	 * Trys to save a pseudoJob to the backend
 	 * @param pseudoJob {@link PseudoJob} to save
@@ -302,8 +411,8 @@ public class LogicHandler {
 			RestClient.build(new SuccessFunction<PseudoJob>() {
 				@Override
 				public void onSuccess(Method method, PseudoJob response) {
-					self.loadPseudoJobs();
-					self.updateAllObservables();
+					LogicHandler.this.loadPseudoJobs();
+					LogicHandler.this.updateAllObservables();
 					NotifyHelper.successMessage("PseudoJob saved successfully!");
 				}
 
@@ -323,24 +432,24 @@ public class LogicHandler {
 	 * Try to load all {@link ActivityReportTemplate} from the backend
 	 * On success is calls {@link #updateAllObservables()}to update the widgets 
 	 */
-	
 	public void loadTemplates() {
 		this.updateAllObservables();
 		try {
 			RestClient.build(new SuccessFunction<List<ActivityReportTemplate>>() {
 				@Override
 				public void onSuccess(Method method, List<ActivityReportTemplate> response) {
-					self.templateList = response;
-					self.updateAllObservables();
-				}
+					GWT.log("loaded templates");
+					LogicHandler.this.setTemplateList(response);
+					LogicHandler.this.updateAllObservables();
 
+				}
 				@Override
 				public void onFailure(Method method, Throwable exception) {
 					NotifyHelper.errorMessage(exception.getMessage());
 					GWT.log(exception.getMessage());
 				}
 
-			}).getEmployeeService().getAllPseudoJobs(currentUser.getId());
+			}).getEmployeeService().getAllReportTemplates(currentUser.getId());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -350,13 +459,14 @@ public class LogicHandler {
 	 * Try to load all {@link PseudoJob} from the backend
 	 * On success is calls {@link #updateAllObservables()}to update the widgets
 	 */
-
 	public void loadPseudoJobs() {
 		try {
 			RestClient.build(new SuccessFunction<List<PseudoJob>>() {
 				@Override
 				public void onSuccess(Method method, List<PseudoJob> response) {
-					self.pseudoJobList = response;
+					GWT.log("loaded all pseudoJobs successfully");
+					LogicHandler.this.setPseudoJobList(response);
+					LogicHandler.this.updateAllObservables();
 				}
 
 				@Override
@@ -379,9 +489,9 @@ public class LogicHandler {
 			RestClient.build(new SuccessFunction<List<Job>>() {
 				@Override
 				public void onSuccess(Method method, List<Job> response) {
-					GWT.log(String.valueOf(response.size()));
-					self.jobList = response;
-					self.updateAllObservables();
+					GWT.log("loaded all jobs successfully");
+					LogicHandler.this.setJobList(response);
+					LogicHandler.this.updateAllObservables();
 				}
 
 				@Override
@@ -396,68 +506,19 @@ public class LogicHandler {
 			e.printStackTrace();
 		}
 	}
-	/**
-	 * Method for loading All Users from the Backend
-	 */
-	public void loadUsers(){
-		try {
-			RestClient.build(new SuccessFunction<List<User>>() {
-				@Override
-				public void onSuccess(Method method, List<User> response) {
-					self.userList = response;
-					self.updateAllObservables();
-				}
-
-				@Override
-				public void onFailure(Method method, Throwable exception) {
-					NotifyHelper.errorMessage(exception.getMessage());
-					GWT.log(exception.getMessage());
-				}
-
-			}).getEmployeeService().getAllUser();
-		} catch (Exception e) {
-			GWT.log(e.getMessage());
-		}
-	}
-	
-	/**
-	 * Load all Users based on the selected Jobs
-	 */
-	public void loadUsersForSelectedJobs(){
-		for(Job j : selectedJobs) {
-			try {
-				RestClient.build(new SuccessFunction<List<User>>() {
-					@Override
-					public void onSuccess(Method method, List<User> response) {
-						self.userList = response;
-						self.updateAllObservables();
-					}
-
-					@Override
-					public void onFailure(Method method, Throwable exception) {
-						NotifyHelper.errorMessage(exception.getMessage());
-						GWT.log(exception.getMessage());
-					}
-
-				}).getEmployeeService().getUsersToJob(j.getJobNr(), j.getPosNr());
-			} catch (Exception e) {
-				GWT.log(e.getMessage());
-			}
-		}
-	}
 
 	/**
-	 * Mehtod for loading the utilization for a specified month from the backend
-	 * @param year
-	 * @param month
+	 * Method for loading the utilization for a specified month from the backend
+	 * @param year year of the utilization to show
+	 * @param month month of the utilization to show
      */
 	public void loadUtilization(int year, int month){
 		try {
 			RestClient.build(new SuccessFunction<List<Integer>>() {
 				@Override
 				public void onSuccess(Method method, List<Integer> response) {
-					self.utilizationList = response;
-					self.updateAllObservables();
+					LogicHandler.this.setUtilizationList(response);
+					LogicHandler.this.updateAllObservables();
 				}
 
 				@Override
@@ -488,49 +549,125 @@ public class LogicHandler {
 		return reportList;
 	}
 
+	/**
+	 * function for returning the actual list of the utilization in integer values
+	 * @return a List<Integer> obejct with the utilization values
+     */
 	public List<Integer> getUtilizationList(){
 		return this.utilizationList;
 	}
 
-	public List<User> getUsers(){
-		return this.userList;
+	/**
+	 * function for setting the current utilization list
+	 * @param utilizationList a List<Integer> object with the current utilization
+     */
+	public void setUtilizationList(List<Integer> utilizationList) {
+		this.utilizationList = utilizationList;
 	}
-	
+
+	/**
+	 * get the current selected {@link Job}
+	 * @return currently selected {@link Job} object
+     */
 	public Job getCurrentJob() {
 		return currentJob;
 	}
 
+	/**
+	 * get the current {@link PseudoJob}
+	 * @return {@link PseudoJob} object
+     */
 	public PseudoJob getCurrentPseudoJob(){
 		return currentPJob;
 	}
 
+	/**
+	 * set the current {@link PseudoJob}
+	 * @param currentPJob {@link PseudoJob} object
+     */
 	public void setCurrentPJob(PseudoJob currentPJob) {
 		this.currentPJob = currentPJob;
 	}
 
+	/**
+	 * set the current selected {@link Job}
+	 * @param currentJob {@link Job} object to be set
+     */
 	public void setCurrentJob(Job currentJob) {
 		this.currentJob = currentJob;
 	}
 
+	/**
+	 * set the current selected {@link Job}
+	 * @param currentJob {@link Job} object to be set
+	 */
+	public void setCurrentUtilizationWeek(UtilizationWeek currentJob) {
+		this.currentUtilizationWeek = currentJob;
+	}
+
+	/**
+	 * get the current selected {@link ActivityReportTemplate}
+	 * @return current {@link ActivityReportTemplate}
+     */
 	public ActivityReportTemplate getCurrentTemplate() {
 		return currentTemplate;
 	}
 
+	/**
+	 * function for setting the current selected {@link ActivityReportTemplate}
+	 * @param currentTemplate {@link ActivityReportTemplate} object to be set
+     */
 	public void setCurrentTemplate(ActivityReportTemplate currentTemplate) {
 		this.currentTemplate = currentTemplate;
-		this.updateAllObservables();
 	}
-	public List<Job> getSelectedJobs() {
-		return selectedJobs;
-	}
-	public void setSelectedJobs(List<Job> selectedJobs) {
-		this.selectedJobs = selectedJobs;
-	}
+
+	/**
+	 * gets the calendar widget corresponding to the logic handler
+	 * @return {@link CalendarWidget} object
+     */
 	public CalendarWidget getCalendar() {
 		return calendar;
 	}
+
+	/**
+	 * sets the calendar widget for this handler
+	 * @param calendar {@link CalendarWidget} object to be adressed
+     */
 	public void setCalendar(CalendarWidget calendar) {
 		this.calendar = calendar;
 	}
+
+	/**
+	 * set the CapazityCalendarWidget
+	 * @param calendar the {@link CapacityCalendarWidget}
+     */
+	public void setCapacityCalendar(CapacityCalendarWidget calendar) {
+		this.capacityCalendar = calendar;
+	}
+
+	/**
+	 * get the CapacityCalendarWidget
+	 * @return the {@link CapacityCalendarWidget}
+     */
+	public CapacityCalendarWidget getCapacityCalendar(){
+		return this.capacityCalendar;
+	}
+
+	/**
+	 * get the current pseudojobs list
+	 * @return List<PseudoJobs> object with currently loaded pseudoJobs
+     */
+	public List<PseudoJob> getPseudoJobList() {
+		return pseudoJobList;
+	}
+
+	/**
+	 * set the pseudoJobsList
+	 * @param pseudoJobList List<PseudoJob> the pseudoJobsList to save
+     */
+	public void setPseudoJobList(List<PseudoJob> pseudoJobList) {
+		this.pseudoJobList = pseudoJobList;
+	}
+
 
 }

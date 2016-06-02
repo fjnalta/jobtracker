@@ -16,6 +16,10 @@ import net.greenbeansit.jobtracker.client.components.HomePage;
 import net.greenbeansit.jobtracker.client.components.LogicObservable;
 import net.greenbeansit.jobtracker.client.components.project.ProjectPage;
 
+/**
+ * Utilization ring widget
+ * @author Max Blatt
+ */
 public class UtilizationWidget extends Composite implements LogicObservable{
 
 	private static UtilizationWidgetUiBinder uiBinder = GWT.create(UtilizationWidgetUiBinder.class);
@@ -29,8 +33,10 @@ public class UtilizationWidget extends Composite implements LogicObservable{
 	
 	@UiField
 	PercentageRingDiagram utilizationDiagram;
-	
-	
+
+	/**
+	 * standard constructor
+	 */
 	public UtilizationWidget()
 	{
 		initWidget(uiBinder.createAndBindUi(this));

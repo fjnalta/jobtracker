@@ -79,16 +79,30 @@ public interface RestService extends DirectRestService
 	List<ActivityReport> getAllReports(@PathParam("userId") Integer userId);
 
 	/**
-	 * Gets the {@link ActivityReport} with the following reportId for the
-	 * {@link User} with the following employeeId.
+	 * Gets all {@link UtilizationWeek}s made by the {@link User} with the
+	 * following ID.
+	 *
+	 * @param userId
+	 *            the ID of the {@link User}.
+	 * @return a List of {@link UtilizationWeek}s.
+	 * @throws NotFoundException
+	 *             if the employeeId does not exist.
+	 */
+	@GET
+	@Path("/users/{userId}/utilization_week")
+	List<UtilizationWeek> getAllUtilizationWeeks(@PathParam("userId") Integer userId);
+
+	/**
+	 * Gets all {@link ActivityReport}s made by the {@link User} with the
+	 * following ID.
 	 *
 	 * @param userId
 	 *            the ID of the {@link User}.
 	 * @param reportId
-	 *            the ID of the {@link ActivityReport}.
-	 * @return an {@link ActivityReport}.
+	 * 			  the ID of the {@link ActivityReport}.
+	 * @return the specific {@link ActivityReport} with the given {@param reportId}.
 	 * @throws NotFoundException
-	 *             if the employeeId or the reportId does not exist.
+	 *             if the employeeId does not exist.
 	 */
 	@GET
 	@Path("/users/{userId}/reports/{reportId}")
@@ -147,6 +161,16 @@ public interface RestService extends DirectRestService
 	@POST
 	@Path("/users/{userId}/reports/")
 	void saveReport(@PathParam("userId") Integer userId, ActivityReport report);
+
+	/**
+	 * Saves an {@link UtilizationWeek} to the database.
+	 *
+	 * @param userId
+	 * @param report
+	 */
+	@POST
+	@Path("/users/{userId}/utilization_week")
+	void saveUtilizationWeek(@PathParam("userId") Integer userId, UtilizationWeek report);
 
 	@DELETE
 	@Path("/users/{userId}/reports/{reportId}")
