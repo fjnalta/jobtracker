@@ -13,7 +13,7 @@ import javax.persistence.Table;
  * backend. Each entity class requires a standard constructor and
  * getters/setters for usage in Java Spring.
  * 
- * @author Mike Hukiewitz
+ * @author Mike Hukiewitz & Philipp Minges
  *
  */
 @Entity
@@ -21,9 +21,6 @@ import javax.persistence.Table;
 public class CustomerEntity implements Serializable
 {
 
-	/**
-	 * 
-	 */
 	private static final long	serialVersionUID	= 3842559068860954254L;
 
 	@Id
@@ -53,16 +50,28 @@ public class CustomerEntity implements Serializable
 		return id;
 	}
 
+	/**
+	 * Sets the Id of the current {@link CustomerEntity}
+	 * @param id
+     */
 	public void setId(Integer id)
 	{
 		this.id = id;
 	}
 
+	/**
+	 * Gets the Name of the {@link CustomerEntity}
+	 * @return
+     */
 	public String getName()
 	{
 		return name;
 	}
 
+	/**
+	 * Sets the Name of the {@link CustomerEntity}
+	 * @param name the name of the {@link CustomerEntity}
+     */
 	public void setName(String name)
 	{
 		this.name = name;
