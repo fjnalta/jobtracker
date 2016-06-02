@@ -14,6 +14,7 @@ public interface JobTaskEntityRepository
 	 * @param deleted
 	 *            entity to delete.
 	 */
+	@Override
 	void delete(JobTaskEntity deleted);
 
 	/**
@@ -23,12 +24,14 @@ public interface JobTaskEntityRepository
 	 *            {@link JobTaskEntity} to save
 	 * @return the persisted {@link JobTaskEntity}
 	 */
+	@Override
 	@SuppressWarnings("unchecked")
 	JobTaskEntity save(JobTaskEntity persisted);
 
 	/**
 	 * @return all instances of {@link JobTaskEntity}
 	 */
+	@Override
 	List<JobTaskEntity> findAll();
 
 	/**

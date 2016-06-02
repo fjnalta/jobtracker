@@ -241,7 +241,7 @@ public class RestServiceImpl implements RestService {
 	{
 		List<Integer> utilization = new ArrayList<Integer>();
 		List<ActivityReport> reports = activityReportService.getByUser(userId);
-		for(Integer i = 0; i < 31; i++)
+		for(Integer i = 0; i < 32; i++)
 			utilization.add(0);
 		for(ActivityReport report : reports)
 		{

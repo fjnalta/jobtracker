@@ -21,6 +21,7 @@ public interface PseudoJobEntityRepository
 	 * @param deleted
 	 *            entity to delete.
 	 */
+	@Override
 	void delete(PseudoJobEntity deleted);
 
 	/**
@@ -30,12 +31,14 @@ public interface PseudoJobEntityRepository
 	 *            {@link PseudoJobEntity} to save
 	 * @return the persisted {@link PseudoJobEntity}
 	 */
+	@Override
 	@SuppressWarnings("unchecked")
 	PseudoJobEntity save(PseudoJobEntity persisted);
 
 	/**
 	 * @return all instances of {@link PseudoJobEntity}
 	 */
+	@Override
 	List<PseudoJobEntity> findAll();
 
 	/**

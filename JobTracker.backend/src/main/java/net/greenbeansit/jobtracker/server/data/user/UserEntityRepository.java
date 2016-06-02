@@ -18,6 +18,7 @@ public interface UserEntityRepository
 	/**
 	 * @return all instances of {@link UserEntity}
 	 */
+	@Override
 	List<UserEntity> findAll();
 
 	/**
@@ -51,6 +52,7 @@ public interface UserEntityRepository
 	 *            {@link UserEntity} to save
 	 * @return the persisted {@link UserEntity}
 	 */
+	@Override
 	@SuppressWarnings("unchecked")
 	UserEntity save(UserEntity persisted);
 }

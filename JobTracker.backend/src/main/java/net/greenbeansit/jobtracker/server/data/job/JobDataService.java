@@ -10,7 +10,6 @@ import net.greenbeansit.jobtracker.shared.Job;
  * @author Mike Hukiewitz
  *
  */
-
 public interface JobDataService
 {
 
@@ -33,10 +32,10 @@ public interface JobDataService
 	Job getJob(Integer jobNr, Integer posNr);
 
 	/**
-	 * Returns a
+	 * Returns all jobs belonging to a customer.
 	 * 
-	 * @param customerId
-	 * @return
+	 * @param customerId ID of the customer
+	 * @return List of Jobs belonging to the customer
 	 */
 	List<Job> getByCustomer(Integer customerId);
 
