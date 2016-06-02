@@ -13,7 +13,7 @@ import javax.persistence.Table;
  * backend. Each entity class requires a standard constructor and
  * getters/setters for usage in Java Spring.
  * 
- * @author Mike Hukiewitz
+ * @author Mike Hukiewitz & Philipp Minges
  *
  */
 @Entity
@@ -82,41 +82,73 @@ public class JobEntity implements Serializable
 		this.locked = isLocked;
 	}
 
+	/**
+	 * Gets the Job Number
+	 * @return the Jobnumber.
+     */
 	public Integer getJobNr()
 	{
 		return jobNr;
 	}
 
+	/**
+	 * Sets the Job Number for the {@link JobEntity}
+	 * @param jobNr
+     */
 	public void setJobNr(Integer jobNr)
 	{
 		this.jobNr = jobNr;
 	}
 
+	/**
+	 * Gets the Position Number of the {@link JobEntity}
+	 * @return the position Number
+     */
 	public Integer getPosNr()
 	{
 		return posNr;
 	}
 
+	/**
+	 * Sets the position Number of the {@link JobEntity}
+	 * @param posNr the position Number
+     */
 	public void setPosNr(Integer posNr)
 	{
 		this.posNr = posNr;
 	}
 
+	/**
+	 * Gets the Accounting Mode of the {@link JobEntity}
+	 * @return the given accounting Mode
+     */
 	public Integer getAccountingMode()
 	{
 		return accountingMode;
 	}
 
+	/**
+	 * Sets the Accounting Mode to the {@link JobEntity}
+	 * @param accountingMode
+     */
 	public void setAccountingMode(Integer accountingMode)
 	{
 		this.accountingMode = accountingMode;
 	}
 
+	/**
+	 * Gets the Customer ID of the {@link JobEntity}
+	 * @return the the Cusomer id.
+     */
 	public Integer getCustomerID()
 	{
 		return customerID;
 	}
 
+	/**
+	 * Sets the Customer id of the {@link JobEntity}
+	 * @param customerID the Customer id.
+     */
 	public void setCustomerID(Integer customerID)
 	{
 		this.customerID = customerID;
