@@ -25,9 +25,9 @@ public class UserJob implements Serializable
 	 * 
 	 * @param userId
 	 *            the unique identifier
-	 * @param jobNo
-	 * @param posNo
-	 * @param role
+	 * @param jobNo jobNo of the job
+	 * @param posNo posNo of the job
+	 * @param role role in this job
 	 */
 	public UserJob(Integer userId, Integer jobNo, Integer posNo, Integer role)
 	{
@@ -37,16 +37,27 @@ public class UserJob implements Serializable
 		this.role = role;
 	}
 
+	/**
+	 * empty constructor for JSON parsing
+	 */
 	public UserJob()
 	{
 
 	}
 
+	/**
+	 * get userID
+	 * @return the userID Integer
+     */
 	public Integer getUserId()
 	{
 		return userId;
 	}
 
+	/**
+	 * set the userID
+	 * @param userId Integer value
+     */
 	public void setUserId(Integer userId)
 	{
 		if (userId == null)
@@ -56,11 +67,19 @@ public class UserJob implements Serializable
 		this.userId = userId;
 	}
 
+	/**
+	 * get the jobNr
+	 * @return Integer value
+     */
 	public Integer getJobNr()
 	{
 		return jobNo;
 	}
 
+	/**
+	 * set the jobNr
+	 * @param jobNo Integer value
+     */
 	public void setJobNr(Integer jobNo)
 	{
 		if (jobNo == null)
@@ -70,21 +89,37 @@ public class UserJob implements Serializable
 		this.jobNo = jobNo;
 	}
 
+	/**
+	 * get posNr
+	 * @return Integer value
+     */
 	public Integer getPosNr()
 	{
 		return posNo;
 	}
 
+	/**
+	 * set the posNr
+	 * @param posNo Interger value
+     */
 	public void setPosNr(Integer posNo)
 	{
 		this.posNo = posNo;
 	}
 
+	/**
+	 * get the role
+	 * @return Integer value
+     */
 	public Integer getRole()
 	{
 		return role;
 	}
 
+	/**
+	 * set the role in this job
+	 * @param role Integer value
+     */
 	public void setRole(Integer role)
 	{
 		if (role == null)
@@ -94,11 +129,20 @@ public class UserJob implements Serializable
 		this.role = role;
 	}
 
+	/**
+	 * get the posNo
+	 * @return Integer value
+     */
 	public Integer getPosNo()
 	{
 		return posNo;
 	}
 
+	/**
+	 * set the posNo
+	 *
+	 * @param posNo Integer value
+     */
 	public void setPosNo(Integer posNo)
 	{
 		if (posNo == null)
@@ -108,6 +152,11 @@ public class UserJob implements Serializable
 		this.posNo = posNo;
 	}
 
+	/**
+	 * custom equals method
+	 * @param obj Object to compare to
+	 * @return Boolean value
+     */
 	public boolean equals(Object obj)
 	{
 		if (obj == null)
