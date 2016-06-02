@@ -160,7 +160,7 @@ public class CapacityNav extends Composite implements LogicObservable, CalendarO
 
     /**
      * Adds the Jobs to the {@link OptGroup} allJobsOptGroup.
-     * @param jobList
+     * @param jobList the List of Jobs.
      */
     private void addJobs(List<Job> jobList) {
         for (Job currentJob : jobList) {
@@ -171,7 +171,7 @@ public class CapacityNav extends Composite implements LogicObservable, CalendarO
 
     /**
      * Adds the PseudoJobs to the {@link OptGroup} myJobsOptGroup.
-     * @param pJobList
+     * @param pJobList the List of Pseudo Jobs.
      */
     private void addPseudoJobs(List<PseudoJob> pJobList) {
         for (PseudoJob currentPJob : pJobList) {
