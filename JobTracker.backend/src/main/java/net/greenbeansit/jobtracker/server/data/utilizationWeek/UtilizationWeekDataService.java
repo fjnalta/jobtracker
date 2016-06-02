@@ -14,6 +14,10 @@ import net.greenbeansit.jobtracker.shared.UtilizationWeek;
 public interface UtilizationWeekDataService
 {
 
+	/**
+	 * 
+	 * @return
+	 */
 	List<UtilizationWeek> getAll();
 
 	UtilizationWeek getUtilizationWeek(Integer utilId);

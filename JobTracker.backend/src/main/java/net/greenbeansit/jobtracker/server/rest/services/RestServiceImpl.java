@@ -73,7 +73,13 @@ public class RestServiceImpl implements RestService {
 
     @Override
     public List<UtilizationWeek> getAllUtilizationWeeks(Integer userId) {
-        return null;
+    	return utilizationWeekService.getByUser(userId);
+    }
+    
+    @Override
+    public UtilizationWeek getSingleUtilizationWeek(Integer userId, Integer utilId)
+    {
+    	return utilizationWeekService.getUtilizationWeek(utilId);
     }
 
     @Override

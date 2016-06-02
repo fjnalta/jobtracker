@@ -91,6 +91,16 @@ public interface RestService extends DirectRestService
 	@GET
 	@Path("/users/{userId}/utilization_week")
 	List<UtilizationWeek> getAllUtilizationWeeks(@PathParam("userId") Integer userId);
+	
+	/**
+	 * Gets a {@link UtilizationWeek} by its ID.
+	 * @param userId its author
+	 * @param utilId its ID
+	 * @return a {@link UtilizationWeek}
+	 */
+	@GET
+	@Path("/users/{userId}/utilization_week/{utilId}")
+	UtilizationWeek getSingleUtilizationWeek(@PathParam("userId") Integer userId, @PathParam("utilId") Integer utilId);
 
 	/**
 	 * Gets all {@link ActivityReport}s made by the {@link User} with the
@@ -492,9 +502,9 @@ public interface RestService extends DirectRestService
 		}
 
 		/**
-		 * Creates a new {@link 
-		 * @param jobs
-		 * @param customers
+		 * Creates a new {@link ProjectPageRestServiceResponse}
+		 * @param jobs list of unique jobs associated with the list of customers
+		 * @param customers list of customers
 		 */
 		public ProjectPageRestServiceResponse(List<Job> jobs,
 				List<Customer> customers)
@@ -503,21 +513,35 @@ public interface RestService extends DirectRestService
 			this.customers = customers;
 		}
 
+		/**
+		 * @return the jobs
+		 */
 		public List<Job> getJobs()
 		{
 			return jobs;
 		}
 
+		/**
+		 * set jobs
+		 * @param jobs
+		 */
 		public void setJobs(List<Job> jobs)
 		{
 			this.jobs = jobs;
 		}
 
+		/**
+		 * @return the customers
+		 */
 		public List<Customer> getCustomers()
 		{
 			return customers;
 		}
 
+		/**
+		 * set customers
+		 * @param customers
+		 */
 		public void setCustomers(List<Customer> customers)
 		{
 			this.customers = customers;
