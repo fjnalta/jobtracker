@@ -1,24 +1,17 @@
 package net.greenbeansit.jobtracker.client.components.widgets.calendar;
 
-import java.awt.List;
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 
 import org.gwtbootstrap3.client.ui.Button;
 import org.gwtbootstrap3.client.ui.TextBox;
 import org.gwtbootstrap3.client.ui.constants.IconType;
-import org.gwtbootstrap3.extras.fullcalendar.client.ui.Event;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.KeyPressEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -27,7 +20,7 @@ import net.greenbeansit.jobtracker.client.components.LogicObservable;
 import net.greenbeansit.jobtracker.shared.ActivityReport;
 
 /**
- * The Calendar time input from keyboard
+ * Displays the time and date of the selected {@link ActivityReportEvent}.
  * 
  * @author Jonathan
  *
@@ -104,7 +97,7 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 
 	/**
 	 * Initializes a new instance of the CalendarTimeInputWidget and sets the
-	 * Image of the Buttons. 
+	 * Image of the Buttons.
 	 */
 	public CalendarTimeInputWidget() {
 		initWidget(uiBinder.createAndBindUi(this));
@@ -134,6 +127,12 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 
 	}
 
+	/**
+	 * {@link UiHandler} for the even start textbox.
+	 * 
+	 * @param event
+	 *            {@link KeyPressEvent}
+	 */
 	@UiHandler("eventStart")
 	public void keyPressedEventStart(KeyPressEvent event) {
 		String before = eventStart.getText().replace(":", "");
@@ -144,6 +143,12 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 		notifyHandler();
 	}
 
+	/**
+	 * {@link UiHandler} for the event end textbox.
+	 * 
+	 * @param event
+	 *            {@link KeyPressEvent}
+	 */
 	@UiHandler("eventEnd")
 	public void keyPressedEventEnd(KeyPressEvent event) {
 		inputLengthIsToLong(eventEnd.getText(), event);
@@ -151,6 +156,12 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 		notifyHandler();
 	}
 
+	/**
+	 * {@link UiHandler} for the event pause textbox.
+	 * 
+	 * @param event
+	 *            {@link KeyPressEvent}
+	 */
 	@UiHandler("pause")
 	public void keyPressedPause(KeyPressEvent event) {
 		inputLengthIsToLong(pause.getText(), event);
@@ -158,6 +169,12 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 		notifyHandler();
 	}
 
+	/**
+	 * {@link UiHandler} for the duration textbox of the event.
+	 * 
+	 * @param event
+	 *            {@link KeyPressEvent}
+	 */
 	@UiHandler("workTime")
 	public void keyPressedWorkTime(KeyPressEvent event) {
 		inputLengthIsToLong(workTime.getText(), event);
@@ -173,6 +190,13 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 		notifyHandler();
 	}
 
+	/**
+	 * {@link UiHandler} for the {@link Button} to increase the event start
+	 * hours.
+	 * 
+	 * @param e
+	 *            {@link ClickEvent}
+	 */
 	@UiHandler("buttonTimeHourUpStart")
 	public void clickButtonTimeHourUpStart(ClickEvent e) {
 		increaseEventHours(eventStart);
@@ -180,6 +204,13 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 		notifyHandler();
 	}
 
+	/**
+	 * {@link UiHandler} for the {@link Button} to decrease the event start
+	 * hours.
+	 * 
+	 * @param e
+	 *            {@link ClickEvent}
+	 */
 	@UiHandler("buttonTimeHourDownStart")
 	public void clickButtonTimeHourDownStart(ClickEvent e) {
 		decreaseEventHours(eventStart);
@@ -187,6 +218,13 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 		notifyHandler();
 	}
 
+	/**
+	 * {@link UiHandler} for the {@link Button} to increase the event start
+	 * minutes.
+	 * 
+	 * @param e
+	 *            {@link ClickEvent}
+	 */
 	@UiHandler("buttonTimeMinuteUpStart")
 	public void clickButtonTimeMinuteUpStart(ClickEvent e) {
 		increaseEventMinutes(eventStart);
@@ -194,6 +232,13 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 		notifyHandler();
 	}
 
+	/**
+	 * {@link UiHandler} for the {@link Button} to decrease the event start
+	 * minutes.
+	 * 
+	 * @param e
+	 *            {@link ClickEvent}
+	 */
 	@UiHandler("buttonTimeMinuteDownStart")
 	public void clickButtonMinuteDownStart(ClickEvent e) {
 		decreaseEventMinutes(eventStart);
@@ -201,6 +246,12 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 		notifyHandler();
 	}
 
+	/**
+	 * {@link UiHandler} for the {@link Button} to increase the event end hours.
+	 * 
+	 * @param e
+	 *            {@link ClickEvent}
+	 */
 	@UiHandler("buttonTimeHourUpEnd")
 	public void clickButtonTimeHourUpEnd(ClickEvent e) {
 		increaseEventHours(eventEnd);
@@ -208,6 +259,12 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 		notifyHandler();
 	}
 
+	/**
+	 * {@link UiHandler} for the {@link Button} to decrease the event end hours.
+	 * 
+	 * @param e
+	 *            {@link ClickEvent}
+	 */
 	@UiHandler("buttonTimeHourDownEnd")
 	public void clickButtonTimeHourDownEnd(ClickEvent e) {
 		decreaseEventHours(eventEnd);
@@ -215,6 +272,13 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 		notifyHandler();
 	}
 
+	/**
+	 * {@link UiHandler} for the {@link Button} to increase the event end
+	 * minutes.
+	 * 
+	 * @param e
+	 *            {@link ClickEvent}
+	 */
 	@UiHandler("buttonTimeMinuteUpEnd")
 	public void clickButtonTimeMinuteUpEnd(ClickEvent e) {
 		increaseEventMinutes(eventEnd);
@@ -222,6 +286,13 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 		notifyHandler();
 	}
 
+	/**
+	 * {@link UiHandler} for the {@link Button} to decrease the event end
+	 * minutes.
+	 * 
+	 * @param e
+	 *            {@link ClickEvent}
+	 */
 	@UiHandler("buttonTimeMinuteDownEnd")
 	public void clickButtonMinuteDownEnd(ClickEvent e) {
 		decreaseEventMinutes(eventEnd);
@@ -229,30 +300,65 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 		notifyHandler();
 	}
 
+	/**
+	 * {@link UiHandler} for the {@link Button} to increase the hours of the
+	 * event pause.
+	 * 
+	 * @param e
+	 *            {@link ClickEvent}
+	 */
 	@UiHandler("buttonTimeHourUpPause")
 	public void clickButtonTimeHourUpPause(ClickEvent e) {
 		increasePauseHours(pause);
 		notifyHandler();
 	}
 
+	/**
+	 * {@link UiHandler} for the {@link Button} to decrease the hours of the
+	 * event pause.
+	 * 
+	 * @param e
+	 *            {@link ClickEvent}
+	 */
 	@UiHandler("buttonTimeHourDownPause")
 	public void clickButtonTimeHourDownPause(ClickEvent e) {
 		decreasePauseDurationHours(pause);
 		notifyHandler();
 	}
 
+	/**
+	 * {@link UiHandler} for the {@link Button} to increase the minutes of the
+	 * event pause.
+	 * 
+	 * @param e
+	 *            {@link ClickEvent}
+	 */
 	@UiHandler("buttonTimeMinuteUpPause")
 	public void clickButtonTimeMinuteUpPause(ClickEvent e) {
 		increasePauseMinutes(pause);
 		notifyHandler();
 	}
 
+	/**
+	 * {@link UiHandler} for the {@link Button} to decrease the minutes of the
+	 * event pause.
+	 * 
+	 * @param e
+	 *            {@link ClickEvent}
+	 */
 	@UiHandler("buttonTimeMinuteDownPause")
 	public void clickButtonMinuteDownPause(ClickEvent e) {
 		decreasePauseMinutes(pause);
 		notifyHandler();
 	}
 
+	/**
+	 * {@link UiHandler} for the {@link Button} to increase the hours of the
+	 * event duration.
+	 * 
+	 * @param e
+	 *            {@link ClickEvent}
+	 */
 	@UiHandler("buttonTimeHourUpDuration")
 	public void clickButtonTimeHourUpDuration(ClickEvent e) {
 		increaseDurationHours(workTime);
@@ -260,6 +366,13 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 		notifyHandler();
 	}
 
+	/**
+	 * {@link UiHandler} for the {@link Button} to decrease the hours of the
+	 * event duration.
+	 * 
+	 * @param e
+	 *            {@link ClickEvent}
+	 */
 	@UiHandler("buttonTimeHourDownDuration")
 	public void clickButtonTimeHourDownDuration(ClickEvent e) {
 		decreasePauseDurationHours(workTime);
@@ -267,6 +380,13 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 		notifyHandler();
 	}
 
+	/**
+	 * {@link UiHandler} for the {@link Button} to increase the minutes of the
+	 * event duration.
+	 * 
+	 * @param e
+	 *            {@link ClickEvent}
+	 */
 	@UiHandler("buttonTimeMinuteUpDuration")
 	public void clickButtonTimeMinuteUpDuration(ClickEvent e) {
 		increaseDurationMinutes(workTime);
@@ -274,6 +394,13 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 		notifyHandler();
 	}
 
+	/**
+	 * {@link UiHandler} for the {@link Button} to decrease the minutes of the
+	 * event duration.
+	 * 
+	 * @param e
+	 *            {@link ClickEvent}
+	 */
 	@UiHandler("buttonTimeMinuteDownDuration")
 	public void clickButtonTimeMinuteDownDuration(ClickEvent e) {
 		decreaseDurationMinutes(workTime);
@@ -281,30 +408,63 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 		notifyHandler();
 	}
 
+	/**
+	 * {@link UiHandler} for the {@link Button} to increase the start date.
+	 * 
+	 * @param e
+	 *            {@link ClickEvent}
+	 */
 	@UiHandler("buttonUpDateStart")
 	public void buttonUpDateStartClicked(ClickEvent e) {
 		increaseDate(dateStart);
 		notifyHandler();
 	}
 
+	/**
+	 * {@link UiHandler} for the {@link Button} to decrease the start date.
+	 * 
+	 * @param e
+	 *            {@link ClickEvent}
+	 */
 	@UiHandler("buttonDownDateStart")
 	public void buttonDownDateStartClicked(ClickEvent e) {
 		decreaseDate(dateStart);
 		notifyHandler();
 	}
 
+	/**
+	 * {@link UiHandler} for the {@link Button} to increase the end date of an
+	 * event.
+	 * 
+	 * @param e
+	 *            {@link ClickEvent}
+	 */
 	@UiHandler("buttonDownDateEnd")
 	public void buttonDownDateEndClicked(ClickEvent e) {
 		decreaseDate(dateEnd);
 		notifyHandler();
 	}
 
+	/**
+	 * {@link UiHandler} for the {@link Button} to decrease the end date of an
+	 * event.
+	 * 
+	 * @param e
+	 *            {@link ClickEvent}
+	 */
 	@UiHandler("buttonUpDateEnd")
 	public void buttonUpDateEndClicked(ClickEvent e) {
 		increaseDate(dateEnd);
 		notifyHandler();
 	}
 
+	/**
+	 * {@link UiHandler} for the {@link Button} that saves the
+	 * {@link ActivityReport}
+	 * 
+	 * @param e
+	 *            {@link ClickEvent}
+	 */
 	@UiHandler("buttonBook")
 	public void buttonBookClicked(ClickEvent e) {
 		int startTime = createTimeFromText(eventStart.getText());
@@ -583,6 +743,7 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 	 *            String "dd.mm"
 	 * @return Date Object
 	 */
+	@SuppressWarnings("deprecation")
 	private Date getDateFromBox(TextBox dateStart) {
 		String[] split = dateStart.getText().split("\\.");
 		int day = Integer.parseInt(split[0]);
@@ -636,6 +797,7 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 	 * @param dateTextBox
 	 *            "dd.mm"
 	 */
+	@SuppressWarnings("deprecation")
 	private void increaseDate(TextBox dateTextBox) {
 		Date dt = getDateFromBox(dateTextBox);
 		dt.setDate(dt.getDate() + 1);
@@ -648,6 +810,7 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 	 * 
 	 * @param dateTextBox
 	 */
+	@SuppressWarnings("deprecation")
 	private void decreaseDate(TextBox dateTextBox) {
 		Date dt = getDateFromBox(dateTextBox);
 		dt.setDate(dt.getDate() - 1);
@@ -869,12 +1032,17 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 			increaseDate(dateBox);
 		}
 	}
-
+	
+	/**
+	 * Makes the Copy- and Delete{@link Button} visible.
+	 */
 	public void makeCopyDeleteButtonsVisible() {
 		buttonCopy.setVisible(true);
 		buttonDelete.setVisible(true);
 	}
-
+	/**
+	 *  Makes the Copy- and Delete{@link Button} hidden.
+	 */
 	public void makeCopyDeleteButtonsHidden() {
 		buttonCopy.setVisible(false);
 		buttonDelete.setVisible(false);
