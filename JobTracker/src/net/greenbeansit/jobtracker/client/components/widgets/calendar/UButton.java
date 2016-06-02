@@ -6,15 +6,22 @@ import org.gwtbootstrap3.client.ui.Button;
 
 /**
  * This class extends from Button and contain a date
- * @author Yangus
+ * @author ahmed
  *
  */
 public class UButton extends Button {
  
-	Date date;
+	private Date date;
 	public UButton(String txt, Date d) {
 		super(txt);
 		this.date = d;
 		
+	}
+	/**
+	 * Return the Date of the day
+	 * @return date object
+	 */
+	public Date getDate(){
+		return date;
 	}
 }

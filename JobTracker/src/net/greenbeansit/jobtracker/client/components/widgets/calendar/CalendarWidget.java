@@ -190,11 +190,6 @@ public class CalendarWidget extends Composite implements CalendarObserver, Logic
 					public void select(JavaScriptObject start, JavaScriptObject end, NativeEvent event,
 							JavaScriptObject viewObject) {
 
-						GWT.log(start + "");
-						/*
-						 * Thu Jun 02 2016 08:15:00 GMT+0000
-						 *
-						 */
 						updateId();
 						ActivityReportEvent tmp = new ActivityReportEvent(eventID + "", eventTitel + eventID);
 						if (calendar.getCurrentView().toString().equals("month")) {
@@ -243,37 +238,45 @@ public class CalendarWidget extends Composite implements CalendarObserver, Logic
 						String startYear = splitStart[3];
 						String startMonth = addLeadingNull((getMonth(splitStart[1]) + 1) + "");
 						String startDay = splitStart[2];
-						Date neweEventDateStart = new Date(Integer.parseInt(startYear), getMonth(splitStart[1]),
+						Date newEventDateStart = new Date((Integer.parseInt(startYear)-1900), getMonth(splitStart[1]),
 								(Integer.parseInt(splitStart[2])));
 
 						String[] splitEnd = end.toString().split(" ");
 						String endYear = splitEnd[3];
-						Date newEventDateEnd = new Date(Integer.parseInt(endYear), getMonth(splitEnd[1]),
+						Date newEventDateEnd = new Date((Integer.parseInt(endYear)-1900), getMonth(splitEnd[1]),
 								(Integer.parseInt(splitEnd[2])));
 						newEventDateEnd.setDate(newEventDateEnd.getDate() - 1);
-						String endDay = addLeadingNull(newEventDateEnd.getDate() + "");
+						String endDay = addLeadingNull((newEventDateEnd.getDate()+1900) + "");
 
+						GWT.log("Start:->" + newEventDateStart.toGMTString()+"\n\r" + "End:->" + newEventDateEnd.toGMTString());
+						GWT.log(newEventDateStart.getYear()+"");
 						String eventStandardStart = startYear + "-" + startMonth + "-" + startDay + "T08:00:00.000Z";
 						String eventStandardEnd = startYear + "-" + startMonth + "-" + startDay + "T16:00:00.000Z";
-						if (neweEventDateStart.before(newEventDateEnd)) {
+						
+						Date st = new Date();
+						Date ed = new Date();
+						st = newEventDateStart;
+						ed = newEventDateStart;
+						ed.setHours(16);
+						st.setHours(8);
+						
+						if (newEventDateStart.before(newEventDateEnd)) {
 							tmp.setStart(eventStandardStart);
 							tmp.setEnd(eventStandardEnd);
 							addEvent(tmp, viewObject, event);
 
-							while (neweEventDateStart.before(newEventDateEnd)) {
-								neweEventDateStart.setDate(neweEventDateStart.getDate() + 1);
-								startDay = addLeadingNull("" + neweEventDateStart.getDate());
-								startMonth = addLeadingNull("" + (neweEventDateStart.getMonth() + 1));
-								startYear = "" + neweEventDateStart.getYear();
-
-								GWT.log(neweEventDateStart.toString() + "\n\ragain\n\r" + newEventDateEnd.toString()
-										+ "\n\r" + neweEventDateStart.before(newEventDateEnd));
+							while (newEventDateStart.before(newEventDateEnd)) {
+								newEventDateStart.setDate(newEventDateStart.getDate() + 1);
+								startDay = addLeadingNull("" + newEventDateStart.getDate());
+								startMonth = addLeadingNull("" + (newEventDateStart.getMonth() + 1));
+								startYear = "" + (newEventDateStart.getYear()+1900);
+								
 								ActivityReportEvent tempEvent = new ActivityReportEvent(eventID + "",
 										eventTitel + eventID);
 
 								eventStandardStart = startYear + "-" + startMonth + "-" + startDay + "T08:00:00.000Z";
 								eventStandardEnd = startYear + "-" + startMonth + "-" + startDay + "T16:00:00.000Z";
-
+								
 								tempEvent.setStart(eventStandardStart);
 								tempEvent.setEnd(eventStandardEnd);
 

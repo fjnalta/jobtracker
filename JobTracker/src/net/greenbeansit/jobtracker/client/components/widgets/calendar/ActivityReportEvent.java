@@ -123,7 +123,6 @@ public class ActivityReportEvent extends Event implements LogicObservable {
 	 *         else false.
 	 */
 	public boolean overlapsOtherEvent() {
-		GWT.log("Overlap");
 		handler.updateObservable(this);
 		return false;
 	}
@@ -150,15 +149,12 @@ public class ActivityReportEvent extends Event implements LogicObservable {
 	}
 
 	@Override
-	public void updateObservable() {
+	public void updateObservable() {		
 		String[] isoDateString = this.getISOStart().split("T")[0].split("-");
 		int year = Integer.parseInt((isoDateString[0])) - 1900;
 		int month = Integer.parseInt((isoDateString[1])) - 1;
 		int day = Integer.parseInt((isoDateString[2]));
 		reportList = handler.getReportsForDay(new Date(year, month, day));
-		for (ActivityReport p : reportList) {
-			GWT.log(p.toString());
-		}
 	}
 
 	@Override
