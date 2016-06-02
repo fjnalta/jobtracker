@@ -15,13 +15,15 @@ import java.util.List;
  */
 
 @Service("pseudoJobService")
-public class PseudoJobServiceJpa implements PseudoJobDataService {
-	
+public class PseudoJobServiceJpa implements PseudoJobDataService
+{
+
 	@Autowired
 	private PseudoJobEntityRepository repository;
 
 	@Override
-	public List<PseudoJob> getAll() {
+	public List<PseudoJob> getAll()
+	{
 		ArrayList<PseudoJob> list = new ArrayList<PseudoJob>();
 		for (PseudoJobEntity entity : repository.findAll())
 		{
@@ -31,7 +33,8 @@ public class PseudoJobServiceJpa implements PseudoJobDataService {
 	}
 
 	@Override
-	public List<PseudoJob> getAllByAuthor(Integer author) {
+	public List<PseudoJob> getAllByAuthor(Integer author)
+	{
 		ArrayList<PseudoJob> list = new ArrayList<PseudoJob>();
 		for (PseudoJobEntity entity : repository.findByAuthor(author))
 		{
@@ -45,7 +48,7 @@ public class PseudoJobServiceJpa implements PseudoJobDataService {
 	{
 		return convert(repository.findById(pseudoJobId));
 	}
-	
+
 	@Override
 	public boolean save(PseudoJob report)
 	{
@@ -57,12 +60,13 @@ public class PseudoJobServiceJpa implements PseudoJobDataService {
 	{
 		repository.delete(convert(report));
 	}
-	
+
 	private PseudoJob convert(PseudoJobEntity entity)
 	{
 		if (entity == null)
 			return null;
-		return new PseudoJob(entity.getId(), entity.getName(), entity.getAuthor());
+		return new PseudoJob(entity.getId(), entity.getName(),
+				entity.getAuthor());
 	}
 
 	private PseudoJobEntity convert(PseudoJob pseudoJob)

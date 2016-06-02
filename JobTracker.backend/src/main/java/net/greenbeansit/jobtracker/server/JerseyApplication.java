@@ -20,6 +20,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.web.SpringBootServletInitializer;
 
+/**
+ * EntryPoint for the apache tomcat server.
+ * @author Mike Hukiewitz
+ *
+ */
 @SpringBootApplication
 public class JerseyApplication extends SpringBootServletInitializer
 {

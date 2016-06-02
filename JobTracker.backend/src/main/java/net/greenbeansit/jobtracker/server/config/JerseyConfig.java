@@ -23,6 +23,11 @@ import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
 
 import net.greenbeansit.jobtracker.server.rest.services.RestServiceImpl;
 
+/**
+ * Configuration component for JerseyApplication.java.
+ * @author Mike Hukiewitz
+ *
+ */
 @Component
 public class JerseyConfig extends ResourceConfig
 {

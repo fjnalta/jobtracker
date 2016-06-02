@@ -4,20 +4,50 @@ import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
 
-public interface ActivityReportTemplateEntityRepository extends CrudRepository<ActivityReportTemplateEntity, Integer>
+/**
+ * Repository for handling {@link ActivityReportTemplateEntity} and making requests to
+ * the database.
+ * 
+ * @author Mike Hukiewitz
+ *
+ */
+public interface ActivityReportTemplateEntityRepository
+		extends CrudRepository<ActivityReportTemplateEntity, Integer>
 {
 
+	/**
+	 * Deletes the given entity.
+	 * 
+	 * @param deleted
+	 *            entity to delete.
+	 */
 	void delete(ActivityReportTemplateEntity deleted);
 
-//	List<ActivityReportTemplateEntity> findAll();
-
-//	ActivityReportTemplateEntity findById(Integer id);
-
+	/**
+	 * Saves an {@link ActivityReportTemplateEntity} to the database.
+	 * 
+	 * @param persisted
+	 *            {@link ActivityReportTemplateEntity} to save
+	 * @return the persisted {@link ActivityReportTemplateEntity}
+	 */
 	@SuppressWarnings("unchecked")
 	ActivityReportTemplateEntity save(ActivityReportTemplateEntity persisted);
 
+	/**
+	 * Returns all {@link ActivityReportTemplateEntity} written by a given user.
+	 * 
+	 * @param author
+	 *            ID of the author
+	 * @return List of his {@link ActivityReportTemplateEntity}
+	 */
 	List<ActivityReportTemplateEntity> findByAuthor(Integer author);
-	
-	ActivityReportTemplateEntity findByAuthorAndName(Integer author, String name);
-//	ActivityReportTemplateEntity findByAuthor(Integer author);
+
+	/**
+	 * Returns an {@link ActivityReportTemplateEntity} by it's unique combination of author and template name.
+	 * @param author ID of the author
+	 * @param name name of the template
+	 * @return corresponding {@link ActivityReportTemplateEntity}
+	 */
+	ActivityReportTemplateEntity findByAuthorAndName(Integer author,
+			String name);
 }

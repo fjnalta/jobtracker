@@ -4,72 +4,106 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
-@Entity @IdClass(ActivityReportTemplateEntityId.class)
+/**
+ * A class representing ActivityReportTemplate as entities in our database. Only
+ * used in backend. Each entity class requires a standard constructor and
+ * getters/setters for usage in Java Spring.
+ * 
+ * @author Mike Hukiewitz
+ *
+ */
+@Entity
+@IdClass(ActivityReportTemplateEntityId.class)
 @Table(name = "activity_report_template")
-public class ActivityReportTemplateEntity implements Serializable {
+public class ActivityReportTemplateEntity implements Serializable
+{
 
-    /**
-     *
-     */
-    private static final long serialVersionUID = -804679538322787505L;
+	/**
+	 *
+	 */
+	private static final long	serialVersionUID	= -804679538322787505L;
 
-    @Id @Column(name = "author", nullable = false)
-    private Integer author;
-    @Id @Column(name = "name", nullable = false)
-    private String name;
-    @Column(name = "text")
-    private String text;
-    @Column(name = "taskId")
-    private Integer taskId;
+	@Id
+	@Column(name = "author", nullable = false)
+	private Integer				author;
+	@Id
+	@Column(name = "name", nullable = false)
+	private String				name;
+	@Column(name = "text")
+	private String				text;
+	@Column(name = "taskId")
+	private Integer				taskId;
 
+	/**
+	 * Standard constructor for internal purposes.
+	 */
+	public ActivityReportTemplateEntity()
+	{
 
-    public ActivityReportTemplateEntity() {
+	}
 
-    }
+	/**
+	 * Creates a new {@link ActivityReportTemplateEntity}.
+	 * 
+	 * @param name
+	 *            name given by the author
+	 * @param text
+	 *            description as written by the author
+	 * @param taskId
+	 *            corresponding id for eventual JIRA compatibility
+	 * @param author
+	 *            id of the author
+	 */
+	public ActivityReportTemplateEntity(String name, String text,
+			Integer taskId, Integer author)
+	{
+		this.name = name;
+		this.text = text;
+		this.taskId = taskId;
+		this.author = author;
+	}
 
-    /**
-     * Constructor for a new template
-     */
-    public ActivityReportTemplateEntity(String name, String text, Integer taskId, Integer author) {
-        this.name = name;
-        this.text = text;
-        this.taskId = taskId;
-        this.author = author;
-    }
+	@Column(name = "name")
+	public String getName()
+	{
+		return name;
+	}
 
-    @Column(name = "name")
-    public String getName() {
-        return name;
-    }
+	public void setName(String name)
+	{
+		this.name = name;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	@Column(name = "text")
+	public String getText()
+	{
+		return text;
+	}
 
-    @Column(name = "text")
-    public String getText() {
-        return text;
-    }
+	public void setText(String text)
+	{
+		this.text = text;
+	}
 
-    public void setText(String text) {
-        this.text = text;
-    }
+	@Column(name = "task_id")
+	public Integer getTaskId()
+	{
+		return taskId;
+	}
 
-    @Column(name = "task_id")
-    public Integer getTaskId() {
-        return taskId;
-    }
+	public void setTaskId(Integer taskId)
+	{
+		this.taskId = taskId;
+	}
 
-    public void setTaskId(Integer taskId) {
-        this.taskId = taskId;
-    }
+	@Column(name = "author")
+	public Integer getAuthor()
+	{
+		return author;
+	}
 
-    @Column(name = "author")
-    public Integer getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(Integer author) {
-        this.author = author;
-    }
+	public void setAuthor(Integer author)
+	{
+		this.author = author;
+	}
 }

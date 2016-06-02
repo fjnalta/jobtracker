@@ -16,7 +16,7 @@ import net.greenbeansit.jobtracker.shared.User;
 /**
  * Implementation of UserDataService {@link UserDataService}.
  * 
- * @author Philipp Minges
+ * @author Philipp Minges & Mike Hukiewitz
  *
  */
 
@@ -99,7 +99,7 @@ public class UserServiceJpa implements UserDataService
 	{
 		UserEntity user = repository.findById(employeeId);
 		user.setUtilization(Math.max(0, getUtilization(employeeId,
-				new Date(year-1900, 0, 1), new Date(year-1900, 11, 30))));
+				new Date(year - 1900, 0, 1), new Date(year - 1900, 11, 30))));
 		user.setUtilizationYear(year);
 		repository.save(user);
 	}

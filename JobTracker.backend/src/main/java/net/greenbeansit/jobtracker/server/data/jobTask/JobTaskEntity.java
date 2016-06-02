@@ -8,6 +8,16 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/**
+ * A class representing JobTask as entities in our database. Only used in
+ * backend. Each entity class requires a standard constructor and
+ * getters/setters for usage in Java Spring.
+ * 
+ * This class implements JIRA compatibility.
+ * 
+ * @author Mike Hukiewitz
+ *
+ */
 @Entity
 @Table(name = "job_task")
 public class JobTaskEntity implements Serializable
@@ -22,10 +32,33 @@ public class JobTaskEntity implements Serializable
 	@GeneratedValue
 	private Integer				id;
 
+	@Column(name = "job_no")
 	private Integer				jobNr;
+	@Column(name = "pos_no")
 	private Integer				posNr;
+	@Column(name = "name")
 	private String				name;
 
+	/**
+	 * Standard constructor for internal purposes.
+	 */
+	public JobTaskEntity()
+	{
+	}
+	
+	/**
+	 * Creates a new {@link JobTaskEntity}
+	 * @param jobNr 3 to 6 digits
+	 * @param posNr up to 3 digits
+	 * @param name name of the task
+	 */
+	public JobTaskEntity(Integer jobNr, Integer posNr, String name)
+	{
+		this.jobNr = jobNr;
+		this.posNr = posNr;
+		this.name = name;
+	}
+	
 	public Integer getId()
 	{
 		return id;
@@ -36,7 +69,6 @@ public class JobTaskEntity implements Serializable
 		this.id = id;
 	}
 
-	@Column(name = "job_no")
 	public Integer getJobNr()
 	{
 		return jobNr;
@@ -47,7 +79,6 @@ public class JobTaskEntity implements Serializable
 		this.jobNr = jobNr;
 	}
 
-	@Column(name = "pos_no")
 	public Integer getPosNr()
 	{
 		return posNr;
@@ -58,7 +89,6 @@ public class JobTaskEntity implements Serializable
 		this.posNr = posNr;
 	}
 
-	@Column(name = "name")
 	public String getName()
 	{
 		return name;
