@@ -20,6 +20,9 @@ import java.util.List;
  */
 public class WeeklyUtilizationWidget extends Composite {
 
+    /**
+     * UiBinder Interface for {@link WeeklyUtilizationWidget}
+     */
     interface WeeklyUtilizationWidgetUiBinder extends UiBinder<Widget, WeeklyUtilizationWidget> {
     }
 
@@ -32,6 +35,9 @@ public class WeeklyUtilizationWidget extends Composite {
     FlexTable table;
     private List<HorizontalPanel> list;
 
+    /**
+     * constructor
+     */
     public WeeklyUtilizationWidget() {
         initWidget(uiBinder.createAndBindUi(this));
 
@@ -44,6 +50,9 @@ public class WeeklyUtilizationWidget extends Composite {
         timer.schedule(300);
     }
 
+    /**
+     * creates a new utilization overview
+     */
     private void createNewUtilizationOverview(){
         table.removeAllRows();
 
@@ -54,7 +63,10 @@ public class WeeklyUtilizationWidget extends Composite {
         }
     }
 
-
+    /**
+     * creates a new bar chart list
+     * @return List<HorizontalPanel> with the charts
+     */
     // TODO - need to turn the bars 90°
     private List<HorizontalPanel> createBarChartList() {
         List<HorizontalPanel> list = new ArrayList<HorizontalPanel>();
