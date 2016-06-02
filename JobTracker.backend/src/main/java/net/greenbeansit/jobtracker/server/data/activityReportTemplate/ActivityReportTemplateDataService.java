@@ -7,7 +7,7 @@ import net.greenbeansit.jobtracker.shared.ActivityReportTemplate;
 /**
  * Database interface for {@link ActivityReportTemplate}s.
  * 
- * @author Mike Hukiewitz
+ * @author Mike Hukiewitz & Philipp Minges
  *
  */
 
@@ -53,7 +53,7 @@ public interface ActivityReportTemplateDataService
 	/**
 	 * Deletes a template from the database.
 	 * 
-	 * @param template
+	 * @param template the given Template
 	 */
 	void delete(ActivityReportTemplate template);
 }
