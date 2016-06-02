@@ -13,21 +13,37 @@ public class ActivityReportTemplateEntityId implements Serializable
 	private Integer				author;
 	private String				name;
 
+	/**
+	 * Gets the Author of the {@link ActivityReportTemplateEntityId}
+	 * @return the Author of the {@link ActivityReportTemplateEntityId}
+     */
 	public Integer getAuthor()
 	{
 		return author;
 	}
 
+	/**
+	 * Sets the Author of the {@link ActivityReportTemplateEntityId}
+	 * @param author the Author of the {@link ActivityReportTemplateEntityId}
+     */
 	public void setAuthor(Integer author)
 	{
 		this.author = author;
 	}
 
+	/**
+	 * Gets the Name of the {@link ActivityReportTemplateEntityId}
+	 * @return the Name of the {@link ActivityReportTemplateEntityId}.
+     */
 	public String getName()
 	{
 		return name;
 	}
 
+	/**
+	 * Sets the Name of the {@link ActivityReportTemplateEntityId}
+	 * @param name the Name of the {@link ActivityReportTemplateEntityId}
+     */
 	public void setName(String name)
 	{
 		this.name = name;
