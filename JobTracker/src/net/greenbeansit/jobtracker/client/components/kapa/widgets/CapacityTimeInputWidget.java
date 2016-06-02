@@ -12,6 +12,8 @@ import org.gwtbootstrap3.client.ui.constants.IconType;
  * Shows the bottom Widget on the Capacity Page. This Widget is used to display
  * the data of the actual UtilizationWeek of the {@link CapacityCalendarWidget}
  * It is also used to save new CapacityReportEvents to the Database.
+ *
+ * @author Philipp Minges
  */
 public class CapacityTimeInputWidget extends Composite {
     interface CapacityTimeInputWidgetUiBinder extends UiBinder<Widget, CapacityTimeInputWidget> {
