@@ -56,4 +56,5 @@ public interface ActivityReportTemplateDataService
 	 * @param template the given Template
 	 */
 	void delete(ActivityReportTemplate template);
+
 }

@@ -52,4 +52,5 @@ public interface ActivityReportTemplateEntityRepository
 	 */
 	ActivityReportTemplateEntity findByAuthorAndName(Integer author,
 			String name);
+
 }

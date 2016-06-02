@@ -100,8 +100,8 @@ public class WeeklyUtilizationWidget extends Composite {
     /**
      * get the barChart height of a day
      *
-     * @param date
-     * @return
+     * @param date the Date
+     * @return the bar chart height
      */
     private double getBarChartHeight(Date date) {
         //TODO read utilization from DB

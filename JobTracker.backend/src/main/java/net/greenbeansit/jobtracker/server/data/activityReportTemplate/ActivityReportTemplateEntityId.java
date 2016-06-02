@@ -68,4 +68,5 @@ public class ActivityReportTemplateEntityId implements Serializable
 	{
 		return super.hashCode();
 	}
+
 }

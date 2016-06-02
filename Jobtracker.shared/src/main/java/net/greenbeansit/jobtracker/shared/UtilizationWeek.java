@@ -23,6 +23,9 @@ public class UtilizationWeek implements Serializable {
     private Integer pseudoJobId;
     private Integer breakTime;
 
+    /**
+     * Empty Constructor for internal purposes
+     */
     public UtilizationWeek() {
 
     }
@@ -54,6 +57,10 @@ public class UtilizationWeek implements Serializable {
         this.breakTime = breakTime;
     }
 
+    /**
+     * Gets the ID of the UtilizationWeek
+     * @return the Id.
+     */
     public Integer getId() {
         return id;
     }
