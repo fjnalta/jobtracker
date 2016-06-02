@@ -26,7 +26,7 @@ public class SelectJobOption extends Option{
 
 	/**
 	 * Constructor for initialization with a {@link PseudoJob}
-	 * @param pjob
+	 * @param pjob the PseudoJob
      */
 	public SelectJobOption(PseudoJob pjob){
 		this.setJob(pjob);
