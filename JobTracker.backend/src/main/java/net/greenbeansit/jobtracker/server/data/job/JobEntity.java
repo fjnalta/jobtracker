@@ -154,51 +154,86 @@ public class JobEntity implements Serializable
 		this.customerID = customerID;
 	}
 
+	/**
+	 * @return the short description
+	 */
 	public String getDesc()
 	{
 		return desc;
 	}
 
+	/**
+	 * set short description
+	 * @param desc
+	 */
 	public void setDesc(String desc)
 	{
 		this.desc = desc;
 	}
 
+	/**
+	 * @return the maximum budget
+	 */
 	public Integer getMaxBudget()
 	{
 		return maxBudget;
 	}
 
+	/**
+	 * set maximum budget
+	 * @param maxBudget
+	 */
 	public void setMaxBudget(Integer maxBudget)
 	{
 		this.maxBudget = maxBudget;
 	}
 
+	/**
+	 * @return the used budget
+	 */
 	public Integer getUsedBudget()
 	{
 		return usedBudget;
 	}
 
+	/**
+	 * set used budget
+	 * @param usedBudget
+	 */
 	public void setUsedBudget(Integer usedBudget)
 	{
 		this.usedBudget = usedBudget;
 	}
 
+	/**
+	 * @return true if internal job
+	 */
 	public Boolean getIntern()
 	{
 		return intern;
 	}
 
+	/**
+	 * set whether internal job
+	 * @param isIntern
+	 */
 	public void setIntern(Boolean isIntern)
 	{
 		this.intern = isIntern;
 	}
 
+	/**
+	 * @return true if further booking is locked
+	 */
 	public Boolean getLocked()
 	{
 		return locked;
 	}
 
+	/**
+	 * set lock on further booking
+	 * @param isLocked
+	 */
 	public void setLocked(Boolean isLocked)
 	{
 		this.locked = isLocked;

@@ -17,31 +17,52 @@ public class UserJobEntityId implements Serializable
 	private Integer				jobNr;
 	private Integer				posNr;
 
+	/**
+	 * @return the user ID
+	 */
 	public Integer getUserId()
 	{
 		return userId;
 	}
 
+	/**
+	 * set user ID
+	 * @param userId
+	 */
 	public void setUserId(Integer userId)
 	{
 		this.userId = userId;
 	}
 
+	/**
+	 * @return the job number
+	 */
 	public Integer getJobNr()
 	{
 		return jobNr;
 	}
 
+	/**
+	 * set job number
+	 * @param jobNr
+	 */
 	public void setJobNr(Integer jobNr)
 	{
 		this.jobNr = jobNr;
 	}
 
+	/**
+	 * @return the position number
+	 */
 	public Integer getPosNr()
 	{
 		return posNr;
 	}
 
+	/**
+	 * set position number
+	 * @param posNr
+	 */
 	public void setPosNr(Integer posNr)
 	{
 		this.posNr = posNr;

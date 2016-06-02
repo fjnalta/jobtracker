@@ -78,61 +78,103 @@ public class UserEntity implements Serializable
 		this.supervisor = supervisor;
 	}
 
+	/**
+	 * @return the ID
+	 */
 	public Integer getId()
 	{
 		return id;
 	}
 
+	/**
+	 * set ID
+	 * @param id
+	 */
 	public void setId(Integer id)
 	{
 		this.id = id;
 	}
 
+	/**
+	 * @return the first name
+	 */
 	public String getName()
 	{
 		return name;
 	}
 
+	/**
+	 * set first name
+	 * @param name
+	 */
 	public void setName(String name)
 	{
 		this.name = name;
 	}
 
+	/**
+	 * @return the last name
+	 */
 	public String getSurname()
 	{
 		return surname;
 	}
 
+	/**
+	 * set last name
+	 * @param surname
+	 */
 	public void setSurname(String surname)
 	{
 		this.surname = surname;
 	}
 
+	/**
+	 * @return the supervisor ID
+	 */
 	public Integer getSupervisor()
 	{
 		return supervisor;
 	}
 
+	/**
+	 * set supervisor ID
+	 * @param supervisor
+	 */
 	public void setSupervisor(Integer supervisor)
 	{
 		this.supervisor = supervisor;
 	}
 
+	/**
+	 * @return the utilization in percent of {@link UserEntity#getUtilizationYear()}
+	 */
 	public Integer getUtilization()
 	{
 		return utilization;
 	}
 
+	/**
+	 * set utilization in percent of {@link UserEntity#getUtilizationYear()}
+	 * @param utilization
+	 */
 	public void setUtilization(Integer utilization)
 	{
 		this.utilization = utilization;
 	}
 
+	/**
+	 * @return the year which the utilization refers to
+	 */
 	public Integer getUtilizationYear()
 	{
 		return utilizationYear;
 	}
 
+	/**
+	 * set the year which the utilization refers to
+	 * @param utilizationYear
+	 */
 	public void setUtilizationYear(Integer utilizationYear)
 	{
 		this.utilizationYear = utilizationYear;

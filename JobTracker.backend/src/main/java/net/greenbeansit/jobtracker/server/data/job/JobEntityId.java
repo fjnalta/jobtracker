@@ -17,31 +17,52 @@ public class JobEntityId implements Serializable
 	private Integer				posNr;
 	private String				desc;
 
+	/**
+	 * @return the job number
+	 */
 	public Integer getJobNr()
 	{
 		return jobNr;
 	}
 
+	/**
+	 * set job number
+	 * @param jobNr
+	 */
 	public void setJobNr(Integer jobNr)
 	{
 		this.jobNr = jobNr;
 	}
 
+	/**
+	 * @return the position number
+	 */
 	public Integer getPosNr()
 	{
 		return posNr;
 	}
 
+	/**
+	 * set position number
+	 * @param posNr
+	 */
 	public void setPosNr(Integer posNr)
 	{
 		this.posNr = posNr;
 	}
 
+	/**
+	 * @return the description
+	 */
 	public String getDesc()
 	{
 		return desc;
 	}
 
+	/**
+	 * set description
+	 * @param desc
+	 */
 	public void setDesc(String desc)
 	{
 		this.desc = desc;

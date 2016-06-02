@@ -59,41 +59,69 @@ public class JobTaskEntity implements Serializable
 		this.name = name;
 	}
 	
+	/**
+	 * @return the ID
+	 */
 	public Integer getId()
 	{
 		return id;
 	}
 
+	/**
+	 * set ID
+	 * @param id
+	 */
 	public void setId(Integer id)
 	{
 		this.id = id;
 	}
 
+	/**
+	 * @return the job number
+	 */
 	public Integer getJobNr()
 	{
 		return jobNr;
 	}
 
+	/**
+	 * set job number
+	 * @param jobNr
+	 */
 	public void setJobNr(Integer jobNr)
 	{
 		this.jobNr = jobNr;
 	}
 
+	/**
+	 * @return the position number
+	 */
 	public Integer getPosNr()
 	{
 		return posNr;
 	}
 
+	/**
+	 * set position number
+	 * @param posNr
+	 */
 	public void setPosNr(Integer posNr)
 	{
 		this.posNr = posNr;
 	}
 
+	/**
+	 * @return the name
+	 */
 	public String getName()
 	{
 		return name;
 	}
 
+	/**
+	 * set name
+	 * @param name
+	 */
 	public void setName(String name)
 	{
 		this.name = name;

@@ -94,6 +94,7 @@ public class UserServiceJpa implements UserDataService
 		return repository.findById(employeeId).getUtilization();
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public void updateYearUtilization(Integer employeeId, Integer year)
 	{

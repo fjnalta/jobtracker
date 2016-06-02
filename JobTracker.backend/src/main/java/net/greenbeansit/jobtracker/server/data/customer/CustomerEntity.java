@@ -45,6 +45,9 @@ public class CustomerEntity implements Serializable
 		this.name = name;
 	}
 	
+	/**
+	 * @return the ID
+	 */
 	public Integer getId()
 	{
 		return id;
@@ -61,7 +64,7 @@ public class CustomerEntity implements Serializable
 
 	/**
 	 * Gets the Name of the {@link CustomerEntity}
-	 * @return
+	 * @return the name
      */
 	public String getName()
 	{

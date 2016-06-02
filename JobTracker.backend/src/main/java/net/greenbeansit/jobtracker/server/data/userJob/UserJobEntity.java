@@ -65,41 +65,69 @@ public class UserJobEntity implements Serializable
 		this.role = role;
 	}
 	
+	/**
+	 * @return the user ID
+	 */
 	public Integer getUserId()
 	{
 		return userId;
 	}
 
+	/**
+	 * set user ID
+	 * @param userId
+	 */
 	public void setUserId(Integer userId)
 	{
 		this.userId = userId;
 	}
 
+	/**
+	 * @return the job number
+	 */
 	public Integer getJobNr()
 	{
 		return jobNr;
 	}
 
+	/**
+	 * set job number
+	 * @param jobNr
+	 */
 	public void setJobNr(Integer jobNr)
 	{
 		this.jobNr = jobNr;
 	}
 
+	/**
+	 * @return the position number
+	 */
 	public Integer getPosNr()
 	{
 		return posNr;
 	}
 
+	/**
+	 * set position number
+	 * @param posNr
+	 */
 	public void setPosNr(Integer posNr)
 	{
 		this.posNr = posNr;
 	}
 
+	/**
+	 * @return the role
+	 */
 	public Integer getRole()
 	{
 		return role;
 	}
 
+	/**
+	 * set role
+	 * @param role
+	 */
 	public void setRole(Integer role)
 	{
 		this.role = role;

@@ -4,8 +4,13 @@ import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
 
-import net.greenbeansit.jobtracker.server.data.activityReport.ActivityReportEntity;
-
+/**
+ * Repository for handling {@link UserJobEntity} and making requests to
+ * the database.
+ * 
+ * @author Mike Hukiewitz
+ *
+ */
 public interface UserJobEntityRepository
 		extends CrudRepository<UserJobEntity, Integer>
 {
@@ -19,28 +24,34 @@ public interface UserJobEntityRepository
 	void delete(UserJobEntity deleted);
 
 	/**
-	 * Saves an {@link ActivityReportEntity} to the database.
+	 * Saves an {@link UserJobEntity} to the database.
 	 * 
 	 * @param persisted
-	 *            {@link ActivityReportEntity} to save
-	 * @return the persisted {@link ActivityReportEntity}
+	 *            {@link UserJobEntity} to save
+	 * @return the persisted {@link UserJobEntity}
 	 */
 	@Override
 	@SuppressWarnings("unchecked")
 	UserJobEntity save(UserJobEntity persisted);
 
 	/**
-	 * @return all instances of {@link ActivityReportEntity}
+	 * @return all instances of {@link UserJobEntity}
 	 */
 	@Override
 	List<UserJobEntity> findAll();
 
 	/**
-	 * Returns all relations {@link 
-	 * @param userId
-	 * @return
+	 * Returns all instances of {@link UserJobEntity} which include the given user.
+	 * @param userId ID of the user
+	 * @return List of {@link UserJobEntity}
 	 */
 	List<UserJobEntity> findByUserId(Integer userId);
 
+	/**
+	 * Returns all instances of {@link UserJobEntity} which include the given job.
+	 * @param jobNr 3 to 6 digits
+	 * @param posNr up to 3 digits
+	 * @return List of {@link UserJobEntity}
+	 */
 	List<UserJobEntity> findByJobNrAndPosNr(Integer jobNr, Integer posNr);
 }
