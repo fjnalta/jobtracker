@@ -13,6 +13,12 @@ import net.greenbeansit.jobtracker.server.data.userJob.UserJobDataService;
 import net.greenbeansit.jobtracker.shared.Job;
 import net.greenbeansit.jobtracker.shared.UserJob;
 
+/**
+ * Implements {@link JobDataService}
+ * 
+ * @author Mike Hukiewitz
+ *
+ */
 @Service("jobService")
 public class JobServiceJpa implements JobDataService
 {

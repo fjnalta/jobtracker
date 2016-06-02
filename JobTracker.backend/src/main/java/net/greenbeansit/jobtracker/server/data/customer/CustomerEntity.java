@@ -48,21 +48,35 @@ public class CustomerEntity implements Serializable
 		this.name = name;
 	}
 	
+	/**
+	 * @return the ID
+	 */
 	public Integer getId()
 	{
 		return id;
 	}
 
+	/**
+	 * set ID
+	 * @param id
+	 */
 	public void setId(Integer id)
 	{
 		this.id = id;
 	}
 
+	/**
+	 * @return the name
+	 */
 	public String getName()
 	{
 		return name;
 	}
 
+	/**
+	 * set name
+	 * @param name
+	 */
 	public void setName(String name)
 	{
 		this.name = name;

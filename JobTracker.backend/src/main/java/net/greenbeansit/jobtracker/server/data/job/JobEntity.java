@@ -82,91 +82,154 @@ public class JobEntity implements Serializable
 		this.locked = isLocked;
 	}
 
+	/**
+	 * @return the job number
+	 */
 	public Integer getJobNr()
 	{
 		return jobNr;
 	}
 
+	/**
+	 * set job number
+	 * @param jobNr
+	 */
 	public void setJobNr(Integer jobNr)
 	{
 		this.jobNr = jobNr;
 	}
 
+	/**
+	 * @return the position number
+	 */
 	public Integer getPosNr()
 	{
 		return posNr;
 	}
 
+	/**
+	 * set position number
+	 * @param posNr
+	 */
 	public void setPosNr(Integer posNr)
 	{
 		this.posNr = posNr;
 	}
 
+	/**
+	 * @return the accounting mode: 0 = NF, 1 = TM (Time & Material), 2 = FP (Festpreis)
+	 */
 	public Integer getAccountingMode()
 	{
 		return accountingMode;
 	}
 
+	/**
+	 * set accounting mode: 0 = NF, 1 = TM (Time & Material), 2 = FP (Festpreis)
+	 * @param accountingMode
+	 */
 	public void setAccountingMode(Integer accountingMode)
 	{
 		this.accountingMode = accountingMode;
 	}
 
+	/**
+	 * @return the customer ID
+	 */
 	public Integer getCustomerID()
 	{
 		return customerID;
 	}
 
+	/**
+	 * set customer ID
+	 * @param customerID
+	 */
 	public void setCustomerID(Integer customerID)
 	{
 		this.customerID = customerID;
 	}
 
+	/**
+	 * @return the short description
+	 */
 	public String getDesc()
 	{
 		return desc;
 	}
 
+	/**
+	 * set description
+	 * @param desc
+	 */
 	public void setDesc(String desc)
 	{
 		this.desc = desc;
 	}
 
+	/**
+	 * @return the maximum budget
+	 */
 	public Integer getMaxBudget()
 	{
 		return maxBudget;
 	}
 
+	/**
+	 * set maximum budget
+	 * @param maxBudget
+	 */
 	public void setMaxBudget(Integer maxBudget)
 	{
 		this.maxBudget = maxBudget;
 	}
 
+	/**
+	 * @return the used budget
+	 */
 	public Integer getUsedBudget()
 	{
 		return usedBudget;
 	}
 
+	/**
+	 * set used budget
+	 * @param usedBudget
+	 */
 	public void setUsedBudget(Integer usedBudget)
 	{
 		this.usedBudget = usedBudget;
 	}
 
+	/**
+	 * @return true if internal job
+	 */
 	public Boolean getIntern()
 	{
 		return intern;
 	}
 
+	/**
+	 * set whether internal job
+	 * @param isIntern
+	 */
 	public void setIntern(Boolean isIntern)
 	{
 		this.intern = isIntern;
 	}
 
+	/**
+	 * @return true if locked for further booking
+	 */
 	public Boolean getLocked()
 	{
 		return locked;
 	}
 
+	/**
+	 * set lock on further booking
+	 * @param isLocked
+	 */
 	public void setLocked(Boolean isLocked)
 	{
 		this.locked = isLocked;

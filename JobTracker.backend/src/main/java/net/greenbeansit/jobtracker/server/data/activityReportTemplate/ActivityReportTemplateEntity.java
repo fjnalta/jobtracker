@@ -63,45 +63,69 @@ public class ActivityReportTemplateEntity implements Serializable
 		this.author = author;
 	}
 
-	@Column(name = "name")
+	/**
+	 * @return the name
+	 */
 	public String getName()
 	{
 		return name;
 	}
 
+	/**
+	 * set name
+	 * @param name
+	 */
 	public void setName(String name)
 	{
 		this.name = name;
 	}
 
-	@Column(name = "text")
+	/**
+	 * @return the description text
+	 */
 	public String getText()
 	{
 		return text;
 	}
 
+	/**
+	 * set description text
+	 * @param text
+	 */
 	public void setText(String text)
 	{
 		this.text = text;
 	}
 
-	@Column(name = "task_id")
+	/**
+	 * @return the task ID
+	 */
 	public Integer getTaskId()
 	{
 		return taskId;
 	}
 
+	/**
+	 * set task ID
+	 * @param taskId
+	 */
 	public void setTaskId(Integer taskId)
 	{
 		this.taskId = taskId;
 	}
 
-	@Column(name = "author")
+	/**
+	 * @return the author
+	 */
 	public Integer getAuthor()
 	{
 		return author;
 	}
 
+	/**
+	 * set author
+	 * @param author
+	 */
 	public void setAuthor(Integer author)
 	{
 		this.author = author;

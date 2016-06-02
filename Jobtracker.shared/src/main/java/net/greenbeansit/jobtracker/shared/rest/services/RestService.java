@@ -110,7 +110,7 @@ public interface RestService extends DirectRestService
 	 *            the ID of the {@link User}.
 	 * @param reportId
 	 * 			  the ID of the {@link ActivityReport}.
-	 * @return the specific {@link ActivityReport} with the given {@param reportId}.
+	 * @return the specific {@link ActivityReport} with the given reportId.
 	 * @throws NotFoundException
 	 *             if the employeeId does not exist.
 	 */

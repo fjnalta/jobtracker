@@ -9,6 +9,12 @@ import org.springframework.stereotype.Service;
 
 import net.greenbeansit.jobtracker.shared.UtilizationWeek;
 
+/**
+ * Implements {@link UtilizationWeekDataService}
+ * 
+ * @author Mike Hukiewitz
+ *
+ */
 @Service("utilizationWeekService")
 public class UtilizationWeekServiceJpa implements UtilizationWeekDataService
 {

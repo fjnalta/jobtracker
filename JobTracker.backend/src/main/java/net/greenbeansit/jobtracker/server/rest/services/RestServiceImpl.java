@@ -92,7 +92,8 @@ public class RestServiceImpl implements RestService {
     }
 
 
-    @Override
+    @SuppressWarnings("deprecation")
+	@Override
     public void saveReport(Integer userId, ActivityReport report) {
 //		report.setAuthor(userId);
         activityReportService.save(report);
@@ -223,7 +224,8 @@ public class RestServiceImpl implements RestService {
 		jobService.save(job);
 	}
 
-    @Override
+    @SuppressWarnings("deprecation")
+	@Override
     public Integer getUtilizationMonth(Integer userId, Integer year,
                                        Integer month) {
         //Sooooo dirty...
@@ -232,7 +234,8 @@ public class RestServiceImpl implements RestService {
         return userService.getUtilization(userId, from, to);
     }
 
-    @Override
+    @SuppressWarnings("deprecation")
+	@Override
     public Integer getUtilizationYear(Integer userId, Integer year) {
         //Oh gaaaaawd...
         Date from = new Date(year - 1900, 0, 1);
