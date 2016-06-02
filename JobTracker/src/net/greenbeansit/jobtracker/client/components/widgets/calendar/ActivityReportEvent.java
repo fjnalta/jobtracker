@@ -85,8 +85,8 @@ public class ActivityReportEvent extends Event implements LogicObservable {
 	/**
 	 * Method for setting the {@link ActivityReport} of the
 	 * {@link ActivityReportEvent}.
-	 * 
-	 * @param {@link ActivityReport} of the {@link ActivityReportEvent}
+	 *
+	 * @param ap {@link ActivityReport} to set
 	 */
 	public void setAp(ActivityReport ap) {
 		this.ap = ap;

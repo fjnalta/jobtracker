@@ -146,6 +146,11 @@ public class RestServiceImpl implements RestService {
     }
 
 
+    /**
+     * Parses a String to Date
+     * @param date the Date
+     * @return the newly created String.
+     */
     @SuppressWarnings("deprecation")
     private Date stringToDate(String date) {
         return new Date(Integer.parseInt(date.substring(0, 4)) - 1900, Integer.parseInt(date.substring(5, 7)) - 1, Integer.parseInt(date.substring(8)));

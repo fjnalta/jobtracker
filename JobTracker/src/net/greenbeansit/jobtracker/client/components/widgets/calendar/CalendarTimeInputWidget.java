@@ -621,7 +621,7 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 	/**
 	 * Increase the pause.
 	 * 
-	 * @param box
+	 * @param box TextBox to change
 	 */
 	private void increasePauseHours(TextBox box) {
 		String boxText = removeDoublePoint(box.getText());

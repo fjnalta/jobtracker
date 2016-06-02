@@ -89,6 +89,11 @@ public class ActivityReportServiceJpa implements ActivityReportDataService
 		return list;
 	}
 
+	/**
+	 * convert an {@link ActivityReportEntity} to a {@link ActivityReport}
+	 * @param entity the {@link ActivityReportEntity}
+	 * @return the converted {@link ActivityReport}
+     */
 	private ActivityReport convert(ActivityReportEntity entity)
 	{
 		if (entity == null)
@@ -102,6 +107,11 @@ public class ActivityReportServiceJpa implements ActivityReportDataService
 				duration, entity.getBreakTime());
 	}
 
+	/**
+	 * convert an {@link ActivityReport} to a {@link ActivityReportEntity}
+	 * @param report the {@link ActivityReport} to convert
+	 * @return the converted {@link ActivityReportEntity}
+     */
 	private ActivityReportEntity convert(ActivityReport report)
 	{
 		if (report == null)
@@ -114,12 +124,22 @@ public class ActivityReportServiceJpa implements ActivityReportDataService
 				report.getPosNr());
 	}
 
+	/**
+	 * convert time object to a Integer value
+	 * @param time java.sql.Time object
+	 * @return Integer value of the minutes and hours
+     */
 	@SuppressWarnings("deprecation")
 	private int convert(Time time)
 	{
 		return time.getMinutes() + time.getHours() * 60;
 	}
 
+	/**
+	 * convert a inter value of minutes into a Time object
+	 * @param minutes Integer value of minutes
+	 * @return a java.sql.Time object
+     */
 	@SuppressWarnings("deprecation")
 	private Time convert(int minutes)
 	{
