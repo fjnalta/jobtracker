@@ -128,6 +128,11 @@ public class CalendarWidget extends Composite implements CalendarObserver, Logic
 				handler.loadAllReports();
 			}
 
+			/**
+			 * This method returns the {@link ClickAndHoverConfig}
+			 * 
+			 * @return {@link ClickAndHoverConfig}
+			 */
 			private ClickAndHoverConfig getClickAndHoverConfig() {
 				ClickAndHoverConfig clickHoverConfig = new ClickAndHoverConfig(new ClickAndHoverEventCallback() {
 					@Override
@@ -170,6 +175,11 @@ public class CalendarWidget extends Composite implements CalendarObserver, Logic
 				return clickHoverConfig;
 			}
 
+			/**
+			 * This method returns the {@link SelectConfig}
+			 * 
+			 * @return {@link SelectConfig}
+			 */
 			private SelectConfig getSelectConfig() {
 				SelectConfig selectConfig = new SelectConfig(new SelectEventCallback() {
 					/**
@@ -180,7 +190,7 @@ public class CalendarWidget extends Composite implements CalendarObserver, Logic
 					public void select(JavaScriptObject start, JavaScriptObject end, NativeEvent event,
 							JavaScriptObject viewObject) {
 
-						GWT.log(start.toString() + "\n\rdraw\n\r" + calendar.getCurrentView().toString());
+						GWT.log(start + "");
 						/*
 						 * Thu Jun 02 2016 08:15:00 GMT+0000
 						 *
@@ -198,6 +208,14 @@ public class CalendarWidget extends Composite implements CalendarObserver, Logic
 						notifyHandler();
 					}
 
+					/**
+					 * This method adds an {@link ActivityReportEvent} to the
+					 * calendar.
+					 * 
+					 * @param tmp {@link ActivityReportEvent}
+					 * @param viewObject {@link JavaScriptObject}
+					 * @param event {@link NativeEvent}
+					 */
 					private void addEvent(ActivityReportEvent tmp, JavaScriptObject viewObject, NativeEvent event) {
 						unselect(viewObject, event);
 						calendar.addEvent(tmp);
@@ -332,6 +350,10 @@ public class CalendarWidget extends Composite implements CalendarObserver, Logic
 				return selectConfig;
 			}
 
+			/**
+			 * This method returns the {@link DragAndResizeConfig}
+			 * @return {@link DragAndResizeConfig}
+			 */
 			private DragAndResizeConfig getDragAndResizeConfig() {
 				DragAndResizeConfig dr = new DragAndResizeConfig(new DragAndResizeCallback() {
 
@@ -362,9 +384,6 @@ public class CalendarWidget extends Composite implements CalendarObserver, Logic
 						notifyHandler();
 					}
 
-					/**
-					 * This method should copy an event
-					 */
 					@Override
 					public void eventDragStart(JavaScriptObject calendarEvent, NativeEvent nativeEvent) {
 
