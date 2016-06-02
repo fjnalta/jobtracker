@@ -191,6 +191,12 @@ public class ActivityReport implements Serializable
 		this.date = date;
 	}
 
+	/**
+	 * set Date with integer values
+	 * @param year Integer year value
+	 * @param month	Integer month value
+     * @param day Integer day value
+     */
 	@SuppressWarnings("deprecation")
 	public void setDate(Integer year, Integer month, Integer day)
 	{
