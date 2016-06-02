@@ -17,7 +17,6 @@ import org.springframework.stereotype.Component;
  * that the correct files get cached.
  * 
  * @author See Wah Cheng
- * @created 24 Feb 2009
  */
 @Component
 public class CORSFilter implements Filter {
