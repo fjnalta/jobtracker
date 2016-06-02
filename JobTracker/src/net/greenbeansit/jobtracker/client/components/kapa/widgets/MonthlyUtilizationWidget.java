@@ -29,10 +29,16 @@ public class MonthlyUtilizationWidget extends Composite implements CalendarObser
 
     private static CalendarUtilizationWidgetUiBinder uiBinder = GWT.create(CalendarUtilizationWidgetUiBinder.class);
 
+    /**
+     * This Method is called from the {@link CalendarObserver}
+     */
     @Override
     public void update() {
     }
 
+    /**
+     * This Method notifies the {@link CalendarObserver} about changes.
+     */
     @Override
     public void notifyHandler() {
         calendarHandler.updateObserver(this);
@@ -50,6 +56,10 @@ public class MonthlyUtilizationWidget extends Composite implements CalendarObser
     @UiField
     Button rightButton;
 
+    /**
+     * This Method sets the previous Month of the {@link CapacityCalendarWidget}
+     * @param e {@link ClickEvent}
+     */
     @UiHandler("leftButton")
     public void clickHandlerLeftButton(ClickEvent e) {
         createNewTimeline();
@@ -57,6 +67,10 @@ public class MonthlyUtilizationWidget extends Composite implements CalendarObser
         notifyHandler();
     }
 
+    /**
+     * This Method sets the next Month of the {@link CapacityCalendarWidget}
+     * @param e {@link ClickEvent}
+     */
     @UiHandler("rightButton")
     public void clickHandlerRightButton(ClickEvent e) {
         createNewTimeline();
@@ -70,8 +84,10 @@ public class MonthlyUtilizationWidget extends Composite implements CalendarObser
     private String[] months = {"Jan", "Feb", "Mar", "Apr", "Mai", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dez"};
     private List<VerticalPanel> list;
 
-    private int year, month;
-
+    /**
+     * Initializes a new Instance of the {@link MonthlyUtilizationWidget}. This Widget
+     * shows the Utilization for every Month in this year.
+     */
     public MonthlyUtilizationWidget() {
 
         calendarHandler.addObserver(this);
@@ -85,9 +101,6 @@ public class MonthlyUtilizationWidget extends Composite implements CalendarObser
             }
         };
         timer.schedule(300);
-
-//        calendarHandler.calendar.getDate();
-
 
         this.leftButton.setIcon(IconType.ARROW_LEFT);
         this.rightButton.setIcon(IconType.ARROW_RIGHT);
@@ -117,6 +130,10 @@ public class MonthlyUtilizationWidget extends Composite implements CalendarObser
         }
     }
 
+    /**
+     * This Method creates a Vertical Panel for every Month
+     * @return list the ArrayList of the Panels.
+     */
     private List<VerticalPanel> createBarChartList() {
         List<VerticalPanel> list = new ArrayList<VerticalPanel>();
 
