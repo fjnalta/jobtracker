@@ -30,6 +30,13 @@ public class User implements Serializable
 
 	}
 
+	/**
+	 *
+	 * @param id user ID
+	 * @param name user name
+	 * @param surname user surname
+	 * @param supervisor superviser ID for this user
+     */
 	public User(Integer id, String name, String surname, Integer supervisor)
 	{
 		this.id = id;
@@ -38,10 +45,18 @@ public class User implements Serializable
 		this.supervisor = supervisor;
 	}
 
+	/**
+	 *
+	 * @return id of this user
+     */
 	public Integer getId() {
 		return id;
 	}
 
+	/**
+	 * set id of this user
+	 * @param id Integer value
+     */
 	public void setId(Integer id) {
 		if(id == null)
 		{
@@ -50,10 +65,18 @@ public class User implements Serializable
 		this.id = id;
 	}
 
+	/**
+	 * get the name of this user
+	 * @return String value name
+     */
 	public String getName() {
 		return name;
 	}
 
+	/**
+	 * set the name of this user
+	 * @param name String value name
+     */
 	public void setName(String name) {
 		if(name == "")
 		{
@@ -62,10 +85,18 @@ public class User implements Serializable
 		this.name = name;
 	}
 
+	/**
+	 * get the surname of this user
+	 * @return the String value of surname
+     */
 	public String getSurname() {
 		return surname;
 	}
 
+	/**
+	 * set the surname of this user
+	 * @param surname String value
+     */
 	public void setSurname(String surname) {
 		if(surname == "")
 		{
@@ -74,10 +105,18 @@ public class User implements Serializable
 		this.surname = surname;
 	}
 
+	/**
+	 * get the superviser ID in charge for this user
+	 * @return Integer value
+     */
 	public Integer getSupervisor() {
 		return supervisor;
 	}
 
+	/**
+	 * set teh superviser id for this user
+	 * @param supervisor Integer value
+     */
 	public void setSupervisor(Integer supervisor) {
 		if(supervisor == null)
 		{
@@ -86,21 +125,37 @@ public class User implements Serializable
 		this.supervisor = supervisor;
 	}
 
+	/**
+	 * get the utilization of this user
+	 * @return utilization integer value
+     */
 	public Integer getUtilization()
 	{
 		return utilization;
 	}
 
+	/**
+	 * set the utilization for this user
+	 * @param utilization Integer value
+     */
 	public void setUtilization(Integer utilization)
 	{
 		this.utilization = utilization;
 	}
 
+	/**
+	 * get the assigned jobs for this user
+	 * @return all assigned jobs for this user
+     */
 	public List<JobID> getAssignedJobs()
 	{
 		return assignedJobs;
 	}
 
+	/**
+	 * set the assigned jobs for this user
+	 * @param assignedJobs List<JOBID> object
+     */
 	public void setAssignedJobs(List<JobID> assignedJobs)
 	{
 		this.assignedJobs = assignedJobs;
