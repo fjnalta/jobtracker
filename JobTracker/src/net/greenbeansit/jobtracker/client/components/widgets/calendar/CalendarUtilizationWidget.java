@@ -83,7 +83,7 @@ public class CalendarUtilizationWidget extends Composite implements CalendarObse
 	/**
 	 * This method create a new TimeLine.
 	 * 
-	 * @param newMonth
+	 * @param days
 	 *            the month which is choosen, e.g. 1 means the next month, -1
 	 *            the previous month
 	 */
@@ -199,10 +199,8 @@ public class CalendarUtilizationWidget extends Composite implements CalendarObse
 	/**
 	 * Get the BarChart for a day
 	 * 
-	 * @param height
+	 * @param number
 	 *            set the heigh of the Bar
-	 * @param style
-	 *            add css attribute so the widget
 	 * @return an new BarChart
 	 */
 	private VerticalPanel getBarChart(double number) {

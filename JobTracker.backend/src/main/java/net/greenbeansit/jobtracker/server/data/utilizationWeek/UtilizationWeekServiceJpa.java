@@ -83,6 +83,11 @@ public class UtilizationWeekServiceJpa implements UtilizationWeekDataService
 
 	// TODO change UtilizationWeekEntity Constructor in Backend
 
+	/**
+	 * Converty the {@link UtilizationWeekEntity} to {@link UtilizationWeek}
+	 * @param entity the {@link UtilizationWeekEntity}
+	 * @return the {@link UtilizationWeek}
+     */
 	private UtilizationWeek convert(UtilizationWeekEntity entity)
 	{
 		if (entity == null)
@@ -94,6 +99,11 @@ public class UtilizationWeekServiceJpa implements UtilizationWeekDataService
 		return null;
 	}
 
+	/**
+	 * Converty the {@link UtilizationWeek} to {@link UtilizationWeekEntity}
+	 * @param util the {@link UtilizationWeek}
+	 * @return the {@link UtilizationWeekEntity}
+	 */
 	private UtilizationWeekEntity convert(UtilizationWeek util)
 	{
 		if (util == null)
