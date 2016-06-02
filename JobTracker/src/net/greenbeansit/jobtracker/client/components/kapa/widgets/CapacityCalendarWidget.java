@@ -74,7 +74,7 @@ public class CapacityCalendarWidget extends Composite implements CalendarObserve
     public CapacityCalendarWidget() {
 
         calendarHandler.addObserver(this);
-        handler.setCalendar(this);
+        handler.setCapacityCalendar(this);
 
         initWidget(uiBinder.createAndBindUi(this));
 

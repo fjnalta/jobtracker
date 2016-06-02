@@ -164,6 +164,10 @@ public class LogicHandler {
 		return currentReportsList;
 	}
 
+	/**
+	 * get the current capacity report list
+	 * @return List<UtilizationWeek> object
+     */
 	public List<UtilizationWeek> getCurrentCapacityReportsList(){
 		return utilizationWeekList;
 	}
@@ -569,10 +573,18 @@ public class LogicHandler {
 		return currentJob;
 	}
 
+	/**
+	 * get the current {@link PseudoJob}
+	 * @return {@link PseudoJob} object
+     */
 	public PseudoJob getCurrentPseudoJob(){
 		return currentPJob;
 	}
 
+	/**
+	 * set the current {@link PseudoJob}
+	 * @param currentPJob {@link PseudoJob} object
+     */
 	public void setCurrentPJob(PseudoJob currentPJob) {
 		this.currentPJob = currentPJob;
 	}
@@ -625,10 +637,18 @@ public class LogicHandler {
 		this.calendar = calendar;
 	}
 
-	public void setCalendar(CapacityCalendarWidget calendar) {
+	/**
+	 * set the CapazityCalendarWidget
+	 * @param calendar the {@link CapacityCalendarWidget}
+     */
+	public void setCapacityCalendar(CapacityCalendarWidget calendar) {
 		this.capacityCalendar = calendar;
 	}
 
+	/**
+	 * get the CapacityCalendarWidget
+	 * @return the {@link CapacityCalendarWidget}
+     */
 	public CapacityCalendarWidget getCapacityCalendar(){
 		return this.capacityCalendar;
 	}
