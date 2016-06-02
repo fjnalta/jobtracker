@@ -98,111 +98,199 @@ public class ActivityReportEntity implements Serializable
 		this.breakTime = breakTime;
 	}
 
+	/**
+	 * get the ID
+	 * @return Integer value
+     */
 	public Integer getId()
 	{
 		return id;
 	}
 
+	/**
+	 * set the ID
+	 * @param id  ID Integer value
+     */
 	public void setId(Integer id)
 	{
 		this.id = id;
 	}
 
+	/**
+	 * get the authorID
+	 * @return Integer value
+     */
 	public Integer getAuthor()
 	{
 		return author;
 	}
 
+	/**
+	 * set the author ID
+	 * @param author Integer value
+     */
 	public void setAuthor(Integer author)
 	{
 		this.author = author;
 	}
 
+	/**
+	 * get the report text
+	 * @return String value
+     */
 	public String getText()
 	{
 		return text;
 	}
 
+	/**
+	 * set the report text
+	 * @param text String value
+     */
 	public void setText(String text)
 	{
 		this.text = text;
 	}
 
+	/**
+	 * get the begin Date
+	 * @return java.sql.Date object
+     */
 	public Date getBeginDate()
 	{
 		return beginDate;
 	}
 
+	/**
+	 * set the begin Date
+	 * @param beginDate java.sql.Date object
+     */
 	public void setBeginDate(Date beginDate)
 	{
 		this.beginDate = beginDate;
 	}
 
+	/**
+	 * get the begin Time
+	 * @return java.sql.time object
+     */
 	public Time getBeginTime()
 	{
 		return beginTime;
 	}
 
+	/**
+	 * set the begin time
+	 * @param beginTime java.sql.time object
+     */
 	public void setBeginTime(Time beginTime)
 	{
 		this.beginTime = beginTime;
 	}
 
+	/**
+	 * get the end date
+	 * @return java.sql.date object
+     */
 	public Date getEndDate()
 	{
 		return endDate;
 	}
 
+	/**
+	 * set the end date
+	 * @param endDate java.sql.date object
+     */
 	public void setEndDate(Date endDate)
 	{
 		this.endDate = endDate;
 	}
 
+	/**
+	 * get the endTime
+	 * @return java.sql.time object
+     */
 	public Time getEndTime()
 	{
 		return endTime;
 	}
 
+	/**
+	 * set the end time
+	 * @param endTime java.sql.time object
+     */
 	public void setEndTime(Time endTime)
 	{
 		this.endTime = endTime;
 	}
 
+	/**
+	 * get the task ID
+	 * @return Integer value
+     */
 	public Integer getTaskId()
 	{
 		return taskId;
 	}
 
+	/**
+	 * set the task ID
+	 * @param taskId Integer value
+     */
 	public void setTaskId(Integer taskId)
 	{
 		this.taskId = taskId;
 	}
 
+	/**
+	 * get the break time in minutes
+	 * @return Integer value
+     */
 	public Integer getBreakTime()
 	{
 		return breakTime;
 	}
 
+	/**
+	 * set the break time in minutes
+	 * @param breakTime Integer value
+     */
 	public void setBreakTime(Integer breakTime)
 	{
 		this.breakTime = breakTime;
 	}
 
+	/**
+	 * get the JobNo
+	 * @return Interger value
+     */
 	public Integer getJobNo()
 	{
 		return jobNo;
 	}
 
+	/**
+	 * set the JobNo
+	 * @param jobNo Integer value
+     */
 	public void setJobNo(Integer jobNo)
 	{
 		this.jobNo = jobNo;
 	}
 
+	/**
+	 * get the PosNo
+	 * @return Integer value
+     */
 	public Integer getPosNo()
 	{
 		return posNo;
 	}
 
+	/**
+	 * set the posNo
+	 * @param posNo Integer value
+     */
 	public void setPosNo(Integer posNo)
 	{
 		this.posNo = posNo;

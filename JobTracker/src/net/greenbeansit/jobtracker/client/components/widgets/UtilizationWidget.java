@@ -24,6 +24,9 @@ public class UtilizationWidget extends Composite implements LogicObservable{
 
 	private static UtilizationWidgetUiBinder uiBinder = GWT.create(UtilizationWidgetUiBinder.class);
 
+	/**
+	 * UiBinder for {@link UtilizationWidget}
+	 */
 	interface UtilizationWidgetUiBinder extends UiBinder<Widget, UtilizationWidget> {
 	}
 

@@ -86,7 +86,7 @@ public class ActivityReportEvent extends Event implements LogicObservable {
 	 * Method for setting the {@link ActivityReport} of the
 	 * {@link ActivityReportEvent}.
 	 * 
-	 * @return ap the {@link ActivityReport} of the {@link ActivityReportEvent}
+	 * @param {@link ActivityReport} of the {@link ActivityReportEvent}
 	 */
 	public void setAp(ActivityReport ap) {
 		this.ap = ap;
@@ -139,7 +139,7 @@ public class ActivityReportEvent extends Event implements LogicObservable {
 	 * @param ISOEnd
 	 *            End of the {@link ActivityReportEvent} as an ISO8601
 	 *            {@link String} (yyyy-mm-ddThh:mm:ss.000Z)
-	 * @return
+	 * @return a copy of a {@link ActivityReportEvent}
 	 */
 	public ActivityReportEvent copyEvent(String ISOStart, String ISOEnd) {
 		ActivityReportEvent arp = new ActivityReportEvent(this.getId(), this.getTitle());

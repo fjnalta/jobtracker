@@ -36,6 +36,9 @@ public class WorkDescriptionWidget extends Composite implements LogicObservable
 	private static WorkDescriptionWidgetUiBinder uiBinder =
 			GWT.create(WorkDescriptionWidgetUiBinder.class);
 
+	/**
+	 * UiBinder Interface for {@link WorkDescriptionWidget}
+	 */
 	interface WorkDescriptionWidgetUiBinder extends UiBinder<Widget, WorkDescriptionWidget>
 	{
 
@@ -97,7 +100,7 @@ public class WorkDescriptionWidget extends Composite implements LogicObservable
 
 	/**
 	 * Method for loading a selected template to the textFields
-	 * @param e
+	 * @param e CLickEvent
      */
 	@UiHandler("buttonLoad")
 	public void loadTemplate(final ClickEvent e){
@@ -107,7 +110,7 @@ public class WorkDescriptionWidget extends Composite implements LogicObservable
 
 	/**
 	 * add new Templates to the selectTemplate field
-	 * @param templateList
+	 * @param templateList a List with the templates to add
      */
 	public void addTemplates(List<ActivityReportTemplate> templateList){
 		for(ActivityReportTemplate t : templateList){
