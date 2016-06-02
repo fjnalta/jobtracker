@@ -21,6 +21,9 @@ public class CapacityTimeInputWidget extends Composite {
 
     private static CapacityTimeInputWidgetUiBinder uiBinder = GWT.create(CapacityTimeInputWidgetUiBinder.class);
 
+    /**
+     * Initializes a new Instance of CapacityTimeInputWidget.
+     */
     public CapacityTimeInputWidget() {
         initWidget(uiBinder.createAndBindUi(this));
 

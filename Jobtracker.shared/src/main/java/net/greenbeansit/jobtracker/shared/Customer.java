@@ -15,7 +15,9 @@ public class Customer implements Serializable
 	private Integer				id;
 	private String				name;
 
-
+	/**
+	 * Empty Constructor
+	 */
 	public Customer(){
 
 	}
@@ -34,11 +36,19 @@ public class Customer implements Serializable
 		this.name = name;
 	}
 
+	/**
+	 * Gets the Id of the Customer
+	 * @return the id.
+     */
 	public Integer getId()
 	{
 		return id;
 	}
 
+	/**
+	 * Sets the id of the Customer
+	 * @param id the id of the Customer.
+     */
 	public void setId(Integer id)
 	{
 		if (id == null)
@@ -48,11 +58,19 @@ public class Customer implements Serializable
 		this.id = id;
 	}
 
+	/**
+	 * Gets the Name of the Customer
+	 * @return the Name of the Customer.
+     */
 	public String getName()
 	{
 		return name;
 	}
 
+	/**
+	 * Sets the Name of the Customer.
+	 * @param name the Name of the Customer.
+     */
 	public void setName(String name)
 	{
 		if (name == null)

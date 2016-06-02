@@ -83,7 +83,7 @@ public class CapacityReportEvent extends Event {
 
     /**
      * Method for getting the possibility of the {@link CapacityReportEvent}
-     * @return
+     * @return the possibility.
      */
     public int getPossibility() {
         return this.possibility;
@@ -91,7 +91,7 @@ public class CapacityReportEvent extends Event {
 
     /**
      * Method for setting the possibility of the {@link CapacityReportEvent}
-     * @param possibility
+     * @param possibility the Possibility.
      */
     public void setPossibility(Integer possibility) {
         this.possibility = possibility;

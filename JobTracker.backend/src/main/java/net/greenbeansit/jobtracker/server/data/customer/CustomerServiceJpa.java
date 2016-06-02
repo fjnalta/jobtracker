@@ -11,7 +11,7 @@ import net.greenbeansit.jobtracker.shared.Customer;
 /**
  * Implementation of CustomerDataService {@link CustomerDataService}.
  * 
- * @author Mike Hukiewitz
+ * @author Mike Hukiewitz & Philipp Minges
  *
  */
 
@@ -45,6 +45,11 @@ public class CustomerServiceJpa implements CustomerDataService
 		return convert(repository.findByName(name));
 	}
 
+	/**
+	 * Converts a {@link CustomerEntity} to {@link Customer}
+	 * @param entity {@link CustomerEntity} the Customer Entity
+	 * @return {@link Customer} the Customer with Name and Id.
+     */
 	private Customer convert(CustomerEntity entity)
 	{
 		if (entity == null)

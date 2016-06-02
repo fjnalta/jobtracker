@@ -9,6 +9,7 @@ import com.google.gwt.user.client.ui.RootPanel;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
+ * @author GreenBeansIT & DESIGN
  */
 public class GwtEntryPoint implements EntryPoint
 {	

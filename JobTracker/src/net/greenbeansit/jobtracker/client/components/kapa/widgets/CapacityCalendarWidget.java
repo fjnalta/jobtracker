@@ -110,8 +110,8 @@ public class CapacityCalendarWidget extends Composite implements CalendarObserve
             /**
              * Create new event. It has an unique ID.
              *
-             * @param title
-             *            Title of the Event.
+             * @param title the Title of the Event.
+             * @param possibility the possibility of the Event.
              * @return new Event
              */
             private CapacityReportEvent createEvent(String title, Integer possibility) {
@@ -323,7 +323,7 @@ public class CapacityCalendarWidget extends Composite implements CalendarObserve
     /**
      * Prints the Month of the Calendar into a String. This Method is used to display the
      * name of the month in the {@link CapacityCalendarWidget}
-     * @param month
+     * @param month the given {@link CapacityCalendarWidget} Month.
      * @return out the {@link String} of the Month.
      */
     private String monthToString(int month) {
