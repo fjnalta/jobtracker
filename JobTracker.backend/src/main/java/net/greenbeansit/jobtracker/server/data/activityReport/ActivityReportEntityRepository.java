@@ -21,11 +21,13 @@ public interface ActivityReportEntityRepository
 	 * @param deleted
 	 *            entity to delete
 	 */
+	@Override
 	void delete(ActivityReportEntity deleted);
 
 	/**
 	 * @return all instances of {@link ActivityReportEntity}
 	 */
+	@Override
 	List<ActivityReportEntity> findAll();
 
 	/**
@@ -44,6 +46,7 @@ public interface ActivityReportEntityRepository
 	 *            {@link ActivityReportEntity} to save
 	 * @return the persisted {@link ActivityReportEntity}
 	 */
+	@Override
 	@SuppressWarnings("unchecked")
 	ActivityReportEntity save(ActivityReportEntity persisted);
 

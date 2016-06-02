@@ -21,6 +21,7 @@ public interface CustomerEntityRepository
 	 * @param deleted
 	 *            entity to delete.
 	 */
+	@Override
 	void delete(CustomerEntity deleted);
 
 	/**
@@ -30,12 +31,14 @@ public interface CustomerEntityRepository
 	 *            {@link CustomerEntity} to save
 	 * @return the persisted {@link CustomerEntity}
 	 */
+	@Override
 	@SuppressWarnings("unchecked")
 	CustomerEntity save(CustomerEntity persisted);
 
 	/**
 	 * @return all instances of {@link CustomerEntity}
 	 */
+	@Override
 	List<CustomerEntity> findAll();
 
 	/**

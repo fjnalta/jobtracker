@@ -20,11 +20,13 @@ public interface JobEntityRepository extends CrudRepository<JobEntity, Integer>
 	 * @param deleted
 	 *            entity to delete.
 	 */
+	@Override
 	void delete(JobEntity deleted);
 
 	/**
 	 * @return all instances of {@link JobEntity}
 	 */
+	@Override
 	List<JobEntity> findAll();
 
 	/**
@@ -34,6 +36,7 @@ public interface JobEntityRepository extends CrudRepository<JobEntity, Integer>
 	 *            {@link JobEntity} to save
 	 * @return the persisted {@link JobEntity}
 	 */
+	@Override
 	@SuppressWarnings("unchecked")
 	JobEntity save(JobEntity persisted);
 

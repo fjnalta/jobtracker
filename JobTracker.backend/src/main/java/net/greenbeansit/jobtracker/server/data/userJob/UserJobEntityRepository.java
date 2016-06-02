@@ -15,6 +15,7 @@ public interface UserJobEntityRepository
 	 * @param deleted
 	 *            entity to delete.
 	 */
+	@Override
 	void delete(UserJobEntity deleted);
 
 	/**
@@ -24,12 +25,14 @@ public interface UserJobEntityRepository
 	 *            {@link ActivityReportEntity} to save
 	 * @return the persisted {@link ActivityReportEntity}
 	 */
+	@Override
 	@SuppressWarnings("unchecked")
 	UserJobEntity save(UserJobEntity persisted);
 
 	/**
 	 * @return all instances of {@link ActivityReportEntity}
 	 */
+	@Override
 	List<UserJobEntity> findAll();
 
 	/**

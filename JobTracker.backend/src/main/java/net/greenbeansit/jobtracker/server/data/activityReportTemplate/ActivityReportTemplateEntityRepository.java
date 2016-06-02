@@ -21,6 +21,7 @@ public interface ActivityReportTemplateEntityRepository
 	 * @param deleted
 	 *            entity to delete.
 	 */
+	@Override
 	void delete(ActivityReportTemplateEntity deleted);
 
 	/**
@@ -30,6 +31,7 @@ public interface ActivityReportTemplateEntityRepository
 	 *            {@link ActivityReportTemplateEntity} to save
 	 * @return the persisted {@link ActivityReportTemplateEntity}
 	 */
+	@Override
 	@SuppressWarnings("unchecked")
 	ActivityReportTemplateEntity save(ActivityReportTemplateEntity persisted);
 
