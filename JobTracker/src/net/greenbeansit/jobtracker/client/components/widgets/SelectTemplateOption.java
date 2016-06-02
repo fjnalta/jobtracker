@@ -14,7 +14,7 @@ private ActivityReportTemplate template;
 
 	/**
 	 * initialize one object with a given {@link ActivityReportTemplate}
-	 * @param template
+	 * @param template the Template
      */
 	public SelectTemplateOption(ActivityReportTemplate template){
 		this.template = template;
