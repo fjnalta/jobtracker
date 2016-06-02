@@ -11,7 +11,7 @@ import net.greenbeansit.jobtracker.shared.ActivityReportTemplate;
 /**
  * Implements {@link ActivityReportTemplateDataService}
  * 
- * @author Mike Hukiewitz
+ * @author Mike Hukiewitz & Philipp Minges
  *
  */
 @Service("activityReportTemplateService")
@@ -63,6 +63,11 @@ public class ActivityReportTemplateServiceJpa
 		repository.delete(convert(report));
 	}
 
+	/**
+	 * Converts a {@link ActivityReportTemplateEntity} to {@link ActivityReportTemplate}
+	 * @param entity the {@link ActivityReportTemplateEntity}
+	 * @return the {@link ActivityReportTemplate}
+     */
 	private ActivityReportTemplate convert(ActivityReportTemplateEntity entity)
 	{
 		if (entity == null)
@@ -71,6 +76,11 @@ public class ActivityReportTemplateServiceJpa
 				entity.getTaskId(), entity.getAuthor());
 	}
 
+	/**
+	 * Converts a {@link ActivityReportTemplate} to {@link ActivityReportTemplateEntity}
+	 * @param report the {@link ActivityReportTemplate}
+	 * @return the {@link ActivityReportTemplateEntity}
+	 */
 	private ActivityReportTemplateEntity convert(ActivityReportTemplate report)
 	{
 		if (report == null)
