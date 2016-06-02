@@ -16,13 +16,15 @@ import net.greenbeansit.jobtracker.shared.UserJob;
  */
 
 @Service("userJobService")
-public class UserJobServiceJpa implements UserJobDataService {
-	
+public class UserJobServiceJpa implements UserJobDataService
+{
+
 	@Autowired
 	private UserJobEntityRepository repository;
 
 	@Override
-	public List<UserJob> getAll() {
+	public List<UserJob> getAll()
+	{
 		ArrayList<UserJob> list = new ArrayList<UserJob>();
 		for (UserJobEntity entity : repository.findAll())
 		{
@@ -41,12 +43,13 @@ public class UserJobServiceJpa implements UserJobDataService {
 		}
 		return list;
 	}
-	
+
 	@Override
 	public List<UserJob> getByJobNrAndPosNr(Integer jobNr, Integer posNr)
 	{
 		ArrayList<UserJob> list = new ArrayList<UserJob>();
-		for (UserJobEntity entity : repository.findByJobNrAndPosNr(jobNr, posNr))
+		for (UserJobEntity entity : repository.findByJobNrAndPosNr(jobNr,
+				posNr))
 		{
 			list.add(convert(entity));
 		}
@@ -57,15 +60,16 @@ public class UserJobServiceJpa implements UserJobDataService {
 	{
 		if (entity == null)
 			return null;
-		return new UserJob(entity.getUserId(), entity.getJobNr(), entity.getPosNr(), entity.getRole());
+		return new UserJob(entity.getUserId(), entity.getJobNr(),
+				entity.getPosNr(), entity.getRole());
 	}
 
-//	private JobEntity convert(UserJob user)
-//	{
-//		if (user == null)
-//			return null;
-//		return new JobEntity(job.getJobNr(), job.getPosNr(), job.getPayMode(),
-//				job.getUserJobID(), job.getDesc(), job.getMaxBudget(),
-//				job.getUsedBudget());
-//	}
+	// private JobEntity convert(UserJob user)
+	// {
+	// if (user == null)
+	// return null;
+	// return new JobEntity(job.getJobNr(), job.getPosNr(), job.getPayMode(),
+	// job.getUserJobID(), job.getDesc(), job.getMaxBudget(),
+	// job.getUsedBudget());
+	// }
 }

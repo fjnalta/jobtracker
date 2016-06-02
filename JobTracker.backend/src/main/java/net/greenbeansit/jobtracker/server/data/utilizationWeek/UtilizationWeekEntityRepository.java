@@ -4,9 +4,16 @@ import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
 
-public interface UtilizationWeekEntityRepository extends CrudRepository<UtilizationWeekEntity, Integer>
+public interface UtilizationWeekEntityRepository
+		extends CrudRepository<UtilizationWeekEntity, Integer>
 {
 
+	/**
+	 * Deletes the given entity.
+	 * 
+	 * @param deleted
+	 *            entity to delete.
+	 */
 	void delete(UtilizationWeekEntity deleted);
 
 	List<UtilizationWeekEntity> findAll();
@@ -17,6 +24,6 @@ public interface UtilizationWeekEntityRepository extends CrudRepository<Utilizat
 	UtilizationWeekEntity save(UtilizationWeekEntity persisted);
 
 	List<UtilizationWeekEntity> findByAuthor(Integer author);
-	
+
 	List<UtilizationWeekEntity> findByPseudoJobId(Integer pseudoJobId);
 }

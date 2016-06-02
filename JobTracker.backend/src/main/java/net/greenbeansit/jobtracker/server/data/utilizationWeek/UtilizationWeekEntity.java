@@ -30,12 +30,12 @@ public class UtilizationWeekEntity implements Serializable
 	private Integer				daysHoliday;
 	private Integer				possibilty;
 	private Integer				pseudoJobId;
-	
+
 	public UtilizationWeekEntity()
 	{
-		
+
 	}
-	
+
 	public UtilizationWeekEntity(Integer id, Integer author, Date begin,
 			Integer daysFree, Integer daysWork, Integer daysHoliday,
 			Integer possibility, Integer pseudoJobId)
@@ -49,10 +49,10 @@ public class UtilizationWeekEntity implements Serializable
 		this.possibilty = possibility;
 		this.pseudoJobId = pseudoJobId;
 	}
-	
-	public UtilizationWeekEntity(Integer author, Date begin,
-			Integer daysFree, Integer daysWork, Integer daysHoliday,
-			Integer possibility, Integer pseudoJobId)
+
+	public UtilizationWeekEntity(Integer author, Date begin, Integer daysFree,
+			Integer daysWork, Integer daysHoliday, Integer possibility,
+			Integer pseudoJobId)
 	{
 		this.author = author;
 		this.begin = begin;

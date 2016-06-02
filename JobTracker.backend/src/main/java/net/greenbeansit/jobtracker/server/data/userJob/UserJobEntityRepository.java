@@ -4,17 +4,40 @@ import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
 
-public interface UserJobEntityRepository extends CrudRepository<UserJobEntity, Integer>
+import net.greenbeansit.jobtracker.server.data.activityReport.ActivityReportEntity;
+
+public interface UserJobEntityRepository
+		extends CrudRepository<UserJobEntity, Integer>
 {
-	
+	/**
+	 * Deletes the given entity.
+	 * 
+	 * @param deleted
+	 *            entity to delete.
+	 */
 	void delete(UserJobEntity deleted);
-	
+
+	/**
+	 * Saves an {@link ActivityReportEntity} to the database.
+	 * 
+	 * @param persisted
+	 *            {@link ActivityReportEntity} to save
+	 * @return the persisted {@link ActivityReportEntity}
+	 */
 	@SuppressWarnings("unchecked")
 	UserJobEntity save(UserJobEntity persisted);
 
+	/**
+	 * @return all instances of {@link ActivityReportEntity}
+	 */
 	List<UserJobEntity> findAll();
 
+	/**
+	 * Returns all relations {@link 
+	 * @param userId
+	 * @return
+	 */
 	List<UserJobEntity> findByUserId(Integer userId);
-	
+
 	List<UserJobEntity> findByJobNrAndPosNr(Integer jobNr, Integer posNr);
 }

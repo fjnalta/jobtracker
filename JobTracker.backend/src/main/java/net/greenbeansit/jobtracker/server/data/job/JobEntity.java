@@ -8,9 +8,17 @@ import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.Table;
 
-@Entity @IdClass(JobEntityId.class)
+/**
+ * A class representing Job as entities in our database. Only used in
+ * backend. Each entity class requires a standard constructor and
+ * getters/setters for usage in Java Spring.
+ * 
+ * @author Mike Hukiewitz
+ *
+ */
+@Entity
+@IdClass(JobEntityId.class)
 @Table(name = "job")
-
 public class JobEntity implements Serializable
 {
 
@@ -19,11 +27,14 @@ public class JobEntity implements Serializable
 	 */
 	private static final long	serialVersionUID	= -8538049446050091809L;
 
-	@Id @Column(name = "job_no", nullable = false)
+	@Id
+	@Column(name = "job_no", nullable = false)
 	private Integer				jobNr;
-	@Id @Column(name = "pos_no", nullable = false)
+	@Id
+	@Column(name = "pos_no", nullable = false)
 	private Integer				posNr;
-	@Id @Column(name = "description", nullable = false)
+	@Id
+	@Column(name = "description", nullable = false)
 	private String				desc;
 	@Column(name = "accounting_mode")
 	private Integer				accountingMode;
@@ -38,11 +49,24 @@ public class JobEntity implements Serializable
 	@Column(name = "is_locked")
 	private Boolean				locked;
 
+	/**
+	 * Standard constructor for internal purposes.
+	 */
 	public JobEntity()
 	{
-
 	}
 
+	/**
+	 * Creates a new {@link JobEntity}.
+	 * @param jobNr 3 to 6 digits
+	 * @param posNr up to 3 digits
+	 * @param accountingMode 0 = NF, 1 = TM (Time & Material), 2 = FP (Festpreis)
+	 * @param customerID id of the customer
+	 * @param desc short description of the job (max. 30 characters)
+	 * @param maxBudget maximum budget 
+	 * @param usedBudget already used budget
+	 * @param isLocked true if job is locked for further booking
+	 */
 	public JobEntity(Integer jobNr, Integer posNr, Integer accountingMode,
 			Integer customerID, String desc, Integer maxBudget,
 			Integer usedBudget, boolean isLocked)
@@ -58,7 +82,6 @@ public class JobEntity implements Serializable
 		this.locked = isLocked;
 	}
 
-	
 	public Integer getJobNr()
 	{
 		return jobNr;
@@ -69,7 +92,6 @@ public class JobEntity implements Serializable
 		this.jobNr = jobNr;
 	}
 
-	
 	public Integer getPosNr()
 	{
 		return posNr;
@@ -80,7 +102,6 @@ public class JobEntity implements Serializable
 		this.posNr = posNr;
 	}
 
-	
 	public Integer getAccountingMode()
 	{
 		return accountingMode;
@@ -91,7 +112,6 @@ public class JobEntity implements Serializable
 		this.accountingMode = accountingMode;
 	}
 
-	
 	public Integer getCustomerID()
 	{
 		return customerID;
@@ -102,7 +122,6 @@ public class JobEntity implements Serializable
 		this.customerID = customerID;
 	}
 
-	
 	public String getDesc()
 	{
 		return desc;
@@ -113,7 +132,6 @@ public class JobEntity implements Serializable
 		this.desc = desc;
 	}
 
-	
 	public Integer getMaxBudget()
 	{
 		return maxBudget;
@@ -124,7 +142,6 @@ public class JobEntity implements Serializable
 		this.maxBudget = maxBudget;
 	}
 
-	
 	public Integer getUsedBudget()
 	{
 		return usedBudget;
@@ -135,7 +152,6 @@ public class JobEntity implements Serializable
 		this.usedBudget = usedBudget;
 	}
 
-	
 	public Boolean getIntern()
 	{
 		return intern;
@@ -145,7 +161,7 @@ public class JobEntity implements Serializable
 	{
 		this.intern = isIntern;
 	}
-	
+
 	public Boolean getLocked()
 	{
 		return locked;

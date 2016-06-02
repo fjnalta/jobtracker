@@ -8,6 +8,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/**
+ * A class representing User as entities in our database. Only used in
+ * backend. Each entity class requires a standard constructor and
+ * getters/setters for usage in Java Spring.
+ * 
+ * @author Mike Hukiewitz
+ *
+ */
 @Entity
 @Table(name = "user")
 public class UserEntity implements Serializable
@@ -22,25 +30,47 @@ public class UserEntity implements Serializable
 	@GeneratedValue
 	private Integer				id;
 
+	@Column(name = "name")
 	private String				name;
+	@Column(name = "surname")
 	private String				surname;
+	@Column(name = "supervisor")
 	private Integer				supervisor;
+	@Column(name = "utilization")
 	private Integer				utilization;
+	@Column(name = "utilization_year")
 	private Integer				utilizationYear;
-	
+
+	/**
+	 * Standard constructor for internal purposes.
+	 */
 	public UserEntity()
 	{
-		
+
 	}
-	
-	public UserEntity(Integer id, String name, String surname, Integer supervisor)
+
+	/**
+	 * Initializes an {@link UserEntity}
+	 * @param id ID of the user
+	 * @param name their first name
+	 * @param surname their last name
+	 * @param supervisor ID of the supervisor
+	 */
+	public UserEntity(Integer id, String name, String surname,
+			Integer supervisor)
 	{
 		this.id = id;
 		this.name = name;
 		this.surname = surname;
 		this.supervisor = supervisor;
 	}
-	
+
+	/**
+	 * Creates a new {@link UserEntity}
+	 * @param name their first name
+	 * @param surname their last name
+	 * @param supervisor ID of the supervisor
+	 */
 	public UserEntity(String name, String surname, Integer supervisor)
 	{
 		this.name = name;
@@ -58,7 +88,6 @@ public class UserEntity implements Serializable
 		this.id = id;
 	}
 
-	@Column(name = "name")
 	public String getName()
 	{
 		return name;
@@ -69,7 +98,6 @@ public class UserEntity implements Serializable
 		this.name = name;
 	}
 
-	@Column(name = "surname")
 	public String getSurname()
 	{
 		return surname;
@@ -80,7 +108,6 @@ public class UserEntity implements Serializable
 		this.surname = surname;
 	}
 
-	@Column(name = "supervisor")
 	public Integer getSupervisor()
 	{
 		return supervisor;
@@ -91,7 +118,6 @@ public class UserEntity implements Serializable
 		this.supervisor = supervisor;
 	}
 
-	@Column(name = "utilization")
 	public Integer getUtilization()
 	{
 		return utilization;
@@ -102,7 +128,6 @@ public class UserEntity implements Serializable
 		this.utilization = utilization;
 	}
 
-	@Column(name = "utilization_year")
 	public Integer getUtilizationYear()
 	{
 		return utilizationYear;

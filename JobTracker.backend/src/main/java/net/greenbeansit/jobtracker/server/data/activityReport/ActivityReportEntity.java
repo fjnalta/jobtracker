@@ -10,6 +10,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/**
+ * A class representing ActivityReport as entities in our database. Only used in
+ * backend. Each entity class requires a standard constructor and
+ * getters/setters for usage in Java Spring.
+ * 
+ * @author Mike Hukiewitz
+ *
+ */
 @Entity
 @Table(name = "activity_report")
 public class ActivityReportEntity implements Serializable
@@ -45,11 +53,35 @@ public class ActivityReportEntity implements Serializable
 	@Column(name = "pos_no")
 	private Integer				posNo;
 
+	/**
+	 * Standard constructor for internal purposes.
+	 */
 	public ActivityReportEntity()
 	{
-
 	}
 
+	/**
+	 * Creates a new {@link ActivityReportEntity}
+	 * 
+	 * @param author
+	 *            id of its author
+	 * @param text
+	 *            the description as written by the author
+	 * @param beginDate
+	 *            date of the report
+	 * @param beginTime
+	 *            when it begun
+	 * @param endTime
+	 *            when it ended
+	 * @param breakTime
+	 *            how much time (in minutes) was spent as break time
+	 * @param taskId
+	 *            corresponding id for eventual JIRA compatibility
+	 * @param jobNo
+	 *            3 to 6 digits
+	 * @param posNo
+	 *            up to 3 digits
+	 */
 	public ActivityReportEntity(Integer author, String text, Date beginDate,
 			Time beginTime, Time endTime, Integer breakTime, Integer taskId,
 			Integer jobNo, Integer posNo)
@@ -76,7 +108,6 @@ public class ActivityReportEntity implements Serializable
 		this.id = id;
 	}
 
-	
 	public Integer getAuthor()
 	{
 		return author;
@@ -87,7 +118,6 @@ public class ActivityReportEntity implements Serializable
 		this.author = author;
 	}
 
-	
 	public String getText()
 	{
 		return text;
@@ -98,7 +128,6 @@ public class ActivityReportEntity implements Serializable
 		this.text = text;
 	}
 
-	
 	public Date getBeginDate()
 	{
 		return beginDate;
@@ -109,7 +138,6 @@ public class ActivityReportEntity implements Serializable
 		this.beginDate = beginDate;
 	}
 
-	
 	public Time getBeginTime()
 	{
 		return beginTime;
@@ -120,7 +148,6 @@ public class ActivityReportEntity implements Serializable
 		this.beginTime = beginTime;
 	}
 
-	
 	public Date getEndDate()
 	{
 		return endDate;
@@ -131,7 +158,6 @@ public class ActivityReportEntity implements Serializable
 		this.endDate = endDate;
 	}
 
-	
 	public Time getEndTime()
 	{
 		return endTime;
@@ -142,7 +168,6 @@ public class ActivityReportEntity implements Serializable
 		this.endTime = endTime;
 	}
 
-	@Column(name = "task_id")
 	public Integer getTaskId()
 	{
 		return taskId;
@@ -153,7 +178,6 @@ public class ActivityReportEntity implements Serializable
 		this.taskId = taskId;
 	}
 
-	
 	public Integer getBreakTime()
 	{
 		return breakTime;
@@ -164,7 +188,6 @@ public class ActivityReportEntity implements Serializable
 		this.breakTime = breakTime;
 	}
 
-	
 	public Integer getJobNo()
 	{
 		return jobNo;
@@ -175,7 +198,6 @@ public class ActivityReportEntity implements Serializable
 		this.jobNo = jobNo;
 	}
 
-	
 	public Integer getPosNo()
 	{
 		return posNo;

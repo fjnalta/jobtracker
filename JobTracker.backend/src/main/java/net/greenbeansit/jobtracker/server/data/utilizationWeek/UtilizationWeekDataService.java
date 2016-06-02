@@ -18,11 +18,10 @@ public interface UtilizationWeekDataService
 
 	UtilizationWeek getUtilizationWeek(Integer utilId);
 
-	List<UtilizationWeek> getByPeriod(Date from,
-			Date to);
+	List<UtilizationWeek> getByPeriod(Date from, Date to);
 
 	List<UtilizationWeek> getByUser(Integer authorId);
-	
+
 	List<UtilizationWeek> getByPseudoJob(Integer pseudoJobId);
 
 	boolean save(UtilizationWeek util);

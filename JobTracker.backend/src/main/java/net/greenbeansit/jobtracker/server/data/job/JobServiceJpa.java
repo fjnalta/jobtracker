@@ -18,31 +18,35 @@ public class JobServiceJpa implements JobDataService
 {
 
 	@Autowired
-	private JobEntityRepository repository;
-	
-	@Inject
-	private UserJobDataService userJobService;
+	private JobEntityRepository	repository;
 
-	@Override @Transactional
+	@Inject
+	private UserJobDataService	userJobService;
+
+	@Override
+	@Transactional
 	public Job getJob(Integer jobNr, Integer posNr)
 	{
 		return convert(repository.findByJobNrAndPosNr(jobNr, posNr));
 	}
 
-	@Override @Transactional
+	@Override
+	@Transactional
 	public boolean save(Job job)
 	{
 		return repository.save(convert(job)) != null;
 	}
 
-	@Override @Transactional
+	@Override
+	@Transactional
 	public void delete(Job job)
 	{
-		repository.delete(repository
-				.findByJobNrAndPosNr(job.getJobNr(), job.getPosNr()));
+		repository.delete(
+				repository.findByJobNrAndPosNr(job.getJobNr(), job.getPosNr()));
 	}
 
-	@Override @Transactional
+	@Override
+	@Transactional
 	public List<Job> getAll()
 	{
 		ArrayList<Job> list = new ArrayList<Job>();
@@ -52,8 +56,9 @@ public class JobServiceJpa implements JobDataService
 		}
 		return list;
 	}
-	
-	@Override @Transactional
+
+	@Override
+	@Transactional
 	public List<Job> getByCustomer(Integer customerId)
 	{
 		ArrayList<Job> list = new ArrayList<Job>();
@@ -63,12 +68,13 @@ public class JobServiceJpa implements JobDataService
 		}
 		return list;
 	}
-	
-	@Override @Transactional
+
+	@Override
+	@Transactional
 	public List<Job> getByUser(Integer userId)
 	{
 		List<Job> jobs = new ArrayList<Job>();
-		for(UserJob relation : userJobService.getByUserId(userId))
+		for (UserJob relation : userJobService.getByUserId(userId))
 		{
 			jobs.add(getJob(relation.getJobNr(), relation.getPosNo()));
 		}
@@ -81,8 +87,8 @@ public class JobServiceJpa implements JobDataService
 			return null;
 		return new Job(entity.getJobNr(), entity.getPosNr(),
 				entity.getAccountingMode(), entity.getCustomerID(),
-				entity.getDesc(), entity.getMaxBudget(),
-				entity.getUsedBudget(), entity.getLocked());
+				entity.getDesc(), entity.getMaxBudget(), entity.getUsedBudget(),
+				entity.getLocked());
 	}
 
 	private JobEntity convert(Job job)
