@@ -28,6 +28,9 @@ public class JobsWidget extends Composite implements LogicObservable {
 
 	private static JobsWidgetUiBinder uiBinder = GWT.create(JobsWidgetUiBinder.class);
 
+	/**
+	 * UiBinder interface for {@link JobsWidget}
+	 */
 	interface JobsWidgetUiBinder extends UiBinder<Widget, JobsWidget> {
 
 	}

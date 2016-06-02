@@ -23,7 +23,9 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Created by Philipp Minges on 31.05.16.
+ * Displays the Capacity Calendar and all {@link CapacityCalendarWidget}s in it.
+ *
+ * @author Philipp Minges
  */
 public class CapacityCalendarWidget extends Composite implements CalendarObserver, LogicObservable {
 
@@ -36,30 +38,40 @@ public class CapacityCalendarWidget extends Composite implements CalendarObserve
     @UiField
     Column calendar;
 
+    /**
+     * This Method is called from the {@link CalendarObserver}
+     */
     @Override
     public void update() {
         fullcalendar.render();
-        GWT.log(fullcalendar.getDate().getMonth() +"");
+        GWT.log(fullcalendar.getDate().getMonth() + "");
         month.setSubText(monthToString(fullcalendar.getDate().getMonth()));
     }
 
+    /**
+     * This Method notifies the {@link CalendarObserver} about changes.
+     */
     @Override
     public void notifyHandler() {
         calendarHandler.updateObserver(this);
     }
 
+    /**
+     * This Method is called from the {@link LogicObservable}
+     */
     @Override
     public void updateObservable() {
-//        addActvityReports(handler.getCurrentCapacityReportsList());
+        // TODO - add CapacityReportEvents here
         fullcalendar.render();
     }
 
+    /**
+     * This Method notifies the {@link LogicObservable} about given changes
+     */
     @Override
     public void notifyLogicHandler() {
 
     }
-
-
 
     interface CapacityCalendarUiBinder extends UiBinder<Widget, CapacityCalendarWidget> {
     }
@@ -71,6 +83,9 @@ public class CapacityCalendarWidget extends Composite implements CalendarObserve
     List<CapacityReportEvent> eventList = new ArrayList<CapacityReportEvent>();
 
 
+    /**
+     * Initializes a new Instance of the {@link CapacityCalendarWidget}
+     */
     public CapacityCalendarWidget() {
 
         calendarHandler.addObserver(this);
@@ -85,7 +100,7 @@ public class CapacityCalendarWidget extends Composite implements CalendarObserve
             int titleNumber;
 
             /**
-             * refresh the ID variable. It should be call everytime you create a
+             * refresh the ID variable. It should be called everytime you create a
              * new event.
              */
             private void updateId() {
@@ -137,6 +152,10 @@ public class CapacityCalendarWidget extends Composite implements CalendarObserve
                 month.setSubText(monthToString(fullcalendar.getDate().getMonth()));
             }
 
+            /**
+             * Sets the Click and Hover config for the {@link CapacityCalendarWidget}
+             * @return the Click and Hover config
+             */
             private ClickAndHoverConfig getClickAndHoverConfig() {
                 ClickAndHoverConfig clickHoverConfig = new ClickAndHoverConfig(new ClickAndHoverEventCallback() {
                     @Override
@@ -157,7 +176,7 @@ public class CapacityCalendarWidget extends Composite implements CalendarObserve
                                            JavaScriptObject viewObject) {
                         CapacityReportEvent e = new CapacityReportEvent(calendarEvent);
                         fullcalendar.capacityEvent = e;
-                        for(CapacityReportEvent a : eventList) {
+                        for (CapacityReportEvent a : eventList) {
                             if (a.getDescription().equals(e.getDescription())) {
                                 handler.setCurrentReport(a.getUw());
                             }
@@ -166,7 +185,7 @@ public class CapacityCalendarWidget extends Composite implements CalendarObserve
                     }
 
                     /**
-                     * Not needed
+                     * Handles the onClick event - Not needed here
                      */
                     @Override
                     public void dayClick(JavaScriptObject moment, NativeEvent event, JavaScriptObject viewObject) {
@@ -176,6 +195,10 @@ public class CapacityCalendarWidget extends Composite implements CalendarObserve
                 return clickHoverConfig;
             }
 
+            /**
+             * Gets the selected config
+             * @return the {@link SelectConfig} for the {@link CapacityCalendarWidget}
+             */
             private SelectConfig getSelectConfig() {
                 SelectConfig selectConfig = new SelectConfig(new SelectEventCallback() {
 
@@ -201,6 +224,10 @@ public class CapacityCalendarWidget extends Composite implements CalendarObserve
                 return selectConfig;
             }
 
+            /**
+             * Gets the selected Drag and Resize Config for the {@link CapacityCalendarWidget}
+             * @return the {@link DragAndResizeConfig}
+             */
             private DragAndResizeConfig getDragAndResizeConfig() {
                 DragAndResizeConfig dr = new DragAndResizeConfig(new DragAndResizeCallback() {
 
@@ -261,19 +288,25 @@ public class CapacityCalendarWidget extends Composite implements CalendarObserve
         timer.schedule(0);
     }
 
-    public String getYear(){
+    /**
+     * Gets the actual year of the {@link CapacityCalendarWidget}
+     *
+     * @return the year
+     */
+    public String getYear() {
         return fullcalendar.getDate().getYear() + 1900 + "";
     }
 
     /**
-     * Adds ActivityReports to the calendar.
-     * @param reports List of ActivityReports for CapacityPlaning
+     * Adds {@link UtilizationWeek} to the calendar.
+     *
+     * @param reports List of {@link UtilizationWeek} for CapacityPlaning
      */
     public void addActvityReports(List<UtilizationWeek> reports) {
-        if(!reports.isEmpty()){
+        if (!reports.isEmpty()) {
             for (UtilizationWeek ap : reports) {
-                CapacityReportEvent e = new CapacityReportEvent(ap,ap.getId() + "", ap.getText(), true, true, true);
-                ap.getBeginDate().setYear((2016-1900));
+                CapacityReportEvent e = new CapacityReportEvent(ap, ap.getId() + "", ap.getText(), true, true, true);
+                ap.getBeginDate().setYear((2016 - 1900));
                 e.setStart(calendarHandler.getISO8601StringForDate(ap.getBeginDate(), ap.getBeginTime()));
                 e.setEnd(calendarHandler.getISO8601StringForDate(ap.getBeginDate(), ap.getEndTime()));
                 fullcalendar.addEvent(e);
@@ -287,10 +320,15 @@ public class CapacityCalendarWidget extends Composite implements CalendarObserve
 
     }
 
-    private String monthToString(int month){
+    /**
+     * Prints the Month of the Calendar into a String. This Method is used to display the
+     * name of the month in the {@link CapacityCalendarWidget}
+     * @param month
+     * @return out the {@link String} of the Month.
+     */
+    private String monthToString(int month) {
         String out = "";
-        switch (month)
-        {
+        switch (month) {
             case 0:
                 out = "Jan";
                 break;

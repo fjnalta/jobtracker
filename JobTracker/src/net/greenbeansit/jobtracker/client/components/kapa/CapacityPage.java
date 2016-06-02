@@ -11,7 +11,10 @@ import net.greenbeansit.jobtracker.client.components.kapa.widgets.CapacityCalend
 import org.gwtbootstrap3.client.ui.Heading;
 
 /**
- * Created by Philipp Minges on 23.05.16.
+ * This Page shows the Capacity Planning. It contains all Widgets for
+ * {@link CapacityCalendarWidget},
+ *
+ * @author Philipp Minges
  */
 public class CapacityPage extends Composite implements CalendarObserver {
 
@@ -21,12 +24,18 @@ public class CapacityPage extends Composite implements CalendarObserver {
     @UiField
     CapacityCalendarWidget calendar;
 
+    /**
+     * This Method is called from the {@link CalendarObserver}
+     */
     @Override
     public void update() {
         GWT.log(calendar.getYear());
         dateHeading.setText(calendar.getYear());
     }
 
+    /**
+     * This Method notifies the {@link CalendarObserver} about changes.
+     */
     @Override
     public void notifyHandler() {
         calendarHandler.updateObserver(this);
@@ -37,6 +46,9 @@ public class CapacityPage extends Composite implements CalendarObserver {
 
     private static KapaPageUiBinder uiBinder = GWT.create(KapaPageUiBinder.class);
 
+    /**
+     * Creates a new Instance of the CapacityPage
+     */
     public CapacityPage() {
         initWidget(uiBinder.createAndBindUi(this));
 
@@ -51,6 +63,9 @@ public class CapacityPage extends Composite implements CalendarObserver {
         timer.schedule(300);
     }
 
+    /**
+     * Sets the Text of {@link Heading} to the actual Year of the {@link CapacityCalendarWidget}
+     */
     private void initialize() {
         dateHeading.setText(calendar.getYear());
     }

@@ -16,19 +16,17 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Created by Philipp Minges on 01.06.16.
+ * Shows the Utilization of the shown Week of the {@link CapacityCalendarWidget}
+ *
+ * @author Philipp Minges
  */
 public class WeeklyUtilizationWidget extends Composite {
 
-    /**
-     * UiBinder Interface for {@link WeeklyUtilizationWidget}
-     */
     interface WeeklyUtilizationWidgetUiBinder extends UiBinder<Widget, WeeklyUtilizationWidget> {
     }
 
     private static WeeklyUtilizationWidgetUiBinder uiBinder = GWT.create(WeeklyUtilizationWidgetUiBinder.class);
 
-    // Path for the css File
     private final String suffixPath = "net-greenbeansit-jobtracker-client-components-widgets-calendar-CalendarUtilizationWidget_CalendarUtilizationWidgetUiBinderImpl_GenCss_style-";
 
     @UiField
@@ -36,7 +34,7 @@ public class WeeklyUtilizationWidget extends Composite {
     private List<HorizontalPanel> list;
 
     /**
-     * constructor
+     * Creates a new Instance of the {@link WeeklyUtilizationWidget}
      */
     public WeeklyUtilizationWidget() {
         initWidget(uiBinder.createAndBindUi(this));
@@ -51,7 +49,7 @@ public class WeeklyUtilizationWidget extends Composite {
     }
 
     /**
-     * creates a new utilization overview
+     * Sets the Widgets to the created list.
      */
     private void createNewUtilizationOverview(){
         table.removeAllRows();
@@ -64,10 +62,9 @@ public class WeeklyUtilizationWidget extends Composite {
     }
 
     /**
-     * creates a new bar chart list
-     * @return List<HorizontalPanel> with the charts
+     * Creates the {@link HorizontalPanel}
+     * @return the list
      */
-    // TODO - need to turn the bars 90°
     private List<HorizontalPanel> createBarChartList() {
         List<HorizontalPanel> list = new ArrayList<HorizontalPanel>();
 
@@ -78,7 +75,7 @@ public class WeeklyUtilizationWidget extends Composite {
     }
 
     /**
-     * Get the BarChart for a month
+     * Get the BarChart for a week
      *
      * @param date actual date
      * @return an new BarChart to the given date
@@ -107,7 +104,6 @@ public class WeeklyUtilizationWidget extends Composite {
      * @return
      */
     private double getBarChartHeight(Date date) {
-
         //TODO read utilization from DB
         return Math.random() * 50;
     }

@@ -9,7 +9,11 @@ import org.gwtbootstrap3.client.ui.Button;
 import org.gwtbootstrap3.client.ui.constants.IconType;
 
 /**
- * Created by Philipp Minges on 31.05.16.
+ * Shows the bottom Widget on the Capacity Page. This Widget is used to display
+ * the data of the actual UtilizationWeek of the {@link CapacityCalendarWidget}
+ * It is also used to save new CapacityReportEvents to the Database.
+ *
+ * @author Philipp Minges
  */
 public class CapacityTimeInputWidget extends Composite {
     interface CapacityTimeInputWidgetUiBinder extends UiBinder<Widget, CapacityTimeInputWidget> {
@@ -29,6 +33,9 @@ public class CapacityTimeInputWidget extends Composite {
             buttonUpYearEnd, buttonDownYearEnd, buttonUpDayWeek,
             buttonDownDayWeek, buttonUpCalendarWeekEnd, buttonDownCalendarWeekEnd;
 
+    /**
+     * This Method sets the icons for all Buttons in this Widget
+     */
     private void setButtons() {
 
         buttonUpYearStart.setIcon(IconType.ARROW_UP);
