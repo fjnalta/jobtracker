@@ -53,11 +53,19 @@ public class CapacityNav extends Composite implements LogicObservable, CalendarO
     @UiField
     Slider mySlider;
 
+    /**
+     * This Method sets the possibility of the {@link UtilizationWeek}
+     * @param event the slide event
+     */
     @UiHandler("mySlider")
     void onSlide(SlideEvent<Double> event) {
         possibilityPercentage.setText(event.getValue().toString());
     }
 
+    /**
+     * This Method increases the possibility of the {@link UtilizationWeek} by 25%.
+     * @param e {@link SlideEvent}
+     */
     @UiHandler("buttonUp")
     void onClickUp(ClickEvent e) {
         if (mySlider.getValue() < 76)
@@ -66,6 +74,10 @@ public class CapacityNav extends Composite implements LogicObservable, CalendarO
         possibilityPercentage.setText(mySlider.getValue().toString());
     }
 
+    /**
+     * This Method decreases the possibility of the {@link UtilizationWeek} by 25%.
+     * @param e {@link ClickEvent}
+     */
     @UiHandler("buttonDown")
     void onClickDown(ClickEvent e) {
         if (mySlider.getValue() > 24)
@@ -73,6 +85,10 @@ public class CapacityNav extends Composite implements LogicObservable, CalendarO
         possibilityPercentage.setText(mySlider.getValue().toString());
     }
 
+    /**
+     * This Method saves a new Pseudo Job to the Database
+     * @param e {@link ClickEvent}
+     */
     @UiHandler("buttonSave")
     public void savePseudoJob(final ClickEvent e) {
         PseudoJob template = new PseudoJob();
@@ -99,6 +115,9 @@ public class CapacityNav extends Composite implements LogicObservable, CalendarO
 
     private UtilizationWeek currentReport;
 
+    /**
+     * This Method creates a new Instance of the Capacity Navigation.
+     */
     public CapacityNav() {
         initWidget(uiBinder.createAndBindUi(this));
 
@@ -130,12 +149,19 @@ public class CapacityNav extends Composite implements LogicObservable, CalendarO
         handler.loadPseudoJobs();
     }
 
+    /**
+     * Sets the Icons for the Buttons and the Value for the possibility Slider.
+     */
     private void initializeUIElements() {
         buttonDown.setIcon(IconType.ARROW_DOWN);
         buttonUp.setIcon(IconType.ARROW_UP);
         possibilityPercentage.setText(mySlider.getValue().toString());
     }
 
+    /**
+     * Adds the Jobs to the {@link OptGroup} allJobsOptGroup.
+     * @param jobList
+     */
     private void addJobs(List<Job> jobList) {
         for (Job currentJob : jobList) {
             SelectJobOption tempOption = new SelectJobOption(currentJob);
@@ -143,6 +169,10 @@ public class CapacityNav extends Composite implements LogicObservable, CalendarO
         }
     }
 
+    /**
+     * Adds the PseudoJobs to the {@link OptGroup} myJobsOptGroup.
+     * @param pJobList
+     */
     private void addPseudoJobs(List<PseudoJob> pJobList) {
         for (PseudoJob currentPJob : pJobList) {
             SelectJobOption tempOption = new SelectJobOption(currentPJob);
@@ -150,6 +180,9 @@ public class CapacityNav extends Composite implements LogicObservable, CalendarO
         }
     }
 
+    /**
+     * This Method is called from the {@link LogicObservable}
+     */
     @Override
     public void updateObservable() {
         allJobsOptGroup.clear();
@@ -182,17 +215,26 @@ public class CapacityNav extends Composite implements LogicObservable, CalendarO
         selectJob.refresh();
     }
 
+    /**
+     * This Method is called from the {@link CalendarObserver}
+     */
     @Override
     public void update() {
         this.currentReport = handler.getCurrentUtilizationWeek();
         textIdentifier.setText(currentReport.getText());
     }
 
+    /**
+     * This Method notifies the {@link CalendarObserver} about changes.
+     */
     @Override
     public void notifyHandler() {
 
     }
 
+    /**
+     * This Method notifies the {@link LogicObservable} about given changes
+     */
     @Override
     public void notifyLogicHandler() {
         if (currentJob != null) {
