@@ -62,7 +62,7 @@ public class RestClient<R> {
 	 * 
 	 * RestClient.build(new SuccessFunction<List<Person>>() {
 	 * 
-	 * @Override public void onSuccess(Method method, List<Person> response) {
+	 * public void onSuccess(Method method, List<Person> response) {
 	 *           // handle response here. } }).personService().getPersons();
 	 * 
 	 * @param successFunction

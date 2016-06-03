@@ -10,7 +10,7 @@ import net.greenbeansit.jobtracker.client.components.HomePage;
 /**
  * This class represents the capacity widget on the HomePage.
  *
- * @author
+ * @author Jonathan Brenner.
  */
 public class CapazityWidget extends Composite{
 

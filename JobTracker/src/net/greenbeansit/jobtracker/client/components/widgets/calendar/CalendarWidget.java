@@ -82,6 +82,7 @@ public class CalendarWidget extends Composite implements CalendarObserver, Logic
 			 * Create new event. It has an unique ID.
 			 * 
 			 * @param title Title of the Event.
+			 * @param id the Id.
 			 * @return new Event
 			 */
 			private ActivityReportEvent createEvent(String id, String title) {

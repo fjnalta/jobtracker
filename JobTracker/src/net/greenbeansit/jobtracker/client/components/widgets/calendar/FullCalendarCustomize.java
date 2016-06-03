@@ -8,6 +8,11 @@ import org.gwtbootstrap3.extras.fullcalendar.client.ui.FullCalendar;
 import org.gwtbootstrap3.extras.fullcalendar.client.ui.Header;
 import org.gwtbootstrap3.extras.fullcalendar.client.ui.ViewOption;
 
+/**
+ * Extends the FullCalender to provide more functionality.
+ *
+ * @author Ahmed Salame.
+ */
 public class FullCalendarCustomize extends FullCalendar {
 
 	/**

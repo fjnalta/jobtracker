@@ -31,7 +31,6 @@ public class CalendarTimeLineWidget extends Composite implements CalendarObserve
 	interface CalendarTimeLineWidgetUiBinder extends UiBinder<Widget, CalendarTimeLineWidget> {
 	}
 
-	@SuppressWarnings("deprecation")
 	/**
 	 * Initializes a new Instane of CalendarTimeLineWidget.
 	 */
