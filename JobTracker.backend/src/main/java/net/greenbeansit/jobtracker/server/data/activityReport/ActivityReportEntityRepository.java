@@ -2,7 +2,9 @@ package net.greenbeansit.jobtracker.server.data.activityReport;
 
 import java.util.List;
 
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 
 /**
  * Repository for handling {@link ActivityReportEntity} and making requests to
@@ -80,4 +82,26 @@ public interface ActivityReportEntityRepository
 	 */
 	List<ActivityReportEntity> findByJobNoAndPosNo(Integer jobNo,
 			Integer posNo);
+
+	/**
+	 * Returns all {@link ActivityReportEntity} from a single user in a single month.
+	 * @param author ID of the author
+	 * @param year the year
+	 * @param month the month
+	 * @return List of corresponding {@link ActivityReportEntity}
+	 */
+	@Query("select x from ActivityReport x where x.author = :author and YEAR(x.begin_date) = :year and MONTH(x.begin_date) = :month")
+	List<ActivityReportEntity> findByAuthorAndMonth(
+			@Param("author") Integer author, @Param("year") Integer year,
+			@Param("month") Integer month);
+	
+	/**
+	 * Returns all {@link ActivityReportEntity} from a single user in a single year.
+	 * @param author ID of the author
+	 * @param year the year
+	 * @return List of corresponding {@link ActivityReportEntity}
+	 */
+	@Query("select x from ActivityReport x where x.author = :author and YEAR(x.begin_date) = :year")
+	List<ActivityReportEntity> findByAuthorAndYear(
+			@Param("author") Integer author, @Param("year") Integer year);
 }

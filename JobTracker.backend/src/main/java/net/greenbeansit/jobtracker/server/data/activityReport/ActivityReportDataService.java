@@ -44,6 +44,23 @@ public interface ActivityReportDataService
 	 */
 	List<ActivityReport> getByUserAndPeriod(Integer authorId, Date from,
 			Date to);
+	
+	/**
+	 * Retrieves all reports of a user created in the given month.
+	 * @param authorId ID of the author
+	 * @param year year of the month
+	 * @param month the month
+	 * @return List of corresponding reports
+	 */
+	List<ActivityReport> getByUserAndMonth(Integer authorId, Integer year, Integer month);
+	
+	/**
+	 * Retrieves all reports of a user created in the given year.
+	 * @param authorId ID of the author
+	 * @param year year of the month
+	 * @return List of corresponding reports
+	 */
+	List<ActivityReport> getByUserAndYear(Integer authorId, Integer year);
 
 	/**
 	 * Retrieves all reports created by the given author.

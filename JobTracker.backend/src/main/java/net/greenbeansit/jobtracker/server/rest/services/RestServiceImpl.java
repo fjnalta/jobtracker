@@ -2,6 +2,7 @@ package net.greenbeansit.jobtracker.server.rest.services;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -254,17 +255,71 @@ public class RestServiceImpl implements RestService {
 			Integer month)
 	{
 		List<Integer> utilization = new ArrayList<Integer>();
-		List<ActivityReport> reports = activityReportService.getByUser(userId);
+		List<ActivityReport> reports = activityReportService.getByUserAndMonth(userId, year, month);
 		for(Integer i = 0; i < 32; i++)
 			utilization.add(0);
 		for(ActivityReport report : reports)
 		{
 			//8 Hours = 480 Minutes = 100%
 			Integer index = report.getDate().getDate();
-				utilization.set(index, utilization.get(index) + (int) (report.getDuration()*(10f/48f)));
+				utilization.set( index, utilization.get(index) + (int) (report.getDuration()*(10f/48f)) );
 		}
 		for(Integer p : utilization)
 			System.out.print(p + ", ");
 		return utilization;
+	}
+
+	@Override
+	public List<Integer> getUtilizationMonths(Integer userId, Integer year)
+	{
+		List<Integer> utilization = new ArrayList<Integer>();
+		List<ActivityReport> reports = activityReportService.getByUserAndYear(userId, year);
+		for(Integer i = 0; i < 13; i++)
+			utilization.add(0);
+		List<Integer> workingDays = new ArrayList<Integer>();
+		for(Integer i = 0; i < 12; i++)
+			workingDays.add(getWorkDays(year, i));
+			
+		for(ActivityReport report : reports)
+		{
+			Integer index = report.getDate().getMonth() + 1;
+			utilization.set( index, utilization.get(index) +
+					(int) (report.getDuration()*(10f/48f)) );
+		}
+		
+		//8 Hours * workingDays = 480 Minutes * workingDays = 100%
+		for(Integer i = 1; i < 13; i++)
+			utilization.set(i, (int) ((utilization.get(i)*(10f/48f)) / workingDays.get(i-1) ));
+		
+		for(Integer p : utilization)
+			System.out.print(p + ", ");
+		return utilization;
+	}
+	
+	/**
+	 * Returns the amount of working days in the given month, but does not exclude public and personal holidays, etc.
+	 * TODO: Include those holidays.
+	 * @param year the year
+	 * @param month the month, 0 is January
+	 * @return amount of working days
+	 */
+	private Integer getWorkDays(Integer year, Integer month)
+	{
+		Calendar firstDay = Calendar.getInstance();
+		Calendar lastDay = Calendar.getInstance();
+		firstDay.set(year, month, 1, 0, 0, 0);
+		lastDay.set(year, month, 0, 0, 0, 0);
+		lastDay.set(Calendar.DAY_OF_MONTH, firstDay.getMaximum(Calendar.DAY_OF_MONTH));
+		Integer workDays = 0;
+
+		do {
+	        if (firstDay.get(Calendar.DAY_OF_WEEK) != Calendar.SATURDAY
+	       && firstDay.get(Calendar.DAY_OF_WEEK) != Calendar.SUNDAY) {  
+	            workDays++;
+	        }
+	        firstDay.add(Calendar.DAY_OF_MONTH, 1);
+	    } while (firstDay.get(Calendar.DAY_OF_MONTH) <= lastDay.get(Calendar.DAY_OF_MONTH));
+		
+		return workDays;
 	}
 }
