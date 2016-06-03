@@ -10,16 +10,36 @@ import org.gwtbootstrap3.extras.fullcalendar.client.ui.ViewOption;
 
 public class FullCalendarCustomize extends FullCalendar {
 
+	/**
+	 * FullCalendar Constructor
+	 * @param id the id
+	 * @param defaultView the default view
+	 * @param editable true if editable
+     */
 	public FullCalendarCustomize(String id, ViewOption defaultView, boolean editable) {
 		super(id, defaultView, editable);
 		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 * FullCalendar Constructor
+	 * @param id the id
+	 * @param defaultView the default view
+	 * @param editable true if editable
+     * @param header the header
+     */
 	public FullCalendarCustomize(String id, ViewOption defaultView, boolean editable, Header header) {
 		super(id, defaultView, editable, header);
 		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 * FullCalendar Constructor
+	 * @param id the id
+	 * @param defaultView the default view
+	 * @param config the config
+	 * @param editable true if editable
+     */
 	public FullCalendarCustomize(String id, ViewOption defaultView, CalendarConfig config, boolean editable) {
 		super(id, defaultView, config, editable);
 		// TODO Auto-generated constructor stub
@@ -32,8 +52,16 @@ public class FullCalendarCustomize extends FullCalendar {
 	}
 
 	ActivityReportEvent currentEvent;
+
+	/**
+	 * Represents a {@link CapacityReportEvent}
+	 */
 	public CapacityReportEvent capacityEvent;
 
+	/**
+	 * Adds a Event to the Calendar
+	 * @param event the Event.
+     */
 	public void addEvent(ActivityReportEvent event) {
 		// TODO Auto-generated method stub
 		super.addEvent(event);

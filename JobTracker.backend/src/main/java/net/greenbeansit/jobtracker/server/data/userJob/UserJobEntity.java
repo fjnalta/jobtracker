@@ -75,7 +75,7 @@ public class UserJobEntity implements Serializable
 
 	/**
 	 * set user ID
-	 * @param userId
+	 * @param userId the User Id.
 	 */
 	public void setUserId(Integer userId)
 	{
@@ -92,7 +92,7 @@ public class UserJobEntity implements Serializable
 
 	/**
 	 * set job number
-	 * @param jobNr
+	 * @param jobNr the Job Nr.
 	 */
 	public void setJobNr(Integer jobNr)
 	{
@@ -109,7 +109,7 @@ public class UserJobEntity implements Serializable
 
 	/**
 	 * set position number
-	 * @param posNr
+	 * @param posNr the position no.
 	 */
 	public void setPosNr(Integer posNr)
 	{
@@ -126,7 +126,7 @@ public class UserJobEntity implements Serializable
 
 	/**
 	 * set role
-	 * @param role
+	 * @param role the User role.
 	 */
 	public void setRole(Integer role)
 	{

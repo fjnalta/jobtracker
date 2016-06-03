@@ -88,7 +88,7 @@ public class UserEntity implements Serializable
 
 	/**
 	 * set ID
-	 * @param id
+	 * @param id the UserId.
 	 */
 	public void setId(Integer id)
 	{
@@ -105,7 +105,7 @@ public class UserEntity implements Serializable
 
 	/**
 	 * set first name
-	 * @param name
+	 * @param name the Name.
 	 */
 	public void setName(String name)
 	{
@@ -122,7 +122,7 @@ public class UserEntity implements Serializable
 
 	/**
 	 * set last name
-	 * @param surname
+	 * @param surname the Surname.
 	 */
 	public void setSurname(String surname)
 	{
@@ -139,7 +139,7 @@ public class UserEntity implements Serializable
 
 	/**
 	 * set supervisor ID
-	 * @param supervisor
+	 * @param supervisor the Supervisor.
 	 */
 	public void setSupervisor(Integer supervisor)
 	{
@@ -156,7 +156,7 @@ public class UserEntity implements Serializable
 
 	/**
 	 * set utilization in percent of {@link UserEntity#getUtilizationYear()}
-	 * @param utilization
+	 * @param utilization the Utilization.
 	 */
 	public void setUtilization(Integer utilization)
 	{
@@ -173,7 +173,7 @@ public class UserEntity implements Serializable
 
 	/**
 	 * set the year which the utilization refers to
-	 * @param utilizationYear
+	 * @param utilizationYear the Utilization Year.
 	 */
 	public void setUtilizationYear(Integer utilizationYear)
 	{

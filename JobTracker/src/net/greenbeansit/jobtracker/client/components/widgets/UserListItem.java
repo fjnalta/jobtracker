@@ -13,6 +13,11 @@ import com.google.gwt.user.client.ui.Widget;
 
 import net.greenbeansit.jobtracker.shared.User;
 
+/**
+ * This class describes a UserListItem
+ *
+ * @author Maximilian Blatt & Philipp Minges
+ */
 public class UserListItem extends Composite
 {
 
@@ -37,6 +42,10 @@ public class UserListItem extends Composite
 	
 	private User user;
 
+	/**
+	 * Initializes a new Object of UserListItem
+	 * @param user the User.
+     */
 	public UserListItem(User user)
 	{
 		initWidget(uiBinder.createAndBindUi(this));
@@ -49,17 +58,29 @@ public class UserListItem extends Composite
 		else
 			displayUtilization(0);
 	}
-	
+
+	/**
+	 * This method displays the Utilization
+	 * @param utilization the Utilization.
+     */
 	private void displayUtilization(int utilization)
 	{
 		spanUtilization.setText(utilization + " %");
 		barUtilization.setPercent(utilization);
 	}
 
+	/**
+	 * Gets the User
+	 * @return the user.
+     */
 	public User getUser() {
 		return user;
 	}
 
+	/**
+	 * Sets the User
+	 * @param user the User to be set.
+     */
 	public void setUser(User user) {
 		this.user = user;
 	}

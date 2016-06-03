@@ -14,6 +14,10 @@ import com.google.gwt.user.client.ui.Widget;
 
 import net.greenbeansit.jobtracker.client.components.CalendarObserver;
 
+/**
+ * This Class Creates the Timeline Buttons on the Homepage.
+ * @author Jonathan Brenner
+ */
 public class CalendarTimeLineButtons extends Composite implements CalendarObserver{
 
 	private static CalendarTimeLineButtonsUiBinder uiBinder = GWT.create(CalendarTimeLineButtonsUiBinder.class);
@@ -22,6 +26,9 @@ public class CalendarTimeLineButtons extends Composite implements CalendarObserv
 	interface CalendarTimeLineButtonsUiBinder extends UiBinder<Widget, CalendarTimeLineButtons> {
 	}
 
+	/**
+	 * Initializes a new Instance of {@link CalendarTimeLineButtons}
+	 */
 	public CalendarTimeLineButtons() {
 		initWidget(uiBinder.createAndBindUi(this));
 	}
@@ -32,16 +39,28 @@ public class CalendarTimeLineButtons extends Composite implements CalendarObserv
 	@UiField
 	Button buttonMonth;
 
+	/**
+	 * Initializes a new Instance of {@link CalendarTimeLineButtons}
+	 * @param firstName the FirstName.
+     */
 	public CalendarTimeLineButtons(String firstName) {
 		initWidget(uiBinder.createAndBindUi(this));
 		
 	}
-	
+
+	/**
+	 * Changes the Calendar view to monthly.
+	 * @param event the ClickEvent.
+     */
 	@UiHandler("buttonMonth")
 	public void onClickButtonMonth(ClickEvent event){
 		calendarHandler.calendar.setView(ViewOption.month);
 	}
 
+	/**
+	 * Changes the Calendar view to weekly.
+	 * @param event the ClickEvent.
+     */
 	@UiHandler("buttonWeek")
 	public void onClickButtonWeek(ClickEvent event){
 		calendarHandler.calendar.setView(ViewOption.agendaWeek);

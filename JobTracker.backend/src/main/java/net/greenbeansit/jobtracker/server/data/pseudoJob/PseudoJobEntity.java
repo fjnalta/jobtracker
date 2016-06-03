@@ -64,7 +64,7 @@ public class PseudoJobEntity implements Serializable
 
 	/**
 	 * set ID
-	 * @param id
+	 * @param id the Id.
 	 */
 	public void setId(Integer id)
 	{
@@ -81,7 +81,7 @@ public class PseudoJobEntity implements Serializable
 
 	/**
 	 * set name
-	 * @param name
+	 * @param name the Name.
 	 */
 	public void setName(String name)
 	{
@@ -98,7 +98,7 @@ public class PseudoJobEntity implements Serializable
 
 	/**
 	 * set author
-	 * @param author
+	 * @param author the Author.
 	 */
 	public void setAuthor(Integer author)
 	{

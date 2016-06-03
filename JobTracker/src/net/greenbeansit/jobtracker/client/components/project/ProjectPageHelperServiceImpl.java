@@ -366,7 +366,7 @@ class ProjectPageHelperServiceImpl implements ProjectPageHelperService
 
 	/**
 	 * Gets the ID of the current user.
-	 * @return
+	 * @return the UserID.
 	 */
 	private int getUserId()
 	{

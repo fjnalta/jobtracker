@@ -81,8 +81,7 @@ public class CalendarWidget extends Composite implements CalendarObserver, Logic
 			/**
 			 * Create new event. It has an unique ID.
 			 * 
-			 * @param title
-			 *            Title of the Event.
+			 * @param title Title of the Event.
 			 * @return new Event
 			 */
 			private ActivityReportEvent createEvent(String id, String title) {
@@ -297,7 +296,7 @@ public class CalendarWidget extends Composite implements CalendarObserver, Logic
 					 * 
 					 * @param sign
 					 *            {@link String}
-					 * @return
+					 * @return the String with leading zero.
 					 */
 					private String addLeadingNull(String sign) {
 						if (sign.length() < 2) {

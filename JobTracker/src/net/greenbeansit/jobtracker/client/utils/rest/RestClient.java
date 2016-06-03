@@ -30,13 +30,24 @@ public class RestClient<R> {
 	 *            - type of the Response
 	 */
 	public interface SuccessFunction<T> {
+		/**
+		 * Method to be called if the Function succeeded
+		 * @param method the method.
+		 * @param response the response.
+         */
 		void onSuccess(Method method, T response);
+
+		/**
+		 * Method to be called on failure.
+		 * @param method the method.
+		 * @param exception the exception.
+         */
 		void onFailure(Method method, Throwable exception);
 	}
 
 	/**
 	 * 
-	 * @param callback
+	 * @param callback the callback.
 	 */
 	private RestClient(MethodCallback<R> callback) {
 		this.callback = callback;
@@ -84,7 +95,11 @@ public class RestClient<R> {
 		((CallbackAware) service).setCallback(callback);
 		return service;
 	}
-	
+
+	/**
+	 * Gets the Employee (Rest) Service.
+	 * @return the specific service.
+     */
 	public RestService getEmployeeService()
 	{
 		return setCallback(EMPLOYEE_SERVICE);

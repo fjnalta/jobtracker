@@ -11,6 +11,9 @@ import org.gwtbootstrap3.extras.notify.client.ui.NotifySettings;
  */
 public final class NotifyHelper
 {
+	/**
+	 * Empty constructor for internal purposes.
+	 */
 	private NotifyHelper() { }
 	
 	/**
@@ -24,7 +27,11 @@ public final class NotifyHelper
 		settings.setType(NotifyType.DANGER);
 		Notify.notify(message, settings);
 	}
-	
+
+	/**
+	 * Displays the success notify message.
+	 * @param message the message.
+     */
 	public static void successMessage(String message)
 	{
 		NotifySettings settings = NotifySettings.newSettings();

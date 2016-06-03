@@ -13,6 +13,11 @@ import com.google.gwt.user.client.ui.Widget;
 
 import net.greenbeansit.jobtracker.client.components.project.ProjectPage;
 
+/**
+ * This Class represents the ProjectBudgetBar on the Manager Page.
+ *
+ * @author Maximilian Blatt.
+ */
 public class ProjectBudgetBar extends Composite
 {
 
@@ -34,7 +39,13 @@ public class ProjectBudgetBar extends Composite
 //	{
 //		initWidget(uiBinder.createAndBindUi(this));
 //	}
-	
+
+	/**
+	 * Initializes a new Instance of ProjectBudgetBar
+	 * @param consumedBudget the consumed Budget.
+	 * @param totalBudget the total Budget.
+	 * @param projectName the project Name.
+     */
 	public ProjectBudgetBar(int consumedBudget, int totalBudget, String projectName)
 	{
 		initWidget(uiBinder.createAndBindUi(this));

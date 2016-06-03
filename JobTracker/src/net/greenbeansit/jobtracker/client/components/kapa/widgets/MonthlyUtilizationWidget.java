@@ -167,8 +167,8 @@ public class MonthlyUtilizationWidget extends Composite implements CalendarObser
     /**
      * get the barChart height of a day
      *
-     * @param date
-     * @return
+     * @param date the date.
+     * @return the Bar Chart height.
      */
     private double getBarChartHeight(Date date) {
 

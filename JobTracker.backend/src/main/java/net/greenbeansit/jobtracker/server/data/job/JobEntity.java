@@ -93,7 +93,7 @@ public class JobEntity implements Serializable
 
 	/**
 	 * Sets the Job Number for the {@link JobEntity}
-	 * @param jobNr
+	 * @param jobNr the Job number.
      */
 	public void setJobNr(Integer jobNr)
 	{
@@ -129,7 +129,7 @@ public class JobEntity implements Serializable
 
 	/**
 	 * Sets the Accounting Mode to the {@link JobEntity}
-	 * @param accountingMode
+	 * @param accountingMode the accounting mode.
      */
 	public void setAccountingMode(Integer accountingMode)
 	{
@@ -164,7 +164,7 @@ public class JobEntity implements Serializable
 
 	/**
 	 * set short description
-	 * @param desc
+	 * @param desc the description.
 	 */
 	public void setDesc(String desc)
 	{
@@ -181,7 +181,7 @@ public class JobEntity implements Serializable
 
 	/**
 	 * set maximum budget
-	 * @param maxBudget
+	 * @param maxBudget the maximal budget.
 	 */
 	public void setMaxBudget(Integer maxBudget)
 	{
@@ -198,7 +198,7 @@ public class JobEntity implements Serializable
 
 	/**
 	 * set used budget
-	 * @param usedBudget
+	 * @param usedBudget the used budget.
 	 */
 	public void setUsedBudget(Integer usedBudget)
 	{
@@ -215,7 +215,7 @@ public class JobEntity implements Serializable
 
 	/**
 	 * set whether internal job
-	 * @param isIntern
+	 * @param isIntern true if its a internal entity.
 	 */
 	public void setIntern(Boolean isIntern)
 	{
@@ -232,7 +232,7 @@ public class JobEntity implements Serializable
 
 	/**
 	 * set lock on further booking
-	 * @param isLocked
+	 * @param isLocked true if the Job is locked.
 	 */
 	public void setLocked(Boolean isLocked)
 	{

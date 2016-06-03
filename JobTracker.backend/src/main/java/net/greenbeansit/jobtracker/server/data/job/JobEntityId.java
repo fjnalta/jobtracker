@@ -27,7 +27,7 @@ public class JobEntityId implements Serializable
 
 	/**
 	 * set job number
-	 * @param jobNr
+	 * @param jobNr the Job number.
 	 */
 	public void setJobNr(Integer jobNr)
 	{
@@ -44,7 +44,7 @@ public class JobEntityId implements Serializable
 
 	/**
 	 * set position number
-	 * @param posNr
+	 * @param posNr the position number.
 	 */
 	public void setPosNr(Integer posNr)
 	{
@@ -61,7 +61,7 @@ public class JobEntityId implements Serializable
 
 	/**
 	 * set description
-	 * @param desc
+	 * @param desc the description
 	 */
 	public void setDesc(String desc)
 	{

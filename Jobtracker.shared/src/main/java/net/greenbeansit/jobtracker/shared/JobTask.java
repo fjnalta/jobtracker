@@ -30,6 +30,8 @@ public class JobTask implements Serializable
 	 *            unique id for the JobTask
 	 * @param jobNr
 	 *            the identifier of the jobNr
+	 * @param posNr
+	 * 			  the position number.
 	 * @param name
 	 *            the name of the Task
 	 */
@@ -41,11 +43,19 @@ public class JobTask implements Serializable
 		this.name = name;
 	}
 
+	/**
+	 * Gets the {@link JobTask} id.
+	 * @return the id.
+     */
 	public Integer getId()
 	{
 		return id;
 	}
 
+	/**
+	 * Sets the {@link JobTask} id.
+	 * @param id the id.
+     */
 	public void setId(Integer id)
 	{
 		if (id == null)
@@ -55,11 +65,19 @@ public class JobTask implements Serializable
 		this.id = id;
 	}
 
+	/**
+	 * Gets the Job number.
+	 * @return the Job Number.
+     */
 	public Integer getJobNr()
 	{
 		return jobNr;
 	}
 
+	/**
+	 * Sets the Job number.
+	 * @param jobNr the Job number.
+     */
 	public void setJobNr(Integer jobNr)
 	{
 		if (jobNr == null)
@@ -69,21 +87,37 @@ public class JobTask implements Serializable
 		this.jobNr = jobNr;
 	}
 
+	/**
+	 * Gets the position Number.
+	 * @return the Position number.
+     */
 	public Integer getPosNr()
 	{
 		return posNr;
 	}
 
+	/**
+	 * Sets the position Number.
+	 * @param posNr the position number.
+     */
 	public void setPosNr(Integer posNr)
 	{
 		this.posNr = posNr;
 	}
 
+	/**
+	 * Gets the JobTask name.
+	 * @return the Name.
+     */
 	public String getName()
 	{
 		return name;
 	}
 
+	/**
+	 * Sets the JobTask name.
+	 * @param name the Name.
+     */
 	public void setName(String name)
 	{
 		if (name == "")

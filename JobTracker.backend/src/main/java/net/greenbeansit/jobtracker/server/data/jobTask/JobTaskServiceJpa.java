@@ -11,7 +11,7 @@ import net.greenbeansit.jobtracker.shared.JobTask;
 /**
  * Implementation of JobTaskDataService {@link JobTaskDataService}.
  * 
- * @author Mike Hukiewitz
+ * @author Mike Hukiewitz & Philipp Minges
  *
  */
 
@@ -51,6 +51,11 @@ public class JobTaskServiceJpa implements JobTaskDataService
 		return list;
 	}
 
+	/**
+	 * Converts a {@link JobTaskEntity} to {@link JobTask}
+	 * @param entity the {@link JobTaskEntity}
+	 * @return the {@link JobTask}
+     */
 	private JobTask convert(JobTaskEntity entity)
 	{
 		if (entity == null)

@@ -283,7 +283,7 @@ public class GraphWidget extends Composite implements LogicObservable {
 
 	/**
 	 * Event handling for the buttonModeYear, switches the graph to year mode
-	 * @param event
+	 * @param event the Click event.
      */
 	@UiHandler("buttonModeYear")
 	public void showYearMode(ClickEvent event) {
@@ -557,7 +557,7 @@ public class GraphWidget extends Composite implements LogicObservable {
 
 	/**
 	 * set the current reports
-	 * @param reports
+	 * @param reports the Report.
      */
 	public void setReportList(List<ActivityReport> reports) {
 		this.reportList = reports;

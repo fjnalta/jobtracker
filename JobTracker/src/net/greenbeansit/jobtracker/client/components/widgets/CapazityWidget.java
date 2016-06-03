@@ -7,6 +7,11 @@ import com.google.gwt.user.client.ui.Widget;
 
 import net.greenbeansit.jobtracker.client.components.HomePage;
 
+/**
+ * This class represents the capacity widget on the HomePage.
+ *
+ * @author
+ */
 public class CapazityWidget extends Composite{
 
 	private static CapazityWidgetUiBinder uiBinder = GWT.create(CapazityWidgetUiBinder.class);
@@ -14,8 +19,13 @@ public class CapazityWidget extends Composite{
 	interface CapazityWidgetUiBinder extends UiBinder<Widget, CapazityWidget> {
 	}
 
+	/**
+	 * Initializes a new Instance of CapazityWidget
+	 */
 	public CapazityWidget() {
 		initWidget(uiBinder.createAndBindUi(this));
 	}
+
+	// TODO - this class is never used.
 
 }

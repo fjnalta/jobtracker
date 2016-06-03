@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Implementation of PseudoJobDataService {@link PseudoJobDataService}.
  * 
- * @author Mike Hukiewitz
+ * @author Mike Hukiewitz & Philipp Minges
  *
  */
 
@@ -61,6 +61,11 @@ public class PseudoJobServiceJpa implements PseudoJobDataService
 		repository.delete(convert(report));
 	}
 
+	/**
+	 * Converts a {@link PseudoJobEntity} to {@link PseudoJob}
+	 * @param entity the {@link PseudoJobEntity}
+	 * @return the {@link PseudoJob}
+     */
 	private PseudoJob convert(PseudoJobEntity entity)
 	{
 		if (entity == null)
@@ -69,6 +74,11 @@ public class PseudoJobServiceJpa implements PseudoJobDataService
 				entity.getAuthor());
 	}
 
+	/**
+	 * Converts a {@link PseudoJob} to {@link PseudoJobEntity}
+	 * @param pseudoJob the {@link PseudoJob}
+	 * @return the {@link PseudoJobEntity}
+	 */
 	private PseudoJobEntity convert(PseudoJob pseudoJob)
 	{
 		if (pseudoJob == null)

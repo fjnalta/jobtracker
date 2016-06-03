@@ -32,6 +32,9 @@ public class CalendarTimeLineWidget extends Composite implements CalendarObserve
 	}
 
 	@SuppressWarnings("deprecation")
+	/**
+	 * Initializes a new Instane of CalendarTimeLineWidget.
+	 */
 	public CalendarTimeLineWidget() {
 		initWidget(uiBinder.createAndBindUi(this));
 		calendarHandler.addObserver(this);
@@ -43,10 +46,10 @@ public class CalendarTimeLineWidget extends Composite implements CalendarObserve
 
 	/**
 	 * Get the calendarweek from the given Date
-	 * @param year
-	 * @param month
-	 * @param day
-	 * @return
+	 * @param year the year
+	 * @param month the month
+	 * @param day the day
+	 * @return the CalendarWeek
 	 */
 	// TODO- Schaltjahr berechnung
 	private String getCalendarWeek(int year, int month, int day) {
@@ -59,6 +62,10 @@ public class CalendarTimeLineWidget extends Composite implements CalendarObserve
 		return summDay+" KW";
 	}
 
+	/**
+	 * Initializes a new Instance of {@link CalendarTimeLineWidget}
+	 * @param firstName the FirstName.
+     */
 	public CalendarTimeLineWidget(String firstName) {
 		initWidget(uiBinder.createAndBindUi(this));
 		calendarHandler.addObserver(this);
@@ -80,7 +87,12 @@ public class CalendarTimeLineWidget extends Composite implements CalendarObserve
 		setCalenderWeek(getCalendarWeek(yearInt, monthInt, dayInt));
 		
 	}
-	
+
+	/**
+	 * Gets the Month name to a specific month.
+	 * @param string the String of the Month
+	 * @return the Name of the Month.
+     */
 	private String getMonthName(String string) {
 		switch(string){
 		case"01":
@@ -111,7 +123,12 @@ public class CalendarTimeLineWidget extends Composite implements CalendarObserve
 			return null;
 		}	
 	}
-	
+
+	/**
+	 * Gets the number of the Day.
+	 * @param month the Month.
+	 * @return the day.
+     */
 	private int getMonthDayNumber(int month){
 		switch(month){
 		case 1:
@@ -148,14 +165,27 @@ public class CalendarTimeLineWidget extends Composite implements CalendarObserve
 		calendarHandler.updateObserver(this);
 	}
 
+	/**
+	 * Sets the CalendarWeek.
+	 * @param week the Week.
+     */
 	public void setCalenderWeek(String week) {
 		kw.setText(week);
 	}
 
+	/**
+	 * Sets the Date
+	 * @param monthDate the date of the Month.
+     */
 	public void setDate(String monthDate) {
 		date.setText(monthDate);
 	}
 
+	/**
+	 * Creates a new Date
+	 * @param date the Date as a String.
+	 * @return the Date.
+     */
 	private String createDate(String date) {
 		return date.substring(4, 10).replace(" ", "`");
 	}

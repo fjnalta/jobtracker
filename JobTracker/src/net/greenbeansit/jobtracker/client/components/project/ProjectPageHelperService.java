@@ -50,7 +50,7 @@ interface ProjectPageHelperService
 	/**
 	 * Gets the percentag of the of the used budget of the following job.
 	 * 
-	 * @param job
+	 * @param job the Job.
 	 * @return a value between 100 and 0.
 	 */
 	double getUsedBudgetPercent(Job job);

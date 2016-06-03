@@ -16,6 +16,9 @@ public class PseudoJob implements Serializable {
     private String  name;
     private Integer author;
 
+    /**
+     * Empty Constructor for internal purposes.
+     */
     public PseudoJob() {
 
     }
@@ -34,11 +37,19 @@ public class PseudoJob implements Serializable {
         this.author = author;
     }
 
+    /**
+     * Gets the Id
+     * @return the id.
+     */
     public Integer getId()
     {
         return id;
     }
 
+    /**
+     * Sets the Id.
+     * @param id the Id.
+     */
     public void setId(Integer id)
     {
         if (id == null)
@@ -46,11 +57,19 @@ public class PseudoJob implements Serializable {
         this.id = id;
     }
 
+    /**
+     * Gets the Name
+     * @return the Name.
+     */
     public String getName()
     {
         return name;
     }
 
+    /**
+     * Sets the Name.
+     * @param name the Name.
+     */
     public void setName(String name)
     {
         if (name == "")
@@ -58,10 +77,18 @@ public class PseudoJob implements Serializable {
         this.name = name;
     }
 
+    /**
+     * Gets the Author.
+     * @return the Author.
+     */
     public Integer getAuthor() {
         return author;
     }
 
+    /**
+     * Sets the Author.
+     * @param author the Author.
+     */
     public void setAuthor(Integer author) {
         if(author == null)
             throw new IllegalArgumentException();

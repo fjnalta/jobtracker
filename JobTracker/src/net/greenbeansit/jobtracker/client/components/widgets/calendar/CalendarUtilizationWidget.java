@@ -63,7 +63,7 @@ public class CalendarUtilizationWidget extends Composite implements CalendarObse
 	 * When this button is clicked, the timeline will change to 1 week or month
 	 * previous
 	 * 
-	 * @param e
+	 * @param e the ClickEvent.
 	 */
 	@SuppressWarnings("deprecation")
 	@UiHandler("leftButton")
@@ -78,7 +78,7 @@ public class CalendarUtilizationWidget extends Composite implements CalendarObse
 	 * When this button is clicked, the timeline will change to 1 week or month
 	 * next
 	 * 
-	 * @param e
+	 * @param e the ClickEvent.
 	 */
 	@SuppressWarnings("deprecation")
 	@UiHandler("rightButton")
@@ -112,8 +112,8 @@ public class CalendarUtilizationWidget extends Composite implements CalendarObse
 	/**
 	 * Set the time for creating the table
 	 * 
-	 * @param d
-	 * @param m
+	 * @param day the Day
+	 * @param month the Month
 	 */
 	private void time(int day, int month) {
 		this.d = day;
@@ -156,7 +156,7 @@ public class CalendarUtilizationWidget extends Composite implements CalendarObse
 	 * 
 	 * @param dayNumberColumn
 	 *            the current column
-	 * @param element
+	 * @param element the element.
 	 */
 	private void createFirstRow(int dayNumberColumn, int element) {
 		
@@ -214,8 +214,8 @@ public class CalendarUtilizationWidget extends Composite implements CalendarObse
 	/**
 	 * Get the name of the day by the number. 0: Sunday... 6: Saturday
 	 * 
-	 * @param day
-	 * @return
+	 * @param day the Day
+	 * @return the Name of the Day.
 	 */
 	private String getDayName(int day) {
 
@@ -250,10 +250,7 @@ public class CalendarUtilizationWidget extends Composite implements CalendarObse
 	/**
 	 * Get the BarChart for a day
 	 * 
-	 * @param height
-	 *            set the heigh of the Bar
-	 * @param style
-	 *            add css attribute so the widget
+	 * @param number set the height of the Bar
 	 * @return an new BarChart
 	 */
 	private VerticalPanel getBarChart(double number) {
@@ -272,7 +269,8 @@ public class CalendarUtilizationWidget extends Composite implements CalendarObse
 	/**
 	 * Update the List with the new Utilization
 	 *
-	 * @param utilizationList
+	 * @param u the Utilization List
+	 * @return the Bar chart List
 	 */
 	private List<VerticalPanel> createBarChartList(List<Integer> u) {
 		List<VerticalPanel> list = new ArrayList<VerticalPanel>();
@@ -287,7 +285,7 @@ public class CalendarUtilizationWidget extends Composite implements CalendarObse
 	/**
 	 * Get an Date, which is set to the first day of the current week (Sunday)
 	 * 
-	 * @return
+	 * @return the first Day.
 	 */
 	@SuppressWarnings("deprecation")
 	private Date getFirstDayOfActualWeek() {
@@ -298,6 +296,9 @@ public class CalendarUtilizationWidget extends Composite implements CalendarObse
 		return tmp;
 	}
 
+	/**
+	 * Creates a new TimeLine.
+	 */
 	private void render() {
 		createNewTimeline(d, m);
 		time(0, 0);

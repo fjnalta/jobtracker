@@ -12,6 +12,12 @@ import org.gwtbootstrap3.client.ui.Button;
 public class UButton extends Button {
  
 	private Date date;
+
+	/**
+	 * Initializes a new Instance of UButton
+	 * @param txt the Text.
+	 * @param d the Date.
+     */
 	public UButton(String txt, Date d) {
 		super(txt);
 		this.date = d;

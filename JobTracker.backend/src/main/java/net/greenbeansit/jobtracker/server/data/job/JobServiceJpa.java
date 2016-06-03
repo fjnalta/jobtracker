@@ -16,7 +16,7 @@ import net.greenbeansit.jobtracker.shared.UserJob;
 /**
  * Implements {@link JobDataService}
  * 
- * @author Mike Hukiewitz
+ * @author Mike Hukiewitz & Philipp Minges
  *
  */
 @Service("jobService")
@@ -87,6 +87,11 @@ public class JobServiceJpa implements JobDataService
 		return jobs;
 	}
 
+	/**
+	 * Converts a {@link JobEntity} to {@link Job}
+	 * @param entity the {@link JobEntity}
+	 * @return the {@link Job}
+     */
 	private Job convert(JobEntity entity)
 	{
 		if (entity == null)
@@ -97,6 +102,11 @@ public class JobServiceJpa implements JobDataService
 				entity.getLocked());
 	}
 
+	/**
+	 * Converts a {@link Job} to {@link JobEntity}
+	 * @param job the {@link Job}
+	 * @return the {@link JobEntity}
+	 */
 	private JobEntity convert(Job job)
 	{
 		if (job == null)

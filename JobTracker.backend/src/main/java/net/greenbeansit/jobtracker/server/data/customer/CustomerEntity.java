@@ -55,7 +55,7 @@ public class CustomerEntity implements Serializable
 
 	/**
 	 * Sets the Id of the current {@link CustomerEntity}
-	 * @param id
+	 * @param id the id.
      */
 	public void setId(Integer id)
 	{

@@ -58,7 +58,7 @@ interface ManagerPageHelperService
 	 * Gets a value that indicates whether the data has already been loaded from
 	 * the server or not.
 	 * 
-	 * @return
+	 * @return the UserId.
 	 */
 	boolean isDataLoaded();
 

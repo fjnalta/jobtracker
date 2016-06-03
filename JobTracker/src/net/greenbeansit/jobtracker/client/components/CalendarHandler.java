@@ -41,8 +41,9 @@ public class CalendarHandler implements LogicObservable {
 	}
 
 	/**
-	 * update a observer
-	 */
+	 * Updates the Observer.
+	 * @param obs the Observer.
+     */
 	public void updateObserver(CalendarObserver obs) {
 		for (CalendarObserver p : list) {
 			if (p.getClass() == obs.getClass()) {
