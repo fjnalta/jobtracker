@@ -15,6 +15,7 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -38,26 +39,28 @@ public class CalendarUtilizationWidget extends Composite implements CalendarObse
 	}
 
 	// Path for the css File
-	private final String SUFFIXPATH = "net-greenbeansit-jobtracker-client-components-widgets-calendar-CalendarUtilizationWidget_CalendarUtilizationWidgetUiBinderImpl_GenCss_style-";
+	private final String 				SUFFIXPATH = "net-greenbeansit-jobtracker-client-components-widgets-calendar-CalendarUtilizationWidget_CalendarUtilizationWidgetUiBinderImpl_GenCss_style-";
 	// This date iterate to every day of month
-	private Date tmpDate;
+	private Date 						iteratorDate;
 	// This date is needed for the current week view
-	private Date calcDate;
+	private Date 						currentWeekFirstDayDate;
 	// Utilization should new calculate if it's yes
-	private ViewOption view;
-	// Is needed for load from the Database
-	private int d, m;
-	private List<VerticalPanel> list;
-	private boolean calcUtil;
+	private ViewOption 					view;
+	// Is needed for change the Calendar time line
+	private int 						changeDay, changeMonth;
+	
+	private List<VerticalPanel> 		list;
+	
+	private boolean 					calculateUtilization;
 
 	@UiField
-	FlexTable table;
+	FlexTable 							table;
 
 	@UiField
-	Button leftButton;
+	Button								leftButton;
 
 	@UiField
-	Button rightButton;
+	Button 								rightButton;
 
 	/**
 	 * When this button is clicked, the timeline will change to 1 week or month
@@ -68,9 +71,12 @@ public class CalendarUtilizationWidget extends Composite implements CalendarObse
 	@SuppressWarnings("deprecation")
 	@UiHandler("leftButton")
 	public void clickHandlerLeftButton(ClickEvent e) {
-		this.time(-7, 0);
-		handler.loadUtilization(this.tmpDate.getYear() + 1900, this.tmpDate.getMonth() + 1);
-		calcUtil= true;
+		this.setTime(-7, 0);
+		
+		handler.loadUtilization(this.iteratorDate.getYear() + 1900, this.iteratorDate.getMonth() + 1);
+		
+		calculateUtilization= true;
+		
 		calendarHandler.calendar.previous();
 	}
 
@@ -83,41 +89,52 @@ public class CalendarUtilizationWidget extends Composite implements CalendarObse
 	@SuppressWarnings("deprecation")
 	@UiHandler("rightButton")
 	public void clickHandlerRightButton(ClickEvent e) {
-		this.time(7, 0);
-		handler.loadUtilization(this.tmpDate.getYear() + 1900, this.tmpDate.getMonth() + 1);
-		calcUtil= true;
+		this.setTime(7, 0);
+	
+		handler.loadUtilization(this.iteratorDate.getYear() + 1900, this.iteratorDate.getMonth() + 1);
+		
+		calculateUtilization= true;
+		
 		calendarHandler.calendar.next();
 	}
 
 	/**
-	 * 
+	 * Contructor 
 	 */
 	@SuppressWarnings("deprecation")
 	public CalendarUtilizationWidget() {
 		initWidget(uiBinder.createAndBindUi(this));
-		handler.addObservable(this);
-		calendarHandler.addObserver(this);
-		this.calcUtil = true;
-		this.tmpDate = new Date();
-		this.calcDate = getFirstDayOfActualWeek();
-		this.view = ViewOption.agendaWeek;
-		this.leftButton.setIcon(IconType.ARROW_LEFT);
-		this.rightButton.setIcon(IconType.ARROW_RIGHT);
-		this.time(0, 0);
 		
-		handler.loadUtilization(tmpDate.getYear() + 1900, tmpDate.getMonth() + 1);
+		handler.addObservable(this);
+		
+		calendarHandler.addObserver(this);
+		
+		this.calculateUtilization = true;
+		
+		this.currentWeekFirstDayDate = getFirstDayOfActualWeek();
+		
+		this.view = ViewOption.agendaWeek;
+		
+		this.leftButton.setIcon(IconType.ARROW_LEFT);
+		
+		this.rightButton.setIcon(IconType.ARROW_RIGHT);
+		
+		this.setTime(0, 0);
+		
+		handler.loadUtilization(new Date().getYear() + 1900, new Date().getMonth() + 1);
 		
 	}
 
 	/**
-	 * Set the time for creating the table
+	 * Set the time for creating the table.
 	 * 
 	 * @param day the Day
 	 * @param month the Month
 	 */
-	private void time(int day, int month) {
-		this.d = day;
-		this.m = month;
+	private void setTime(int day, int month) {
+		this.changeDay = day;
+		
+		this.changeMonth = month;
 	}
 
 	/**
@@ -135,19 +152,28 @@ public class CalendarUtilizationWidget extends Composite implements CalendarObse
 	private void createNewTimeline(int days, int month) {
 		this.table.removeAllRows();
 
-		CalendarUtil.addDaysToDate(calcDate, days);
-		this.tmpDate = CalendarUtil.copyDate(calcDate);
-		CalendarUtil.setToFirstDayOfMonth(this.tmpDate);
+		CalendarUtil.addDaysToDate(currentWeekFirstDayDate, days);
+		CalendarUtil.addMonthsToDate(currentWeekFirstDayDate, month);
+		
+		this.iteratorDate = CalendarUtil.copyDate(currentWeekFirstDayDate);
+		
+		CalendarUtil.setToFirstDayOfMonth(this.iteratorDate);
 
-		int monthNumber = calcDate.getMonth();
+		int monthNumber = currentWeekFirstDayDate.getMonth();
+		
 		int dayNumberColumn = 0;
+		
 		int element = 0;
 
-		while (monthNumber == this.tmpDate.getMonth()) {
+		while (monthNumber == this.iteratorDate.getMonth()) {
+		
 			createFirstRow(dayNumberColumn, element++);
+			
 			createSecondRow(dayNumberColumn);
+			
 			createThirdRow(dayNumberColumn++);
-			CalendarUtil.addDaysToDate(this.tmpDate, 1);
+			
+			CalendarUtil.addDaysToDate(this.iteratorDate, 1);
 		}
 	}
 
@@ -170,8 +196,10 @@ public class CalendarUtilizationWidget extends Composite implements CalendarObse
 	 *            the current column
 	 */
 	private void createSecondRow(int dayNumberColumn) {
-		final UButton dayBtn = new UButton((dayNumberColumn + 1) + "", CalendarUtil.copyDate(this.tmpDate));
+		final UButton dayBtn = new UButton((dayNumberColumn + 1) + "", CalendarUtil.copyDate(this.iteratorDate));
+		
 		Date date = new Date();
+		
 		dayBtn.addClickHandler(new ClickHandler() {
 
 			@Override
@@ -181,12 +209,18 @@ public class CalendarUtilizationWidget extends Composite implements CalendarObse
 			}
 		});
 
-		if (CalendarUtil.isSameDate(date, this.tmpDate)) {
+		if (CalendarUtil.isSameDate(date, this.iteratorDate)) {
+			
 			dayBtn.setStyleName(this.SUFFIXPATH + "button-Day-current");
+			
 			this.table.setWidget(1, dayNumberColumn, dayBtn);
+			
 		} else {
+			
 			dayBtn.setStyleName(this.SUFFIXPATH + "button-Day");
+			
 			this.table.setWidget(1, dayNumberColumn, dayBtn);
+			
 		}
 	}
 
@@ -199,14 +233,19 @@ public class CalendarUtilizationWidget extends Composite implements CalendarObse
 	@SuppressWarnings("deprecation")
 	private void createThirdRow(int dayNumberColumn) {
 
-		Label lbl = new Label("" + this.getDayName(tmpDate.getDay()));
-		if (this.calcDate.getDate() <= (dayNumberColumn + 1)
-				&& (this.calcDate.getDate() + 6) >= (dayNumberColumn + 1)) {
+		Label lbl = new Label("" + this.getDayName(iteratorDate.getDay()));
+		
+		if (this.currentWeekFirstDayDate.getDate() <= (dayNumberColumn + 1)
+				&& (this.currentWeekFirstDayDate.getDate() + 6) >= (dayNumberColumn + 1)) {
+			
 			lbl.setStyleName(this.SUFFIXPATH + "label-week");
+			
 			this.table.setWidget(2, dayNumberColumn, lbl);
-
+			
 		} else {
+			
 			lbl.setStyleName(this.SUFFIXPATH + "label-not-week");
+			
 			this.table.setWidget(2, dayNumberColumn, lbl);
 		}
 	}
@@ -254,13 +293,19 @@ public class CalendarUtilizationWidget extends Composite implements CalendarObse
 	 * @return an new BarChart
 	 */
 	private VerticalPanel getBarChart(double number) {
+		
 		VerticalPanel vp = new VerticalPanel();
+		
 		vp.setHeight(number * 0.5+ "px");
 
 		if (number < 100) {
+			
 			vp.setStyleName(this.SUFFIXPATH + "barChart", true);
+			
 		} else {
+			
 			vp.setStyleName(this.SUFFIXPATH + "barChartHeight", true);
+			
 		}
 
 		return vp;
@@ -273,10 +318,15 @@ public class CalendarUtilizationWidget extends Composite implements CalendarObse
 	 * @return the Bar chart List
 	 */
 	private List<VerticalPanel> createBarChartList(List<Integer> u) {
+		
 		List<VerticalPanel> list = new ArrayList<VerticalPanel>();
+		
 		int n = u.size();
+		
 		for (int element = 1; element < n; element++) {
+			
 			list.add(getBarChart(Math.abs(u.get(element).intValue()) ));
+			
 		}
 		
 		return list;
@@ -289,10 +339,15 @@ public class CalendarUtilizationWidget extends Composite implements CalendarObse
 	 */
 	@SuppressWarnings("deprecation")
 	private Date getFirstDayOfActualWeek() {
+		
 		Date tmp = new Date();
+		
 		while (tmp.getDay() > 0) {
+		
 			CalendarUtil.addDaysToDate(tmp, -1);
+		
 		}
+		
 		return tmp;
 	}
 
@@ -300,30 +355,42 @@ public class CalendarUtilizationWidget extends Composite implements CalendarObse
 	 * Creates a new TimeLine.
 	 */
 	private void render() {
-		createNewTimeline(d, m);
-		time(0, 0);
+		
+		createNewTimeline(changeDay, changeMonth);
+		
+		setTime(0, 0);
 	}
 
 	@SuppressWarnings("deprecation")
 	@Override
 	public void update() {
+		
 		this.view = calendarHandler.calendar.getCurrentView();
-		handler.loadUtilization(calcDate.getYear() + 1900, calcDate.getMonth() + 1);
+		
+		handler.loadUtilization(currentWeekFirstDayDate.getYear() + 1900, currentWeekFirstDayDate.getMonth() + 1);
 	}
 
 	@Override
 	public void notifyHandler() {
+		
 		calendarHandler.updateObserver(this);
 	}
 
 	@Override
 	public void updateObservable() {
-		if (calcUtil) {			
+		
+		if (calculateUtilization) {			
+			
 			List<Integer> utilizationList = handler.getUtilizationList();
+			
 			if(utilizationList.size() != 0){
+			
 				list = createBarChartList(utilizationList);
+				
 				render();
-				this.calcUtil = false;
+				
+				this.calculateUtilization = false;
+				
 			}
 		}
 	}
