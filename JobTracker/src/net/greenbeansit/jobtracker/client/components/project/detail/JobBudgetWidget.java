@@ -143,7 +143,6 @@ public class JobBudgetWidget extends Composite implements OnDisplayEventListener
 				temp.setStartTime(1);
 				temp.setDuration(480);
 				reportList.add(temp);
-				GWT.log(tempDate.toGMTString());
 			}
 		}
 
@@ -195,7 +194,6 @@ public class JobBudgetWidget extends Composite implements OnDisplayEventListener
 			this.endDate.setYear(this.startDate.getYear());
 			this.endDate.setMonth(this.startDate.getMonth());
 			this.endDate.setDate(this.startDate.getDate() + 6);
-			GWT.log(endDate.toGMTString());
 			showWeek();
 			break;
 		case MONTH:
@@ -311,7 +309,6 @@ public class JobBudgetWidget extends Composite implements OnDisplayEventListener
 
 		for (ActivityReport report : reportList)
 		{
-			GWT.log("CurrentReport" + report.getDate().toGMTString());
 			Date tempDate = new Date();
 			tempDate.setDate(this.startDate.getDate() + 7);
 			tempDate.setHours(this.startDate.getHours());
@@ -322,9 +319,6 @@ public class JobBudgetWidget extends Composite implements OnDisplayEventListener
 			if (report.getDate().after(startDate)
 					&& report.getDate().before(tempDate))
 			{
-				GWT.log("startDate:" + startDate.toGMTString() + "-"
-						+ report.getDate().toGMTString() + "-"
-						+ tempDate.toGMTString());
 				int currentWeekDay = report.getDate().getDay();
 				if (currentWeekDay == 0)
 				{
