@@ -2,8 +2,10 @@ package net.greenbeansit.jobtracker.client.components.project.detail;
 
 import org.gwtbootstrap3.client.shared.event.TabShowEvent;
 import org.gwtbootstrap3.client.shared.event.TabShowHandler;
+import org.gwtbootstrap3.client.ui.Heading;
 import org.gwtbootstrap3.client.ui.NavTabs;
 import org.gwtbootstrap3.client.ui.TabListItem;
+import org.gwtbootstrap3.client.ui.html.Span;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -11,6 +13,8 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 
+import net.greenbeansit.jobtracker.client.components.project.detail.ProjectDetailPageHelperServiceImpl.Callback;
+import net.greenbeansit.jobtracker.client.utils.rest.NotifyHelper;
 import net.greenbeansit.jobtracker.shared.Job;
 
 
@@ -33,7 +37,6 @@ public class ProjectDetailPage extends Composite
 	interface ProjectDetailPageUiBinder
 			extends UiBinder<Widget, ProjectDetailPage>
 	{
-
 	}
 
 	@UiField
@@ -56,7 +59,23 @@ public class ProjectDetailPage extends Composite
 
 	@UiField
 	JobWorkerListWidget	jobWorkerListWidget;
+	
+	@UiField
+	Heading titleProjectName;
+	
+	@UiField
+	Span textProjectName;
+	
+	@UiField
+	Span textCustomerName;
+	
+	@UiField
+	Span textBudgetInfo;
 
+	
+	private ProjectDetailPageHelperService helperService;
+	
+	
 	/**
 	 * Initializes a new instance of the {@link ProjectDetailPage}.
 	 * 
@@ -68,7 +87,6 @@ public class ProjectDetailPage extends Composite
 	{
 		initWidget(uiBinder.createAndBindUi(this));
 
-		
 		//Add tab handlers
 		tabBudget.addShowHandler(new TabShowHandler()
 		{
@@ -94,6 +112,27 @@ public class ProjectDetailPage extends Composite
 			public void onShow(TabShowEvent event)
 			{
 				jobWorkerListWidget.onDisplay();
+			}
+		});
+		
+		
+		helperService = new ProjectDetailPageHelperServiceImpl(jobId, new Callback()
+		{
+			@Override
+			public void onSuccess()
+			{
+				textProjectName.setText(helperService.getJob().toString());
+				titleProjectName.setText(textProjectName.getText());
+				
+				textCustomerName.setText(helperService.getCustomer().getName());
+				textBudgetInfo.setText(helperService.getJob().getUsedBudget() + " / " + helperService.getJob().getMaxBudget());
+				
+			}
+			
+			@Override
+			public void onFailure(Throwable error)
+			{
+				NotifyHelper.errorMessage(error.toString());
 			}
 		});
 	}
