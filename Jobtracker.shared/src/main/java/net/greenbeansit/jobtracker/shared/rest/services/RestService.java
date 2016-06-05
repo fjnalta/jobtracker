@@ -168,6 +168,17 @@ public interface RestService extends DirectRestService
 	@GET
 	@Path("/customers/{name}")
 	Customer getCustomer(@PathParam("name") String name);
+	
+	/**
+	 * Gets the {@link Job} with the following ID.
+	 * 
+	 * @param id the ID of the searched {@link Job}.
+	 * 
+	 * @return the searched {@link Job} if it was found. Otherwise null.
+	 */
+	@GET
+	@Path("/jobs/{id}")
+	Job getJob(@PathParam("id") Integer id);
 
 	/**
 	 * Saves an {@link ActivityReport} to the database.
