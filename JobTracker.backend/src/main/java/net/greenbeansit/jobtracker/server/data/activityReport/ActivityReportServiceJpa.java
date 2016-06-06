@@ -145,4 +145,27 @@ public class ActivityReportServiceJpa implements ActivityReportDataService
 	{
 		return new Time(minutes / 60, minutes % 60, 0);
 	}
+
+	@Override
+	public List<ActivityReport> getByUserAndMonth(Integer authorId,
+			Integer year, Integer month)
+	{
+		ArrayList<ActivityReport> list = new ArrayList<ActivityReport>();
+		for (ActivityReportEntity entity : repository.findByAuthorAndMonth(authorId, year, month))
+		{
+			list.add(convert(entity));
+		}
+		return list;
+	}
+
+	@Override
+	public List<ActivityReport> getByUserAndYear(Integer authorId, Integer year)
+	{
+		ArrayList<ActivityReport> list = new ArrayList<ActivityReport>();
+		for (ActivityReportEntity entity : repository.findByAuthorAndYear(authorId, year))
+		{
+			list.add(convert(entity));
+		}
+		return list;
+	}
 }

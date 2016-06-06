@@ -21,13 +21,16 @@
             <b:FormLabel>Monat</b:FormLabel>
             <b:Heading size="H3" ui:field="month"/>
         </b:Column>
-        <b:Column size="XS_12,SM_7,MD_7,LG_7" addStyleNames="{style.mainColumn}" ui:field="calendar">
+        <b:Column size="XS_12,SM_10,MD_10,LG_10" addStyleNames="{style.mainColumn}" ui:field="calendar">
             <b:FormLabel>Kalender</b:FormLabel>
         </b:Column>
+        <!-- Utilization Widget
+
         <b:Column size="XS_12,SM_3,MD_3,LG_3" addStyleNames="{style.mainColumn}">
             <b:FormLabel>Auslastung</b:FormLabel>
             <widgets:WeeklyUtilizationWidget></widgets:WeeklyUtilizationWidget>
-            <!-- Import utilization Widget -->
         </b:Column>
+
+        -->
     </b:Container>
 </ui:UiBinder>

@@ -104,8 +104,8 @@
 		<b:Row addStyleNames="{style.headerRow}">
 			<g:Anchor text="&lt; Alle Projekte" href="#project"
 				addStyleNames="{style.anchorBackward}" />
-			<b:Heading size="H3" addStyleNames="{style.title}" text="Jesus Christus"
-				ui:field="titleEmployeeName" />
+			<b:Heading size="H3" addStyleNames="{style.title}" text=""
+				ui:field="titleProjectName" />
 		</b:Row>
 		<b:Row addStyleNames="{style.bottomRow}">
 			<b:Column size="XS_12,SM_12,MD_4,LG_4" addStyleNames="{style.mainColumn}">
@@ -117,11 +117,11 @@
 					</b.html:ClearFix>
 					<b.html:ClearFix addStyleNames="{style.infoFieldContainer}">
 						<b.html:Span text="Vorname:" addStyleNames="{style.infoFieldLabel}"/>
-						<b.html:Span text="Jesus" ui:field="textCustomerName" addStyleNames="{style.infoFieldValue}"/>
+						<b.html:Span text="" ui:field="textCustomerName" addStyleNames="{style.infoFieldValue}"/>
 					</b.html:ClearFix>
 					<b.html:ClearFix addStyleNames="{style.infoFieldContainer}">
 						<b.html:Span text="Budget" addStyleNames="{style.infoFieldLabel}"/>
-						<b.html:Span text="50000 / 75000 EURO" ui:field="textBudgetInfo" addStyleNames="{style.infoFieldValue}"/>
+						<b.html:Span text="" ui:field="textBudgetInfo" addStyleNames="{style.infoFieldValue}"/>
 					</b.html:ClearFix>
 				</b:Row>
 			</b:Column>
