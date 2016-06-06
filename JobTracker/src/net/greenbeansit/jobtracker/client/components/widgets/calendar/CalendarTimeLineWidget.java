@@ -1,5 +1,6 @@
 package net.greenbeansit.jobtracker.client.components.widgets.calendar;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import org.gwtbootstrap3.client.ui.html.Text;
@@ -40,7 +41,7 @@ public class CalendarTimeLineWidget extends Composite implements CalendarObserve
 		String currentDate = createDate(new Date().toString());
 		setDate(currentDate);
 		Date d = new Date();
-		setCalenderWeek(getCalendarWeek(d.getYear()+1900,d.getMonth() + 1, d.getDate()));
+		setCalendarWeek(""+getCalendarWeek(d.getYear()+1900,d.getMonth() + 1, d.getDate()));
 	}
 
 	/**
@@ -51,14 +52,11 @@ public class CalendarTimeLineWidget extends Composite implements CalendarObserve
 	 * @return the CalendarWeek
 	 */
 	// TODO- Schaltjahr berechnung
-	private String getCalendarWeek(int year, int month, int day) {
+	private Integer getCalendarWeek(int year, int month, int day) {
 		
-		int summDay = 0;
-		while(month > 0 ){
-			summDay += this.getMonthDayNumber(month--);
-		}
-		summDay /= 7;
-		return summDay+" KW";
+		Calendar calendar = Calendar.getInstance();
+		calendar.set(year, month-1, day);
+		return calendar.get(Calendar.WEEK_OF_YEAR);
 	}
 
 	/**
@@ -83,7 +81,7 @@ public class CalendarTimeLineWidget extends Composite implements CalendarObserve
 		
 		setDate(month + "`" + day);
 		//Window.alert(yearInt +" "+ monthInt+ " " + dayInt);
-		setCalenderWeek(getCalendarWeek(yearInt, monthInt, dayInt));
+		setCalendarWeek(""+getCalendarWeek(yearInt, monthInt, dayInt));
 		
 	}
 
@@ -123,42 +121,6 @@ public class CalendarTimeLineWidget extends Composite implements CalendarObserve
 		}	
 	}
 
-	/**
-	 * Gets the number of the Day.
-	 * @param month the Month.
-	 * @return the day.
-     */
-	private int getMonthDayNumber(int month){
-		switch(month){
-		case 1:
-			return 31;
-		case 2:
-			return 28;
-		case 3:
-			return 31;
-		case 4:
-			return 30;
-		case 5:
-			return 31;
-		case 6:
-			return 30;
-		case 7:
-			return 31;
-		case 8:
-			return 31;
-		case 9:
-			return 30;
-		case 10:
-			return 31;
-		case 11:
-			return 30;
-		case 12:
-			return 31;
-		default:
-			return -100;
-		}
-	}
-
 	@Override
 	public void notifyHandler() {
 		calendarHandler.updateObserver(this);
@@ -168,7 +130,7 @@ public class CalendarTimeLineWidget extends Composite implements CalendarObserve
 	 * Sets the CalendarWeek.
 	 * @param week the Week.
      */
-	public void setCalenderWeek(String week) {
+	public void setCalendarWeek(String week) {
 		kw.setText(week);
 	}
 
