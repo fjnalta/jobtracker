@@ -127,6 +127,7 @@ public class ProjectDetailPage extends Composite
 				textCustomerName.setText(helperService.getCustomer().getName());
 				textBudgetInfo.setText(helperService.getJob().getUsedBudget() + " / " + helperService.getJob().getMaxBudget());
 				
+				jobWorkerListWidget.fillWorkerList(helperService.getWorker());
 			}
 			
 			@Override

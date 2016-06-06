@@ -1,7 +1,10 @@
 package net.greenbeansit.jobtracker.client.components.project.detail;
 
+import java.util.List;
+
 import net.greenbeansit.jobtracker.shared.Customer;
 import net.greenbeansit.jobtracker.shared.Job;
+import net.greenbeansit.jobtracker.shared.User;
 
 /**
  * Helper service for the {@link ProjectDetailPage}.
@@ -23,4 +26,11 @@ interface ProjectDetailPageHelperService
 	 * @return a {@link Customer}.
 	 */
 	Customer getCustomer();
+	
+	/**
+	 * Gets all {@link User}s who work at the {@link Job}.
+	 * 
+	 * @return a list of {@link User}s.
+	 */
+	List<User> getWorker();
 }

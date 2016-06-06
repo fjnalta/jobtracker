@@ -1,0 +1,10 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:gwtbootstrap3="urn:import:org.gwtbootstrap3.client.ui">
+	<ui:style>
+	.container {
+		margin: 5px;
+	}
+	</ui:style>
+	<gwtbootstrap3:Heading ui:field="headingWorkerName" addStyleNames="{style.container}"></gwtbootstrap3:Heading>
+</ui:UiBinder> 

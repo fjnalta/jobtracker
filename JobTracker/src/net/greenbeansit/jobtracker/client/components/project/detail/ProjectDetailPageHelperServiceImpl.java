@@ -1,11 +1,14 @@
 package net.greenbeansit.jobtracker.client.components.project.detail;
 
+import java.util.List;
+
 import org.fusesource.restygwt.client.Method;
 
 import net.greenbeansit.jobtracker.client.utils.rest.RestClient;
 import net.greenbeansit.jobtracker.client.utils.rest.RestClient.SuccessFunction;
 import net.greenbeansit.jobtracker.shared.Customer;
 import net.greenbeansit.jobtracker.shared.Job;
+import net.greenbeansit.jobtracker.shared.User;
 
 /**
  * Implementation of {@link ProjectDetailPageHelperService}.
@@ -39,6 +42,7 @@ class ProjectDetailPageHelperServiceImpl implements ProjectDetailPageHelperServi
 	
 	private Job job;
 	private Customer customer;
+	private List<User> worker;
 	
 	
 	/**
@@ -65,6 +69,23 @@ class ProjectDetailPageHelperServiceImpl implements ProjectDetailPageHelperServi
 					public void onSuccess(Method method, Customer response)
 					{
 						customer = response;
+						
+						RestClient.build(new SuccessFunction<List<User>>()
+						{
+							@Override
+							public void onSuccess(Method method,
+									List<User> response)
+							{
+								worker = response;
+							}
+
+							@Override
+							public void onFailure(Method method,
+									Throwable exception)
+							{
+								initCallback.onFailure(exception);
+							}
+						});
 						
 						initCallback.onSuccess();
 					}
@@ -101,4 +122,9 @@ class ProjectDetailPageHelperServiceImpl implements ProjectDetailPageHelperServi
 		return customer;
 	}
 
+	@Override
+	public List<User> getWorker()
+	{
+		return worker;
+	}
 }
