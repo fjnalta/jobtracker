@@ -83,7 +83,7 @@ public class ProjectDetailPage extends Composite
 	 *            the ID of the {@link Job} that should be displayed by the
 	 *            page.
 	 */
-	public ProjectDetailPage(Integer jobId)
+	public ProjectDetailPage(Integer jobNo, Integer posNo)
 	{
 		initWidget(uiBinder.createAndBindUi(this));
 
@@ -116,7 +116,7 @@ public class ProjectDetailPage extends Composite
 		});
 		
 		
-		helperService = new ProjectDetailPageHelperServiceImpl(jobId, new Callback()
+		helperService = new ProjectDetailPageHelperServiceImpl(jobNo, posNo, new Callback()
 		{
 			@Override
 			public void onSuccess()

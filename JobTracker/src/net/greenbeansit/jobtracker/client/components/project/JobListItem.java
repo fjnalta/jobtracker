@@ -44,7 +44,7 @@ public class JobListItem extends Composite
 	{
 		initWidget(uiBinder.createAndBindUi(this));
 		
-		anchor.setHref("#project/job/" + job.getPosNr());
+		anchor.setHref("#project/job/" + job.getJobNr() + "/" + job.getPosNr());
 		anchor.add(new ProjectBudgetBar(job));
 	}
 

@@ -323,13 +323,10 @@ public class RestServiceImpl implements RestService {
 		return workDays;
 	}
 
-	/* (non-Javadoc)
-	 * @see net.greenbeansit.jobtracker.shared.rest.services.RestService#getJob(java.lang.Integer)
-	 */
 	@Override
-	public Job getJob(Integer id)
+	public void getJob(Integer jobNo, Integer posNo)
 	{
-		// TODO Max: Nein wir benutzen keine "jobID" - Mike
-		return null;
+		// TODO Auto-generated method stub
+		
 	}
 }

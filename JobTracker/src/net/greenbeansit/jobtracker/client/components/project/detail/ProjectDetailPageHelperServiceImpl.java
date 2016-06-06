@@ -44,12 +44,13 @@ class ProjectDetailPageHelperServiceImpl implements ProjectDetailPageHelperServi
 	/**
 	 * Starts the asynchronous loading process.
 	 * 
-	 * @param jobId the ID of the {@link Job} that should be loaded.
+	 * @param jobNo the job number of the {@link Job} that should be loaded.
+	 * @param posNo the position number of the {@link Job} that should be loaded.
 	 * @param initCallback
 	 *            the {@link Callback} that will be called after the
 	 *            asynchronous process has been finished.
 	 */
-	public ProjectDetailPageHelperServiceImpl(Integer jobId, final Callback initCallback)
+	public ProjectDetailPageHelperServiceImpl(Integer jobNo, Integer posNo, final Callback initCallback)
 	{
 		RestClient.build(new SuccessFunction<Job>()
 		{
@@ -82,7 +83,7 @@ class ProjectDetailPageHelperServiceImpl implements ProjectDetailPageHelperServi
 			{
 				initCallback.onFailure(exception);
 			}
-		}).getEmployeeService().getJob(jobId);
+		}).getEmployeeService().getJob(jobNo, posNo);
 		
 		
 	}

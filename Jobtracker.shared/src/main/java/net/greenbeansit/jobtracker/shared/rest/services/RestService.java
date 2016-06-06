@@ -177,8 +177,9 @@ public interface RestService extends DirectRestService
 	 * @return the searched {@link Job} if it was found. Otherwise null.
 	 */
 	@GET
-	@Path("/jobs/{id}")
-	Job getJob(@PathParam("id") Integer id);
+	@Path("/jobs/{jobNo}/{posNo}")
+	void getJob(@PathParam("jobNo") Integer jobNo,
+			@PathParam("posNo") Integer posNo);
 
 	/**
 	 * Saves an {@link ActivityReport} to the database.

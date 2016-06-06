@@ -125,21 +125,23 @@ public class Application extends Composite
 		{
 			Composite page;
 
-			if (addressSplit.length == 3 && addressSplit[1] == "job")
+			if (addressSplit.length == 4 && addressSplit[1] == "job")
 			{
-				Integer jobId;
+				Integer jobNo, posNo;
 
 				try
 				{
-					jobId = Integer.parseInt(addressSplit[2]);
+					jobNo = Integer.parseInt(addressSplit[2]);
+					posNo = Integer.parseInt(addressSplit[3]);
 
 				} catch (Exception ex)
 				{
-					jobId = null;
+					jobNo = null;
+					posNo = null;
 				}
 
-				if (jobId != null)
-					page = new ProjectDetailPage(jobId);
+				if (jobNo != null && posNo != null)
+					page = new ProjectDetailPage(jobNo, posNo);
 				else
 					page = new ProjectPage();
 			} else
