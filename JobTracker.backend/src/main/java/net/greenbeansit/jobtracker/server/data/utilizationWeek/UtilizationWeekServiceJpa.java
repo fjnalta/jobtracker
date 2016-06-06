@@ -1,7 +1,6 @@
 package net.greenbeansit.jobtracker.server.data.utilizationWeek;
 
 import java.util.ArrayList;
-import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,13 +36,6 @@ public class UtilizationWeekServiceJpa implements UtilizationWeekDataService
 	public UtilizationWeek getUtilizationWeek(Integer utilId)
 	{
 		return convert(repository.findById(utilId));
-	}
-
-	@Override
-	public List<UtilizationWeek> getByPeriod(Date from, Date to)
-	{
-		// TODO Mike: Implement when repository done
-		return null;
 	}
 
 	@Override
@@ -113,5 +105,29 @@ public class UtilizationWeekServiceJpa implements UtilizationWeekDataService
 		// util.getDaysHoliday(), util.getPossibilty(),
 		// util.getPseudoJobId());
 		return null;
+	}
+
+	@Override
+	public List<UtilizationWeek> getByUserAndMonth(Integer authorId,
+			Integer year, Integer month)
+	{
+		ArrayList<UtilizationWeek> list = new ArrayList<UtilizationWeek>();
+		for (UtilizationWeekEntity entity : repository.findByAuthorAndMonth(authorId, year, month))
+		{
+			list.add(convert(entity));
+		}
+		return list;
+	}
+
+	@Override
+	public List<UtilizationWeek> getByUserAndYear(Integer authorId,
+			Integer year)
+	{
+		ArrayList<UtilizationWeek> list = new ArrayList<UtilizationWeek>();
+		for (UtilizationWeekEntity entity : repository.findByAuthorAndYear(authorId, year))
+		{
+			list.add(convert(entity));
+		}
+		return list;
 	}
 }

@@ -224,7 +224,6 @@ public class Job implements Serializable {
 				payMode = "UNDEFINED";
 		}
 			
-		//TODO: String format
 		return this.jobNr + "-" + this.posNr + "-" + payMode + " | " + this.customerID + " | " + this.desc;
 	}
 
