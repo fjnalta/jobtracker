@@ -1,0 +1,97 @@
+.important {
+	width: 100%;
+	text-align: center;
+}
+
+.button-arrow {
+	background-color: white; 
+	border: none;
+	border-radius: 10px;
+	color: black;
+	display: inline-block;
+	font-size: 16px;
+	vertical-align: bottom;
+}
+
+.button-Day {
+	width: 5px;
+	border: none;
+	text-align: center;
+	padding-right: 15px;
+	background-color: white;
+}
+
+.button-Day-current {
+	width: 5px;
+	text-align: center;
+	padding-right: 23px;
+	background-color: rgba(238 ,0 ,0,0.5 );
+	border: none;
+	border-radius: 20px;
+}
+.label-week{
+	opacity:1;
+}
+.label-not-week{
+	opacity:0.3;
+}
+td {
+	padding-top: 0;
+	margin-top: 0;
+	text-align: center;
+	vertical-align: bottom;
+}
+.fontColor {
+	color: red;
+}
+
+.barChart {
+	width: 7px;
+	text-align: center;
+	display: inline-block;
+	background-color: #00AAAA;
+	border-radius: 10px;
+}
+
+.barChartHeight {
+	width: 7px;
+	text-align: center;
+	display: inline-block;
+	background-color: #ff8c00;
+	border-radius: 10px;
+}
+
+.button-Day:HOVER, .button-Day-current:HOVER{
+	border-radius:50px;
+	background-color: rgba(180,205,205,0.5);
+	
+}
+.button-Day:FOCUS {
+
+	
+}
+
+.weeklyUtilization {
+	height: 100%;
+	width: 100%;
+	margin-top: 75px;
+	text-align: left;
+}
+
+.barChartHorizontal {
+	width: 7px;
+	text-align: center;
+	display: inline-block;
+	background-color: #00AAAA;
+	border-radius: 10px;
+	margin-bottom: 40px;
+}
+
+.barChartHeightHorizontal {
+	width: 7px;
+	text-align: center;
+	display: inline-block;
+	background-color: #ff8c00;
+	border-radius: 10px;
+	margin-bottom: 40px;
+}
