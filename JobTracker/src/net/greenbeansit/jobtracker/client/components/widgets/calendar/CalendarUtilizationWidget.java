@@ -51,6 +51,8 @@ public class CalendarUtilizationWidget extends Composite implements CalendarObse
 	
 	private List<VerticalPanel> 		list;
 	
+	private List<Integer> 				utilizationList;
+	
 	private boolean 					calculateUtilization;
 
 	@UiField
@@ -73,7 +75,7 @@ public class CalendarUtilizationWidget extends Composite implements CalendarObse
 	public void clickHandlerLeftButton(ClickEvent e) {
 		this.setTime(-7, 0);
 		
-		handler.loadUtilization(this.iteratorDate.getYear() + 1900, this.iteratorDate.getMonth() + 1);
+		handler.loadUtilization(this.currentWeekFirstDayDate.getYear() + 1900, this.currentWeekFirstDayDate.getMonth() + 1);
 		
 		calculateUtilization= true;
 		
@@ -91,7 +93,7 @@ public class CalendarUtilizationWidget extends Composite implements CalendarObse
 	public void clickHandlerRightButton(ClickEvent e) {
 		this.setTime(7, 0);
 	
-		handler.loadUtilization(this.iteratorDate.getYear() + 1900, this.iteratorDate.getMonth() + 1);
+		handler.loadUtilization(this.currentWeekFirstDayDate.getYear() + 1900, this.currentWeekFirstDayDate.getMonth() + 1);
 		
 		calculateUtilization= true;
 		
@@ -121,7 +123,7 @@ public class CalendarUtilizationWidget extends Composite implements CalendarObse
 		
 		this.setTime(0, 0);
 		
-		handler.loadUtilization(new Date().getYear() + 1900, new Date().getMonth() + 1);
+		handler.loadUtilization(currentWeekFirstDayDate.getYear() + 1900, currentWeekFirstDayDate.getMonth() + 1);
 		
 	}
 
@@ -206,6 +208,8 @@ public class CalendarUtilizationWidget extends Composite implements CalendarObse
 			public void onClick(ClickEvent event) {
 				
 				calendarHandler.calendar.goToDate(dayBtn.getDate());
+				
+				
 			}
 		});
 
@@ -296,18 +300,15 @@ public class CalendarUtilizationWidget extends Composite implements CalendarObse
 		
 		VerticalPanel vp = new VerticalPanel();
 		
-		vp.setHeight(number * 0.5+ "px");
-
-		if (number < 100) {
-			
-			vp.setStyleName(this.SUFFIXPATH + "barChart", true);
-			
-		} else {
-			
-			vp.setStyleName(this.SUFFIXPATH + "barChartHeight", true);
-			
+		//For empty Days
+		if(number < 1 ){
+			number = 15;
 		}
-
+		
+		vp.setHeight(number * 0.5+ "px");
+	
+		vp.setStyleName(this.SUFFIXPATH + "barChartHeight", true);
+			
 		return vp;
 	}
 
@@ -325,7 +326,7 @@ public class CalendarUtilizationWidget extends Composite implements CalendarObse
 		
 		for (int element = 1; element < n; element++) {
 			
-			list.add(getBarChart(Math.abs(u.get(element).intValue()) ));
+			list.add(getBarChart(Math.abs(u.get(element).intValue())  ));
 			
 		}
 		
@@ -361,19 +362,21 @@ public class CalendarUtilizationWidget extends Composite implements CalendarObse
 		setTime(0, 0);
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public void update() {
 		
 		this.view = calendarHandler.calendar.getCurrentView();
-		
-		handler.loadUtilization(currentWeekFirstDayDate.getYear() + 1900, currentWeekFirstDayDate.getMonth() + 1);
+	
+	//	this.setTime(0, 0);
+	//	handler.loadUtilization(this.currentWeekFirstDayDate.getYear() + 1900, this.currentWeekFirstDayDate.getMonth() + 1);
 	}
 
 	@Override
 	public void notifyHandler() {
 		
 		calendarHandler.updateObserver(this);
+		
+		
 	}
 
 	@Override
@@ -381,21 +384,19 @@ public class CalendarUtilizationWidget extends Composite implements CalendarObse
 		
 		if (calculateUtilization) {			
 			
-			List<Integer> utilizationList = handler.getUtilizationList();
+			this.utilizationList = handler.getUtilizationList();
 			
 			if(utilizationList.size() != 0){
 			
 				list = createBarChartList(utilizationList);
 				
-				render();
-				
 				this.calculateUtilization = false;
 				
+				render();
 			}
 		}
 	}
 
 	@Override
-	public void notifyLogicHandler() {
-	}
+	public void notifyLogicHandler() {}
 }
