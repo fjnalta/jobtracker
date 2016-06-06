@@ -90,7 +90,7 @@ public interface ActivityReportEntityRepository
 	 * @param month the month
 	 * @return List of corresponding {@link ActivityReportEntity}
 	 */
-	@Query("select x from ActivityReport x where x.author = :author and YEAR(x.begin_date) = :year and MONTH(x.begin_date) = :month")
+	@Query("select x from ActivityReportEntity x where x.author = :author and YEAR(x.beginDate) = :year and MONTH(x.beginDate) = :month")
 	List<ActivityReportEntity> findByAuthorAndMonth(
 			@Param("author") Integer author, @Param("year") Integer year,
 			@Param("month") Integer month);
@@ -101,7 +101,7 @@ public interface ActivityReportEntityRepository
 	 * @param year the year
 	 * @return List of corresponding {@link ActivityReportEntity}
 	 */
-	@Query("select x from ActivityReport x where x.author = :author and YEAR(x.begin_date) = :year")
+	@Query("select x from ActivityReportEntity x where x.author = :author and YEAR(x.beginDate) = :year")
 	List<ActivityReportEntity> findByAuthorAndYear(
 			@Param("author") Integer author, @Param("year") Integer year);
 }
