@@ -74,10 +74,11 @@ public class CalendarUtilizationWidget extends Composite implements CalendarObse
 	@UiHandler("leftButton")
 	public void clickHandlerLeftButton(ClickEvent e) {
 		this.setTime(-7, 0);
+		CalendarUtil.addDaysToDate(this.currentWeekFirstDayDate, this.changeDay);
+		//Window.alert(currentWeekFirstDayDate.getMonth()+1+"");
+		handler.loadUtilization(this.currentWeekFirstDayDate.getYear() + 1900, this.currentWeekFirstDayDate.getMonth()+1);
 		
-		handler.loadUtilization(this.currentWeekFirstDayDate.getYear() + 1900, this.currentWeekFirstDayDate.getMonth() + 1);
-		
-		calculateUtilization= true;
+		setCalculateUtilization(true);
 		
 		calendarHandler.calendar.previous();
 	}
@@ -92,12 +93,17 @@ public class CalendarUtilizationWidget extends Composite implements CalendarObse
 	@UiHandler("rightButton")
 	public void clickHandlerRightButton(ClickEvent e) {
 		this.setTime(7, 0);
-	
-		handler.loadUtilization(this.currentWeekFirstDayDate.getYear() + 1900, this.currentWeekFirstDayDate.getMonth() + 1);
+		CalendarUtil.addDaysToDate(this.currentWeekFirstDayDate, this.changeDay);
+		//Window.alert(currentWeekFirstDayDate.getMonth()+1+"");
+		handler.loadUtilization(this.currentWeekFirstDayDate.getYear() + 1900, this.currentWeekFirstDayDate.getMonth()+1);
 		
-		calculateUtilization= true;
+		setCalculateUtilization(true);
 		
 		calendarHandler.calendar.next();
+	}
+
+	public void setCalculateUtilization(boolean calculateUtilization) {
+		this.calculateUtilization = calculateUtilization;
 	}
 
 	/**
@@ -111,7 +117,7 @@ public class CalendarUtilizationWidget extends Composite implements CalendarObse
 		
 		calendarHandler.addObserver(this);
 		
-		this.calculateUtilization = true;
+		this.setCalculateUtilization(true);
 		
 		this.currentWeekFirstDayDate = getFirstDayOfActualWeek();
 		
@@ -145,17 +151,11 @@ public class CalendarUtilizationWidget extends Composite implements CalendarObse
 	 * month or the month The third show the day name and the current week /
 	 * month
 	 * 
-	 * @param days
-	 *            the day, which should change
-	 * @param month
-	 *            the month which should change
 	 */
 	@SuppressWarnings("deprecation")
-	private void createNewTimeline(int days, int month) {
+	private void createNewTimeline() {
 		this.table.removeAllRows();
 
-		CalendarUtil.addDaysToDate(currentWeekFirstDayDate, days);
-		CalendarUtil.addMonthsToDate(currentWeekFirstDayDate, month);
 		
 		this.iteratorDate = CalendarUtil.copyDate(currentWeekFirstDayDate);
 		
@@ -198,21 +198,9 @@ public class CalendarUtilizationWidget extends Composite implements CalendarObse
 	 *            the current column
 	 */
 	private void createSecondRow(int dayNumberColumn) {
-		final UButton dayBtn = new UButton((dayNumberColumn + 1) + "", CalendarUtil.copyDate(this.iteratorDate));
+		final UButton dayBtn = new UButton((dayNumberColumn + 1) + "", CalendarUtil.copyDate(this.iteratorDate),this.currentWeekFirstDayDate, this);
 		
 		Date date = new Date();
-		
-		dayBtn.addClickHandler(new ClickHandler() {
-
-			@Override
-			public void onClick(ClickEvent event) {
-				
-				calendarHandler.calendar.goToDate(dayBtn.getDate());
-				
-				
-			}
-		});
-
 		if (CalendarUtil.isSameDate(date, this.iteratorDate)) {
 			
 			dayBtn.setStyleName(this.SUFFIXPATH + "button-Day-current");
@@ -236,6 +224,8 @@ public class CalendarUtilizationWidget extends Composite implements CalendarObse
 	 */
 	@SuppressWarnings("deprecation")
 	private void createThirdRow(int dayNumberColumn) {
+
+		//this.table.removeRow(3);
 
 		Label lbl = new Label("" + this.getDayName(iteratorDate.getDay()));
 		
@@ -355,9 +345,9 @@ public class CalendarUtilizationWidget extends Composite implements CalendarObse
 	/**
 	 * Creates a new TimeLine.
 	 */
-	private void render() {
+	public void render() {
 		
-		createNewTimeline(changeDay, changeMonth);
+		createNewTimeline();
 		
 		setTime(0, 0);
 	}
@@ -382,7 +372,7 @@ public class CalendarUtilizationWidget extends Composite implements CalendarObse
 	@Override
 	public void updateObservable() {
 		
-		if (calculateUtilization) {			
+		if (this.calculateUtilization) {			
 			
 			this.utilizationList = handler.getUtilizationList();
 			
@@ -390,7 +380,7 @@ public class CalendarUtilizationWidget extends Composite implements CalendarObse
 			
 				list = createBarChartList(utilizationList);
 				
-				this.calculateUtilization = false;
+				this.setCalculateUtilization(false);
 				
 				render();
 			}
