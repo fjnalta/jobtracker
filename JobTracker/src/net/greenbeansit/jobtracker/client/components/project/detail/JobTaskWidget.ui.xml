@@ -4,5 +4,5 @@
 	<ui:style>
 	
 	</ui:style>
-	<h:ClearFix></h:ClearFix>
+	<h:ClearFix ui:field="activityContent"/>
 </ui:UiBinder> 
