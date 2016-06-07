@@ -113,6 +113,7 @@ public class CalendarWidget extends Composite implements CalendarObserver, Logic
 				header.setCenter("");
 				header.setRight("");
 				generalDisplay.setHeader(header);
+				generalDisplay.setFirstDayOption(1);
 
 				config.setGeneralDisplay(generalDisplay);
 
