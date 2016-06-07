@@ -29,6 +29,7 @@
 	.barBudget {
 		margin: 0;
 		overflow: hidden;
+		border-radius: 0;
 	}
 	
 	.spanBudget {
