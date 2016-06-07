@@ -47,6 +47,10 @@
 	margin-top: auto;
 }
 
+.button-book {
+	background: #000099;
+}
+
 .text {
 	line-height: 0px;
 	text-align: center;
@@ -58,20 +62,18 @@
 }
 
 
+.inputGroup {
+	border-radius: 0;
+}
 
+.inputGroup > div, button, span {
+	border-radius: 0 !important;
+}
 
 .textInput {
 	height: 43px;
 }
-.buttonCenter {
-	border-radius: 0 !important;
-}
-.buttonLeftEndTop {
-	border-radius: 0px 4px 0px 0px !important;
-}
-.buttonLeftEndBottom {
-	border-radius: 0px 0px 4px 0px !important;
-}
+
 .row {
 	margin: 10px 0px;
 	padding: 0;
