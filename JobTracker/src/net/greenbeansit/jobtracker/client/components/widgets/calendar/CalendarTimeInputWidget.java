@@ -493,10 +493,6 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 		}
 		calendarHandler.calendar.getEventsToSave().clear();
 
-		Date date = getDateFromBox(dateStart);
-		ActivityReport tmp = new ActivityReport(Integer.parseInt(calendarHandler.calendar.currentEvent.getId() + ""), 0,
-				0, 0, 2, "", date, startTime, duration, breakTime);
-		handler.saveReport(tmp);
 	}
 
 	@Override

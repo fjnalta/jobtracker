@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.data.repository.CrudRepository;
 
 /**
- * Repository for handling {@link JobEntity} and making requests to
- * the database.
+ * Repository for handling {@link JobEntity} and making requests to the
+ * database.
  * 
  * @author Mike Hukiewitz
  *
@@ -53,7 +53,9 @@ public interface JobEntityRepository extends CrudRepository<JobEntity, Integer>
 
 	/**
 	 * Returns all {@link JobEntity} related to a single customer.
-	 * @param customer_id ID of the customer
+	 * 
+	 * @param customer_id
+	 *            ID of the customer
 	 * @return List of {@link JobEntity}
 	 */
 	List<JobEntity> findByCustomerID(Integer customer_id);

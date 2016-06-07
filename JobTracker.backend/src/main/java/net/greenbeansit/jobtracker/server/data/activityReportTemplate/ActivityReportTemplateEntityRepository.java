@@ -7,8 +7,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 /**
- * Repository for handling {@link ActivityReportTemplateEntity} and making requests to
- * the database.
+ * Repository for handling {@link ActivityReportTemplateEntity} and making
+ * requests to the database.
  * 
  * @author Mike Hukiewitz
  *
@@ -20,12 +20,14 @@ public interface ActivityReportTemplateEntityRepository
 	/**
 	 * Deletes the given entity.
 	 * 
-	 * @param id
-	 *            entity to delete.
+	 * @param authorId
+	 *            its author
+	 * @param name
+	 *            name of the template
 	 */
 	@Modifying
-    @Query("delete from ActivityReportTemplateEntity where id = ?1")
-	void delete(Integer id);
+	@Query("delete from ActivityReportTemplateEntity where author = ?1 and name = ?2")
+	void delete(Integer authorId, String name);
 
 	/**
 	 * Saves an {@link ActivityReportTemplateEntity} to the database.
@@ -48,9 +50,13 @@ public interface ActivityReportTemplateEntityRepository
 	List<ActivityReportTemplateEntity> findByAuthor(Integer author);
 
 	/**
-	 * Returns an {@link ActivityReportTemplateEntity} by it's unique combination of author and template name.
-	 * @param author ID of the author
-	 * @param name name of the template
+	 * Returns an {@link ActivityReportTemplateEntity} by it's unique
+	 * combination of author and template name.
+	 * 
+	 * @param author
+	 *            ID of the author
+	 * @param name
+	 *            name of the template
 	 * @return corresponding {@link ActivityReportTemplateEntity}
 	 */
 	ActivityReportTemplateEntity findByAuthorAndName(Integer author,

@@ -25,6 +25,7 @@ import net.greenbeansit.jobtracker.server.rest.services.RestServiceImpl;
 
 /**
  * Configuration component for JerseyApplication.java.
+ * 
  * @author Mike Hukiewitz
  *
  */

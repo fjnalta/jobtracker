@@ -58,16 +58,19 @@ public class ActivityReportTemplateServiceJpa
 	}
 
 	@Override
-	public void delete(ActivityReportTemplate report)
+	public void delete(Integer author, String name)
 	{
-		repository.delete(convert(report));
+		repository.delete(author, name);
 	}
 
 	/**
-	 * Converts a {@link ActivityReportTemplateEntity} to {@link ActivityReportTemplate}
-	 * @param entity the {@link ActivityReportTemplateEntity}
+	 * Converts a {@link ActivityReportTemplateEntity} to
+	 * {@link ActivityReportTemplate}
+	 * 
+	 * @param entity
+	 *            the {@link ActivityReportTemplateEntity}
 	 * @return the {@link ActivityReportTemplate}
-     */
+	 */
 	private ActivityReportTemplate convert(ActivityReportTemplateEntity entity)
 	{
 		if (entity == null)
@@ -77,8 +80,11 @@ public class ActivityReportTemplateServiceJpa
 	}
 
 	/**
-	 * Converts a {@link ActivityReportTemplate} to {@link ActivityReportTemplateEntity}
-	 * @param report the {@link ActivityReportTemplate}
+	 * Converts a {@link ActivityReportTemplate} to
+	 * {@link ActivityReportTemplateEntity}
+	 * 
+	 * @param report
+	 *            the {@link ActivityReportTemplate}
 	 * @return the {@link ActivityReportTemplateEntity}
 	 */
 	private ActivityReportTemplateEntity convert(ActivityReportTemplate report)

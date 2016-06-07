@@ -22,6 +22,7 @@ import org.springframework.boot.context.web.SpringBootServletInitializer;
 
 /**
  * EntryPoint for the apache tomcat server.
+ * 
  * @author Mike Hukiewitz
  *
  */
@@ -39,8 +40,10 @@ public class JerseyApplication extends SpringBootServletInitializer
 
 	/**
 	 * Main Backend Method
-	 * @param args arguments of Main Method
-     */
+	 * 
+	 * @param args
+	 *            arguments of Main Method
+	 */
 	public static void main(String[] args)
 	{
 		new JerseyApplication()

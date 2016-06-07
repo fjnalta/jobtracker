@@ -49,22 +49,29 @@ public class UserJobEntity implements Serializable
 	public UserJobEntity()
 	{
 	}
-	
+
 	/**
 	 * Creates a new {@link UserJobEntity}
-	 * @param userId ID of the user
-	 * @param jobNr 3 to 6 digits
-	 * @param posNr up to 3 digits
-	 * @param role 0 = simple co-worker, 1 = project leader, 2 = same as 1 but without user administration
+	 * 
+	 * @param userId
+	 *            ID of the user
+	 * @param jobNr
+	 *            3 to 6 digits
+	 * @param posNr
+	 *            up to 3 digits
+	 * @param role
+	 *            0 = simple co-worker, 1 = project leader, 2 = same as 1 but
+	 *            without user administration
 	 */
-	public UserJobEntity(Integer userId, Integer jobNr, Integer posNr, Integer role)
+	public UserJobEntity(Integer userId, Integer jobNr, Integer posNr,
+			Integer role)
 	{
 		this.userId = userId;
 		this.jobNr = jobNr;
 		this.posNr = posNr;
 		this.role = role;
 	}
-	
+
 	/**
 	 * @return the user ID
 	 */
@@ -75,7 +82,9 @@ public class UserJobEntity implements Serializable
 
 	/**
 	 * set user ID
-	 * @param userId the User Id.
+	 * 
+	 * @param userId
+	 *            the User Id.
 	 */
 	public void setUserId(Integer userId)
 	{
@@ -92,7 +101,9 @@ public class UserJobEntity implements Serializable
 
 	/**
 	 * set job number
-	 * @param jobNr the Job Nr.
+	 * 
+	 * @param jobNr
+	 *            the Job Nr.
 	 */
 	public void setJobNr(Integer jobNr)
 	{
@@ -109,7 +120,9 @@ public class UserJobEntity implements Serializable
 
 	/**
 	 * set position number
-	 * @param posNr the position no.
+	 * 
+	 * @param posNr
+	 *            the position no.
 	 */
 	public void setPosNr(Integer posNr)
 	{
@@ -126,7 +139,9 @@ public class UserJobEntity implements Serializable
 
 	/**
 	 * set role
-	 * @param role the User role.
+	 * 
+	 * @param role
+	 *            the User role.
 	 */
 	public void setRole(Integer role)
 	{

@@ -34,7 +34,8 @@ public interface JobDataService
 	/**
 	 * Returns all jobs belonging to a customer.
 	 * 
-	 * @param customerId ID of the customer
+	 * @param customerId
+	 *            ID of the customer
 	 * @return List of Jobs belonging to the customer
 	 */
 	List<Job> getByCustomer(Integer customerId);

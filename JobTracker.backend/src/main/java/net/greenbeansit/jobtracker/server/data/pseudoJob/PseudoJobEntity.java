@@ -9,9 +9,9 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
- * A class representing PseudoJob (for capacity planning) as entities in our database. Only used in
- * backend. Each entity class requires a standard constructor and
- * getters/setters for usage in Java Spring.
+ * A class representing PseudoJob (for capacity planning) as entities in our
+ * database. Only used in backend. Each entity class requires a standard
+ * constructor and getters/setters for usage in Java Spring.
  * 
  * @author Mike Hukiewitz
  *
@@ -45,8 +45,11 @@ public class PseudoJobEntity implements Serializable
 
 	/**
 	 * Creates a new {@link PseudoJobEntity}
-	 * @param name name of the entity
-	 * @param author ID of its author
+	 * 
+	 * @param name
+	 *            name of the entity
+	 * @param author
+	 *            ID of its author
 	 */
 	public PseudoJobEntity(String name, Integer author)
 	{
@@ -64,7 +67,9 @@ public class PseudoJobEntity implements Serializable
 
 	/**
 	 * set ID
-	 * @param id the Id.
+	 * 
+	 * @param id
+	 *            the Id.
 	 */
 	public void setId(Integer id)
 	{
@@ -81,7 +86,9 @@ public class PseudoJobEntity implements Serializable
 
 	/**
 	 * set name
-	 * @param name the Name.
+	 * 
+	 * @param name
+	 *            the Name.
 	 */
 	public void setName(String name)
 	{
@@ -98,7 +105,9 @@ public class PseudoJobEntity implements Serializable
 
 	/**
 	 * set author
-	 * @param author the Author.
+	 * 
+	 * @param author
+	 *            the Author.
 	 */
 	public void setAuthor(Integer author)
 	{

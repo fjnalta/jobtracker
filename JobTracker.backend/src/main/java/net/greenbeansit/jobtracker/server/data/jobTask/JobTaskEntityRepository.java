@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.data.repository.CrudRepository;
 
 /**
- * Repository for handling {@link JobTaskEntity} and making requests to
- * the database.
+ * Repository for handling {@link JobTaskEntity} and making requests to the
+ * database.
  * 
  * @author Mike Hukiewitz
  *
