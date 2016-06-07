@@ -73,12 +73,26 @@ public class CalendarUtilizationWidget extends Composite implements CalendarObse
 	@SuppressWarnings("deprecation")
 	@UiHandler("leftButton")
 	public void clickHandlerLeftButton(ClickEvent e) {
-		this.setTime(-7, 0);
-		CalendarUtil.addDaysToDate(this.currentWeekFirstDayDate, this.changeDay);
-		//Window.alert(currentWeekFirstDayDate.getMonth()+1+"");
-		handler.loadUtilization(this.currentWeekFirstDayDate.getYear() + 1900, this.currentWeekFirstDayDate.getMonth()+1);
+		
+		if(view.toString().equals("agendaWeek")){
+		
+			this.setTime(-7, 0);	
+			
+			CalendarUtil.addDaysToDate(this.currentWeekFirstDayDate, this.changeDay);
+	
+		}else {
+		
+			this.setTime(0, -1);	
+			
+			CalendarUtil.addMonthsToDate(this.currentWeekFirstDayDate, this.changeMonth);
+			
+			CalendarUtil.setToFirstDayOfMonth(this.currentWeekFirstDayDate);
+			
+		}
 		
 		setCalculateUtilization(true);
+		
+		handler.loadUtilization(this.currentWeekFirstDayDate.getYear() + 1900, this.currentWeekFirstDayDate.getMonth()+1);
 		
 		calendarHandler.calendar.previous();
 	}
@@ -92,12 +106,23 @@ public class CalendarUtilizationWidget extends Composite implements CalendarObse
 	@SuppressWarnings("deprecation")
 	@UiHandler("rightButton")
 	public void clickHandlerRightButton(ClickEvent e) {
-		this.setTime(7, 0);
-		CalendarUtil.addDaysToDate(this.currentWeekFirstDayDate, this.changeDay);
-		//Window.alert(currentWeekFirstDayDate.getMonth()+1+"");
-		handler.loadUtilization(this.currentWeekFirstDayDate.getYear() + 1900, this.currentWeekFirstDayDate.getMonth()+1);
 		
+		if(view.toString().equals("agendaWeek")){
+			
+			this.setTime(7, 0);	
+			
+			CalendarUtil.addDaysToDate(this.currentWeekFirstDayDate, this.changeDay);
+	
+		}else {
+		
+			this.setTime(0, 1);	
+				
+			CalendarUtil.addMonthsToDate(this.currentWeekFirstDayDate, this.changeMonth);
+			
+		}
 		setCalculateUtilization(true);
+		
+		handler.loadUtilization(this.currentWeekFirstDayDate.getYear() + 1900, this.currentWeekFirstDayDate.getMonth()+1);
 		
 		calendarHandler.calendar.next();
 	}
@@ -156,7 +181,6 @@ public class CalendarUtilizationWidget extends Composite implements CalendarObse
 	private void createNewTimeline() {
 		this.table.removeAllRows();
 
-		
 		this.iteratorDate = CalendarUtil.copyDate(currentWeekFirstDayDate);
 		
 		CalendarUtil.setToFirstDayOfMonth(this.iteratorDate);
@@ -372,7 +396,7 @@ public class CalendarUtilizationWidget extends Composite implements CalendarObse
 	@Override
 	public void updateObservable() {
 		
-		if (this.calculateUtilization) {			
+				
 			
 			this.utilizationList = handler.getUtilizationList();
 			
@@ -384,7 +408,7 @@ public class CalendarUtilizationWidget extends Composite implements CalendarObse
 				
 				render();
 			}
-		}
+		
 	}
 
 	@Override
