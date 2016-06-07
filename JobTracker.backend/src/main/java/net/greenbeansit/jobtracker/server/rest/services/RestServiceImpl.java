@@ -318,15 +318,17 @@ public class RestServiceImpl implements RestService {
 	            workDays++;
 	        }
 	        firstDay.add(Calendar.DAY_OF_MONTH, 1);
-	    } while (firstDay.get(Calendar.DAY_OF_MONTH) <= lastDay.get(Calendar.DAY_OF_MONTH));
-		
+	    } while (firstDay.get(Calendar.DAY_OF_MONTH) < lastDay.get(Calendar.DAY_OF_MONTH));
+		//Has to be repeated
+		if (firstDay.get(Calendar.DAY_OF_WEEK) != Calendar.SATURDAY &&
+				firstDay.get(Calendar.DAY_OF_WEEK) != Calendar.SUNDAY)
+			workDays++;
 		return workDays;
 	}
 
 	@Override
-	public void getJob(Integer jobNo, Integer posNo)
+	public Job getJob(Integer jobNo, Integer posNo)
 	{
-		// TODO Auto-generated method stub
-		
+		return jobService.getJob(jobNo, posNo);
 	}
 }
