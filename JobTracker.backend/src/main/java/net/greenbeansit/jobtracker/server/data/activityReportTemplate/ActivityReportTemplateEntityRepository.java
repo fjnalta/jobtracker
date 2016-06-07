@@ -2,6 +2,8 @@ package net.greenbeansit.jobtracker.server.data.activityReportTemplate;
 
 import java.util.List;
 
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 /**
@@ -18,11 +20,12 @@ public interface ActivityReportTemplateEntityRepository
 	/**
 	 * Deletes the given entity.
 	 * 
-	 * @param deleted
+	 * @param id
 	 *            entity to delete.
 	 */
-	@Override
-	void delete(ActivityReportTemplateEntity deleted);
+	@Modifying
+    @Query("delete from ActivityReportTemplateEntity where id = ?1")
+	void delete(Integer id);
 
 	/**
 	 * Saves an {@link ActivityReportTemplateEntity} to the database.

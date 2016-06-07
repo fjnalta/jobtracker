@@ -109,9 +109,7 @@ public class RestServiceImpl implements RestService {
 
     @Override
     public void deleteReport(Integer userId, Integer reportId) {
-        ActivityReport report = activityReportService.getActivityReport(reportId);
-        if (report.getAuthor().equals(userId))
-            activityReportService.delete(report);
+        activityReportService.delete(reportId);
         //TODO: Throw error if not enough permission
     }
 

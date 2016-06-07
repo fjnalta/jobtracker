@@ -2,6 +2,7 @@ package net.greenbeansit.jobtracker.server.data.activityReport;
 
 import java.sql.Time;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.sql.Date;
 import java.util.List;
 
@@ -72,9 +73,9 @@ public class ActivityReportServiceJpa implements ActivityReportDataService
 	}
 
 	@Override
-	public void delete(ActivityReport report)
+	public void delete(Integer reportId)
 	{
-		repository.delete(convert(report));
+		repository.delete(reportId);
 	}
 
 	@Override

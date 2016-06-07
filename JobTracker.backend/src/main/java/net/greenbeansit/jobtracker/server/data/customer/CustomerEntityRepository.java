@@ -2,6 +2,8 @@ package net.greenbeansit.jobtracker.server.data.customer;
 
 import java.util.List;
 
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 /**
@@ -18,11 +20,12 @@ public interface CustomerEntityRepository
 	/**
 	 * Deletes the given entity.
 	 * 
-	 * @param deleted
+	 * @param id
 	 *            entity to delete.
 	 */
-	@Override
-	void delete(CustomerEntity deleted);
+	@Modifying
+    @Query("delete from CustomerEntity where id = ?1")
+	void delete(Integer id);
 
 	/**
 	 * Saves an {@link CustomerEntity} to the database.

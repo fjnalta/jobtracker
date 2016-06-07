@@ -97,8 +97,8 @@ public interface ActivityReportDataService
 	/**
 	 * Deletes a report from the database.
 	 * 
-	 * @param report
+	 * @param reportId
 	 *            report to be deleted
 	 */
-	void delete(ActivityReport report);
+	void delete(Integer reportId);
 }

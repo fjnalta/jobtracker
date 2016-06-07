@@ -2,6 +2,7 @@ package net.greenbeansit.jobtracker.server.data.activityReport;
 
 import java.util.List;
 
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -20,11 +21,12 @@ public interface ActivityReportEntityRepository
 	/**
 	 * Deletes the given entity.
 	 * 
-	 * @param deleted
+	 * @param id
 	 *            entity to delete
 	 */
-	@Override
-	void delete(ActivityReportEntity deleted);
+	@Modifying
+    @Query("delete from ActivityReportEntity where id = ?1")
+	void delete(Integer id);
 
 	/**
 	 * @return all instances of {@link ActivityReportEntity}
