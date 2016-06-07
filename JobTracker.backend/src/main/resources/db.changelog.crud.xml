@@ -125,4 +125,42 @@
 			]]>
 		</sql>
 	</changeSet>
+	<changeSet id="20160607-user_job-9" author="mike">
+		<sql>
+			<![CDATA[
+				INSERT INTO user_job (user_id, job_no, pos_no)
+				VALUES(3, 201001, 025),
+				(4, 201001, 026),
+				(5, 201001, 027),
+				(6, 100001, 001),
+				(6, 100245, 001),
+				(4, 100001, 003);
+			]]>
+		</sql>
+	</changeSet>
+	<changeSet id="20160607-user-10" author="mike">
+		<sql>
+			<![CDATA[
+				INSERT INTO user (name, surname, supervisor, vacation_days)
+				VALUES("Siri","Maler", NULL, 30),
+				("Veronica", "Baumann", 7, 25),
+				("Petra", "Fischer", 7, 30),
+				("Lorenz", "Lorenzo", 7, 2),
+				("Anguel", "Anguelov", 7, 14),
+				("Hansi", "Meister", 7, 30),
+				("Micha", "Michelin", 7, 30),
+				("Leonardo", "Moreno-Frei", 7, 29),
+				("Susanne", "Nitsch", 7, 0);
+			]]>
+		</sql>
+	</changeSet>
+	<changeSet id="20160607-customer-11" author="mike">
+		<sql>
+			<![CDATA[
+				INSERT INTO customer (name)
+				VALUES("Intern"),
+				("Klaus&Klaus");
+			]]>
+		</sql>
+	</changeSet>
 </databaseChangeLog>

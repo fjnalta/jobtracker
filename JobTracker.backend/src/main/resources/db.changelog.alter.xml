@@ -196,4 +196,11 @@
             ]]>
         </sql>
     </changeSet>
+    <changeSet id="20160607-ALTERUser" author="mike">
+        <sql>
+            <![CDATA[
+                ALTER TABLE `user` ADD COLUMN `vacation_days` INT DEFAULT 0;
+            ]]>
+        </sql>
+    </changeSet>
 </databaseChangeLog>

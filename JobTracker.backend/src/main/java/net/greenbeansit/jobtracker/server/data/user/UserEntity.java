@@ -40,6 +40,8 @@ public class UserEntity implements Serializable
 	private Integer				utilization;
 	@Column(name = "utilization_year")
 	private Integer				utilizationYear;
+	@Column(name = "vacation_days")
+	private Integer				vacationDays;
 
 	/**
 	 * Standard constructor for internal purposes.
@@ -60,14 +62,17 @@ public class UserEntity implements Serializable
 	 *            their last name
 	 * @param supervisor
 	 *            ID of the supervisor
+	 * @param vacationDays
+	 *            how many remaining days this user has
 	 */
 	public UserEntity(Integer id, String name, String surname,
-			Integer supervisor)
+			Integer supervisor, Integer vacationDays)
 	{
 		this.id = id;
 		this.name = name;
 		this.surname = surname;
 		this.supervisor = supervisor;
+		this.vacationDays = vacationDays;
 	}
 
 	/**
@@ -79,12 +84,15 @@ public class UserEntity implements Serializable
 	 *            their last name
 	 * @param supervisor
 	 *            ID of the supervisor
+	 * @param vacationDays
+	 *            how many remaining days this user has
 	 */
-	public UserEntity(String name, String surname, Integer supervisor)
+	public UserEntity(String name, String surname, Integer supervisor, Integer vacationDays)
 	{
 		this.name = name;
 		this.surname = surname;
 		this.supervisor = supervisor;
+		this.vacationDays = vacationDays;
 	}
 
 	/**
@@ -200,6 +208,25 @@ public class UserEntity implements Serializable
 	public void setUtilizationYear(Integer utilizationYear)
 	{
 		this.utilizationYear = utilizationYear;
+	}
+	
+	/**
+	 * @return how many days of vacation this user has left
+	 */
+	public Integer getVacationDays()
+	{
+		return vacationDays;
+	}
+
+	/**
+	 * set how many days of vacation this user has left
+	 * 
+	 * @param vacationDays
+	 *            amount of vacation days
+	 */
+	public void setVacationDays(Integer vacationDays)
+	{
+		this.vacationDays = vacationDays;
 	}
 
 }
