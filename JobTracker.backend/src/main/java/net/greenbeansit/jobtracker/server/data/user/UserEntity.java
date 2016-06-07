@@ -9,9 +9,9 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
- * A class representing User as entities in our database. Only used in
- * backend. Each entity class requires a standard constructor and
- * getters/setters for usage in Java Spring.
+ * A class representing User as entities in our database. Only used in backend.
+ * Each entity class requires a standard constructor and getters/setters for
+ * usage in Java Spring.
  * 
  * @author Mike Hukiewitz
  *
@@ -51,10 +51,15 @@ public class UserEntity implements Serializable
 
 	/**
 	 * Initializes an {@link UserEntity}
-	 * @param id ID of the user
-	 * @param name their first name
-	 * @param surname their last name
-	 * @param supervisor ID of the supervisor
+	 * 
+	 * @param id
+	 *            ID of the user
+	 * @param name
+	 *            their first name
+	 * @param surname
+	 *            their last name
+	 * @param supervisor
+	 *            ID of the supervisor
 	 */
 	public UserEntity(Integer id, String name, String surname,
 			Integer supervisor)
@@ -67,9 +72,13 @@ public class UserEntity implements Serializable
 
 	/**
 	 * Creates a new {@link UserEntity}
-	 * @param name their first name
-	 * @param surname their last name
-	 * @param supervisor ID of the supervisor
+	 * 
+	 * @param name
+	 *            their first name
+	 * @param surname
+	 *            their last name
+	 * @param supervisor
+	 *            ID of the supervisor
 	 */
 	public UserEntity(String name, String surname, Integer supervisor)
 	{
@@ -88,7 +97,9 @@ public class UserEntity implements Serializable
 
 	/**
 	 * set ID
-	 * @param id the UserId.
+	 * 
+	 * @param id
+	 *            the UserId.
 	 */
 	public void setId(Integer id)
 	{
@@ -105,7 +116,9 @@ public class UserEntity implements Serializable
 
 	/**
 	 * set first name
-	 * @param name the Name.
+	 * 
+	 * @param name
+	 *            the Name.
 	 */
 	public void setName(String name)
 	{
@@ -122,7 +135,9 @@ public class UserEntity implements Serializable
 
 	/**
 	 * set last name
-	 * @param surname the Surname.
+	 * 
+	 * @param surname
+	 *            the Surname.
 	 */
 	public void setSurname(String surname)
 	{
@@ -139,7 +154,9 @@ public class UserEntity implements Serializable
 
 	/**
 	 * set supervisor ID
-	 * @param supervisor the Supervisor.
+	 * 
+	 * @param supervisor
+	 *            the Supervisor.
 	 */
 	public void setSupervisor(Integer supervisor)
 	{
@@ -147,7 +164,8 @@ public class UserEntity implements Serializable
 	}
 
 	/**
-	 * @return the utilization in percent of {@link UserEntity#getUtilizationYear()}
+	 * @return the utilization in percent of
+	 *         {@link UserEntity#getUtilizationYear()}
 	 */
 	public Integer getUtilization()
 	{
@@ -156,7 +174,9 @@ public class UserEntity implements Serializable
 
 	/**
 	 * set utilization in percent of {@link UserEntity#getUtilizationYear()}
-	 * @param utilization the Utilization.
+	 * 
+	 * @param utilization
+	 *            the Utilization.
 	 */
 	public void setUtilization(Integer utilization)
 	{
@@ -173,7 +193,9 @@ public class UserEntity implements Serializable
 
 	/**
 	 * set the year which the utilization refers to
-	 * @param utilizationYear the Utilization Year.
+	 * 
+	 * @param utilizationYear
+	 *            the Utilization Year.
 	 */
 	public void setUtilizationYear(Integer utilizationYear)
 	{

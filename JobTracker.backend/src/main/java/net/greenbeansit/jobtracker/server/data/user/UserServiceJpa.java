@@ -65,9 +65,11 @@ public class UserServiceJpa implements UserDataService
 
 	/**
 	 * Converts a {@link UserEntity} to {@link User}
-	 * @param entity the {@link UserEntity}
+	 * 
+	 * @param entity
+	 *            the {@link UserEntity}
 	 * @return {@link User}
-     */
+	 */
 	private User convert(UserEntity entity)
 	{
 		if (entity == null)

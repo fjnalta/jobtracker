@@ -10,8 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
- * A class representing UtilizationWeek as entities in our database. Only used in
- * backend. Each entity class requires a standard constructor and
+ * A class representing UtilizationWeek as entities in our database. Only used
+ * in backend. Each entity class requires a standard constructor and
  * getters/setters for usage in Java Spring.
  * 
  * Used for capacity planning.
@@ -58,14 +58,23 @@ public class UtilizationWeekEntity implements Serializable
 
 	/**
 	 * Initializes an {@link UtilizationWeekEntity}
-	 * @param id ID of the entity
-	 * @param author ID of its author
-	 * @param begin first day of the week
-	 * @param daysFree how many days of the week are free
-	 * @param daysWork how many days of the week are working days
-	 * @param daysHoliday how many days of the week are holidays
-	 * @param possibility how likely does this planning apply
-	 * @param pseudoJobId ID of the corresponding pseudoJob
+	 * 
+	 * @param id
+	 *            ID of the entity
+	 * @param author
+	 *            ID of its author
+	 * @param begin
+	 *            first day of the week
+	 * @param daysFree
+	 *            how many days of the week are free
+	 * @param daysWork
+	 *            how many days of the week are working days
+	 * @param daysHoliday
+	 *            how many days of the week are holidays
+	 * @param possibility
+	 *            how likely does this planning apply
+	 * @param pseudoJobId
+	 *            ID of the corresponding pseudoJob
 	 */
 	public UtilizationWeekEntity(Integer id, Integer author, Date begin,
 			Integer daysFree, Integer daysWork, Integer daysHoliday,
@@ -83,13 +92,21 @@ public class UtilizationWeekEntity implements Serializable
 
 	/**
 	 * Creates a new {@link UtilizationWeekEntity}
-	 * @param author ID of its author
-	 * @param begin first day of the week
-	 * @param daysFree how many days of the week are free
-	 * @param daysWork how many days of the week are working days
-	 * @param daysHoliday how many days of the week are holidays
-	 * @param possibility how likely does this planning apply
-	 * @param pseudoJobId ID of the corresponding pseudoJob
+	 * 
+	 * @param author
+	 *            ID of its author
+	 * @param begin
+	 *            first day of the week
+	 * @param daysFree
+	 *            how many days of the week are free
+	 * @param daysWork
+	 *            how many days of the week are working days
+	 * @param daysHoliday
+	 *            how many days of the week are holidays
+	 * @param possibility
+	 *            how likely does this planning apply
+	 * @param pseudoJobId
+	 *            ID of the corresponding pseudoJob
 	 */
 	public UtilizationWeekEntity(Integer author, Date begin, Integer daysFree,
 			Integer daysWork, Integer daysHoliday, Integer possibility,
@@ -113,7 +130,8 @@ public class UtilizationWeekEntity implements Serializable
 	}
 
 	/**
-	 * @param id set ID
+	 * @param id
+	 *            set ID
 	 */
 	public void setId(Integer id)
 	{
@@ -129,7 +147,8 @@ public class UtilizationWeekEntity implements Serializable
 	}
 
 	/**
-	 * @param author set authorID
+	 * @param author
+	 *            set authorID
 	 */
 	public void setAuthor(Integer author)
 	{
@@ -145,7 +164,8 @@ public class UtilizationWeekEntity implements Serializable
 	}
 
 	/**
-	 * @param begin set begin date
+	 * @param begin
+	 *            set begin date
 	 */
 	public void setBegin(Date begin)
 	{
@@ -161,7 +181,8 @@ public class UtilizationWeekEntity implements Serializable
 	}
 
 	/**
-	 * @param daysFree set days free
+	 * @param daysFree
+	 *            set days free
 	 */
 	public void setDaysFree(Integer daysFree)
 	{
@@ -177,7 +198,8 @@ public class UtilizationWeekEntity implements Serializable
 	}
 
 	/**
-	 * @param daysWork set days work
+	 * @param daysWork
+	 *            set days work
 	 */
 	public void setDaysWork(Integer daysWork)
 	{
@@ -193,7 +215,8 @@ public class UtilizationWeekEntity implements Serializable
 	}
 
 	/**
-	 * @param daysHoliday set days holiday
+	 * @param daysHoliday
+	 *            set days holiday
 	 */
 	public void setDaysHoliday(Integer daysHoliday)
 	{
@@ -209,7 +232,8 @@ public class UtilizationWeekEntity implements Serializable
 	}
 
 	/**
-	 * @param possibilty set possiblity (0-100)
+	 * @param possibilty
+	 *            set possiblity (0-100)
 	 */
 	public void setPossibilty(Integer possibilty)
 	{
@@ -225,7 +249,8 @@ public class UtilizationWeekEntity implements Serializable
 	}
 
 	/**
-	 * @param pseudoJobId set pseudoJob ID
+	 * @param pseudoJobId
+	 *            set pseudoJob ID
 	 */
 	public void setPseudoJobId(Integer pseudoJobId)
 	{

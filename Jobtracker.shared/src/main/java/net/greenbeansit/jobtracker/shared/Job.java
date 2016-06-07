@@ -7,7 +7,7 @@ import java.io.Serializable;
  * 
  * @author Mike Hukiewitz & Alex & Philipp Minges
  */
-@SuppressWarnings("JavaDoc")
+
 public class Job implements Serializable {
 	private static final long serialVersionUID = -3379608733084915877L;
 
@@ -47,6 +47,7 @@ public class Job implements Serializable {
 	 *            the maximum budget for the job.
 	 * @param usedBudget
 	 *            the currently used budget for the job
+	 * @param isLocked true if locked for further booking
 	 */
 	public Job(Integer jobNr, Integer posNr, Integer payMode, Integer customerID, String desc, Integer maxBudget, Integer usedBudget, Boolean isLocked) {
 		this.maxBudget = maxBudget;
@@ -61,7 +62,7 @@ public class Job implements Serializable {
 
 	/**
 	 * Setter & Getter
-	 * @return
+	 * @return Integer value
 	 */
 	public Integer getMaxBudget() {
 		return maxBudget;

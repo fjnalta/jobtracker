@@ -47,9 +47,11 @@ public class CustomerServiceJpa implements CustomerDataService
 
 	/**
 	 * Converts a {@link CustomerEntity} to {@link Customer}
-	 * @param entity {@link CustomerEntity} the Customer Entity
+	 * 
+	 * @param entity
+	 *            {@link CustomerEntity} the Customer Entity
 	 * @return {@link Customer} the Customer with Name and Id.
-     */
+	 */
 	private Customer convert(CustomerEntity entity)
 	{
 		if (entity == null)

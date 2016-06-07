@@ -35,16 +35,18 @@ public class CustomerEntity implements Serializable
 	public CustomerEntity()
 	{
 	}
-	
+
 	/**
 	 * Creates a new {@link CustomerEntity}
-	 * @param name name of the customer (must be unique)
+	 * 
+	 * @param name
+	 *            name of the customer (must be unique)
 	 */
 	public CustomerEntity(String name)
 	{
 		this.name = name;
 	}
-	
+
 	/**
 	 * @return the ID
 	 */
@@ -55,8 +57,10 @@ public class CustomerEntity implements Serializable
 
 	/**
 	 * Sets the Id of the current {@link CustomerEntity}
-	 * @param id the id.
-     */
+	 * 
+	 * @param id
+	 *            the id.
+	 */
 	public void setId(Integer id)
 	{
 		this.id = id;
@@ -64,8 +68,9 @@ public class CustomerEntity implements Serializable
 
 	/**
 	 * Gets the Name of the {@link CustomerEntity}
+	 * 
 	 * @return the name
-     */
+	 */
 	public String getName()
 	{
 		return name;
@@ -73,8 +78,10 @@ public class CustomerEntity implements Serializable
 
 	/**
 	 * Sets the Name of the {@link CustomerEntity}
-	 * @param name the name of the {@link CustomerEntity}
-     */
+	 * 
+	 * @param name
+	 *            the name of the {@link CustomerEntity}
+	 */
 	public void setName(String name)
 	{
 		this.name = name;

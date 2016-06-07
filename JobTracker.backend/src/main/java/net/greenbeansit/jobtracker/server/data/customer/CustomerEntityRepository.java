@@ -7,8 +7,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 /**
- * Repository for handling {@link CustomerEntity} and making requests to
- * the database.
+ * Repository for handling {@link CustomerEntity} and making requests to the
+ * database.
  * 
  * @author Mike Hukiewitz
  *
@@ -24,7 +24,7 @@ public interface CustomerEntityRepository
 	 *            entity to delete.
 	 */
 	@Modifying
-    @Query("delete from CustomerEntity where id = ?1")
+	@Query("delete from CustomerEntity where id = ?1")
 	void delete(Integer id);
 
 	/**

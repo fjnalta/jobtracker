@@ -53,8 +53,11 @@ public interface ActivityReportTemplateDataService
 	/**
 	 * Deletes a template from the database.
 	 * 
-	 * @param template the given Template
+	 * @param author
+	 *            ID of its author
+	 * @param name
+	 *            its name
 	 */
-	void delete(ActivityReportTemplate template);
+	void delete(Integer author, String name);
 
 }

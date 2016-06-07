@@ -9,9 +9,9 @@ import javax.persistence.IdClass;
 import javax.persistence.Table;
 
 /**
- * A class representing Job as entities in our database. Only used in
- * backend. Each entity class requires a standard constructor and
- * getters/setters for usage in Java Spring.
+ * A class representing Job as entities in our database. Only used in backend.
+ * Each entity class requires a standard constructor and getters/setters for
+ * usage in Java Spring.
  * 
  * @author Mike Hukiewitz & Philipp Minges
  *
@@ -58,14 +58,23 @@ public class JobEntity implements Serializable
 
 	/**
 	 * Creates a new {@link JobEntity}.
-	 * @param jobNr 3 to 6 digits
-	 * @param posNr up to 3 digits
-	 * @param accountingMode 0 = NF, 1 = TM (Time & Material), 2 = FP (Festpreis)
-	 * @param customerID id of the customer
-	 * @param desc short description of the job (max. 30 characters)
-	 * @param maxBudget maximum budget 
-	 * @param usedBudget already used budget
-	 * @param isLocked true if job is locked for further booking
+	 * 
+	 * @param jobNr
+	 *            3 to 6 digits
+	 * @param posNr
+	 *            up to 3 digits
+	 * @param accountingMode
+	 *            0 = NF, 1 = TM (Time & Material), 2 = FP (Festpreis)
+	 * @param customerID
+	 *            id of the customer
+	 * @param desc
+	 *            short description of the job (max. 30 characters)
+	 * @param maxBudget
+	 *            maximum budget
+	 * @param usedBudget
+	 *            already used budget
+	 * @param isLocked
+	 *            true if job is locked for further booking
 	 */
 	public JobEntity(Integer jobNr, Integer posNr, Integer accountingMode,
 			Integer customerID, String desc, Integer maxBudget,
@@ -84,8 +93,9 @@ public class JobEntity implements Serializable
 
 	/**
 	 * Gets the Job Number
+	 * 
 	 * @return the Jobnumber.
-     */
+	 */
 	public Integer getJobNr()
 	{
 		return jobNr;
@@ -93,8 +103,10 @@ public class JobEntity implements Serializable
 
 	/**
 	 * Sets the Job Number for the {@link JobEntity}
-	 * @param jobNr the Job number.
-     */
+	 * 
+	 * @param jobNr
+	 *            the Job number.
+	 */
 	public void setJobNr(Integer jobNr)
 	{
 		this.jobNr = jobNr;
@@ -102,8 +114,9 @@ public class JobEntity implements Serializable
 
 	/**
 	 * Gets the Position Number of the {@link JobEntity}
+	 * 
 	 * @return the position Number
-     */
+	 */
 	public Integer getPosNr()
 	{
 		return posNr;
@@ -111,8 +124,10 @@ public class JobEntity implements Serializable
 
 	/**
 	 * Sets the position Number of the {@link JobEntity}
-	 * @param posNr the position Number
-     */
+	 * 
+	 * @param posNr
+	 *            the position Number
+	 */
 	public void setPosNr(Integer posNr)
 	{
 		this.posNr = posNr;
@@ -120,8 +135,9 @@ public class JobEntity implements Serializable
 
 	/**
 	 * Gets the Accounting Mode of the {@link JobEntity}
+	 * 
 	 * @return the given accounting Mode
-     */
+	 */
 	public Integer getAccountingMode()
 	{
 		return accountingMode;
@@ -129,8 +145,10 @@ public class JobEntity implements Serializable
 
 	/**
 	 * Sets the Accounting Mode to the {@link JobEntity}
-	 * @param accountingMode the accounting mode.
-     */
+	 * 
+	 * @param accountingMode
+	 *            the accounting mode.
+	 */
 	public void setAccountingMode(Integer accountingMode)
 	{
 		this.accountingMode = accountingMode;
@@ -138,8 +156,9 @@ public class JobEntity implements Serializable
 
 	/**
 	 * Gets the Customer ID of the {@link JobEntity}
+	 * 
 	 * @return the the Cusomer id.
-     */
+	 */
 	public Integer getCustomerID()
 	{
 		return customerID;
@@ -147,8 +166,10 @@ public class JobEntity implements Serializable
 
 	/**
 	 * Sets the Customer id of the {@link JobEntity}
-	 * @param customerID the Customer id.
-     */
+	 * 
+	 * @param customerID
+	 *            the Customer id.
+	 */
 	public void setCustomerID(Integer customerID)
 	{
 		this.customerID = customerID;
@@ -164,7 +185,9 @@ public class JobEntity implements Serializable
 
 	/**
 	 * set short description
-	 * @param desc the description.
+	 * 
+	 * @param desc
+	 *            the description.
 	 */
 	public void setDesc(String desc)
 	{
@@ -181,7 +204,9 @@ public class JobEntity implements Serializable
 
 	/**
 	 * set maximum budget
-	 * @param maxBudget the maximal budget.
+	 * 
+	 * @param maxBudget
+	 *            the maximal budget.
 	 */
 	public void setMaxBudget(Integer maxBudget)
 	{
@@ -198,7 +223,9 @@ public class JobEntity implements Serializable
 
 	/**
 	 * set used budget
-	 * @param usedBudget the used budget.
+	 * 
+	 * @param usedBudget
+	 *            the used budget.
 	 */
 	public void setUsedBudget(Integer usedBudget)
 	{
@@ -215,7 +242,9 @@ public class JobEntity implements Serializable
 
 	/**
 	 * set whether internal job
-	 * @param isIntern true if its a internal entity.
+	 * 
+	 * @param isIntern
+	 *            true if its a internal entity.
 	 */
 	public void setIntern(Boolean isIntern)
 	{
@@ -232,7 +261,9 @@ public class JobEntity implements Serializable
 
 	/**
 	 * set lock on further booking
-	 * @param isLocked true if the Job is locked.
+	 * 
+	 * @param isLocked
+	 *            true if the Job is locked.
 	 */
 	public void setLocked(Boolean isLocked)
 	{

@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.data.repository.CrudRepository;
 
 /**
- * Repository for handling {@link PseudoJobEntity} and making requests to
- * the database.
+ * Repository for handling {@link PseudoJobEntity} and making requests to the
+ * database.
  * 
  * @author Mike Hukiewitz
  *
@@ -43,7 +43,9 @@ public interface PseudoJobEntityRepository
 
 	/**
 	 * Returns all {@link PseudoJobEntity} by one author
-	 * @param author ID of the author
+	 * 
+	 * @param author
+	 *            ID of the author
 	 * @return List of {@link PseudoJobEntity}
 	 */
 	List<PseudoJobEntity> findByAuthor(Integer author);

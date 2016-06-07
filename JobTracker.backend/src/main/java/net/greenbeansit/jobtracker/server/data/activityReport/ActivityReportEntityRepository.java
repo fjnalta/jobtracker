@@ -25,7 +25,7 @@ public interface ActivityReportEntityRepository
 	 *            entity to delete
 	 */
 	@Modifying
-    @Query("delete from ActivityReportEntity where id = ?1")
+	@Query("delete from ActivityReportEntity where id = ?1")
 	void delete(Integer id);
 
 	/**
@@ -86,21 +86,30 @@ public interface ActivityReportEntityRepository
 			Integer posNo);
 
 	/**
-	 * Returns all {@link ActivityReportEntity} from a single user in a single month.
-	 * @param author ID of the author
-	 * @param year the year
-	 * @param month the month
+	 * Returns all {@link ActivityReportEntity} from a single user in a single
+	 * month.
+	 * 
+	 * @param author
+	 *            ID of the author
+	 * @param year
+	 *            the year
+	 * @param month
+	 *            the month
 	 * @return List of corresponding {@link ActivityReportEntity}
 	 */
 	@Query("select x from ActivityReportEntity x where x.author = :author and YEAR(x.beginDate) = :year and MONTH(x.beginDate) = :month")
 	List<ActivityReportEntity> findByAuthorAndMonth(
 			@Param("author") Integer author, @Param("year") Integer year,
 			@Param("month") Integer month);
-	
+
 	/**
-	 * Returns all {@link ActivityReportEntity} from a single user in a single year.
-	 * @param author ID of the author
-	 * @param year the year
+	 * Returns all {@link ActivityReportEntity} from a single user in a single
+	 * year.
+	 * 
+	 * @param author
+	 *            ID of the author
+	 * @param year
+	 *            the year
 	 * @return List of corresponding {@link ActivityReportEntity}
 	 */
 	@Query("select x from ActivityReportEntity x where x.author = :author and YEAR(x.beginDate) = :year")

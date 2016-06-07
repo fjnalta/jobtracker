@@ -33,8 +33,8 @@ public interface ActivityReportDataService
 
 	/**
 	 * Retrieves all reports of a user created in the given time span.
-	 * Deprecated, better use {@link this#getByUserAndMonth(Integer, Integer, Integer)}
-	 * or {@link this#getByUserAndYear(Integer, Integer)}
+	 * Deprecated, better use {@link this#getByUserAndMonth(Integer, Integer,
+	 * Integer)} or {@link this#getByUserAndYear(Integer, Integer)}
 	 * 
 	 * @param authorId
 	 *            ID of the author
@@ -47,20 +47,28 @@ public interface ActivityReportDataService
 	@Deprecated
 	List<ActivityReport> getByUserAndPeriod(Integer authorId, Date from,
 			Date to);
-	
+
 	/**
 	 * Retrieves all reports of a user created in the given month.
-	 * @param authorId ID of the author
-	 * @param year year of the month
-	 * @param month the month
+	 * 
+	 * @param authorId
+	 *            ID of the author
+	 * @param year
+	 *            year of the month
+	 * @param month
+	 *            the month
 	 * @return List of corresponding reports
 	 */
-	List<ActivityReport> getByUserAndMonth(Integer authorId, Integer year, Integer month);
-	
+	List<ActivityReport> getByUserAndMonth(Integer authorId, Integer year,
+			Integer month);
+
 	/**
 	 * Retrieves all reports of a user created in the given year.
-	 * @param authorId ID of the author
-	 * @param year year of the month
+	 * 
+	 * @param authorId
+	 *            ID of the author
+	 * @param year
+	 *            year of the month
 	 * @return List of corresponding reports
 	 */
 	List<ActivityReport> getByUserAndYear(Integer authorId, Integer year);

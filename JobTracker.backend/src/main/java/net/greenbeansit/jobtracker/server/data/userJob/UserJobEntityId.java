@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 /**
  * Serves as representation of the composite primary key of UserJobEntity.
+ * 
  * @author Mike Hukiewitz & Philipp Minges
  *
  */
@@ -27,7 +28,9 @@ public class UserJobEntityId implements Serializable
 
 	/**
 	 * set user ID
-	 * @param userId the UserId.
+	 * 
+	 * @param userId
+	 *            the UserId.
 	 */
 	public void setUserId(Integer userId)
 	{
@@ -44,7 +47,9 @@ public class UserJobEntityId implements Serializable
 
 	/**
 	 * set job number
-	 * @param jobNr the JobNr.
+	 * 
+	 * @param jobNr
+	 *            the JobNr.
 	 */
 	public void setJobNr(Integer jobNr)
 	{
@@ -61,7 +66,9 @@ public class UserJobEntityId implements Serializable
 
 	/**
 	 * set position number
-	 * @param posNr the Position Nr.
+	 * 
+	 * @param posNr
+	 *            the Position Nr.
 	 */
 	public void setPosNr(Integer posNr)
 	{

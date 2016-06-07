@@ -53,9 +53,11 @@ public class JobTaskServiceJpa implements JobTaskDataService
 
 	/**
 	 * Converts a {@link JobTaskEntity} to {@link JobTask}
-	 * @param entity the {@link JobTaskEntity}
+	 * 
+	 * @param entity
+	 *            the {@link JobTaskEntity}
 	 * @return the {@link JobTask}
-     */
+	 */
 	private JobTask convert(JobTaskEntity entity)
 	{
 		if (entity == null)

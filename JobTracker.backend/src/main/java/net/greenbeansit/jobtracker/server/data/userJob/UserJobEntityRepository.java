@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.data.repository.CrudRepository;
 
 /**
- * Repository for handling {@link UserJobEntity} and making requests to
- * the database.
+ * Repository for handling {@link UserJobEntity} and making requests to the
+ * database.
  * 
  * @author Mike Hukiewitz
  *
@@ -41,16 +41,23 @@ public interface UserJobEntityRepository
 	List<UserJobEntity> findAll();
 
 	/**
-	 * Returns all instances of {@link UserJobEntity} which include the given user.
-	 * @param userId ID of the user
+	 * Returns all instances of {@link UserJobEntity} which include the given
+	 * user.
+	 * 
+	 * @param userId
+	 *            ID of the user
 	 * @return List of {@link UserJobEntity}
 	 */
 	List<UserJobEntity> findByUserId(Integer userId);
 
 	/**
-	 * Returns all instances of {@link UserJobEntity} which include the given job.
-	 * @param jobNr 3 to 6 digits
-	 * @param posNr up to 3 digits
+	 * Returns all instances of {@link UserJobEntity} which include the given
+	 * job.
+	 * 
+	 * @param jobNr
+	 *            3 to 6 digits
+	 * @param posNr
+	 *            up to 3 digits
 	 * @return List of {@link UserJobEntity}
 	 */
 	List<UserJobEntity> findByJobNrAndPosNr(Integer jobNr, Integer posNr);

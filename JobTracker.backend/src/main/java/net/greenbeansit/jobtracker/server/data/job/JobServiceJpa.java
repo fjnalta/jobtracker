@@ -89,9 +89,11 @@ public class JobServiceJpa implements JobDataService
 
 	/**
 	 * Converts a {@link JobEntity} to {@link Job}
-	 * @param entity the {@link JobEntity}
+	 * 
+	 * @param entity
+	 *            the {@link JobEntity}
 	 * @return the {@link Job}
-     */
+	 */
 	private Job convert(JobEntity entity)
 	{
 		if (entity == null)
@@ -104,7 +106,9 @@ public class JobServiceJpa implements JobDataService
 
 	/**
 	 * Converts a {@link Job} to {@link JobEntity}
-	 * @param job the {@link Job}
+	 * 
+	 * @param job
+	 *            the {@link Job}
 	 * @return the {@link JobEntity}
 	 */
 	private JobEntity convert(Job job)

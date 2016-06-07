@@ -68,18 +68,20 @@ public class UtilizationWeekServiceJpa implements UtilizationWeekDataService
 	}
 
 	@Override
-	public void delete(UtilizationWeek util)
+	public void delete(Integer utilId)
 	{
-		repository.delete(convert(util));
+		repository.delete(utilId);
 	}
 
 	// TODO change UtilizationWeekEntity Constructor in Backend
 
 	/**
 	 * Converty the {@link UtilizationWeekEntity} to {@link UtilizationWeek}
-	 * @param entity the {@link UtilizationWeekEntity}
+	 * 
+	 * @param entity
+	 *            the {@link UtilizationWeekEntity}
 	 * @return the {@link UtilizationWeek}
-     */
+	 */
 	private UtilizationWeek convert(UtilizationWeekEntity entity)
 	{
 		if (entity == null)
@@ -93,7 +95,9 @@ public class UtilizationWeekServiceJpa implements UtilizationWeekDataService
 
 	/**
 	 * Converty the {@link UtilizationWeek} to {@link UtilizationWeekEntity}
-	 * @param util the {@link UtilizationWeek}
+	 * 
+	 * @param util
+	 *            the {@link UtilizationWeek}
 	 * @return the {@link UtilizationWeekEntity}
 	 */
 	private UtilizationWeekEntity convert(UtilizationWeek util)
@@ -112,7 +116,8 @@ public class UtilizationWeekServiceJpa implements UtilizationWeekDataService
 			Integer year, Integer month)
 	{
 		ArrayList<UtilizationWeek> list = new ArrayList<UtilizationWeek>();
-		for (UtilizationWeekEntity entity : repository.findByAuthorAndMonth(authorId, year, month))
+		for (UtilizationWeekEntity entity : repository
+				.findByAuthorAndMonth(authorId, year, month))
 		{
 			list.add(convert(entity));
 		}
@@ -124,7 +129,8 @@ public class UtilizationWeekServiceJpa implements UtilizationWeekDataService
 			Integer year)
 	{
 		ArrayList<UtilizationWeek> list = new ArrayList<UtilizationWeek>();
-		for (UtilizationWeekEntity entity : repository.findByAuthorAndYear(authorId, year))
+		for (UtilizationWeekEntity entity : repository
+				.findByAuthorAndYear(authorId, year))
 		{
 			list.add(convert(entity));
 		}

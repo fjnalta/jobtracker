@@ -65,8 +65,9 @@ public class ActivityReportTemplateEntity implements Serializable
 
 	/**
 	 * Gets the Name of the {@link ActivityReportTemplateEntity}
+	 * 
 	 * @return the name.
-     */
+	 */
 	@Column(name = "name")
 	public String getName()
 	{
@@ -75,8 +76,10 @@ public class ActivityReportTemplateEntity implements Serializable
 
 	/**
 	 * Sets the Name of the {@link ActivityReportTemplateEntity}
-	 * @param name the Name of the {@link ActivityReportTemplateEntity}
-     */
+	 * 
+	 * @param name
+	 *            the Name of the {@link ActivityReportTemplateEntity}
+	 */
 	public void setName(String name)
 	{
 		this.name = name;
@@ -84,8 +87,9 @@ public class ActivityReportTemplateEntity implements Serializable
 
 	/**
 	 * Gets the Text of the {@link ActivityReportTemplateEntity}
+	 * 
 	 * @return the Text of the {@link ActivityReportTemplateEntity}
-     */
+	 */
 	@Column(name = "text")
 	public String getText()
 	{
@@ -94,8 +98,11 @@ public class ActivityReportTemplateEntity implements Serializable
 
 	/**
 	 * Sets the Text of the {@link ActivityReportTemplateEntity}
-	 * @param text the Text to be inserted into {@link ActivityReportTemplateEntity}
-     */
+	 * 
+	 * @param text
+	 *            the Text to be inserted into
+	 *            {@link ActivityReportTemplateEntity}
+	 */
 	public void setText(String text)
 	{
 		this.text = text;
@@ -103,8 +110,9 @@ public class ActivityReportTemplateEntity implements Serializable
 
 	/**
 	 * Gets the Task id of the {@link ActivityReportTemplateEntity}
+	 * 
 	 * @return the Task id of the {@link ActivityReportTemplateEntity}
-     */
+	 */
 	@Column(name = "task_id")
 	public Integer getTaskId()
 	{
@@ -113,8 +121,10 @@ public class ActivityReportTemplateEntity implements Serializable
 
 	/**
 	 * Sets the Task id of the {@link ActivityReportTemplateEntity}
-	 * @param taskId the Task id of the {@link ActivityReportTemplateEntity}
-     */
+	 * 
+	 * @param taskId
+	 *            the Task id of the {@link ActivityReportTemplateEntity}
+	 */
 	public void setTaskId(Integer taskId)
 	{
 		this.taskId = taskId;
@@ -122,8 +132,9 @@ public class ActivityReportTemplateEntity implements Serializable
 
 	/**
 	 * Gets the Author of the {@link ActivityReportTemplateEntity}
+	 * 
 	 * @return the Author of the {@link ActivityReportTemplateEntity}
-     */
+	 */
 	@Column(name = "author")
 	public Integer getAuthor()
 	{
@@ -132,8 +143,10 @@ public class ActivityReportTemplateEntity implements Serializable
 
 	/**
 	 * Sets the Author of the {@link ActivityReportTemplateEntity}
-	 * @param author the Author of the {@link ActivityReportTemplateEntity}
-     */
+	 * 
+	 * @param author
+	 *            the Author of the {@link ActivityReportTemplateEntity}
+	 */
 	public void setAuthor(Integer author)
 	{
 		this.author = author;

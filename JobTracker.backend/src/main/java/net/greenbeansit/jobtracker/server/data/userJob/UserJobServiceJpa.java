@@ -58,9 +58,11 @@ public class UserJobServiceJpa implements UserJobDataService
 
 	/**
 	 * Converts a {@link UserJobEntity} to {@link UserJob}
-	 * @param entity the {@link UserJobEntity} to be converted
+	 * 
+	 * @param entity
+	 *            the {@link UserJobEntity} to be converted
 	 * @return the UserJob.
-     */
+	 */
 	private UserJob convert(UserJobEntity entity)
 	{
 		if (entity == null)

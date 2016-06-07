@@ -2,7 +2,6 @@ package net.greenbeansit.jobtracker.server.data.activityReport;
 
 import java.sql.Time;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.sql.Date;
 import java.util.List;
 
@@ -92,9 +91,11 @@ public class ActivityReportServiceJpa implements ActivityReportDataService
 
 	/**
 	 * convert an {@link ActivityReportEntity} to a {@link ActivityReport}
-	 * @param entity the {@link ActivityReportEntity}
+	 * 
+	 * @param entity
+	 *            the {@link ActivityReportEntity}
 	 * @return the converted {@link ActivityReport}
-     */
+	 */
 	private ActivityReport convert(ActivityReportEntity entity)
 	{
 		if (entity == null)
@@ -110,9 +111,11 @@ public class ActivityReportServiceJpa implements ActivityReportDataService
 
 	/**
 	 * convert an {@link ActivityReport} to a {@link ActivityReportEntity}
-	 * @param report the {@link ActivityReport} to convert
+	 * 
+	 * @param report
+	 *            the {@link ActivityReport} to convert
 	 * @return the converted {@link ActivityReportEntity}
-     */
+	 */
 	private ActivityReportEntity convert(ActivityReport report)
 	{
 		if (report == null)
@@ -127,9 +130,11 @@ public class ActivityReportServiceJpa implements ActivityReportDataService
 
 	/**
 	 * convert time object to a Integer value
-	 * @param time java.sql.Time object
+	 * 
+	 * @param time
+	 *            java.sql.Time object
 	 * @return Integer value of the minutes and hours
-     */
+	 */
 	@SuppressWarnings("deprecation")
 	private int convert(Time time)
 	{
@@ -138,9 +143,11 @@ public class ActivityReportServiceJpa implements ActivityReportDataService
 
 	/**
 	 * convert a inter value of minutes into a Time object
-	 * @param minutes Integer value of minutes
+	 * 
+	 * @param minutes
+	 *            Integer value of minutes
 	 * @return a java.sql.Time object
-     */
+	 */
 	@SuppressWarnings("deprecation")
 	private Time convert(int minutes)
 	{
@@ -152,7 +159,8 @@ public class ActivityReportServiceJpa implements ActivityReportDataService
 			Integer year, Integer month)
 	{
 		ArrayList<ActivityReport> list = new ArrayList<ActivityReport>();
-		for (ActivityReportEntity entity : repository.findByAuthorAndMonth(authorId, year, month))
+		for (ActivityReportEntity entity : repository
+				.findByAuthorAndMonth(authorId, year, month))
 		{
 			list.add(convert(entity));
 		}
@@ -163,7 +171,8 @@ public class ActivityReportServiceJpa implements ActivityReportDataService
 	public List<ActivityReport> getByUserAndYear(Integer authorId, Integer year)
 	{
 		ArrayList<ActivityReport> list = new ArrayList<ActivityReport>();
-		for (ActivityReportEntity entity : repository.findByAuthorAndYear(authorId, year))
+		for (ActivityReportEntity entity : repository
+				.findByAuthorAndYear(authorId, year))
 		{
 			list.add(convert(entity));
 		}

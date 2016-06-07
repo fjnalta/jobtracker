@@ -172,7 +172,8 @@ public interface RestService extends DirectRestService
 	/**
 	 * Gets the {@link Job} with the following ID.
 	 * 
-	 * @param id the ID of the searched {@link Job}.
+	 * @param jobNo 3 to 6 digits
+	 * @param posNo up to 3 digits
 	 * 
 	 * @return the searched {@link Job} if it was found. Otherwise null.
 	 */
@@ -195,11 +196,21 @@ public interface RestService extends DirectRestService
 	 * Saves an {@link UtilizationWeek} to the database.
 	 *
 	 * @param userId its author
-	 * @param utilweek the utilization entity 
+	 * @param utilweek the {@link UtilizationWeek}
 	 */
 	@POST
 	@Path("/users/{userId}/utilization_week")
 	void saveUtilizationWeek(@PathParam("userId") Integer userId, UtilizationWeek utilweek);
+	
+	/**
+	 * Deletes an {@link UtilizationWeek} from the database.
+	 * 
+	 * @param userId ID of its author
+	 * @param utilId ID of the {@link UtilizationWeek}
+	 */
+	@DELETE
+	@Path("/users/{userId}/utilization_week/{utilId}")
+	void deleteUtilizationWeek(@PathParam("userId") Integer userId, @PathParam("utilId") Integer utilId);
 
 	/**
 	 * Deletes an {@link ActivityReport} from the database.

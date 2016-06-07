@@ -45,12 +45,16 @@ public class JobTaskEntity implements Serializable
 	public JobTaskEntity()
 	{
 	}
-	
+
 	/**
 	 * Creates a new {@link JobTaskEntity}
-	 * @param jobNr 3 to 6 digits
-	 * @param posNr up to 3 digits
-	 * @param name name of the task
+	 * 
+	 * @param jobNr
+	 *            3 to 6 digits
+	 * @param posNr
+	 *            up to 3 digits
+	 * @param name
+	 *            name of the task
 	 */
 	public JobTaskEntity(Integer jobNr, Integer posNr, String name)
 	{
@@ -58,7 +62,7 @@ public class JobTaskEntity implements Serializable
 		this.posNr = posNr;
 		this.name = name;
 	}
-	
+
 	/**
 	 * @return the ID
 	 */
@@ -69,7 +73,9 @@ public class JobTaskEntity implements Serializable
 
 	/**
 	 * set ID
-	 * @param id the Id.
+	 * 
+	 * @param id
+	 *            the Id.
 	 */
 	public void setId(Integer id)
 	{
@@ -86,7 +92,9 @@ public class JobTaskEntity implements Serializable
 
 	/**
 	 * set job number
-	 * @param jobNr the Job no.
+	 * 
+	 * @param jobNr
+	 *            the Job no.
 	 */
 	public void setJobNr(Integer jobNr)
 	{
@@ -103,7 +111,9 @@ public class JobTaskEntity implements Serializable
 
 	/**
 	 * set position number
-	 * @param posNr the pos no.
+	 * 
+	 * @param posNr
+	 *            the pos no.
 	 */
 	public void setPosNr(Integer posNr)
 	{
@@ -120,7 +130,9 @@ public class JobTaskEntity implements Serializable
 
 	/**
 	 * set name
-	 * @param name the Name.
+	 * 
+	 * @param name
+	 *            the Name.
 	 */
 	public void setName(String name)
 	{

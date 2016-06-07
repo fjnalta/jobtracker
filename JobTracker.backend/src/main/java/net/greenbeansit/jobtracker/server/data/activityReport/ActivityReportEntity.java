@@ -100,8 +100,9 @@ public class ActivityReportEntity implements Serializable
 
 	/**
 	 * get the ID
+	 * 
 	 * @return Integer value
-     */
+	 */
 	public Integer getId()
 	{
 		return id;
@@ -109,8 +110,10 @@ public class ActivityReportEntity implements Serializable
 
 	/**
 	 * set the ID
-	 * @param id  ID Integer value
-     */
+	 * 
+	 * @param id
+	 *            ID Integer value
+	 */
 	public void setId(Integer id)
 	{
 		this.id = id;
@@ -118,8 +121,9 @@ public class ActivityReportEntity implements Serializable
 
 	/**
 	 * get the authorID
+	 * 
 	 * @return Integer value
-     */
+	 */
 	public Integer getAuthor()
 	{
 		return author;
@@ -127,8 +131,10 @@ public class ActivityReportEntity implements Serializable
 
 	/**
 	 * set the author ID
-	 * @param author Integer value
-     */
+	 * 
+	 * @param author
+	 *            Integer value
+	 */
 	public void setAuthor(Integer author)
 	{
 		this.author = author;
@@ -136,8 +142,9 @@ public class ActivityReportEntity implements Serializable
 
 	/**
 	 * get the report text
+	 * 
 	 * @return String value
-     */
+	 */
 	public String getText()
 	{
 		return text;
@@ -145,8 +152,10 @@ public class ActivityReportEntity implements Serializable
 
 	/**
 	 * set the report text
-	 * @param text String value
-     */
+	 * 
+	 * @param text
+	 *            String value
+	 */
 	public void setText(String text)
 	{
 		this.text = text;
@@ -154,8 +163,9 @@ public class ActivityReportEntity implements Serializable
 
 	/**
 	 * get the begin Date
+	 * 
 	 * @return java.sql.Date object
-     */
+	 */
 	public Date getBeginDate()
 	{
 		return beginDate;
@@ -163,8 +173,10 @@ public class ActivityReportEntity implements Serializable
 
 	/**
 	 * set the begin Date
-	 * @param beginDate java.sql.Date object
-     */
+	 * 
+	 * @param beginDate
+	 *            java.sql.Date object
+	 */
 	public void setBeginDate(Date beginDate)
 	{
 		this.beginDate = beginDate;
@@ -172,8 +184,9 @@ public class ActivityReportEntity implements Serializable
 
 	/**
 	 * get the begin Time
+	 * 
 	 * @return java.sql.time object
-     */
+	 */
 	public Time getBeginTime()
 	{
 		return beginTime;
@@ -181,8 +194,10 @@ public class ActivityReportEntity implements Serializable
 
 	/**
 	 * set the begin time
-	 * @param beginTime java.sql.time object
-     */
+	 * 
+	 * @param beginTime
+	 *            java.sql.time object
+	 */
 	public void setBeginTime(Time beginTime)
 	{
 		this.beginTime = beginTime;
@@ -190,8 +205,9 @@ public class ActivityReportEntity implements Serializable
 
 	/**
 	 * get the end date
+	 * 
 	 * @return java.sql.date object
-     */
+	 */
 	public Date getEndDate()
 	{
 		return endDate;
@@ -199,8 +215,10 @@ public class ActivityReportEntity implements Serializable
 
 	/**
 	 * set the end date
-	 * @param endDate java.sql.date object
-     */
+	 * 
+	 * @param endDate
+	 *            java.sql.date object
+	 */
 	public void setEndDate(Date endDate)
 	{
 		this.endDate = endDate;
@@ -208,8 +226,9 @@ public class ActivityReportEntity implements Serializable
 
 	/**
 	 * get the endTime
+	 * 
 	 * @return java.sql.time object
-     */
+	 */
 	public Time getEndTime()
 	{
 		return endTime;
@@ -217,8 +236,10 @@ public class ActivityReportEntity implements Serializable
 
 	/**
 	 * set the end time
-	 * @param endTime java.sql.time object
-     */
+	 * 
+	 * @param endTime
+	 *            java.sql.time object
+	 */
 	public void setEndTime(Time endTime)
 	{
 		this.endTime = endTime;
@@ -226,8 +247,9 @@ public class ActivityReportEntity implements Serializable
 
 	/**
 	 * get the task ID
+	 * 
 	 * @return Integer value
-     */
+	 */
 	public Integer getTaskId()
 	{
 		return taskId;
@@ -235,8 +257,10 @@ public class ActivityReportEntity implements Serializable
 
 	/**
 	 * set the task ID
-	 * @param taskId Integer value
-     */
+	 * 
+	 * @param taskId
+	 *            Integer value
+	 */
 	public void setTaskId(Integer taskId)
 	{
 		this.taskId = taskId;
@@ -244,8 +268,9 @@ public class ActivityReportEntity implements Serializable
 
 	/**
 	 * get the break time in minutes
+	 * 
 	 * @return Integer value
-     */
+	 */
 	public Integer getBreakTime()
 	{
 		return breakTime;
@@ -253,8 +278,10 @@ public class ActivityReportEntity implements Serializable
 
 	/**
 	 * set the break time in minutes
-	 * @param breakTime Integer value
-     */
+	 * 
+	 * @param breakTime
+	 *            Integer value
+	 */
 	public void setBreakTime(Integer breakTime)
 	{
 		this.breakTime = breakTime;
@@ -262,8 +289,9 @@ public class ActivityReportEntity implements Serializable
 
 	/**
 	 * get the JobNo
+	 * 
 	 * @return Interger value
-     */
+	 */
 	public Integer getJobNo()
 	{
 		return jobNo;
@@ -271,8 +299,10 @@ public class ActivityReportEntity implements Serializable
 
 	/**
 	 * set the JobNo
-	 * @param jobNo Integer value
-     */
+	 * 
+	 * @param jobNo
+	 *            Integer value
+	 */
 	public void setJobNo(Integer jobNo)
 	{
 		this.jobNo = jobNo;
@@ -280,8 +310,9 @@ public class ActivityReportEntity implements Serializable
 
 	/**
 	 * get the PosNo
+	 * 
 	 * @return Integer value
-     */
+	 */
 	public Integer getPosNo()
 	{
 		return posNo;
@@ -289,8 +320,10 @@ public class ActivityReportEntity implements Serializable
 
 	/**
 	 * set the posNo
-	 * @param posNo Integer value
-     */
+	 * 
+	 * @param posNo
+	 *            Integer value
+	 */
 	public void setPosNo(Integer posNo)
 	{
 		this.posNo = posNo;
