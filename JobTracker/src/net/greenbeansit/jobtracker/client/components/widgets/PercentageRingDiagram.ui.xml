@@ -9,13 +9,13 @@
 	
 	.diagramOuter {
 		border-radius: 50%;
-		background-color: #000099;
+		background-color: #ffffff;
 		position: relative;
 	}
 	
 	.diagramSecondRowOuter {
 		border-radius: 50%;
-		background-color: #000080;
+		background-color: #ffffff;
 		position: relative;
 	}
 	
@@ -39,7 +39,7 @@
 		left: 50%;
 		border-top-right-radius: 100%;
 		transform-origin: 0 100%;
-		background-color: #337ab7;
+		background-color: #000099;
 	}
 	
 	.quarterFinal {
@@ -51,6 +51,7 @@
 	
 	.quarter-second-row {
 		background-color: #f18c16;
+		border-color: #f18c16;
 	}
 	
 	.diagramInnerTextContainer {
@@ -81,7 +82,7 @@
 			<h:ClearFix addStyleNames="{style.quarter} {style.quarter-second-row}" ui:field="quarterSecondTwo" />
 			<h:ClearFix addStyleNames="{style.quarter} {style.quarter-second-row}" ui:field="quarterSecondThree" />
 
-			<h:ClearFix addStyleNames="{style.quarter} {style.quarter-second-row} {style.quarterFinal}"
+			<h:ClearFix addStyleNames="{style.quarter} {style.quarterFinal} {style.quarter-second-row}"
 				ui:field="quarterSecondFinal" />
 			<h:ClearFix addStyleNames="{style.quarter} {style.quarter-second-row}" ui:field="quarterSecondFour" />
 		
