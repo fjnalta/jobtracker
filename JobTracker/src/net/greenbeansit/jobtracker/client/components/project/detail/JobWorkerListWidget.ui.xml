@@ -17,7 +17,7 @@
 	</ui:style>
 	<h:ClearFix>
 		<b:Row addStyleNames="{style.columnHeader}">
-			<b:Heading text="Name"/>
+			<b:Heading size="H4" text="Name"/>
 		</b:Row>
 		<h:ClearFix ui:field="employeeContainer">
 		</h:ClearFix>
