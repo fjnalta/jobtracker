@@ -10,6 +10,7 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 import net.greenbeansit.jobtracker.client.components.CalendarObserver;
 import net.greenbeansit.jobtracker.client.components.LogicObservable;
+import net.greenbeansit.jobtracker.client.components.kapa.CapaCalendarObserver;
 import net.greenbeansit.jobtracker.client.components.kapa.data.CapacityReportEvent;
 import net.greenbeansit.jobtracker.client.components.widgets.calendar.FullCalendarCustomize;
 import net.greenbeansit.jobtracker.shared.UtilizationWeek;
@@ -27,7 +28,7 @@ import java.util.List;
  *
  * @author Philipp Minges
  */
-public class CapacityCalendarWidget extends Composite implements CalendarObserver, LogicObservable {
+public class CapacityCalendarWidget extends Composite implements CapaCalendarObserver, LogicObservable {
 
     @UiField
     Container container;

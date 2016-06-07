@@ -13,6 +13,7 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 import net.greenbeansit.jobtracker.client.components.CalendarObserver;
 import net.greenbeansit.jobtracker.client.components.LogicObservable;
+import net.greenbeansit.jobtracker.client.components.kapa.CapaCalendarObserver;
 import net.greenbeansit.jobtracker.client.components.widgets.SelectJobOption;
 import net.greenbeansit.jobtracker.client.utils.rest.NotifyHelper;
 import net.greenbeansit.jobtracker.shared.Job;
@@ -36,7 +37,7 @@ import java.util.List;
  *
  * @author Philipp Minges
  */
-public class CapacityNav extends Composite implements LogicObservable, CalendarObserver {
+public class CapacityNav extends Composite implements LogicObservable, CapaCalendarObserver {
 
     @UiField
     Select selectJob;

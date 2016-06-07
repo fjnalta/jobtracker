@@ -13,6 +13,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import net.greenbeansit.jobtracker.client.components.CalendarObserver;
 import net.greenbeansit.jobtracker.client.components.LogicObservable;
+import net.greenbeansit.jobtracker.client.components.kapa.CapaCalendarObserver;
 import net.greenbeansit.jobtracker.client.components.widgets.calendar.FullCalendarCustomize;
 import org.gwtbootstrap3.client.ui.Button;
 import org.gwtbootstrap3.client.ui.constants.IconType;
@@ -26,7 +27,7 @@ import java.util.List;
  *
  * @author Philipp Minges
  */
-public class MonthlyUtilizationWidget extends Composite implements CalendarObserver, LogicObservable {
+public class MonthlyUtilizationWidget extends Composite implements CapaCalendarObserver, LogicObservable {
 
     private static CalendarUtilizationWidgetUiBinder uiBinder = GWT.create(CalendarUtilizationWidgetUiBinder.class);
 

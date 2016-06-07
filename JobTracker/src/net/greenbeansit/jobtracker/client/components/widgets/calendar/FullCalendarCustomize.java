@@ -2,11 +2,15 @@ package net.greenbeansit.jobtracker.client.components.widgets.calendar;
 
 import com.google.gwt.event.shared.HandlerManager;
 import net.greenbeansit.jobtracker.client.components.kapa.data.CapacityReportEvent;
+import net.greenbeansit.jobtracker.shared.ActivityReport;
 import net.greenbeansit.jobtracker.shared.UtilizationWeek;
 import org.gwtbootstrap3.extras.fullcalendar.client.ui.CalendarConfig;
 import org.gwtbootstrap3.extras.fullcalendar.client.ui.FullCalendar;
 import org.gwtbootstrap3.extras.fullcalendar.client.ui.Header;
 import org.gwtbootstrap3.extras.fullcalendar.client.ui.ViewOption;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Extends the FullCalender to provide more functionality.
@@ -14,6 +18,8 @@ import org.gwtbootstrap3.extras.fullcalendar.client.ui.ViewOption;
  * @author Ahmed Salame.
  */
 public class FullCalendarCustomize extends FullCalendar {
+
+	private List<ActivityReport> reportsToSave= new ArrayList<ActivityReport>();
 
 	/**
 	 * FullCalendar Constructor
@@ -72,6 +78,15 @@ public class FullCalendarCustomize extends FullCalendar {
 		super.addEvent(event);
 		this.currentEvent = event;
 	}
+
+	public void addEventToSave(ActivityReport a){
+		this.reportsToSave.add(a);
+	}
+
+	public List<ActivityReport> getEventsToSave(){
+		return this.reportsToSave;
+	}
+
 
 	/*
 	 * private static final long serialVersionUID = 7682896069658320372L;

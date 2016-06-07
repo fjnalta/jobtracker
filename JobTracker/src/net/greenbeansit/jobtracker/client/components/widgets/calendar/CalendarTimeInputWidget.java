@@ -465,7 +465,7 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 	/**
 	 * {@link UiHandler} for the {@link Button} to delete an
 	 * ActivityReportEvent.
-	 * 
+	 *
 	 * @param e
 	 *            {@link ClickEvent}
 	 */
@@ -486,6 +486,13 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 		int startTime = createTimeFromText(eventStart.getText());
 		int duration = createTimeFromText(workTime.getText());
 		int breakTime = createTimeFromText(pause.getText());
+		for(ActivityReport report : calendarHandler.calendar.getEventsToSave()){
+			ActivityReport tmp = new ActivityReport(0, 0,
+					0, 0, 0, "", report.getDate(), startTime, duration, breakTime);
+			handler.saveReport(tmp);
+		}
+		calendarHandler.calendar.getEventsToSave().clear();
+
 		Date date = getDateFromBox(dateStart);
 		ActivityReport tmp = new ActivityReport(Integer.parseInt(calendarHandler.calendar.currentEvent.getId() + ""), 0,
 				0, 0, 2, "", date, startTime, duration, breakTime);
@@ -546,7 +553,7 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 
 	/**
 	 * remove double point from String
-	 * 
+	 *
 	 * @param input
 	 *            String with doublepoint
 	 * @return String without doublepoint
@@ -557,7 +564,7 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 
 	/**
 	 * add doublepoint to a timestring
-	 * 
+	 *
 	 * @param input
 	 *            String without doublepoint
 	 * @return String with doublepoint
@@ -568,7 +575,7 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 
 	/**
 	 * Increase event minutes from a textbox
-	 * 
+	 *
 	 * @param box
 	 *            the textbox with the minutes
 	 */
@@ -665,7 +672,7 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 
 	/**
 	 * increase eventhours from a textbox
-	 * 
+	 *
 	 * @param box
 	 *            the textbox with the hours value
 	 */
@@ -686,7 +693,7 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 
 	/**
 	 * decrease the minutes of the event from a textbox
-	 * 
+	 *
 	 * @param box
 	 *            the textbex with the minutes value
 	 */
@@ -719,7 +726,7 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 
 	/**
 	 * decrease the events hour value from a textbox value
-	 * 
+	 *
 	 * @param box
 	 *            the textbox with the hours value
 	 */
@@ -740,7 +747,7 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 
 	/**
 	 * check if the keypress event is not a number
-	 * 
+	 *
 	 * @param event
 	 *            the Keypress event
 	 */
@@ -754,7 +761,7 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 	/**
 	 * add a leading 0 to a string like convert 8 to 08, if string length is >1
 	 * no leading null is added
-	 * 
+	 *
 	 * @param sign
 	 *            the string where the number schould be added
 	 * @return string with a leading 0
@@ -769,7 +776,7 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 
 	/**
 	 * add a leading null but to an integer
-	 * 
+	 *
 	 * @param sign
 	 *            Integer value where you need to add a leading null
 	 * @return a String with a leading null
@@ -780,7 +787,7 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 
 	/**
 	 * remove a leading null from a string
-	 * 
+	 *
 	 * @param sign
 	 *            String with the null
 	 * @return String without leading null
@@ -795,7 +802,7 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 
 	/**
 	 * check if input length is too long
-	 * 
+	 *
 	 * @param before
 	 *            string to check
 	 * @param event

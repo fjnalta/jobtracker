@@ -16,7 +16,7 @@ import org.gwtbootstrap3.client.ui.Heading;
  *
  * @author Philipp Minges
  */
-public class CapacityPage extends Composite implements CalendarObserver {
+public class CapacityPage extends Composite implements CapaCalendarObserver {
 
     @UiField
     Heading dateHeading;
@@ -29,8 +29,12 @@ public class CapacityPage extends Composite implements CalendarObserver {
      */
     @Override
     public void update() {
+        dateHeading.removeFromParent();
+        GWT.log("update capazity");
         GWT.log(calendar.getYear());
         dateHeading.setText(calendar.getYear());
+        dateHeading.setText("TROLROTLROLRO");
+
     }
 
     /**
