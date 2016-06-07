@@ -159,8 +159,7 @@ public class CalendarWidget extends Composite implements CalendarObserver, Logic
 							JavaScriptObject viewObject) {
 						// Event e = new Event(calendarEvent);
 						// calendar.removeEvent(e.getId());
-						GWT.log("click ");
-						selectedEvent.setBackgroundColor("rgb(0,0,153)");
+
 						ActivityReportEvent e = new ActivityReportEvent(calendarEvent);
 						e.setBackgroundColor("rgb(87,87,87)");
 						calendar.currentEvent = e;
@@ -199,11 +198,9 @@ public class CalendarWidget extends Composite implements CalendarObserver, Logic
 					@Override
 					public void select(JavaScriptObject start, JavaScriptObject end, NativeEvent event,
 							JavaScriptObject viewObject) {
-						GWT.log("select");
 						updateId();
 						ActivityReportEvent tmp = new ActivityReportEvent(eventID + "", eventTitel + eventID);
 						
-						GWT.log("rgb(0,0,153)" +tmp.getRendering() );
 						
 						
 						if (calendar.getCurrentView().toString().equals("month")) {
@@ -360,7 +357,7 @@ public class CalendarWidget extends Composite implements CalendarObserver, Logic
 
 					@Override
 					public void unselect(JavaScriptObject viewObject, NativeEvent event) {
-						GWT.log("unselect");
+
 					}
 				});
 
