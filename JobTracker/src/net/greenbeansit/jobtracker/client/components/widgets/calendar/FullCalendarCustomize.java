@@ -79,10 +79,18 @@ public class FullCalendarCustomize extends FullCalendar {
 		this.currentEvent = event;
 	}
 
+	/**
+	 * This Method is used to cache multiple events to save
+	 * @param a the {@link ActivityReport} to be saved.
+     */
 	public void addEventToSave(ActivityReport a){
 		this.reportsToSave.add(a);
 	}
 
+	/**
+	 * Get's the List of Events to be saved
+	 * @return a list of {@link ActivityReport}s.
+     */
 	public List<ActivityReport> getEventsToSave(){
 		return this.reportsToSave;
 	}
