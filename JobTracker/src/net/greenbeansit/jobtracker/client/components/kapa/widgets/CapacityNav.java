@@ -125,26 +125,28 @@ public class CapacityNav extends Composite implements LogicObservable, CapaCalen
         handler.addObservable(this);
         handler.updateObservable(this);
 
-        Timer timer = new Timer() {
+//        Timer timer = new Timer() {
+//            @Override
+//            public void run() {
+//                
+//            }
+//        };
+//        timer.schedule(100);
+        
+        initializeUIElements();
+        selectJob.addValueChangeHandler(new ValueChangeHandler<String>() {
             @Override
-            public void run() {
-                initializeUIElements();
-                selectJob.addValueChangeHandler(new ValueChangeHandler<String>() {
-                    @Override
-                    public void onValueChange(ValueChangeEvent<String> event) {
-                        if (selectJob.getSelectedItem().getText().contains("Pseudo")) {
-                            currentPJob = ((SelectJobOption) selectJob.getSelectedItem()).getPjob();
-                            notifyLogicHandler();
-                        }
-                        if (!selectJob.getSelectedItem().getText().contains("Pseudo")) {
-                            currentJob = ((SelectJobOption) selectJob.getSelectedItem()).getJob();
-                            notifyLogicHandler();
-                        }
-                    }
-                });
+            public void onValueChange(ValueChangeEvent<String> event) {
+                if (selectJob.getSelectedItem().getText().contains("Pseudo")) {
+                    currentPJob = ((SelectJobOption) selectJob.getSelectedItem()).getPjob();
+                    notifyLogicHandler();
+                }
+                if (!selectJob.getSelectedItem().getText().contains("Pseudo")) {
+                    currentJob = ((SelectJobOption) selectJob.getSelectedItem()).getJob();
+                    notifyLogicHandler();
+                }
             }
-        };
-        timer.schedule(100);
+        });
 
         handler.loadJobs();
         handler.loadPseudoJobs();

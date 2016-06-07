@@ -2,6 +2,8 @@ package net.greenbeansit.jobtracker.client.components;
 
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.i18n.client.DateTimeFormat;
+import com.google.gwt.user.client.Window;
+
 import net.greenbeansit.jobtracker.client.components.kapa.widgets.CapacityCalendarWidget;
 import net.greenbeansit.jobtracker.client.components.widgets.calendar.CalendarWidget;
 import net.greenbeansit.jobtracker.client.utils.rest.NotifyHelper;
@@ -565,6 +567,7 @@ public class LogicHandler {
 				public void onSuccess(Method method, List<Integer> response) {
 					LogicHandler.this.setUtilizationList(response);
 					LogicHandler.this.updateAllObservables();
+					GWT.log("utilization loaded");
 				}
 
 				@Override

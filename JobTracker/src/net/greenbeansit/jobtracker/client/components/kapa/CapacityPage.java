@@ -29,11 +29,7 @@ public class CapacityPage extends Composite implements CapaCalendarObserver {
      */
     @Override
     public void update() {
-        dateHeading.removeFromParent();
-        GWT.log("update capazity");
-        GWT.log(calendar.getYear());
         dateHeading.setText(calendar.getYear());
-        dateHeading.setText("TROLROTLROLRO");
 
     }
 
