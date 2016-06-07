@@ -45,7 +45,6 @@ public class CapacityCalendarWidget extends Composite implements CapaCalendarObs
     @Override
     public void update() {
         fullcalendar.render();
-        GWT.log(fullcalendar.getDate().getMonth() + "");
         month.setSubText(monthToString(fullcalendar.getDate().getMonth()));
     }
 

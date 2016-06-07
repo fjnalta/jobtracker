@@ -6,8 +6,6 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
-import com.google.gwt.user.client.Timer;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -15,11 +13,9 @@ import com.google.gwt.user.client.ui.Widget;
 import net.greenbeansit.jobtracker.client.components.CalendarObserver;
 import net.greenbeansit.jobtracker.client.components.LogicObservable;
 import net.greenbeansit.jobtracker.client.components.kapa.CapaCalendarObserver;
-import net.greenbeansit.jobtracker.client.components.widgets.calendar.FullCalendarCustomize;
 import org.gwtbootstrap3.client.ui.Button;
 import org.gwtbootstrap3.client.ui.constants.IconType;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -43,7 +39,7 @@ public class MonthlyUtilizationWidget extends Composite
 	}
 	
 	// Path for the css File
-		private final String		suffixPath	= "net-greenbeansit-jobtracker-client-components-widgets-calendar-CalendarUtilizationWidget_CalendarUtilizationWidgetUiBinderImpl_GenCss_style-";
+//		private final String		suffixPath	= "net-greenbeansit-jobtracker-client-components-widgets-calendar-CalendarUtilizationWidget_CalendarUtilizationWidgetUiBinderImpl_GenCss_style-";
 
 		private String[]			months		=
 		{ "Jan", "Feb", "Mar", "Apr", "Mai", "Jun", "Jul", "Aug", "Sep", "Okt",
@@ -68,11 +64,8 @@ public class MonthlyUtilizationWidget extends Composite
 	public void clickHandlerLeftButton(ClickEvent e)
 	{
 		calendarHandler.calendar.previous();
-		
 		createNewTimeline();
-		
-		
-		//createNewTimeline();
+		setCurrentMonthToActive();
 		notifyHandler();
 	}
 
@@ -86,10 +79,8 @@ public class MonthlyUtilizationWidget extends Composite
 	public void clickHandlerRightButton(ClickEvent e)
 	{
 		calendarHandler.calendar.next();
-		
 		createNewTimeline();
-		
-		// createNewTimeline();
+		setCurrentMonthToActive();
 		notifyHandler();
 	}
 
@@ -125,6 +116,7 @@ public class MonthlyUtilizationWidget extends Composite
 //		}
 		
 		createNewTimeline();
+//		setCurrentMonthToActive();
 
 		this.leftButton.setIcon(IconType.ARROW_LEFT);
 		this.rightButton.setIcon(IconType.ARROW_RIGHT);
@@ -152,6 +144,7 @@ public class MonthlyUtilizationWidget extends Composite
 					Date currentDate = calendarHandler.calendar.getDate();
 					currentDate.setMonth(calendarMonth);
 					calendarHandler.calendar.goToDate(currentDate);
+					setCurrentMonthToActive();
 					notifyHandler();
 				}
 			}));
@@ -160,50 +153,59 @@ public class MonthlyUtilizationWidget extends Composite
 
 //	/**
 //	 * This Method creates a Vertical Panel for every Month
-//	 * 
+//	 *
 //	 * @return list the ArrayList of the Panels.
 //	 */
 //	private List<VerticalPanel> createBarChartList()
 //	{
 //		List<VerticalPanel> list = new ArrayList<VerticalPanel>();
-//		
+//
 //		for (int element = 0; element <= 11; element++)
 //		{
 //			list.add(getBarChart(handler.getUtilizationList().get(element)));
 //		}
-//		
+//
 //		return list;
 //	}
 
-	/**
-	 * Get the BarChart for a month
-	 *
-	 * @param element
-	 *            actual date
-	 * @return an new BarChart to the given date
-	 */
-	private VerticalPanel getBarChart(Integer element)
-	{
-		VerticalPanel vp = new VerticalPanel();
+//	/**
+//	 * Get the BarChart for a month
+//	 *
+//	 * @param element
+//	 *            actual date
+//	 * @return an new BarChart to the given date
+//	 */
+//	private VerticalPanel getBarChart(Integer element)
+//	{
+//		VerticalPanel vp = new VerticalPanel();
+//
+//		double rnd = element.intValue();
+//
+//		// For empty Days
+//		if (rnd < 1)
+//		{
+//			rnd = 15;
+//		}
+//
+//		vp.setHeight(rnd * 0.5 + "px");
+//
+//		if (rnd < 40)
+//		{
+//			vp.setStyleName(this.suffixPath + "barChart", true);
+//		} else
+//		{
+//			vp.setStyleName(this.suffixPath + "barChartHeight", true);
+//		}
+//		return vp;
+//	}
 
-		double rnd = element.intValue();
-
-		// For empty Days
-		if (rnd < 1)
-		{
-			rnd = 15;
+	private void setCurrentMonthToActive(){
+		for(int i = 0; i < 12; i ++) {
+			Button temp = (Button) table.getWidget(1, i);
+			temp.setActive(false);
 		}
-
-		vp.setHeight(rnd * 0.5 + "px");
-
-		if (rnd < 40)
-		{
-			vp.setStyleName(this.suffixPath + "barChart", true);
-		} else
-		{
-			vp.setStyleName(this.suffixPath + "barChartHeight", true);
-		}
-		return vp;
+		Button monthButton = (Button) table.getWidget(1, calendarHandler.calendar.getDate().getMonth());
+		monthButton.setActive(true);
 	}
 	
 	/**
