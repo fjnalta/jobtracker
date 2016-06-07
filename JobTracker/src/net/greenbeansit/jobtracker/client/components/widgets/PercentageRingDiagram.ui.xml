@@ -54,6 +54,11 @@
 		border-color: #f18c16;
 	}
 	
+	.quarter-second-row-final {
+		background-color: #ffffff;
+		border-color: #ffffff:
+	}
+	
 	.diagramInnerTextContainer {
 		position: relative;
 	}
@@ -82,7 +87,7 @@
 			<h:ClearFix addStyleNames="{style.quarter} {style.quarter-second-row}" ui:field="quarterSecondTwo" />
 			<h:ClearFix addStyleNames="{style.quarter} {style.quarter-second-row}" ui:field="quarterSecondThree" />
 
-			<h:ClearFix addStyleNames="{style.quarter} {style.quarterFinal} {style.quarter-second-row}"
+			<h:ClearFix addStyleNames="{style.quarter} {style.quarterFinal} {style.quarter-second-row} {style.quarter-second-row-final}"
 				ui:field="quarterSecondFinal" />
 			<h:ClearFix addStyleNames="{style.quarter} {style.quarter-second-row}" ui:field="quarterSecondFour" />
 		
