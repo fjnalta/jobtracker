@@ -49,11 +49,11 @@
 					</b:AnchorListItem>
 					<b:AnchorListItem iconFixedWidth="true" ui:field="navProject"
 						href="#project">
-						Projektleitung
+						Projekte
 					</b:AnchorListItem>
 					<b:AnchorListItem iconFixedWidth="true" ui:field="navManager"
 						href="#manager">
-						Management
+						Mitarbeiter
 					</b:AnchorListItem>
 				</b:NavbarNav>
 				<b:NavbarNav pull="RIGHT">

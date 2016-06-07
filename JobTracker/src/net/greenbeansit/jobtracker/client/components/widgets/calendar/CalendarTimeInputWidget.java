@@ -154,8 +154,11 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 	 */
 	@UiHandler("eventEnd")
 	public void keyPressedEventEnd(KeyPressEvent event) {
-		inputLengthIsToLong(eventEnd.getText(), event);
+		String before = eventEnd.getText().replace(":", "");
+		eventEnd.setText(before);
+		inputLengthIsToLong(before, event);
 		inputIsNotAnNumber(event);
+		eventEnd.setText(addDoublePoint(before));
 		notifyHandler();
 	}
 
@@ -167,8 +170,11 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 	 */
 	@UiHandler("pause")
 	public void keyPressedPause(KeyPressEvent event) {
-		inputLengthIsToLong(pause.getText(), event);
+		String before = pause.getText().replace(":", "");
+		pause.setText(before);
+		inputLengthIsToLong(before, event);
 		inputIsNotAnNumber(event);
+		pause.setText(addDoublePoint(before));
 		notifyHandler();
 	}
 
@@ -180,16 +186,11 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 	 */
 	@UiHandler("workTime")
 	public void keyPressedWorkTime(KeyPressEvent event) {
-		inputLengthIsToLong(workTime.getText(), event);
+		String before = workTime.getText().replace(":", "");
+		workTime.setText(before);
+		inputLengthIsToLong(before, event);
 		inputIsNotAnNumber(event);
-		if (workTime.getText().length() > 0) {
-			workTimeIsEntered();
-		} else {
-			enableFields();
-		}
-		if (workTime.getText().length() > 3) {
-
-		}
+		workTime.setText(addDoublePoint(before));
 		notifyHandler();
 	}
 
