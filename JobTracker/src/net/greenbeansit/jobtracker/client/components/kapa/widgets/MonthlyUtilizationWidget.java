@@ -84,8 +84,6 @@ public class MonthlyUtilizationWidget extends Composite
 		notifyHandler();
 	}
 
-	
-	
 	private List<VerticalPanel>	list;
 
 	/**
@@ -116,7 +114,6 @@ public class MonthlyUtilizationWidget extends Composite
 //		}
 		
 		createNewTimeline();
-//		setCurrentMonthToActive();
 
 		this.leftButton.setIcon(IconType.ARROW_LEFT);
 		this.rightButton.setIcon(IconType.ARROW_RIGHT);
