@@ -1,68 +1,78 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
-             xmlns:b="urn:import:org.gwtbootstrap3.client.ui">
-    <ui:style>
-        .buttonTop {
-            border-radius: 4px 4px 0px 0px !important;
-        }
-
-        .buttonDown {
-            border-radius: 0px 0px 4px 4px !important;
-        }
-
-        .buttonText {
-            min-width: 50px;
-            height: 43px;
-        }
-    </ui:style>
-    <b:Container fluid="true">
-        <b:InputGroup>
-            <b:TextBox readOnly="true" ui:field="projectStart" addStyleNames="{style.buttonText}">YEAR</b:TextBox>
-            <b:InputGroupButton>
-                <b:VerticalButtonGroup>
-                    <b:Button size="EXTRA_SMALL" addStyleNames="{style.buttonTop}"
-                              ui:field="buttonUpYearStart"/>
-                    <b:Button size="EXTRA_SMALL" addStyleNames="{style.buttonDown}"
-                              ui:field="buttonDownYearStart"/>
-                </b:VerticalButtonGroup>
-            </b:InputGroupButton>
-            <b:TextBox readOnly="true" ui:field="projectStartKw" addStyleNames="{style.buttonText}">KW</b:TextBox>
-            <b:InputGroupButton>
-                <b:VerticalButtonGroup>
-                    <b:Button size="EXTRA_SMALL" addStyleNames="{style.buttonTop}"
-                              ui:field="buttonUpCalendarWeekStart"/>
-                    <b:Button size="EXTRA_SMALL" addStyleNames="{style.buttonDown}"
-                              ui:field="buttonDownCalendarWeekStart"/>
-                </b:VerticalButtonGroup>
-            </b:InputGroupButton>
-            <b:TextBox readOnly="true" ui:field="projectEnd" addStyleNames="{style.buttonText}">YEAR</b:TextBox>
-            <b:InputGroupButton>
-                <b:VerticalButtonGroup>
-                    <b:Button size="EXTRA_SMALL" addStyleNames="{style.buttonTop}"
-                              ui:field="buttonUpYearEnd"/>
-                    <b:Button size="EXTRA_SMALL" addStyleNames="{style.buttonDown}"
-                              ui:field="buttonDownYearEnd"/>
-                </b:VerticalButtonGroup>
-            </b:InputGroupButton>
-            <b:TextBox readOnly="true" ui:field="projectEndKw" addStyleNames="{style.buttonText}">KW</b:TextBox>
-            <b:InputGroupButton>
-                <b:VerticalButtonGroup>
-                    <b:Button size="EXTRA_SMALL" addStyleNames="{style.buttonTop}"
-                              ui:field="buttonUpCalendarWeekEnd"/>
-                    <b:Button size="EXTRA_SMALL" addStyleNames="{style.buttonDown}"
-                              ui:field="buttonDownCalendarWeekEnd"/>
-                </b:VerticalButtonGroup>
-            </b:InputGroupButton>
-            <b:TextBox readOnly="true" ui:field="dayWeek" addStyleNames="{style.buttonText}">05</b:TextBox>
-            <b:InputGroupButton>
-                <b:VerticalButtonGroup>
-                    <b:Button size="EXTRA_SMALL" addStyleNames="{style.buttonTop}"
-                              ui:field="buttonUpDayWeek"/>
-                    <b:Button size="EXTRA_SMALL" addStyleNames="{style.buttonDown}"
-                              ui:field="buttonDownDayWeek"/>
-                </b:VerticalButtonGroup>
-            </b:InputGroupButton>
-            <b:Button type="PRIMARY" text="Buchen" pull="RIGHT"/>
-        </b:InputGroup>
-    </b:Container>
+	xmlns:b="urn:import:org.gwtbootstrap3.client.ui">
+	<ui:style>
+	.buttonTop {
+		border-radius: 4px 4px 0px 0px !important;
+	}
+	
+	.buttonDown {
+		border-radius: 0px 0px 4px 4px !important;
+	}
+	
+	.buttonText {
+		min-width: 50px;
+		height: 43px;
+	}
+	
+	.button-blue {
+		background: #000099
+	}
+	</ui:style>
+	<b:Container fluid="true">
+		<b:InputGroup>
+			<b:TextBox readOnly="true" ui:field="projectStart"
+				addStyleNames="{style.buttonText}">YEAR</b:TextBox>
+			<b:InputGroupButton>
+				<b:VerticalButtonGroup>
+					<b:Button size="EXTRA_SMALL" addStyleNames="{style.buttonTop}"
+						ui:field="buttonUpYearStart" />
+					<b:Button size="EXTRA_SMALL" addStyleNames="{style.buttonDown}"
+						ui:field="buttonDownYearStart" />
+				</b:VerticalButtonGroup>
+			</b:InputGroupButton>
+			<b:TextBox readOnly="true" ui:field="projectStartKw"
+				addStyleNames="{style.buttonText}">KW</b:TextBox>
+			<b:InputGroupButton>
+				<b:VerticalButtonGroup>
+					<b:Button size="EXTRA_SMALL" addStyleNames="{style.buttonTop}"
+						ui:field="buttonUpCalendarWeekStart" />
+					<b:Button size="EXTRA_SMALL" addStyleNames="{style.buttonDown}"
+						ui:field="buttonDownCalendarWeekStart" />
+				</b:VerticalButtonGroup>
+			</b:InputGroupButton>
+			<b:TextBox readOnly="true" ui:field="projectEnd"
+				addStyleNames="{style.buttonText}">YEAR</b:TextBox>
+			<b:InputGroupButton>
+				<b:VerticalButtonGroup>
+					<b:Button size="EXTRA_SMALL" addStyleNames="{style.buttonTop}"
+						ui:field="buttonUpYearEnd" />
+					<b:Button size="EXTRA_SMALL" addStyleNames="{style.buttonDown}"
+						ui:field="buttonDownYearEnd" />
+				</b:VerticalButtonGroup>
+			</b:InputGroupButton>
+			<b:TextBox readOnly="true" ui:field="projectEndKw"
+				addStyleNames="{style.buttonText}">KW</b:TextBox>
+			<b:InputGroupButton>
+				<b:VerticalButtonGroup>
+					<b:Button size="EXTRA_SMALL" addStyleNames="{style.buttonTop}"
+						ui:field="buttonUpCalendarWeekEnd" />
+					<b:Button size="EXTRA_SMALL" addStyleNames="{style.buttonDown}"
+						ui:field="buttonDownCalendarWeekEnd" />
+				</b:VerticalButtonGroup>
+			</b:InputGroupButton>
+			<b:TextBox readOnly="true" ui:field="dayWeek"
+				addStyleNames="{style.buttonText}">05</b:TextBox>
+			<b:InputGroupButton>
+				<b:VerticalButtonGroup>
+					<b:Button size="EXTRA_SMALL" addStyleNames="{style.buttonTop}"
+						ui:field="buttonUpDayWeek" />
+					<b:Button size="EXTRA_SMALL" addStyleNames="{style.buttonDown}"
+						ui:field="buttonDownDayWeek" />
+				</b:VerticalButtonGroup>
+			</b:InputGroupButton>
+			<b:Button type="PRIMARY" text="Buchen" pull="RIGHT"
+				addStyleNames="{style.button-blue}" />
+		</b:InputGroup>
+	</b:Container>
 </ui:UiBinder>
