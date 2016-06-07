@@ -46,6 +46,8 @@ public class ActivityReportEvent extends Event implements LogicObservable {
 			boolean isDurationEditable) {
 		super(id, title, isEditable, isStartEditable, isDurationEditable);
 		this.ap = ap;
+		this.setColor("rgb(0,0,153)");
+		
 	}
 
 	/**
@@ -59,6 +61,7 @@ public class ActivityReportEvent extends Event implements LogicObservable {
 	 */
 	public ActivityReportEvent(String id, String title) {
 		super(id, title);
+		this.setColor("rgb(0,0,153)");
 	}
 
 	/**
@@ -70,6 +73,7 @@ public class ActivityReportEvent extends Event implements LogicObservable {
 	 */
 	public ActivityReportEvent(JavaScriptObject jso) {
 		super(jso);
+		this.setColor("rgb(0,0,153)");
 	}
 
 	/**

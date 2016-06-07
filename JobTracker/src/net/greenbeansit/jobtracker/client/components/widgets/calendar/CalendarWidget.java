@@ -1,7 +1,9 @@
 package net.greenbeansit.jobtracker.client.components.widgets.calendar;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.EventObject;
 import java.util.List;
 
 import org.gwtbootstrap3.client.ui.Row;
@@ -26,6 +28,7 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 
 import com.google.gwt.user.client.Timer;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -45,7 +48,9 @@ public class CalendarWidget extends Composite implements CalendarObserver, Logic
 	private static CalendarWidgetUiBinder uiBinder = GWT.create(CalendarWidgetUiBinder.class);
 
 	private int eventID;
-
+	
+	private ActivityReportEvent selectedEvent;
+	
 	interface CalendarWidgetUiBinder extends UiBinder<Widget, CalendarWidget> {
 	}
 
@@ -61,7 +66,7 @@ public class CalendarWidget extends Composite implements CalendarObserver, Logic
 	 */
 	public CalendarWidget() {
 		initWidget(uiBinder.createAndBindUi(this));
-
+		selectedEvent = new ActivityReportEvent("-1", "e");
 		calendarHandler.addObserver(this);
 		handler.setCalendar(this);
 
@@ -119,7 +124,8 @@ public class CalendarWidget extends Composite implements CalendarObserver, Logic
 				agenda.setAllDaySlot(false);
 				agenda.setSlotEventOverlap(false);
 				config.setAgendaOptions(agenda);
-
+				
+				
 				calendar = new FullCalendarCustomize("fullCalendar", ViewOption.agendaWeek, config, true);
 				calendarRow.add(calendar);
 				calendar.render();
@@ -153,8 +159,12 @@ public class CalendarWidget extends Composite implements CalendarObserver, Logic
 							JavaScriptObject viewObject) {
 						// Event e = new Event(calendarEvent);
 						// calendar.removeEvent(e.getId());
+						GWT.log("click ");
+						selectedEvent.setBackgroundColor("rgb(0,0,153)");
 						ActivityReportEvent e = new ActivityReportEvent(calendarEvent);
+						e.setBackgroundColor("rgb(87,87,87)");
 						calendar.currentEvent = e;
+						selectedEvent = e;
 						for (ActivityReportEvent a : eventList) {
 							if (a.getId().equals(e.getId())) {
 								handler.setCurrentReport(a.getAp());
@@ -189,9 +199,13 @@ public class CalendarWidget extends Composite implements CalendarObserver, Logic
 					@Override
 					public void select(JavaScriptObject start, JavaScriptObject end, NativeEvent event,
 							JavaScriptObject viewObject) {
-
+						GWT.log("select");
 						updateId();
 						ActivityReportEvent tmp = new ActivityReportEvent(eventID + "", eventTitel + eventID);
+						
+						GWT.log("rgb(0,0,153)" +tmp.getRendering() );
+						
+						
 						if (calendar.getCurrentView().toString().equals("month")) {
 							addSeveralEvents(start, end, event, viewObject);
 						} else {
@@ -199,7 +213,7 @@ public class CalendarWidget extends Composite implements CalendarObserver, Logic
 							tmp.setEnd(end);
 							addEvent(tmp, viewObject, event);
 						}
-
+						calendar.render();
 						notifyHandler();
 					}
 
@@ -213,6 +227,7 @@ public class CalendarWidget extends Composite implements CalendarObserver, Logic
 					 */
 					private void addEvent(ActivityReportEvent tmp, JavaScriptObject viewObject, NativeEvent event) {
 						unselect(viewObject, event);
+						
 						calendar.addEvent(tmp);
 						calendar.currentEvent = tmp;
 					}
@@ -234,6 +249,7 @@ public class CalendarWidget extends Composite implements CalendarObserver, Logic
 					private void addSeveralEvents(JavaScriptObject start, JavaScriptObject end, NativeEvent event,
 							JavaScriptObject viewObject) {
 						ActivityReportEvent tmp = new ActivityReportEvent(eventID + "", eventTitel + eventID);
+
 						String[] splitStart = start.toString().split(" ");
 						String startYear = splitStart[3];
 						String startMonth = addLeadingNull((getMonth(splitStart[1]) + 1) + "");
@@ -248,8 +264,6 @@ public class CalendarWidget extends Composite implements CalendarObserver, Logic
 						newEventDateEnd.setDate(newEventDateEnd.getDate() - 1);
 						String endDay = addLeadingNull((newEventDateEnd.getDate()+1900) + "");
 
-						GWT.log("Start:->" + newEventDateStart.toGMTString()+"\n\r" + "End:->" + newEventDateEnd.toGMTString());
-						GWT.log(newEventDateStart.getYear()+"");
 						String eventStandardStart = startYear + "-" + startMonth + "-" + startDay + "T08:00:00.000Z";
 						String eventStandardEnd = startYear + "-" + startMonth + "-" + startDay + "T16:00:00.000Z";
 						
@@ -346,7 +360,8 @@ public class CalendarWidget extends Composite implements CalendarObserver, Logic
 
 					@Override
 					public void unselect(JavaScriptObject viewObject, NativeEvent event) {
-
+						GWT.log("unselect");
+						selectedEvent.setColor("rgb(0,0,153)");
 					}
 				});
 
@@ -394,8 +409,8 @@ public class CalendarWidget extends Composite implements CalendarObserver, Logic
 						if (nativeEvent.getAltKey()) {
 							updateId();
 							ActivityReportEvent dragEvent = new ActivityReportEvent(calendarEvent);
-							ActivityReportEvent oldEvent = createEvent(dragEvent.getId(), dragEvent.getTitle());
-
+							ActivityReportEvent oldEvent = createEvent(eventID+"", dragEvent.getTitle());
+							updateId();
 							oldEvent.setStart(dragEvent.getISOStart());
 							oldEvent.setEnd(dragEvent.getISOEnd());
 
@@ -439,6 +454,7 @@ public class CalendarWidget extends Composite implements CalendarObserver, Logic
 				ap.getDate().setYear((2016 - 1900));
 				e.setStart(calendarHandler.getISO8601StringForDate(ap.getDate(), ap.getStartTime()));
 				e.setEnd(calendarHandler.getISO8601StringForDate(ap.getDate(), ap.getEndTime()));
+
 				calendar.addEvent(e);
 				this.eventList.add(e);
 				eventID = Integer.parseInt(e.getId());
