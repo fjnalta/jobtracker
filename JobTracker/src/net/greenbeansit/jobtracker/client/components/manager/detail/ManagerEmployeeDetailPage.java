@@ -14,6 +14,7 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 
 import net.greenbeansit.jobtracker.client.components.manager.detail.ManagerEmployeeDetailPageHelperServiceImpl.Callback;
+import net.greenbeansit.jobtracker.client.components.widgets.UtilizationWidget;
 import net.greenbeansit.jobtracker.client.utils.rest.NotifyHelper;
 
 /**
@@ -66,6 +67,9 @@ public class ManagerEmployeeDetailPage extends Composite
 
 	@UiField
 	JobChart										jobChart;
+	
+	@UiField
+	UtilizationWidget utilizationWidget;
 
 	private ManagerEmployeeDetailPageHelperService	helperService;
 
@@ -123,6 +127,11 @@ public class ManagerEmployeeDetailPage extends Composite
 								+ helperService.getEmployee().getSurname());
 
 						jobChart.fillPieChart(helperService.getJobs());
+						
+						utilizationWidget.setRemainingVacationDays(helperService.getEmployee().getRemainingVacationDays());
+						
+//						utilizationWidget.setUtilization((double)helperService.getEmployee().getUtilization());
+						utilizationWidget.setUtilization(157d);
 					}
 
 					@Override

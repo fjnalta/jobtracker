@@ -26,7 +26,7 @@
 	<h:ClearFix ui:field="container">
 		<b:Column size="XS_12,SM_12,MD_12,LG_12">
 			<b:Heading size="H4" text="Verbleibende Urlaubstage:" />
-			<h:Span text="13" addStyleNames="{style.labelValue}" />
+			<h:Span text="13" addStyleNames="{style.labelValue}" ui:field="textRemainingVacationDays" />
 		</b:Column>
 		<b:Column size="XS_12,SM_12,MD_12,LG_12">
 			<b:Heading size="H4" text="Auslastung:" />

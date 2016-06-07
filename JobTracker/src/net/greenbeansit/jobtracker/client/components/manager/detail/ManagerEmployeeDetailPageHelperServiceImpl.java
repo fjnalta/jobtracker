@@ -1,5 +1,6 @@
 package net.greenbeansit.jobtracker.client.components.manager.detail;
 
+import java.util.Date;
 import java.util.List;
 
 import org.fusesource.restygwt.client.Method;
@@ -66,7 +67,27 @@ class ManagerEmployeeDetailPageHelperServiceImpl implements ManagerEmployeeDetai
 					{
 						jobs = response;
 						
-						initCallback.onSuccess();
+						RestClient.build(new SuccessFunction<Integer>()
+						{
+							@Override
+							public void onSuccess(Method method,
+									Integer response)
+							{
+								employee.setUtilization(response);
+
+								initCallback.onSuccess();
+							}
+
+							@Override
+							public void onFailure(Method method,
+									Throwable exception)
+							{
+								GWT.log(exception.getMessage());
+
+								initCallback.onFailure(exception);
+							}
+							
+						}).getEmployeeService().getUtilizationYear(employeeId, new Date().getYear());
 					}
 
 					@Override

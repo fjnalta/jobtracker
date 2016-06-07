@@ -92,7 +92,7 @@
 			<h:ClearFix addStyleNames="{style.quarter} {style.quarter-second-row}" ui:field="quarterSecondFour" />
 		
 			<h:ClearFix addStyleNames="{style.diagramInner}" ui:field="diagramInnerInner">
-				<b:Heading size="H1" text="[Prozent]" addStyleNames="{style.diagramInnerText}"
+				<b:Heading size="H1" text="%" addStyleNames="{style.diagramInnerText}"
 				ui:field="diagramInnerText" />
 			</h:ClearFix>
 		</h:ClearFix>
