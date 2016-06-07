@@ -79,9 +79,11 @@ public class ProjectDetailPage extends Composite
 	/**
 	 * Initializes a new instance of the {@link ProjectDetailPage}.
 	 * 
-	 * @param jobId
+	 * @param jobNo
 	 *            the ID of the {@link Job} that should be displayed by the
 	 *            page.
+	 * @param posNo
+	 * 			  the Position Number.
 	 */
 	public ProjectDetailPage(Integer jobNo, Integer posNo)
 	{
