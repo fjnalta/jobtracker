@@ -1,5 +1,8 @@
 package net.greenbeansit.jobtracker.client.components.manager.detail;
 
+import java.util.List;
+
+import net.greenbeansit.jobtracker.shared.Job;
 import net.greenbeansit.jobtracker.shared.User;
 
 /**
@@ -15,4 +18,11 @@ interface ManagerEmployeeDetailPageHelperService
 	 * @return a {@link User} object.
 	 */
 	User getEmployee();
+
+	/**
+	 * Get all {@link Job}s of the current employee.
+	 * 
+	 * @return a list of {@link Job}s.
+	 */
+	List<Job> getJobs();
 }

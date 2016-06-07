@@ -1,11 +1,14 @@
 package net.greenbeansit.jobtracker.client.components.manager.detail;
 
+import java.util.List;
+
 import org.fusesource.restygwt.client.Method;
 
 import com.google.gwt.core.client.GWT;
 
 import net.greenbeansit.jobtracker.client.utils.rest.RestClient;
 import net.greenbeansit.jobtracker.client.utils.rest.RestClient.SuccessFunction;
+import net.greenbeansit.jobtracker.shared.Job;
 import net.greenbeansit.jobtracker.shared.User;
 
 /**
@@ -37,7 +40,7 @@ class ManagerEmployeeDetailPageHelperServiceImpl implements ManagerEmployeeDetai
 	}
 	
 	private User employee;
-	
+	private List<Job> jobs;
 	
 	/**
 	 * Initializes a new instance of the {@link ManagerEmployeeDetailPageHelperServiceImpl} class.
@@ -47,7 +50,7 @@ class ManagerEmployeeDetailPageHelperServiceImpl implements ManagerEmployeeDetai
 	 *            the {@link Callback} that will be called after the
 	 *            asynchronous process has been finished.
 	 */
-	public ManagerEmployeeDetailPageHelperServiceImpl(Integer employeeId, final Callback initCallback)
+	public ManagerEmployeeDetailPageHelperServiceImpl(final Integer employeeId, final Callback initCallback)
 	{
 		RestClient.build(new SuccessFunction<User>()
 		{
@@ -56,7 +59,25 @@ class ManagerEmployeeDetailPageHelperServiceImpl implements ManagerEmployeeDetai
 			{
 				employee = response;
 				
-				initCallback.onSuccess();
+				RestClient.build(new SuccessFunction<List<Job>>()
+				{
+					@Override
+					public void onSuccess(Method method, List<Job> response)
+					{
+						jobs = response;
+						
+						initCallback.onSuccess();
+					}
+
+					@Override
+					public void onFailure(Method method, Throwable exception)
+					{
+						GWT.log(exception.getMessage());
+
+						initCallback.onFailure(exception);
+					}
+					
+				}).getEmployeeService().getAllJobs(employeeId);
 			}
 
 			@Override
@@ -73,6 +94,12 @@ class ManagerEmployeeDetailPageHelperServiceImpl implements ManagerEmployeeDetai
 	public User getEmployee()
 	{
 		return employee;
+	}
+
+	@Override
+	public List<Job> getJobs()
+	{
+		return jobs;
 	}
 
 }

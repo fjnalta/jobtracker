@@ -108,7 +108,7 @@
 		<b:Row addStyleNames="{style.headerRow}">
 			<g:Anchor text="&lt; Alle Mitarbeiter" href="#manager"
 				addStyleNames="{style.anchorBackward}" />
-			<b:Heading size="H3" addStyleNames="{style.title}" text="Jesus Christus"
+			<b:Heading size="H3" addStyleNames="{style.title}" text=""
 				ui:field="titleEmployeeName" />
 		</b:Row>
 		<b:Row addStyleNames="{style.bottomRow}">
@@ -144,7 +144,7 @@
 					</b:NavTabs>
 					<b:TabContent>
 						<b:TabPane b:id="tab1" active="true">
-							<d:JobChart></d:JobChart>
+							<d:JobChart ui:field="jobChart"></d:JobChart>
 						</b:TabPane>
 						<b:TabPane b:id="tab2">
 							<d:ActivityReportCalendar ui:field="reportCalendar"></d:ActivityReportCalendar>

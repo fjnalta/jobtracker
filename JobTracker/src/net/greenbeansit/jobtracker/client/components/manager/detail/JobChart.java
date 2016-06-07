@@ -1,5 +1,7 @@
 package net.greenbeansit.jobtracker.client.components.manager.detail;
 
+import java.util.List;
+
 import org.gwtbootstrap3.client.ui.html.ClearFix;
 
 import com.google.gwt.core.client.GWT;
@@ -16,6 +18,7 @@ import com.googlecode.gwt.charts.client.corechart.PieChartOptions;
 import com.googlecode.gwt.charts.client.event.ReadyEvent;
 import com.googlecode.gwt.charts.client.event.ReadyHandler;
 
+import net.greenbeansit.jobtracker.client.components.project.detail.OnDisplayEventListener;
 import net.greenbeansit.jobtracker.shared.Job;
 
 /**
@@ -23,7 +26,7 @@ import net.greenbeansit.jobtracker.shared.Job;
  * 
  * @author Max Blatt
  */
-public class JobChart extends Composite
+public class JobChart extends Composite implements OnDisplayEventListener
 {
 
 	private static JobChartUiBinder uiBinder = GWT
@@ -49,13 +52,14 @@ public class JobChart extends Composite
 	public JobChart()
 	{
 		initWidget(uiBinder.createAndBindUi(this));
-		initActivityChart();
 	}
-
+	
 	/**
-	 * Initializes the pieChart.
+	 * Fills the pie chart.
+	 * 
+	 * @param jobs a list of {@link Job}s.
 	 */
-	private void initActivityChart()
+	public void fillPieChart(final List<Job> jobs)
 	{
 		ChartLoader chartLoader = new ChartLoader(ChartPackage.CORECHART);
 		chartLoader.loadApi(new Runnable()
@@ -66,22 +70,21 @@ public class JobChart extends Composite
 				piechart = new PieChart();
 				activityChartContainer.add(piechart);
 
-				// Prepare the data
 				DataTable dataTable = DataTable.create();
 				dataTable.addColumn(ColumnType.STRING, "Name");
-				dataTable.addColumn(ColumnType.NUMBER, "Hours per Day");
-				dataTable.addRows(5);
-				dataTable.setValue(0, 0, "VW Intern");
-				dataTable.setValue(0, 1, 11);
-				dataTable.setValue(1, 0, "Porsche Support");
-				dataTable.setValue(1, 1, 7);
-				dataTable.setValue(2, 0, "Porsche Entwicklung");
-				dataTable.setValue(2, 1, 11);
-				dataTable.setValue(3, 0, "HeidCement Entwicklung");
-				dataTable.setValue(3, 1, 6);
-				dataTable.setValue(4, 0, "HeidCement Support");
-				dataTable.setValue(4, 1, 11);
-
+				dataTable.addColumn(ColumnType.NUMBER, "Hours per Week");
+				
+				for(Job job : jobs)
+				{
+					if(job != null)
+					{
+						int rowIndex = dataTable.addRow();
+						dataTable.setValue(rowIndex, 0, job.toString());
+						dataTable.setValue(rowIndex, 1, 20);
+					}
+				}
+				
+				
 				// Set options
 				PieChartOptions options = PieChartOptions.create();
 
@@ -92,13 +95,12 @@ public class JobChart extends Composite
 				options.setPieResidueSliceColor("#000000");
 				options.setPieResidueSliceLabel("Andere");
 				options.setSliceVisibilityThreshold(0.1);
-				options.setWidth(500);
-				options.setHeight(500);
-				// options.setTitle("");
-
-				// Draw the chart
+				
+				piechart.setWidth("100%");
+				piechart.setHeight("500px");
+				
 				piechart.draw(dataTable, options);
-
+				
 				piechart.addReadyHandler(new ReadyHandler()
 				{
 
@@ -110,5 +112,15 @@ public class JobChart extends Composite
 				});
 			}
 		});
+	}
+
+	@Override
+	public void onDisplay()
+	{
+		if(piechart != null)
+		{
+			piechart.setWidth("100%");
+			piechart.redraw();
+		}
 	}
 }

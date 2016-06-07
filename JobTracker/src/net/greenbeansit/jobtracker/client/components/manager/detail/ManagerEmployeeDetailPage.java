@@ -64,6 +64,9 @@ public class ManagerEmployeeDetailPage extends Composite
 	@UiField
 	Heading											titleEmployeeName;
 
+	@UiField
+	JobChart										jobChart;
+
 	private ManagerEmployeeDetailPageHelperService	helperService;
 
 	/**
@@ -76,6 +79,15 @@ public class ManagerEmployeeDetailPage extends Composite
 	public ManagerEmployeeDetailPage(Integer userId)
 	{
 		initWidget(uiBinder.createAndBindUi(this));
+
+		tabProject.addShowHandler(new TabShowHandler()
+		{
+			@Override
+			public void onShow(TabShowEvent event)
+			{
+				jobChart.onDisplay();
+			}
+		});
 
 		tabReport.addShowHandler(new TabShowHandler()
 		{
@@ -101,14 +113,16 @@ public class ManagerEmployeeDetailPage extends Composite
 					@Override
 					public void onSuccess()
 					{
-						textEmployeeName
-								.setText(helperService.getEmployee().getSurname());
-						textEmployeeSurName.setText(
-								helperService.getEmployee().getName());
+						textEmployeeName.setText(
+								helperService.getEmployee().getSurname());
+						textEmployeeSurName
+								.setText(helperService.getEmployee().getName());
 
 						titleEmployeeName.setText(helperService.getEmployee()
 								.getName() + " "
 								+ helperService.getEmployee().getSurname());
+
+						jobChart.fillPieChart(helperService.getJobs());
 					}
 
 					@Override
