@@ -555,6 +555,31 @@ public class LogicHandler {
 	}
 
 	/**
+	 * Method for loading the utilization for a specific month in the given year
+	 * @param year the Year.
+     */
+	public void loadUtilizationYear(int year){
+		try {
+			RestClient.build(new SuccessFunction<List<Integer>>() {
+				@Override
+				public void onSuccess(Method method, List<Integer> response) {
+					LogicHandler.this.setUtilizationList(response);
+					LogicHandler.this.updateAllObservables();
+				}
+
+				@Override
+				public void onFailure(Method method, Throwable exception) {
+					NotifyHelper.errorMessage(exception.getMessage());
+					GWT.log(exception.getMessage());
+				}
+
+			}).getEmployeeService().getUtilizationMonths(currentUser.getId(),year);
+		} catch (Exception e) {
+			GWT.log(e.getMessage());
+		}
+	}
+
+	/**
 	 * Function for
 	 * @param day Date objet with the date of the day, the function should load the reports for
 	 * @return the list with the reports for a day
