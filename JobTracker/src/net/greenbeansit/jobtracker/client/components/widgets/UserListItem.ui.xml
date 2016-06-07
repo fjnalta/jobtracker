@@ -14,6 +14,11 @@
 		float: left;
 	}
 	
+	.barUtilization {
+		border-radius: 0;
+		margin: 0;
+	}
+	
 	.barUtilizationContainer {
 		width: 60%;
 		height: 80%;
@@ -36,8 +41,8 @@
 	<h:ClearFix addStyleNames="{style.container}" ui:field="container">
 		<h:Span ui:field="spanName" addStyleNames="{style.spanName}" />
 		<h:ClearFix addStyleNames="{style.barUtilizationContainer}">
-			<b:Progress>
-				<b:ProgressBar ui:field="barUtilization"/>
+			<b:Progress addStyleNames="{style.barUtilization}">
+				<b:ProgressBar ui:field="barUtilization" />
 			</b:Progress>
 		</h:ClearFix>
 		<h:Span ui:field="spanUtilization" addStyleNames="{style.spanUtilization}" />
