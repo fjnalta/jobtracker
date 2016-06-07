@@ -116,11 +116,11 @@
 						<b.html:Span text="" ui:field="textProjectName" addStyleNames="{style.infoFieldValue}"/>
 					</b.html:ClearFix>
 					<b.html:ClearFix addStyleNames="{style.infoFieldContainer}">
-						<b.html:Span text="Vorname:" addStyleNames="{style.infoFieldLabel}"/>
+						<b.html:Span text="Kunde:" addStyleNames="{style.infoFieldLabel}"/>
 						<b.html:Span text="" ui:field="textCustomerName" addStyleNames="{style.infoFieldValue}"/>
 					</b.html:ClearFix>
 					<b.html:ClearFix addStyleNames="{style.infoFieldContainer}">
-						<b.html:Span text="Budget" addStyleNames="{style.infoFieldLabel}"/>
+						<b.html:Span text="Budget:" addStyleNames="{style.infoFieldLabel}"/>
 						<b.html:Span text="" ui:field="textBudgetInfo" addStyleNames="{style.infoFieldValue}"/>
 					</b.html:ClearFix>
 				</b:Row>
