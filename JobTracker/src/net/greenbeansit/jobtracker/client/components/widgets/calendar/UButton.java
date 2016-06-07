@@ -20,7 +20,14 @@ public class UButton extends Button implements CalendarObserver{
  
 	private Date date;
 	private UButton self = this;
-	
+
+	/**
+	 * Initializes a new Instance of UButton
+	 * @param txt the Text
+	 * @param d the Date
+	 * @param calcDate the calculated Date
+     * @param u the CalendarUtilizationWidget
+     */
 	public UButton(String txt, final Date d, final Date calcDate, final CalendarUtilizationWidget u) {
 		super(txt);
 		this.date = d;
@@ -47,7 +54,11 @@ public class UButton extends Button implements CalendarObserver{
 				
 				calendarHandler.calendar.goToDate(self.getDate());
 			}
-			
+
+			/**
+			 * Changes the Date to Sunday
+			 * @param d the Date.
+             */
 			@SuppressWarnings("deprecation")
 			private void changeDateToSunday(Date d){
 				while(d.getDay() > 0){
