@@ -4,37 +4,37 @@
 	xmlns:h="urn:import:org.gwtbootstrap3.client.ui.html"
 	xmlns:widgets="urn:import:net.greenbeansit.jobtracker.client.components.widgets.calendar">
 	<ui:style>
-	.dateText {
-		font-size: 2em;
-	}
-	
-	.kwStyle {
-		margin-top: 1em;
+	.textWeek {
+		font-size: 20px;
+		text-align: right;
+		vertical-align: bottom;
+		margin: 10px;
 		font-style: italic;
-		font-size: 1em;
+		line-height: 40px
 	}
 	
-	.formGroupDate {
+	.textDate {
+		font-size: 25px;
+		text-align: right;
+		vertical-align: bottom;
+		margin: 10px;
+		line-height: 40px
 	}
 	
-	
+	.textContainer {
+		float: right;
+	}
 	</ui:style>
-
-
-	<b:Container fluid="true">
-		<b:Row>
-			<b:Column size="XS_6,SM_4,MD_3,LG_1">
-				<widgets:CalendarTimeLineButtons />
-			</b:Column>
-			<b:Column offset="MD_7" size="XS_6,SM_4,MD_3,LG_1" addStyleNames="{style.kwStyle}">
-				<h:Text ui:field="kw" />
-			</b:Column>
-			<b:Column size="XS_6,SM_4,MD_3,LG_1" addStyleNames="{style.dateText}">
-				<h:Text ui:field="date" />
-			</b:Column>
-		</b:Row>
-	</b:Container>
-
-
+	<b:Row>
+		<b:Column size="XS_12,SM_6,MD_6,LG_6">
+			<widgets:CalendarTimeLineButtons />
+		</b:Column>
+		<b:Column size="XS_12,SM_6,MD_6,LG_6">
+			<h:ClearFix addStyleNames="{style.textContainer}">
+				<h:Span ui:field="kw" addStyleNames="{style.textWeek}"/>
+				<h:Span ui:field="date" addStyleNames="{style.textDate}"/>
+			</h:ClearFix>
+		</b:Column>
+	</b:Row>
 
 </ui:UiBinder> 

@@ -7,6 +7,8 @@
 	.dashBoardCalendar {
 		background-color: white;
 		height: 50%;
+		margin: 0;
+		padding: 0;
 	}
 	
 	.smallContainerCalendar {
@@ -15,26 +17,21 @@
 		background-color: #ffffff;
 		height: 10%;
 	}
-	
-	.scrollPanel {
-		
-	}
-	
 	</ui:style>
 
-	<h:Div ui:field="container">
+	<h:ClearFix ui:field="container">
 		<b:Row addStyleNames="{style.smallContainerCalendar}">
 			<widgets:CalendarTimeLineWidget />
 		</b:Row>
 		<b:Row  addStyleNames="{style.smallContainerCalendar}">
 			<widgets:CalendarUtilizationWidget />
 		</b:Row>
-		<b:Row addStyleNames="{style.dashBoardCalendar} {style.scrollPanel}"
+		<b:Row addStyleNames="{style.dashBoardCalendar}"
 			ui:field="calendarRow" />
 		<b:Row addStyleNames="{style.smallContainerCalendar}">
 			<widgets:CalendarTimeInputWidget />
 		</b:Row>
-	</h:Div>
+	</h:ClearFix>
 
 
 </ui:UiBinder> 

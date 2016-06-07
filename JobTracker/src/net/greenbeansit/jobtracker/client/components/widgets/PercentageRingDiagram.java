@@ -7,6 +7,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.i18n.client.NumberFormat;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.UIObject;
 import com.google.gwt.user.client.ui.Widget;
@@ -21,6 +22,11 @@ public class PercentageRingDiagram extends Composite
 	private static PercentageRingDiagramUiBinder uiBinder =
 			GWT.create(PercentageRingDiagramUiBinder.class);
 
+	/**
+	 * UiBinde for {@link PercentageRingDiagram}.
+	 * 
+	 * @author Max Blatt
+	 */
 	interface PercentageRingDiagramUiBinder 
 		extends UiBinder<Widget, PercentageRingDiagram>
 	{
@@ -53,6 +59,24 @@ public class PercentageRingDiagram extends Composite
 	@UiField
 	Heading diagramInnerText;
 	
+	@UiField
+	ClearFix diagramInnerInner;
+	
+	@UiField
+	ClearFix quarterSecondOne;
+	
+	@UiField
+	ClearFix quarterSecondTwo;
+	
+	@UiField
+	ClearFix quarterSecondThree;
+	
+	@UiField
+	ClearFix quarterSecondFour;
+	
+	@UiField
+	ClearFix quarterSecondFinal;
+	
 	
 	/**
 	 * Initializes a new instance of the {@link PercentageRingDiagram} class.
@@ -82,7 +106,123 @@ public class PercentageRingDiagram extends Composite
 	 */
 	public void setPercentage(double percentage)
 	{
-		if(percentage >= 100f) //full
+		if(percentage >= 200f)
+		{
+			setInnerRingPercentage(100f); 
+			setOuterRingPercentge(100f);
+		}
+		else if(percentage >= 100f)
+		{
+			setInnerRingPercentage(percentage - 100f);
+			setOuterRingPercentge(100f);
+		}
+		else
+		{
+			//Hide inner ring
+			setInnerRingPercentage(0f);
+			
+			setOuterRingPercentge(percentage);
+		}
+		
+		diagramInnerText.setText(
+				NumberFormat.getFormat("###").format(percentage) + "%");
+		
+		this.percentage = percentage;
+	}
+	
+	/**
+	 * Fills the inner ring.
+	 * 
+	 * @param percentage the percentage the ring should be filled.
+	 */
+	private void setInnerRingPercentage(double percentage)
+	{
+		if(percentage >= 100f) //Full
+		{
+			//Fill all four quarters
+			rotateQuarter(quarterSecondOne, 0f);
+			rotateQuarter(quarterSecondTwo, 90f);
+			rotateQuarter(quarterSecondThree, 180f);
+			rotateQuarter(quarterSecondFour, 270f);
+			
+			//..and hide the final one.
+			quarterSecondFinal.setVisible(false);
+		}
+		else if(percentage >= 75f)
+		{
+			/* To prevent the final quarter from moving over the 0 degree
+			 * point, it will be set to 270 degrees and the fourth quarter will
+			 * be rotated. 
+			 */
+			
+			rotateQuarter(quarterSecondOne, 0f);
+			rotateQuarter(quarterSecondTwo, 90f);
+			rotateQuarter(quarterSecondThree, 180f);
+			
+			//..and hide the final one.
+			quarterSecondFinal.setVisible(false);
+			
+			rotateQuarterToFillPercentage(quarterSecondFour, percentage, -90f);
+		}
+		else if(percentage >= 50f)
+		{
+			//Fill first three quarters...
+			rotateQuarter(quarterSecondOne, 0f);
+			rotateQuarter(quarterSecondTwo, 90f);
+			rotateQuarter(quarterSecondThree, 180f);
+			
+			//...hide fourth...
+			quarterSecondFour.setVisible(false);
+			
+			//..and move the final one over the third.
+			rotateQuarterToFillPercentage(quarterSecondFinal, percentage, 0f);
+		}
+		else if(percentage >= 25f)
+		{
+			//Fill first two quarters...
+			rotateQuarter(quarterSecondOne, 0f);
+			rotateQuarter(quarterSecondTwo, 90f);
+			
+			//...hide the other two...
+			quarterSecondThree.setVisible(false);
+			quarterSecondFour.setVisible(false);
+			
+			//..and move the final one over the second.
+			rotateQuarterToFillPercentage(quarterSecondFinal, percentage, 0f);
+		}
+		else if(percentage > 0f)
+		{
+			//Fill first quarter...
+			rotateQuarter(quarterSecondOne, 0f);
+			
+			//...hide the other three...
+			quarterSecondTwo.setVisible(false);
+			quarterSecondThree.setVisible(false);
+			quarterSecondFour.setVisible(false);
+			
+			//...and move the final one over the first.
+			rotateQuarterToFillPercentage(quarterSecondFinal, percentage, 0f);
+		}
+		else
+		{
+			//Hide all quarters.
+			quarterSecondOne.setVisible(false);
+			quarterSecondTwo.setVisible(false);
+			quarterSecondThree.setVisible(false);
+			quarterSecondFour.setVisible(false);
+			
+			quarterSecondFinal.setVisible(false);
+		}
+	}
+	
+	/**
+	 * Fills the outer ring.
+	 * 
+	 * @param percentage the percentage the ring should be filled.
+	 */
+	private void setOuterRingPercentge(double percentage)
+	{
+		if(percentage >= 100f) //Full
 		{
 			//Fill all four quarters
 			rotateQuarter(quarterOne, 0f);
@@ -104,7 +244,8 @@ public class PercentageRingDiagram extends Composite
 			rotateQuarter(quarterTwo, 90f);
 			rotateQuarter(quarterThree, 180f);
 			
-			rotateQuarter(quarterFinal, 270f);
+			//..and hide the final one.
+			quarterFinal.setVisible(false);
 			
 			rotateQuarterToFillPercentage(quarterFour, percentage, -90f);
 		}
@@ -157,11 +298,6 @@ public class PercentageRingDiagram extends Composite
 			
 			quarterFinal.setVisible(false);
 		}
-		
-		diagramInnerText.setText(
-				NumberFormat.getFormat("###").format(percentage) + "%");
-		
-		this.percentage = percentage;
 	}
 	
 	/**

@@ -178,7 +178,7 @@ public interface RestService extends DirectRestService
 	 */
 	@GET
 	@Path("/jobs/{jobNo}/{posNo}")
-	void getJob(@PathParam("jobNo") Integer jobNo,
+	Job getJob(@PathParam("jobNo") Integer jobNo,
 			@PathParam("posNo") Integer posNo);
 
 	/**

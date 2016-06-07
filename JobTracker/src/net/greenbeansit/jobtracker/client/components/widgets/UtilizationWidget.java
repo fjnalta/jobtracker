@@ -44,7 +44,7 @@ public class UtilizationWidget extends Composite implements LogicObservable{
 	{
 		initWidget(uiBinder.createAndBindUi(this));
 		
-		utilizationDiagram.setPercentage(80);
+		utilizationDiagram.setPercentage(120);
 	}
 
 

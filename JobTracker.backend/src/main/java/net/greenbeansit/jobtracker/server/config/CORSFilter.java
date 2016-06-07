@@ -30,7 +30,7 @@ public class CORSFilter implements Filter {
 			throws IOException, ServletException {
 		//((HttpServletResponse) response).addHeader("Cache-control", "no-cache");
 		((HttpServletResponse) response).addHeader("Access-Control-Allow-Origin", "*");
-		((HttpServletResponse) response).addHeader("Access-Control-Allow-Methods", "POST, GET, UPDATE, OPTIONS");
+		((HttpServletResponse) response).addHeader("Access-Control-Allow-Methods", "POST, GET, UPDATE, OPTIONS, DELETE");
 		((HttpServletResponse) response).addHeader("Access-Control-Allow-Headers", "X-HTTP-Method-Override, Origin, X-Requested-With, Content-Type, Accept");
 		filterChain.doFilter(request, response);
 	}

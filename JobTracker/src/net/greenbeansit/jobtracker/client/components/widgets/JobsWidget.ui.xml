@@ -3,13 +3,19 @@
 	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:b="urn:import:org.gwtbootstrap3.client.ui"
 	xmlns:h="urn:import:org.gwtbootstrap3.client.ui.html" xmlns:s="urn:import:org.gwtbootstrap3.extras.select.client.ui">
 	<ui:style>
-	.tab {
-		
+	.select {
+		border-radius: 0;
+	}
+	
+	.select > button {
+		border-radius: 0 !important;
+		background: #000099
 	}
 	</ui:style>
 	<h:ClearFix ui:field="container">
 		<s:Select ui:field="selectJob" liveSearch="true"
-			liveSearchPlaceholder="Name" placeholder="Projekt auswählen" type="PRIMARY">
+			liveSearchPlaceholder="Name" placeholder="Projekt auswählen" type="PRIMARY"
+			addStyleNames="{style.select}">
 			<s:OptGroup label="Favoriten" ui:field="favoriteJobsOptGroup">
 			</s:OptGroup>
 			<s:OptGroup label="Alle anderen" ui:field="allJobsOptGroup">

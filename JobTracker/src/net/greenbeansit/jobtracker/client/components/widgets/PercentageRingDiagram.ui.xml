@@ -9,7 +9,13 @@
 	
 	.diagramOuter {
 		border-radius: 50%;
-		background-color: #d8d8d8;
+		background-color: #ffffff;
+		position: relative;
+	}
+	
+	.diagramSecondRowOuter {
+		border-radius: 50%;
+		background-color: #ffffff;
 		position: relative;
 	}
 	
@@ -33,14 +39,19 @@
 		left: 50%;
 		border-top-right-radius: 100%;
 		transform-origin: 0 100%;
-		background-color: #337ab7;
+		background-color: #000099;
 	}
 	
 	.quarterFinal {
-		border-color: #d8d8d8;
+		border-color: #000099;
 		border-style: solid;
 		border-width: 1px;
-		background-color: #d8d8d8;
+		background-color: #000099;
+	}
+	
+	.quarter-second-row {
+		background-color: #f18c16;
+		border-color: #f18c16;
 	}
 	
 	.diagramInnerTextContainer {
@@ -67,8 +78,18 @@
 
 
 		<h:ClearFix addStyleNames="{style.diagramInner}" ui:field="diagramInner">
-			<b:Heading size="H1" text="[Prozent]" addStyleNames="{style.diagramInnerText}"
+			<h:ClearFix addStyleNames="{style.quarter} {style.quarter-second-row}" ui:field="quarterSecondOne" />
+			<h:ClearFix addStyleNames="{style.quarter} {style.quarter-second-row}" ui:field="quarterSecondTwo" />
+			<h:ClearFix addStyleNames="{style.quarter} {style.quarter-second-row}" ui:field="quarterSecondThree" />
+
+			<h:ClearFix addStyleNames="{style.quarter} {style.quarterFinal} {style.quarter-second-row}"
+				ui:field="quarterSecondFinal" />
+			<h:ClearFix addStyleNames="{style.quarter} {style.quarter-second-row}" ui:field="quarterSecondFour" />
+		
+			<h:ClearFix addStyleNames="{style.diagramInner}" ui:field="diagramInnerInner">
+				<b:Heading size="H1" text="[Prozent]" addStyleNames="{style.diagramInnerText}"
 				ui:field="diagramInnerText" />
+			</h:ClearFix>
 		</h:ClearFix>
 	</h:ClearFix>
 </ui:UiBinder> 
