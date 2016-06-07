@@ -161,7 +161,6 @@ public class CalendarWidget extends Composite implements CalendarObserver, Logic
 						// calendar.removeEvent(e.getId());
 
 						ActivityReportEvent e = new ActivityReportEvent(calendarEvent);
-						e.setBackgroundColor("rgb(87,87,87)");
 						calendar.currentEvent = e;
 						selectedEvent = e;
 						for (ActivityReportEvent a : eventList) {
