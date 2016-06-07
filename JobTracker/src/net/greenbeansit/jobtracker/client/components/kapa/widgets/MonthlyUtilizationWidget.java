@@ -196,6 +196,10 @@ public class MonthlyUtilizationWidget extends Composite
 //		return vp;
 //	}
 
+	/**
+	 * Resets all Buttons to inactive and sets the
+	 * specific month to active afterwards.
+	 */
 	private void setCurrentMonthToActive(){
 		for(int i = 0; i < 12; i ++) {
 			Button temp = (Button) table.getWidget(1, i);
