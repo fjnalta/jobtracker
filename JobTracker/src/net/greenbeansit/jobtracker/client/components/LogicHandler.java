@@ -265,6 +265,27 @@ public class LogicHandler {
 
 		}).getEmployeeService().getAllReports(currentUser.getId());
 	}
+
+	public void deleteReport(Integer authorId, Integer reportId){
+		final Integer reportID = reportId;
+		RestClient.build(new SuccessFunction<List<ActivityReport>>() {
+			@Override
+			public void onSuccess(Method method, List<ActivityReport> response) {
+				NotifyHelper.successMessage("Report deleted");
+				for(ActivityReport report : currentReportsList){
+					if(report.getId()==reportID){
+						currentReportsList.remove(report);
+					}
+				}
+			}
+
+			@Override
+			public void onFailure(Method method, Throwable exception) {
+				NotifyHelper.errorMessage("FAILED: " + exception.getMessage());
+				GWT.log(exception.getMessage());
+			}
+		}).getEmployeeService().deleteReport(authorId,reportId);
+	}
 	
 	/**
 	 * Function for loading a set of {@link ActivityReport} between the specified start and end time
