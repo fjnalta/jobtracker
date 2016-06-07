@@ -117,16 +117,18 @@
 					<b:Heading size="H4" text="Information" addStyleNames="{style.infoFieldHeading}"/>
 					<b.html:ClearFix addStyleNames="{style.infoFieldContainer}">
 						<b.html:Span text="Name:" addStyleNames="{style.infoFieldLabel}"/>
-						<b.html:Span text="Christus" ui:field="textEmployeeName" addStyleNames="{style.infoFieldValue}"/>
+						<b.html:Span text="" ui:field="textEmployeeName" addStyleNames="{style.infoFieldValue}"/>
 					</b.html:ClearFix>
 					<b.html:ClearFix addStyleNames="{style.infoFieldContainer}">
 						<b.html:Span text="Vorname:" addStyleNames="{style.infoFieldLabel}"/>
-						<b.html:Span text="Jesus" ui:field="textEmployeeSurName" addStyleNames="{style.infoFieldValue}"/>
+						<b.html:Span text="" ui:field="textEmployeeSurName" addStyleNames="{style.infoFieldValue}"/>
 					</b.html:ClearFix>
+					<!--
 					<b.html:ClearFix addStyleNames="{style.infoFieldContainer}">
 						<b.html:Span text="Abteilung:" addStyleNames="{style.infoFieldLabel}"/>
-						<b.html:Span text="Kundendienst" ui:field="textEmployeeDivision" addStyleNames="{style.infoFieldValue}"/>
+						<b.html:Span text="" ui:field="textEmployeeDivision" addStyleNames="{style.infoFieldValue}"/>
 					</b.html:ClearFix>
+					-->
 				</b:Row>
 				<b:Row addStyleNames="{style.smallContainer}">
 					<widgets:UtilizationWidget/>

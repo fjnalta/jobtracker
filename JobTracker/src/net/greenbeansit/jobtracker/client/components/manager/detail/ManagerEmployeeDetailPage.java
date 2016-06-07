@@ -2,14 +2,19 @@ package net.greenbeansit.jobtracker.client.components.manager.detail;
 
 import org.gwtbootstrap3.client.shared.event.TabShowEvent;
 import org.gwtbootstrap3.client.shared.event.TabShowHandler;
+import org.gwtbootstrap3.client.ui.Heading;
 import org.gwtbootstrap3.client.ui.NavTabs;
 import org.gwtbootstrap3.client.ui.TabListItem;
+import org.gwtbootstrap3.client.ui.html.Span;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
+
+import net.greenbeansit.jobtracker.client.components.manager.detail.ManagerEmployeeDetailPageHelperServiceImpl.Callback;
+import net.greenbeansit.jobtracker.client.utils.rest.NotifyHelper;
 
 /**
  * Shows detailed information about an employee to the user.
@@ -33,22 +38,33 @@ public class ManagerEmployeeDetailPage extends Composite
 	}
 
 	@UiField
-	ActivityReportCalendar	reportCalendar;
+	ActivityReportCalendar							reportCalendar;
 
 	@UiField
-	CapacityCalendar		capacityCalendar;
+	CapacityCalendar								capacityCalendar;
 
 	@UiField
-	NavTabs					tabControl;
+	NavTabs											tabControl;
 
 	@UiField
-	TabListItem				tabProject;
+	TabListItem										tabProject;
 
 	@UiField
-	TabListItem				tabReport;
+	TabListItem										tabReport;
 
 	@UiField
-	TabListItem				tabCapacity;
+	TabListItem										tabCapacity;
+
+	@UiField
+	Span											textEmployeeName;
+
+	@UiField
+	Span											textEmployeeSurName;
+
+	@UiField
+	Heading											titleEmployeeName;
+
+	private ManagerEmployeeDetailPageHelperService	helperService;
 
 	/**
 	 * Initializes a new instance of the {@link ManagerEmployeeDetailPage}
@@ -78,5 +94,28 @@ public class ManagerEmployeeDetailPage extends Composite
 				capacityCalendar.onDisplayed();
 			}
 		});
+
+		helperService = new ManagerEmployeeDetailPageHelperServiceImpl(userId,
+				new Callback()
+				{
+					@Override
+					public void onSuccess()
+					{
+						textEmployeeName
+								.setText(helperService.getEmployee().getSurname());
+						textEmployeeSurName.setText(
+								helperService.getEmployee().getName());
+
+						titleEmployeeName.setText(helperService.getEmployee()
+								.getName() + " "
+								+ helperService.getEmployee().getSurname());
+					}
+
+					@Override
+					public void onFailure(Throwable error)
+					{
+						NotifyHelper.errorMessage(error.toString());
+					}
+				});
 	}
 }
