@@ -47,3 +47,11 @@ div {
 html {
 	background-color: #f4f4f1;
 }
+
+input {
+	border-radius: 0 !important;
+}
+
+button {
+	border-radius: 0 !important;
+}
