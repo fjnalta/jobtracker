@@ -268,6 +268,11 @@ public class LogicHandler {
 		}).getEmployeeService().getAllReports(currentUser.getId());
 	}
 
+	/**
+	 * Method to delete an {@link ActivityReport} from the Calendar and Backend.
+	 * @param authorId the Author ID.
+	 * @param reportId the Report ID.
+     */
 	public void deleteReport(Integer authorId, Integer reportId){
 		final Integer reportID = reportId;
 		RestClient.build(new SuccessFunction<List<ActivityReport>>() {
