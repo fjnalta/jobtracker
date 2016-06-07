@@ -39,14 +39,6 @@
 	</ui:style>
 	<h:ClearFix>
 		<b:Column size="XS_12,SM_12,MD_12,LG_12">
-			<b:Label text="xxxx von xxx" ui:field="labelBudget"
-				addStyleNames="{style.label}" />
-		</b:Column>
-		<b:Column size="XS_12,SM_12,MD_12,LG_12">
-			<b:Label text="REST xxxxx" ui:field="labelBudgetLeft"
-				addStyleNames="{style.label}" />
-		</b:Column>
-		<b:Column size="XS_12,SM_12,MD_12,LG_12">
 			<h:ClearFix ui:field="budgetContent"/>
 		</b:Column>
 		<b:Column size="XS_12,SM_12MD_12,LG_12">

@@ -56,12 +56,6 @@ public class JobBudgetWidget extends Composite implements OnDisplayEventListener
 	ClearFix						budgetContent;
 
 	@UiField
-	Label							labelBudget;
-
-	@UiField
-	Label							labelBudgetLeft;
-
-	@UiField
 	Label							labelCurrentFocus;
 
 	@UiField
@@ -509,10 +503,6 @@ public class JobBudgetWidget extends Composite implements OnDisplayEventListener
 				+ "." + (endDate.getMonth() + 1) + "."
 				+ (endDate.getYear() + 1900);
 		labelCurrentFocus.setText(focusString);
-		labelBudgetLeft.setText("Budget left: "
-				+ String.valueOf(maxBudget - currentBudgetStartFocus));
-		labelBudget.setText(String.valueOf(currentBudgetStartFocus) + " von "
-				+ String.valueOf(maxBudget));
 	}
 
 	/**
