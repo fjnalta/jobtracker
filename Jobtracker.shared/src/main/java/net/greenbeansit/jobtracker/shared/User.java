@@ -21,7 +21,8 @@ public class User implements Serializable
 	private Integer				supervisor;
 	private Integer				utilization;
 	private List<JobID>			assignedJobs;
-
+	private Integer				remainingVacationDays;
+	
 	/**
 	 * Initializes a new instance of the {@link User} class.
 	 */
@@ -161,6 +162,27 @@ public class User implements Serializable
 		this.assignedJobs = assignedJobs;
 	}
 	
+	
+	/**
+	 * Get the remaining vacation days.
+	 * 
+	 * @return an Integer.
+	 */
+	public Integer getRemainingVacationDays()
+	{
+		return remainingVacationDays;
+	}
+
+	/**
+	 * Sets the remaining vacation days.
+	 * 
+	 * @param remainingVacationDays
+	 */
+	public void setRemainingVacationDays(Integer remainingVacationDays)
+	{
+		this.remainingVacationDays = remainingVacationDays;
+	}
+
 	public boolean equals(Object obj) {
 		if(obj == null)
 			return false;
