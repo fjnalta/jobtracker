@@ -127,6 +127,10 @@ public class CalendarUtilizationWidget extends Composite implements CalendarObse
 		calendarHandler.calendar.next();
 	}
 
+	/**
+	 * Returns the calculateUtilization state
+	 * @param calculateUtilization true or false
+     */
 	public void setCalculateUtilization(boolean calculateUtilization) {
 		this.calculateUtilization = calculateUtilization;
 	}
