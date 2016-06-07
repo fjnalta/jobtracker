@@ -40,8 +40,17 @@
 		margin: 0;
 	}
 	
-	.anchorBackward {
+	.anchorBackward, .anchorBackward:LINK, .anchorBackward:VISITED {
 		float: left;
+		font-weight: 500;
+		font-size: 24px;
+		line-height: 1.1;
+		color: black;
+		text-decoration-color: black;
+	}
+	.anchorBackward:HOVER, .anchorBackward:FOCUS, .anchorBackward:ACTIVE {
+		color: #b3b3b3;
+		text-decoration-color: #b3b3b3;
 	}
 	
 	/*Infobox*/
