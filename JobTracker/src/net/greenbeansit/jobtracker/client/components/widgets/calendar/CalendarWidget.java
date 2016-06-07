@@ -1,6 +1,5 @@
 package net.greenbeansit.jobtracker.client.components.widgets.calendar;
 
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.EventObject;
@@ -211,6 +210,10 @@ public class CalendarWidget extends Composite implements CalendarObserver, Logic
 						} else {
 							tmp.setStart(start);
 							tmp.setEnd(end);
+
+
+							tmp.setAp(saveEventTemporary(start,end));
+
 							addEvent(tmp, viewObject, event);
 						}
 						calendar.render();
@@ -277,8 +280,8 @@ public class CalendarWidget extends Composite implements CalendarObserver, Logic
 						if (newEventDateStart.before(newEventDateEnd)) {
 							tmp.setStart(eventStandardStart);
 							tmp.setEnd(eventStandardEnd);
+							tmp.setAp(saveEventTemporary(start,end));
 							addEvent(tmp, viewObject, event);
-
 							while (newEventDateStart.before(newEventDateEnd)) {
 								newEventDateStart.setDate(newEventDateStart.getDate() + 1);
 								startDay = addLeadingNull("" + newEventDateStart.getDate());
@@ -294,6 +297,11 @@ public class CalendarWidget extends Composite implements CalendarObserver, Logic
 								tempEvent.setStart(eventStandardStart);
 								tempEvent.setEnd(eventStandardEnd);
 
+								ActivityReport tempReport = new ActivityReport();
+								tempReport.setDate(Integer.valueOf(startYear),Integer.valueOf(startMonth),Integer.valueOf(startDay));
+								calendar.addEventToSave(tempReport);
+								tempEvent.setAp(tempReport);
+
 								addEvent(tempEvent, viewObject, event);
 								updateId();
 
@@ -304,6 +312,19 @@ public class CalendarWidget extends Composite implements CalendarObserver, Logic
 							tmp.setEnd(eventStandardEnd);
 							addEvent(tmp, viewObject, event);
 						}
+					}
+
+					private ActivityReport saveEventTemporary(JavaScriptObject start, JavaScriptObject end){
+						String[] splitStart = start.toString().split(" ");
+						String startYear = splitStart[3];
+						String startMonth = addLeadingNull((getMonth(splitStart[1]) + 1) + "");
+						String startDay = splitStart[2];
+						String eventStandardStart = startYear + "-" + startMonth + "-" + startDay + "T08:00:00.000Z";
+						String eventStandardEnd = startYear + "-" + startMonth + "-" + startDay + "T16:00:00.000Z";
+						ActivityReport tempReport = new ActivityReport();
+						tempReport.setDate(Integer.valueOf(startYear),Integer.valueOf(startMonth),Integer.valueOf(startDay));
+						calendar.addEventToSave(tempReport);
+						return tempReport;
 					}
 
 					/**
@@ -465,6 +486,8 @@ public class CalendarWidget extends Composite implements CalendarObserver, Logic
 		calendar.render();
 
 	}
+
+
 
 	@Override
 	public void updateObservable() {
