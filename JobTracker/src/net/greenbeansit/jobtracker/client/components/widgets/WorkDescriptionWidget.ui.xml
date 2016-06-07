@@ -3,37 +3,42 @@
 	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:b="urn:import:org.gwtbootstrap3.client.ui"
 	xmlns:h="urn:import:org.gwtbootstrap3.client.ui.html" xmlns:s="urn:import:org.gwtbootstrap3.extras.select.client.ui">
 	<ui:style>
-		.tabField {
+	.tabField {
 		padding-top: 10px;
 		padding-bottom: 10px;
 		padding-left: 5px;
 		padding-right: 5px;
-		}
-
-		.row {
+	}
+	
+	.row {
 		margin: 0px;
 		padding-top: 10px;
 		padding-bottom: 10px;
-		padding-left:
-		5px;
+		padding-left: 5px;
 		padding-right: 5px;
-		}
-
-		.textArea {
+	}
+	
+	.textArea {
 		max-width: 100%;
 		min-width: 100%;
 		min-height: 35px;
-		}
-		.button
-		{
+		border-radius: 0;
+	}
+	
+	.button {
 		margin-top: 5px;
 		margin-bottom: 5px;
-		}
-		.collapse
-		{
+		border-radius: 0;
+	}
+	
+	.button-blue {
+		background: #000099
+	}
+	
+	.collapse {
 		margin-top: 5px;
 		margin-bottom: 5px;
-		}
+	}
 	</ui:style>
 	<h:ClearFix>
 		<b:Row addStyleNames="{style.row}">
@@ -44,15 +49,19 @@
 			</b:FormGroup>
 			<b:FormGroup>
 				<b:FormLabel for="description2">Tätigkeitsbeschreibung 2</b:FormLabel>
-				<b:TextBox placeholder="Bitte eintragen..." b:id="description2"  ui:field="textIdentifier"/>
+				<b:TextBox placeholder="Bitte eintragen..." b:id="description2"
+					addStyleNames="{style.textArea}"
+					ui:field="textIdentifier" />
 			</b:FormGroup>
 		</b:Row>
 		<b:Row addStyleNames="{style.row}">
 			<b:Button type="PRIMARY" dataToggle="COLLAPSE" dataTarget="#collapseTemplate"
-				text="Vorlagen" />
-			<b:Collapse b:id="collapseTemplate" addStyleNames="{style.collapse}" toggle="false">
+				text="Vorlagen" addStyleNames="{style.button-blue}"/>
+			<b:Collapse b:id="collapseTemplate" addStyleNames="{style.collapse}"
+				toggle="false">
 				<b:FormGroup>
-					<b:TextBox placeholder="Name der Vorlage" b:id="textTemplateName" ui:field="textName"/>
+					<b:TextBox placeholder="Name der Vorlage" b:id="textTemplateName"
+						ui:field="textName" />
 					<b:Button text="Als Vorlage speichern" addStyleNames="{style.button}"
 						ui:field="buttonSave" />
 				</b:FormGroup>

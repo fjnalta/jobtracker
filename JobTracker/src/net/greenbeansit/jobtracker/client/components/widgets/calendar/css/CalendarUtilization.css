@@ -11,14 +11,28 @@
 	display: inline-block;
 	font-size: 16px;
 	vertical-align: bottom;
+	widht: 24px;
+}
+
+.button-left {
+	float: left;
+}
+
+.button-right {
+	float: right;
 }
 
 .button-Day {
-	width: 5px;
+	width: 25px;
+	height: 25px;
 	border: none;
-	text-align: center;
 	padding-right: 15px;
 	background-color: white;
+	border-radius: 50%;
+	padding: 0px 4px;
+	text-align:center;
+	line-height:25px;
+	font-size:13px;
 }
 
 .button-Day-current {
@@ -27,8 +41,18 @@
 	text-align: center;
 	padding-right: 20px;
 	background-color: rgba(171 ,171 ,171,0.7);
+	width: 25px;
+	height: 25px;
+	border: none;
+	padding-right: 15px;
+	background-color: rgba(238 ,0 ,0,0.5 );
 	border: none;
 	border-radius: 30px;
+	border-radius: 50%;
+	padding: 0px 4px;
+	text-align:center;
+	line-height:25px;
+	font-size:13px;
 }
 .label-week{
 	opacity:1;

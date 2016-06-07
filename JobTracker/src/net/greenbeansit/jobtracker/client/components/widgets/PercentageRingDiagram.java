@@ -108,20 +108,10 @@ public class PercentageRingDiagram extends Composite
 	{
 		if(percentage >= 200f)
 		{
-			setInnerRingPercentage(percentage - 100f); 
+			setInnerRingPercentage(100f); 
 			setOuterRingPercentge(100f);
 		}
-		else if(percentage >= 175f)
-		{
-			setInnerRingPercentage(percentage - 100f);
-			setOuterRingPercentge(100f);
-		}
-		else if(percentage >= 150f)
-		{
-			setInnerRingPercentage(percentage - 100f);
-			setOuterRingPercentge(100f);
-		}
-		else if(percentage >= 125f)
+		else if(percentage >= 100f)
 		{
 			setInnerRingPercentage(percentage - 100f);
 			setOuterRingPercentge(100f);
@@ -129,12 +119,7 @@ public class PercentageRingDiagram extends Composite
 		else
 		{
 			//Hide inner ring
-			quarterSecondOne.setVisible(false);
-			quarterSecondTwo.setVisible(false);
-			quarterSecondThree.setVisible(false);
-			quarterSecondFour.setVisible(false);
-			
-			quarterSecondFinal.setVisible(false);
+			setInnerRingPercentage(0f);
 			
 			setOuterRingPercentge(percentage);
 		}
@@ -152,8 +137,6 @@ public class PercentageRingDiagram extends Composite
 	 */
 	private void setInnerRingPercentage(double percentage)
 	{
-//		Window.alert("Inner: " + percentage);
-		
 		if(percentage >= 100f) //Full
 		{
 			//Fill all four quarters
@@ -239,8 +222,6 @@ public class PercentageRingDiagram extends Composite
 	 */
 	private void setOuterRingPercentge(double percentage)
 	{
-//		Window.alert("Outer: " + percentage);
-		
 		if(percentage >= 100f) //Full
 		{
 			//Fill all four quarters

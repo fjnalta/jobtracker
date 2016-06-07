@@ -2,6 +2,7 @@ package net.greenbeansit.jobtracker.client.components.widgets.calendar;
 
 import java.util.Date;
 
+import org.gwtbootstrap3.client.ui.html.Span;
 import org.gwtbootstrap3.client.ui.html.Text;
 
 import com.google.gwt.core.client.GWT;
@@ -21,10 +22,10 @@ import net.greenbeansit.jobtracker.client.components.CalendarObserver;
 public class CalendarTimeLineWidget extends Composite implements CalendarObserver {
 
 	@UiField
-	Text date;
+	Span date;
 
 	@UiField
-	Text kw;
+	Span kw;
 
 	private static CalendarTimeLineWidgetUiBinder uiBinder = GWT.create(CalendarTimeLineWidgetUiBinder.class);
 
