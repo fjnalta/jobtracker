@@ -18,7 +18,7 @@
 	
 	.labelValue {
 		font-size: 36px;
-		color: #ff0066;
+		color: #000099;
 		text-align: left;
 		margin-top: 20px;
 	}
