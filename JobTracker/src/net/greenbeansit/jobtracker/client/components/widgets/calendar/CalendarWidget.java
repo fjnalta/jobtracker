@@ -361,7 +361,6 @@ public class CalendarWidget extends Composite implements CalendarObserver, Logic
 					@Override
 					public void unselect(JavaScriptObject viewObject, NativeEvent event) {
 						GWT.log("unselect");
-						selectedEvent.setColor("rgb(0,0,153)");
 					}
 				});
 
@@ -450,11 +449,11 @@ public class CalendarWidget extends Composite implements CalendarObserver, Logic
 	public void addActvityReports(List<ActivityReport> reports) {
 		if (!reports.isEmpty()) {
 			for (ActivityReport ap : reports) {
-				ActivityReportEvent e = new ActivityReportEvent(ap, ap.getId() + "", ap.getText(), true, true, true);
+				ActivityReportEvent e = new ActivityReportEvent(ap, ap.getId() + "", ap.getText() + ap.getId(), true, true, true);
 				ap.getDate().setYear((2016 - 1900));
 				e.setStart(calendarHandler.getISO8601StringForDate(ap.getDate(), ap.getStartTime()));
 				e.setEnd(calendarHandler.getISO8601StringForDate(ap.getDate(), ap.getEndTime()));
-
+				
 				calendar.addEvent(e);
 				this.eventList.add(e);
 				eventID = Integer.parseInt(e.getId());

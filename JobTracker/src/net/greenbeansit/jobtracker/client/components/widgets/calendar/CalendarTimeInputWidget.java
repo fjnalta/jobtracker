@@ -142,7 +142,7 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 		eventStart.setText(before);
 		inputLengthIsToLong(before, event);
 		inputIsNotAnNumber(event);
-		eventStart.setText(before);
+		eventStart.setText(addDoublePoint(before));
 		notifyHandler();
 	}
 
@@ -462,6 +462,18 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 	}
 
 	/**
+	 * {@link UiHandler} for the {@link Button} to delete an
+	 * ActivityReportEvent.
+	 * 
+	 * @param e
+	 *            {@link ClickEvent}
+	 */
+	@UiHandler("buttonDelete")
+	public void deleteButton(ClickEvent e) {
+		handler.deleteReport(2,Integer.parseInt(calendarHandler.calendar.currentEvent.getId()));
+	}
+
+	/**
 	 * {@link UiHandler} for the {@link Button} that saves the
 	 * {@link ActivityReport}
 	 * 
@@ -475,7 +487,7 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 		int breakTime = createTimeFromText(pause.getText());
 		Date date = getDateFromBox(dateStart);
 		ActivityReport tmp = new ActivityReport(Integer.parseInt(calendarHandler.calendar.currentEvent.getId() + ""), 0,
-				0, 0, 0, "", date, startTime, duration, breakTime);
+				0, 0, 2, "", date, startTime, duration, breakTime);
 		handler.saveReport(tmp);
 	}
 
@@ -533,26 +545,32 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 
 	/**
 	 * remove double point from String
-	 * @param input String with doublepoint
+	 * 
+	 * @param input
+	 *            String with doublepoint
 	 * @return String without doublepoint
-     */
+	 */
 	private String removeDoublePoint(String input) {
 		return input = input.replace(":", "");
 	}
 
 	/**
 	 * add doublepoint to a timestring
-	 * @param input String without doublepoint
+	 * 
+	 * @param input
+	 *            String without doublepoint
 	 * @return String with doublepoint
-     */
+	 */
 	private String addDoublePoint(String input) {
 		return input = input.substring(0, 2) + ":" + input.substring(2, input.length());
 	}
 
 	/**
 	 * Increase event minutes from a textbox
-	 * @param box the textbox with the minutes
-     */
+	 * 
+	 * @param box
+	 *            the textbox with the minutes
+	 */
 	private void increaseEventMinutes(TextBox box) {
 		String boxText = removeDoublePoint(box.getText());
 		String hourString = removeLeadingNull(boxText.substring(0, 2));
@@ -584,7 +602,8 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 	/**
 	 * Increase the pause minutes.
 	 * 
-	 * @param box the tex box to modify
+	 * @param box
+	 *            the tex box to modify
 	 */
 	private void increasePauseMinutes(TextBox box) {
 		String boxText = removeDoublePoint(box.getText());
@@ -621,7 +640,8 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 	/**
 	 * Increase the pause.
 	 * 
-	 * @param box TextBox to change
+	 * @param box
+	 *            TextBox to change
 	 */
 	private void increasePauseHours(TextBox box) {
 		String boxText = removeDoublePoint(box.getText());
@@ -644,8 +664,10 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 
 	/**
 	 * increase eventhours from a textbox
-	 * @param box the textbox with the hours value
-     */
+	 * 
+	 * @param box
+	 *            the textbox with the hours value
+	 */
 	private void increaseEventHours(TextBox box) {
 		String boxText = removeDoublePoint(box.getText());
 		String hourString = removeLeadingNull(boxText.substring(0, 2));
@@ -663,8 +685,10 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 
 	/**
 	 * decrease the minutes of the event from a textbox
-	 * @param box the textbex with the minutes value
-     */
+	 * 
+	 * @param box
+	 *            the textbex with the minutes value
+	 */
 	private void decreaseEventMinutes(TextBox box) {
 		String boxText = removeDoublePoint(box.getText());
 		String hourString = removeLeadingNull(boxText.substring(0, 2));
@@ -694,8 +718,10 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 
 	/**
 	 * decrease the events hour value from a textbox value
-	 * @param box the textbox with the hours value
-     */
+	 * 
+	 * @param box
+	 *            the textbox with the hours value
+	 */
 	private void decreaseEventHours(TextBox box) {
 		String boxText = removeDoublePoint(box.getText());
 		String hourString = removeLeadingNull(boxText.substring(0, 2));
@@ -713,8 +739,10 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 
 	/**
 	 * check if the keypress event is not a number
-	 * @param event the Keypress event
-     */
+	 * 
+	 * @param event
+	 *            the Keypress event
+	 */
 	private void inputIsNotAnNumber(KeyPressEvent event) {
 		if (!Character.isDigit(event.getCharCode())) {
 			event.preventDefault();
@@ -723,10 +751,13 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 	}
 
 	/**
-	 * add a leading 0 to a string like convert 8 to 08, if string length is >1 no leading null is added
-	 * @param sign the string where the number schould be added
+	 * add a leading 0 to a string like convert 8 to 08, if string length is >1
+	 * no leading null is added
+	 * 
+	 * @param sign
+	 *            the string where the number schould be added
 	 * @return string with a leading 0
-     */
+	 */
 	private String addLeadingNull(String sign) {
 		if (sign.length() < 2) {
 			return (0 + sign);
@@ -737,18 +768,22 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 
 	/**
 	 * add a leading null but to an integer
-	 * @param sign Integer value where you need to add a leading null
+	 * 
+	 * @param sign
+	 *            Integer value where you need to add a leading null
 	 * @return a String with a leading null
-     */
+	 */
 	private String addLeadingNullToInteger(int sign) {
 		return addLeadingNull(sign + "");
 	}
 
 	/**
 	 * remove a leading null from a string
-	 * @param sign String with the null
+	 * 
+	 * @param sign
+	 *            String with the null
 	 * @return String without leading null
-     */
+	 */
 	private String removeLeadingNull(String sign) {
 		if (sign.startsWith("0") && !(sign.equals("00"))) {
 			return sign.replace("0", "");
@@ -759,9 +794,12 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 
 	/**
 	 * check if input length is too long
-	 * @param before string to check
-	 * @param event KeyPressEvent which starts this
-     */
+	 * 
+	 * @param before
+	 *            string to check
+	 * @param event
+	 *            KeyPressEvent which starts this
+	 */
 	private void inputLengthIsToLong(String before, KeyPressEvent event) {
 		if (before.length() > 3) {
 			event.preventDefault();
@@ -867,7 +905,8 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 	/**
 	 * Increase the date by one day.
 	 * 
-	 * @param dateTextBox TextBox with the values
+	 * @param dateTextBox
+	 *            TextBox with the values
 	 */
 	@SuppressWarnings("deprecation")
 	private void decreaseDate(TextBox dateTextBox) {
@@ -892,13 +931,17 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 	 */
 	private void changeEndByDuration() {
 		int newEnd = createTimeFromText(eventStart.getText()) + createTimeFromText(workTime.getText());
+		if (newEnd > 1439) {
+			// ToDo split Event for other date
+		}
 		eventEnd.setText(createTimeForTextBox(newEnd));
 	}
 
 	/**
 	 * Increase the duration minutes until the time is 23:59.
 	 * 
-	 * @param box TextBox with the values
+	 * @param box
+	 *            TextBox with the values
 	 */
 	private void increaseDurationMinutes(TextBox box) {
 		String boxText = removeDoublePoint(box.getText());
@@ -931,7 +974,8 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 	/**
 	 * Increase the duration time until the time is 23.XX hours.
 	 * 
-	 * @param box TextBox with the values
+	 * @param box
+	 *            TextBox with the values
 	 */
 	private void increaseDurationHours(TextBox box) {
 		String boxText = removeDoublePoint(box.getText());
@@ -951,7 +995,8 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 	/**
 	 * decrease the pause minutes until the time is 00:00.
 	 * 
-	 * @param box TextBox with the values
+	 * @param box
+	 *            TextBox with the values
 	 */
 	private void decreasePauseMinutes(TextBox box) {
 		String boxText = removeDoublePoint(box.getText());
@@ -983,7 +1028,8 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 	/**
 	 * decreas the minutes of duration until it is 00:01.
 	 * 
-	 * @param box TextBox with the values
+	 * @param box
+	 *            TextBox with the values
 	 */
 	private void decreaseDurationMinutes(TextBox box) {
 		String boxText = removeDoublePoint(box.getText());
@@ -1022,7 +1068,8 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 	/**
 	 * Decrease the pause or duration hours.
 	 * 
-	 * @param box TextBox with the values
+	 * @param box
+	 *            TextBox with the values
 	 */
 	private void decreasePauseDurationHours(TextBox box) {
 		String boxText = removeDoublePoint(box.getText());
@@ -1043,8 +1090,10 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 	 * decrease the date of dateBox if the decreased time is between 23.00 and
 	 * 23.59.
 	 * 
-	 * @param box TextBox with the values
-	 * @param dateBox TextBox with the values
+	 * @param box
+	 *            TextBox with the values
+	 * @param dateBox
+	 *            TextBox with the values
 	 */
 	private void decreaseDateTimeDownHour(TextBox box, TextBox dateBox) {
 		int boxTime = createTimeFromText(box.getText());
@@ -1056,8 +1105,10 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 	/**
 	 * decrease the date if the decreased time is 23.59.
 	 * 
-	 * @param box TextBox with the values
-	 * @param dateBox TextBox with the values
+	 * @param box
+	 *            TextBox with the values
+	 * @param dateBox
+	 *            TextBox with the values
 	 */
 	private void decreaseDateTimeDownMinute(TextBox box, TextBox dateBox) {
 		int boxTime = createTimeFromText(box.getText());
@@ -1069,8 +1120,10 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 	/**
 	 * increase the date if the increased time is 00:00.
 	 * 
-	 * @param box TextBox with the values
-	 * @param dateBox TextBox with the values
+	 * @param box
+	 *            TextBox with the values
+	 * @param dateBox
+	 *            TextBox with the values
 	 */
 	private void increaseDateTimeUpMinute(TextBox box, TextBox dateBox) {
 		int boxTime = createTimeFromText(box.getText());
@@ -1082,8 +1135,10 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 	/**
 	 * increase the date if the increased time is between 00:01 and 01:00.
 	 * 
-	 * @param box TextBox with the values
-	 * @param dateBox TextBox with the values
+	 * @param box
+	 *            TextBox with the values
+	 * @param dateBox
+	 *            TextBox with the values
 	 */
 	private void increaseDateTimeUpHour(TextBox box, TextBox dateBox) {
 		int boxTime = createTimeFromText(box.getText());
@@ -1091,7 +1146,7 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 			increaseDate(dateBox);
 		}
 	}
-	
+
 	/**
 	 * Makes the Copy- and Delete{@link Button} visible.
 	 */
@@ -1099,8 +1154,9 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 		buttonCopy.setVisible(true);
 		buttonDelete.setVisible(true);
 	}
+
 	/**
-	 *  Makes the Copy- and Delete{@link Button} hidden.
+	 * Makes the Copy- and Delete{@link Button} hidden.
 	 */
 	public void makeCopyDeleteButtonsHidden() {
 		buttonCopy.setVisible(false);
