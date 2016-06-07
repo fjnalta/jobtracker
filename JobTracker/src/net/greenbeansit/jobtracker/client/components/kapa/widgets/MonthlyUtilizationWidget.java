@@ -12,6 +12,7 @@ import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import net.greenbeansit.jobtracker.client.components.CalendarObserver;
+import net.greenbeansit.jobtracker.client.components.LogicObservable;
 import net.greenbeansit.jobtracker.client.components.widgets.calendar.FullCalendarCustomize;
 import org.gwtbootstrap3.client.ui.Button;
 import org.gwtbootstrap3.client.ui.constants.IconType;
@@ -25,7 +26,7 @@ import java.util.List;
  *
  * @author Philipp Minges
  */
-public class MonthlyUtilizationWidget extends Composite implements CalendarObserver {
+public class MonthlyUtilizationWidget extends Composite implements CalendarObserver, LogicObservable {
 
     private static CalendarUtilizationWidgetUiBinder uiBinder = GWT.create(CalendarUtilizationWidgetUiBinder.class);
 
@@ -42,6 +43,15 @@ public class MonthlyUtilizationWidget extends Composite implements CalendarObser
     @Override
     public void notifyHandler() {
         calendarHandler.updateObserver(this);
+    }
+
+    @Override
+    public void updateObservable() {
+    }
+
+    @Override
+    public void notifyLogicHandler() {
+
     }
 
     interface CalendarUtilizationWidgetUiBinder extends UiBinder<Widget, MonthlyUtilizationWidget> {
@@ -64,6 +74,8 @@ public class MonthlyUtilizationWidget extends Composite implements CalendarObser
     public void clickHandlerLeftButton(ClickEvent e) {
         createNewTimeline();
 		calendarHandler.calendar.previous();
+//        handler.loadUtilizationYear(calendarHandler.calendar.getDate().getYear() + 1899);
+//        createNewTimeline();
         notifyHandler();
     }
 
@@ -75,6 +87,8 @@ public class MonthlyUtilizationWidget extends Composite implements CalendarObser
     public void clickHandlerRightButton(ClickEvent e) {
         createNewTimeline();
 		calendarHandler.calendar.next();
+//        handler.loadUtilizationYear(calendarHandler.calendar.getDate().getYear() + 1901);
+//        createNewTimeline();
         notifyHandler();
     }
 
@@ -90,9 +104,9 @@ public class MonthlyUtilizationWidget extends Composite implements CalendarObser
      */
     public MonthlyUtilizationWidget() {
 
-        calendarHandler.addObserver(this);
-
         initWidget(uiBinder.createAndBindUi(this));
+
+        calendarHandler.addObserver(this);
 
         Timer timer = new Timer() {
             @Override
@@ -135,10 +149,12 @@ public class MonthlyUtilizationWidget extends Composite implements CalendarObser
      * @return list the ArrayList of the Panels.
      */
     private List<VerticalPanel> createBarChartList() {
+        handler.loadUtilizationYear(calendarHandler.calendar.getDate().getYear() + 1900);
+
         List<VerticalPanel> list = new ArrayList<VerticalPanel>();
 
         for (int element = 0; element <= 11; element++) {
-            list.add(getBarChart(null));
+            list.add(getBarChart(handler.getUtilizationList().get(element)));
         }
         return list;
     }
@@ -146,15 +162,20 @@ public class MonthlyUtilizationWidget extends Composite implements CalendarObser
     /**
      * Get the BarChart for a month
      *
-     * @param date actual date
+     * @param element actual date
      * @return an new BarChart to the given date
      */
-    private VerticalPanel getBarChart(Date date) {
+    private VerticalPanel getBarChart(Integer element) {
         VerticalPanel vp = new VerticalPanel();
 
-        double rnd = getBarChartHeight(date);
+        double rnd = element.intValue();
 
-        vp.setHeight(rnd + "px");
+        //For empty Days
+        if(rnd < 1 ){
+            rnd = 15;
+        }
+
+        vp.setHeight(rnd * 0.5+ "px");
 
         if (rnd < 40) {
             vp.setStyleName(this.suffixPath + "barChart", true);
@@ -162,17 +183,5 @@ public class MonthlyUtilizationWidget extends Composite implements CalendarObser
             vp.setStyleName(this.suffixPath + "barChartHeight", true);
         }
         return vp;
-    }
-
-    /**
-     * get the barChart height of a day
-     *
-     * @param date the date.
-     * @return the Bar Chart height.
-     */
-    private double getBarChartHeight(Date date) {
-
-        //TODO read utilization from DB
-        return Math.random() * 50;
     }
 }
