@@ -1,9 +1,9 @@
 package net.greenbeansit.jobtracker.client.components.kapa.data;
 
 import com.google.gwt.core.client.JavaScriptObject;
-import net.greenbeansit.jobtracker.shared.UtilizationWeek;
-import org.gwtbootstrap3.extras.fullcalendar.client.ui.*;
 import net.greenbeansit.jobtracker.client.components.kapa.widgets.CapacityCalendarWidget;
+import net.greenbeansit.jobtracker.shared.UtilizationWeek;
+import org.gwtbootstrap3.extras.fullcalendar.client.ui.Event;
 
 /**
  * A Special {@link Event} for the {@link CapacityCalendarWidget}. It is used to display
@@ -72,6 +72,7 @@ public class CapacityReportEvent extends Event {
         return uw;
     }
 
+
     /**
      * Method for setting the {@link UtilizationWeek} of the
      * @param uw
@@ -79,21 +80,5 @@ public class CapacityReportEvent extends Event {
      */
     public void setUtilizationWeek(UtilizationWeek uw) {
         this.uw = uw;
-    }
-
-    /**
-     * Method for getting the possibility of the {@link CapacityReportEvent}
-     * @return the possibility.
-     */
-    public int getPossibility() {
-        return this.possibility;
-    }
-
-    /**
-     * Method for setting the possibility of the {@link CapacityReportEvent}
-     * @param possibility the Possibility.
-     */
-    public void setPossibility(Integer possibility) {
-        this.possibility = possibility;
     }
 }
