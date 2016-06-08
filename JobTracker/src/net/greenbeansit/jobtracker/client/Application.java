@@ -22,6 +22,7 @@ import net.greenbeansit.jobtracker.client.components.manager.ManagerPage;
 import net.greenbeansit.jobtracker.client.components.manager.detail.ManagerEmployeeDetailPage;
 import net.greenbeansit.jobtracker.client.components.project.ProjectPage;
 import net.greenbeansit.jobtracker.client.components.project.detail.ProjectDetailPage;
+import net.greenbeansit.jobtracker.client.localization.ApplicationConstants;
 
 /**
  * Represents the main widget of the application.
@@ -32,6 +33,8 @@ public class Application extends Composite
 {
 	private static ApplicationUiBinder uiBinder = GWT
 			.create(ApplicationUiBinder.class);
+	
+	private static ApplicationConstants constants = GWT.create(ApplicationConstants.class);
 
 	/**
 	 * UiBinder for {@link Application}.
@@ -70,6 +73,11 @@ public class Application extends Composite
 	{
 		initWidget(uiBinder.createAndBindUi(this));
 
+		navHome.setText(constants.homePage());
+		navKapa.setText(constants.capacityPage());
+		navProject.setText(constants.projectPage());
+		navManager.setText(constants.managerPage());
+		
 		// Add navbar logo
 		navbarBrand.add(new Image("jobtracker/assets/images/navbar_logo.png"));
 
