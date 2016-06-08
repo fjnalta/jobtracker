@@ -17,6 +17,7 @@ import com.googlecode.gwt.charts.client.DataTable;
 import com.googlecode.gwt.charts.client.corechart.PieChart;
 import com.googlecode.gwt.charts.client.corechart.PieChartOptions;
 
+import net.greenbeansit.jobtracker.client.localization.ProjectDetailPageConstants;
 import net.greenbeansit.jobtracker.shared.Job;
 import net.greenbeansit.jobtracker.shared.JobTask;
 
@@ -28,8 +29,11 @@ import net.greenbeansit.jobtracker.shared.JobTask;
 public class JobTaskWidget extends Composite implements OnDisplayEventListener
 {
 
-	private static JobTaskWidgetUiBinder uiBinder = GWT
+	private static JobTaskWidgetUiBinder		uiBinder	= GWT
 			.create(JobTaskWidgetUiBinder.class);
+
+	private static ProjectDetailPageConstants	constants	= GWT
+			.create(ProjectDetailPageConstants.class);
 
 	/**
 	 * UiBinder for {@link JobTaskWidget}.
@@ -51,21 +55,21 @@ public class JobTaskWidget extends Composite implements OnDisplayEventListener
 	public JobTaskWidget()
 	{
 		initWidget(uiBinder.createAndBindUi(this));
-		
+
 		Window.addResizeHandler(new ResizeHandler()
 		{
-			
+
 			@Override
 			public void onResize(ResizeEvent event)
 			{
-				if(piechart != null)
+				if (piechart != null)
 				{
 					piechart.setWidth("100%");
 					piechart.redraw();
 				}
 			}
 		});
-		
+
 		initializeChart();
 	}
 
@@ -90,11 +94,11 @@ public class JobTaskWidget extends Composite implements OnDisplayEventListener
 	 * Draws the pie chart.
 	 */
 	private void drawPieChart()
-	{	
+	{
 		// Prepare the data
 		DataTable dataTable = DataTable.create();
-		dataTable.addColumn(ColumnType.STRING, "Task");
-		dataTable.addColumn(ColumnType.NUMBER, "Hours per Day");
+		dataTable.addColumn(ColumnType.STRING, constants.jobTaskColumnName());
+		dataTable.addColumn(ColumnType.NUMBER, constants.jobTaskColumnHoursPerDay());
 		dataTable.addRows(5);
 		dataTable.setValue(0, 0, "Task 1");
 		dataTable.setValue(0, 1, 11);
@@ -117,7 +121,7 @@ public class JobTaskWidget extends Composite implements OnDisplayEventListener
 		options.setPieResidueSliceColor("#000000");
 		options.setPieResidueSliceLabel("Others");
 		options.setSliceVisibilityThreshold(0.1);
-		options.setTitle("Project utilization");
+		options.setTitle(constants.jobTaskTitle());
 
 		// Draw the chart
 		piechart.draw(dataTable, options);

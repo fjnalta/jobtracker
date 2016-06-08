@@ -2,7 +2,9 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:b="urn:import:org.gwtbootstrap3.client.ui"
 	xmlns:b.html="urn:import:org.gwtbootstrap3.client.ui.html" xmlns:s="urn:import:org.gwtbootstrap3.extras.select.client.ui"
-	xmlns:widgets="urn:import:net.greenbeansit.jobtracker.client.components.widgets" xmlns:d="urn:import:net.greenbeansit.jobtracker.client.components.manager.detail" xmlns:detail="urn:import:net.greenbeansit.jobtracker.client.components.project.detail">
+	xmlns:widgets="urn:import:net.greenbeansit.jobtracker.client.components.widgets"
+	xmlns:d="urn:import:net.greenbeansit.jobtracker.client.components.manager.detail"
+	xmlns:detail="urn:import:net.greenbeansit.jobtracker.client.components.project.detail">
 	<ui:style>
 	/*Container*/
 	.headerRow {
@@ -52,6 +54,7 @@
 		color: black;
 		text-decoration-color: black;
 	}
+	
 	.anchorBackward:HOVER, .anchorBackward:FOCUS, .anchorBackward:ACTIVE {
 		color: #b3b3b3;
 		text-decoration-color: #b3b3b3;
@@ -83,12 +86,15 @@
 		width: 100%;
 		margin: 0;
 	}
+	
 	.infoFieldHeading {
 		margin: 5px;
 	}
+	
 	.infoFieldContainer {
 		margin: 10px;
 	}
+	
 	.infoFieldLabel {
 		width: 30%;
 		float: left;
@@ -96,6 +102,7 @@
 		text-align: left;
 		color: black;
 	}
+	
 	.infoFieldValue {
 		width: 60%;
 		float: right;
@@ -106,26 +113,32 @@
 	</ui:style>
 	<b:Container fluid="true">
 		<b:Row addStyleNames="{style.headerRow}">
-			<g:Anchor text="&lt; Alle Projekte" href="#project"
-				addStyleNames="{style.anchorBackward}" />
+			<g:Anchor href="#project" addStyleNames="{style.anchorBackward}" />
 			<b:Heading size="H3" addStyleNames="{style.title}" text=""
 				ui:field="titleProjectName" />
 		</b:Row>
 		<b:Row addStyleNames="{style.bottomRow}">
 			<b:Column size="XS_12,SM_12,MD_4,LG_4" addStyleNames="{style.mainColumn}">
 				<b:Row addStyleNames="{style.smallContainer}">
-					<b:Heading size="H4" text="Information" addStyleNames="{style.infoFieldHeading}"/>
+					<b:Heading size="H4" text="Information" addStyleNames="{style.infoFieldHeading}"
+						ui:field="infoFieldHeading" />
 					<b.html:ClearFix addStyleNames="{style.infoFieldContainer}">
-						<b.html:Span text="Name:" addStyleNames="{style.infoFieldLabel}"/>
-						<b.html:Span text="" ui:field="textProjectName" addStyleNames="{style.infoFieldValue}"/>
+						<b.html:Span text="" addStyleNames="{style.infoFieldLabel}"
+							ui:field="labelProjectName" />
+						<b.html:Span text="" ui:field="textProjectName"
+							addStyleNames="{style.infoFieldValue}" />
 					</b.html:ClearFix>
 					<b.html:ClearFix addStyleNames="{style.infoFieldContainer}">
-						<b.html:Span text="Kunde:" addStyleNames="{style.infoFieldLabel}"/>
-						<b.html:Span text="" ui:field="textCustomerName" addStyleNames="{style.infoFieldValue}"/>
+						<b.html:Span text="" addStyleNames="{style.infoFieldLabel}"
+							ui:field="labelCustomerName" />
+						<b.html:Span text="" ui:field="textCustomerName"
+							addStyleNames="{style.infoFieldValue}" />
 					</b.html:ClearFix>
 					<b.html:ClearFix addStyleNames="{style.infoFieldContainer}">
-						<b.html:Span text="Budget:" addStyleNames="{style.infoFieldLabel}"/>
-						<b.html:Span text="" ui:field="textBudgetInfo" addStyleNames="{style.infoFieldValue}"/>
+						<b.html:Span text="" addStyleNames="{style.infoFieldLabel}"
+							ui:field="labelBudgetInfo" />
+						<b.html:Span text="" ui:field="textBudgetInfo"
+							addStyleNames="{style.infoFieldValue}" />
 					</b.html:ClearFix>
 				</b:Row>
 			</b:Column>
@@ -133,19 +146,19 @@
 				<b:Row addStyleNames="{style.largeContainer}">
 					<b:NavTabs ui:field="tabControl">
 						<b:TabListItem active="true" dataTarget="#tab1"
-							text="Budget" ui:field="tabBudget"/>
-						<b:TabListItem dataTarget="#tab2" text="Tätigkeiten" ui:field="tabTasks"/>
-						<b:TabListItem dataTarget="#tab3" text="Mitarbeiter" ui:field="tabEmployees"/>
+							ui:field="tabBudget" />
+						<b:TabListItem dataTarget="#tab2" ui:field="tabTasks" />
+						<b:TabListItem dataTarget="#tab3" ui:field="tabEmployees" />
 					</b:NavTabs>
 					<b:TabContent>
 						<b:TabPane b:id="tab1" active="true">
-							<detail:JobBudgetWidget ui:field="jobBudgetWidget"/>
+							<detail:JobBudgetWidget ui:field="jobBudgetWidget" />
 						</b:TabPane>
 						<b:TabPane b:id="tab2">
-							<detail:JobTaskWidget ui:field="jobTaskWidget"/>
+							<detail:JobTaskWidget ui:field="jobTaskWidget" />
 						</b:TabPane>
 						<b:TabPane b:id="tab3">
-							<detail:JobWorkerListWidget ui:field="jobWorkerListWidget"/>
+							<detail:JobWorkerListWidget ui:field="jobWorkerListWidget" />
 						</b:TabPane>
 					</b:TabContent>
 				</b:Row>

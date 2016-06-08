@@ -28,6 +28,8 @@ import com.googlecode.gwt.charts.client.options.HAxis;
 import com.googlecode.gwt.charts.client.options.VAxis;
 
 import net.greenbeansit.jobtracker.client.components.widgets.GraphWidget.GraphMode;
+import net.greenbeansit.jobtracker.client.localization.HomePageConstants;
+import net.greenbeansit.jobtracker.client.localization.ProjectDetailPageConstants;
 import net.greenbeansit.jobtracker.client.utils.rest.NotifyHelper;
 import net.greenbeansit.jobtracker.shared.ActivityReport;
 import net.greenbeansit.jobtracker.shared.Job;
@@ -43,6 +45,8 @@ public class JobBudgetWidget extends Composite implements OnDisplayEventListener
 	private static JobBudgetWidgetUiBinder uiBinder = GWT
 			.create(JobBudgetWidgetUiBinder.class);
 
+	private static ProjectDetailPageConstants constants = GWT.create(ProjectDetailPageConstants.class);
+	
 	/**
 	 * UiBinder for the {@link JobBudgetWidget}.
 	 * 
@@ -290,8 +294,7 @@ public class JobBudgetWidget extends Composite implements OnDisplayEventListener
 	 */
 	public void showWeek()
 	{
-		String[] weekDays = new String[]
-		{ "Mo", "Tu", "We", "Thu", "Fr", "Sa", "Sun" };
+		String[] weekDays = constants.weekDayNames();
 
 		int[] values = new int[7];
 		int[] budgetValues = new int[7];
