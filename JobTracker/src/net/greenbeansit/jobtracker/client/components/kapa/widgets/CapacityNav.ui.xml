@@ -73,7 +73,7 @@
 						</b:FormGroup>
 						<b:FormGroup>
 							<b:FormLabel for="projectDesc">Tätigkeitsbeschreibung</b:FormLabel>
-							<b:TextArea placeholder="Bitte eintragen..."
+							<b:TextArea placeholder="Bitte eintragen..." ui:field="description"
 								addStyleNames="{style.textArea}" />
 							<b:Heading size="H3" subText="Projekt Erstellen" />
 							<b:FormLabel for="projectName">Projektname</b:FormLabel>

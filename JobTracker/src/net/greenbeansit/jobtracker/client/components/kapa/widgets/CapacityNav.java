@@ -7,8 +7,6 @@ import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
-import com.google.gwt.user.client.Timer;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 import net.greenbeansit.jobtracker.client.components.CalendarObserver;
@@ -20,6 +18,7 @@ import net.greenbeansit.jobtracker.shared.Job;
 import net.greenbeansit.jobtracker.shared.PseudoJob;
 import net.greenbeansit.jobtracker.shared.UtilizationWeek;
 import org.gwtbootstrap3.client.ui.Button;
+import org.gwtbootstrap3.client.ui.TextArea;
 import org.gwtbootstrap3.client.ui.TextBox;
 import org.gwtbootstrap3.client.ui.constants.IconType;
 import org.gwtbootstrap3.extras.select.client.ui.OptGroup;
@@ -29,6 +28,7 @@ import org.gwtbootstrap3.extras.slider.client.ui.Slider;
 import org.gwtbootstrap3.extras.slider.client.ui.base.event.SlideEvent;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -41,6 +41,9 @@ public class CapacityNav extends Composite implements LogicObservable, CapaCalen
 
     @UiField
     Select selectJob;
+
+    @UiField
+    TextArea description;
 
     @UiField
     OptGroup myJobsOptGroup, allJobsOptGroup;
@@ -61,6 +64,8 @@ public class CapacityNav extends Composite implements LogicObservable, CapaCalen
     @UiHandler("mySlider")
     void onSlide(SlideEvent<Double> event) {
         possibilityPercentage.setText(event.getValue().toString());
+        currentUtilizationWeek.setPossibility(mySlider.getValue().intValue());
+        notifyLogicHandler();
     }
 
     /**
@@ -108,13 +113,11 @@ public class CapacityNav extends Composite implements LogicObservable, CapaCalen
 
     private static CapacityNavUiBinder uiBinder = GWT.create(CapacityNavUiBinder.class);
 
+    private List<UtilizationWeek> utilizationWeekList = new ArrayList<UtilizationWeek>();
     private List<Job> jobList = new ArrayList<Job>();
     private List<PseudoJob> pJobList = new ArrayList<PseudoJob>();
 
-    private PseudoJob currentPJob = null;
-    private Job currentJob = null;
-
-    private UtilizationWeek currentReport;
+    private UtilizationWeek currentUtilizationWeek = null;
 
     /**
      * This Method creates a new Instance of the Capacity Navigation.
@@ -125,31 +128,35 @@ public class CapacityNav extends Composite implements LogicObservable, CapaCalen
         handler.addObservable(this);
         handler.updateObservable(this);
 
-//        Timer timer = new Timer() {
-//            @Override
-//            public void run() {
-//                
-//            }
-//        };
-//        timer.schedule(100);
+        createUtilizationWeekList();
         
         initializeUIElements();
         selectJob.addValueChangeHandler(new ValueChangeHandler<String>() {
             @Override
             public void onValueChange(ValueChangeEvent<String> event) {
-                if (selectJob.getSelectedItem().getText().contains("Pseudo")) {
-                    currentPJob = ((SelectJobOption) selectJob.getSelectedItem()).getPjob();
-                    notifyLogicHandler();
-                }
-                if (!selectJob.getSelectedItem().getText().contains("Pseudo")) {
-                    currentJob = ((SelectJobOption) selectJob.getSelectedItem()).getJob();
-                    notifyLogicHandler();
-                }
+                currentUtilizationWeek = ((SelectJobOption) selectJob.getSelectedItem()).getUtilizationWeek();
+
             }
         });
 
         handler.loadJobs();
         handler.loadPseudoJobs();
+    }
+
+    private void createUtilizationWeekList() {
+        utilizationWeekList.clear();
+
+        this.pJobList = handler.getPseudoJobList();
+        this.jobList = handler.getJobList();
+
+        for (PseudoJob pjob : pJobList) {
+            UtilizationWeek uw = new UtilizationWeek(0, 0, pjob.getName(), new Date(),0, 0, new Date(), 0, pjob.getId(), 0);
+            utilizationWeekList.add(uw);
+        }
+        for (Job job : jobList) {
+            UtilizationWeek uw = new UtilizationWeek(999, 0, job.getDesc(), new Date(), 0, 0, new Date(), 0, 0, 0);
+            utilizationWeekList.add(uw);
+        }
     }
 
     /**
@@ -161,25 +168,15 @@ public class CapacityNav extends Composite implements LogicObservable, CapaCalen
         possibilityPercentage.setText(mySlider.getValue().toString());
     }
 
-    /**
-     * Adds the Jobs to the {@link OptGroup} allJobsOptGroup.
-     * @param jobList the List of Jobs.
-     */
-    private void addJobs(List<Job> jobList) {
-        for (Job currentJob : jobList) {
-            SelectJobOption tempOption = new SelectJobOption(currentJob);
-            allJobsOptGroup.add(tempOption);
-        }
-    }
-
-    /**
-     * Adds the PseudoJobs to the {@link OptGroup} myJobsOptGroup.
-     * @param pJobList the List of Pseudo Jobs.
-     */
-    private void addPseudoJobs(List<PseudoJob> pJobList) {
-        for (PseudoJob currentPJob : pJobList) {
-            SelectJobOption tempOption = new SelectJobOption(currentPJob);
-            myJobsOptGroup.add(tempOption);
+    private void addUtilizationWeeks(List<UtilizationWeek> utilWeekList) {
+        for (UtilizationWeek currentUtilWeek : utilWeekList) {
+            if(currentUtilWeek.getId().intValue() == 999) {
+                SelectJobOption tempOption = new SelectJobOption(currentUtilWeek);
+                allJobsOptGroup.add(tempOption);
+            } else {
+                SelectJobOption tempOption = new SelectJobOption(currentUtilWeek);
+                myJobsOptGroup.add(tempOption);
+            }
         }
     }
 
@@ -190,31 +187,21 @@ public class CapacityNav extends Composite implements LogicObservable, CapaCalen
     public void updateObservable() {
         allJobsOptGroup.clear();
         myJobsOptGroup.clear();
+        textIdentifier.clear();
 
-        this.pJobList = handler.getPseudoJobList();
-        this.jobList = handler.getJobList();
+        createUtilizationWeekList();
+        addUtilizationWeeks(this.utilizationWeekList);
+        currentUtilizationWeek = handler.getCurrentUtilizationWeek();
 
-        addPseudoJobs(this.pJobList);
-        addJobs(this.jobList);
-
-        //Set select Job
-        currentPJob = handler.getCurrentPseudoJob();
-        currentJob = handler.getCurrentJob();
-        if (currentJob != null || currentPJob != null) {
+        if (currentUtilizationWeek != null) {
             for (Option option : selectJob.getItems()) {
                 ((SelectJobOption) option).setSelected(false);
-
-                if (((SelectJobOption) option).getText().contains("Pseudo")) {
-                    if (((SelectJobOption) option).getPjob().equals(currentPJob)) {
-                        option.setSelected(true);
-                    }
-                } else {
-                    if (((SelectJobOption) option).getJob().equals(currentJob)) {
-                        option.setSelected(true);
-                    }
+                if (((SelectJobOption) option).getUtilizationWeek().equals(currentUtilizationWeek)) {
+                    option.setSelected(true);
                 }
             }
         }
+        notifyLogicHandler();
         selectJob.refresh();
     }
 
@@ -223,8 +210,8 @@ public class CapacityNav extends Composite implements LogicObservable, CapaCalen
      */
     @Override
     public void update() {
-        this.currentReport = handler.getCurrentUtilizationWeek();
-        textIdentifier.setText(currentReport.getText());
+
+        // TODO - load other Tab if calendar job is clicked
     }
 
     /**
@@ -240,13 +227,18 @@ public class CapacityNav extends Composite implements LogicObservable, CapaCalen
      */
     @Override
     public void notifyLogicHandler() {
-        if (currentJob != null) {
-            handler.setCurrentJob(currentJob);
-            handler.setCurrentPJob(null);
+        if(currentUtilizationWeek != null) {
+                currentUtilizationWeek.setText(description.getText());
         }
-        if (currentPJob != null) {
-            handler.setCurrentPJob(currentPJob);
-            handler.setCurrentJob(null);
+        handler.setCurrentUtilizationWeek(currentUtilizationWeek);
+
+        if(handler.getCurrentUtilizationWeek() != null) {
+            // TODO - read the DATE
+            GWT.log(handler.getCurrentUtilizationWeek().getText());
+            GWT.log(handler.getCurrentUtilizationWeek().getPossibility().toString());
+            GWT.log(handler.getCurrentUtilizationWeek().getPseudoJobId().toString() + " PseudoJobID");
+            GWT.log(handler.getCurrentUtilizationWeek().getBeginDate().toString());
+            GWT.log(handler.getCurrentUtilizationWeek().getEndDate().toString());
         }
     }
 }
