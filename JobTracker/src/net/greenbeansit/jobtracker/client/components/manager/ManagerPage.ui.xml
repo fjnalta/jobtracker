@@ -90,29 +90,27 @@
 	<b:Container fluid="true">
 		<b:Column size="XS_12,SM_12,MD_4,LG_4" addStyleNames="{style.mainColumn}">
 			<b:Row addStyleNames="{style.smallContainer}">
-				<b:Heading size="H4" text="Filter" addStyleNames="{style.titleLeft}" />
-				<s:MultipleSelect liveSearch="true"
-					liveSearchPlaceholder="Jobname" ui:field="selectJob">
+				<b:Heading size="H4" text="Filter" addStyleNames="{style.titleLeft}" ui:field="headingFilter" />
+				<s:MultipleSelect liveSearch="true" ui:field="selectJob">
 				</s:MultipleSelect>
 			</b:Row>
 		</b:Column>
 		<b:Column size="XS_12,SM_12,MD_8,LG_8" addStyleNames="{style.mainColumn}">
 			<b:Row addStyleNames="{style.largeContainer}">
-				<b:Heading size="H3" addStyleNames="{style.titleRight}"
-					text="Alle Mitarbeiter" />
+				<b:Heading size="H3" addStyleNames="{style.titleRight}" ui:field="headingTitle"/>
 			</b:Row>
 			<b:Row addStyleNames="{style.largeContainer}">
 				<b.html:ClearFix addStyleNames="{style.columnHeader} {style.columnHeaderName}"
 					ui:field="columnHeaderName">
-					<b:Heading size="H4" text="Name" addStyleNames="{style.columnTitle}" />
-					<b:Heading size="H4" text="" addStyleNames="{style.columnTitle}"
+					<b:Heading size="H4" addStyleNames="{style.columnTitle}" ui:field="columnHeaderNameTitle"/>
+					<b:Heading size="H4" addStyleNames="{style.columnTitle}"
 						ui:field="columnHeaderNameArrow" />
 				</b.html:ClearFix>
 				<b.html:ClearFix
 					addStyleNames="{style.columnHeader} {style.columnHeaderUtilization}"
 					ui:field="columnHeaderUtilization">
-					<b:Heading size="H4" text="Auslastung" addStyleNames="{style.columnTitle}" />
-					<b:Heading size="H4" text="" addStyleNames="{style.columnTitle}"
+					<b:Heading size="H4" addStyleNames="{style.columnTitle}" ui:field="columnHeaderUtilizationTitle"/>
+					<b:Heading size="H4" addStyleNames="{style.columnTitle}"
 						ui:field="columnHeaderUtilizationArrow" />
 				</b.html:ClearFix>
 			</b:Row>

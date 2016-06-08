@@ -24,6 +24,8 @@ import com.google.gwt.user.client.ui.Widget;
 
 import net.greenbeansit.jobtracker.client.components.manager.ManagerPageHelperServiceImpl.Callback;
 import net.greenbeansit.jobtracker.client.components.widgets.UserListItem;
+import net.greenbeansit.jobtracker.client.localization.HomePageConstants;
+import net.greenbeansit.jobtracker.client.localization.ManagerPageConstants;
 import net.greenbeansit.jobtracker.client.utils.rest.NotifyHelper;
 import net.greenbeansit.jobtracker.shared.Job;
 import net.greenbeansit.jobtracker.shared.User;
@@ -62,6 +64,8 @@ public class ManagerPage extends Composite
 	private static ManagerPageUiBinder	uiBinder	= GWT
 			.create(ManagerPageUiBinder.class);
 
+	private static ManagerPageConstants constants = GWT.create(ManagerPageConstants.class);
+	
 	private static final String			ARROW_UP	= "\u25B2";
 	private static final String			ARROW_DOWN	= "\u25BC";
 
@@ -85,6 +89,9 @@ public class ManagerPage extends Composite
 
 	@UiField
 	ClearFix							columnHeaderUtilization;
+	
+	@UiField
+	Heading headingFilter, columnHeaderNameTitle, columnHeaderUtilizationTitle, headingTitle;
 
 	private ManagerPageHelperService	helperService;
 	private ManagerPageSortMode			sortMode	= ManagerPageSortMode.ALPHABETICAL_UP;
@@ -100,6 +107,13 @@ public class ManagerPage extends Composite
 	{
 		initWidget(uiBinder.createAndBindUi(this));
 
+		columnHeaderNameTitle.setText(constants.columnHeaderName());
+		columnHeaderUtilizationTitle.setText(constants.columnHeaderUtilization());
+		selectJob.setPlaceholder(constants.selectJobPlaceHolder());
+		selectJob.setLiveSearchPlaceholder(constants.selectJobLiveSearchPlaceHolder());
+		headingFilter.setText(constants.headingFilter());
+		headingTitle.setText(constants.title());
+		
 		// Add handler
 		selectJob.addValueChangeHandler(new ValueChangeHandler<List<String>>()
 		{
