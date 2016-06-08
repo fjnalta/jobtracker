@@ -41,10 +41,10 @@ public class CapacityPage extends Composite implements CapaCalendarObserver {
         calendarHandler.updateObserver(this);
     }
 
-    interface KapaPageUiBinder extends UiBinder<Widget, CapacityPage> {
+    interface CapacityPageUiBinder extends UiBinder<Widget, CapacityPage> {
     }
 
-    private static KapaPageUiBinder uiBinder = GWT.create(KapaPageUiBinder.class);
+    private static CapacityPageUiBinder uiBinder = GWT.create(CapacityPageUiBinder.class);
 
     /**
      * Creates a new Instance of the CapacityPage
