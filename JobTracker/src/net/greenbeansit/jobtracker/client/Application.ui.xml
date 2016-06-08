@@ -41,11 +41,11 @@
 				<b:NavbarNav ui:field="nav" inline="true">
 					<b:AnchorListItem iconFixedWidth="true" ui:field="navHome"
 						href="#home">
-						Home
+						Tätigkeitsbericht
 					</b:AnchorListItem>
 					<b:AnchorListItem iconFixedWidth="true" ui:field="navKapa"
 						href="#kapa">
-						Kapaplanung
+						Kapazitätsplanung
 					</b:AnchorListItem>
 					<b:AnchorListItem iconFixedWidth="true" ui:field="navProject"
 						href="#project">
