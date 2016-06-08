@@ -71,7 +71,7 @@
 						ui:field="buttonDownDayWeek" />
 				</b:VerticalButtonGroup>
 			</b:InputGroupButton>
-			<b:Button type="PRIMARY" text="Buchen" pull="RIGHT"
+			<b:Button type="PRIMARY" text="Buchen" pull="RIGHT" ui:field="buttonBook"
 				addStyleNames="{style.button-blue}" />
 		</b:InputGroup>
 	</b:Container>

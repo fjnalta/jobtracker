@@ -1,12 +1,20 @@
 package net.greenbeansit.jobtracker.client.components.kapa.widgets;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
+import net.greenbeansit.jobtracker.client.components.LogicObservable;
+import net.greenbeansit.jobtracker.client.components.kapa.CapaCalendarObserver;
+import net.greenbeansit.jobtracker.shared.UtilizationWeek;
 import org.gwtbootstrap3.client.ui.Button;
+import org.gwtbootstrap3.client.ui.TextBox;
 import org.gwtbootstrap3.client.ui.constants.IconType;
+
+import java.util.Date;
 
 /**
  * Shows the bottom Widget on the Capacity Page. This Widget is used to display
@@ -15,11 +23,48 @@ import org.gwtbootstrap3.client.ui.constants.IconType;
  *
  * @author Philipp Minges
  */
-public class CapacityTimeInputWidget extends Composite {
+public class CapacityTimeInputWidget extends Composite implements CapaCalendarObserver, LogicObservable {
+
+    /**
+     * Calendar Handler
+     */
+    @Override
+    public void update() {
+        projectStart.setText(splitISOString(calendarHandler.calendar.currentCapacityEvent.getISOStart()));
+        projectStartKw.setText("KW");
+        projectEnd.setText(splitISOString(calendarHandler.calendar.currentCapacityEvent.getISOEnd()));
+        projectEndKw.setText("KW");
+        notifyLogicHandler();
+    }
+
+    @Override
+    public void notifyHandler() {
+        calendarHandler.updateObserver(this);
+    }
+
+    /**
+     * Logic Handler
+     */
+    @Override
+    public void updateObservable() {
+        currentUtilizationWeek = handler.getCurrentUtilizationWeek();
+    }
+
+    @Override
+    public void notifyLogicHandler() {
+        if(calendarHandler.calendar.currentCapacityEvent.getUw() != null) {
+            currentUtilizationWeek.setBeginDate(calendarHandler.calendar.currentCapacityEvent.getUw().getBeginDate());
+            currentUtilizationWeek.setEndDate(calendarHandler.calendar.currentCapacityEvent.getUw().getEndDate());
+        }
+        handler.setCurrentUtilizationWeek(currentUtilizationWeek);
+    }
+
     interface CapacityTimeInputWidgetUiBinder extends UiBinder<Widget, CapacityTimeInputWidget> {
     }
 
     private static CapacityTimeInputWidgetUiBinder uiBinder = GWT.create(CapacityTimeInputWidgetUiBinder.class);
+
+    private UtilizationWeek currentUtilizationWeek;
 
     /**
      * Initializes a new Instance of CapacityTimeInputWidget.
@@ -27,14 +72,47 @@ public class CapacityTimeInputWidget extends Composite {
     public CapacityTimeInputWidget() {
         initWidget(uiBinder.createAndBindUi(this));
 
+
         setButtons();
+
+        handler.addObservable(this);
+        calendarHandler.addObserver(this);
+        currentUtilizationWeek = handler.getCurrentUtilizationWeek();
+
     }
+
+    @UiField
+    TextBox projectStart, projectStartKw, projectEnd, projectEndKw;
 
     @UiField
     Button buttonUpYearStart, buttonDownYearStart,
             buttonUpCalendarWeekStart, buttonDownCalendarWeekStart,
             buttonUpYearEnd, buttonDownYearEnd, buttonUpDayWeek,
             buttonDownDayWeek, buttonUpCalendarWeekEnd, buttonDownCalendarWeekEnd;
+
+    /**
+     * {@link UiHandler} for the {@link Button} that saves the
+     * {@link UtilizationWeek}
+     *
+     * @param e
+     *            {@link ClickEvent}
+     */
+    @UiHandler("buttonBook")
+    public void buttonBookClicked(ClickEvent e) {
+        // TODO - needs work. cant read date from calendar Event.
+        UtilizationWeek report = new UtilizationWeek(0, handler.getCurrentUser().getId(), currentUtilizationWeek.getText(), createDateFromText(projectStart.getText()), 8, 16,
+                createDateFromText(projectEnd.getText()), currentUtilizationWeek.getPossibility(), currentUtilizationWeek.getPseudoJobId(), 0);
+        handler.saveUtilizationWeek(report);
+        calendarHandler.calendar.getCapacityReportsToSave().clear();
+    }
+
+    private Date createDateFromText(String text) {
+        String[] split = text.split("-");
+        int year = Integer.parseInt(split[0]);
+        int month = Integer.parseInt(split[1]);
+        int day = Integer.parseInt(split[2]);
+        return new Date(year, month, day);
+    }
 
     /**
      * This Method sets the icons for all Buttons in this Widget
@@ -55,5 +133,12 @@ public class CapacityTimeInputWidget extends Composite {
 
         buttonUpDayWeek.setIcon(IconType.ARROW_UP);
         buttonDownDayWeek.setIcon(IconType.ARROW_DOWN);
+    }
+
+    private String splitISOString(String string){
+        if (string != null && string.length() > 0) {
+            string = string.substring(0, string.length()-14);
+        }
+        return string;
     }
 }
