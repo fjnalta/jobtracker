@@ -34,6 +34,10 @@
 	<set-property name="gwt.logging.systemHandler" value="DISABLED" />
 	<set-property name="gwt.logging.consoleHandler" value="ENABLED"/>
 	
+	<!-- Languages -->
+	<extend-property name="locale" values="de,en" />
+	<set-property-fallback name="locale" value="en"/>
+	
 	<!-- Specify the app entry point class. -->
 	<entry-point class='net.greenbeansit.jobtracker.client.GwtEntryPoint' />
 
