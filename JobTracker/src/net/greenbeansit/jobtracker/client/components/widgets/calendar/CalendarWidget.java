@@ -2,7 +2,6 @@ package net.greenbeansit.jobtracker.client.components.widgets.calendar;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.EventObject;
 import java.util.List;
 
 import org.gwtbootstrap3.client.ui.Row;
@@ -25,14 +24,13 @@ import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.NativeEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-
 import com.google.gwt.user.client.Timer;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 
 import net.greenbeansit.jobtracker.client.components.CalendarObserver;
 import net.greenbeansit.jobtracker.client.components.LogicObservable;
+import net.greenbeansit.jobtracker.client.localization.HomePageConstants;
 import net.greenbeansit.jobtracker.shared.ActivityReport;
 
 /**
@@ -45,6 +43,9 @@ import net.greenbeansit.jobtracker.shared.ActivityReport;
 public class CalendarWidget extends Composite implements CalendarObserver, LogicObservable {
 
 	private static CalendarWidgetUiBinder uiBinder = GWT.create(CalendarWidgetUiBinder.class);
+	
+	private static HomePageConstants			constants	= GWT
+			.create(HomePageConstants.class);
 
 	private int eventID;
 	
@@ -97,8 +98,20 @@ public class CalendarWidget extends Composite implements CalendarObserver, Logic
 
 			@Override
 			public void run() {
+				
 				config = new CalendarConfig();
-				config.setLangauge(Language.German);
+				
+				//Language
+				switch(constants.languageName())
+				{
+				case "de":
+					config.setLangauge(Language.German);
+					break;
+				default: //case "en":
+					config.setLangauge(Language.EnglishBritish);
+					break;
+				}
+				
 				config.setClickHoverConfig(getClickAndHoverConfig());
 				config.setSelectConfig(getSelectConfig());
 				config.setDragResizeConfig(getDragAndResizeConfig());

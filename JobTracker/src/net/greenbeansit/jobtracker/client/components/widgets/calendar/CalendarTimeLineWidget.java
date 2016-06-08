@@ -12,6 +12,7 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 
 import net.greenbeansit.jobtracker.client.components.CalendarObserver;
+import net.greenbeansit.jobtracker.client.localization.HomePageConstants;
 
 /**
  * 3 Round Buttons , KW KWNR MONTH DATE
@@ -28,6 +29,9 @@ public class CalendarTimeLineWidget extends Composite implements CalendarObserve
 	Span kw;
 
 	private static CalendarTimeLineWidgetUiBinder uiBinder = GWT.create(CalendarTimeLineWidgetUiBinder.class);
+	
+	private static HomePageConstants			constants	= GWT
+			.create(HomePageConstants.class);
 
 	interface CalendarTimeLineWidgetUiBinder extends UiBinder<Widget, CalendarTimeLineWidget> {
 	}

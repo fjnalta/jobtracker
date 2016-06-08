@@ -17,7 +17,7 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 
 import net.greenbeansit.jobtracker.client.components.LogicObservable;
-import net.greenbeansit.jobtracker.client.utils.rest.NotifyHelper;
+import net.greenbeansit.jobtracker.client.localization.HomePageConstants;
 import net.greenbeansit.jobtracker.shared.Job;
 
 /**
@@ -27,6 +27,8 @@ import net.greenbeansit.jobtracker.shared.Job;
 public class JobsWidget extends Composite implements LogicObservable {
 
 	private static JobsWidgetUiBinder uiBinder = GWT.create(JobsWidgetUiBinder.class);
+	
+	private static HomePageConstants constants = GWT.create(HomePageConstants.class);
 
 	/**
 	 * UiBinder interface for {@link JobsWidget}
@@ -34,6 +36,8 @@ public class JobsWidget extends Composite implements LogicObservable {
 	interface JobsWidgetUiBinder extends UiBinder<Widget, JobsWidget> {
 
 	}
+	
+	
 
 	@UiField
 	ClearFix container;
@@ -69,6 +73,12 @@ public class JobsWidget extends Composite implements LogicObservable {
 			}
 		});
 		handler.loadJobs();
+		
+		selectJob.setPlaceholder(constants.selectJobPlaceHolder());
+		selectJob.setLiveSearchPlaceholder(constants.selectJobLiveSearchPlaceHolder());
+		favoriteJobsOptGroup.setLabel(constants.groupFavoriteJobs());
+		allJobsOptGroup.setLabel(constants.groupAllOtherJobs());
+		
 	}
 
 	/**

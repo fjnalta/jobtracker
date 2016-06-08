@@ -16,9 +16,9 @@
 		<s:Select ui:field="selectJob" liveSearch="true"
 			liveSearchPlaceholder="Name" placeholder="Projekt auswählen" type="PRIMARY"
 			addStyleNames="{style.select}">
-			<s:OptGroup label="Favoriten" ui:field="favoriteJobsOptGroup">
+			<s:OptGroup label="" ui:field="favoriteJobsOptGroup">
 			</s:OptGroup>
-			<s:OptGroup label="Alle anderen" ui:field="allJobsOptGroup">
+			<s:OptGroup label="" ui:field="allJobsOptGroup">
 			</s:OptGroup>
 		</s:Select>
 	</h:ClearFix>

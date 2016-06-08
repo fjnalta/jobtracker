@@ -1,5 +1,6 @@
 package net.greenbeansit.jobtracker.client.components.widgets;
 
+import org.gwtbootstrap3.client.ui.Heading;
 import org.gwtbootstrap3.client.ui.html.ClearFix;
 import org.gwtbootstrap3.client.ui.html.Span;
 
@@ -10,6 +11,7 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 
 import net.greenbeansit.jobtracker.client.components.LogicObservable;
+import net.greenbeansit.jobtracker.client.localization.HomePageConstants;
 
 /**
  * Utilization ring widget
@@ -19,8 +21,11 @@ import net.greenbeansit.jobtracker.client.components.LogicObservable;
 public class UtilizationWidget extends Composite implements LogicObservable
 {
 
-	private static UtilizationWidgetUiBinder uiBinder = GWT
+	private static UtilizationWidgetUiBinder	uiBinder	= GWT
 			.create(UtilizationWidgetUiBinder.class);
+
+	private static HomePageConstants			constants	= GWT
+			.create(HomePageConstants.class);
 
 	/**
 	 * UiBinder for {@link UtilizationWidget}
@@ -35,9 +40,15 @@ public class UtilizationWidget extends Composite implements LogicObservable
 
 	@UiField
 	PercentageRingDiagram	utilizationDiagram;
-	
+
 	@UiField
-	Span textRemainingVacationDays;
+	Span					textRemainingVacationDays;
+
+	@UiField
+	Heading					headingRemainingVacationDays;
+
+	@UiField
+	Heading					headingUtilization;
 
 	/**
 	 * standard constructor
@@ -47,18 +58,22 @@ public class UtilizationWidget extends Composite implements LogicObservable
 		initWidget(uiBinder.createAndBindUi(this));
 
 		utilizationDiagram.setPercentage(120);
+
+		headingRemainingVacationDays
+				.setText(constants.headingRemainingVacationDays());
+		headingUtilization.setText(constants.headingUtilization());
 	}
 
 	@Override
 	public void updateObservable()
 	{
-		
+
 	}
 
 	@Override
 	public void notifyLogicHandler()
 	{
-		
+
 	}
 
 	/**
@@ -68,12 +83,12 @@ public class UtilizationWidget extends Composite implements LogicObservable
 	 */
 	public void setRemainingVacationDays(Integer remainingVacationDays)
 	{
-		if(remainingVacationDays == null)
+		if (remainingVacationDays == null)
 			remainingVacationDays = 0;
-		
+
 		textRemainingVacationDays.setText(remainingVacationDays + "");
 	}
-	
+
 	/**
 	 * Sets the percentage of the ring diagram.
 	 * 
@@ -81,9 +96,9 @@ public class UtilizationWidget extends Composite implements LogicObservable
 	 */
 	public void setUtilization(Double utilizationPercent)
 	{
-		if(utilizationPercent == null)
+		if (utilizationPercent == null)
 			utilizationPercent = 0d;
-		
+
 		utilizationDiagram.setPercentage(utilizationPercent);
 	}
 }

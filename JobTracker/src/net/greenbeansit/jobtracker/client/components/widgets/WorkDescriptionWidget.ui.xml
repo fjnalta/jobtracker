@@ -43,26 +43,27 @@
 	<h:ClearFix>
 		<b:Row addStyleNames="{style.row}">
 			<b:FormGroup>
-				<b:FormLabel for="description1">Tätigkeitsbeschreibung 1</b:FormLabel>
-				<b:TextArea placeholder="Bitte eintragen..." b:id="description1"
+				<b:FormLabel for="description1" ui:field="labelDescription"></b:FormLabel>
+				<b:TextArea placeholder="" b:id="description1"
 					addStyleNames="{style.textArea}" ui:field="textDiscription" />
 			</b:FormGroup>
 			<b:FormGroup>
-				<b:FormLabel for="description2">Tätigkeitsbeschreibung 2</b:FormLabel>
-				<b:TextBox placeholder="Bitte eintragen..." b:id="description2"
+				<b:FormLabel for="description2" ui:field="labelTask"></b:FormLabel>
+				<b:TextBox placeholder="" b:id="description2"
 					addStyleNames="{style.textArea}"
 					ui:field="textIdentifier" />
 			</b:FormGroup>
 		</b:Row>
 		<b:Row addStyleNames="{style.row}">
 			<b:Button type="PRIMARY" dataToggle="COLLAPSE" dataTarget="#collapseTemplate"
-				text="Vorlagen" addStyleNames="{style.button-blue}"/>
+				text="" addStyleNames="{style.button-blue}"
+				ui:field="buttonCollapseTemplate"/>
 			<b:Collapse b:id="collapseTemplate" addStyleNames="{style.collapse}"
 				toggle="false">
 				<b:FormGroup>
-					<b:TextBox placeholder="Name der Vorlage" b:id="textTemplateName"
+					<b:TextBox placeholder="" b:id="textTemplateName"
 						ui:field="textName" />
-					<b:Button text="Als Vorlage speichern" addStyleNames="{style.button}"
+					<b:Button text="" addStyleNames="{style.button}"
 						ui:field="buttonSave" />
 				</b:FormGroup>
 				<b:FormGroup>

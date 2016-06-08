@@ -9,7 +9,7 @@
 	<b:Container fluid="true" addStyleNames="{style.noPadding}">
 		<b:Row addStyleNames="{style.row}">
 			<b:InputGroup addStyleNames="{style.inputGroup}">
-				<b:InputGroupAddon addStyleNames="{style.addonLeft}">Datum von</b:InputGroupAddon>
+				<b:InputGroupAddon addStyleNames="{style.addonLeft}" ui:field="addonDateStart"></b:InputGroupAddon>
 				<b:TextBox ui:field="dateStart" height="43px">06.05</b:TextBox>
 				<b:InputGroupButton>
 					<b:VerticalButtonGroup>
@@ -19,7 +19,7 @@
 							ui:field="buttonDownDateStart" />
 					</b:VerticalButtonGroup>
 				</b:InputGroupButton>
-				<b:InputGroupAddon>bis</b:InputGroupAddon>
+				<b:InputGroupAddon ui:field="addonDateEnd"></b:InputGroupAddon>
 				<b:TextBox ui:field="dateEnd" height="43px">06.05</b:TextBox>
 				<b:InputGroupButton>
 					<b:VerticalButtonGroup>
@@ -33,7 +33,7 @@
 		</b:Row>
 		<b:Row addStyleNames="{style.row}">
 			<b:InputGroup>
-				<b:InputGroupAddon addStyleNames="{style.addonLeft}">Uhrzeit von</b:InputGroupAddon>
+				<b:InputGroupAddon addStyleNames="{style.addonLeft}" ui:field="addonTimeStart"></b:InputGroupAddon>
 				<b:TextBox ui:field="eventStart" height="43px">12:00</b:TextBox>
 				<b:InputGroupButton>
 					<b:VerticalButtonGroup>
@@ -51,7 +51,7 @@
 							ui:field="buttonTimeMinuteDownStart" />
 					</b:VerticalButtonGroup>
 				</b:InputGroupButton>
-				<b:InputGroupAddon>bis</b:InputGroupAddon>
+				<b:InputGroupAddon ui:field="addonTimeEnd"></b:InputGroupAddon>
 				<b:TextBox ui:field="eventEnd" height="43px">13:00</b:TextBox>
 				<b:InputGroupButton>
 					<b:VerticalButtonGroup>
@@ -73,7 +73,7 @@
 		</b:Row>
 		<b:Row addStyleNames="{style.row}">
 			<b:InputGroup>
-				<b:InputGroupAddon addStyleNames="{style.addonLeft}">Pause</b:InputGroupAddon>
+				<b:InputGroupAddon addStyleNames="{style.addonLeft}" ui:field="addonBreak"></b:InputGroupAddon>
 				<b:TextBox ui:field="pause" height="43px">00:00</b:TextBox>
 				<b:InputGroupButton>
 					<b:VerticalButtonGroup>
@@ -91,7 +91,7 @@
 							ui:field="buttonTimeMinuteDownPause" />
 					</b:VerticalButtonGroup>
 				</b:InputGroupButton>
-				<b:InputGroupAddon>Dauer</b:InputGroupAddon>
+				<b:InputGroupAddon ui:field="addonDuration"></b:InputGroupAddon>
 				<b:TextBox ui:field="workTime" height="43px">13:00</b:TextBox>
 				<b:InputGroupButton>
 					<b:VerticalButtonGroup>
@@ -116,7 +116,7 @@
 				ui:field="buttonCopy" />
 			<b:Button addStyleNames="{style.eventButton}" text="x"
 				ui:field="buttonDelete" />
-			<b:Button type="PRIMARY" text="Buchen" addStyleNames="{style.button-book}"
+			<b:Button type="PRIMARY" text="" addStyleNames="{style.button-book}"
 				ui:field="buttonBook" />
 		</h:ClearFix>
 	</b:Container>

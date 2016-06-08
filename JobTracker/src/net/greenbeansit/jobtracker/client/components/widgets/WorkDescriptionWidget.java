@@ -3,6 +3,9 @@ package net.greenbeansit.jobtracker.client.components.widgets;
 import java.util.List;
 
 import net.greenbeansit.jobtracker.client.components.LogicHandler;
+
+import org.gwtbootstrap3.client.ui.Button;
+import org.gwtbootstrap3.client.ui.FormLabel;
 import org.gwtbootstrap3.client.ui.TextArea;
 import org.gwtbootstrap3.client.ui.TextBox;
 import org.gwtbootstrap3.extras.select.client.ui.OptGroup;
@@ -19,6 +22,7 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 
 import net.greenbeansit.jobtracker.client.components.LogicObservable;
+import net.greenbeansit.jobtracker.client.localization.HomePageConstants;
 import net.greenbeansit.jobtracker.client.utils.rest.NotifyHelper;
 import net.greenbeansit.jobtracker.shared.ActivityReportTemplate;
 
@@ -36,12 +40,13 @@ public class WorkDescriptionWidget extends Composite implements LogicObservable
 	private static WorkDescriptionWidgetUiBinder uiBinder =
 			GWT.create(WorkDescriptionWidgetUiBinder.class);
 
+	private static HomePageConstants constants = GWT.create(HomePageConstants.class);
+	
 	/**
 	 * UiBinder Interface for {@link WorkDescriptionWidget}
 	 */
 	interface WorkDescriptionWidgetUiBinder extends UiBinder<Widget, WorkDescriptionWidget>
 	{
-
 	}
 	
 	@UiField 
@@ -57,7 +62,19 @@ public class WorkDescriptionWidget extends Composite implements LogicObservable
 	TextBox textIdentifier;
 	
 	@UiField
+	FormLabel labelDescription, labelTask;
+	
+	@UiField
 	TextBox textName;
+	
+	@UiField
+	Button buttonSave;
+	
+	@UiField
+	Button buttonLoad;
+	
+	@UiField
+	Button buttonCollapseTemplate;
 	
 	ActivityReportTemplate selectedTemplate;
 
@@ -78,6 +95,15 @@ public class WorkDescriptionWidget extends Composite implements LogicObservable
 			}
 		});
 		handler.loadTemplates();
+		
+		textDiscription.setPlaceholder(constants.workDescriptionPlaceHolder());
+		textName.setPlaceholder(constants.textTemplateNamePlaceHolder());
+		buttonLoad.setText(constants.buttonLoadTemplate());
+		buttonSave.setText(constants.buttonSaveTemplate());
+		buttonCollapseTemplate.setText(constants.buttonTemplateText());
+		
+		labelDescription.setText(constants.headingWorkDescription());
+		labelTask.setText(constants.headingSelectTask());
 	}
 
 	/**

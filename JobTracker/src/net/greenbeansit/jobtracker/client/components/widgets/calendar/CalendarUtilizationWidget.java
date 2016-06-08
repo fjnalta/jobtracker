@@ -24,6 +24,7 @@ import com.google.gwt.user.datepicker.client.CalendarUtil;
 
 import net.greenbeansit.jobtracker.client.components.CalendarObserver;
 import net.greenbeansit.jobtracker.client.components.LogicObservable;
+import net.greenbeansit.jobtracker.client.localization.HomePageConstants;
 
 /**
  * Shows the Utilization per Day of the month above the Calendar
@@ -35,6 +36,9 @@ public class CalendarUtilizationWidget extends Composite implements CalendarObse
 
 	private static CalendarUtilizationWidgetUiBinder uiBinder = GWT.create(CalendarUtilizationWidgetUiBinder.class);
 
+	private static HomePageConstants			constants	= GWT
+			.create(HomePageConstants.class);
+	
 	interface CalendarUtilizationWidgetUiBinder extends UiBinder<Widget, CalendarUtilizationWidget> {
 	}
 
@@ -280,32 +284,10 @@ public class CalendarUtilizationWidget extends Composite implements CalendarObse
 	 */
 	private String getDayName(int day) {
 
-		String dayName = "";
-
-		switch (day) {
-		case 0:
-			dayName = "So";
-			break;
-		case 1:
-			dayName = "Mo";
-			break;
-		case 2:
-			dayName = "Di";
-			break;
-		case 3:
-			dayName = "Mi";
-			break;
-		case 4:
-			dayName = "Do";
-			break;
-		case 5:
-			dayName = "Fr";
-			break;
-		case 6:
-			dayName = "Sa";
-			break;
-		}
-		return dayName;
+		if(day >= 0 && day < 7)
+			return constants.dayNames()[day];
+		else
+			return "";
 	}
 
 	/**

@@ -3,6 +3,7 @@ package net.greenbeansit.jobtracker.client.components.widgets.calendar;
 import java.util.Date;
 
 import org.gwtbootstrap3.client.ui.Button;
+import org.gwtbootstrap3.client.ui.InputGroupAddon;
 import org.gwtbootstrap3.client.ui.TextBox;
 import org.gwtbootstrap3.client.ui.constants.IconType;
 
@@ -17,6 +18,7 @@ import com.google.gwt.user.client.ui.Widget;
 
 import net.greenbeansit.jobtracker.client.components.CalendarObserver;
 import net.greenbeansit.jobtracker.client.components.LogicObservable;
+import net.greenbeansit.jobtracker.client.localization.HomePageConstants;
 import net.greenbeansit.jobtracker.shared.ActivityReport;
 
 /**
@@ -29,12 +31,18 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 
 	private static CalendarTimeInputWidgetUiBinder uiBinder = GWT.create(CalendarTimeInputWidgetUiBinder.class);
 
+	private static HomePageConstants			constants	= GWT
+			.create(HomePageConstants.class);
+	
 	/**
 	 * UIBinder Interface for {@link CalendarTimeInputWidget}
 	 */
 	interface CalendarTimeInputWidgetUiBinder extends UiBinder<Widget, CalendarTimeInputWidget> {
 	}
 
+	@UiField
+	InputGroupAddon addonDateStart, addonDateEnd, addonTimeStart, addonTimeEnd, addonBreak, addonDuration;
+	
 	@UiField
 	Button buttonUpDateStart;
 	@UiField
@@ -128,6 +136,14 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 		buttonTimeHourUpDuration.setIcon(IconType.ARROW_UP);
 		buttonTimeMinuteUpDuration.setIcon(IconType.ARROW_UP);
 
+		addonDateStart.setText(constants.addonDateStart());
+		addonDateEnd.setText(constants.addonDateEnd());
+		addonTimeStart.setText(constants.addonTimeStart());
+		addonTimeEnd.setText(constants.addonTimeEnd());
+		addonBreak.setText(constants.addonBreak());
+		addonDuration.setText(constants.addonDuration());
+		
+		buttonBook.setText(constants.buttonBook());
 	}
 
 	/**
