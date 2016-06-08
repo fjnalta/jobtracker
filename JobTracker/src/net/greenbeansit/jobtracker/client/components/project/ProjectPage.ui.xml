@@ -100,27 +100,28 @@
 	<b:Container fluid="true">
 		<b:Column size="XS_12,SM_12,MD_4,LG_4" addStyleNames="{style.mainColumn}">
 			<b:Row addStyleNames="{style.smallContainer}">
-				<b:Heading size="H4" text="Filter" addStyleNames="{style.titleLeft}" />
-				<s:MultipleSelect liveSearch="true"
-					liveSearchPlaceholder="Kunde" ui:field="selectCustomer">
+				<b:Heading size="H4" addStyleNames="{style.titleLeft}"
+					ui:field="headingFilter" />
+				<s:MultipleSelect liveSearch="true" ui:field="selectCustomer">
 				</s:MultipleSelect>
 			</b:Row>
 		</b:Column>
 		<b:Column size="XS_12,SM_12,MD_8,LG_8" addStyleNames="{style.mainColumn}">
 			<b:Row addStyleNames="{style.largeContainer}">
 				<b:Heading size="H3" addStyleNames="{style.titleRight}"
-					text="Alle Projekte" />
+					ui:field="headingTitle" />
 			</b:Row>
 			<b:Row addStyleNames="{style.largeContainer}">
 				<b.html:ClearFix addStyleNames="{style.columnHeader} {style.columnHeaderName}"
 					ui:field="columnHeaderName">
-					<b:Heading size="H4" text="Name" addStyleNames="{style.columnTitle}" />
+					<b:Heading size="H4" text="Name" addStyleNames="{style.columnTitle}"
+						ui:field="columnHeaderNameTitle" />
 					<b:Heading size="H4" text="" addStyleNames="{style.columnTitle}"
 						ui:field="columnHeaderNameArrow" />
 				</b.html:ClearFix>
 				<b.html:ClearFix addStyleNames="{style.columnHeader} {style.columnHeaderBudget}"
 					ui:field="columnHeaderBudget">
-					<b:Heading size="H4" text="Auslastung" addStyleNames="{style.columnTitle}" />
+					<b:Heading size="H4" text="Auslastung" addStyleNames="{style.columnTitle}" ui:field="columnHeaderBudgetTitle"/>
 					<b:Heading size="H4" text="" addStyleNames="{style.columnTitle}"
 						ui:field="columnHeaderBudgetArrow" />
 				</b.html:ClearFix>

@@ -15,6 +15,7 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
+import com.google.gwt.i18n.client.Constants;
 import com.google.gwt.resources.client.CssResource;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
@@ -22,6 +23,7 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 
 import net.greenbeansit.jobtracker.client.components.project.ProjectPageHelperServiceImpl.Callback;
+import net.greenbeansit.jobtracker.client.localization.ProjectPageConstants;
 import net.greenbeansit.jobtracker.client.utils.rest.NotifyHelper;
 import net.greenbeansit.jobtracker.shared.Customer;
 import net.greenbeansit.jobtracker.shared.Job;
@@ -34,8 +36,11 @@ import net.greenbeansit.jobtracker.shared.Job;
  */
 public class ProjectPage extends Composite
 {
-	private static ProjectPageUiBinder uiBinder = GWT
+	private static ProjectPageUiBinder	uiBinder	= GWT
 			.create(ProjectPageUiBinder.class);
+
+	private static ProjectPageConstants	constants	= GWT
+			.create(ProjectPageConstants.class);
 
 	/**
 	 * UiBinder for the {@link ProjectPage}.
@@ -83,13 +88,9 @@ public class ProjectPage extends Composite
 	ClearFix							columnHeaderLocked;
 
 	@UiField
-	Heading								columnHeaderNameArrow;
-
-	@UiField
-	Heading								columnHeaderBudgetArrow;
-
-	@UiField
-	Heading								columnHeaderLockedArrow;
+	Heading								columnHeaderNameTitle,
+			columnHeaderNameArrow, columnHeaderBudgetTitle,
+			columnHeaderBudgetArrow, columnHeaderLockedArrow, headingTitle, headingFilter;
 
 	private ProjectPageHelperService	helperService;
 	private ProjectPageSortMode			sortMode;
@@ -104,6 +105,13 @@ public class ProjectPage extends Composite
 	{
 		initWidget(uiBinder.createAndBindUi(this));
 
+		columnHeaderNameTitle.setText(constants.columnHeaderName());
+		columnHeaderBudgetTitle.setText(constants.columnHeaderBudget());
+		headingTitle.setText(constants.title());
+		headingFilter.setText(constants.headingFilter());
+		selectCustomer.setPlaceholder(constants.selectCustomerPlaceHolder());
+		selectCustomer.setLiveSearchPlaceholder(constants.selectCustomerLiveSearchPlaceHolder());
+		
 		// initial sort mode
 		sortMode = ProjectPageSortMode.NAME_UP;
 		columnHeaderNameArrow.setText(ARROW_UP);
@@ -236,7 +244,8 @@ public class ProjectPage extends Composite
 	 * Clears the list container and refills it with {@link JobListItem}s based
 	 * on the following list of {@link Job}s.
 	 * 
-	 * @param jobs the list of {@link Job}s that should be displayed.
+	 * @param jobs
+	 *            the list of {@link Job}s that should be displayed.
 	 */
 	private void fillJobList(List<Job> jobs)
 	{
@@ -253,8 +262,9 @@ public class ProjectPage extends Composite
 
 	/**
 	 * Fills the filter {@link Select} with the following {@link Customer}s.
-	 *  
-	 * @param customers a list of {@link Customer}s.
+	 * 
+	 * @param customers
+	 *            a list of {@link Customer}s.
 	 */
 	private void fillCustomerList(List<Customer> customers)
 	{
