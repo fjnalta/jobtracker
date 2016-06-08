@@ -19,7 +19,8 @@ import java.util.List;
  */
 public class FullCalendarCustomize extends FullCalendar {
 
-	private List<ActivityReport> reportsToSave= new ArrayList<ActivityReport>();
+	private List<ActivityReport> reportsToSave = new ArrayList<ActivityReport>();
+	private List<UtilizationWeek> capacityReportsToSave = new ArrayList<UtilizationWeek>();
 
 	/**
 	 * FullCalendar Constructor
@@ -67,16 +68,20 @@ public class FullCalendarCustomize extends FullCalendar {
 	/**
 	 * Represents a {@link CapacityReportEvent}
 	 */
-	public CapacityReportEvent capacityEvent;
+	public CapacityReportEvent currentCapacityEvent;
 
 	/**
 	 * Adds a Event to the Calendar
 	 * @param event the Event.
      */
 	public void addEvent(ActivityReportEvent event) {
-		// TODO Auto-generated method stub
 		super.addEvent(event);
 		this.currentEvent = event;
+	}
+
+	public void addEvent(CapacityReportEvent event) {
+		super.addEvent(event);
+		this.currentCapacityEvent = event;
 	}
 
 	/**
@@ -87,6 +92,10 @@ public class FullCalendarCustomize extends FullCalendar {
 		this.reportsToSave.add(a);
 	}
 
+	public void addEventToSave(UtilizationWeek uw) {
+		this.capacityReportsToSave.add(uw);
+	}
+
 	/**
 	 * Get's the List of Events to be saved
 	 * @return a list of {@link ActivityReport}s.
@@ -95,6 +104,9 @@ public class FullCalendarCustomize extends FullCalendar {
 		return this.reportsToSave;
 	}
 
+	public List<UtilizationWeek> getCapacityReportsToSave() {
+		return  this.capacityReportsToSave;
+	}
 
 	/*
 	 * private static final long serialVersionUID = 7682896069658320372L;

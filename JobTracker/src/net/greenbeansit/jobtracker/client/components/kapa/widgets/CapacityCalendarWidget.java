@@ -61,7 +61,7 @@ public class CapacityCalendarWidget extends Composite implements CapaCalendarObs
      */
     @Override
     public void updateObservable() {
-        // TODO - add CapacityReportEvents here
+        currentUtilizationWeek = handler.getCurrentUtilizationWeek();
         fullcalendar.render();
     }
 
@@ -82,14 +82,17 @@ public class CapacityCalendarWidget extends Composite implements CapaCalendarObs
     CalendarConfig config;
     List<CapacityReportEvent> eventList = new ArrayList<CapacityReportEvent>();
 
+    private UtilizationWeek currentUtilizationWeek;
 
     /**
      * Initializes a new Instance of the {@link CapacityCalendarWidget}
      */
     public CapacityCalendarWidget() {
 
-        calendarHandler.addObserver(this);
+        handler.addObservable(this);
         handler.setCapacityCalendar(this);
+
+        calendarHandler.addObserver(this);
 
         initWidget(uiBinder.createAndBindUi(this));
 
@@ -111,10 +114,9 @@ public class CapacityCalendarWidget extends Composite implements CapaCalendarObs
              * Create new event. It has an unique ID.
              *
              * @param title the Title of the Event.
-             * @param possibility the possibility of the Event.
              * @return new Event
              */
-            private CapacityReportEvent createEvent(String title, Integer possibility) {
+            private CapacityReportEvent createEvent(String title) {
                 updateId();
                 return (new CapacityReportEvent(eventID, title));
             }
@@ -152,6 +154,9 @@ public class CapacityCalendarWidget extends Composite implements CapaCalendarObs
                 month.setSubText(monthToString(fullcalendar.getDate().getMonth()));
             }
 
+
+            // TODO - get startDate and beginDate from created CapacityReportEvent and add the Dates to the handler.currentUtilizationWeek
+
             /**
              * Sets the Click and Hover config for the {@link CapacityCalendarWidget}
              * @return the Click and Hover config
@@ -175,13 +180,14 @@ public class CapacityCalendarWidget extends Composite implements CapaCalendarObs
                     public void eventClick(JavaScriptObject calendarEvent, NativeEvent event,
                                            JavaScriptObject viewObject) {
                         CapacityReportEvent e = new CapacityReportEvent(calendarEvent);
-                        fullcalendar.capacityEvent = e;
+                        fullcalendar.currentCapacityEvent = e;
                         for (CapacityReportEvent a : eventList) {
                             if (a.getDescription().equals(e.getDescription())) {
-                                handler.setCurrentReport(a.getUw());
+                                handler.setCurrentUtilizationWeek(a.getUw());
                             }
                         }
                         notifyHandler();
+                        notifyLogicHandler();
                     }
 
                     /**
@@ -211,7 +217,7 @@ public class CapacityCalendarWidget extends Composite implements CapaCalendarObs
                         tmp.setEnd(end);
                         unselect(viewObject, event);
                         fullcalendar.addEvent(tmp);
-                        fullcalendar.capacityEvent = tmp;
+                        fullcalendar.currentCapacityEvent = tmp;
                         notifyHandler();
                     }
 
@@ -268,14 +274,14 @@ public class CapacityCalendarWidget extends Composite implements CapaCalendarObs
                         if (nativeEvent.getAltKey()) {
                             updateId();
                             CapacityReportEvent dragEvent = new CapacityReportEvent(calendarEvent);
-                            CapacityReportEvent oldEvent = createEvent(dragEvent.getTitle(), dragEvent.getPossibility());
+                            CapacityReportEvent oldEvent = createEvent(dragEvent.getTitle());
 
                             oldEvent.setStart(dragEvent.getISOStart());
                             oldEvent.setEnd(dragEvent.getISOEnd());
 
                             dragEvent.setTitle(dragEvent.getTitle() + titleNumber++);
                             fullcalendar.addEvent(oldEvent);
-                            fullcalendar.capacityEvent = dragEvent;
+                            fullcalendar.currentCapacityEvent = dragEvent;
                             notifyHandler();
                         }
 
@@ -312,8 +318,7 @@ public class CapacityCalendarWidget extends Composite implements CapaCalendarObs
                 fullcalendar.addEvent(e);
                 this.eventList.add(e);
                 fullcalendar.render();
-                fullcalendar.capacityEvent = null;
-
+                fullcalendar.currentCapacityEvent = null;
             }
         }
         fullcalendar.render();
