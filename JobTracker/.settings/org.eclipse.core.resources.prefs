@@ -1,4 +1,5 @@
 eclipse.preferences.version=1
+encoding//src/net/greenbeansit/jobtracker/client/localization/ApplicationConstants_de.properties=UTF-8
 encoding//src/net/greenbeansit/jobtracker/client/localization/HomePageConstants_de.properties=UTF-8
 encoding//src/net/greenbeansit/jobtracker/client/localization/ManagerEmployeeDetailPageConstants_de.properties=UTF-8
 encoding//src/net/greenbeansit/jobtracker/client/localization/ManagerPageConstants_de.properties=UTF-8
