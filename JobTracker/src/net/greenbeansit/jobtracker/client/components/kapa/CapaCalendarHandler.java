@@ -7,21 +7,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
-
-import com.google.gwt.user.client.Window;
-
-
-import net.greenbeansit.jobtracker.client.components.widgets.calendar.FullCalendarCustomize;
-
 /**
  * This class handles the communication between the calender widgets
  *
- * @author ahmed
+ * @author Philipp Minges
  *
  */
 public class CapaCalendarHandler implements LogicObservable {
@@ -29,8 +18,6 @@ public class CapaCalendarHandler implements LogicObservable {
      * calendar
      */
     public FullCalendarCustomize calendar;
-    //public Event currentEvent;
-
     private List<CapaCalendarObserver> list = new ArrayList<>();
 
     /**
@@ -93,7 +80,9 @@ public class CapaCalendarHandler implements LogicObservable {
 
     @Override
     public void notifyLogicHandler() {
+
         handler.updateAllObservables();
+
     }
 
     /**
