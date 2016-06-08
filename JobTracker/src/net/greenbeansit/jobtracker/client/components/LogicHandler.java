@@ -2,8 +2,6 @@ package net.greenbeansit.jobtracker.client.components;
 
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.i18n.client.DateTimeFormat;
-import com.google.gwt.user.client.Window;
-
 import net.greenbeansit.jobtracker.client.components.kapa.widgets.CapacityCalendarWidget;
 import net.greenbeansit.jobtracker.client.components.widgets.calendar.CalendarWidget;
 import net.greenbeansit.jobtracker.client.utils.rest.NotifyHelper;
@@ -32,21 +30,22 @@ public class LogicHandler {
 
 	private ActivityReport currentReport;
 	private ActivityReportTemplate currentTemplate;
-	private UtilizationWeek currentUtilizationWeek;
 
 	private List<LogicObservable> list = new ArrayList<>();
+
+
 	private List<ActivityReport> currentReportsList = new ArrayList<ActivityReport>();
-	private List<Job> jobList = new ArrayList<Job>();
 	private List<ActivityReportTemplate> templateList = new ArrayList<ActivityReportTemplate>();
+	private List<Job> jobList = new ArrayList<Job>();
 	private List<PseudoJob> pseudoJobList = new ArrayList<PseudoJob>();
+	private List<UtilizationWeek> utilizationWeekList = new ArrayList<UtilizationWeek>();
+
 	private List<Integer> utilizationList = new ArrayList<Integer>();
 	private User currentUser;
 
 	private Job currentJob;
 	private PseudoJob currentPJob;
-
-	private List<UtilizationWeek> utilizationWeekList = new ArrayList<UtilizationWeek>();
-
+	private UtilizationWeek currentUtilizationWeek;
 
 	private CapacityCalendarWidget capacityCalendar;
 	private CalendarWidget calendar;
@@ -65,10 +64,13 @@ public class LogicHandler {
 		List<Job> temp = new ArrayList<Job>();
 		List<ActivityReportTemplate> reporttemp = new ArrayList<ActivityReportTemplate>();
 		List<PseudoJob> pseudoJobreport = new ArrayList<PseudoJob>();
+		List<UtilizationWeek> utilizationWeekreports = new ArrayList<UtilizationWeek>();
 		
 		this.jobList = temp;
 		this.templateList = reporttemp;
 		this.pseudoJobList = pseudoJobreport;
+		this.utilizationWeekList = utilizationWeekreports;
+
 		this.currentUser = new User();
 		this.currentUser.setId(2);
 	}
@@ -170,7 +172,7 @@ public class LogicHandler {
 	 * get the current capacity report list
 	 * @return List<UtilizationWeek> object
      */
-	public List<UtilizationWeek> getCurrentCapacityReportsList(){
+	public List<UtilizationWeek> getCurrentUtilizationWeekList(){
 		return utilizationWeekList;
 	}
 
