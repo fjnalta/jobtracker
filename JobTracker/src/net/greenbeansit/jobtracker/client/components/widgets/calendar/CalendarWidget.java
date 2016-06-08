@@ -30,6 +30,7 @@ import com.google.gwt.user.client.ui.Widget;
 
 import net.greenbeansit.jobtracker.client.components.CalendarObserver;
 import net.greenbeansit.jobtracker.client.components.LogicObservable;
+import net.greenbeansit.jobtracker.client.localization.ApplicationConstants;
 import net.greenbeansit.jobtracker.client.localization.HomePageConstants;
 import net.greenbeansit.jobtracker.shared.ActivityReport;
 
@@ -46,6 +47,8 @@ public class CalendarWidget extends Composite implements CalendarObserver, Logic
 	
 	private static HomePageConstants			constants	= GWT
 			.create(HomePageConstants.class);
+	
+	private static ApplicationConstants applicationConstants = GWT.create(ApplicationConstants.class);
 
 	private int eventID;
 	
@@ -102,7 +105,7 @@ public class CalendarWidget extends Composite implements CalendarObserver, Logic
 				config = new CalendarConfig();
 				
 				//Language
-				switch(constants.languageName())
+				switch(applicationConstants.languageName())
 				{
 				case "de":
 					config.setLangauge(Language.German);

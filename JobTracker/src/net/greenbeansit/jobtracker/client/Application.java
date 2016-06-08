@@ -1,6 +1,5 @@
 package net.greenbeansit.jobtracker.client;
 
-
 import org.gwtbootstrap3.client.ui.AnchorListItem;
 import org.gwtbootstrap3.client.ui.Container;
 import org.gwtbootstrap3.client.ui.Image;
@@ -31,10 +30,11 @@ import net.greenbeansit.jobtracker.client.localization.ApplicationConstants;
  */
 public class Application extends Composite
 {
-	private static ApplicationUiBinder uiBinder = GWT
+	private static ApplicationUiBinder	uiBinder	= GWT
 			.create(ApplicationUiBinder.class);
-	
-	private static ApplicationConstants constants = GWT.create(ApplicationConstants.class);
+
+	private static ApplicationConstants	constants	= GWT
+			.create(ApplicationConstants.class);
 
 	/**
 	 * UiBinder for {@link Application}.
@@ -77,7 +77,7 @@ public class Application extends Composite
 		navKapa.setText(constants.capacityPage());
 		navProject.setText(constants.projectPage());
 		navManager.setText(constants.managerPage());
-		
+
 		// Add navbar logo
 		navbarBrand.add(new Image("jobtracker/assets/images/navbar_logo.png"));
 
@@ -127,7 +127,8 @@ public class Application extends Composite
 		/**
 		 * Initializes the {@link ProjectPage} as the new active page.
 		 * 
-		 * @param addressSplit the URL that led to this page.
+		 * @param addressSplit
+		 *            the URL that led to this page.
 		 */
 		private void loadProjectPage(String[] addressSplit)
 		{
@@ -154,8 +155,7 @@ public class Application extends Composite
 					page = new ProjectPage();
 			} else
 				page = new ProjectPage();
-			
-			
+
 			navProject.setActive(true);
 
 			removeActiveContentContainer();
@@ -166,7 +166,8 @@ public class Application extends Composite
 		/**
 		 * Initializes the {@link ManagerPage} as the new active page.
 		 * 
-		 * @param addressSplit the URL that led to this page.
+		 * @param addressSplit
+		 *            the URL that led to this page.
 		 */
 		private void loadManagerPage(String[] addressSplit)
 		{
@@ -202,7 +203,8 @@ public class Application extends Composite
 		/**
 		 * Initializes the {@link CapacityPage} as the new active page.
 		 * 
-		 * @param addressSplit the URL that led to this page.
+		 * @param addressSplit
+		 *            the URL that led to this page.
 		 */
 		private void loadCapacityPage(String[] addressSplit)
 		{
@@ -214,7 +216,8 @@ public class Application extends Composite
 		/**
 		 * Initializes the {@link HomePage} as the new active page.
 		 * 
-		 * @param addressSplit the URL that led to this page.
+		 * @param addressSplit
+		 *            the URL that led to this page.
 		 */
 		private void loadHomePage(String[] addressSplit)
 		{
@@ -239,18 +242,19 @@ public class Application extends Composite
 		}
 
 		/**
-		 * Removes all elements except the navbar from the mainContainer. 
+		 * Removes all elements except the navbar from the mainContainer.
 		 */
 		private void removeActiveContentContainer()
 		{
 			for (int i = 1; i < mainContainer.getWidgetCount(); i++)
 				mainContainer.remove(i);
 		}
-		
+
 		/**
 		 * Adds the following {@link Widget} to the mainContainer.
 		 * 
-		 * @param widget the {@link Widget} that should be added.
+		 * @param widget
+		 *            the {@link Widget} that should be added.
 		 */
 		private void addWidgetAsContentPage(Widget widget)
 		{

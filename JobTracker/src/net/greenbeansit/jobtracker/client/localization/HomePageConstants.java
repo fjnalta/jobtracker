@@ -71,9 +71,6 @@ public interface HomePageConstants extends Constants
 	@DefaultStringValue("Book")
 	String buttonBook();
 	
-	@DefaultStringValue("en")
-	String languageName();
-	
 	@DefaultStringArrayValue({ "Su", "Mo", "Tu", "We", "Th", "Fr", "Sa" })
 	String[] dayNames();
 }

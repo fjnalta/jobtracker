@@ -1,6 +1,7 @@
 package net.greenbeansit.jobtracker.client.localization;
 
 import com.google.gwt.i18n.client.Constants;
+import com.google.gwt.i18n.client.Constants.DefaultStringValue;
 import com.sun.research.ws.wadl.Application;
 
 /**
@@ -21,4 +22,7 @@ public interface ApplicationConstants extends Constants
 	
 	@DefaultStringValue("Manager")
 	String managerPage();
+	
+	@DefaultStringValue("en")
+	String languageName();
 }
