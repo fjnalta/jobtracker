@@ -17,6 +17,7 @@ public class UtilizationWeek implements Serializable {
     private Integer author;
     private String  text;
     private Date    beginDate;
+    private Date    endDate;
     private Integer beginTime;
     private Integer endTime;
     private Integer possibility;
@@ -44,7 +45,7 @@ public class UtilizationWeek implements Serializable {
      * @param breakTime   the break time
      */
     public UtilizationWeek(Integer id, Integer author, String text, Date beginDate,
-                           Integer beginTime, Integer endTime, Integer possibility,
+                           Integer beginTime, Integer endTime, Date endDate, Integer possibility,
                            Integer pseudoJobId, Integer breakTime) {
         this.id = id;
         this.author = author;
@@ -52,6 +53,7 @@ public class UtilizationWeek implements Serializable {
         this.beginDate = beginDate;
         this.beginTime = beginTime;
         this.endTime = endTime;
+        this.endDate = endDate;
         this.possibility = possibility;
         this.pseudoJobId = pseudoJobId;
         this.breakTime = breakTime;
@@ -223,6 +225,17 @@ public class UtilizationWeek implements Serializable {
             throw new IllegalArgumentException();
         }
         this.pseudoJobId = pseudoJobId;
+    }
+
+    public void setEndDate(Date date) {
+        if(date == null) {
+            throw new IllegalArgumentException();
+        }
+        this.endDate = date;
+    }
+
+    public Date getEndDate(){
+        return this.endDate;
     }
     
     public boolean equals(Object obj) {
