@@ -106,21 +106,21 @@
 	</ui:style>
 	<b:Container fluid="true">
 		<b:Row addStyleNames="{style.headerRow}">
-			<g:Anchor text="&lt; Alle Mitarbeiter" href="#manager"
-				addStyleNames="{style.anchorBackward}" />
+			<b:Anchor text="" href="#manager"
+				addStyleNames="{style.anchorBackward}" ui:field="anchorBackward"/>
 			<b:Heading size="H3" addStyleNames="{style.title}" text=""
 				ui:field="titleEmployeeName" />
 		</b:Row>
 		<b:Row addStyleNames="{style.bottomRow}">
 			<b:Column size="XS_12,SM_12,MD_4,LG_4" addStyleNames="{style.mainColumn}">
 				<b:Row addStyleNames="{style.smallContainer}">
-					<b:Heading size="H4" text="Information" addStyleNames="{style.infoFieldHeading}"/>
+					<b:Heading size="H4" text="Information" addStyleNames="{style.infoFieldHeading}" ui:field="infoFieldHeading"/>
 					<b.html:ClearFix addStyleNames="{style.infoFieldContainer}">
-						<b.html:Span text="Name:" addStyleNames="{style.infoFieldLabel}"/>
+						<b.html:Span text="" addStyleNames="{style.infoFieldLabel}" ui:field="labelName"/>
 						<b.html:Span text="" ui:field="textEmployeeName" addStyleNames="{style.infoFieldValue}"/>
 					</b.html:ClearFix>
 					<b.html:ClearFix addStyleNames="{style.infoFieldContainer}">
-						<b.html:Span text="Vorname:" addStyleNames="{style.infoFieldLabel}"/>
+						<b.html:Span text="" addStyleNames="{style.infoFieldLabel}" ui:field="labelSurName"/>
 						<b.html:Span text="" ui:field="textEmployeeSurName" addStyleNames="{style.infoFieldValue}"/>
 					</b.html:ClearFix>
 					<!--
@@ -138,9 +138,9 @@
 				<b:Row addStyleNames="{style.largeContainer}">
 					<b:NavTabs ui:field="tabControl">
 						<b:TabListItem active="true" dataTarget="#tab1"
-							text="Projekte" ui:field="tabProject"/>
-						<b:TabListItem dataTarget="#tab2" text="Tätigkeiten" ui:field="tabReport"/>
-						<b:TabListItem dataTarget="#tab3" text="Kapaplanung" ui:field="tabCapacity"/>
+							text="" ui:field="tabProject"/>
+						<b:TabListItem dataTarget="#tab2" text="" ui:field="tabReport"/>
+						<b:TabListItem dataTarget="#tab3" text="" ui:field="tabCapacity"/>
 					</b:NavTabs>
 					<b:TabContent>
 						<b:TabPane b:id="tab1" active="true">

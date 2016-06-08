@@ -2,6 +2,7 @@ package net.greenbeansit.jobtracker.client.components.manager.detail;
 
 import org.gwtbootstrap3.client.shared.event.TabShowEvent;
 import org.gwtbootstrap3.client.shared.event.TabShowHandler;
+import org.gwtbootstrap3.client.ui.Anchor;
 import org.gwtbootstrap3.client.ui.Heading;
 import org.gwtbootstrap3.client.ui.NavTabs;
 import org.gwtbootstrap3.client.ui.TabListItem;
@@ -15,6 +16,7 @@ import com.google.gwt.user.client.ui.Widget;
 
 import net.greenbeansit.jobtracker.client.components.manager.detail.ManagerEmployeeDetailPageHelperServiceImpl.Callback;
 import net.greenbeansit.jobtracker.client.components.widgets.UtilizationWidget;
+import net.greenbeansit.jobtracker.client.localization.ManagerEmployeeDetailPageConstants;
 import net.greenbeansit.jobtracker.client.utils.rest.NotifyHelper;
 
 /**
@@ -25,8 +27,11 @@ import net.greenbeansit.jobtracker.client.utils.rest.NotifyHelper;
 public class ManagerEmployeeDetailPage extends Composite
 {
 
-	private static ManagerEmployeeDetailPageUiBinder uiBinder = GWT
+	private static ManagerEmployeeDetailPageUiBinder	uiBinder	= GWT
 			.create(ManagerEmployeeDetailPageUiBinder.class);
+
+	private static ManagerEmployeeDetailPageConstants	constants	= GWT
+			.create(ManagerEmployeeDetailPageConstants.class);
 
 	/**
 	 * UiBinder for the {@link ManagerEmployeeDetailPage}.
@@ -60,16 +65,21 @@ public class ManagerEmployeeDetailPage extends Composite
 	Span											textEmployeeName;
 
 	@UiField
-	Span											textEmployeeSurName;
+	Span											textEmployeeSurName,
+			labelName, labelSurName;
 
 	@UiField
-	Heading											titleEmployeeName;
+	Heading											titleEmployeeName,
+			infoFieldHeading;
 
 	@UiField
 	JobChart										jobChart;
-	
+
 	@UiField
-	UtilizationWidget utilizationWidget;
+	UtilizationWidget								utilizationWidget;
+
+	@UiField
+	Anchor											anchorBackward;
 
 	private ManagerEmployeeDetailPageHelperService	helperService;
 
@@ -83,6 +93,14 @@ public class ManagerEmployeeDetailPage extends Composite
 	public ManagerEmployeeDetailPage(Integer userId)
 	{
 		initWidget(uiBinder.createAndBindUi(this));
+
+		labelName.setText(constants.labelName());
+		labelSurName.setText(constants.labelSurName());
+		anchorBackward.setText(constants.anchorBackward());
+		tabProject.setText(constants.tabProject());
+		tabReport.setText(constants.tabReport());
+		tabCapacity.setText(constants.tabCapacity());
+		infoFieldHeading.setText(constants.infoFieldHeading());
 
 		tabProject.addShowHandler(new TabShowHandler()
 		{
@@ -127,10 +145,11 @@ public class ManagerEmployeeDetailPage extends Composite
 								+ helperService.getEmployee().getSurname());
 
 						jobChart.fillPieChart(helperService.getJobs());
-						
-						utilizationWidget.setRemainingVacationDays(helperService.getEmployee().getRemainingVacationDays());
-						
-//						utilizationWidget.setUtilization((double)helperService.getEmployee().getUtilization());
+
+						utilizationWidget.setRemainingVacationDays(helperService
+								.getEmployee().getRemainingVacationDays());
+
+						// utilizationWidget.setUtilization((double)helperService.getEmployee().getUtilization());
 						utilizationWidget.setUtilization(157d);
 					}
 
