@@ -16,6 +16,7 @@ import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 
+import net.greenbeansit.jobtracker.client.localization.ApplicationConstants;
 import net.greenbeansit.jobtracker.shared.ActivityReport;
 
 /**
@@ -26,8 +27,11 @@ import net.greenbeansit.jobtracker.shared.ActivityReport;
 public class ActivityReportCalendar extends Composite
 {
 
-	private static ActivityReportCalendarUiBinder uiBinder = GWT
+	private static ActivityReportCalendarUiBinder	uiBinder				= GWT
 			.create(ActivityReportCalendarUiBinder.class);
+
+	private static ApplicationConstants				applicationConstants	= GWT
+			.create(ApplicationConstants.class);
 
 	/**
 	 * UiBinder for {@link ActivityReportCalendar}.
@@ -38,23 +42,20 @@ public class ActivityReportCalendar extends Composite
 			extends UiBinder<Widget, ActivityReportCalendar>
 	{
 	}
-	
-	
-	
-	@UiField
-	ClearFix container;
-	
-	FullCalendar calendar;
-	CalendarConfig config;
 
-	
+	@UiField
+	ClearFix		container;
+
+	FullCalendar	calendar;
+	CalendarConfig	config;
+
 	/**
 	 * Initializes a new instance of the {@link ActivityReportCalendar} class.
 	 */
 	public ActivityReportCalendar()
 	{
 		initWidget(uiBinder.createAndBindUi(this));
-		
+
 		Timer timer = new Timer()
 		{
 			@Override
@@ -65,23 +66,33 @@ public class ActivityReportCalendar extends Composite
 		};
 		timer.schedule(0);
 	}
-	
+
 	/**
 	 * Initializes the calendar.
 	 */
 	private void initCalendar()
 	{
 		config = new CalendarConfig();
-		config.setLangauge(Language.German);
-		
+
+		switch (applicationConstants.languageName())
+		{
+		case "de":
+			config.setLangauge(Language.German);
+			break;
+		default:
+			config.setLangauge(Language.EnglishBritish);
+			break;
+		}
+
 		GeneralDisplay generalDisplay = new GeneralDisplay();
 		generalDisplay.setHeight(600);
 
 		config.setGeneralDisplay(generalDisplay);
-		
-		calendar = new FullCalendar("test", ViewOption.agendaWeek, config, false);
+
+		calendar = new FullCalendar("test", ViewOption.agendaWeek, config,
+				false);
 		calendar.goToDate(new Date());
-		
+
 		container.add(calendar);
 	}
 

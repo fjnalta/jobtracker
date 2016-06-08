@@ -16,6 +16,8 @@ import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 
+import net.greenbeansit.jobtracker.client.localization.ApplicationConstants;
+
 /**
  * Displays the planned capacity of an employee.
  * 
@@ -26,6 +28,9 @@ public class CapacityCalendar extends Composite
 
 	private static CapacityCalendarUiBinder uiBinder = GWT
 			.create(CapacityCalendarUiBinder.class);
+	
+	private static ApplicationConstants				applicationConstants	= GWT
+			.create(ApplicationConstants.class);
 
 	/**
 	 * UiBinder for {@link CapacityCalendar}.
@@ -67,6 +72,17 @@ public class CapacityCalendar extends Composite
 	private void initCalendar()
 	{
 		config = new CalendarConfig();
+		
+		switch (applicationConstants.languageName())
+		{
+		case "de":
+			config.setLangauge(Language.German);
+			break;
+		default:
+			config.setLangauge(Language.EnglishBritish);
+			break;
+		}
+		
 		config.setLangauge(Language.German);
 		
 		GeneralDisplay generalDisplay = new GeneralDisplay();
