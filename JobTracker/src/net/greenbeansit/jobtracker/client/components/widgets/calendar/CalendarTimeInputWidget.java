@@ -314,6 +314,7 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 	@UiHandler("buttonTimeHourUpPause")
 	public void clickButtonTimeHourUpPause(ClickEvent e) {
 		increasePauseHours(pause);
+		workTime.setText(calculateDuration());
 		notifyHandler();
 	}
 
@@ -327,6 +328,7 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 	@UiHandler("buttonTimeHourDownPause")
 	public void clickButtonTimeHourDownPause(ClickEvent e) {
 		decreasePauseDurationHours(pause);
+		workTime.setText(calculateDuration());
 		notifyHandler();
 	}
 
@@ -340,6 +342,7 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 	@UiHandler("buttonTimeMinuteUpPause")
 	public void clickButtonTimeMinuteUpPause(ClickEvent e) {
 		increasePauseMinutes(pause);
+		workTime.setText(calculateDuration());
 		notifyHandler();
 	}
 
@@ -353,6 +356,7 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 	@UiHandler("buttonTimeMinuteDownPause")
 	public void clickButtonMinuteDownPause(ClickEvent e) {
 		decreasePauseMinutes(pause);
+		workTime.setText(calculateDuration());
 		notifyHandler();
 	}
 
@@ -471,7 +475,8 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 	 */
 	@UiHandler("buttonDelete")
 	public void deleteButton(ClickEvent e) {
-		handler.deleteReport(2,Integer.parseInt(calendarHandler.calendar.currentEvent.getId()));
+		handler.deleteReport(2, Integer.parseInt(calendarHandler.calendar.currentEvent.getId()));
+		calendarHandler.calendar.removeEvent(calendarHandler.calendar.currentEvent.getId());
 	}
 
 	/**
@@ -486,9 +491,9 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 		int startTime = createTimeFromText(eventStart.getText());
 		int duration = createTimeFromText(workTime.getText());
 		int breakTime = createTimeFromText(pause.getText());
-		for(ActivityReport report : calendarHandler.calendar.getEventsToSave()){
-			ActivityReport tmp = new ActivityReport(0, 0,
-					0, 0, 0, "", report.getDate(), startTime, duration, breakTime);
+		for (ActivityReport report : calendarHandler.calendar.getEventsToSave()) {
+			ActivityReport tmp = new ActivityReport(0, 0, 0, 0, 0, "", report.getDate(), startTime, duration,
+					breakTime);
 			handler.saveReport(tmp);
 		}
 		calendarHandler.calendar.getEventsToSave().clear();
@@ -498,7 +503,6 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 	@Override
 	public void update() {
 		ActivityReportEvent arp = calendarHandler.calendar.currentEvent;
-
 		dateStart.setText(getDateForBoxFromISOString(arp.getISOStart()));
 		dateEnd.setText(getDateForBoxFromISOString(arp.getISOEnd()));
 
@@ -511,7 +515,6 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 
 	@Override
 	public void notifyHandler() {
-
 		calendarHandler.calendar.removeEvent(calendarHandler.calendar.currentEvent.getId());
 
 		ActivityReportEvent e = new ActivityReportEvent(calendarHandler.calendar.currentEvent.getAp(),
@@ -529,8 +532,6 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 		calendarHandler.calendar.currentEvent = e;
 
 		calendarHandler.calendar.addEvent(calendarHandler.calendar.currentEvent);
-
-		e.overlapsOtherEvent();
 
 		calendarHandler.updateObserver(this);
 	}
@@ -881,14 +882,15 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 
 	/**
 	 * Calculates the duration of an event.
-	 * 
+	 *
+	 * @param pauseBefore
 	 * @return the duration "hh:mm"
 	 */
 	private String calculateDuration() {
 		int startOfEvent = createTimeFromText(eventStart.getText());
 		int endOfEvent = createTimeFromText(eventEnd.getText());
 		int eventPause = createTimeFromText(pause.getText());
-		int duration = endOfEvent - startOfEvent + eventPause;
+		int duration = endOfEvent - (startOfEvent + eventPause);
 		return addLeadingNullToInteger(duration / 60) + ":" + addLeadingNullToInteger(duration % 60);
 	}
 
@@ -954,18 +956,20 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 
 		int hours = Integer.parseInt(hourString);
 		int minutes = Integer.parseInt(minuteString);
-
-		if (minutes < 59) {
-			minutes++;
-		} else {
-			hours++;
-			minutes = 0;
+		int startOfEvent = createTimeFromText(eventStart.getText());
+		int duration = createTimeFromText(workTime.getText())+1;
+		if (1440 > (startOfEvent + duration)) {
+			if (minutes < 59) {
+				minutes++;
+			} else {
+				hours++;
+				minutes = 0;
+			}
+			if (hours > 23) {
+				hours = 23;
+				minutes = 59;
+			}
 		}
-		if (hours > 23) {
-			hours = 23;
-			minutes = 59;
-		}
-
 		hourString = "" + hours;
 		minuteString = "" + minutes;
 
@@ -986,10 +990,14 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 		String hourString = removeLeadingNull(boxText.substring(0, 2));
 		String minuteString = boxText.substring(2, boxText.length());
 		int hours = Integer.parseInt(hourString);
-		if (hours < 23) {
-			hours++;
-		} else {
-			hours = 23;
+		int startOfEvent = createTimeFromText(eventStart.getText());
+		int duration = createTimeFromText(workTime.getText()) + 60;
+		if (1440 > (startOfEvent + duration)) {
+			if (hours < 23) {
+				hours++;
+			} else {
+				hours = 23;
+			}
 		}
 		hourString = "" + hours;
 		hourString = addLeadingNull(hourString);
