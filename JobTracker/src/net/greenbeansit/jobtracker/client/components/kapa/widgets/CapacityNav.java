@@ -2,9 +2,6 @@ package net.greenbeansit.jobtracker.client.components.kapa.widgets;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.KeyDownHandler;
-import com.google.gwt.event.dom.client.KeyPressEvent;
-import com.google.gwt.event.dom.client.KeyPressHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -246,6 +243,7 @@ public class CapacityNav extends Composite implements LogicObservable, CapaCalen
     public void notifyLogicHandler() {
         if(currentUtilizationWeek != null) {
             currentUtilizationWeek.setText(description.getText());
+            currentUtilizationWeek.setPossibility(mySlider.getValue().intValue());
             GWT.log("notify logicHandler " + currentUtilizationWeek.getText());
             handler.setTempUtilizationWeek(currentUtilizationWeek);
         }
