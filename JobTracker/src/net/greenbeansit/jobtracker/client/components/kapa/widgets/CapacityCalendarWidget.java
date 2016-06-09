@@ -12,6 +12,7 @@ import net.greenbeansit.jobtracker.client.components.CalendarObserver;
 import net.greenbeansit.jobtracker.client.components.LogicObservable;
 import net.greenbeansit.jobtracker.client.components.kapa.CapaCalendarObserver;
 import net.greenbeansit.jobtracker.client.components.kapa.data.CapacityReportEvent;
+import net.greenbeansit.jobtracker.client.components.widgets.UtilizationWidget;
 import net.greenbeansit.jobtracker.client.components.widgets.calendar.FullCalendarCustomize;
 import net.greenbeansit.jobtracker.shared.UtilizationWeek;
 import org.gwtbootstrap3.client.ui.Column;
@@ -70,7 +71,7 @@ public class CapacityCalendarWidget extends Composite implements CapaCalendarObs
      */
     @Override
     public void notifyLogicHandler() {
-
+        handler.setCurrentUtilizationWeek(currentUtilizationWeek);
     }
 
     interface CapacityCalendarUiBinder extends UiBinder<Widget, CapacityCalendarWidget> {
@@ -215,10 +216,19 @@ public class CapacityCalendarWidget extends Composite implements CapaCalendarObs
                         CapacityReportEvent tmp = new CapacityReportEvent(eventID, eventTitel);
                         tmp.setStart(start);
                         tmp.setEnd(end);
+                        Date endDate = new Date(tmp.getISOEnd());
+                        endDate.setDate(endDate.getDate()-1);
+                        Date beginDate = new Date(tmp.getISOStart());
+
+                        UtilizationWeek tempUtil = new UtilizationWeek(0,0,"",beginDate,8,16,endDate,0,0,0);
+
                         unselect(viewObject, event);
+                        currentUtilizationWeek = tempUtil;
                         fullcalendar.addEvent(tmp);
+                        GWT.log("set util event");
                         fullcalendar.currentCapacityEvent = tmp;
                         notifyHandler();
+                        notifyLogicHandler();
                     }
 
                     @Override

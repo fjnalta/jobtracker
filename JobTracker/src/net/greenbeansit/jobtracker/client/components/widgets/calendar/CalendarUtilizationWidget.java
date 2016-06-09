@@ -305,7 +305,7 @@ public class CalendarUtilizationWidget extends Composite implements CalendarObse
 			number = 15;
 		}
 		
-		vp.setHeight(number * 0.5+ "px");
+		vp.setHeight(number+ "%");
 	
 		vp.setStyleName(this.SUFFIXPATH + "barChartHeight", true);
 			

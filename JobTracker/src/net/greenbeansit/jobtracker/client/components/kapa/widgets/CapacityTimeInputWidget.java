@@ -50,11 +50,7 @@ public class CapacityTimeInputWidget extends Composite implements CapaCalendarOb
 
     @Override
     public void notifyLogicHandler() {
-        if(calendarHandler.calendar.currentCapacityEvent.getUw() != null) {
-            currentUtilizationWeek.setBeginDate(calendarHandler.calendar.currentCapacityEvent.getUw().getBeginDate());
-            currentUtilizationWeek.setEndDate(calendarHandler.calendar.currentCapacityEvent.getUw().getEndDate());
-        }
-        handler.setCurrentUtilizationWeek(currentUtilizationWeek);
+        //handler.setCurrentUtilizationWeek(currentUtilizationWeek);
     }
 
     interface CapacityTimeInputWidgetUiBinder extends UiBinder<Widget, CapacityTimeInputWidget> {
@@ -96,9 +92,8 @@ public class CapacityTimeInputWidget extends Composite implements CapaCalendarOb
     @UiHandler("buttonBook")
     public void buttonBookClicked(ClickEvent e) {
         // TODO - needs work. cant read date from calendar Event.
-        UtilizationWeek report = new UtilizationWeek(0, handler.getCurrentUser().getId(), currentUtilizationWeek.getText(), createDateFromText(projectStart.getText()), 8, 16,
-                createDateFromText(projectEnd.getText()), currentUtilizationWeek.getPossibility(), currentUtilizationWeek.getPseudoJobId(), 0);
-        handler.saveUtilizationWeek(report);
+        //handler.setCurrentUtilizationWeek(calendarHandler.calendar.currentCapacityEvent.getUw());
+        handler.saveUtilizationWeek();
         calendarHandler.calendar.getCapacityReportsToSave().clear();
     }
 

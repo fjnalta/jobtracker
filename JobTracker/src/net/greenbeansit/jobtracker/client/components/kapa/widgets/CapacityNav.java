@@ -135,6 +135,7 @@ public class CapacityNav extends Composite implements LogicObservable, CapaCalen
             @Override
             public void onValueChange(ValueChangeEvent<String> event) {
                 currentUtilizationWeek = ((SelectJobOption) selectJob.getSelectedItem()).getUtilizationWeek();
+                notifyLogicHandler();
 
             }
         });
@@ -191,7 +192,7 @@ public class CapacityNav extends Composite implements LogicObservable, CapaCalen
 
         createUtilizationWeekList();
         addUtilizationWeeks(this.utilizationWeekList);
-        currentUtilizationWeek = handler.getCurrentUtilizationWeek();
+        currentUtilizationWeek = handler.getTempUtilizationWeek();
 
         if (currentUtilizationWeek != null) {
             for (Option option : selectJob.getItems()) {
@@ -227,18 +228,14 @@ public class CapacityNav extends Composite implements LogicObservable, CapaCalen
      */
     @Override
     public void notifyLogicHandler() {
+
+
         if(currentUtilizationWeek != null) {
                 currentUtilizationWeek.setText(description.getText());
+             handler.setTempUtilizationWeek(currentUtilizationWeek);
+            GWT.log("tempUtil  set)");
         }
-        handler.setCurrentUtilizationWeek(currentUtilizationWeek);
 
-        if(handler.getCurrentUtilizationWeek() != null) {
-            // TODO - read the DATE
-            GWT.log(handler.getCurrentUtilizationWeek().getText());
-            GWT.log(handler.getCurrentUtilizationWeek().getPossibility().toString());
-            GWT.log(handler.getCurrentUtilizationWeek().getPseudoJobId().toString() + " PseudoJobID");
-            GWT.log(handler.getCurrentUtilizationWeek().getBeginDate().toString());
-            GWT.log(handler.getCurrentUtilizationWeek().getEndDate().toString());
-        }
+
     }
 }

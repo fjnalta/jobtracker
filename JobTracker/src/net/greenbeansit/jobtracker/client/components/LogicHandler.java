@@ -47,6 +47,9 @@ public class LogicHandler {
 	private PseudoJob currentPJob;
 	private UtilizationWeek currentUtilizationWeek;
 
+
+	private UtilizationWeek tempUtilizationWeek;
+
 	private CapacityCalendarWidget capacityCalendar;
 	private CalendarWidget calendar;
 
@@ -365,23 +368,28 @@ public class LogicHandler {
 	 * Function for saving an UtilizationWeek to the backend. It first collects all needed information,
 	 * then if everything is correct it will try to save it.
 	 * On success is calls {@link #updateAllObservables()}to update the widgets
-	 * @param reportDummy a {@link UtilizationWeek} object with set time parameters
+	 *
 	 */
-	public void saveUtilizationWeek(UtilizationWeek reportDummy) {
+	public void saveUtilizationWeek() {
 		getInformations();
-		UtilizationWeek tempReport = reportDummy;
-
-		if (currentUtilizationWeek != null && currentUser != null) {
-			tempReport.setText(currentUtilizationWeek.getText());
-			tempReport.setAuthor(currentUtilizationWeek.getAuthor());
-			tempReport.setPseudoJobId(currentUtilizationWeek.getPseudoJobId());
-			tempReport.setPossibility(currentUtilizationWeek.getPossibility());
+		GWT.log("0");
+		GWT.log(tempUtilizationWeek.toString());
+		GWT.log("1");
+		GWT.log("2" + currentUtilizationWeek.toString());
+		if (currentUtilizationWeek != null && currentUser != null && tempUtilizationWeek!=null) {
+			final UtilizationWeek tempReport = currentUtilizationWeek;
+			tempReport.setText(tempUtilizationWeek.getText());
+			tempReport.setAuthor(tempUtilizationWeek.getAuthor());
+			tempReport.setPseudoJobId(tempUtilizationWeek.getPseudoJobId());
+			tempReport.setPossibility(tempUtilizationWeek.getPossibility());
 			try {
 				RestClient.build(new SuccessFunction<UtilizationWeek>() {
 					@Override
 					public void onSuccess(Method method, UtilizationWeek response) {
+						GWT.log(tempReport.toString());
 						LogicHandler.this.updateAllObservables();
 						NotifyHelper.successMessage("Report saved");
+
 					}
 
 					@Override
@@ -658,6 +666,8 @@ public class LogicHandler {
 	 * @param currentJob {@link Job} object to be set
 	 */
 	public void setCurrentUtilizationWeek(UtilizationWeek currentJob) {
+
+		GWT.log("set week");
 		this.currentUtilizationWeek = currentJob;
 	}
 
@@ -724,6 +734,16 @@ public class LogicHandler {
 	public void setPseudoJobList(List<PseudoJob> pseudoJobList) {
 		this.pseudoJobList = pseudoJobList;
 	}
+
+	public UtilizationWeek getTempUtilizationWeek() {
+		return tempUtilizationWeek;
+	}
+
+	public void setTempUtilizationWeek(UtilizationWeek tempUtilizationWeek) {
+		GWT.log("set temp");
+		this.tempUtilizationWeek = tempUtilizationWeek;
+	}
+
 
 
 }
