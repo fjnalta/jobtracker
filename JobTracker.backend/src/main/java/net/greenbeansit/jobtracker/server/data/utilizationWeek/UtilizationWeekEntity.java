@@ -9,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import net.greenbeansit.jobtracker.shared.UtilizationWeek;
+
 /**
  * A class representing UtilizationWeek as entities in our database. Only used
  * in backend. Each entity class requires a standard constructor and
@@ -256,4 +258,20 @@ public class UtilizationWeekEntity implements Serializable
 	{
 		this.pseudoJobId = pseudoJobId;
 	}
+	
+	public boolean equals(Object obj) {
+		if(obj == null)
+			return false;
+		else if (obj instanceof UtilizationWeekEntity)
+		{
+			UtilizationWeekEntity temp = (UtilizationWeekEntity) obj;
+			return this.id.equals(temp.id);
+		} else
+			return false;
+	}
+	
+	@Override
+    public int hashCode() {
+        return id == null ? 0 : id.hashCode();
+    }
 }

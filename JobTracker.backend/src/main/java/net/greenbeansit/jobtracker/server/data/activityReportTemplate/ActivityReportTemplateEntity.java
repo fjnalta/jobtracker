@@ -4,6 +4,9 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
+import net.greenbeansit.jobtracker.server.data.activityReport.ActivityReportEntity;
+import net.greenbeansit.jobtracker.shared.ActivityReportTemplate;
+
 /**
  * A class representing ActivityReportTemplate as entities in our database. Only
  * used in backend. Each entity class requires a standard constructor and
@@ -151,5 +154,24 @@ public class ActivityReportTemplateEntity implements Serializable
 	{
 		this.author = author;
 	}
+	
+	public boolean equals(Object obj) {
+		if(obj == null)
+			return false;
+		else if (obj instanceof ActivityReportTemplateEntity)
+		{
+			ActivityReportTemplateEntity temp = (ActivityReportTemplateEntity) obj;
+			return this.author.equals(temp.author) && this.name.equals(temp.name);
+		} else
+			return false;
+	}
+	
+	@Override
+    public int hashCode() {
+		if(author == null || name == null)
+			return 0;
+		String hashString = author + name;
+        return hashString.hashCode();
+    }
 
 }

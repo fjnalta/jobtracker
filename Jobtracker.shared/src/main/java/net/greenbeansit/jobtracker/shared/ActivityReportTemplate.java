@@ -118,11 +118,6 @@ public class ActivityReportTemplate implements Serializable
 		this.author = author;
 	}
 
-	/**
-	 * custom equals method
-	 * @param obj Object to compare to
-	 * @return Boolean value
-     */
 	public boolean equals(Object obj) {
 		if(obj == null)
 			return false;
@@ -133,4 +128,12 @@ public class ActivityReportTemplate implements Serializable
 		} else
 			return false;
 	}
+	
+	@Override
+    public int hashCode() {
+		if(author == null || name == null)
+			return 0;
+		String hashString = author + name;
+        return hashString.hashCode();
+    }
 }

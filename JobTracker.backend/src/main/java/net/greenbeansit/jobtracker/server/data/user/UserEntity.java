@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import net.greenbeansit.jobtracker.server.data.pseudoJob.PseudoJobEntity;
+
 /**
  * A class representing User as entities in our database. Only used in backend.
  * Each entity class requires a standard constructor and getters/setters for
@@ -228,5 +230,21 @@ public class UserEntity implements Serializable
 	{
 		this.vacationDays = vacationDays;
 	}
+	
+	public boolean equals(Object obj) {
+        if(obj == null)
+            return false;
+        else if (obj instanceof UserEntity)
+        {
+        	UserEntity temp = (UserEntity) obj;
+            return this.id.equals(temp.id);
+        } else
+            return false;
+    }
+	
+	@Override
+    public int hashCode() {
+        return id == null ? 0 : id.hashCode();
+    }
 
 }
