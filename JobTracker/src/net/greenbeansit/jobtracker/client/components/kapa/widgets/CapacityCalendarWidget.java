@@ -101,6 +101,7 @@ public class CapacityCalendarWidget extends Composite implements CapaCalendarObs
 
                 GeneralDisplay generalDisplay = new GeneralDisplay();
                 generalDisplay.setWeekNumbers(true);
+                generalDisplay.setWeekends(false);
                 generalDisplay.setFirstDayOption(1);
 
                 Header header = new Header();
