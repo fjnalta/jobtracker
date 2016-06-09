@@ -362,6 +362,7 @@ public class LogicHandler {
 		final ActivityReport tempReport = reportDummy;
 
 		if (currentTemplate != null && currentJob != null && currentUser != null) {
+			tempReport.setId(0);
 			tempReport.setJobNr(currentJob.getJobNr());
 			tempReport.setPosNr(currentJob.getPosNr());
 			tempReport.setText(currentTemplate.getText());
@@ -401,6 +402,7 @@ public class LogicHandler {
 
 		if (report != null && currentUser != null && tempUtilizationWeek!=null) {
 			final UtilizationWeek tempReport = report;
+			//tempReport.setId(0);
 			tempReport.setText(tempUtilizationWeek.getText());
 			tempReport.setAuthor(currentUser.getId());
 			tempReport.setPseudoJobId(tempUtilizationWeek.getPseudoJobId());
