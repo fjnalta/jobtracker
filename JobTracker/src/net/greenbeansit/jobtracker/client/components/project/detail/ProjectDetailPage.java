@@ -2,6 +2,7 @@ package net.greenbeansit.jobtracker.client.components.project.detail;
 
 import org.gwtbootstrap3.client.shared.event.TabShowEvent;
 import org.gwtbootstrap3.client.shared.event.TabShowHandler;
+import org.gwtbootstrap3.client.ui.Anchor;
 import org.gwtbootstrap3.client.ui.Heading;
 import org.gwtbootstrap3.client.ui.NavTabs;
 import org.gwtbootstrap3.client.ui.TabListItem;
@@ -14,9 +15,9 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 
 import net.greenbeansit.jobtracker.client.components.project.detail.ProjectDetailPageHelperServiceImpl.Callback;
+import net.greenbeansit.jobtracker.client.localization.ProjectDetailPageConstants;
 import net.greenbeansit.jobtracker.client.utils.rest.NotifyHelper;
 import net.greenbeansit.jobtracker.shared.Job;
-
 
 /**
  * Shows detailed information of a {@link Job} to the user.
@@ -26,8 +27,11 @@ import net.greenbeansit.jobtracker.shared.Job;
 public class ProjectDetailPage extends Composite
 {
 
-	private static ProjectDetailPageUiBinder uiBinder = GWT
+	private static ProjectDetailPageUiBinder	uiBinder	= GWT
 			.create(ProjectDetailPageUiBinder.class);
+
+	private static ProjectDetailPageConstants	constants	= GWT
+			.create(ProjectDetailPageConstants.class);
 
 	/**
 	 * UiBinder for {@link ProjectDetailPage}.
@@ -40,42 +44,38 @@ public class ProjectDetailPage extends Composite
 	}
 
 	@UiField
-	NavTabs				tabControl;
+	NavTabs									tabControl;
 
 	@UiField
-	TabListItem			tabBudget;
+	TabListItem								tabBudget;
 
 	@UiField
-	TabListItem			tabTasks;
+	TabListItem								tabTasks;
 
 	@UiField
-	TabListItem			tabEmployees;
+	TabListItem								tabEmployees;
 
 	@UiField
-	JobBudgetWidget		jobBudgetWidget;
+	JobBudgetWidget							jobBudgetWidget;
 
 	@UiField
-	JobTaskWidget		jobTaskWidget;
+	JobTaskWidget							jobTaskWidget;
 
 	@UiField
-	JobWorkerListWidget	jobWorkerListWidget;
-	
-	@UiField
-	Heading titleProjectName;
-	
-	@UiField
-	Span textProjectName;
-	
-	@UiField
-	Span textCustomerName;
-	
-	@UiField
-	Span textBudgetInfo;
+	JobWorkerListWidget						jobWorkerListWidget;
 
-	
-	private ProjectDetailPageHelperService helperService;
-	
-	
+	@UiField
+	Heading									titleProjectName;
+
+	@UiField
+	Span									textProjectName, textCustomerName,
+			textBudgetInfo, labelProjectName, labelCustomerName,
+			labelBudgetInfo;
+	@UiField
+	Anchor anchorBackward;
+
+	private ProjectDetailPageHelperService	helperService;
+
 	/**
 	 * Initializes a new instance of the {@link ProjectDetailPage}.
 	 * 
@@ -83,13 +83,21 @@ public class ProjectDetailPage extends Composite
 	 *            the ID of the {@link Job} that should be displayed by the
 	 *            page.
 	 * @param posNo
-	 * 			  the Position Number.
+	 *            the Position Number.
 	 */
 	public ProjectDetailPage(Integer jobNo, Integer posNo)
 	{
 		initWidget(uiBinder.createAndBindUi(this));
 
-		//Add tab handlers
+		tabEmployees.setText(constants.tabEmployees());
+		tabTasks.setText(constants.tabTasks());
+		tabBudget.setText(constants.tabBudget());
+		labelProjectName.setText(constants.labelProjectName());
+		labelCustomerName.setText(constants.labelCustomerName());
+		labelBudgetInfo.setText(constants.labelBudgetInfo());
+		anchorBackward.setText(constants.anchorBackward());
+
+		// Add tab handlers
 		tabBudget.addShowHandler(new TabShowHandler()
 		{
 			@Override
@@ -116,28 +124,33 @@ public class ProjectDetailPage extends Composite
 				jobWorkerListWidget.onDisplay();
 			}
 		});
-		
-		
-		helperService = new ProjectDetailPageHelperServiceImpl(jobNo, posNo, new Callback()
-		{
-			@Override
-			public void onSuccess()
-			{
-				textProjectName.setText(helperService.getJob().toString());
-				titleProjectName.setText(textProjectName.getText());
-				
-				textCustomerName.setText(helperService.getCustomer().getName());
-				textBudgetInfo.setText(helperService.getJob().getUsedBudget() + " / " + helperService.getJob().getMaxBudget());
-				
-				jobWorkerListWidget.fillWorkerList(helperService.getWorker());
-			}
-			
-			@Override
-			public void onFailure(Throwable error)
-			{
-				NotifyHelper.errorMessage(error.toString());
-			}
-		});
+
+		helperService = new ProjectDetailPageHelperServiceImpl(jobNo, posNo,
+				new Callback()
+				{
+					@Override
+					public void onSuccess()
+					{
+						textProjectName
+								.setText(helperService.getJob().toString());
+						titleProjectName.setText(textProjectName.getText());
+
+						textCustomerName
+								.setText(helperService.getCustomer().getName());
+						textBudgetInfo.setText(helperService.getJob()
+								.getUsedBudget() + " / "
+								+ helperService.getJob().getMaxBudget());
+
+						jobWorkerListWidget
+								.fillWorkerList(helperService.getWorker());
+					}
+
+					@Override
+					public void onFailure(Throwable error)
+					{
+						NotifyHelper.errorMessage(error.toString());
+					}
+				});
 	}
 
 }
