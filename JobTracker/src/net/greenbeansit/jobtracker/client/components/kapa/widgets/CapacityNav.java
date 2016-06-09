@@ -2,6 +2,7 @@ package net.greenbeansit.jobtracker.client.components.kapa.widgets;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -17,7 +18,10 @@ import net.greenbeansit.jobtracker.client.utils.rest.NotifyHelper;
 import net.greenbeansit.jobtracker.shared.Job;
 import net.greenbeansit.jobtracker.shared.PseudoJob;
 import net.greenbeansit.jobtracker.shared.UtilizationWeek;
-import org.gwtbootstrap3.client.ui.*;
+import org.gwtbootstrap3.client.ui.Button;
+import org.gwtbootstrap3.client.ui.TabListItem;
+import org.gwtbootstrap3.client.ui.TextArea;
+import org.gwtbootstrap3.client.ui.TextBox;
 import org.gwtbootstrap3.client.ui.constants.IconType;
 import org.gwtbootstrap3.extras.select.client.ui.OptGroup;
 import org.gwtbootstrap3.extras.select.client.ui.Option;
@@ -143,6 +147,13 @@ public class CapacityNav extends Composite implements LogicObservable, CapaCalen
                 currentUtilizationWeek = ((SelectJobOption) selectJob.getSelectedItem()).getUtilizationWeek();
                 notifyLogicHandler();
 
+            }
+        });
+
+        newProject.addClickHandler(new ClickHandler() {
+            @Override
+            public void onClick(ClickEvent event) {
+                description.setText("");
             }
         });
 
