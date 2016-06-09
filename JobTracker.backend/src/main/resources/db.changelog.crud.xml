@@ -163,4 +163,20 @@
 			]]>
 		</sql>
 	</changeSet>
+	<changeSet id="20160609-customer-12" author="mike">
+		<sql>
+			<![CDATA[
+				INSERT INTO job_task(job_no, pos_no, name)
+				VALUES(100001, 1, "AP 001 - Vor-Ort-Betreuung"),
+				(100001, 1, "AP 002 - Telefondienst"),
+				(100001, 1, "AP 003 - Hin-/Rückreise"),
+				(100001, 2, "AP 001 - Einkauf Hardware"),
+				(100001, 2, "AP 002 - Vorbereitung Software"),
+				(100001, 2, "AP 003 - Hin-/Rückreise"),
+				(100001, 2, "AP 004 - Aufbau Hardware"),
+				(100001, 2, "AP 005 - Konfigurierung"),
+				(100001, 2, "AP 006 - Kundenabnahme");
+			]]>
+		</sql>
+	</changeSet>
 </databaseChangeLog>
