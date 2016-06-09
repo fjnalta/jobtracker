@@ -491,7 +491,7 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 	 */
 	@UiHandler("buttonDelete")
 	public void deleteButton(ClickEvent e) {
-		handler.deleteReport(calendarHandler.calendar.currentEvent.getAp().getAuthor(), Integer.parseInt(calendarHandler.calendar.currentEvent.getId()));
+		handler.deleteReport(0, Integer.parseInt(calendarHandler.calendar.currentEvent.getId()));
 		calendarHandler.calendar.removeEvent(calendarHandler.calendar.currentEvent.getId());
 	}
 
