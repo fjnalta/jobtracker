@@ -171,7 +171,7 @@ public class UserJob implements Serializable
 	
 	@Override
     public int hashCode() {
-        if(userId == null || jobNo == null || posNo == null || role == null)
+        if(userId == null || jobNo == null || posNo == null)
         	return 0;
         List<Integer> ints = new ArrayList<Integer>();
         ints.add(userId);
