@@ -21,11 +21,23 @@ public class CalendarHandler implements LogicObservable {
 	/**
 	 * calendar
 	 */
-	public FullCalendarCustomize calendar;
+	public FullCalendarCustomize 		calendar;
 	//public Event currentEvent;
 
-	private List<CalendarObserver> list = new ArrayList<>();
+	private List<CalendarObserver>		list = new ArrayList<>();
+	
+	private Date 						displayDate;
 
+	/**
+	 * Initialize the object
+	 */
+	public CalendarHandler(){
+		
+		Date d = new Date();
+		
+		this.displayDate = new Date();
+	}
+	
 	/**
 	 * 
 	 * @param w add a calendar observer
@@ -38,6 +50,22 @@ public class CalendarHandler implements LogicObservable {
 
 		}
 		list.add(w);
+	}
+	
+	public int getDisplayMonth() {
+		return this.displayDate.getMonth();
+	}
+
+	public void setDisplayMonth(int displayMonth) {
+		this.displayDate.setMonth(displayMonth);
+	}
+
+	public int getDisplayYear(){
+		return (this.displayDate.getYear() +1900);
+	}
+	
+	public void setDisplayYear(int displayYear){
+		this.displayDate.setYear(displayYear);
 	}
 
 	/**

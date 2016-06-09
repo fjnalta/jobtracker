@@ -73,47 +73,7 @@ public class UtilizationWeekServiceJpa implements UtilizationWeekDataService
 	{
 		repository.delete(utilId);
 	}
-
-	// TODO change UtilizationWeekEntity Constructor in Backend
-
-	/**
-	 * Converty the {@link UtilizationWeekEntity} to {@link UtilizationWeek}
-	 * 
-	 * @param entity
-	 *            the {@link UtilizationWeekEntity}
-	 * @return the {@link UtilizationWeek}
-	 */
-	private UtilizationWeek convert(UtilizationWeekEntity entity)
-	{
-		if (entity == null)
-			return null;
-		// return new UtilizationWeek(entity.getId(), entity.getAuthor(),
-		// entity.getBegin(), entity.getDaysFree(), entity.getDaysWork(),
-		// entity.getDaysHoliday(), entity.getPossibilty(),
-		// entity.getPseudoJobId());
-		return null;
-	}
-
-	/**
-	 * Converty the {@link UtilizationWeek} to {@link UtilizationWeekEntity}
-	 * 
-	 * @param util
-	 *            the {@link UtilizationWeek}
-	 * @return the {@link UtilizationWeekEntity}
-	 */
-	private UtilizationWeekEntity convert(UtilizationWeek util)
-	{
-		if (util != null) {
-			return new UtilizationWeekEntity(util.getId(), util.getAuthor(),
-					util.getText(), new Date(util.getBeginDate().getTime()),
-					util.getBeginTime(), new Date(util.getEndDate().getTime()),
-					util.getEndTime(), util.getPossibility(), util.getBreakTime(),
-					util.getPseudoJobId());
-		} else {
-			return null;
-		}
-	}
-
+	
 //	@Override
 //	public List<UtilizationWeek> getByUserAndMonth(Integer authorId,
 //			Integer year, Integer month)
@@ -126,7 +86,7 @@ public class UtilizationWeekServiceJpa implements UtilizationWeekDataService
 //		}
 //		return list;
 //	}
-
+//
 //	@Override
 //	public List<UtilizationWeek> getByUserAndYear(Integer authorId,
 //			Integer year)
@@ -139,4 +99,39 @@ public class UtilizationWeekServiceJpa implements UtilizationWeekDataService
 //		}
 //		return list;
 //	}
+
+	/**
+	 * Converty the {@link UtilizationWeekEntity} to {@link UtilizationWeek}
+	 * 
+	 * @param entity
+	 *            the {@link UtilizationWeekEntity}
+	 * @return the {@link UtilizationWeek}
+	 */
+	private UtilizationWeek convert(UtilizationWeekEntity entity)
+	{
+		if (entity == null)
+			return null;
+		return new UtilizationWeek(entity.getId(), entity.getAuthor(),
+				entity.getText(), new java.util.Date(entity.getBeginDate().getTime()), 0,
+				0, new java.util.Date(entity.getEndDate().getTime()),
+				entity.getPossibilty(), entity.getPseudoJobId(),
+				entity.getBreakTime());
+	}
+
+	/**
+	 * Converts the {@link UtilizationWeek} to {@link UtilizationWeekEntity}
+	 * 
+	 * @param util
+	 *            the {@link UtilizationWeek}
+	 * @return the {@link UtilizationWeekEntity}
+	 */
+	private UtilizationWeekEntity convert(UtilizationWeek util)
+	{
+		if (util == null)
+			return null;
+		return new UtilizationWeekEntity(util.getId(), util.getAuthor(),
+				util.getText(), new java.sql.Date(util.getBeginDate().getTime()), 0,
+				new java.sql.Date(util.getEndDate().getTime()), 0, util.getPossibility(),
+				util.getBreakTime(), util.getPseudoJobId());
+	}
 }

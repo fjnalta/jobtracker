@@ -2,6 +2,7 @@ package net.greenbeansit.jobtracker.server.data.userJob;
 
 import java.util.List;
 
+import net.greenbeansit.jobtracker.shared.User;
 import net.greenbeansit.jobtracker.shared.UserJob;
 
 /**
@@ -31,13 +32,13 @@ public interface UserJobDataService
 	List<UserJob> getByUserId(Integer userId);
 
 	/**
-	 * Retrieves all UserJob relations for a given job and pos number.
+	 * Retrieves all Users working on a given job and pos number.
 	 * 
 	 * @param jobNr
 	 *            3 to 6 digits
 	 * @param posNr
 	 *            3 digits
-	 * @return List of UserJob relations
+	 * @return List of Users
 	 */
-	List<UserJob> getByJobNrAndPosNr(Integer jobNr, Integer posNr);
+	List<User> getByJobNrAndPosNr(Integer jobNr, Integer posNr);
 }
