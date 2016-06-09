@@ -280,7 +280,7 @@ public class CalendarWidget extends Composite implements CalendarObserver, Logic
 						newEventDateEnd.setDate(newEventDateEnd.getDate() - 1);
 						String endDay = addLeadingNull((newEventDateEnd.getDate()+1900) + "");
 
-						String eventStandardStart = startYear + "-" + startMonth + "-" + startDay + "T08:00:00.000Z";
+						String eventStandardStart = startYear + "-"	 + startMonth + "-" + startDay + "T08:00:00.000Z";
 						String eventStandardEnd = startYear + "-" + startMonth + "-" + startDay + "T16:00:00.000Z";
 						
 						Date st = new Date();
@@ -427,6 +427,11 @@ public class CalendarWidget extends Composite implements CalendarObserver, Logic
 					@Override
 					public void eventDrop(JavaScriptObject calendarEvent, JavaScriptObject revertFunction,
 							NativeEvent nativeEvent) {
+						ActivityReportEvent tempEvent = new ActivityReportEvent(calendarEvent);
+						ActivityReport tempReport = new ActivityReport();
+						Date tempDate = new Date(tempEvent.getISOStart());
+						tempReport.setDate(tempDate);
+						calendar.addEventToSave(tempReport);
 						notifyHandler();
 					}
 

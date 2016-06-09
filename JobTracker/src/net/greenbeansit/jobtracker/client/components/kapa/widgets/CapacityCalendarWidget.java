@@ -40,40 +40,6 @@ public class CapacityCalendarWidget extends Composite implements CapaCalendarObs
     @UiField
     Column calendar;
 
-    /**
-     * This Method is called from the {@link CalendarObserver}
-     */
-    @Override
-    public void update() {
-        fullcalendar.render();
-        month.setSubText(monthToString(fullcalendar.getDate().getMonth()));
-    }
-
-    /**
-     * This Method notifies the {@link CalendarObserver} about changes.
-     */
-    @Override
-    public void notifyHandler() {
-        calendarHandler.updateObserver(this);
-    }
-
-    /**
-     * This Method is called from the {@link LogicObservable}
-     */
-    @Override
-    public void updateObservable() {
-        currentUtilizationWeek = handler.getCurrentUtilizationWeek();
-        fullcalendar.render();
-    }
-
-    /**
-     * This Method notifies the {@link LogicObservable} about given changes
-     */
-    @Override
-    public void notifyLogicHandler() {
-        handler.setCurrentUtilizationWeek(currentUtilizationWeek);
-    }
-
     interface CapacityCalendarUiBinder extends UiBinder<Widget, CapacityCalendarWidget> {
     }
 
@@ -226,6 +192,7 @@ public class CapacityCalendarWidget extends Composite implements CapaCalendarObs
                         currentUtilizationWeek = tempUtil;
 
                         tmp.setUtilizationWeek(tempUtil);
+                        GWT.log((tmp.getUw()!=null) + "");
                         fullcalendar.addEvent(tmp);
                         fullcalendar.addEventToSave(tempUtil);
 
@@ -270,6 +237,12 @@ public class CapacityCalendarWidget extends Composite implements CapaCalendarObs
                     @Override
                     public void eventDrop(JavaScriptObject calendarEvent, JavaScriptObject revertFunction,
                                           NativeEvent nativeEvent) {
+                        CapacityReportEvent dragEvent = new CapacityReportEvent(calendarEvent);
+                        Date endDate = new Date(dragEvent.getISOEnd());
+                        endDate.setDate(endDate.getDate()-1);
+                        Date beginDate = new Date(dragEvent.getISOStart());
+                        UtilizationWeek tempUtil = new UtilizationWeek(0,0,"",beginDate,8,16,endDate,0,0,0);
+                        fullcalendar.addEventToSave(tempUtil);
                         notifyHandler();
                     }
 
@@ -288,25 +261,13 @@ public class CapacityCalendarWidget extends Composite implements CapaCalendarObs
                             updateId();
                             CapacityReportEvent dragEvent = new CapacityReportEvent(calendarEvent);
                             CapacityReportEvent oldEvent = createEvent(dragEvent.getTitle());
-
-                            fullcalendar.getCapacityReportsToSave().remove(oldEvent.getUw());
                             oldEvent.setStart(dragEvent.getISOStart());
                             oldEvent.setEnd(dragEvent.getISOEnd());
-
                             dragEvent.setTitle(dragEvent.getTitle() + titleNumber++);
-
-                            Date endDate = new Date(oldEvent.getISOEnd());
-                            endDate.setDate(endDate.getDate()-1);
-                            Date beginDate = new Date(oldEvent.getISOStart());
-
-                            UtilizationWeek tempUtil = new UtilizationWeek(0,0,"",beginDate,8,16,endDate,0,0,0);
-
-                            oldEvent.setUtilizationWeek(tempUtil);
-
-                            fullcalendar.addEventToSave(tempUtil);
                             fullcalendar.addEvent(oldEvent);
                             fullcalendar.currentCapacityEvent = dragEvent;
                             notifyHandler();
+
                         }
 
                     }
@@ -347,6 +308,41 @@ public class CapacityCalendarWidget extends Composite implements CapaCalendarObs
         }
         fullcalendar.render();
 
+    }
+
+
+    /**
+     * This Method is called from the {@link CalendarObserver}
+     */
+    @Override
+    public void update() {
+        fullcalendar.render();
+        month.setSubText(monthToString(fullcalendar.getDate().getMonth()));
+    }
+
+    /**
+     * This Method notifies the {@link CalendarObserver} about changes.
+     */
+    @Override
+    public void notifyHandler() {
+        calendarHandler.updateObserver(this);
+    }
+
+    /**
+     * This Method is called from the {@link LogicObservable}
+     */
+    @Override
+    public void updateObservable() {
+        currentUtilizationWeek = handler.getCurrentUtilizationWeek();
+        fullcalendar.render();
+    }
+
+    /**
+     * This Method notifies the {@link LogicObservable} about given changes
+     */
+    @Override
+    public void notifyLogicHandler() {
+        handler.setCurrentUtilizationWeek(currentUtilizationWeek);
     }
 
     /**
