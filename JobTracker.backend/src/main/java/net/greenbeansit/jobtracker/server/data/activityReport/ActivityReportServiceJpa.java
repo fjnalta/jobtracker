@@ -68,6 +68,21 @@ public class ActivityReportServiceJpa implements ActivityReportDataService
 	@Override
 	public boolean save(ActivityReport report)
 	{
+		ActivityReportEntity entity = repository.findOne(report.getId());
+		if(entity != null)
+		{
+			entity.setAuthor(report.getAuthor());
+			entity.setBeginDate((Date) report.getDate());
+			entity.setBeginTime(convert(report.getStartTime()));
+			entity.setBreakTime(report.getBreakTime());
+			entity.setEndTime(convert(report.getEndTime()));
+			entity.setJobNo(report.getJobNr());
+			entity.setPosNo(report.getPosNr());
+			entity.setTaskId(report.getTaskId());
+			entity.setText(report.getText());
+			repository.save(entity);
+			return true;
+		}
 		return repository.save(convert(report)) != null;
 	}
 
