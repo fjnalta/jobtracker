@@ -228,12 +228,9 @@ public class CapacityNav extends Composite implements LogicObservable, CapaCalen
      */
     @Override
     public void notifyLogicHandler() {
-
-
         if(currentUtilizationWeek != null) {
-                currentUtilizationWeek.setText(description.getText());
-             handler.setTempUtilizationWeek(currentUtilizationWeek);
-            GWT.log("tempUtil  set)");
+            currentUtilizationWeek.setText(description.getText());
+            handler.setTempUtilizationWeek(currentUtilizationWeek);
         }
 
 
