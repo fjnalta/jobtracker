@@ -42,30 +42,30 @@ public class CalendarUtilizationWidget extends Composite implements CalendarObse
 	}
 
 	// Path for the css File
-	private final String SUFFIXPATH = "net-greenbeansit-jobtracker-client-components-widgets-calendar-CalendarUtilizationWidget_CalendarUtilizationWidgetUiBinderImpl_GenCss_style-";
+	private final String 						SUFFIXPATH = "net-greenbeansit-jobtracker-client-components-widgets-calendar-CalendarUtilizationWidget_CalendarUtilizationWidgetUiBinderImpl_GenCss_style-";
 	// This date iterate to every day of month
-	private Date iteratorDate;
+	private Date 								iteratorDate;
 	// This date is needed for the current week view
-	private Date currentWeekFirstDayDate;
+	private Date 								currentWeekFirstDayDate;
 	// Utilization should new calculate if it's yes
-	private ViewOption view;
+	private ViewOption 							view;
 	// Is needed for change the Calendar time line
-	private int changeDay, changeMonth;
+	private int 								changeDay, changeMonth;
 
-	private List<VerticalPanel> list;
+	private List<VerticalPanel> 				list;
 
-	private List<Integer> utilizationList;
+	private List<Integer> 						utilizationList;
 
-	private boolean calculateUtilization;
-
-	@UiField
-	FlexTable table;
+	private boolean 							calculateUtilization;
 
 	@UiField
-	Button leftButton;
+	FlexTable 									table;
 
 	@UiField
-	Button rightButton;
+	Button 										leftButton;
+
+	@UiField
+	Button 										rightButton;
 
 	/**
 	 * When this button is clicked, the timeline will change to 1 week or month
@@ -97,6 +97,7 @@ public class CalendarUtilizationWidget extends Composite implements CalendarObse
 				this.currentWeekFirstDayDate.getMonth() + 1);
 
 		calendarHandler.calendar.previous();
+		
 		notifyHandler();
 	}
 

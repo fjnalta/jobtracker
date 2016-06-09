@@ -21,10 +21,10 @@ public class CalendarHandler implements LogicObservable {
 	/**
 	 * calendar
 	 */
-	public FullCalendarCustomize calendar;
+	public FullCalendarCustomize 		calendar;
 	//public Event currentEvent;
 
-	private List<CalendarObserver> list = new ArrayList<>();
+	private List<CalendarObserver>		list = new ArrayList<>();
 	
 	private Date 						displayDate;
 
