@@ -2,9 +2,11 @@ package net.greenbeansit.jobtracker.server.data.pseudoJob;
 
 import java.io.Serializable;
 
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -29,7 +31,8 @@ public class PseudoJobEntity implements Serializable
 	private static final long	serialVersionUID	= -5496667715876969877L;
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Basic(optional = false)
 	private Integer				id;
 
 	@Column(name = "name")
