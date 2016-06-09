@@ -51,12 +51,11 @@
 	</ui:style>
 	<h:ClearFix ui:field="container">
 		<b:NavTabs justified="true">
-			<b:TabListItem dataTarget="#newProject" active="true"
-				text="Neues Projekt" />
-			<b:TabListItem dataTarget="#myProjects" text="Meine Projekte" />
+			<b:TabListItem dataTarget="#newProject" active="true" text="Neues Projekt" ui:field="newProject"/>
+			<b:TabListItem dataTarget="#myProjects" text="Meine Projekte" ui:field="myProjects"/>
 		</b:NavTabs>
 		<b:TabContent>
-			<b:TabPane b:id="newProject" active="true">
+			<b:TabPane b:id="newProject" active="true" ui:field="newProjectPane">
 				<b:Form>
 					<b:FieldSet>
 						<b:FormGroup>
@@ -84,15 +83,14 @@
 					</b:FieldSet>
 				</b:Form>
 			</b:TabPane>
-			<b:TabPane b:id="myProjects">
+			<b:TabPane b:id="myProjects" ui:field="myProjectsPane">
 				<b:Form>
 					<b:FieldSet>
 						<b:FormGroup>
 							<b:FormLabel>Projektname</b:FormLabel>
-							<b:TextBox placeholder="Projektname" ui:field="projektName" />
+							<b:TextBox placeholder="Projektname" ui:field="myProjectsProjectName" />
 							<b:FormLabel for="projectDesc">Tätigkeitsbeschreibung</b:FormLabel>
-							<b:TextArea placeholder="Bitte eintragen..."
-								addStyleNames="{style.textArea}" />
+							<b:TextArea placeholder="Bitte eintragen..." addStyleNames="{style.textArea}" ui:field="myProjectsDescription"/>
 						</b:FormGroup>
 					</b:FieldSet>
 				</b:Form>

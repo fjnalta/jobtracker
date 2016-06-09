@@ -17,9 +17,7 @@ import net.greenbeansit.jobtracker.client.utils.rest.NotifyHelper;
 import net.greenbeansit.jobtracker.shared.Job;
 import net.greenbeansit.jobtracker.shared.PseudoJob;
 import net.greenbeansit.jobtracker.shared.UtilizationWeek;
-import org.gwtbootstrap3.client.ui.Button;
-import org.gwtbootstrap3.client.ui.TextArea;
-import org.gwtbootstrap3.client.ui.TextBox;
+import org.gwtbootstrap3.client.ui.*;
 import org.gwtbootstrap3.client.ui.constants.IconType;
 import org.gwtbootstrap3.extras.select.client.ui.OptGroup;
 import org.gwtbootstrap3.extras.select.client.ui.Option;
@@ -43,7 +41,7 @@ public class CapacityNav extends Composite implements LogicObservable, CapaCalen
     Select selectJob;
 
     @UiField
-    TextArea description;
+    TextArea description, myProjectsDescription;
 
     @UiField
     OptGroup myJobsOptGroup, allJobsOptGroup;
@@ -52,10 +50,16 @@ public class CapacityNav extends Composite implements LogicObservable, CapaCalen
     Button buttonUp, buttonDown, buttonSave;
 
     @UiField
-    TextBox possibilityPercentage, textIdentifier;
+    TextBox possibilityPercentage, textIdentifier, myProjectsProjectName;
 
     @UiField
     Slider mySlider;
+
+    @UiField
+    TabListItem myProjects, newProject;
+
+    @UiField
+    TabPane newProjectPane, myProjectsPane;
 
     /**
      * This Method sets the possibility of the {@link UtilizationWeek}
@@ -127,6 +131,7 @@ public class CapacityNav extends Composite implements LogicObservable, CapaCalen
 
         handler.addObservable(this);
         handler.updateObservable(this);
+        calendarHandler.addObserver(this);
 
         createUtilizationWeekList();
         
@@ -224,7 +229,7 @@ public class CapacityNav extends Composite implements LogicObservable, CapaCalen
      */
     @Override
     public void update() {
-        GWT.log("kennsch");
+        loadMyProjectPage();
     }
 
     /**
@@ -246,5 +251,18 @@ public class CapacityNav extends Composite implements LogicObservable, CapaCalen
             GWT.log("notify logicHandler " + currentUtilizationWeek.getText());
             handler.setTempUtilizationWeek(currentUtilizationWeek);
         }
+    }
+
+    private void loadMyProjectPage(){
+
+        myProjects.setActive(true);
+        myProjectsPane.setActive(true);
+        newProject.setActive(false);
+        newProjectPane.setActive(false);
+
+        myProjectsProjectName.setText("NAME MISSING");
+        myProjectsDescription.setText(calendarHandler.getCurrentUtilizationWeek().getText());
+        mySlider.setValue(calendarHandler.getCurrentUtilizationWeek().getPossibility().doubleValue());
+        possibilityPercentage.setText(calendarHandler.getCurrentUtilizationWeek().getPossibility().toString());
     }
 }
