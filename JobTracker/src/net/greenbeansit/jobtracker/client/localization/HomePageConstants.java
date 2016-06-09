@@ -2,7 +2,7 @@ package net.greenbeansit.jobtracker.client.localization;
 
 import com.google.gwt.i18n.client.Constants;
 
-import net.greenbeansit.jobtracker.client.components.HomePage;
+import net.greenbeansit.jobtracker.client.components.home.HomePage;
 
 /**
  * Contains translations for the {@link HomePage}.

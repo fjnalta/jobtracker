@@ -5,10 +5,6 @@ import java.util.Date;
 import java.util.List;
 
 
-import com.google.gwt.user.client.Window;
-
-import net.greenbeansit.jobtracker.client.components.HomePage.HomePageUiBinder;
-
 import net.greenbeansit.jobtracker.client.components.widgets.calendar.FullCalendarCustomize;
 
 /**
