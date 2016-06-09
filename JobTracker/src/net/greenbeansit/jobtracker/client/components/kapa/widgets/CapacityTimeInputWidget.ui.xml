@@ -22,7 +22,7 @@
 	<b:Container fluid="true">
 		<b:InputGroup>
 			<b:TextBox readOnly="true" ui:field="projectStart"
-				addStyleNames="{style.buttonText}">YEAR</b:TextBox>
+				addStyleNames="{style.buttonText}"></b:TextBox>
 			<b:InputGroupButton>
 				<b:VerticalButtonGroup>
 					<b:Button size="EXTRA_SMALL" addStyleNames="{style.buttonTop}"
@@ -32,7 +32,7 @@
 				</b:VerticalButtonGroup>
 			</b:InputGroupButton>
 			<b:TextBox readOnly="true" ui:field="projectEnd"
-				addStyleNames="{style.buttonText}">YEAR</b:TextBox>
+				addStyleNames="{style.buttonText}"></b:TextBox>
 			<b:InputGroupButton>
 				<b:VerticalButtonGroup>
 					<b:Button size="EXTRA_SMALL" addStyleNames="{style.buttonTop}"

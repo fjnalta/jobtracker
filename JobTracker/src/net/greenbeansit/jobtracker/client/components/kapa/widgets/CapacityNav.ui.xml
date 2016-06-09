@@ -56,48 +56,49 @@
 		</b:NavTabs>
 		<b:TabContent>
 			<b:TabPane b:id="newProject" active="true" ui:field="newProjectPane">
-				<b:Form>
-					<b:FieldSet>
-						<b:FormGroup>
-							<b:FormLabel for="projectName">Projektname</b:FormLabel>
-							<select:Select liveSearch="true"
-								liveSearchPlaceholder="Name" placeholder="Projekt auswählen"
-								type="PRIMARY" title="Projekt auswählen..." ui:field="selectJob"
-								addStyleNames="{style.select}">
-								<s:OptGroup label="Meine Jobs" ui:field="allJobsOptGroup">
-								</s:OptGroup>
-								<s:OptGroup label="Andere Jobs" ui:field="myJobsOptGroup">
-								</s:OptGroup>
-							</select:Select>
-						</b:FormGroup>
-						<b:FormGroup>
-							<b:FormLabel for="projectDesc">Tätigkeitsbeschreibung</b:FormLabel>
-							<b:TextArea placeholder="Bitte eintragen..." ui:field="description"
-								addStyleNames="{style.textArea}" />
-							<b:Heading size="H3" subText="Projekt Erstellen" />
-							<b:FormLabel for="projectName">Projektname</b:FormLabel>
-							<b:TextBox placeholder="Bitte eintragen..." ui:field="textIdentifier" />
-						</b:FormGroup>
-						<b:Button type="PRIMARY" text="Speichern" ui:field="buttonSave"
-							addStyleNames="{style.buttonSave} {style.button-blue}" />
-					</b:FieldSet>
-				</b:Form>
 			</b:TabPane>
 			<b:TabPane b:id="myProjects" ui:field="myProjectsPane">
-				<b:Form>
-					<b:FieldSet>
-						<b:FormGroup>
-							<b:FormLabel>Projektname</b:FormLabel>
-							<b:TextBox placeholder="Projektname" ui:field="myProjectsProjectName" />
-							<b:FormLabel for="projectDesc">Tätigkeitsbeschreibung</b:FormLabel>
-							<b:TextArea placeholder="Bitte eintragen..." addStyleNames="{style.textArea}" ui:field="myProjectsDescription"/>
-						</b:FormGroup>
-					</b:FieldSet>
-				</b:Form>
 			</b:TabPane>
 		</b:TabContent>
+		<b:Form>
+			<b:FieldSet>
+				<b:FormGroup>
+					<b:Heading size="H3" subText="Projekt" />
+					<b:FormLabel for="projectName">Projektname</b:FormLabel>
+					<select:Select liveSearch="true"
+								   liveSearchPlaceholder="Name" placeholder="Projekt auswählen"
+								   type="PRIMARY" title="Projekt auswählen..." ui:field="selectJob"
+								   addStyleNames="{style.select}">
+						<s:OptGroup label="Meine Jobs" ui:field="allJobsOptGroup">
+						</s:OptGroup>
+						<s:OptGroup label="Andere Jobs" ui:field="myJobsOptGroup">
+						</s:OptGroup>
+					</select:Select>
+				</b:FormGroup>
+				<b:FormGroup>
+					<b:FormLabel for="projectDesc">Projektbeschreibung</b:FormLabel>
+					<b:TextArea placeholder="Bitte eintragen..." ui:field="description"
+								addStyleNames="{style.textArea}" />
+					<b:Heading size="H3" subText="Kunde" />
+					<select:Select liveSearch="true"
+								   liveSearchPlaceholder="Name" placeholder="Kunde auswählen"
+								   type="PRIMARY" title="Kunde auswählen..." ui:field="selectCustomer"
+								   addStyleNames="{style.select}">
+						<s:OptGroup label="meine Kunden" ui:field="allCustomer">
+						</s:OptGroup>
+						<s:OptGroup label="andere Kunden" ui:field="otherCustomer">
+						</s:OptGroup>
+					</select:Select>
+					<b:Heading size="H3" subText="Projekt erstellen" />
+					<b:FormLabel for="projectName">Projektname</b:FormLabel>
+					<b:TextBox placeholder="Bitte eintragen..." ui:field="textIdentifier" />
+				</b:FormGroup>
+				<b:Button type="PRIMARY" text="Speichern" ui:field="buttonSave"
+						  addStyleNames="{style.buttonSave} {style.button-blue}" />
+			</b:FieldSet>
+		</b:Form>
 		<b:FormGroup>
-			<b:FormLabel for="slider">Wahrscheinlichkeit</b:FormLabel>
+			<b:Heading size="H3" subText="Wahrscheinlichkeit" />
 			<b:Column size="XS_9,SM_9,MD_9,LG_9" addStyleNames="{style.possibilitySlider}">
 				<b3:Slider ui:field="mySlider" width="100%" enabled="true"
 					min="0" max="100" step="25" value="50" />

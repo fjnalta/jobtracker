@@ -41,7 +41,7 @@ public class CapacityNav extends Composite implements LogicObservable, CapaCalen
     Select selectJob;
 
     @UiField
-    TextArea description, myProjectsDescription;
+    TextArea description;
 
     @UiField
     OptGroup myJobsOptGroup, allJobsOptGroup;
@@ -50,7 +50,7 @@ public class CapacityNav extends Composite implements LogicObservable, CapaCalen
     Button buttonUp, buttonDown, buttonSave;
 
     @UiField
-    TextBox possibilityPercentage, textIdentifier, myProjectsProjectName;
+    TextBox possibilityPercentage, textIdentifier;
 
     @UiField
     Slider mySlider;
@@ -63,6 +63,7 @@ public class CapacityNav extends Composite implements LogicObservable, CapaCalen
 
     /**
      * This Method sets the possibility of the {@link UtilizationWeek}
+     *
      * @param event the slide event
      */
     @UiHandler("mySlider")
@@ -74,6 +75,7 @@ public class CapacityNav extends Composite implements LogicObservable, CapaCalen
 
     /**
      * This Method increases the possibility of the {@link UtilizationWeek} by 25%.
+     *
      * @param e {@link SlideEvent}
      */
     @UiHandler("buttonUp")
@@ -86,6 +88,7 @@ public class CapacityNav extends Composite implements LogicObservable, CapaCalen
 
     /**
      * This Method decreases the possibility of the {@link UtilizationWeek} by 25%.
+     *
      * @param e {@link ClickEvent}
      */
     @UiHandler("buttonDown")
@@ -97,6 +100,7 @@ public class CapacityNav extends Composite implements LogicObservable, CapaCalen
 
     /**
      * This Method saves a new Pseudo Job to the Database
+     *
      * @param e {@link ClickEvent}
      */
     @UiHandler("buttonSave")
@@ -134,7 +138,7 @@ public class CapacityNav extends Composite implements LogicObservable, CapaCalen
         calendarHandler.addObserver(this);
 
         createUtilizationWeekList();
-        
+
         initializeUIElements();
         selectJob.addValueChangeHandler(new ValueChangeHandler<String>() {
             @Override
@@ -159,7 +163,7 @@ public class CapacityNav extends Composite implements LogicObservable, CapaCalen
         this.jobList = handler.getJobList();
 
         for (PseudoJob pjob : pJobList) {
-            UtilizationWeek uw = new UtilizationWeek(0, 0, pjob.getName(), new Date(),0, 0, new Date(), 0, pjob.getId(), 0);
+            UtilizationWeek uw = new UtilizationWeek(0, 0, pjob.getName(), new Date(), 0, 0, new Date(), 0, pjob.getId(), 0);
             utilizationWeekList.add(uw);
         }
         for (Job job : jobList) {
@@ -185,11 +189,12 @@ public class CapacityNav extends Composite implements LogicObservable, CapaCalen
 
     /**
      * Adds the {@link UtilizationWeek}s to the select box.
+     *
      * @param utilWeekList the {@link UtilizationWeek}
      */
     private void addUtilizationWeeks(List<UtilizationWeek> utilWeekList) {
         for (UtilizationWeek currentUtilWeek : utilWeekList) {
-            if(currentUtilWeek.getId().intValue() == 999) {
+            if (currentUtilWeek.getId().intValue() == 999) {
                 SelectJobOption tempOption = new SelectJobOption(currentUtilWeek);
                 allJobsOptGroup.add(tempOption);
             } else {
@@ -246,7 +251,8 @@ public class CapacityNav extends Composite implements LogicObservable, CapaCalen
      */
     @Override
     public void notifyLogicHandler() {
-        if(currentUtilizationWeek != null) {
+        if (currentUtilizationWeek != null) {
+            // TODO - insert name
             currentUtilizationWeek.setText(description.getText());
             currentUtilizationWeek.setPossibility(mySlider.getValue().intValue());
             GWT.log("notify logicHandler " + currentUtilizationWeek.getText());
@@ -254,22 +260,14 @@ public class CapacityNav extends Composite implements LogicObservable, CapaCalen
         }
     }
 
-    private void loadMyProjectPage(){
+    private void loadMyProjectPage() {
 
-//        myProjects.setActive(true);
-//        myProjectsPane.setActive(true);
-//        newProject.setActive(false);
-//        newProjectPane.setActive(false);
+        myProjects.showTab();
+        if (calendarHandler.getCurrentUtilizationWeek() != null) {
+            description.setText(calendarHandler.getCurrentUtilizationWeek().getText());
 
-        myProjectsProjectName.setText("NAME MISSING");
-        if(calendarHandler.getCurrentUtilizationWeek() != null) {
-            myProjectsDescription.setText(calendarHandler.getCurrentUtilizationWeek().getText());
             mySlider.setValue(calendarHandler.getCurrentUtilizationWeek().getPossibility().doubleValue());
             possibilityPercentage.setText(calendarHandler.getCurrentUtilizationWeek().getPossibility().toString());
-        } else {
-            myProjectsDescription.setText("");
-            mySlider.setValue(50.00);
-            possibilityPercentage.setText("50");
         }
     }
 }
