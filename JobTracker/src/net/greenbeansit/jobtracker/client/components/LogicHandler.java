@@ -359,7 +359,7 @@ public class LogicHandler {
 	 */
 	public void saveReport(ActivityReport reportDummy) {
 		getInformations();
-		ActivityReport tempReport = reportDummy;
+		final ActivityReport tempReport = reportDummy;
 
 		if (currentTemplate != null && currentJob != null && currentUser != null) {
 			tempReport.setJobNr(currentJob.getJobNr());
@@ -379,6 +379,7 @@ public class LogicHandler {
 					public void onFailure(Method method, Throwable exception) {
 						NotifyHelper.errorMessage("FAILED" + exception.getMessage());
 						GWT.log(exception.getMessage());
+						calendar.addReportsToSave(tempReport);
 					}
 
 				}).getEmployeeService().saveReport(currentUser.getId(), tempReport);

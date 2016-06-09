@@ -504,7 +504,9 @@ public class CalendarWidget extends Composite implements CalendarObserver, Logic
 
 	}
 
-
+	public void addReportsToSave(ActivityReport report){
+		calendar.addEventToSave(report);
+	}
 
 	@Override
 	public void updateObservable() {
