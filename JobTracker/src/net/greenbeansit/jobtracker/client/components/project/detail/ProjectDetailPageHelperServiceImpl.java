@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.fusesource.restygwt.client.Method;
 
+import com.google.gwt.user.client.Window;
+
 import net.greenbeansit.jobtracker.client.utils.rest.RestClient;
 import net.greenbeansit.jobtracker.client.utils.rest.RestClient.SuccessFunction;
 import net.greenbeansit.jobtracker.shared.Customer;
@@ -77,6 +79,8 @@ class ProjectDetailPageHelperServiceImpl implements ProjectDetailPageHelperServi
 									List<User> response)
 							{
 								worker = response;
+								
+								initCallback.onSuccess();
 							}
 
 							@Override
@@ -85,9 +89,7 @@ class ProjectDetailPageHelperServiceImpl implements ProjectDetailPageHelperServi
 							{
 								initCallback.onFailure(exception);
 							}
-						});
-						
-						initCallback.onSuccess();
+						}).getEmployeeService().getUsersToJob(job.getJobNr(), job.getPosNr());						
 					}
 
 					@Override

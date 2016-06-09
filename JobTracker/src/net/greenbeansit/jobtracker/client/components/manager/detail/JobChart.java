@@ -5,8 +5,11 @@ import java.util.List;
 import org.gwtbootstrap3.client.ui.html.ClearFix;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.logical.shared.ResizeEvent;
+import com.google.gwt.event.logical.shared.ResizeHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 import com.googlecode.gwt.charts.client.ChartLoader;
@@ -52,6 +55,19 @@ public class JobChart extends Composite implements OnDisplayEventListener
 	public JobChart()
 	{
 		initWidget(uiBinder.createAndBindUi(this));
+		
+		Window.addResizeHandler(new ResizeHandler()
+		{
+			@Override
+			public void onResize(ResizeEvent event)
+			{
+				if(piechart != null)
+				{
+					piechart.setWidth("100%");
+					piechart.redraw();
+				}
+			}
+		});
 	}
 	
 	/**

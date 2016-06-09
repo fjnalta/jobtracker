@@ -176,9 +176,10 @@ public class RestServiceImpl implements RestService
 	}
 
 	@Override
-	public List<UserJob> getUsersToJob(Integer jobNo, Integer posNo)
+	public List<User> getUsersToJob(Integer jobNo, Integer posNo)
 	{
-		return userJobService.getByJobNrAndPosNr(jobNo, posNo);
+//		return userJobService.getByJobNrAndPosNr(jobNo, posNo);
+		return null;
 	}
 
 	@Override

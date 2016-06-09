@@ -30,6 +30,10 @@
 		background-color: #ffffff;
 	}
 	
+	.largeContainer > a {
+		border-radius: 0 !important;
+	}
+	
 	.smallContainer {
 		margin: 10px 10px;
 		padding: 10px;
@@ -113,7 +117,7 @@
 	</ui:style>
 	<b:Container fluid="true">
 		<b:Row addStyleNames="{style.headerRow}">
-			<g:Anchor href="#project" addStyleNames="{style.anchorBackward}" />
+			<b:Anchor href="#project" addStyleNames="{style.anchorBackward}" ui:field="anchorBackward" />
 			<b:Heading size="H3" addStyleNames="{style.title}" text=""
 				ui:field="titleProjectName" />
 		</b:Row>

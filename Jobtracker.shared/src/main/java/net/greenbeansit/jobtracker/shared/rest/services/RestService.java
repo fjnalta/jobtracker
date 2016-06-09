@@ -259,7 +259,7 @@ public interface RestService extends DirectRestService {
 	 */
 	@GET
 	@Path("/usertojob/{jobNo}&{posNo}")
-	List<UserJob> getUsersToJob(@PathParam("jobNo") Integer jobNo, @PathParam("posNo") Integer posNo);
+	List<User> getUsersToJob(@PathParam("jobNo") Integer jobNo, @PathParam("posNo") Integer posNo);
 
 	/**
 	 * Returns the utilization of an employee for the given month.
