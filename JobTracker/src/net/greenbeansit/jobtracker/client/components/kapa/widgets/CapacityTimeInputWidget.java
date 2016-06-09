@@ -12,7 +12,6 @@ import net.greenbeansit.jobtracker.client.components.kapa.CapaCalendarObserver;
 import net.greenbeansit.jobtracker.shared.UtilizationWeek;
 import org.gwtbootstrap3.client.ui.Button;
 import org.gwtbootstrap3.client.ui.TextBox;
-import org.gwtbootstrap3.client.ui.constants.IconType;
 
 /**
  * Shows the bottom Widget on the Capacity Page. This Widget is used to display
@@ -67,8 +66,6 @@ public class CapacityTimeInputWidget extends Composite implements CapaCalendarOb
 
         initWidget(uiBinder.createAndBindUi(this));
 
-        setButtons();
-
         handler.addObservable(this);
         handler.updateObservable(this);
         calendarHandler.addObserver(this);
@@ -78,10 +75,6 @@ public class CapacityTimeInputWidget extends Composite implements CapaCalendarOb
 
     @UiField
     TextBox projectStart, projectEnd;
-
-    @UiField
-    Button buttonUpYearStart, buttonDownYearStart,
-            buttonUpYearEnd, buttonDownYearEnd;
 
     /**
      * {@link UiHandler} for the {@link Button} that saves the
@@ -96,18 +89,6 @@ public class CapacityTimeInputWidget extends Composite implements CapaCalendarOb
             handler.saveUtilizationWeek(u);
         }
         calendarHandler.calendar.getCapacityReportsToSave().clear();
-    }
-
-    /**
-     * This Method sets the icons for all Buttons in this Widget
-     */
-    private void setButtons() {
-
-        buttonUpYearStart.setIcon(IconType.ARROW_UP);
-        buttonDownYearStart.setIcon(IconType.ARROW_DOWN);
-
-        buttonUpYearEnd.setIcon(IconType.ARROW_UP);
-        buttonDownYearEnd.setIcon(IconType.ARROW_DOWN);
     }
 
     /**

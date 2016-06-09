@@ -2,47 +2,36 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:b="urn:import:org.gwtbootstrap3.client.ui">
 	<ui:style>
-	.buttonTop {
-		border-radius: 4px 4px 0px 0px !important;
-	}
-	
-	.buttonDown {
-		border-radius: 0px 0px 4px 4px !important;
-	}
-	
 	.buttonText {
 		min-width: 50px;
-		height: 43px;
+		height: 35px;
 	}
 	
 	.button-blue {
 		background: #000099
 	}
+    .buttonBook {
+        align: center;
+    }
 	</ui:style>
 	<b:Container fluid="true">
-		<b:InputGroup>
-			<b:TextBox readOnly="true" ui:field="projectStart"
-				addStyleNames="{style.buttonText}"></b:TextBox>
-			<b:InputGroupButton>
-				<b:VerticalButtonGroup>
-					<b:Button size="EXTRA_SMALL" addStyleNames="{style.buttonTop}"
-						ui:field="buttonUpYearStart" />
-					<b:Button size="EXTRA_SMALL" addStyleNames="{style.buttonDown}"
-						ui:field="buttonDownYearStart" />
-				</b:VerticalButtonGroup>
-			</b:InputGroupButton>
-			<b:TextBox readOnly="true" ui:field="projectEnd"
-				addStyleNames="{style.buttonText}"></b:TextBox>
-			<b:InputGroupButton>
-				<b:VerticalButtonGroup>
-					<b:Button size="EXTRA_SMALL" addStyleNames="{style.buttonTop}"
-						ui:field="buttonUpYearEnd" />
-					<b:Button size="EXTRA_SMALL" addStyleNames="{style.buttonDown}"
-						ui:field="buttonDownYearEnd" />
-				</b:VerticalButtonGroup>
-			</b:InputGroupButton>
-			<b:Button type="PRIMARY" text="Buchen" pull="RIGHT" ui:field="buttonBook"
-				addStyleNames="{style.button-blue}" />
-		</b:InputGroup>
+        <b:Column size="XS_5,SM_5,MD_5,LG_5">
+            <b:FormLabel>Projektstart:</b:FormLabel>
+            <b:TextBox readOnly="true" ui:field="projectStart"
+                       addStyleNames="{style.buttonText}"></b:TextBox>
+        </b:Column>
+        <b:Column size="XS_5,SM_5,MD_5,LG_5">
+            <b:FormLabel>Projektende:</b:FormLabel>
+            <b:TextBox readOnly="true" ui:field="projectEnd"
+                       addStyleNames="{style.buttonText}"></b:TextBox>
+        </b:Column>
+        <b:Column size="XS_1,SM_1,MD_1,LG_1">
+            <b:FormLabel>Löschen:</b:FormLabel>
+            <b:Button text="x" ui:field="buttonDelete" addStyleNames="{style.buttonBook}"/>
+        </b:Column>
+        <b:Column size="XS_1,SM_1,MD_1,LG_1">
+            <b:FormLabel>Buchen:</b:FormLabel>
+            <b:Button type="PRIMARY" text="OK" ui:field="buttonBook" addStyleNames="{style.button-blue}" />
+        </b:Column>
 	</b:Container>
 </ui:UiBinder>
