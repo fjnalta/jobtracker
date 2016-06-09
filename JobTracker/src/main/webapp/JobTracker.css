@@ -44,10 +44,6 @@ html {
 	background-color: #f4f4f1;
 }
 
-input {
-	border-radius: 0 !important;
-}
-
-button {
+input, button, textarea {
 	border-radius: 0 !important;
 }
