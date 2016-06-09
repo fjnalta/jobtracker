@@ -28,8 +28,10 @@ public class CapacityTimeInputWidget extends Composite implements CapaCalendarOb
      */
     @Override
     public void update() {
-        projectStart.setText(splitISOString(calendarHandler.calendar.currentCapacityEvent.getISOStart()));
-        projectEnd.setText(splitISOString(calendarHandler.calendar.currentCapacityEvent.getISOEnd()));
+        if(calendarHandler.calendar.currentCapacityEvent != null) {
+            projectStart.setText(splitISOString(calendarHandler.calendar.currentCapacityEvent.getISOStart()));
+            projectEnd.setText(splitISOString(calendarHandler.calendar.currentCapacityEvent.getISOEnd()));
+        }
         notifyLogicHandler();
     }
 
@@ -62,12 +64,13 @@ public class CapacityTimeInputWidget extends Composite implements CapaCalendarOb
      * Initializes a new Instance of CapacityTimeInputWidget.
      */
     public CapacityTimeInputWidget() {
-        initWidget(uiBinder.createAndBindUi(this));
 
+        initWidget(uiBinder.createAndBindUi(this));
 
         setButtons();
 
         handler.addObservable(this);
+        handler.updateObservable(this);
         calendarHandler.addObserver(this);
         currentUtilizationWeek = handler.getCurrentUtilizationWeek();
 

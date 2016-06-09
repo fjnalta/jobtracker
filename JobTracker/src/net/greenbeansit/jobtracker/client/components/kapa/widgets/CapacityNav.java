@@ -256,16 +256,20 @@ public class CapacityNav extends Composite implements LogicObservable, CapaCalen
 
     private void loadMyProjectPage(){
 
-        myProjects.setActive(true);
-        myProjectsPane.setActive(true);
-        newProject.setActive(false);
-        newProjectPane.setActive(false);
+//        myProjects.setActive(true);
+//        myProjectsPane.setActive(true);
+//        newProject.setActive(false);
+//        newProjectPane.setActive(false);
 
         myProjectsProjectName.setText("NAME MISSING");
         if(calendarHandler.getCurrentUtilizationWeek() != null) {
             myProjectsDescription.setText(calendarHandler.getCurrentUtilizationWeek().getText());
             mySlider.setValue(calendarHandler.getCurrentUtilizationWeek().getPossibility().doubleValue());
             possibilityPercentage.setText(calendarHandler.getCurrentUtilizationWeek().getPossibility().toString());
+        } else {
+            myProjectsDescription.setText("");
+            mySlider.setValue(50.00);
+            possibilityPercentage.setText("50");
         }
     }
 }

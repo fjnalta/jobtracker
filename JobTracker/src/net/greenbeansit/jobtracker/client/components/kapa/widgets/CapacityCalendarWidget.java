@@ -186,13 +186,12 @@ public class CapacityCalendarWidget extends Composite implements CapaCalendarObs
                         endDate.setDate(endDate.getDate()-1);
                         Date beginDate = new Date(tmp.getISOStart());
 
-                        UtilizationWeek tempUtil = new UtilizationWeek(0,0,"",beginDate,8,16,endDate,0,0,0);
+                        UtilizationWeek tempUtil = new UtilizationWeek(0,0,"new Report",beginDate,8,16,endDate,0,0,0);
 
                         unselect(viewObject, event);
                         currentUtilizationWeek = tempUtil;
 
                         tmp.setUtilizationWeek(tempUtil);
-                        GWT.log((tmp.getUw()!=null) + "");
                         fullcalendar.addEvent(tmp);
                         fullcalendar.addEventToSave(tempUtil);
 
@@ -294,6 +293,7 @@ public class CapacityCalendarWidget extends Composite implements CapaCalendarObs
      * @param reports List of {@link UtilizationWeek} for CapacityPlaning
      */
     public void addUtilizationWeeks(List<UtilizationWeek> reports) {
+
         if (!reports.isEmpty()) {
             for (UtilizationWeek ap : reports) {
                 CapacityReportEvent e = new CapacityReportEvent(ap, ap.getId() + "", ap.getText(), true, true, true);
@@ -302,7 +302,6 @@ public class CapacityCalendarWidget extends Composite implements CapaCalendarObs
                 e.setEnd(calendarHandler.getISO8601StringForDate(ap.getEndDate(), ap.getEndTime()));
                 fullcalendar.addEvent(e);
                 this.eventList.add(e);
-                fullcalendar.render();
                 fullcalendar.currentCapacityEvent = null;
             }
         }
@@ -333,9 +332,9 @@ public class CapacityCalendarWidget extends Composite implements CapaCalendarObs
      */
     @Override
     public void updateObservable() {
-        addUtilizationWeeks(handler.getCurrentUtilizationWeekList());
         currentUtilizationWeek = handler.getCurrentUtilizationWeek();
         fullcalendar.render();
+        addUtilizationWeeks(handler.getCurrentUtilizationWeekList());
     }
 
     /**
