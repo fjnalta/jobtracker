@@ -203,6 +203,24 @@ public class Job implements Serializable {
 	{
 		this.isIntern = isIntern;
 	}
+	
+	/**
+	 * get the isLocked value
+	 * @return Boolean value
+     */
+	public Boolean isLocked()
+	{
+		return isLocked;
+	}
+
+	/**
+	 * set the isLocked value
+	 * @param isLocked Boolean value
+     */
+	public void setLocked(Boolean isLocked)
+	{
+		this.isLocked = isLocked;
+	}
 
 	/**
 	 * custom toString method
@@ -228,11 +246,6 @@ public class Job implements Serializable {
 		return this.jobNr + "-" + this.posNr + "-" + payMode + " | " + this.customerID + " | " + this.desc;
 	}
 
-	/**
-	 * custom equals value
-	 * @param obj Object to compare with
-	 * @return Boolean value
-     */
 	public boolean equals(Object obj) {
 		if(obj == null)
 			return false;
@@ -243,23 +256,13 @@ public class Job implements Serializable {
 		} else
 			return false;
 	}
-
-	/**
-	 * get the isLocked value
-	 * @return Boolean value
-     */
-	public Boolean isLocked()
-	{
-		return isLocked;
-	}
-
-	/**
-	 * set the isLocked value
-	 * @param isLocked Boolean value
-     */
-	public void setLocked(Boolean isLocked)
-	{
-		this.isLocked = isLocked;
-	}
+	
+	@Override
+    public int hashCode() {
+		if(jobNr == null || posNr == null)
+			return 0;
+		Integer hashInt = jobNr*1000 + posNr;
+        return hashInt.hashCode();
+    }
 
 }

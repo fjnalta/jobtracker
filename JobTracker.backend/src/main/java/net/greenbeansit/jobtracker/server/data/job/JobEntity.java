@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.Table;
 
+import net.greenbeansit.jobtracker.shared.Job;
+
 /**
  * A class representing Job as entities in our database. Only used in backend.
  * Each entity class requires a standard constructor and getters/setters for
@@ -269,5 +271,24 @@ public class JobEntity implements Serializable
 	{
 		this.locked = isLocked;
 	}
+	
+	public boolean equals(Object obj) {
+		if(obj == null)
+			return false;
+		else if (obj instanceof JobEntity)
+		{
+			JobEntity temp = (JobEntity) obj;
+			return this.jobNr.equals(temp.jobNr) && this.posNr.equals(temp.posNr);
+		} else
+			return false;
+	}
+	
+	@Override
+    public int hashCode() {
+		if(jobNr == null || posNr == null)
+			return 0;
+		Integer hashInt = jobNr*1000 + posNr;
+        return hashInt.hashCode();
+    }
 
 }

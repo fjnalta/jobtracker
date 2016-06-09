@@ -33,7 +33,7 @@ public class LogicHandler {
 
 	private List<LogicObservable> list = new ArrayList<>();
 
-
+	private List<JobTask> jobTasksList = new ArrayList<JobTask>();
 	private List<ActivityReport> currentReportsList = new ArrayList<ActivityReport>();
 	private List<ActivityReportTemplate> templateList = new ArrayList<ActivityReportTemplate>();
 	private List<Job> jobList = new ArrayList<Job>();
@@ -68,7 +68,9 @@ public class LogicHandler {
 		List<ActivityReportTemplate> reporttemp = new ArrayList<ActivityReportTemplate>();
 		List<PseudoJob> pseudoJobreport = new ArrayList<PseudoJob>();
 		List<UtilizationWeek> utilizationWeekreports = new ArrayList<UtilizationWeek>();
+		List<JobTask> jobTasksTmp = new ArrayList<JobTask>();
 		
+		this.jobTasksList = jobTasksTmp;
 		this.jobList = temp;
 		this.templateList = reporttemp;
 		this.pseudoJobList = pseudoJobreport;
@@ -272,7 +274,30 @@ public class LogicHandler {
 
 		}).getEmployeeService().getAllReports(currentUser.getId());
 	}
+	
+	/**
+	 * Function for loading all {@link Jobtask}s for the current user
+	 */
+	public void getAllJobTasks(){
+		RestClient.build(new SuccessFunction<List<JobTask>>() {
 
+			@Override
+			public void onSuccess(Method method, List<JobTask> response) {
+				LogicHandler.this.setJobTasksList(response);
+				LogicHandler.this.updateAllObservables();
+				calendar.updateObservable();
+				NotifyHelper.successMessage("JobTask´s loaded from backend");
+			}
+
+			@Override
+			public void onFailure(Method method, Throwable exception) {
+				NotifyHelper.errorMessage("FAILED: " + exception.getMessage());
+				GWT.log(exception.getMessage());
+			}
+			
+		}).getEmployeeService().getJobTasks(LogicHandler.this.getCurrentUser().getId());
+	}
+	
 	/**
 	 * Method to delete an {@link ActivityReport} from the Calendar and Backend.
 	 * @param authorId the Author ID.
@@ -733,6 +758,21 @@ public class LogicHandler {
      */
 	public void setPseudoJobList(List<PseudoJob> pseudoJobList) {
 		this.pseudoJobList = pseudoJobList;
+	}
+	/**
+	 * get the {@link JobTask} {@link List}
+	 * @return {@link List} object with the currently loaded {@link JobTak}s
+	 */
+	public List<JobTask> getJobTasksList() {
+		return jobTasksList;
+	}
+	
+	/**
+	 * set the {@link JobTask} {@link List}
+	 * @param jobTasksList {@link List} object with the {@link JobTak}s to save
+	 */
+	public void setJobTasksList(List<JobTask> jobTasksList) {
+		this.jobTasksList = jobTasksList;
 	}
 
 	public UtilizationWeek getTempUtilizationWeek() {

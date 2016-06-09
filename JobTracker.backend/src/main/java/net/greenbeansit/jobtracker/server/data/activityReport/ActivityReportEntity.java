@@ -328,5 +328,21 @@ public class ActivityReportEntity implements Serializable
 	{
 		this.posNo = posNo;
 	}
+	
+	public boolean equals(Object obj) {
+		if(obj == null)
+			return false;
+		else if (obj instanceof ActivityReportEntity)
+		{
+			ActivityReportEntity temp = (ActivityReportEntity) obj;
+			return this.id.equals(temp.getId());
+		} else
+			return false;
+	}
+	
+	@Override
+    public int hashCode() {
+        return id == null ? 0 : id.hashCode();
+    }
 
 }

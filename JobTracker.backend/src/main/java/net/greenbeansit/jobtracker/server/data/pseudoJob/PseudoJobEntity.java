@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import net.greenbeansit.jobtracker.shared.PseudoJob;
+
 /**
  * A class representing PseudoJob (for capacity planning) as entities in our
  * database. Only used in backend. Each entity class requires a standard
@@ -113,4 +115,20 @@ public class PseudoJobEntity implements Serializable
 	{
 		this.author = author;
 	}
+	
+	public boolean equals(Object obj) {
+        if(obj == null)
+            return false;
+        else if (obj instanceof PseudoJobEntity)
+        {
+            PseudoJobEntity temp = (PseudoJobEntity) obj;
+            return this.id.equals(temp.id);
+        } else
+            return false;
+    }
+	
+	@Override
+    public int hashCode() {
+        return id == null ? 0 : id.hashCode();
+    }
 }

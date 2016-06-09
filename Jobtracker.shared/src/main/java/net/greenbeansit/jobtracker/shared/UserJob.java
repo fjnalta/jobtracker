@@ -1,6 +1,8 @@
 package net.greenbeansit.jobtracker.shared;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Represents a UserJob
@@ -152,11 +154,6 @@ public class UserJob implements Serializable
 		this.posNo = posNo;
 	}
 
-	/**
-	 * custom equals method
-	 * @param obj Object to compare to
-	 * @return Boolean value
-     */
 	public boolean equals(Object obj)
 	{
 		if (obj == null)
@@ -171,4 +168,16 @@ public class UserJob implements Serializable
 		} else
 			return false;
 	}
+	
+	@Override
+    public int hashCode() {
+        if(userId == null || jobNo == null || posNo == null || role == null)
+        	return 0;
+        List<Integer> ints = new ArrayList<Integer>();
+        ints.add(userId);
+        ints.add(jobNo);
+        ints.add(posNo);
+        ints.add(role);
+        return ints.hashCode();
+    }
 }

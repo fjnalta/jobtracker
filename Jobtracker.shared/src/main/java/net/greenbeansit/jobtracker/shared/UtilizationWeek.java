@@ -227,6 +227,10 @@ public class UtilizationWeek implements Serializable {
         this.pseudoJobId = pseudoJobId;
     }
 
+    /**
+     * Sets the end date
+     * @param date the date
+     */
     public void setEndDate(Date date) {
         if(date == null) {
             throw new IllegalArgumentException();
@@ -234,6 +238,10 @@ public class UtilizationWeek implements Serializable {
         this.endDate = date;
     }
 
+    /**
+     * Gets the end date
+     * @return the date
+     */
     public Date getEndDate(){
         return this.endDate;
     }
@@ -248,4 +256,9 @@ public class UtilizationWeek implements Serializable {
 		} else
 			return false;
 	}
+    
+	@Override
+    public int hashCode() {
+        return id == null ? 0 : id.hashCode();
+    }
 }

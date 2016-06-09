@@ -310,11 +310,6 @@ public class ActivityReport implements Serializable
 		return "{id:"+id+", taskId:"+taskId+", jobNr:"+jobNr+", posNr:"+posNr+", authorId:"+authorId+", text:"+text+", date:"+date.toString()+", startTime:"+startTime+", duration:"+duration+", breakTime:"+breakTime+"}";
 	}
 
-	/**
-	 * Method for comparing two reports between each other
-	 * @param obj other report object you want to compare
-	 * @return true if reports are equal, false if not
-     */
 	public boolean equals(Object obj) {
 		if(obj == null)
 			return false;
@@ -325,5 +320,10 @@ public class ActivityReport implements Serializable
 		} else
 			return false;
 	}
+	
+	@Override
+    public int hashCode() {
+        return id == null ? 0 : id.hashCode();
+    }
 
 }

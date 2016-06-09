@@ -78,7 +78,7 @@ public class UserServiceJpa implements UserDataService
 				entity.getSupervisor());
 	}
 
-	@SuppressWarnings("deprecation")
+	@Deprecated
 	@Override
 	public Integer getUtilization(Integer employeeId, Date from, Date to)
 	{

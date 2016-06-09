@@ -510,12 +510,14 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 		GWT.log(calendarHandler.calendar.getEventsToSave().size()+"");
 		if(calendarHandler.calendar.getEventsToSave().size() > 0){
 		for (ActivityReport report : calendarHandler.calendar.getEventsToSave()) {
-			ActivityReport tmp = new ActivityReport(0, 0, 0, 0, 0, "", report.getDate(), startTime, duration,
+			ActivityReport tmp = new ActivityReport(report.getId(), 0, 0, 0, 0, "", report.getDate(), startTime, duration,
 					breakTime);
 			handler.saveReport(tmp);
 		}
 		}else{
-			ActivityReport tmp = new ActivityReport(0, 0, 0, 0, 0, "", getDateFromBox(dateStart), startTime, duration,
+			GWT.log(calendarHandler.calendar.currentEvent.getId());
+			ActivityReport tmp = new ActivityReport(Integer.parseInt(calendarHandler.calendar.currentEvent.getId())
+					, 0, 0, 0, 0, "", getDateFromBox(dateStart), startTime, duration,
 					breakTime);
 			handler.saveReport(tmp);	
 		}
