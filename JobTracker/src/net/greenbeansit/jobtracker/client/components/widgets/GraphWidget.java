@@ -502,7 +502,7 @@ public class GraphWidget extends Composite implements LogicObservable {
 		LineChartOptions options = LineChartOptions.create();
 		options.setBackgroundColor("white");
 		options.setFontName("Tahoma");
-		options.setTitle("Yearly Coffee Consumption by Country");
+		options.setTitle("Year view");
 		options.setHAxis(HAxis.create("Year"));
 		options.setVAxis(VAxis.create("€"));
 		drawLineChart(dataTable, options);

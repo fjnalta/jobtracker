@@ -404,7 +404,7 @@ public class LogicHandler {
 		if (currentUtilizationWeek != null && currentUser != null && tempUtilizationWeek!=null) {
 			final UtilizationWeek tempReport = currentUtilizationWeek;
 			tempReport.setText(tempUtilizationWeek.getText());
-			tempReport.setAuthor(tempUtilizationWeek.getAuthor());
+			tempReport.setAuthor(currentUser.getId());
 			tempReport.setPseudoJobId(tempUtilizationWeek.getPseudoJobId());
 			tempReport.setPossibility(tempUtilizationWeek.getPossibility());
 			try {
