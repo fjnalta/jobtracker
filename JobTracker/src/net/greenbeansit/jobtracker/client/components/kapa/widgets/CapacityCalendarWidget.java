@@ -121,9 +121,6 @@ public class CapacityCalendarWidget extends Composite implements CapaCalendarObs
                 handler.loadAllUtilizationWeeks();
             }
 
-
-            // TODO - get startDate and beginDate from created CapacityReportEvent and add the Dates to the handler.currentUtilizationWeek
-
             /**
              * Sets the Click and Hover config for the {@link CapacityCalendarWidget}
              * @return the Click and Hover config
@@ -149,12 +146,14 @@ public class CapacityCalendarWidget extends Composite implements CapaCalendarObs
                         CapacityReportEvent e = new CapacityReportEvent(calendarEvent);
                         fullcalendar.currentCapacityEvent = e;
                         for (CapacityReportEvent a : eventList) {
-                            if (a.getDescription().equals(e.getDescription())) {
+                            if (a.getId().equals(e.getId())) {
                                 handler.setCurrentUtilizationWeek(a.getUw());
+                                calendarHandler.setCurrentUtilizationWeek(a.getUw());
                             }
                         }
-                        notifyHandler();
+
                         notifyLogicHandler();
+                        notifyHandler();
                     }
 
                     /**
@@ -197,8 +196,8 @@ public class CapacityCalendarWidget extends Composite implements CapaCalendarObs
                         fullcalendar.addEventToSave(tempUtil);
 
                         fullcalendar.currentCapacityEvent = tmp;
-                        notifyHandler();
                         notifyLogicHandler();
+                        notifyHandler();
                     }
 
                     @Override
