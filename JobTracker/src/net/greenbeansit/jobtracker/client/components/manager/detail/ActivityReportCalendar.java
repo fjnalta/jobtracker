@@ -3,6 +3,7 @@ package net.greenbeansit.jobtracker.client.components.manager.detail;
 import java.util.Date;
 
 import org.gwtbootstrap3.client.ui.html.ClearFix;
+import org.gwtbootstrap3.extras.fullcalendar.client.ui.AgendaOptions;
 import org.gwtbootstrap3.extras.fullcalendar.client.ui.CalendarConfig;
 import org.gwtbootstrap3.extras.fullcalendar.client.ui.FullCalendar;
 import org.gwtbootstrap3.extras.fullcalendar.client.ui.GeneralDisplay;
@@ -88,6 +89,11 @@ public class ActivityReportCalendar extends Composite
 		generalDisplay.setHeight(600);
 
 		config.setGeneralDisplay(generalDisplay);
+		
+		AgendaOptions agenda = new AgendaOptions();
+		agenda.setAllDaySlot(false);
+		agenda.setSlotEventOverlap(false);
+		config.setAgendaOptions(agenda);
 
 		calendar = new FullCalendar("test", ViewOption.agendaWeek, config,
 				false);
