@@ -175,44 +175,7 @@ public class GraphWidget extends Composite implements LogicObservable {
 		});
 	}
 
-	/**
-	 * event handling for buttonNext, shows the next time span
-	 * @param event ClickEvent of the Button
-     */
-	@UiHandler("buttonNext")
-	public void showNext(ClickEvent event) {
-		if (false){
 
-		}else {
-			currentBudgetStartFocus = currentBudgetEndFocus;
-			currentBudgetEndFocus += budgetSteps.get(budgetSteps.size() - 1);
-			budgetSteps.remove(budgetSteps.size() - 1);
-			switch (currentMode) {
-			case WEEK:
-				startDate.setDate(startDate.getDate() + 7);
-				endDate.setDate(endDate.getDate()+7);
-				showWeek();
-				break;
-			case MONTH:
-				startDate.setMonth(startDate.getMonth() + 1);
-				endDate.setMonth(endDate.getMonth() + 2);
-				endDate.setDate(0);
-				if (endDate.getMonth() - startDate.getMonth() > 0) {
-					endDate.setDate(0);
-				}
-
-				showMonth();
-				break;
-			case YEAR:
-				startDate.setYear(startDate.getYear() + 1);
-				endDate.setYear(endDate.getYear() + 1);
-				showYear();
-				break;
-			default:
-				break;
-			}
-		}
-	}
 
 	/**
 	 * Event handling for the buttonPrevious, shows the previous time span
@@ -220,6 +183,7 @@ public class GraphWidget extends Composite implements LogicObservable {
      */
 	@UiHandler("buttonPrevious")
 	public void showPrevious(ClickEvent event) {
+		GWT.log("buttonPrev");
 		budgetSteps.add(currentBudgetEndFocus - currentBudgetStartFocus);
 		currentBudgetEndFocus = currentBudgetStartFocus;
 

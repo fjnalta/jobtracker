@@ -214,6 +214,46 @@ public class JobBudgetWidget extends Composite implements OnDisplayEventListener
 	}
 
 	/**
+	 * event handling for buttonNext, shows the next time span
+	 * @param event ClickEvent of the Button
+	 */
+	@UiHandler("buttonNext")
+	public void showNext(ClickEvent event) {
+		GWT.log("buttonNext");
+		currentBudgetStartFocus = currentBudgetEndFocus;
+
+		if(!budgetSteps.isEmpty())	{
+			currentBudgetEndFocus += budgetSteps.get(budgetSteps.size() - 1);
+			budgetSteps.remove(budgetSteps.size() - 1);
+		}
+
+		switch (currentMode) {
+			case WEEK:
+				startDate.setDate(startDate.getDate() + 7);
+				endDate.setDate(endDate.getDate()+7);
+				showWeek();
+				break;
+			case MONTH:
+				startDate.setMonth(startDate.getMonth() + 1);
+				endDate.setMonth(endDate.getMonth() + 2);
+				endDate.setDate(0);
+				if (endDate.getMonth() - startDate.getMonth() > 0) {
+					endDate.setDate(0);
+				}
+				showMonth();
+				break;
+			case YEAR:
+				startDate.setYear(startDate.getYear() + 1);
+				endDate.setYear(endDate.getYear() + 1);
+				showYear();
+				break;
+			default:
+				break;
+		}
+
+	}
+
+	/**
 	 * Event handling for the buttonModeWeek, switches the graph to week mode
 	 * 
 	 * @param event
@@ -436,14 +476,16 @@ public class JobBudgetWidget extends Composite implements OnDisplayEventListener
 	 */
 	public void showYear()
 	{
-		int[] months = new int[12];
+		int monthsToShow = endDate.getMonth()+1;
+		//if(currentTime.getMonth())
+		int[] months = new int[monthsToShow];
 		for (int i = 0; i < months.length; i++)
 		{
-			months[i] = endDate.getMonth() - 12 + i;
+			months[i] = endDate.getMonth() - monthsToShow+2 + i;
 		}
 
-		int[] values = new int[12];
-		int[] budgetValues = new int[12];
+		int[] values = new int[monthsToShow];
+		int[] budgetValues = new int[monthsToShow];
 		for (int i = 0; i < values.length; i++)
 		{
 			values[i] = 0;
