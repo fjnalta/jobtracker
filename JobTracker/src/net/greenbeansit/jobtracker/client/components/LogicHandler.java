@@ -400,10 +400,8 @@ public class LogicHandler {
 	 * 			the {@link UtilizationWeek}.
 	 */
 	public void saveUtilizationWeek(UtilizationWeek report) {
-
 		if (report != null && currentUser != null && tempUtilizationWeek!=null) {
 			final UtilizationWeek tempReport = report;
-			//tempReport.setId(0);
 			tempReport.setText(tempUtilizationWeek.getText());
 			tempReport.setAuthor(currentUser.getId());
 			tempReport.setPseudoJobId(tempUtilizationWeek.getPseudoJobId());
@@ -415,7 +413,6 @@ public class LogicHandler {
 						GWT.log(tempReport.toString());
 						LogicHandler.this.updateAllObservables();
 						NotifyHelper.successMessage("Report saved");
-
 					}
 
 					@Override
@@ -789,7 +786,7 @@ public class LogicHandler {
 	 * @param tempUtilizationWeek the {@link UtilizationWeek}.
      */
 	public void setTempUtilizationWeek(UtilizationWeek tempUtilizationWeek) {
-		GWT.log("set temp");
+//		GWT.log("LogicHandler: TempUtilizationName: " + tempUtilizationWeek.getText());
 		this.tempUtilizationWeek = tempUtilizationWeek;
 	}
 
