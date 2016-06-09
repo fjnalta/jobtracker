@@ -25,7 +25,28 @@ public class CalendarHandler implements LogicObservable {
 	//public Event currentEvent;
 
 	private List<CalendarObserver> list = new ArrayList<>();
+	
+	private int 						displayMonth;
 
+	
+	public int getDisplayMonth() {
+		return displayMonth;
+	}
+
+	public void setDisplayMonth(int displayMonth) {
+		this.displayMonth = displayMonth;
+	}
+
+	/**
+	 * Initialize the object
+	 */
+	public CalendarHandler(){
+		
+		Date d = new Date();
+		
+		this.displayMonth = d.getMonth();
+	}
+	
 	/**
 	 * 
 	 * @param w add a calendar observer
