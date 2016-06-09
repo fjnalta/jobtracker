@@ -207,6 +207,7 @@ public class CapacityNav extends Composite implements LogicObservable, CapaCalen
         allJobsOptGroup.clear();
         myJobsOptGroup.clear();
         textIdentifier.clear();
+        utilizationWeekList.clear();
 
         createUtilizationWeekList();
         addUtilizationWeeks(this.utilizationWeekList);
@@ -261,8 +262,10 @@ public class CapacityNav extends Composite implements LogicObservable, CapaCalen
         newProjectPane.setActive(false);
 
         myProjectsProjectName.setText("NAME MISSING");
-        myProjectsDescription.setText(calendarHandler.getCurrentUtilizationWeek().getText());
-        mySlider.setValue(calendarHandler.getCurrentUtilizationWeek().getPossibility().doubleValue());
-        possibilityPercentage.setText(calendarHandler.getCurrentUtilizationWeek().getPossibility().toString());
+        if(calendarHandler.getCurrentUtilizationWeek() != null) {
+            myProjectsDescription.setText(calendarHandler.getCurrentUtilizationWeek().getText());
+            mySlider.setValue(calendarHandler.getCurrentUtilizationWeek().getPossibility().doubleValue());
+            possibilityPercentage.setText(calendarHandler.getCurrentUtilizationWeek().getPossibility().toString());
+        }
     }
 }
