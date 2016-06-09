@@ -417,6 +417,7 @@ public class CalendarUtilizationWidget extends Composite implements CalendarObse
 	public void notifyHandler() {
 
 		calendarHandler.setDisplayMonth(this.currentWeekFirstDayDate.getMonth() + 1);
+		calendarHandler.setDisplayYear(this.currentWeekFirstDayDate.getYear());
 
 		calendarHandler.updateObserver(this);
 

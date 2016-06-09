@@ -27,17 +27,24 @@ import net.greenbeansit.jobtracker.client.localization.HomePageConstants;
  */
 public class CalendarTimeLineWidget extends Composite implements CalendarObserver {
 
+	private static CalendarTimeLineWidgetUiBinder uiBinder = GWT.create(CalendarTimeLineWidgetUiBinder.class);
+
+	private static HomePageConstants constants	= GWT.create(HomePageConstants.class);
+	
+	interface CalendarTimeLineWidgetUiBinder extends UiBinder<Widget, CalendarTimeLineWidget> {
+	}
+	
 	@UiField
-	Span date;
+	Span 					date;
 
 	@UiField
-	Span kw;
+	Span 					kw;
 
 	@UiField
-	Button buttonWeek;
+	Button					buttonWeek;
 
 	@UiField
-	Button buttonMonth;
+	Button 					buttonMonth;
 
 	/**
 	 * Changes the Calendar view to monthly.
@@ -67,31 +74,19 @@ public class CalendarTimeLineWidget extends Composite implements CalendarObserve
 		notifyHandler();
 	}
 
-	private static CalendarTimeLineWidgetUiBinder uiBinder = GWT.create(CalendarTimeLineWidgetUiBinder.class);
-
-	private static HomePageConstants constants	= GWT.create(HomePageConstants.class);
-	
-	interface CalendarTimeLineWidgetUiBinder extends UiBinder<Widget, CalendarTimeLineWidget> {
-	}
-
 	/**
 	 * Initializes a new Instane of CalendarTimeLineWidget.
 	 */
 	@SuppressWarnings("deprecation")
 	public CalendarTimeLineWidget() {
 		initWidget(uiBinder.createAndBindUi(this));
-
+		
 		Date day = new Date();
 		
 		calendarHandler.addObserver(this);
-
-		//String currentDate = createDate(new Date().toString());
-
-		setCalenderWeek(getMonthName(day.getMonth() + 1));
 		
-		//setDate(currentDate);
+		setCalenderWeek(getMonthName(day.getMonth() + 1) +" "+ (day.getYear()+1900));
 		
-		//setCalenderWeek(getCalendarWeek(day.getYear() + 1900, day.getMonth() + 1 , day.getDate()));
 	}
 
 	/**
@@ -105,7 +100,7 @@ public class CalendarTimeLineWidget extends Composite implements CalendarObserve
 	@Override
 	public void update() {
 
-		setCalenderWeek(getMonthName(calendarHandler.getDisplayMonth()));	
+		setCalenderWeek(getMonthName(calendarHandler.getDisplayMonth() + 1) +" "+calendarHandler.getDisplayYear());	
 	}
 
 	/**
@@ -116,6 +111,7 @@ public class CalendarTimeLineWidget extends Composite implements CalendarObserve
 	 * @return the Name of the Month.
 	 */
 	private String getMonthName(int month) {
+		
 		switch (month) {
 		case 1:
 			return "Januar";

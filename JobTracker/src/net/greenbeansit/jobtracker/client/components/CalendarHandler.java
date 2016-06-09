@@ -26,16 +26,7 @@ public class CalendarHandler implements LogicObservable {
 
 	private List<CalendarObserver> list = new ArrayList<>();
 	
-	private int 						displayMonth;
-
-	
-	public int getDisplayMonth() {
-		return displayMonth;
-	}
-
-	public void setDisplayMonth(int displayMonth) {
-		this.displayMonth = displayMonth;
-	}
+	private Date 						date;
 
 	/**
 	 * Initialize the object
@@ -44,7 +35,7 @@ public class CalendarHandler implements LogicObservable {
 		
 		Date d = new Date();
 		
-		this.displayMonth = d.getMonth();
+		this.date = new Date();
 	}
 	
 	/**
@@ -59,6 +50,22 @@ public class CalendarHandler implements LogicObservable {
 
 		}
 		list.add(w);
+	}
+	
+	public int getDisplayMonth() {
+		return this.date.getMonth();
+	}
+
+	public void setDisplayMonth(int displayMonth) {
+		this.date.setMonth(displayMonth);
+	}
+
+	public int getDisplayYear(){
+		return (this.date.getYear() +1900);
+	}
+	
+	public void setDisplayYear(int displayYear){
+		this.date.setYear(displayYear);
 	}
 
 	/**
