@@ -58,9 +58,6 @@ public class CapacityNav extends Composite implements LogicObservable, CapaCalen
     @UiField
     TabListItem myProjects, newProject;
 
-    @UiField
-    TabPane newProjectPane, myProjectsPane;
-
     /**
      * This Method sets the possibility of the {@link UtilizationWeek}
      *
@@ -261,13 +258,14 @@ public class CapacityNav extends Composite implements LogicObservable, CapaCalen
     }
 
     private void loadMyProjectPage() {
-
-        myProjects.showTab();
         if (calendarHandler.getCurrentUtilizationWeek() != null) {
+            myProjects.showTab();
             description.setText(calendarHandler.getCurrentUtilizationWeek().getText());
 
             mySlider.setValue(calendarHandler.getCurrentUtilizationWeek().getPossibility().doubleValue());
             possibilityPercentage.setText(calendarHandler.getCurrentUtilizationWeek().getPossibility().toString());
+        } else {
+            newProject.showTab();
         }
     }
 }
