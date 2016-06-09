@@ -3,11 +3,9 @@ package net.greenbeansit.jobtracker.server.data.utilizationWeek;
 import java.io.Serializable;
 import java.sql.Date;
 
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -17,10 +15,10 @@ import net.greenbeansit.jobtracker.shared.UtilizationWeek;
  * A class representing UtilizationWeek as entities in our database. Only used
  * in backend. Each entity class requires a standard constructor and
  * getters/setters for usage in Java Spring.
- * 
+ *
  * Used for capacity planning.
- * 
- * @author Mike Hukiewitz
+ *
+ * @author Philipp Minges
  *
  */
 @Entity
@@ -29,27 +27,30 @@ public class UtilizationWeekEntity implements Serializable
 {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long	serialVersionUID	= 3842559068860954254L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Basic(optional = false)
+	@GeneratedValue
 	private Integer				id;
 
 	@Column(name = "author")
 	private Integer				author;
-	@Column(name = "begin")
-	private Date				begin;
-	@Column(name = "days_free")
-	private Integer				daysFree;
-	@Column(name = "days_work")
-	private Integer				daysWork;
-	@Column(name = "days_holiday")
-	private Integer				daysHoliday;
+	@Column(name = "text")
+	private String				text;
+	@Column(name = "begin_date")
+	private Date				beginDate;
+	@Column(name = "begin_time")
+	private Integer				beginTime;
+	@Column(name = "end_date")
+	private Date				endDate;
+	@Column(name = "end_time")
+	private Integer				endTime;
 	@Column(name = "possibility")
 	private Integer				possibilty;
+	@Column(name = "break_time")
+	private Integer				breakTime;
 	@Column(name = "pseudo_job_id")
 	private Integer				pseudoJobId;
 
@@ -62,67 +63,41 @@ public class UtilizationWeekEntity implements Serializable
 	}
 
 	/**
-	 * Initializes an {@link UtilizationWeekEntity}
-	 * 
+	 * Initializes a new Instance of {@link UtilizationWeekEntity}
 	 * @param id
-	 *            ID of the entity
+	 * 			the Id of the Utilization Week
 	 * @param author
-	 *            ID of its author
-	 * @param begin
-	 *            first day of the week
-	 * @param daysFree
-	 *            how many days of the week are free
-	 * @param daysWork
-	 *            how many days of the week are working days
-	 * @param daysHoliday
-	 *            how many days of the week are holidays
+	 * 			the Author id
+	 * @param text
+	 * 			the Description
+	 * @param beginDate
+	 * 			the Begin Date
+	 * @param beginTime
+	 * 			the Begin Time
+	 * @param endDate
+	 * 			the End Date
+	 * @param endTime
+	 * 			the End Time
 	 * @param possibility
-	 *            how likely does this planning apply
-	 * @param pseudoJobId
-	 *            ID of the corresponding pseudoJob
-	 */
-	public UtilizationWeekEntity(Integer id, Integer author, Date begin,
-			Integer daysFree, Integer daysWork, Integer daysHoliday,
-			Integer possibility, Integer pseudoJobId)
+	 * 			the possibility
+     * @param breakTime
+	 * 			the break Time
+     * @param pseudoJobId
+	 * 			the pseudoJobId
+     */
+	public UtilizationWeekEntity(Integer id, Integer author, String text, Date beginDate,
+								 Integer beginTime, Date endDate, Integer endTime,
+								 Integer possibility, Integer breakTime, Integer pseudoJobId)
 	{
 		this.id = id;
 		this.author = author;
-		this.begin = begin;
-		this.daysFree = daysFree;
-		this.daysWork = daysWork;
-		this.daysHoliday = daysHoliday;
+		this.text = text;
+		this.beginDate = beginDate;
+		this.beginTime = beginTime;
+		this.endDate = endDate;
+		this.endTime = endTime;
 		this.possibilty = possibility;
-		this.pseudoJobId = pseudoJobId;
-	}
-
-	/**
-	 * Creates a new {@link UtilizationWeekEntity}
-	 * 
-	 * @param author
-	 *            ID of its author
-	 * @param begin
-	 *            first day of the week
-	 * @param daysFree
-	 *            how many days of the week are free
-	 * @param daysWork
-	 *            how many days of the week are working days
-	 * @param daysHoliday
-	 *            how many days of the week are holidays
-	 * @param possibility
-	 *            how likely does this planning apply
-	 * @param pseudoJobId
-	 *            ID of the corresponding pseudoJob
-	 */
-	public UtilizationWeekEntity(Integer author, Date begin, Integer daysFree,
-			Integer daysWork, Integer daysHoliday, Integer possibility,
-			Integer pseudoJobId)
-	{
-		this.author = author;
-		this.begin = begin;
-		this.daysFree = daysFree;
-		this.daysWork = daysWork;
-		this.daysHoliday = daysHoliday;
-		this.possibilty = possibility;
+		this.breakTime = breakTime;
 		this.pseudoJobId = pseudoJobId;
 	}
 
@@ -160,72 +135,52 @@ public class UtilizationWeekEntity implements Serializable
 		this.author = author;
 	}
 
+	public String getText() {
+		return this.text;
+	}
+
+	public void setText(String text) {
+		this.text = text;
+	}
 	/**
 	 * @return the begin date
 	 */
-	public Date getBegin()
+	public Date getBeginDate()
 	{
-		return begin;
+		return this.beginDate;
 	}
 
 	/**
 	 * @param begin
 	 *            set begin date
 	 */
-	public void setBegin(Date begin)
+	public void setBeginDate(Date begin)
 	{
-		this.begin = begin;
+		this.beginDate = begin;
 	}
 
-	/**
-	 * @return get days free
-	 */
-	public Integer getDaysFree()
-	{
-		return daysFree;
+	public Integer getBeginTime(){
+		return this.beginTime;
 	}
 
-	/**
-	 * @param daysFree
-	 *            set days free
-	 */
-	public void setDaysFree(Integer daysFree)
-	{
-		this.daysFree = daysFree;
+	public void setBeginTime(Integer start) {
+		this.beginTime = start;
 	}
 
-	/**
-	 * @return days work
-	 */
-	public Integer getDaysWork()
-	{
-		return daysWork;
+	public Date getEndDate(){
+		return this.endDate;
 	}
 
-	/**
-	 * @param daysWork
-	 *            set days work
-	 */
-	public void setDaysWork(Integer daysWork)
-	{
-		this.daysWork = daysWork;
+	public void setEndDate(Date end) {
+		this.endDate = end;
 	}
 
-	/**
-	 * @return days holiday
-	 */
-	public Integer getDaysHoliday()
-	{
-		return daysHoliday;
+	public Integer getEndTime(){
+		return this.endTime;
 	}
 
-	/**
-	 * @param daysHoliday
-	 *            set days holiday
-	 */
-	public void setDaysHoliday(Integer daysHoliday)
-	{
-		this.daysHoliday = daysHoliday;
+	public void setEndTime(Integer end) {
+		this.endTime = end;
 	}
 
 	/**
@@ -245,6 +200,14 @@ public class UtilizationWeekEntity implements Serializable
 		this.possibilty = possibilty;
 	}
 
+	public Integer getBreakTime(){
+		return this.breakTime;
+	}
+
+	public void setBreakTime(Integer breakTime){
+		this.breakTime = breakTime;
+	}
+
 	/**
 	 * @return the pseudoJob ID
 	 */
@@ -261,7 +224,7 @@ public class UtilizationWeekEntity implements Serializable
 	{
 		this.pseudoJobId = pseudoJobId;
 	}
-	
+
 	public boolean equals(Object obj) {
 		if(obj == null)
 			return false;
@@ -272,9 +235,9 @@ public class UtilizationWeekEntity implements Serializable
 		} else
 			return false;
 	}
-	
+
 	@Override
-    public int hashCode() {
-        return id == null ? 0 : id.hashCode();
-    }
+	public int hashCode() {
+		return id == null ? 0 : id.hashCode();
+	}
 }
