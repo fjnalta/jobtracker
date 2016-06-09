@@ -163,4 +163,26 @@
 			]]>
 		</sql>
 	</changeSet>
+	<changeSet id="20160609-user_job-12" author="max">
+		<sql>
+			<![CDATA[
+				INSERT INTO user_job (user_id, job_no, pos_no)
+				VALUES(1, 201001, 025),
+				(1, 201001, 026),
+				(1, 201001, 027),
+				(1, 100001, 001),
+				(1, 100245, 001),
+				(1, 100001, 003);
+			]]>
+		</sql>
+	</changeSet>
+	<changeSet id="20160609-user-13" author="max">
+		<sql>
+			<![CDATA[
+				UPDATE user 
+				SET supervisor=7
+				WHERE id=1;
+			]]>
+		</sql>
+	</changeSet>
 </databaseChangeLog>
