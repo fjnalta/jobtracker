@@ -9,6 +9,7 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 import net.greenbeansit.jobtracker.client.components.LogicObservable;
 import net.greenbeansit.jobtracker.client.components.kapa.CapaCalendarObserver;
+import net.greenbeansit.jobtracker.client.components.kapa.data.CapacityReportEvent;
 import net.greenbeansit.jobtracker.shared.UtilizationWeek;
 import org.gwtbootstrap3.client.ui.Button;
 import org.gwtbootstrap3.client.ui.TextBox;
@@ -93,7 +94,10 @@ public class CapacityTimeInputWidget extends Composite implements CapaCalendarOb
     public void buttonBookClicked(ClickEvent e) {
         // TODO - needs work. cant read date from calendar Event.
         //handler.setCurrentUtilizationWeek(calendarHandler.calendar.currentCapacityEvent.getUw());
-        handler.saveUtilizationWeek();
+        for(UtilizationWeek u : calendarHandler.calendar.getCapacityReportsToSave()){
+            handler.saveUtilizationWeek(u);
+        }
+
         calendarHandler.calendar.getCapacityReportsToSave().clear();
     }
 

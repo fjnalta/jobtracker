@@ -1,7 +1,6 @@
 package net.greenbeansit.jobtracker.server.data.utilizationWeek;
 
 import java.sql.Date;
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -75,31 +74,31 @@ public class UtilizationWeekServiceJpa implements UtilizationWeekDataService
 		repository.delete(utilId);
 	}
 	
-	@Override
-	public List<UtilizationWeek> getByUserAndMonth(Integer authorId,
-			Integer year, Integer month)
-	{
-		ArrayList<UtilizationWeek> list = new ArrayList<UtilizationWeek>();
-		for (UtilizationWeekEntity entity : repository
-				.findByAuthorAndMonth(authorId, year, month))
-		{
-			list.add(convert(entity));
-		}
-		return list;
-	}
-
-	@Override
-	public List<UtilizationWeek> getByUserAndYear(Integer authorId,
-			Integer year)
-	{
-		ArrayList<UtilizationWeek> list = new ArrayList<UtilizationWeek>();
-		for (UtilizationWeekEntity entity : repository
-				.findByAuthorAndYear(authorId, year))
-		{
-			list.add(convert(entity));
-		}
-		return list;
-	}
+//	@Override
+//	public List<UtilizationWeek> getByUserAndMonth(Integer authorId,
+//			Integer year, Integer month)
+//	{
+//		ArrayList<UtilizationWeek> list = new ArrayList<UtilizationWeek>();
+//		for (UtilizationWeekEntity entity : repository
+//				.findByAuthorAndMonth(authorId, year, month))
+//		{
+//			list.add(convert(entity));
+//		}
+//		return list;
+//	}
+//
+//	@Override
+//	public List<UtilizationWeek> getByUserAndYear(Integer authorId,
+//			Integer year)
+//	{
+//		ArrayList<UtilizationWeek> list = new ArrayList<UtilizationWeek>();
+//		for (UtilizationWeekEntity entity : repository
+//				.findByAuthorAndYear(authorId, year))
+//		{
+//			list.add(convert(entity));
+//		}
+//		return list;
+//	}
 
 	/**
 	 * Converty the {@link UtilizationWeekEntity} to {@link UtilizationWeek}

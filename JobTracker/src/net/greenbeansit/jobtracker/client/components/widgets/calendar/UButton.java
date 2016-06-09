@@ -18,54 +18,48 @@ import net.greenbeansit.jobtracker.client.components.CalendarObserver;
  */
 public class UButton extends Button implements CalendarObserver{
  
-	private Date date;
-	private UButton self = this;
+	private Date 						date;
 
 	/**
 	 * Initializes a new Instance of UButton
 	 * @param txt the Text
 	 * @param d the Date
 	 * @param calcDate the calculated Date
-     * @param u the CalendarUtilizationWidget
+     * @param calUtil the CalendarUtilizationWidget
      */
-	public UButton(String txt, final Date d, final Date calcDate, final CalendarUtilizationWidget u) {
+	public UButton(String txt, final Date d, final Date calcDate, final CalendarUtilizationWidget calUtil) {
 		super(txt);
+		
 		this.date = d;
 		
 		this.addClickHandler(new ClickHandler() {
 			
+			@SuppressWarnings("deprecation")
 			@Override
 			public void onClick(ClickEvent event) {
-				final int diff =	CalendarUtil.getDaysBetween(calcDate, d);
+				
+				final int diff = CalendarUtil.getDaysBetween(calcDate, d);
+				
 				int month = calcDate.getMonth();
+				
 				CalendarUtil.addDaysToDate(calcDate, diff);
 				
-				changeDateToSunday(calcDate);
+				changeDateToMonday(calcDate);
 					
 				if(month != calcDate.getMonth()){
-					u.setCalculateUtilization(true);	
-					u.handler.loadUtilization(calcDate.getYear()+1900, calcDate.getMonth() +1);
+				
+					calUtil.setCalculateUtilization(true);	
 					
+					calUtil.handler.loadUtilization(calcDate.getYear()+1900, calcDate.getMonth() +1);
 				}else{
-					u.render();	
+					
+					calUtil.render();	
 				}
 				
-				
-				
-				calendarHandler.calendar.goToDate(self.getDate());
+				calendarHandler.calendar.goToDate(UButton.this.getDate());
+				notifyHandler();
 			}
 
-			/**
-			 * Changes the Date to Sunday
-			 * @param d the Date.
-             */
-			@SuppressWarnings("deprecation")
-			private void changeDateToSunday(Date d){
-				while(d.getDay() > 0){
-					CalendarUtil.addDaysToDate(d, -1);
-				}
-				
-			}
 		});
 		
 	}
@@ -82,9 +76,27 @@ public class UButton extends Button implements CalendarObserver{
 		//IDLE
 		
 	}
+	
+	/**
+	 * Changes the Date to Monday
+	 * @param d the Date.
+     */
+	@SuppressWarnings("deprecation")
+	private void changeDateToMonday(Date d){
+		
+		while(d.getDay() > 1 || d.getDay() == 0){
+			
+			CalendarUtil.addDaysToDate(d, -1);
+		}
+		
+	}
+	
 	@Override
 	public void notifyHandler() {
-		//IDLE
+		changeDateToMonday(date);
+		calendarHandler.setDisplayMonth( this.date.getMonth() + 1 );
+		
+		calendarHandler.updateObserver(this);
 		
 	}
 }

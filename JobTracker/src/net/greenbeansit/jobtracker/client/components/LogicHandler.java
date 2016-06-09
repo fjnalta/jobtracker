@@ -3,6 +3,7 @@ package net.greenbeansit.jobtracker.client.components;
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import net.greenbeansit.jobtracker.client.components.kapa.widgets.CapacityCalendarWidget;
+import net.greenbeansit.jobtracker.client.components.widgets.UtilizationWidget;
 import net.greenbeansit.jobtracker.client.components.widgets.calendar.CalendarWidget;
 import net.greenbeansit.jobtracker.client.utils.rest.NotifyHelper;
 import net.greenbeansit.jobtracker.client.utils.rest.RestClient;
@@ -395,14 +396,10 @@ public class LogicHandler {
 	 * On success is calls {@link #updateAllObservables()}to update the widgets
 	 *
 	 */
-	public void saveUtilizationWeek() {
-		getInformations();
-		GWT.log("0");
-		GWT.log(tempUtilizationWeek.toString());
-		GWT.log("1");
-		GWT.log("2" + currentUtilizationWeek.toString());
-		if (currentUtilizationWeek != null && currentUser != null && tempUtilizationWeek!=null) {
-			final UtilizationWeek tempReport = currentUtilizationWeek;
+	public void saveUtilizationWeek(UtilizationWeek report) {
+
+		if (report != null && currentUser != null && tempUtilizationWeek!=null) {
+			final UtilizationWeek tempReport = report;
 			tempReport.setText(tempUtilizationWeek.getText());
 			tempReport.setAuthor(currentUser.getId());
 			tempReport.setPseudoJobId(tempUtilizationWeek.getPseudoJobId());
