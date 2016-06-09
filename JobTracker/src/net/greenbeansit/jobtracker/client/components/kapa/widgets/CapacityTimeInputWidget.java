@@ -31,9 +31,7 @@ public class CapacityTimeInputWidget extends Composite implements CapaCalendarOb
     @Override
     public void update() {
         projectStart.setText(splitISOString(calendarHandler.calendar.currentCapacityEvent.getISOStart()));
-        projectStartKw.setText("KW");
         projectEnd.setText(splitISOString(calendarHandler.calendar.currentCapacityEvent.getISOEnd()));
-        projectEndKw.setText("KW");
         notifyLogicHandler();
     }
 
@@ -82,13 +80,11 @@ public class CapacityTimeInputWidget extends Composite implements CapaCalendarOb
     }
 
     @UiField
-    TextBox projectStart, projectStartKw, projectEnd, projectEndKw;
+    TextBox projectStart, projectEnd;
 
     @UiField
     Button buttonUpYearStart, buttonDownYearStart,
-            buttonUpCalendarWeekStart, buttonDownCalendarWeekStart,
-            buttonUpYearEnd, buttonDownYearEnd, buttonUpDayWeek,
-            buttonDownDayWeek, buttonUpCalendarWeekEnd, buttonDownCalendarWeekEnd;
+            buttonUpYearEnd, buttonDownYearEnd;
 
     /**
      * {@link UiHandler} for the {@link Button} that saves the
@@ -122,17 +118,8 @@ public class CapacityTimeInputWidget extends Composite implements CapaCalendarOb
         buttonUpYearStart.setIcon(IconType.ARROW_UP);
         buttonDownYearStart.setIcon(IconType.ARROW_DOWN);
 
-        buttonUpCalendarWeekStart.setIcon(IconType.ARROW_UP);
-        buttonDownCalendarWeekStart.setIcon(IconType.ARROW_DOWN);
-
         buttonUpYearEnd.setIcon(IconType.ARROW_UP);
         buttonDownYearEnd.setIcon(IconType.ARROW_DOWN);
-
-        buttonUpCalendarWeekEnd.setIcon(IconType.ARROW_UP);
-        buttonDownCalendarWeekEnd.setIcon(IconType.ARROW_DOWN);
-
-        buttonUpDayWeek.setIcon(IconType.ARROW_UP);
-        buttonDownDayWeek.setIcon(IconType.ARROW_DOWN);
     }
 
     private String splitISOString(String string){
