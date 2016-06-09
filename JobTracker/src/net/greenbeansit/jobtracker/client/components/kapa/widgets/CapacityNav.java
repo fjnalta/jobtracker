@@ -224,8 +224,7 @@ public class CapacityNav extends Composite implements LogicObservable, CapaCalen
      */
     @Override
     public void update() {
-
-        // TODO - load other Tab if calendar job is clicked
+        GWT.log("kennsch");
     }
 
     /**
@@ -247,7 +246,5 @@ public class CapacityNav extends Composite implements LogicObservable, CapaCalen
             GWT.log("notify logicHandler " + currentUtilizationWeek.getText());
             handler.setTempUtilizationWeek(currentUtilizationWeek);
         }
-
-
     }
 }

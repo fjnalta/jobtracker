@@ -12,7 +12,6 @@ import net.greenbeansit.jobtracker.client.components.CalendarObserver;
 import net.greenbeansit.jobtracker.client.components.LogicObservable;
 import net.greenbeansit.jobtracker.client.components.kapa.CapaCalendarObserver;
 import net.greenbeansit.jobtracker.client.components.kapa.data.CapacityReportEvent;
-import net.greenbeansit.jobtracker.client.components.widgets.UtilizationWidget;
 import net.greenbeansit.jobtracker.client.components.widgets.calendar.FullCalendarCustomize;
 import net.greenbeansit.jobtracker.shared.UtilizationWeek;
 import org.gwtbootstrap3.client.ui.Column;
@@ -119,6 +118,7 @@ public class CapacityCalendarWidget extends Composite implements CapaCalendarObs
                 calendarHandler.registerCalendar(fullcalendar);
                 fullcalendar.render();
                 month.setSubText(monthToString(fullcalendar.getDate().getMonth()));
+                handler.loadAllUtilizationWeeks();
             }
 
 
@@ -293,13 +293,13 @@ public class CapacityCalendarWidget extends Composite implements CapaCalendarObs
      *
      * @param reports List of {@link UtilizationWeek} for CapacityPlaning
      */
-    public void addActvityReports(List<UtilizationWeek> reports) {
+    public void addUtilizationWeeks(List<UtilizationWeek> reports) {
         if (!reports.isEmpty()) {
             for (UtilizationWeek ap : reports) {
                 CapacityReportEvent e = new CapacityReportEvent(ap, ap.getId() + "", ap.getText(), true, true, true);
                 ap.getBeginDate().setYear((2016 - 1900));
                 e.setStart(calendarHandler.getISO8601StringForDate(ap.getBeginDate(), ap.getBeginTime()));
-                e.setEnd(calendarHandler.getISO8601StringForDate(ap.getBeginDate(), ap.getEndTime()));
+                e.setEnd(calendarHandler.getISO8601StringForDate(ap.getEndDate(), ap.getEndTime()));
                 fullcalendar.addEvent(e);
                 this.eventList.add(e);
                 fullcalendar.render();
@@ -333,6 +333,7 @@ public class CapacityCalendarWidget extends Composite implements CapaCalendarObs
      */
     @Override
     public void updateObservable() {
+        addUtilizationWeeks(handler.getCurrentUtilizationWeekList());
         currentUtilizationWeek = handler.getCurrentUtilizationWeek();
         fullcalendar.render();
     }

@@ -37,9 +37,9 @@ public class LogicHandler {
 	private List<JobTask> jobTasksList = new ArrayList<JobTask>();
 	private List<ActivityReport> currentReportsList = new ArrayList<ActivityReport>();
 	private List<ActivityReportTemplate> templateList = new ArrayList<ActivityReportTemplate>();
+	private List<UtilizationWeek> utilizationWeekList = new ArrayList<UtilizationWeek>();
 	private List<Job> jobList = new ArrayList<Job>();
 	private List<PseudoJob> pseudoJobList = new ArrayList<PseudoJob>();
-	private List<UtilizationWeek> utilizationWeekList = new ArrayList<UtilizationWeek>();
 
 	private List<Integer> utilizationList = new ArrayList<Integer>();
 	private User currentUser;
@@ -182,6 +182,10 @@ public class LogicHandler {
 		return utilizationWeekList;
 	}
 
+	public void setCurrentUtilizationWeekList(List<UtilizationWeek> utilizationWeekList) {
+		this.utilizationWeekList = utilizationWeekList;
+	}
+
 	/**
 	 * function for setting the currently loaded reports
 	 * @param currentReportsList the List<ActivityReport> object with the reports
@@ -274,6 +278,28 @@ public class LogicHandler {
 			}
 
 		}).getEmployeeService().getAllReports(currentUser.getId());
+	}
+
+	/**
+	 * Function for loading all Utilization Weeks for the current user
+	 */
+	public void loadAllUtilizationWeeks(){
+		RestClient.build(new SuccessFunction<List<UtilizationWeek>>() {
+			@Override
+			public void onSuccess(Method method, List<UtilizationWeek> response) {
+				NotifyHelper.successMessage("Reports loaded from backend");
+				LogicHandler.this.setCurrentUtilizationWeekList(response);
+				LogicHandler.this.updateAllObservables();
+				calendar.updateObservable();
+			}
+
+			@Override
+			public void onFailure(Method method, Throwable exception) {
+				NotifyHelper.errorMessage("FAILED: " + exception.getMessage());
+				GWT.log(exception.getMessage());
+			}
+
+		}).getEmployeeService().getAllUtilizationWeeks(currentUser.getId());
 	}
 
 	/**
@@ -789,7 +815,4 @@ public class LogicHandler {
 //		GWT.log("LogicHandler: TempUtilizationName: " + tempUtilizationWeek.getText());
 		this.tempUtilizationWeek = tempUtilizationWeek;
 	}
-
-
-
 }

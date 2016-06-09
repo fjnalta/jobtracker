@@ -80,9 +80,7 @@ public class CapaCalendarHandler implements LogicObservable {
 
     @Override
     public void notifyLogicHandler() {
-
         handler.updateAllObservables();
-
     }
 
     /**
