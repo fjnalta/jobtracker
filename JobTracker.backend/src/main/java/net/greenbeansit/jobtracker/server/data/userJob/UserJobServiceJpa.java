@@ -3,9 +3,13 @@ package net.greenbeansit.jobtracker.server.data.userJob;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import net.greenbeansit.jobtracker.server.data.user.UserDataService;
+import net.greenbeansit.jobtracker.shared.User;
 import net.greenbeansit.jobtracker.shared.UserJob;
 
 /**
@@ -21,6 +25,8 @@ public class UserJobServiceJpa implements UserJobDataService
 
 	@Autowired
 	private UserJobEntityRepository repository;
+	@Inject
+	private UserDataService userService;
 
 	@Override
 	public List<UserJob> getAll()
@@ -45,14 +51,17 @@ public class UserJobServiceJpa implements UserJobDataService
 	}
 
 	@Override
-	public List<UserJob> getByJobNrAndPosNr(Integer jobNr, Integer posNr)
+	public List<User> getByJobNrAndPosNr(Integer jobNr, Integer posNr)
 	{
-		ArrayList<UserJob> list = new ArrayList<UserJob>();
-		for (UserJobEntity entity : repository.findByJobNrAndPosNr(jobNr,
+		ArrayList<User> list = new ArrayList<User>();
+		for (UserJobEntity uj : repository.findByJobNrAndPosNr(jobNr,
 				posNr))
 		{
-			list.add(convert(entity));
+			User u = userService.getUser(uj.getUserId());
+			if(!list.contains(u))
+				list.add(u);
 		}
+		
 		return list;
 	}
 
