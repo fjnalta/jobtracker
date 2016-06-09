@@ -102,7 +102,6 @@ public class FullCalendarCustomize extends FullCalendar {
 	 * @param uw the utilization week.
      */
 	public void addEventToSave(UtilizationWeek uw) {
-		GWT.log(uw.getBeginDate().toString());
 		this.capacityReportsToSave.add(uw);
 	}
 
