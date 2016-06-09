@@ -47,29 +47,29 @@ public interface UtilizationWeekDataService
 	 */
 	List<UtilizationWeek> getByPseudoJob(Integer pseudoJobId);
 
-	/**
-	 * Retrieve all UtilizationWeek by their assigned author and month
-	 * 
-	 * @param authorId
-	 *            ID of the author
-	 * @param year
-	 *            the year
-	 * @param month
-	 *            the month
-	 * @return List of utilization weeks
-	 */
+//	/**
+//	 * Retrieve all UtilizationWeek by their assigned author and month
+//	 * 
+//	 * @param authorId
+//	 *            ID of the author
+//	 * @param year
+//	 *            the year
+//	 * @param month
+//	 *            the month
+//	 * @return List of utilization weeks
+//	 */
 //	List<UtilizationWeek> getByUserAndMonth(Integer authorId, Integer year,
 //			Integer month);
-
-	/**
-	 * Retrieve all UtilizationWeek by their assigned author and year
-	 * 
-	 * @param authorId
-	 *            ID of the author
-	 * @param year
-	 *            the year
-	 * @return List of utilization weeks
-	 */
+//
+//	/**
+//	 * Retrieve all UtilizationWeek by their assigned author and year
+//	 * 
+//	 * @param authorId
+//	 *            ID of the author
+//	 * @param year
+//	 *            the year
+//	 * @return List of utilization weeks
+//	 */
 //	List<UtilizationWeek> getByUserAndYear(Integer authorId, Integer year);
 
 	/**

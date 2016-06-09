@@ -1,6 +1,7 @@
 package net.greenbeansit.jobtracker.shared;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import net.greenbeansit.jobtracker.shared.rest.services.RestService.JobID;
@@ -16,12 +17,12 @@ public class User implements Serializable
 	 * 
 	 */
 	private static final long	serialVersionUID	= 5141608788110790303L;
-	private Integer				id;
-	private String				name, surname;
-	private Integer				supervisor;
-	private Integer				utilization;
-	private List<JobID>			assignedJobs;
-	private Integer				remainingVacationDays;
+	private Integer				id = null;
+	private String				name = null, surname = null;
+	private Integer				supervisor = null;
+	private Integer				utilization = null;
+	private List<JobID>			assignedJobs= new ArrayList<JobID>();
+	private Integer				remainingVacationDays = null;
 	
 	/**
 	 * Initializes a new instance of the {@link User} class.

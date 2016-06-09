@@ -36,33 +36,33 @@ public interface UtilizationWeekEntityRepository
 	@Override
 	List<UtilizationWeekEntity> findAll();
 
-	/**
-	 * Returns all {@link UtilizationWeekEntity} from a single user in a single
-	 * month.
-	 * 
-	 * @param author
-	 *            ID of the author
-	 * @param year
-	 *            the year
-	 * @param month
-	 *            the month
-	 * @return List of corresponding {@link UtilizationWeekEntity}
-	 */
+//	/**
+//	 * Returns all {@link UtilizationWeekEntity} from a single user in a single
+//	 * month.
+//	 * 
+//	 * @param author
+//	 *            ID of the author
+//	 * @param year
+//	 *            the year
+//	 * @param month
+//	 *            the month
+//	 * @return List of corresponding {@link UtilizationWeekEntity}
+//	 */
 //	@Query("select x from UtilizationWeekEntity x where x.author = :author and YEAR(x.begin) = :year and MONTH(x.begin) = :month")
 //	List<UtilizationWeekEntity> findByAuthorAndMonth(
 //			@Param("author") Integer author, @Param("year") Integer year,
 //			@Param("month") Integer month);
-
-	/**
-	 * Returns all {@link UtilizationWeekEntity} from a single user in a single
-	 * year.
-	 * 
-	 * @param author
-	 *            ID of the author
-	 * @param year
-	 *            the year
-	 * @return List of corresponding {@link UtilizationWeekEntity}
-	 */
+//
+//	/**
+//	 * Returns all {@link UtilizationWeekEntity} from a single user in a single
+//	 * year.
+//	 * 
+//	 * @param author
+//	 *            ID of the author
+//	 * @param year
+//	 *            the year
+//	 * @return List of corresponding {@link UtilizationWeekEntity}
+//	 */
 //	@Query("select x from UtilizationWeekEntity x where x.author = :author and YEAR(x.begin) = :year")
 //	List<UtilizationWeekEntity> findByAuthorAndYear(
 //			@Param("author") Integer author, @Param("year") Integer year);

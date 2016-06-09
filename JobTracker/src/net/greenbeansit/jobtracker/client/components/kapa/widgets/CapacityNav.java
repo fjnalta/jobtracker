@@ -155,7 +155,7 @@ public class CapacityNav extends Composite implements LogicObservable, CapaCalen
             utilizationWeekList.add(uw);
         }
         for (Job job : jobList) {
-            UtilizationWeek uw = new UtilizationWeek(999, 0, job.getDesc(), new Date(), 0, 0, new Date(), 0, 9999, 0);
+            UtilizationWeek uw = new UtilizationWeek(999, 0, job.toString(), new Date(), 0, 0, new Date(), 0, 9999, 0);
             utilizationWeekList.add(uw);
         }
     }
@@ -228,12 +228,9 @@ public class CapacityNav extends Composite implements LogicObservable, CapaCalen
      */
     @Override
     public void notifyLogicHandler() {
-
-
         if(currentUtilizationWeek != null) {
-                currentUtilizationWeek.setText(description.getText());
-             handler.setTempUtilizationWeek(currentUtilizationWeek);
-            GWT.log("tempUtil  set)");
+            currentUtilizationWeek.setText(description.getText());
+            handler.setTempUtilizationWeek(currentUtilizationWeek);
         }
 
 

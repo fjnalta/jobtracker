@@ -101,6 +101,8 @@ public class ManagerEmployeeDetailPage extends Composite
 		tabReport.setText(constants.tabReport());
 		tabCapacity.setText(constants.tabCapacity());
 		infoFieldHeading.setText(constants.infoFieldHeading());
+		
+		reportCalendar.loadServerReports(userId);
 
 		tabProject.addShowHandler(new TabShowHandler()
 		{
@@ -149,7 +151,7 @@ public class ManagerEmployeeDetailPage extends Composite
 						utilizationWidget.setRemainingVacationDays(helperService
 								.getEmployee().getRemainingVacationDays());
 
-						// utilizationWidget.setUtilization((double)helperService.getEmployee().getUtilization());
+//						utilizationWidget.setUtilization((double)helperService.getEmployee().getUtilization());
 						utilizationWidget.setUtilization(157d);
 					}
 
