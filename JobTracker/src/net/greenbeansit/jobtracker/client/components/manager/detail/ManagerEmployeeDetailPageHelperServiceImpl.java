@@ -6,6 +6,7 @@ import java.util.List;
 import org.fusesource.restygwt.client.Method;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.Window;
 
 import net.greenbeansit.jobtracker.client.utils.rest.RestClient;
 import net.greenbeansit.jobtracker.client.utils.rest.RestClient.SuccessFunction;
