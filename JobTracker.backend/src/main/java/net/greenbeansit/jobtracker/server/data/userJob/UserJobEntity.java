@@ -168,7 +168,7 @@ public class UserJobEntity implements Serializable
 	
 	@Override
     public int hashCode() {
-        if(userId == null || jobNr == null || posNr == null || role == null)
+        if(userId == null || jobNr == null || posNr == null)
         	return 0;
         List<Integer> ints = new ArrayList<Integer>();
         ints.add(userId);
