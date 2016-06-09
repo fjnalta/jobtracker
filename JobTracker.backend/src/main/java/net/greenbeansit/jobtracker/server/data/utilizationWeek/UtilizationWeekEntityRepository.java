@@ -48,10 +48,10 @@ public interface UtilizationWeekEntityRepository
 	 *            the month
 	 * @return List of corresponding {@link UtilizationWeekEntity}
 	 */
-	@Query("select x from UtilizationWeekEntity x where x.author = :author and YEAR(x.begin) = :year and MONTH(x.begin) = :month")
-	List<UtilizationWeekEntity> findByAuthorAndMonth(
-			@Param("author") Integer author, @Param("year") Integer year,
-			@Param("month") Integer month);
+//	@Query("select x from UtilizationWeekEntity x where x.author = :author and YEAR(x.begin) = :year and MONTH(x.begin) = :month")
+//	List<UtilizationWeekEntity> findByAuthorAndMonth(
+//			@Param("author") Integer author, @Param("year") Integer year,
+//			@Param("month") Integer month);
 
 	/**
 	 * Returns all {@link UtilizationWeekEntity} from a single user in a single
@@ -63,9 +63,9 @@ public interface UtilizationWeekEntityRepository
 	 *            the year
 	 * @return List of corresponding {@link UtilizationWeekEntity}
 	 */
-	@Query("select x from UtilizationWeekEntity x where x.author = :author and YEAR(x.begin) = :year")
-	List<UtilizationWeekEntity> findByAuthorAndYear(
-			@Param("author") Integer author, @Param("year") Integer year);
+//	@Query("select x from UtilizationWeekEntity x where x.author = :author and YEAR(x.begin) = :year")
+//	List<UtilizationWeekEntity> findByAuthorAndYear(
+//			@Param("author") Integer author, @Param("year") Integer year);
 
 	/**
 	 * Retrieves an entity by its ID.

@@ -224,8 +224,11 @@ public class CapacityCalendarWidget extends Composite implements CapaCalendarObs
 
                         unselect(viewObject, event);
                         currentUtilizationWeek = tempUtil;
+
+                        tmp.setUtilizationWeek(tempUtil);
                         fullcalendar.addEvent(tmp);
-                        GWT.log("set util event");
+                        fullcalendar.addEventToSave(tempUtil);
+
                         fullcalendar.currentCapacityEvent = tmp;
                         notifyHandler();
                         notifyLogicHandler();
@@ -286,10 +289,21 @@ public class CapacityCalendarWidget extends Composite implements CapaCalendarObs
                             CapacityReportEvent dragEvent = new CapacityReportEvent(calendarEvent);
                             CapacityReportEvent oldEvent = createEvent(dragEvent.getTitle());
 
+                            fullcalendar.getCapacityReportsToSave().remove(oldEvent.getUw());
                             oldEvent.setStart(dragEvent.getISOStart());
                             oldEvent.setEnd(dragEvent.getISOEnd());
 
                             dragEvent.setTitle(dragEvent.getTitle() + titleNumber++);
+
+                            Date endDate = new Date(oldEvent.getISOEnd());
+                            endDate.setDate(endDate.getDate()-1);
+                            Date beginDate = new Date(oldEvent.getISOStart());
+
+                            UtilizationWeek tempUtil = new UtilizationWeek(0,0,"",beginDate,8,16,endDate,0,0,0);
+
+                            oldEvent.setUtilizationWeek(tempUtil);
+
+                            fullcalendar.addEventToSave(tempUtil);
                             fullcalendar.addEvent(oldEvent);
                             fullcalendar.currentCapacityEvent = dragEvent;
                             notifyHandler();

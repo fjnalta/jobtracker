@@ -159,26 +159,50 @@ public class UtilizationWeekEntity implements Serializable
 		this.beginDate = begin;
 	}
 
+	/**
+	 * Returns the Begin Time of the Utilization Week
+	 * @return the begin Time
+     */
 	public Integer getBeginTime(){
 		return this.beginTime;
 	}
 
+	/**
+	 * Sets the Begin Time
+	 * @param start the begin Time
+     */
 	public void setBeginTime(Integer start) {
 		this.beginTime = start;
 	}
 
+	/**
+	 * Gets the End Date
+	 * @return the End Date.
+     */
 	public Date getEndDate(){
 		return this.endDate;
 	}
 
+	/**
+	 * Sets the End Date
+	 * @param end the endDate.
+     */
 	public void setEndDate(Date end) {
 		this.endDate = end;
 	}
 
+	/**
+	 * Gets the End Time
+	 * @return the End Time
+     */
 	public Integer getEndTime(){
 		return this.endTime;
 	}
 
+	/**
+	 * Sets the end Time
+	 * @param end the End Time
+     */
 	public void setEndTime(Integer end) {
 		this.endTime = end;
 	}
@@ -200,10 +224,18 @@ public class UtilizationWeekEntity implements Serializable
 		this.possibilty = possibilty;
 	}
 
+	/**
+	 * Gets the break Time
+	 * @return the break Time
+     */
 	public Integer getBreakTime(){
 		return this.breakTime;
 	}
 
+	/**
+	 * Sets the break Time
+	 * @param breakTime the Break Time
+     */
 	public void setBreakTime(Integer breakTime){
 		this.breakTime = breakTime;
 	}

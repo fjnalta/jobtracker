@@ -1,5 +1,6 @@
 package net.greenbeansit.jobtracker.client.components.widgets.calendar;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.shared.HandlerManager;
 import net.greenbeansit.jobtracker.client.components.kapa.data.CapacityReportEvent;
 import net.greenbeansit.jobtracker.shared.ActivityReport;
@@ -93,6 +94,7 @@ public class FullCalendarCustomize extends FullCalendar {
 	}
 
 	public void addEventToSave(UtilizationWeek uw) {
+		GWT.log(uw.getBeginDate().toString());
 		this.capacityReportsToSave.add(uw);
 	}
 
