@@ -92,12 +92,9 @@ public class CapacityTimeInputWidget extends Composite implements CapaCalendarOb
      */
     @UiHandler("buttonBook")
     public void buttonBookClicked(ClickEvent e) {
-        // TODO - needs work. cant read date from calendar Event.
-        //handler.setCurrentUtilizationWeek(calendarHandler.calendar.currentCapacityEvent.getUw());
         for(UtilizationWeek u : calendarHandler.calendar.getCapacityReportsToSave()){
             handler.saveUtilizationWeek(u);
         }
-
         calendarHandler.calendar.getCapacityReportsToSave().clear();
     }
 
