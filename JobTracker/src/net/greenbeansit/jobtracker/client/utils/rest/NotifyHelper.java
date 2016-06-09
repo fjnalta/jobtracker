@@ -1,5 +1,6 @@
 package net.greenbeansit.jobtracker.client.utils.rest;
 
+import org.gwtbootstrap3.extras.notify.client.constants.NotifyPlacement;
 import org.gwtbootstrap3.extras.notify.client.constants.NotifyType;
 import org.gwtbootstrap3.extras.notify.client.ui.Notify;
 import org.gwtbootstrap3.extras.notify.client.ui.NotifySettings;
@@ -24,6 +25,7 @@ public final class NotifyHelper
 	public static void errorMessage(String message)
 	{
 		NotifySettings settings = NotifySettings.newSettings();
+		settings.setPlacement(NotifyPlacement.BOTTOM_LEFT);
 		settings.setType(NotifyType.DANGER);
 		Notify.notify(message, settings);
 	}
@@ -35,6 +37,7 @@ public final class NotifyHelper
 	public static void successMessage(String message)
 	{
 		NotifySettings settings = NotifySettings.newSettings();
+		settings.setPlacement(NotifyPlacement.BOTTOM_LEFT);
 		settings.setType(NotifyType.SUCCESS);
 		Notify.notify(message, settings);
 	}
