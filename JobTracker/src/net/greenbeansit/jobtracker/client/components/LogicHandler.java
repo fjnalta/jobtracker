@@ -715,8 +715,6 @@ public class LogicHandler {
 	 * @param currentJob {@link Job} object to be set
 	 */
 	public void setCurrentUtilizationWeek(UtilizationWeek currentJob) {
-
-		GWT.log("set week");
 		this.currentUtilizationWeek = currentJob;
 	}
 
