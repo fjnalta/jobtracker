@@ -181,13 +181,17 @@ public class WorkDescriptionWidget extends Composite implements LogicObservable
 		if(!textIdentifier.getText().isEmpty()){
 			//template.setTaskId();
 		}
-		if(!textDiscription.getText().isEmpty()){
-			template.setText(textDiscription.getText());
-
-		}
 		if(!textName.getText().isEmpty()){
 			template.setName(textName.getText());
 		}
-		handler.setCurrentTemplate(template);
+
+		if(!textDiscription.getText().isEmpty()){
+			template.setText(textDiscription.getText());
+			handler.setCurrentTemplate(template);
+
+		}else{
+			NotifyHelper.errorMessage("Bitte geben sie eine Tätigkeitsbeschreibung ein");
+		}
+
 	}
 }

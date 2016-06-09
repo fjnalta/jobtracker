@@ -3,6 +3,7 @@ package net.greenbeansit.jobtracker.client.components.widgets;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.greenbeansit.jobtracker.client.utils.rest.NotifyHelper;
 import org.gwtbootstrap3.client.ui.html.ClearFix;
 import org.gwtbootstrap3.extras.select.client.ui.OptGroup;
 import org.gwtbootstrap3.extras.select.client.ui.Option;
@@ -124,8 +125,7 @@ public class JobsWidget extends Composite implements LogicObservable {
 			handler.setCurrentJob(currentJob);
 		}
 		else{
-			Job temp = new Job(null,null,null,null,null,null,null,null);
-			handler.setCurrentJob(temp);
+			NotifyHelper.errorMessage("Wählen sie bitte einen Job aus");
 		}
 	}
 }

@@ -386,7 +386,7 @@ public class LogicHandler {
 				e.printStackTrace();
 			}
 		} else {
-			NotifyHelper.errorMessage("Please fill in the missing fields");
+
 		}
 	}
 
