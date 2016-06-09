@@ -25,8 +25,7 @@ import org.fusesource.restygwt.client.DirectRestService;
 @Path("")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
-public interface RestService extends DirectRestService
-{
+public interface RestService extends DirectRestService {
 	/**
 	 * Gets all {@link User}.
 	 *
@@ -37,6 +36,17 @@ public interface RestService extends DirectRestService
 	@GET
 	@Path("/users")
 	List<User> getAllUser();
+
+	/**
+	 * Gets all {@link JobTask}s
+	 * 
+	 * @return a List of {@link JobTask}s
+	 * @throws NotFoundException
+	 *             if there are no {@link JobTask}s
+	 */
+	@GET
+	@Path("/jobTaks")
+	List<JobTask> getAllJobTasks();
 
 	/**
 	 * Gets the {@link User} with the following ID.
@@ -91,11 +101,14 @@ public interface RestService extends DirectRestService
 	@GET
 	@Path("/users/{userId}/utilization_week")
 	List<UtilizationWeek> getAllUtilizationWeeks(@PathParam("userId") Integer userId);
-	
+
 	/**
 	 * Gets a {@link UtilizationWeek} by its ID.
-	 * @param userId its author
-	 * @param utilId its ID
+	 * 
+	 * @param userId
+	 *            its author
+	 * @param utilId
+	 *            its ID
 	 * @return a {@link UtilizationWeek}
 	 */
 	@GET
@@ -109,15 +122,14 @@ public interface RestService extends DirectRestService
 	 * @param userId
 	 *            the ID of the {@link User}.
 	 * @param reportId
-	 * 			  the ID of the {@link ActivityReport}.
+	 *            the ID of the {@link ActivityReport}.
 	 * @return the specific {@link ActivityReport} with the given reportId.
 	 * @throws NotFoundException
 	 *             if the employeeId does not exist.
 	 */
 	@GET
 	@Path("/users/{userId}/reports/{reportId}")
-	ActivityReport getReport(@PathParam("userId") Integer userId,
-			@PathParam("reportId") Integer reportId);
+	ActivityReport getReport(@PathParam("userId") Integer userId, @PathParam("reportId") Integer reportId);
 
 	/**
 	 * Gets all {@link ActivityReport}s made by the {@link User} with the
@@ -135,8 +147,7 @@ public interface RestService extends DirectRestService
 	 */
 	@GET
 	@Path("/users/{userId}/reportPeriod/{from-to}")
-	List<ActivityReport> getReportPeriod(@PathParam("userId") Integer userId,
-			@PathParam("from-to") String fromto);
+	List<ActivityReport> getReportPeriod(@PathParam("userId") Integer userId, @PathParam("from-to") String fromto);
 
 	/**
 	 * Gets all {@link Customer}s
@@ -162,31 +173,36 @@ public interface RestService extends DirectRestService
 
 	/**
 	 * Gets a {@link Customer} by its name.
-	 * @param name name of the customer
+	 * 
+	 * @param name
+	 *            name of the customer
 	 * @return the customer
 	 */
 	@GET
 	@Path("/customers/{name}")
 	Customer getCustomer(@PathParam("name") String name);
-	
+
 	/**
 	 * Gets the {@link Job} with the following ID.
 	 * 
-	 * @param jobNo 3 to 6 digits
-	 * @param posNo up to 3 digits
+	 * @param jobNo
+	 *            3 to 6 digits
+	 * @param posNo
+	 *            up to 3 digits
 	 * 
 	 * @return the searched {@link Job} if it was found. Otherwise null.
 	 */
 	@GET
 	@Path("/jobs/{jobNo}/{posNo}")
-	Job getJob(@PathParam("jobNo") Integer jobNo,
-			@PathParam("posNo") Integer posNo);
+	Job getJob(@PathParam("jobNo") Integer jobNo, @PathParam("posNo") Integer posNo);
 
 	/**
 	 * Saves an {@link ActivityReport} to the database.
 	 *
-	 * @param userId its author
-	 * @param report the report
+	 * @param userId
+	 *            its author
+	 * @param report
+	 *            the report
 	 */
 	@POST
 	@Path("/users/{userId}/reports/")
@@ -195,18 +211,22 @@ public interface RestService extends DirectRestService
 	/**
 	 * Saves an {@link UtilizationWeek} to the database.
 	 *
-	 * @param userId its author
-	 * @param utilweek the {@link UtilizationWeek}
+	 * @param userId
+	 *            its author
+	 * @param utilweek
+	 *            the {@link UtilizationWeek}
 	 */
 	@POST
 	@Path("/users/{userId}/utilization_week")
 	void saveUtilizationWeek(@PathParam("userId") Integer userId, UtilizationWeek utilweek);
-	
+
 	/**
 	 * Deletes an {@link UtilizationWeek} from the database.
 	 * 
-	 * @param userId ID of its author
-	 * @param utilId ID of the {@link UtilizationWeek}
+	 * @param userId
+	 *            ID of its author
+	 * @param utilId
+	 *            ID of the {@link UtilizationWeek}
 	 */
 	@DELETE
 	@Path("/users/{userId}/utilization_week/{utilId}")
@@ -214,13 +234,15 @@ public interface RestService extends DirectRestService
 
 	/**
 	 * Deletes an {@link ActivityReport} from the database.
-	 * @param userId its author
-	 * @param reportId its ID
+	 * 
+	 * @param userId
+	 *            its author
+	 * @param reportId
+	 *            its ID
 	 */
 	@DELETE
 	@Path("/users/{userId}/reports/{reportId}")
-	void deleteReport(@PathParam("userId") Integer userId,
-			@PathParam("reportId") Integer reportId);
+	void deleteReport(@PathParam("userId") Integer userId, @PathParam("reportId") Integer reportId);
 
 	/**
 	 * Gets all {@link ActivityReportTemplate}s of the {@link User} with the
@@ -234,8 +256,7 @@ public interface RestService extends DirectRestService
 	 */
 	@GET
 	@Path("/users/{userId}/report_templates")
-	List<ActivityReportTemplate> getAllReportTemplates(
-			@PathParam("userId") Integer userId);
+	List<ActivityReportTemplate> getAllReportTemplates(@PathParam("userId") Integer userId);
 
 	/**
 	 * Retrieves all users and their role as {@link UserJob} entities for a
@@ -249,8 +270,7 @@ public interface RestService extends DirectRestService
 	 */
 	@GET
 	@Path("/usertojob/{jobNo}&{posNo}")
-	List<UserJob> getUsersToJob(@PathParam("jobNo") Integer jobNo,
-			@PathParam("posNo") Integer posNo);
+	List<UserJob> getUsersToJob(@PathParam("jobNo") Integer jobNo, @PathParam("posNo") Integer posNo);
 
 	/**
 	 * Returns the utilization of an employee for the given month.
@@ -265,8 +285,8 @@ public interface RestService extends DirectRestService
 	 */
 	@GET
 	@Path("/users/{userId}/utilization/{year}/{month}")
-	Integer getUtilizationMonth(@PathParam("userId") Integer userId,
-			@PathParam("year") Integer year, @PathParam("month") Integer month);
+	Integer getUtilizationMonth(@PathParam("userId") Integer userId, @PathParam("year") Integer year,
+			@PathParam("month") Integer month);
 
 	/**
 	 * Returns the utilization of an employee as a {@link List} for each day for
@@ -282,9 +302,9 @@ public interface RestService extends DirectRestService
 	 */
 	@GET
 	@Path("/users/{userId}/utilizationDays/{year}/{month}")
-	List<Integer> getUtilizationDays(@PathParam("userId") Integer userId,
-			@PathParam("year") Integer year, @PathParam("month") Integer month);
-	
+	List<Integer> getUtilizationDays(@PathParam("userId") Integer userId, @PathParam("year") Integer year,
+			@PathParam("month") Integer month);
+
 	/**
 	 * Returns the utilization of an employee as a {@link List} for each day for
 	 * the given month.
@@ -297,8 +317,7 @@ public interface RestService extends DirectRestService
 	 */
 	@GET
 	@Path("/users/{userId}/utilizationMonths/{year}")
-	List<Integer> getUtilizationMonths(@PathParam("userId") Integer userId,
-			@PathParam("year") Integer year);
+	List<Integer> getUtilizationMonths(@PathParam("userId") Integer userId, @PathParam("year") Integer year);
 
 	/**
 	 * Returns the utilization of an employee for the given year.
@@ -311,8 +330,7 @@ public interface RestService extends DirectRestService
 	 */
 	@GET
 	@Path("/users/{userId}/utilization/{year}")
-	Integer getUtilizationYear(@PathParam("userId") Integer userId,
-			@PathParam("year") Integer year);
+	Integer getUtilizationYear(@PathParam("userId") Integer userId, @PathParam("year") Integer year);
 
 	/**
 	 * Saves an {@link ActivityReportTemplate} with a new ID for the
@@ -327,8 +345,7 @@ public interface RestService extends DirectRestService
 	 */
 	@POST
 	@Path("/users/{userId}/report_templates/")
-	void saveReportTemplate(@PathParam("userId") Integer userId,
-			ActivityReportTemplate template);
+	void saveReportTemplate(@PathParam("userId") Integer userId, ActivityReportTemplate template);
 
 	/**
 	 * Gets the employees who have the user with the following ID as supervisor.
@@ -341,8 +358,7 @@ public interface RestService extends DirectRestService
 	 */
 	@GET
 	@Path("manager/{supervisorId}/employees")
-	ManagerPageRestServiceResponse getEmployees(
-			@PathParam("supervisorId") Integer supervisorId);
+	ManagerPageRestServiceResponse getEmployees(@PathParam("supervisorId") Integer supervisorId);
 
 	/**
 	 * Gets all {@link Job}s of the user with the following ID and the union of
@@ -354,8 +370,7 @@ public interface RestService extends DirectRestService
 	 */
 	@GET
 	@Path("project/{userId}/jobs")
-	ProjectPageRestServiceResponse getProjectPageData(
-			@PathParam("userId") Integer userId);
+	ProjectPageRestServiceResponse getProjectPageData(@PathParam("userId") Integer userId);
 
 	/**
 	 * (De-)Activates the budget lock on a given job.
@@ -369,12 +384,14 @@ public interface RestService extends DirectRestService
 	 */
 	@PUT
 	@Path("project/{jobNo}&{posNo}/lock/{bool}")
-	void setJobLock(@PathParam("jobNo") Integer jobNo,
-			@PathParam("posNo") Integer posNo, @PathParam("bool") boolean lock);
+	void setJobLock(@PathParam("jobNo") Integer jobNo, @PathParam("posNo") Integer posNo,
+			@PathParam("bool") boolean lock);
 
 	/**
 	 * Gets all {@link PseudoJob}s written by given user.
-	 * @param userId ID of the user
+	 * 
+	 * @param userId
+	 *            ID of the user
 	 * @return List of his pseudoJobs
 	 */
 	@GET
@@ -383,60 +400,64 @@ public interface RestService extends DirectRestService
 
 	/**
 	 * Saves a {@link PseudoJob} to the database.
-	 * @param userId ID of its author
-	 * @param pseudoJob the entity
+	 * 
+	 * @param userId
+	 *            ID of its author
+	 * @param pseudoJob
+	 *            the entity
 	 */
 	@POST
 	@Path("users/{userId}/pseudoJobs/")
-	void savePseudoJob(@PathParam("userId") Integer userId,
-			PseudoJob pseudoJob);
+	void savePseudoJob(@PathParam("userId") Integer userId, PseudoJob pseudoJob);
 
 	/**
 	 * Deletes a {@link PseudoJob} from the database.
-	 * @param userId ID of its author
-	 * @param pseudoJobId ID of the pseudo job to delete
+	 * 
+	 * @param userId
+	 *            ID of its author
+	 * @param pseudoJobId
+	 *            ID of the pseudo job to delete
 	 */
 	@DELETE
 	@Path("users/{userId}/pseudoJobs/{pseudoJobId}")
-	void deletePseudoJob(@PathParam("userId") Integer userId,
-			@PathParam("pseudoJobId") Integer pseudoJobId);
-			
-	/**
-     * Removes the specified {@link ActivityReportTemplate} from the database.
-     *
-     * @param author     author of the template.
-     * @param name       name of the template.
-     */
-    @DELETE
-    @Path("/users/{userId}/report_templates/{templateName}")
-    void deleteReportTemplate(@PathParam("userId") Integer author,
-                              @PathParam("templateName") String name);
+	void deletePseudoJob(@PathParam("userId") Integer userId, @PathParam("pseudoJobId") Integer pseudoJobId);
 
 	/**
-	 * Response for the {@link RestService#getEmployees(Integer)}
-	 * request.
+	 * Removes the specified {@link ActivityReportTemplate} from the database.
+	 *
+	 * @param author
+	 *            author of the template.
+	 * @param name
+	 *            name of the template.
 	 */
-	public class ManagerPageRestServiceResponse
-	{
-		private List<User>	employees;
-		private List<Job>	jobs;
+	@DELETE
+	@Path("/users/{userId}/report_templates/{templateName}")
+	void deleteReportTemplate(@PathParam("userId") Integer author, @PathParam("templateName") String name);
+
+	/**
+	 * Response for the {@link RestService#getEmployees(Integer)} request.
+	 */
+	public class ManagerPageRestServiceResponse {
+		private List<User> employees;
+		private List<Job> jobs;
 
 		/**
 		 * standard constructor
 		 */
-		public ManagerPageRestServiceResponse()
-		{
+		public ManagerPageRestServiceResponse() {
 
 		}
 
 		/**
 		 * Creates a new {@link ManagerPageRestServiceResponse}
-		 * @param employees List of all employees, their attributes for assigned jobs are filled
-		 * @param jobs list of all jobs that are being processed by the employees
+		 * 
+		 * @param employees
+		 *            List of all employees, their attributes for assigned jobs
+		 *            are filled
+		 * @param jobs
+		 *            list of all jobs that are being processed by the employees
 		 */
-		public ManagerPageRestServiceResponse(List<User> employees,
-				List<Job> jobs)
-		{
+		public ManagerPageRestServiceResponse(List<User> employees, List<Job> jobs) {
 			this.employees = employees;
 			this.jobs = jobs;
 		}
@@ -444,138 +465,137 @@ public interface RestService extends DirectRestService
 		/**
 		 * @return the employees
 		 */
-		public List<User> getEmployees()
-		{
+		public List<User> getEmployees() {
 			return employees;
 		}
 
 		/**
 		 * @return the jobs
 		 */
-		public List<Job> getJobs()
-		{
+		public List<Job> getJobs() {
 			return jobs;
 		}
 
 		/**
-		 * @param employees set employees
+		 * @param employees
+		 *            set employees
 		 */
-		public void setEmployees(List<User> employees)
-		{
+		public void setEmployees(List<User> employees) {
 			this.employees = employees;
 		}
 
 		/**
-		 * @param jobs set jobs
+		 * @param jobs
+		 *            set jobs
 		 */
-		public void setJobs(List<Job> jobs)
-		{
+		public void setJobs(List<Job> jobs) {
 			this.jobs = jobs;
 		}
 
 	}
 
-
 	/**
 	 * TODO: Was zum Teufel macht die Klasse?
+	 * 
 	 * @author Mike Hukiewitz
 	 *
 	 */
-	public class JobID
-	{
+	public class JobID {
 		private Integer jobNr, posNr;
 
 		/**
 		 * Empty constructor for internal purposes.
 		 */
-		public JobID()
-		{
+		public JobID() {
 
 		}
 
 		/**
 		 * Initializes a new instance of {@link JobID}
-		 * @param jobNr the Job no.
-         * @param posNr the Pos no.
-         */
-		public JobID(Integer jobNr, Integer posNr)
-		{
+		 * 
+		 * @param jobNr
+		 *            the Job no.
+		 * @param posNr
+		 *            the Pos no.
+		 */
+		public JobID(Integer jobNr, Integer posNr) {
 			this.setJobNr(jobNr);
 			this.setPosNr(posNr);
 		}
 
 		/**
 		 * Gets the Job number.
+		 * 
 		 * @return the job Numer.
-         */
-		public Integer getJobNr()
-		{
+		 */
+		public Integer getJobNr() {
 			return jobNr;
 		}
 
 		/**
 		 * Sets the Job number.
-		 * @param jobNr the Job no.
-         */
-		public void setJobNr(Integer jobNr)
-		{
+		 * 
+		 * @param jobNr
+		 *            the Job no.
+		 */
+		public void setJobNr(Integer jobNr) {
 			this.jobNr = jobNr;
 		}
 
 		/**
 		 * Gets the Position number.
+		 * 
 		 * @return the position no.
-         */
-		public Integer getPosNr()
-		{
+		 */
+		public Integer getPosNr() {
 			return posNr;
 		}
 
 		/**
 		 * Sets the Position number.
-		 * @param posNr the Position number.
-         */
-		public void setPosNr(Integer posNr)
-		{
+		 * 
+		 * @param posNr
+		 *            the Position number.
+		 */
+		public void setPosNr(Integer posNr) {
 			this.posNr = posNr;
 		}
 
 		/**
 		 * Checks if two Jobs match
-		 * @param job the Job
-         * @return true if the Jobs match.
-         */
-		public boolean matchesJob(Job job)
-		{
+		 * 
+		 * @param job
+		 *            the Job
+		 * @return true if the Jobs match.
+		 */
+		public boolean matchesJob(Job job) {
 			return posNr.equals(job.getPosNr()) && jobNr.equals(job.getJobNr());
 		}
 	}
 
 	/**
-	 * Response for the {@link RestService#getProjectPageData(Integer)}
-	 * request.
+	 * Response for the {@link RestService#getProjectPageData(Integer)} request.
 	 */
-	public class ProjectPageRestServiceResponse
-	{
-		private List<Job>		jobs;
-		private List<Customer>	customers;
+	public class ProjectPageRestServiceResponse {
+		private List<Job> jobs;
+		private List<Customer> customers;
 
 		/**
 		 * standard constructor
 		 */
-		public ProjectPageRestServiceResponse()
-		{
+		public ProjectPageRestServiceResponse() {
 
 		}
 
 		/**
 		 * Creates a new {@link ProjectPageRestServiceResponse}
-		 * @param jobs list of unique jobs associated with the list of customers
-		 * @param customers list of customers
+		 * 
+		 * @param jobs
+		 *            list of unique jobs associated with the list of customers
+		 * @param customers
+		 *            list of customers
 		 */
-		public ProjectPageRestServiceResponse(List<Job> jobs,
-				List<Customer> customers)
-		{
+		public ProjectPageRestServiceResponse(List<Job> jobs, List<Customer> customers) {
 			this.jobs = jobs;
 			this.customers = customers;
 		}
@@ -583,34 +603,34 @@ public interface RestService extends DirectRestService
 		/**
 		 * @return the jobs
 		 */
-		public List<Job> getJobs()
-		{
+		public List<Job> getJobs() {
 			return jobs;
 		}
 
 		/**
 		 * set jobs
-		 * @param jobs the Jobs.
+		 * 
+		 * @param jobs
+		 *            the Jobs.
 		 */
-		public void setJobs(List<Job> jobs)
-		{
+		public void setJobs(List<Job> jobs) {
 			this.jobs = jobs;
 		}
 
 		/**
 		 * @return the customers
 		 */
-		public List<Customer> getCustomers()
-		{
+		public List<Customer> getCustomers() {
 			return customers;
 		}
 
 		/**
 		 * set customers
-		 * @param customers the customers.
+		 * 
+		 * @param customers
+		 *            the customers.
 		 */
-		public void setCustomers(List<Customer> customers)
-		{
+		public void setCustomers(List<Customer> customers) {
 			this.customers = customers;
 		}
 

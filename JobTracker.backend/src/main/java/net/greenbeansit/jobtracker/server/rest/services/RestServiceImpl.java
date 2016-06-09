@@ -381,4 +381,10 @@ public class RestServiceImpl implements RestService
 	{
 		utilizationWeekService.delete(utilId);
 	}
+
+	@Override
+	public List<JobTask> getAllJobTasks() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
