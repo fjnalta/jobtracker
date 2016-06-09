@@ -90,6 +90,7 @@ public class CapacityCalendar extends Composite
 		generalDisplay.setHeight(600);
 
 		AgendaOptions agenda = new AgendaOptions();
+		agenda.setAxisFormat("");
 		agenda.setAllDaySlot(false);
 		agenda.setSlotEventOverlap(false);
 		config.setAgendaOptions(agenda);

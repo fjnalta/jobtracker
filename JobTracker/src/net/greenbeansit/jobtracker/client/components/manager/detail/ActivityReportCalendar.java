@@ -91,6 +91,7 @@ public class ActivityReportCalendar extends Composite
 		config.setGeneralDisplay(generalDisplay);
 		
 		AgendaOptions agenda = new AgendaOptions();
+		agenda.setAxisFormat("");
 		agenda.setAllDaySlot(false);
 		agenda.setSlotEventOverlap(false);
 		config.setAgendaOptions(agenda);
