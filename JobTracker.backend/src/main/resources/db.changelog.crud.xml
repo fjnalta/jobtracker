@@ -201,4 +201,12 @@
 			]]>
 		</sql>
 	</changeSet>
+	<changeSet id="20160609-Job-PseudoJob" author="phil">
+		<sql>
+			<![CDATA[
+				INSERT INTO pseudo_job(id, name, author)
+				VALUES(9999, "Job", 999)
+			]]>
+		</sql>
+	</changeSet>
 </databaseChangeLog>
