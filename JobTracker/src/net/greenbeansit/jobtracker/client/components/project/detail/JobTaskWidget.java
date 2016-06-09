@@ -73,6 +73,9 @@ public class JobTaskWidget extends Composite implements OnDisplayEventListener
 		initializeChart();
 	}
 
+	/**
+	 * Initializes the Widget.
+	 */
 	private void initializeChart()
 	{
 		ChartLoader chartLoader = new ChartLoader(ChartPackage.CORECHART);

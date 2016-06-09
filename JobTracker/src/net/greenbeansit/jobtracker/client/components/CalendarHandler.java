@@ -51,19 +51,35 @@ public class CalendarHandler implements LogicObservable {
 		}
 		list.add(w);
 	}
-	
+
+	/**
+	 * Gets the current month
+	 * @return the month
+     */
 	public int getDisplayMonth() {
 		return this.displayDate.getMonth();
 	}
 
+	/**
+	 * Sets the current month
+	 * @param displayMonth the actual month
+     */
 	public void setDisplayMonth(int displayMonth) {
 		this.displayDate.setMonth(displayMonth);
 	}
 
+	/**
+	 * Gets the current year
+	 * @return the year.
+     */
 	public int getDisplayYear(){
 		return (this.displayDate.getYear() +1900);
 	}
-	
+
+	/**
+	 * Sets the current year
+	 * @param displayYear the current year.
+     */
 	public void setDisplayYear(int displayYear){
 		this.displayDate.setYear(displayYear);
 	}

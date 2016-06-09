@@ -80,6 +80,7 @@ public class UtilizationWidget extends Composite implements LogicObservable
 	 * Sets the display number of the remaining vacation days.
 	 * 
 	 * @param remainingVacationDays
+	 * 				the remaining vacation days.
 	 */
 	public void setRemainingVacationDays(Integer remainingVacationDays)
 	{
@@ -93,6 +94,7 @@ public class UtilizationWidget extends Composite implements LogicObservable
 	 * Sets the percentage of the ring diagram.
 	 * 
 	 * @param utilizationPercent
+	 * 				the utilization percent.
 	 */
 	public void setUtilization(Double utilizationPercent)
 	{

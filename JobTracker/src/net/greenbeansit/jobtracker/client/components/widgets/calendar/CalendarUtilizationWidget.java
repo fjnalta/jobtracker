@@ -377,9 +377,9 @@ public class CalendarUtilizationWidget extends Composite implements CalendarObse
 	}
 	
 	/**
-	 * Get the first of the week which is pointing by currentWeekFirstDayDate
+	 * Gets the first day of the week which is pointing by currentWeekFirstDayDate
 	 * 
-	 * @return
+	 * @return the first Day of the week.
 	 */
 	@SuppressWarnings("deprecation")
 	private Date getFirstDayOfWeek() {

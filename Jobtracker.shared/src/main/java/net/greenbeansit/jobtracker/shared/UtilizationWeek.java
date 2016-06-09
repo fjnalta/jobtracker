@@ -40,6 +40,7 @@ public class UtilizationWeek implements Serializable {
      * @param beginDate   the begin Date
      * @param beginTime   the begin Time
      * @param endTime     the end Time of the Pseudo Activity Report
+     * @param endDate     the end Date
      * @param possibility the possibility the event will take place
      * @param pseudoJobId the unique identifier for the pseudo job
      * @param breakTime   the break time

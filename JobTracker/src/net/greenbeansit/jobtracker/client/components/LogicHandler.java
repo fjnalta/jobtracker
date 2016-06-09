@@ -275,9 +275,9 @@ public class LogicHandler {
 
 		}).getEmployeeService().getAllReports(currentUser.getId());
 	}
-	
+
 	/**
-	 * Function for loading all {@link Jobtask}s for the current user
+	 * Function for loading all Jobtasks for the current user
 	 */
 	public void getAllJobTasks(){
 		RestClient.build(new SuccessFunction<List<JobTask>>() {
@@ -295,7 +295,7 @@ public class LogicHandler {
 				NotifyHelper.errorMessage("FAILED: " + exception.getMessage());
 				GWT.log(exception.getMessage());
 			}
-			
+
 		}).getEmployeeService().getJobTasks(LogicHandler.this.getCurrentUser().getId());
 	}
 	
@@ -396,7 +396,8 @@ public class LogicHandler {
 	 * Function for saving an UtilizationWeek to the backend. It first collects all needed information,
 	 * then if everything is correct it will try to save it.
 	 * On success is calls {@link #updateAllObservables()}to update the widgets
-	 *
+	 * @param report
+	 * 			the {@link UtilizationWeek}.
 	 */
 	public void saveUtilizationWeek(UtilizationWeek report) {
 
@@ -761,7 +762,7 @@ public class LogicHandler {
 	}
 	/**
 	 * get the {@link JobTask} {@link List}
-	 * @return {@link List} object with the currently loaded {@link JobTak}s
+	 * @return {@link List} object with the currently loaded JobTask.
 	 */
 	public List<JobTask> getJobTasksList() {
 		return jobTasksList;
@@ -769,16 +770,24 @@ public class LogicHandler {
 	
 	/**
 	 * set the {@link JobTask} {@link List}
-	 * @param jobTasksList {@link List} object with the {@link JobTak}s to save
+	 * @param jobTasksList {@link List} object with the {@link JobTask}s to save
 	 */
 	public void setJobTasksList(List<JobTask> jobTasksList) {
 		this.jobTasksList = jobTasksList;
 	}
 
+	/**
+	 * Get's the temporary {@link UtilizationWeek}.
+	 * @return the {@link UtilizationWeek}
+     */
 	public UtilizationWeek getTempUtilizationWeek() {
 		return tempUtilizationWeek;
 	}
 
+	/**
+	 * Set's the temporary {@link UtilizationWeek}
+	 * @param tempUtilizationWeek the {@link UtilizationWeek}.
+     */
 	public void setTempUtilizationWeek(UtilizationWeek tempUtilizationWeek) {
 		GWT.log("set temp");
 		this.tempUtilizationWeek = tempUtilizationWeek;

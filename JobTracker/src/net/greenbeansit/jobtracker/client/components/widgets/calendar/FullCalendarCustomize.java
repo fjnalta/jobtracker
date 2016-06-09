@@ -80,6 +80,10 @@ public class FullCalendarCustomize extends FullCalendar {
 		this.currentEvent = event;
 	}
 
+	/**
+	 * adds a Event to the Calendar
+	 * @param event the Event.
+     */
 	public void addEvent(CapacityReportEvent event) {
 		super.addEvent(event);
 		this.currentCapacityEvent = event;
@@ -93,6 +97,10 @@ public class FullCalendarCustomize extends FullCalendar {
 		this.reportsToSave.add(a);
 	}
 
+	/**
+	 * adds the Events to the List to be saved
+	 * @param uw the utilization week.
+     */
 	public void addEventToSave(UtilizationWeek uw) {
 		GWT.log(uw.getBeginDate().toString());
 		this.capacityReportsToSave.add(uw);
@@ -106,6 +114,10 @@ public class FullCalendarCustomize extends FullCalendar {
 		return this.reportsToSave;
 	}
 
+	/**
+	 * Get's the List of UtilizationWeeks to be saved.
+	 * @return the List.
+     */
 	public List<UtilizationWeek> getCapacityReportsToSave() {
 		return  this.capacityReportsToSave;
 	}

@@ -98,14 +98,6 @@ public class CapacityTimeInputWidget extends Composite implements CapaCalendarOb
         calendarHandler.calendar.getCapacityReportsToSave().clear();
     }
 
-    private Date createDateFromText(String text) {
-        String[] split = text.split("-");
-        int year = Integer.parseInt(split[0]);
-        int month = Integer.parseInt(split[1]);
-        int day = Integer.parseInt(split[2]);
-        return new Date(year, month, day);
-    }
-
     /**
      * This Method sets the icons for all Buttons in this Widget
      */
@@ -118,6 +110,11 @@ public class CapacityTimeInputWidget extends Composite implements CapaCalendarOb
         buttonDownYearEnd.setIcon(IconType.ARROW_DOWN);
     }
 
+    /**
+     * Removes the Time from the Date String.
+     * @param string the Date string.
+     * @return the Date string.
+     */
     private String splitISOString(String string){
         if (string != null && string.length() > 0) {
             string = string.substring(0, string.length()-14);

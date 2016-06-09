@@ -135,10 +135,18 @@ public class UtilizationWeekEntity implements Serializable
 		this.author = author;
 	}
 
+	/**
+	 * Gets the Text
+	 * @return the text.
+     */
 	public String getText() {
 		return this.text;
 	}
 
+	/**
+	 * Sets the text.
+	 * @param text the Text.
+     */
 	public void setText(String text) {
 		this.text = text;
 	}

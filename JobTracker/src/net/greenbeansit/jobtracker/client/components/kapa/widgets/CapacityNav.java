@@ -144,6 +144,9 @@ public class CapacityNav extends Composite implements LogicObservable, CapaCalen
         handler.loadPseudoJobs();
     }
 
+    /**
+     * Displays all Jobs and Pseudo Jobs in CapacityNav.
+     */
     private void createUtilizationWeekList() {
         utilizationWeekList.clear();
 
@@ -169,6 +172,10 @@ public class CapacityNav extends Composite implements LogicObservable, CapaCalen
         possibilityPercentage.setText(mySlider.getValue().toString());
     }
 
+    /**
+     * Adds the {@link UtilizationWeek}s to the select box.
+     * @param utilWeekList the {@link UtilizationWeek}
+     */
     private void addUtilizationWeeks(List<UtilizationWeek> utilWeekList) {
         for (UtilizationWeek currentUtilWeek : utilWeekList) {
             if(currentUtilWeek.getId().intValue() == 999) {
