@@ -11,6 +11,7 @@ import net.greenbeansit.jobtracker.server.data.activityReport.ActivityReportData
 import net.greenbeansit.jobtracker.server.data.activityReportTemplate.ActivityReportTemplateDataService;
 import net.greenbeansit.jobtracker.server.data.customer.CustomerDataService;
 import net.greenbeansit.jobtracker.server.data.job.JobDataService;
+import net.greenbeansit.jobtracker.server.data.jobTask.JobTaskDataService;
 import net.greenbeansit.jobtracker.server.data.pseudoJob.PseudoJobDataService;
 import net.greenbeansit.jobtracker.server.data.user.UserDataService;
 import net.greenbeansit.jobtracker.server.data.userJob.UserJobDataService;
@@ -41,6 +42,8 @@ public class RestServiceImpl implements RestService
 	private PseudoJobDataService				pseudoService;
 	@Inject
 	private UtilizationWeekDataService			utilizationWeekService;
+	@Inject
+	private JobTaskDataService					jobTaskService;
 
 	/**
 	 * Empty Constructor for Spring mapping
@@ -67,7 +70,6 @@ public class RestServiceImpl implements RestService
 	@Override
 	public List<Job> getAllJobs(Integer userId)
 	{
-		// TODO: Show only those that the user may access
 		return jobService.getByUser(userId);
 	}
 
@@ -99,7 +101,7 @@ public class RestServiceImpl implements RestService
 		if (report.getAuthor().equals(userId))
 			return report;
 		else
-			return null; // TODO: Throw error if not enough permission
+			return null;
 	}
 
 	@SuppressWarnings("deprecation")
@@ -122,7 +124,7 @@ public class RestServiceImpl implements RestService
 	public void deleteReport(Integer userId, Integer reportId)
 	{
 		activityReportService.delete(reportId);
-		// TODO: Throw error if not enough permission
+
 	}
 
 	// Activity Report Templates
@@ -383,8 +385,13 @@ public class RestServiceImpl implements RestService
 	}
 
 	@Override
-	public List<JobTask> getAllJobTasks() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<JobTask> getJobTasks(Integer user)
+	{
+		List<JobTask> tasks = new ArrayList<JobTask>();
+		for(Job job : jobService.getByUser(user))
+		{
+			tasks.addAll(jobTaskService.getByJobNr(job.getJobNr(), job.getPosNr()));
+		}
+		return tasks;
 	}
 }

@@ -38,17 +38,6 @@ public interface RestService extends DirectRestService {
 	List<User> getAllUser();
 
 	/**
-	 * Gets all {@link JobTask}s
-	 * 
-	 * @return a List of {@link JobTask}s
-	 * @throws NotFoundException
-	 *             if there are no {@link JobTask}s
-	 */
-	@GET
-	@Path("/jobTaks")
-	List<JobTask> getAllJobTasks();
-
-	/**
 	 * Gets the {@link User} with the following ID.
 	 *
 	 * @param userId
@@ -433,6 +422,18 @@ public interface RestService extends DirectRestService {
 	@DELETE
 	@Path("/users/{userId}/report_templates/{templateName}")
 	void deleteReportTemplate(@PathParam("userId") Integer author, @PathParam("templateName") String name);
+	
+	/**
+	 * Gets all {@link JobTask}s available to a given user.
+	 * 
+	 * @param user ID of the user
+	 * @return a List of {@link JobTask}s
+	 * @throws NotFoundException
+	 *             if there are no {@link JobTask}s
+	 */
+	@GET
+	@Path("/users/{userId}/jobTasks")
+	List<JobTask> getJobTasks(@PathParam("userId") Integer user);
 
 	/**
 	 * Response for the {@link RestService#getEmployees(Integer)} request.
