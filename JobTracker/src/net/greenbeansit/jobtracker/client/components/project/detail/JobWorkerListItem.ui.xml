@@ -4,6 +4,7 @@
 	<ui:style>
 	.container {
 		margin: 5px;
+		font-size: 14px;
 	}
 	</ui:style>
 	<gwtbootstrap3:Heading ui:field="headingWorkerName" size="H4" addStyleNames="{style.container}"></gwtbootstrap3:Heading>
