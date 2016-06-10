@@ -64,7 +64,7 @@ public class WorkDescriptionWidget extends Composite implements LogicObservable
 	TextBox textIdentifier;
 	
 	@UiField
-	FormLabel labelDescription, labelTask,labelVorlage;
+	FormLabel labelDescription, labelTask;
 	
 	@UiField
 	TextBox textName;
@@ -110,7 +110,6 @@ public class WorkDescriptionWidget extends Composite implements LogicObservable
 		
 		labelDescription.setText(constants.headingWorkDescription());
 		labelTask.setText(constants.headingSelectTask());
-		labelVorlage.setText(constants.buttonTemplateText());
 	}
 
 	/**

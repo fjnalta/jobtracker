@@ -50,31 +50,11 @@
 			<b:FormGroup>
 				<b:FormLabel for="description2" ui:field="labelTask"></b:FormLabel>
 				<b:TextBox placeholder="" b:id="description2"
-					addStyleNames="{style.textArea}"
-					ui:field="textIdentifier" />
+					addStyleNames="{style.textArea}" ui:field="textIdentifier" />
 			</b:FormGroup>
 		</b:Row>
 
 		<b:Row addStyleNames="{style.row}">
-			<b:FormGroup>
-				<b:FormLabel for="description2" ui:field="labelVorlage"></b:FormLabel>
-
-				</b:FormGroup>
-				<b:FormGroup>
-					<b:TextBox placeholder="" b:id="textTemplateName"
-						ui:field="textName" />
-					<b:Button text="" addStyleNames="{style.button}"
-						ui:field="buttonSave" />
-				</b:FormGroup>
-				<b:FormGroup>
-					<s:Select ui:field="selectTemplate">
-						<s:OptGroup ui:field="optGroupTemplate">
-						</s:OptGroup>
-					</s:Select>
-					<b:Button text="Vorlage laden" addStyleNames="{style.button}"
-						ui:field="buttonLoad" />
-				</b:FormGroup>
-
 			<b:FormLabel ui:field="headingCollapseTemplate"></b:FormLabel>
 			<b:FormGroup>
 				<b:TextBox placeholder="" b:id="textTemplateName"
