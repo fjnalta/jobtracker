@@ -8,7 +8,9 @@
 	float: left;
 }
 
-
+.container {
+	margin-top: 5px;
+}
 
 .line {
 	color: black;
@@ -20,22 +22,19 @@
 	margin-left: 0px;
 }
 
-
+.column {
+	margin: 0px, 5px;
+	padding: 0;
+}
 
 .columnfield {
 	border: 1px solid #DCDCDC;
 	border-radius: 5px;
 }
 
-
-
-
-
 .buttonLeft {
 	float: right;
 }
-
-
 
 .buttonLeft, .buttonRight {
 	font-size: 10px;
@@ -49,6 +48,7 @@
 
 .button-book {
 	background: #000099;
+	float: right;
 }
 
 .text {
