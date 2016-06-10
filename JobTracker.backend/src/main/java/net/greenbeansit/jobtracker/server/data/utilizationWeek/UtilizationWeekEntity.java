@@ -53,6 +53,8 @@ public class UtilizationWeekEntity implements Serializable
 	private Integer				breakTime;
 	@Column(name = "pseudo_job_id")
 	private Integer				pseudoJobId;
+	@Column(name = "customer")
+	private Integer				customerId;
 
 	/**
 	 * Standard constructor for internal purposes.
@@ -88,6 +90,7 @@ public class UtilizationWeekEntity implements Serializable
 	 * @param pseudoJobId
 	 *            the pseudoJobId
 	 */
+	@Deprecated
 	public UtilizationWeekEntity(Integer id, Integer author, String name,
 			String text, Date beginDate, Integer beginTime, Date endDate,
 			Integer endTime, Integer possibility, Integer breakTime,
@@ -104,6 +107,53 @@ public class UtilizationWeekEntity implements Serializable
 		this.possibilty = possibility;
 		this.breakTime = breakTime;
 		this.pseudoJobId = pseudoJobId;
+	}
+	
+	/**
+	 * Initializes a new Instance of {@link UtilizationWeekEntity}
+	 * 
+	 * @param id
+	 *            the Id of the Utilization Week
+	 * @param author
+	 *            the Author id
+	 * @param name
+	 *            the name
+	 * @param text
+	 *            the Description
+	 * @param beginDate
+	 *            the Begin Date
+	 * @param beginTime
+	 *            the Begin Time
+	 * @param endDate
+	 *            the End Date
+	 * @param endTime
+	 *            the End Time
+	 * @param possibility
+	 *            the possibility
+	 * @param breakTime
+	 *            the break Time
+	 * @param pseudoJobId
+	 *            the pseudoJobId
+	 * @param customerId
+	 * 			  the customer
+	 */
+	public UtilizationWeekEntity(Integer id, Integer author, String name,
+			String text, Date beginDate, Integer beginTime, Date endDate,
+			Integer endTime, Integer possibility, Integer breakTime,
+			Integer pseudoJobId, Integer customerId)
+	{
+		this.id = id;
+		this.author = author;
+		this.name = name;
+		this.text = text;
+		this.beginDate = beginDate;
+		this.beginTime = beginTime;
+		this.endDate = endDate;
+		this.endTime = endTime;
+		this.possibilty = possibility;
+		this.breakTime = breakTime;
+		this.pseudoJobId = pseudoJobId;
+		this.customerId = customerId;
 	}
 
 	/**
@@ -311,6 +361,23 @@ public class UtilizationWeekEntity implements Serializable
 	public void setPseudoJobId(Integer pseudoJobId)
 	{
 		this.pseudoJobId = pseudoJobId;
+	}
+	
+	/**
+	 * @return the customer ID
+	 */
+	public Integer getCustomerId()
+	{
+		return customerId;
+	}
+
+	/**
+	 * @param customerId
+	 *            set customer ID
+	 */
+	public void setCustomerId(Integer customerId)
+	{
+		this.customerId = customerId;
 	}
 
 	public boolean equals(Object obj)
