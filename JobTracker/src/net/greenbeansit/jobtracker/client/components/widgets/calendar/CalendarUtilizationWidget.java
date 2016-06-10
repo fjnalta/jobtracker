@@ -326,19 +326,28 @@ public class CalendarUtilizationWidget extends Composite implements CalendarObse
 		
 		outer.add(inner);
 		
-		
 		// For empty Days
 		if (number < 1) {
 			number = 7;
 		}
 		
-		inner.setHeight(number + "%");
+		inner.setHeight(this.getHeightInPercent(60, number) + "px");
 
 		outer.setStyleName(this.SUFFIXPATH + "barChartOuter", true);
-
 		inner.setStyleName(this.SUFFIXPATH + "barChart", true);
 
 		return outer;
+	}
+	
+	/**
+	* Get percent for the given parameters
+	 * @param max stand for 100%
+	 * @param number from this will calculate the percent of max
+	 * @return 
+	 */
+	private double getHeightInPercent(double max, double number){
+		
+		return ( ( max / 100) * number ) ;
 	}
 
 	/**
