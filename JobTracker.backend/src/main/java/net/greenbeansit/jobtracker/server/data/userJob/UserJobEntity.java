@@ -11,7 +11,6 @@ import javax.persistence.IdClass;
 import javax.persistence.Table;
 
 import net.greenbeansit.jobtracker.server.data.userJob.UserJobEntityId;
-import net.greenbeansit.jobtracker.shared.UserJob;
 
 /**
  * A class representing UserJob as entities in our database. Only used in
@@ -150,7 +149,7 @@ public class UserJobEntity implements Serializable
 	{
 		this.role = role;
 	}
-	
+
 	public boolean equals(Object obj)
 	{
 		if (obj == null)
@@ -165,17 +164,18 @@ public class UserJobEntity implements Serializable
 		} else
 			return false;
 	}
-	
+
 	@Override
-    public int hashCode() {
-        if(userId == null || jobNr == null || posNr == null)
-        	return 0;
-        List<Integer> ints = new ArrayList<Integer>();
-        ints.add(userId);
-        ints.add(jobNr);
-        ints.add(posNr);
-        ints.add(role);
-        return ints.hashCode();
-    }
+	public int hashCode()
+	{
+		if (userId == null || jobNr == null || posNr == null)
+			return 0;
+		List<Integer> ints = new ArrayList<Integer>();
+		ints.add(userId);
+		ints.add(jobNr);
+		ints.add(posNr);
+		ints.add(role);
+		return ints.hashCode();
+	}
 
 }

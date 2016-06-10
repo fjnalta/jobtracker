@@ -10,8 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import net.greenbeansit.jobtracker.server.data.pseudoJob.PseudoJobEntity;
-
 /**
  * A class representing User as entities in our database. Only used in backend.
  * Each entity class requires a standard constructor and getters/setters for
@@ -92,7 +90,8 @@ public class UserEntity implements Serializable
 	 * @param vacationDays
 	 *            how many remaining days this user has
 	 */
-	public UserEntity(String name, String surname, Integer supervisor, Integer vacationDays)
+	public UserEntity(String name, String surname, Integer supervisor,
+			Integer vacationDays)
 	{
 		this.name = name;
 		this.surname = surname;
@@ -214,7 +213,7 @@ public class UserEntity implements Serializable
 	{
 		this.utilizationYear = utilizationYear;
 	}
-	
+
 	/**
 	 * @return how many days of vacation this user has left
 	 */
@@ -233,21 +232,23 @@ public class UserEntity implements Serializable
 	{
 		this.vacationDays = vacationDays;
 	}
-	
-	public boolean equals(Object obj) {
-        if(obj == null)
-            return false;
-        else if (obj instanceof UserEntity)
-        {
-        	UserEntity temp = (UserEntity) obj;
-            return this.id.equals(temp.id);
-        } else
-            return false;
-    }
-	
+
+	public boolean equals(Object obj)
+	{
+		if (obj == null)
+			return false;
+		else if (obj instanceof UserEntity)
+		{
+			UserEntity temp = (UserEntity) obj;
+			return this.id.equals(temp.id);
+		} else
+			return false;
+	}
+
 	@Override
-    public int hashCode() {
-        return id == null ? 0 : id.hashCode();
-    }
+	public int hashCode()
+	{
+		return id == null ? 0 : id.hashCode();
+	}
 
 }

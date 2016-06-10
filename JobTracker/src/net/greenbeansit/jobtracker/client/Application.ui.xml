@@ -4,34 +4,33 @@
 	xmlns:b.html="urn:import:org.gwtbootstrap3.client.ui.html"
 	xmlns:components="urn:import:net.greenbeansit.jobtracker.client.components">
 	<ui:style>
-		.mainContainer {
-		padding-top: 70px;
+	.mainContainer {
+		padding-top: 50px;
 		padding-left: 0px;
 		padding-right: 0px;
-		overflow:
-		visible;
+		overflow: visible;
 		background-color: #f4f4f1;
-		}
-
-		.navbarBrand {
+	}
+	
+	.navbarBrand {
 		padding: 0;
-		}
-
-		.navbarBrand>img {
+	}
+	
+	.navbarBrand>img {
 		margin-top: 5px;
 		margin-bottom: 5px;
 		margin-left: 10px;
-		margin-right:
-		5px;
+		margin-right: 5px;
 		height: 40px;
-		}
-		.buttonSettings{
-		margin-right:25px;
-		}
+	}
+	
+	.buttonSettings {
+		margin-right: 25px;
+	}
 	</ui:style>
 	<b:Container addStyleNames="{style.mainContainer}"
 		ui:field="mainContainer" fluid="true">
-		<b:Navbar position="FIXED_TOP" marginBottom="20">
+		<b:Navbar position="FIXED_TOP" marginBottom="15">
 			<b:NavbarHeader>
 				<b:NavbarBrand ui:field="navbarBrand" addStyleNames="{style.navbarBrand}"
 					href="#home" />

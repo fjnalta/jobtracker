@@ -458,7 +458,7 @@ public class CalendarWidget extends Composite implements CalendarObserver, Logic
 							oldEvent.setStart(dragEvent.getISOStart());
 							oldEvent.setEnd(dragEvent.getISOEnd());
 
-							dragEvent.setTitle(dragEvent.getTitle() + titleNumber++);
+							//dragEvent.setOtherTitle();
 							calendar.addEvent(oldEvent);
 							calendar.currentEvent = dragEvent;
 							notifyHandler();
@@ -498,7 +498,7 @@ public class CalendarWidget extends Composite implements CalendarObserver, Logic
 				ap.getDate().setYear((2016 - 1900));
 				e.setStart(calendarHandler.getISO8601StringForDate(ap.getDate(), ap.getStartTime()));
 				e.setEnd(calendarHandler.getISO8601StringForDate(ap.getDate(), ap.getEndTime()));
-				
+				e.setOtherTitle();
 				calendar.addEvent(e);
 				this.eventList.add(e);
 				eventID = Integer.parseInt(e.getId());

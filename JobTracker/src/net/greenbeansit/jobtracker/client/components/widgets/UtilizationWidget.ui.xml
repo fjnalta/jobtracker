@@ -28,7 +28,7 @@
 			<b:Heading size="H4" text="" ui:field="headingRemainingVacationDays"/>
 			<h:Span text="13" addStyleNames="{style.labelValue}" ui:field="textRemainingVacationDays" />
 		</b:Column>
-		<b:Column size="XS_12,SM_12,MD_12,LG_12">
+		<b:Column size="XS_12,SM_12,MD_12,LG_12" paddingBottom="15">
 			<b:Heading size="H4" text="" ui:field="headingUtilization"/>
 			<components:PercentageRingDiagram
 				addStyleNames="{style.utilizationDiagram}" ui:field="utilizationDiagram" />

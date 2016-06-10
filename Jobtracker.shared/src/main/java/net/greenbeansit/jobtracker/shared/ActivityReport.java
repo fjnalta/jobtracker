@@ -16,7 +16,7 @@ public class ActivityReport implements Serializable
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -1176061103569100845L;
+	private static final long	serialVersionUID	= -1176061103569100845L;
 	private Integer				id;
 	private Integer				taskId;
 	private Integer				jobNr;
@@ -73,7 +73,7 @@ public class ActivityReport implements Serializable
 		this.setPosNr(posNr);
 		this.setAuthor(authorId);
 		this.setText(text);
-		
+
 		this.setDate(date);
 		this.setStartTime(startTime);
 		this.setDuration(duration);
@@ -82,8 +82,9 @@ public class ActivityReport implements Serializable
 
 	/**
 	 * Method for getting the text attribute
+	 * 
 	 * @return String text of the activity report
-     */
+	 */
 	public String getText()
 	{
 		return text;
@@ -91,8 +92,10 @@ public class ActivityReport implements Serializable
 
 	/**
 	 * Method for setting the text attribute
-	 * @param text text to set for the ActivityReport
-     */
+	 * 
+	 * @param text
+	 *            text to set for the ActivityReport
+	 */
 	public void setText(String text)
 	{
 		this.text = text;
@@ -100,8 +103,9 @@ public class ActivityReport implements Serializable
 
 	/**
 	 * Method for getting the duration attribute in minutes
+	 * 
 	 * @return Integer of the duration attribute in minutes
-     */
+	 */
 	public Integer getDuration()
 	{
 		return duration;
@@ -109,8 +113,10 @@ public class ActivityReport implements Serializable
 
 	/**
 	 * Set the duration parameter with an Integer in minutes
-	 * @param duration Integer value of the duration in minutes to be set
-     */
+	 * 
+	 * @param duration
+	 *            Integer value of the duration in minutes to be set
+	 */
 	public void setDuration(Integer duration)
 	{
 		// if (duration < 1 || this.startTime + duration > 1440)
@@ -121,7 +127,7 @@ public class ActivityReport implements Serializable
 	/**
 	 *
 	 * @return the Interger value of the attribute startTime in minutes
-     */
+	 */
 	public Integer getStartTime()
 	{
 		return startTime;
@@ -129,17 +135,21 @@ public class ActivityReport implements Serializable
 
 	/**
 	 * set the value of the attribute startTime in minutes
-	 * @param startTime the Integer value to be set
-     */
+	 * 
+	 * @param startTime
+	 *            the Integer value to be set
+	 */
 	public void setStartTime(Integer startTime)
 	{
 		this.startTime = startTime;
 	}
 
 	/**
-	 *get the Integer value of the endTime. This value is calculated out of the startTime and the durartion value
+	 * get the Integer value of the endTime. This value is calculated out of the
+	 * startTime and the durartion value
+	 * 
 	 * @return Integer value of the endTime in minutes
-     */
+	 */
 	public Integer getEndTime()
 	{
 		return startTime + duration;
@@ -147,8 +157,10 @@ public class ActivityReport implements Serializable
 
 	/**
 	 * set the endTime of the report in minutes
-	 * @param endTime Integer value in minutes of the endTime
-     */
+	 * 
+	 * @param endTime
+	 *            Integer value in minutes of the endTime
+	 */
 	public void setEndTime(Integer endTime)
 	{
 		if (this.startTime != null)
@@ -159,8 +171,9 @@ public class ActivityReport implements Serializable
 
 	/**
 	 * method for getting the authorID
+	 * 
 	 * @return Integer value of authorId
-     */
+	 */
 	public Integer getAuthor()
 	{
 		return authorId;
@@ -168,8 +181,10 @@ public class ActivityReport implements Serializable
 
 	/**
 	 * set the corresponding author with the authorID
-	 * @param authorId Integer value of an athorID to be set
-     */
+	 * 
+	 * @param authorId
+	 *            Integer value of an athorID to be set
+	 */
 	public void setAuthor(Integer authorId)
 	{
 		if (authorId == null)
@@ -179,8 +194,9 @@ public class ActivityReport implements Serializable
 
 	/**
 	 * get the date of the report
+	 * 
 	 * @return Date object with the date of the report
-     */
+	 */
 	public Date getDate()
 	{
 		return date;
@@ -188,8 +204,10 @@ public class ActivityReport implements Serializable
 
 	/**
 	 * Set the date of the report
-	 * @param date Date object with the date, the report will be saved to
-     */
+	 * 
+	 * @param date
+	 *            Date object with the date, the report will be saved to
+	 */
 	public void setDate(Date date)
 	{
 		this.date = date;
@@ -197,10 +215,14 @@ public class ActivityReport implements Serializable
 
 	/**
 	 * set Date with integer values
-	 * @param year Integer year value
-	 * @param month	Integer month value
-     * @param day Integer day value
-     */
+	 * 
+	 * @param year
+	 *            Integer year value
+	 * @param month
+	 *            Integer month value
+	 * @param day
+	 *            Integer day value
+	 */
 	@SuppressWarnings("deprecation")
 	public void setDate(Integer year, Integer month, Integer day)
 	{
@@ -209,8 +231,9 @@ public class ActivityReport implements Serializable
 
 	/**
 	 * get the breaktime in minutes
+	 * 
 	 * @return Integer value of the breakTime in minutes
-     */
+	 */
 	public Integer getBreakTime()
 	{
 		return breakTime;
@@ -218,19 +241,22 @@ public class ActivityReport implements Serializable
 
 	/**
 	 * set the breakTime in minutes
-	 * @param breakTime Integer value of the breakTime in minutes
-     */
+	 * 
+	 * @param breakTime
+	 *            Integer value of the breakTime in minutes
+	 */
 	public void setBreakTime(Integer breakTime)
 	{
-//		if (breakTime < 0)
-//			throw (new IllegalArgumentException());
+		// if (breakTime < 0)
+		// throw (new IllegalArgumentException());
 		this.breakTime = breakTime;
 	}
 
 	/**
 	 * get the ID of the report
+	 * 
 	 * @return Integer value of the id of this report
-     */
+	 */
 	public Integer getId()
 	{
 		return id;
@@ -238,8 +264,10 @@ public class ActivityReport implements Serializable
 
 	/**
 	 * set the ID of the report
-	 * @param id the Integer value of the ID
-     */
+	 * 
+	 * @param id
+	 *            the Integer value of the ID
+	 */
 	public void setId(Integer id)
 	{
 		this.id = id;
@@ -247,8 +275,9 @@ public class ActivityReport implements Serializable
 
 	/**
 	 * get the corresponding TaskID which is associated with this report
+	 * 
 	 * @return Interger taskID
-     */
+	 */
 	public Integer getTaskId()
 	{
 		return taskId;
@@ -256,8 +285,10 @@ public class ActivityReport implements Serializable
 
 	/**
 	 * set the corresponding taskID to this report
-	 * @param taskId Integer value of the taskID
-     */
+	 * 
+	 * @param taskId
+	 *            Integer value of the taskID
+	 */
 	public void setTaskId(Integer taskId)
 	{
 		this.taskId = taskId;
@@ -265,8 +296,9 @@ public class ActivityReport implements Serializable
 
 	/**
 	 * get the posNr value corresponding with this report
+	 * 
 	 * @return Integer value of the posNr
-     */
+	 */
 	public Integer getPosNr()
 	{
 		return posNr;
@@ -274,8 +306,10 @@ public class ActivityReport implements Serializable
 
 	/**
 	 * set the corresponding posNr for this report
-	 * @param jobPosNr Integer value of the posNr
-     */
+	 * 
+	 * @param jobPosNr
+	 *            Integer value of the posNr
+	 */
 	public void setPosNr(Integer jobPosNr)
 	{
 		this.posNr = jobPosNr;
@@ -283,8 +317,9 @@ public class ActivityReport implements Serializable
 
 	/**
 	 * get the corresponding jobNr of this report
+	 * 
 	 * @return Integer value of the corresponding jobNr
-     */
+	 */
 	public Integer getJobNr()
 	{
 		return jobNr;
@@ -292,26 +327,34 @@ public class ActivityReport implements Serializable
 
 	/**
 	 * set the corrresponding jobNr for this report
-	 * @param jobNr Interger value of the corresponding jobNr
-     */
+	 * 
+	 * @param jobNr
+	 *            Interger value of the corresponding jobNr
+	 */
 	public void setJobNr(Integer jobNr)
 	{
 		this.jobNr = jobNr;
 	}
 
 	/**
-	 * To sting method, returns the {id + taskid + jobNr + posNr + authorId + text + date + startTime + duration+
-	 * breakTime }
+	 * To sting method, returns the {id + taskid + jobNr + posNr + authorId +
+	 * text + date + startTime + duration+ breakTime }
+	 * 
 	 * @return String object with all values of the report
-     */
+	 */
 	@Override
 	public String toString()
 	{
-		return "{id:"+id+", taskId:"+taskId+", jobNr:"+jobNr+", posNr:"+posNr+", authorId:"+authorId+", text:"+text+", date:"+date.toString()+", startTime:"+startTime+", duration:"+duration+", breakTime:"+breakTime+"}";
+		return "{id:" + id + ", taskId:" + taskId + ", jobNr:" + jobNr
+				+ ", posNr:" + posNr + ", authorId:" + authorId + ", text:"
+				+ text + ", date:" + date.toString() + ", startTime:"
+				+ startTime + ", duration:" + duration + ", breakTime:"
+				+ breakTime + "}";
 	}
 
-	public boolean equals(Object obj) {
-		if(obj == null)
+	public boolean equals(Object obj)
+	{
+		if (obj == null)
 			return false;
 		else if (obj instanceof ActivityReport)
 		{
@@ -320,10 +363,11 @@ public class ActivityReport implements Serializable
 		} else
 			return false;
 	}
-	
+
 	@Override
-    public int hashCode() {
-        return id == null ? 0 : id.hashCode();
-    }
+	public int hashCode()
+	{
+		return id == null ? 0 : id.hashCode();
+	}
 
 }

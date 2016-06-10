@@ -19,7 +19,8 @@ public class JobTask implements Serializable
 	/**
 	 * Empty Constructor for internal purposes
 	 */
-	public JobTask(){
+	public JobTask()
+	{
 
 	}
 
@@ -31,7 +32,7 @@ public class JobTask implements Serializable
 	 * @param jobNr
 	 *            the identifier of the jobNr
 	 * @param posNr
-	 * 			  the position number.
+	 *            the position number.
 	 * @param name
 	 *            the name of the Task
 	 */
@@ -45,8 +46,9 @@ public class JobTask implements Serializable
 
 	/**
 	 * Gets the {@link JobTask} id.
+	 * 
 	 * @return the id.
-     */
+	 */
 	public Integer getId()
 	{
 		return id;
@@ -54,8 +56,10 @@ public class JobTask implements Serializable
 
 	/**
 	 * Sets the {@link JobTask} id.
-	 * @param id the id.
-     */
+	 * 
+	 * @param id
+	 *            the id.
+	 */
 	public void setId(Integer id)
 	{
 		if (id == null)
@@ -67,8 +71,9 @@ public class JobTask implements Serializable
 
 	/**
 	 * Gets the Job number.
+	 * 
 	 * @return the Job Number.
-     */
+	 */
 	public Integer getJobNr()
 	{
 		return jobNr;
@@ -76,8 +81,10 @@ public class JobTask implements Serializable
 
 	/**
 	 * Sets the Job number.
-	 * @param jobNr the Job number.
-     */
+	 * 
+	 * @param jobNr
+	 *            the Job number.
+	 */
 	public void setJobNr(Integer jobNr)
 	{
 		if (jobNr == null)
@@ -89,8 +96,9 @@ public class JobTask implements Serializable
 
 	/**
 	 * Gets the position Number.
+	 * 
 	 * @return the Position number.
-     */
+	 */
 	public Integer getPosNr()
 	{
 		return posNr;
@@ -98,8 +106,10 @@ public class JobTask implements Serializable
 
 	/**
 	 * Sets the position Number.
-	 * @param posNr the position number.
-     */
+	 * 
+	 * @param posNr
+	 *            the position number.
+	 */
 	public void setPosNr(Integer posNr)
 	{
 		this.posNr = posNr;
@@ -107,8 +117,9 @@ public class JobTask implements Serializable
 
 	/**
 	 * Gets the JobTask name.
+	 * 
 	 * @return the Name.
-     */
+	 */
 	public String getName()
 	{
 		return name;
@@ -116,8 +127,10 @@ public class JobTask implements Serializable
 
 	/**
 	 * Sets the JobTask name.
-	 * @param name the Name.
-     */
+	 * 
+	 * @param name
+	 *            the Name.
+	 */
 	public void setName(String name)
 	{
 		if (name == "")
@@ -126,9 +139,10 @@ public class JobTask implements Serializable
 		}
 		this.name = name;
 	}
-	
-	public boolean equals(Object obj) {
-		if(obj == null)
+
+	public boolean equals(Object obj)
+	{
+		if (obj == null)
 			return false;
 		else if (obj instanceof JobTask)
 		{
@@ -137,9 +151,10 @@ public class JobTask implements Serializable
 		} else
 			return false;
 	}
-	
+
 	@Override
-    public int hashCode() {
-        return id == null ? 0 : id.hashCode();
-    }
+	public int hashCode()
+	{
+		return id == null ? 0 : id.hashCode();
+	}
 }

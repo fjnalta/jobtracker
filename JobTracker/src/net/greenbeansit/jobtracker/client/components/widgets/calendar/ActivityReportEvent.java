@@ -47,7 +47,7 @@ public class ActivityReportEvent extends Event implements LogicObservable {
 		super(id, title, isEditable, isStartEditable, isDurationEditable);
 		this.ap = ap;
 		this.setColor("rgb(0,0,153)");
-		
+
 	}
 
 	/**
@@ -90,7 +90,8 @@ public class ActivityReportEvent extends Event implements LogicObservable {
 	 * Method for setting the {@link ActivityReport} of the
 	 * {@link ActivityReportEvent}.
 	 *
-	 * @param ap {@link ActivityReport} to set
+	 * @param ap
+	 *            {@link ActivityReport} to set
 	 */
 	public void setAp(ActivityReport ap) {
 		this.ap = ap;
@@ -153,7 +154,7 @@ public class ActivityReportEvent extends Event implements LogicObservable {
 	}
 
 	@Override
-	public void updateObservable() {		
+	public void updateObservable() {
 		String[] isoDateString = this.getISOStart().split("T")[0].split("-");
 		int year = Integer.parseInt((isoDateString[0])) - 1900;
 		int month = Integer.parseInt((isoDateString[1])) - 1;
@@ -164,6 +165,30 @@ public class ActivityReportEvent extends Event implements LogicObservable {
 	@Override
 	public void notifyLogicHandler() {
 
+	}
+
+	public void setOtherTitle() {
+		String pause;
+		if (this.getAp().getBreakTime() > 0) {
+			pause = "Pause:" + this.getAp().getBreakTime() / 60 + "h" + this.getAp().getBreakTime() % 60 + "min";
+		} else {
+			pause = "Pause: 0h";
+		}
+		this.setTitle("\n\rJobNr.\n\r"
+				+ this.getAp().getJobNr() + 
+				"-"
+				+ this.getAp().getPosNr() 
+				+ "-"
+				+ this.getAp().getAuthor() 
+				+"\n\r"
+				+ this.getAp().getText()
+				+ "\n\r\n\r" + 
+				"Dauer:" + this.getAp().getDuration() / 60 + "h"
+				+ this.getAp().getDuration() % 60 + "min" 
+				+ "\n\r\n\r"
+				+ pause
+
+		);
 	}
 
 }

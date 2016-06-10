@@ -4,14 +4,14 @@
 	xmlns:h="urn:import:org.gwtbootstrap3.client.ui.html">
 	<ui:style>
 	.buttonStyle {
-		border-radius: 100%;
+		border-radius: 100% !important;
 		height: 25px;
 		width: 25px;
 		margin: 2px 2px 2px 2px;
 	}
 	
 	.buttonStyle-active {
-		border-radius: 100%;
+		border-radius: 100% !important;
 		height: 25px;
 		width: 25px;
 		margin: 2px 2px 2px 2px;

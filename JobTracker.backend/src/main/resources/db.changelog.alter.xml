@@ -210,4 +210,19 @@
             ]]>
         </sql>
     </changeSet>
+    <changeSet id="20160610-ALTERActivityReportTemplate" author="mike">
+        <sql>
+            <![CDATA[
+                ALTER TABLE `activity_report_template` ADD COLUMN `job_no` INT;
+                ALTER TABLE `activity_report_template` ADD COLUMN `pos_no` INT;
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="20160610-ALTERUtilizationWeek" author="mike">
+        <sql>
+            <![CDATA[
+                ALTER TABLE `utilization_week` ADD COLUMN `customer` INT;
+            ]]>
+        </sql>
+    </changeSet>
 </databaseChangeLog>

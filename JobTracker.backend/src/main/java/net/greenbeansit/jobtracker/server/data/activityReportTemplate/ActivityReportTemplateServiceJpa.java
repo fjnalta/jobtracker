@@ -76,7 +76,8 @@ public class ActivityReportTemplateServiceJpa
 		if (entity == null)
 			return null;
 		return new ActivityReportTemplate(entity.getName(), entity.getText(),
-				entity.getTaskId(), entity.getAuthor());
+				entity.getTaskId(), entity.getAuthor(), entity.getJobNo(),
+				entity.getPosNo());
 	}
 
 	/**
@@ -94,6 +95,7 @@ public class ActivityReportTemplateServiceJpa
 			return null;
 		}
 		return new ActivityReportTemplateEntity(report.getName(),
-				report.getText(), report.getTaskId(), report.getAuthor());
+				report.getText(), report.getTaskId(), report.getAuthor(),
+				report.getJobNr(), report.getPosNr());
 	}
 }

@@ -40,8 +40,8 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 	interface CalendarTimeInputWidgetUiBinder extends UiBinder<Widget, CalendarTimeInputWidget> {
 	}
 
-	@UiField
-	InputGroupAddon addonDateStart, addonDateEnd, addonTimeStart, addonTimeEnd, addonBreak, addonDuration;
+//	@UiField
+//	InputGroupAddon addonDateStart, addonDateEnd, addonTimeStart, addonTimeEnd, addonBreak, addonDuration;
 	
 	@UiField
 	Button buttonUpDateStart;
@@ -136,13 +136,15 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 		buttonTimeHourUpDuration.setIcon(IconType.ARROW_UP);
 		buttonTimeMinuteUpDuration.setIcon(IconType.ARROW_UP);
 
-		addonDateStart.setText(constants.addonDateStart());
-		addonDateEnd.setText(constants.addonDateEnd());
-		addonTimeStart.setText(constants.addonTimeStart());
-		addonTimeEnd.setText(constants.addonTimeEnd());
-		addonBreak.setText(constants.addonBreak());
-		addonDuration.setText(constants.addonDuration());
-		
+		buttonDelete.setIcon(IconType.TRASH);
+		buttonCopy.setIcon(IconType.COPY);
+//		addonDateStart.setText(constants.addonDateStart());
+//		addonDateEnd.setText(constants.addonDateEnd());
+//		addonTimeStart.setText(constants.addonTimeStart());
+//		addonTimeEnd.setText(constants.addonTimeEnd());
+//		addonBreak.setText(constants.addonBreak());
+//		addonDuration.setText(constants.addonDuration());
+//		
 		buttonBook.setText(constants.buttonBook());
 	}
 
@@ -514,7 +516,6 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 			handler.saveReport(tmp);
 		}
 		}else{
-			GWT.log(calendarHandler.calendar.currentEvent.getId());
 			ActivityReport tmp = new ActivityReport(Integer.parseInt(calendarHandler.calendar.currentEvent.getId())
 					, 0, 0, 0, 0, "", getDateFromBox(dateStart), startTime, duration,
 					breakTime);

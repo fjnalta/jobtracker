@@ -24,9 +24,9 @@ public class UserJobServiceJpa implements UserJobDataService
 {
 
 	@Autowired
-	private UserJobEntityRepository repository;
+	private UserJobEntityRepository	repository;
 	@Inject
-	private UserDataService userService;
+	private UserDataService			userService;
 
 	@Override
 	public List<UserJob> getAll()
@@ -54,14 +54,13 @@ public class UserJobServiceJpa implements UserJobDataService
 	public List<User> getByJobNrAndPosNr(Integer jobNr, Integer posNr)
 	{
 		ArrayList<User> list = new ArrayList<User>();
-		for (UserJobEntity uj : repository.findByJobNrAndPosNr(jobNr,
-				posNr))
+		for (UserJobEntity uj : repository.findByJobNrAndPosNr(jobNr, posNr))
 		{
 			User u = userService.getUser(uj.getUserId());
-			if(!list.contains(u))
+			if (!list.contains(u))
 				list.add(u);
 		}
-		
+
 		return list;
 	}
 

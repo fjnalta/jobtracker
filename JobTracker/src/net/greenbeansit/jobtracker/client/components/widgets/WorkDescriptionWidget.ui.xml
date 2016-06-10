@@ -12,8 +12,8 @@
 	
 	.row {
 		margin: 0px;
-		padding-top: 10px;
-		padding-bottom: 10px;
+		padding-top: 5px;
+		padding-bottom: 5px;
 		padding-left: 5px;
 		padding-right: 5px;
 	}
@@ -50,31 +50,25 @@
 			<b:FormGroup>
 				<b:FormLabel for="description2" ui:field="labelTask"></b:FormLabel>
 				<b:TextBox placeholder="" b:id="description2"
-					addStyleNames="{style.textArea}"
-					ui:field="textIdentifier" />
+					addStyleNames="{style.textArea}" ui:field="textIdentifier" />
 			</b:FormGroup>
 		</b:Row>
+
 		<b:Row addStyleNames="{style.row}">
-			<b:Button type="PRIMARY" dataToggle="COLLAPSE" dataTarget="#collapseTemplate"
-				text="" addStyleNames="{style.button-blue}"
-				ui:field="buttonCollapseTemplate"/>
-			<b:Collapse b:id="collapseTemplate" addStyleNames="{style.collapse}"
-				toggle="false">
-				<b:FormGroup>
-					<b:TextBox placeholder="" b:id="textTemplateName"
-						ui:field="textName" />
-					<b:Button text="" addStyleNames="{style.button}"
-						ui:field="buttonSave" />
-				</b:FormGroup>
-				<b:FormGroup>
-					<s:Select ui:field="selectTemplate">
-						<s:OptGroup ui:field="optGroupTemplate">
-						</s:OptGroup>
-					</s:Select>
-					<b:Button text="Vorlage laden" addStyleNames="{style.button}"
-						ui:field="buttonLoad" />
-				</b:FormGroup>
-			</b:Collapse>
+			<b:FormLabel ui:field="headingCollapseTemplate"></b:FormLabel>
+			<b:FormGroup>
+				<b:TextBox placeholder="" b:id="textTemplateName"
+					ui:field="textName" />
+				<b:Button text="" addStyleNames="{style.button}" ui:field="buttonSave" />
+			</b:FormGroup>
+			<b:FormGroup>
+				<s:Select ui:field="selectTemplate">
+					<s:OptGroup ui:field="optGroupTemplate">
+					</s:OptGroup>
+				</s:Select>
+				<b:Button text="Vorlage laden" addStyleNames="{style.button}"
+					ui:field="buttonLoad" />
+			</b:FormGroup>
 		</b:Row>
 	</h:ClearFix>
 </ui:UiBinder> 

@@ -52,6 +52,13 @@ public interface JobEntityRepository extends CrudRepository<JobEntity, Integer>
 	JobEntity findByJobNrAndPosNr(Integer jobNr, Integer posNr);
 
 	/**
+	 * Returns all {@link JobEntity} marked as internal.
+	 * 
+	 * @return List of {@link JobEntity}
+	 */
+	List<JobEntity> findByInternTrue();
+
+	/**
 	 * Returns all {@link JobEntity} related to a single customer.
 	 * 
 	 * @param customer_id

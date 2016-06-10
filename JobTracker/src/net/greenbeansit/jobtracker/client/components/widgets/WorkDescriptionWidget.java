@@ -4,8 +4,10 @@ import java.util.List;
 
 import net.greenbeansit.jobtracker.client.components.LogicHandler;
 
+import net.greenbeansit.jobtracker.shared.Job;
 import org.gwtbootstrap3.client.ui.Button;
 import org.gwtbootstrap3.client.ui.FormLabel;
+import org.gwtbootstrap3.client.ui.Heading;
 import org.gwtbootstrap3.client.ui.TextArea;
 import org.gwtbootstrap3.client.ui.TextBox;
 import org.gwtbootstrap3.extras.select.client.ui.OptGroup;
@@ -72,9 +74,11 @@ public class WorkDescriptionWidget extends Composite implements LogicObservable
 	
 	@UiField
 	Button buttonLoad;
+
 	
+
 	@UiField
-	Button buttonCollapseTemplate;
+	FormLabel headingCollapseTemplate;
 	
 	ActivityReportTemplate selectedTemplate;
 
@@ -100,7 +104,9 @@ public class WorkDescriptionWidget extends Composite implements LogicObservable
 		textName.setPlaceholder(constants.textTemplateNamePlaceHolder());
 		buttonLoad.setText(constants.buttonLoadTemplate());
 		buttonSave.setText(constants.buttonSaveTemplate());
-		buttonCollapseTemplate.setText(constants.buttonTemplateText());
+
+
+		headingCollapseTemplate.setText(constants.buttonTemplateText());
 		
 		labelDescription.setText(constants.headingWorkDescription());
 		labelTask.setText(constants.headingSelectTask());
@@ -132,6 +138,15 @@ public class WorkDescriptionWidget extends Composite implements LogicObservable
 	public void loadTemplate(final ClickEvent e){
 		textDiscription.setText(selectedTemplate.getText());
 		textName.setText(selectedTemplate.getName());
+		Job selectedJob = new Job();
+		selectedJob.setJobNr(selectedTemplate.getJobNr());
+		selectedJob.setPosNr(selectedTemplate.getPosNr());
+		for(Job elem : handler.getJobList()){
+			if(elem.equals(selectedJob)){
+				handler.setCurrentJob(elem);
+				handler.updateAllObservables();
+			}
+		}
 	}
 
 	/**

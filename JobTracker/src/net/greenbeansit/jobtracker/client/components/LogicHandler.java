@@ -38,8 +38,10 @@ public class LogicHandler {
 	private List<ActivityReport> currentReportsList = new ArrayList<ActivityReport>();
 	private List<ActivityReportTemplate> templateList = new ArrayList<ActivityReportTemplate>();
 	private List<UtilizationWeek> utilizationWeekList = new ArrayList<UtilizationWeek>();
+	private List<Customer> customerList = new ArrayList<Customer>();
 	private List<Job> jobList = new ArrayList<Job>();
 	private List<PseudoJob> pseudoJobList = new ArrayList<PseudoJob>();
+	private List<UtilizationWeek> weeksToSave = new ArrayList<UtilizationWeek>();
 
 	private List<Integer> utilizationList = new ArrayList<Integer>();
 	private User currentUser;
@@ -79,6 +81,8 @@ public class LogicHandler {
 
 		this.currentUser = new User();
 		this.currentUser.setId(2);
+
+		loadAllCustomers();
 	}
 
 	/**
@@ -290,7 +294,6 @@ public class LogicHandler {
 				NotifyHelper.successMessage("Reports loaded from backend");
 				LogicHandler.this.setCurrentUtilizationWeekList(response);
 				LogicHandler.this.updateAllObservables();
-				calendar.updateObservable();
 			}
 
 			@Override
@@ -421,40 +424,44 @@ public class LogicHandler {
 	/**
 	 * Function for saving an UtilizationWeek to the backend. It first collects all needed information,
 	 * then if everything is correct it will try to save it.
-	 * On success is calls {@link #updateAllObservables()}to update the widgets
-	 * @param report
+	 * On success is calls {@link #updateAllObservables()}to update the widgetsv
 	 * 			the {@link UtilizationWeek}.
 	 */
-	public void saveUtilizationWeek(UtilizationWeek report) {
-		if (report != null && currentUser != null && tempUtilizationWeek!=null) {
-			final UtilizationWeek tempReport = report;
-			tempReport.setName(tempUtilizationWeek.getName());
-			GWT.log(tempUtilizationWeek.getName());
-			tempReport.setText(tempUtilizationWeek.getText());
-			tempReport.setAuthor(currentUser.getId());
-			tempReport.setPseudoJobId(tempUtilizationWeek.getPseudoJobId());
-			tempReport.setPossibility(tempUtilizationWeek.getPossibility());
-			try {
-				RestClient.build(new SuccessFunction<UtilizationWeek>() {
-					@Override
-					public void onSuccess(Method method, UtilizationWeek response) {
-						GWT.log(tempReport.toString());
-						LogicHandler.this.updateAllObservables();
-						NotifyHelper.successMessage("Report saved");
-					}
+	public void saveUtilizationWeek() {
+		for(UtilizationWeek report : this.getWeeksToSave()) {
+			if (report != null && currentUser != null && tempUtilizationWeek != null&&tempUtilizationWeek.getCustomerId()!=null) {
+				final UtilizationWeek tempReport = report;
+				tempReport.setName(tempUtilizationWeek.getName());
+				GWT.log(tempUtilizationWeek.getName());
+				tempReport.setText(tempUtilizationWeek.getText());
+				tempReport.setAuthor(currentUser.getId());
+				tempReport.setPseudoJobId(tempUtilizationWeek.getPseudoJobId());
+				tempReport.setPossibility(tempUtilizationWeek.getPossibility());
+				tempReport.setCustomerId(tempUtilizationWeek.getCustomerId());
+				final UtilizationWeek reportToDelete = report;
+				try {
+					RestClient.build(new SuccessFunction<UtilizationWeek>() {
+						@Override
+						public void onSuccess(Method method, UtilizationWeek response) {
+							LogicHandler.this.getCurrentUtilizationWeekList().add(tempReport);
+							LogicHandler.this.updateAllObservables();
+							LogicHandler.this.getWeeksToSave().remove(reportToDelete);
+							NotifyHelper.successMessage("Report saved");
+						}
 
-					@Override
-					public void onFailure(Method method, Throwable exception) {
-						NotifyHelper.errorMessage("FAILED" + exception.getMessage());
-						GWT.log(exception.getMessage());
-					}
+						@Override
+						public void onFailure(Method method, Throwable exception) {
+							NotifyHelper.errorMessage("FAILED" + exception.getMessage());
+							GWT.log(exception.getMessage());
+						}
 
-				}).getEmployeeService().saveUtilizationWeek(currentUser.getId(), tempReport);
-			} catch (Exception e) {
-				e.printStackTrace();
+					}).getEmployeeService().saveUtilizationWeek(currentUser.getId(), tempReport);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			} else {
+				NotifyHelper.errorMessage("Please fill in the missing fields");
 			}
-		} else {
-			NotifyHelper.errorMessage("Please fill in the missing fields");
 		}
 	}
 
@@ -465,28 +472,36 @@ public class LogicHandler {
 	 * @param template {@link ActivityReportTemplate} to save
 	 */
 	public void saveTemplate(ActivityReportTemplate template) {
-		final ActivityReportTemplate temp = template;
-		updateAllObservables();
-		try {
-			RestClient.build(new SuccessFunction<ActivityReportTemplate>() {
-				@Override
-				public void onSuccess(Method method, ActivityReportTemplate response) {
-					LogicHandler.this.loadTemplates();
-					LogicHandler.this.updateAllObservables();
-					GWT.log("Template saved");
-					NotifyHelper.successMessage("Template saved successfully!");
-				}
+		if(currentJob!=null){
+			GWT.log(currentJob.getJobNr()+"");
+			GWT.log(currentJob.getPosNr()+"");
+			template.setJobNr(currentJob.getJobNr());
+			template.setPosNr(currentJob.getPosNr());
+			final ActivityReportTemplate temp = template;
+			try {
+				RestClient.build(new SuccessFunction<ActivityReportTemplate>() {
+					@Override
+					public void onSuccess(Method method, ActivityReportTemplate response) {
+						LogicHandler.this.loadTemplates();
+						LogicHandler.this.updateAllObservables();
+						GWT.log("Template saved");
+						NotifyHelper.successMessage("Template saved successfully!");
+					}
 
-				@Override
-				public void onFailure(Method method, Throwable exception) {
-					NotifyHelper.errorMessage(exception.getMessage());
-					GWT.log(exception.getMessage());
-				}
+					@Override
+					public void onFailure(Method method, Throwable exception) {
+						NotifyHelper.errorMessage(exception.getMessage());
+						GWT.log(exception.getMessage());
+					}
 
-			}).getEmployeeService().saveReportTemplate(currentUser.getId(), template);
-		} catch (Exception e) {
-			e.printStackTrace();
+				}).getEmployeeService().saveReportTemplate(currentUser.getId(), template);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else{
+			NotifyHelper.errorMessage("Setzen sie bitte den Job!");
 		}
+		updateAllObservables();
 	}
 
 	/**
@@ -815,4 +830,61 @@ public class LogicHandler {
 //		GWT.log("LogicHandler: TempUtilizationName: " + tempUtilizationWeek.getText());
 		this.tempUtilizationWeek = tempUtilizationWeek;
 	}
+
+	/**
+	 * Method for loading all customes from the backend
+	 */
+	public void loadAllCustomers(){
+		try {
+			RestClient.build(new SuccessFunction<List<Customer>>() {
+				@Override
+				public void onSuccess(Method method, List<Customer> response) {
+					LogicHandler.this.setCustomerList(response);
+					GWT.log("customers loaded");
+				}
+
+				@Override
+				public void onFailure(Method method, Throwable exception) {
+					GWT.log(exception.getMessage());
+				}
+
+			}).getEmployeeService().getAllCustomer();
+		} catch (Exception e) {
+			GWT.log(e.getMessage());
+		}
+	}
+
+	/**
+	 * Method for get a customer from a id
+	 * @param id
+     */
+	public Customer getCustomerNameForID(Integer id){
+		Customer temp = new Customer(0,"noname");
+		for(Customer elem : this.customerList){
+			if(id == elem.getId()){
+				temp = elem;
+			}
+		}
+		return temp;
+	}
+
+
+	public List<Customer> getCustomerList() {
+		return customerList;
+	}
+
+	public void setCustomerList(List<Customer> customerList) {
+		this.customerList = customerList;
+	}
+
+
+	public List<UtilizationWeek> getWeeksToSave() {
+		return weeksToSave;
+	}
+
+	public void addWeekToSave(UtilizationWeek week) {
+		this.weeksToSave.add(week);
+	}
+
+
 }
