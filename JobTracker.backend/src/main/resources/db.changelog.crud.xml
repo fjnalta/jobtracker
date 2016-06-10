@@ -254,7 +254,7 @@
 			]]>
 		</sql>
 	</changeSet>
-	<changeSet id="20160610-job-17" author="mike">
+	<changeSet id="20160610-job-19" author="mike">
 		<sql>
 			<![CDATA[
 				UPDATE job
