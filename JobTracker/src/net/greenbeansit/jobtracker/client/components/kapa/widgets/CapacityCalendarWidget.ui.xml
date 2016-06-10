@@ -4,22 +4,12 @@
              xmlns:g="urn:import:com.google.gwt.user.client.ui"
              xmlns:widgets="urn:import:net.greenbeansit.jobtracker.client.components.kapa.widgets"
              xmlns:a="urn:import:com.google.gwt.user.client.ui">
-    <ui:style>
-        .mainColumn {
-            float: none;
-            vertical-align: top;
-        }
-
-        .mainContainer {
-        }
-
-    </ui:style>
-    <b:Container fluid="true" ui:field="container" addStyleNames="{style.mainContainer}">
-        <b:Column size="XS_12,SM_2,MD_2,LG_2" addStyleNames="{style.mainColumn}">
+    <b:Container fluid="true" ui:field="container">
+        <b:Column size="XS_12,SM_2,MD_2,LG_2">
             <b:FormLabel>Monat</b:FormLabel>
             <b:Heading size="H3" ui:field="month"/>
         </b:Column>
-        <b:Column size="XS_12,SM_10,MD_10,LG_10" addStyleNames="{style.mainColumn}" ui:field="calendar">
+        <b:Column size="XS_12,SM_10,MD_10,LG_10" ui:field="calendar">
             <b:FormLabel>Kalender</b:FormLabel>
         </b:Column>
         <!-- Utilization Widget

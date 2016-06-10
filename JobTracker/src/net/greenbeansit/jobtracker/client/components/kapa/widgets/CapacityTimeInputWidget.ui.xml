@@ -8,30 +8,29 @@
 	}
 	
 	.button-blue {
-		background: #000099
+		background: #000099;
+		margin-top: 25px;
 	}
     .buttonBook {
-        align: center;
+        margin-top: 25px;
     }
 	</ui:style>
 	<b:Container fluid="true">
-        <b:Column size="XS_6,SM_6,MD_6,LG_6">
+        <b:Column size="XS_4,SM_4,MD_4,LG_4">
             <b:FormLabel>Projektstart</b:FormLabel>
             <b:TextBox readOnly="true" ui:field="projectStart"
                        addStyleNames="{style.buttonText}"></b:TextBox>
         </b:Column>
-        <b:Column size="XS_6,SM_6,MD_6,LG_6">
+        <b:Column size="XS_4,SM_4,MD_4,LG_4">
             <b:FormLabel>Projektende</b:FormLabel>
             <b:TextBox readOnly="true" ui:field="projectEnd"
                        addStyleNames="{style.buttonText}"></b:TextBox>
         </b:Column>
-        <b:Column offset="XS_8,SM_8,MD_8,LG_8" size="XS_2,SM_2,MD_2,LG_2">
-            <b:FormLabel>Löschen</b:FormLabel>
+        <b:Column size="XS_2,SM_2,MD_2,LG_2">
             <b:Button ui:field="buttonDelete" addStyleNames="{style.buttonBook}"/>
         </b:Column>
         <b:Column size="XS_2,SM_2,MD_2,LG_2">
-            <b:FormLabel>Buchen</b:FormLabel>
-            <b:Button type="PRIMARY" text="OK" ui:field="buttonBook" addStyleNames="{style.button-blue}" />
+            <b:Button type="PRIMARY" text="Buchen" ui:field="buttonBook" addStyleNames="{style.button-blue}" />
         </b:Column>
 	</b:Container>
 </ui:UiBinder>
