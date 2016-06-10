@@ -263,4 +263,13 @@
 			]]>
 		</sql>
 	</changeSet>
+	<changeSet id="20160610-user-20" author="mike">
+		<sql>
+			<![CDATA[
+				UPDATE user
+				SET supervisor=1
+				WHERE supervisor=7;
+			]]>
+		</sql>
+	</changeSet>
 </databaseChangeLog>
