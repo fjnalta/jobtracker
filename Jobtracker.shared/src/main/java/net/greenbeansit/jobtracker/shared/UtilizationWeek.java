@@ -25,6 +25,7 @@ public class UtilizationWeek implements Serializable
 	private Integer				possibility;
 	private Integer				pseudoJobId;
 	private Integer				breakTime;
+	private Integer				customerId;
 
 	/**
 	 * Empty Constructor for internal purposes
@@ -60,6 +61,7 @@ public class UtilizationWeek implements Serializable
 	 * @param breakTime
 	 *            the break time
 	 */
+	@Deprecated
 	public UtilizationWeek(Integer id, Integer author, String name, String text,
 			Date beginDate, Integer beginTime, Integer endTime, Date endDate,
 			Integer possibility, Integer pseudoJobId, Integer breakTime)
@@ -75,6 +77,51 @@ public class UtilizationWeek implements Serializable
 		this.possibility = possibility;
 		this.pseudoJobId = pseudoJobId;
 		this.breakTime = breakTime;
+	}
+	
+	/**
+	 * Initializes a new instance of the {@link UtilizationWeek} class
+	 *
+	 * @param id
+	 *            the unique identifier
+	 * @param author
+	 *            the id of the author
+	 * @param name
+	 *            the name of the UtilizationWeek
+	 * @param text
+	 *            the description
+	 * @param beginDate
+	 *            the begin Date
+	 * @param beginTime
+	 *            the begin Time
+	 * @param endTime
+	 *            the end Time of the Pseudo Activity Report
+	 * @param endDate
+	 *            the end Date
+	 * @param possibility
+	 *            the possibility the event will take place
+	 * @param pseudoJobId
+	 *            the unique identifier for the pseudo job
+	 * @param breakTime
+	 *            the break time
+	 * @param customerId the customer that will be served
+	 */
+	public UtilizationWeek(Integer id, Integer author, String name, String text,
+			Date beginDate, Integer beginTime, Integer endTime, Date endDate,
+			Integer possibility, Integer pseudoJobId, Integer breakTime, Integer customerId)
+	{
+		this.id = id;
+		this.author = author;
+		this.name = name;
+		this.text = text;
+		this.beginDate = beginDate;
+		this.beginTime = beginTime;
+		this.endTime = endTime;
+		this.endDate = endDate;
+		this.possibility = possibility;
+		this.pseudoJobId = pseudoJobId;
+		this.breakTime = breakTime;
+		this.customerId = customerId;
 	}
 
 	/**
@@ -127,11 +174,21 @@ public class UtilizationWeek implements Serializable
 		this.author = author;
 	}
 
+	/**
+	 * Gets the name
+	 * 
+	 * @return the name
+	 */
 	public String getName()
 	{
 		return this.name;
 	}
 
+	/**
+	 * Sets the name
+	 * 
+	 * @param name the name
+	 */
 	public void setName(String name)
 	{
 		this.name = name;
@@ -328,6 +385,26 @@ public class UtilizationWeek implements Serializable
 	public Date getEndDate()
 	{
 		return this.endDate;
+	}
+
+	/**
+	 * Gets the customer ID
+	 * 
+	 * @return the customerId
+	 */
+	public Integer getCustomerId()
+	{
+		return customerId;
+	}
+
+	/**
+	 * Sets the customer Id
+	 * 
+	 * @param customerId the customerId
+	 */
+	public void setCustomerId(Integer customerId)
+	{
+		this.customerId = customerId;
 	}
 
 	public boolean equals(Object obj)
