@@ -36,7 +36,7 @@
 	
 	<!-- Languages -->
 	<extend-property name="locale" values="de,en" />
-	<set-property-fallback name="locale" value="en"/>
+	<set-property-fallback name="locale" value="de"/>
 	
 	<!-- Specify the app entry point class. -->
 	<entry-point class='net.greenbeansit.jobtracker.client.GwtEntryPoint' />
