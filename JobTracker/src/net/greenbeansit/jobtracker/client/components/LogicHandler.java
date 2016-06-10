@@ -41,6 +41,7 @@ public class LogicHandler {
 	private List<Customer> customerList = new ArrayList<Customer>();
 	private List<Job> jobList = new ArrayList<Job>();
 	private List<PseudoJob> pseudoJobList = new ArrayList<PseudoJob>();
+	private List<UtilizationWeek> weeksToSave = new ArrayList<UtilizationWeek>();
 
 	private List<Integer> utilizationList = new ArrayList<Integer>();
 	private User currentUser;
@@ -427,36 +428,40 @@ public class LogicHandler {
 	 * @param report
 	 * 			the {@link UtilizationWeek}.
 	 */
-	public void saveUtilizationWeek(UtilizationWeek report) {
-		if (report != null && currentUser != null && tempUtilizationWeek!=null) {
-			final UtilizationWeek tempReport = report;
-			tempReport.setName(tempUtilizationWeek.getName());
-			GWT.log(tempUtilizationWeek.getName());
-			tempReport.setText(tempUtilizationWeek.getText());
-			tempReport.setAuthor(currentUser.getId());
-			tempReport.setPseudoJobId(tempUtilizationWeek.getPseudoJobId());
-			tempReport.setPossibility(tempUtilizationWeek.getPossibility());
-			try {
-				RestClient.build(new SuccessFunction<UtilizationWeek>() {
-					@Override
-					public void onSuccess(Method method, UtilizationWeek response) {
-						LogicHandler.this.getCurrentUtilizationWeekList().add(tempReport);
-						LogicHandler.this.updateAllObservables();
-						NotifyHelper.successMessage("Report saved");
-					}
+	public void saveUtilizationWeek() {
+		for(UtilizationWeek report : this.getWeeksToSave()) {
+			if (report != null && currentUser != null && tempUtilizationWeek != null) {
+				final UtilizationWeek tempReport = report;
+				tempReport.setName(tempUtilizationWeek.getName());
+				GWT.log(tempUtilizationWeek.getName());
+				tempReport.setText(tempUtilizationWeek.getText());
+				tempReport.setAuthor(currentUser.getId());
+				tempReport.setPseudoJobId(tempUtilizationWeek.getPseudoJobId());
+				tempReport.setPossibility(tempUtilizationWeek.getPossibility());
+				final UtilizationWeek reportToDelete = report;
+				try {
+					RestClient.build(new SuccessFunction<UtilizationWeek>() {
+						@Override
+						public void onSuccess(Method method, UtilizationWeek response) {
+							LogicHandler.this.getCurrentUtilizationWeekList().add(tempReport);
+							LogicHandler.this.updateAllObservables();
+							LogicHandler.this.getWeeksToSave().remove(reportToDelete);
+							NotifyHelper.successMessage("Report saved");
+						}
 
-					@Override
-					public void onFailure(Method method, Throwable exception) {
-						NotifyHelper.errorMessage("FAILED" + exception.getMessage());
-						GWT.log(exception.getMessage());
-					}
+						@Override
+						public void onFailure(Method method, Throwable exception) {
+							NotifyHelper.errorMessage("FAILED" + exception.getMessage());
+							GWT.log(exception.getMessage());
+						}
 
-				}).getEmployeeService().saveUtilizationWeek(currentUser.getId(), tempReport);
-			} catch (Exception e) {
-				e.printStackTrace();
+					}).getEmployeeService().saveUtilizationWeek(currentUser.getId(), tempReport);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			} else {
+				NotifyHelper.errorMessage("Please fill in the missing fields");
 			}
-		} else {
-			NotifyHelper.errorMessage("Please fill in the missing fields");
 		}
 	}
 
@@ -871,5 +876,15 @@ public class LogicHandler {
 	public void setCustomerList(List<Customer> customerList) {
 		this.customerList = customerList;
 	}
+
+
+	public List<UtilizationWeek> getWeeksToSave() {
+		return weeksToSave;
+	}
+
+	public void addWeekToSave(UtilizationWeek week) {
+		this.weeksToSave.add(week);
+	}
+
 
 }

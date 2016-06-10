@@ -86,8 +86,9 @@ public class CapacityTimeInputWidget extends Composite implements CapaCalendarOb
     @UiHandler("buttonBook")
     public void buttonBookClicked(ClickEvent e) {
         for(UtilizationWeek u : calendarHandler.calendar.getCapacityReportsToSave()){
-            handler.saveUtilizationWeek(u);
+            handler.addWeekToSave(u);
         }
+        handler.saveUtilizationWeek();
         calendarHandler.calendar.getCapacityReportsToSave().clear();
     }
 

@@ -13,8 +13,10 @@ import com.google.gwt.user.client.ui.Widget;
 import net.greenbeansit.jobtracker.client.components.CalendarObserver;
 import net.greenbeansit.jobtracker.client.components.LogicObservable;
 import net.greenbeansit.jobtracker.client.components.kapa.CapaCalendarObserver;
+import net.greenbeansit.jobtracker.client.components.kapa.data.CustomerOption;
 import net.greenbeansit.jobtracker.client.components.widgets.SelectJobOption;
 import net.greenbeansit.jobtracker.client.utils.rest.NotifyHelper;
+import net.greenbeansit.jobtracker.shared.Customer;
 import net.greenbeansit.jobtracker.shared.Job;
 import net.greenbeansit.jobtracker.shared.PseudoJob;
 import net.greenbeansit.jobtracker.shared.UtilizationWeek;
@@ -42,7 +44,7 @@ import java.util.List;
 public class CapacityNav extends Composite implements LogicObservable, CapaCalendarObserver {
 
     @UiField
-    Select selectJob;
+    Select selectJob,selectCustomer;
 
     @UiField
     TextArea description;
@@ -127,6 +129,7 @@ public class CapacityNav extends Composite implements LogicObservable, CapaCalen
     private List<PseudoJob> pJobList = new ArrayList<PseudoJob>();
 
     private UtilizationWeek currentUtilizationWeek = null;
+    private Customer currentCustomer = null;
 
     /**
      * This Method creates a new Instance of the Capacity Navigation.
@@ -149,6 +152,14 @@ public class CapacityNav extends Composite implements LogicObservable, CapaCalen
 
             }
         });
+        selectCustomer.addValueChangeHandler(new ValueChangeHandler<String>() {
+            @Override
+            public void onValueChange(ValueChangeEvent<String> event) {
+                currentCustomer = ((CustomerOption) selectCustomer.getSelectedItem()).getCustomer();
+                notifyLogicHandler();
+
+            }
+        });
 
         newProject.addClickHandler(new ClickHandler() {
             @Override
@@ -159,6 +170,7 @@ public class CapacityNav extends Composite implements LogicObservable, CapaCalen
 
         handler.loadJobs();
         handler.loadPseudoJobs();
+        handler.loadAllCustomers();
     }
 
     /**
@@ -212,6 +224,13 @@ public class CapacityNav extends Composite implements LogicObservable, CapaCalen
         }
     }
 
+    private void addCustomers(List<Customer> customerList){
+        for(Customer customer : customerList){
+            CustomerOption tempOption = new CustomerOption(customer);
+            selectCustomer.add(tempOption);
+        }
+    }
+
     /**
      * This Method is called from the {@link LogicObservable}
      */
@@ -219,10 +238,12 @@ public class CapacityNav extends Composite implements LogicObservable, CapaCalen
     public void updateObservable() {
         allJobsOptGroup.clear();
         myJobsOptGroup.clear();
+        selectCustomer.clear();
         textIdentifier.clear();
         utilizationWeekList.clear();
 
         createUtilizationWeekList();
+        addCustomers(handler.getCustomerList());
         addUtilizationWeeks(this.utilizationWeekList);
         currentUtilizationWeek = handler.getCurrentUtilizationWeek();
 
@@ -236,6 +257,7 @@ public class CapacityNav extends Composite implements LogicObservable, CapaCalen
         }
         notifyLogicHandler();
         selectJob.refresh();
+        selectCustomer.refresh();
     }
 
     /**
