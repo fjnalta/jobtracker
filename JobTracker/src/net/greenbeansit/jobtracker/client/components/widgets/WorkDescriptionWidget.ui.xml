@@ -54,12 +54,12 @@
 					ui:field="textIdentifier" />
 			</b:FormGroup>
 		</b:Row>
+
 		<b:Row addStyleNames="{style.row}">
-			<b:Button type="PRIMARY" dataToggle="COLLAPSE" dataTarget="#collapseTemplate"
-				text="" addStyleNames="{style.button-blue}"
-				ui:field="buttonCollapseTemplate"/>
-			<b:Collapse b:id="collapseTemplate" addStyleNames="{style.collapse}"
-				toggle="false">
+			<b:FormGroup>
+				<b:FormLabel for="description2" ui:field="labelVorlage"></b:FormLabel>
+
+				</b:FormGroup>
 				<b:FormGroup>
 					<b:TextBox placeholder="" b:id="textTemplateName"
 						ui:field="textName" />
@@ -74,7 +74,7 @@
 					<b:Button text="Vorlage laden" addStyleNames="{style.button}"
 						ui:field="buttonLoad" />
 				</b:FormGroup>
-			</b:Collapse>
+
 		</b:Row>
 	</h:ClearFix>
 </ui:UiBinder> 
