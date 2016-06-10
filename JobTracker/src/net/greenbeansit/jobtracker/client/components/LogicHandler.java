@@ -424,13 +424,12 @@ public class LogicHandler {
 	/**
 	 * Function for saving an UtilizationWeek to the backend. It first collects all needed information,
 	 * then if everything is correct it will try to save it.
-	 * On success is calls {@link #updateAllObservables()}to update the widgets
-	 * @param report
+	 * On success is calls {@link #updateAllObservables()}to update the widgetsv
 	 * 			the {@link UtilizationWeek}.
 	 */
 	public void saveUtilizationWeek() {
 		for(UtilizationWeek report : this.getWeeksToSave()) {
-			if (report != null && currentUser != null && tempUtilizationWeek != null) {
+			if (report != null && currentUser != null && tempUtilizationWeek != null&&tempUtilizationWeek.getCustomerId()!=null) {
 				final UtilizationWeek tempReport = report;
 				tempReport.setName(tempUtilizationWeek.getName());
 				GWT.log(tempUtilizationWeek.getName());
@@ -438,6 +437,7 @@ public class LogicHandler {
 				tempReport.setAuthor(currentUser.getId());
 				tempReport.setPseudoJobId(tempUtilizationWeek.getPseudoJobId());
 				tempReport.setPossibility(tempUtilizationWeek.getPossibility());
+				tempReport.setCustomerId(tempUtilizationWeek.getCustomerId());
 				final UtilizationWeek reportToDelete = report;
 				try {
 					RestClient.build(new SuccessFunction<UtilizationWeek>() {
