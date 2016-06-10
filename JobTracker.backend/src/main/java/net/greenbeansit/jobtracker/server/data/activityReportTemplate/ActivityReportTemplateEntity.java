@@ -4,9 +4,6 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
-import net.greenbeansit.jobtracker.server.data.activityReport.ActivityReportEntity;
-import net.greenbeansit.jobtracker.shared.ActivityReportTemplate;
-
 /**
  * A class representing ActivityReportTemplate as entities in our database. Only
  * used in backend. Each entity class requires a standard constructor and

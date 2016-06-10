@@ -9,8 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import net.greenbeansit.jobtracker.shared.UtilizationWeek;
-
 /**
  * A class representing UtilizationWeek as entities in our database. Only used
  * in backend. Each entity class requires a standard constructor and
@@ -70,6 +68,8 @@ public class UtilizationWeekEntity implements Serializable
 	 * 			the Id of the Utilization Week
 	 * @param author
 	 * 			the Author id
+	 * @param name
+	 * 			the name
 	 * @param text
 	 * 			the Description
 	 * @param beginDate
@@ -129,10 +129,16 @@ public class UtilizationWeekEntity implements Serializable
 		return author;
 	}
 
+	/**
+	 * @param name set name
+	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
+	/**
+	 * @return the name
+	 */
 	public String getName(){
 		return this.name;
 	}

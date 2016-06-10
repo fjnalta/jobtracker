@@ -11,7 +11,6 @@ import javax.persistence.IdClass;
 import javax.persistence.Table;
 
 import net.greenbeansit.jobtracker.server.data.userJob.UserJobEntityId;
-import net.greenbeansit.jobtracker.shared.UserJob;
 
 /**
  * A class representing UserJob as entities in our database. Only used in

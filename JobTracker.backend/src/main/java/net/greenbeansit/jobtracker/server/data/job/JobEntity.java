@@ -8,8 +8,6 @@ import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.Table;
 
-import net.greenbeansit.jobtracker.shared.Job;
-
 /**
  * A class representing Job as entities in our database. Only used in backend.
  * Each entity class requires a standard constructor and getters/setters for
