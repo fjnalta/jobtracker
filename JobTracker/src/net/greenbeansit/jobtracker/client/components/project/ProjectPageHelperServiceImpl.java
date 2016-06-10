@@ -79,8 +79,15 @@ class ProjectPageHelperServiceImpl implements ProjectPageHelperService
 			public void onSuccess(Method method,
 					ProjectPageRestServiceResponse response)
 			{
+				List<Job> jobs = new ArrayList<Job>();
+				for(Job job : response.getJobs())
+				{
+					if(!job.isIntern())
+						jobs.add(job);
+				}
+				
 				if (response.getJobs() != null)
-					cachedJobs = response.getJobs();
+					cachedJobs = jobs;
 
 				if (response.getCustomers() != null)
 					cachedCustomers = response.getCustomers();
