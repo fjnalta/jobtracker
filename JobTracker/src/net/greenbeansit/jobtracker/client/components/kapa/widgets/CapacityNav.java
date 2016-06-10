@@ -254,7 +254,14 @@ public class CapacityNav extends Composite implements LogicObservable, CapaCalen
                     option.setSelected(true);
                 }
             }
+            for (Option option : selectCustomer.getItems()) {
+                ((SelectJobOption) option).setSelected(false);
+                if (((CustomerOption) option).getCustomer().getId().equals(currentUtilizationWeek.getCustomerId())) {
+                    option.setSelected(true);
+                }
+            }
         }
+
         notifyLogicHandler();
         selectJob.refresh();
         selectCustomer.refresh();
@@ -281,9 +288,10 @@ public class CapacityNav extends Composite implements LogicObservable, CapaCalen
      */
     @Override
     public void notifyLogicHandler() {
-        if (currentUtilizationWeek != null) {
+        if (currentUtilizationWeek != null&& currentCustomer!=null) {
             currentUtilizationWeek.setText(description.getText());
             currentUtilizationWeek.setPossibility(mySlider.getValue().intValue());
+            currentUtilizationWeek.setCustomerId(currentCustomer.getId());
             handler.setTempUtilizationWeek(currentUtilizationWeek);
         }
     }
