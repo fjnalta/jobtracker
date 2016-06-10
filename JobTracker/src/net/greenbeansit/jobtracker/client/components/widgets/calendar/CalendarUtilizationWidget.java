@@ -321,20 +321,24 @@ public class CalendarUtilizationWidget extends Composite implements CalendarObse
 	 */
 	private VerticalPanel getBarChart(double number) {
 
-		VerticalPanel vp = new VerticalPanel();
-
+		VerticalPanel outer = new VerticalPanel();
+		VerticalPanel inner = new VerticalPanel();
+		
+		outer.add(inner);
+		
+		
 		// For empty Days
 		if (number < 1) {
 			number = 7;
 		}
-		if (number > 100) {
-			number = 100;
-		}
-		vp.setHeight(number + "%");
+		
+		inner.setHeight(number + "%");
 
-		vp.setStyleName(this.SUFFIXPATH + "barChart", true);
+		outer.setStyleName(this.SUFFIXPATH + "barChartOuter", true);
 
-		return vp;
+		inner.setStyleName(this.SUFFIXPATH + "barChart", true);
+
+		return outer;
 	}
 
 	/**
