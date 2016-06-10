@@ -328,7 +328,7 @@ public class CalendarUtilizationWidget extends Composite implements CalendarObse
 		
 		// For empty Days
 		if (number < 1) {
-			number = 7;
+			number = 10;
 		}
 		
 		inner.setHeight(this.getHeightInPercent(60, number) + "px");
@@ -432,7 +432,7 @@ public class CalendarUtilizationWidget extends Composite implements CalendarObse
 	@Override
 	public void notifyHandler() {
 
-		calendarHandler.setDisplayMonth(this.currentWeekFirstDayDate.getMonth() + 1);
+		calendarHandler.setDisplayMonth(this.currentWeekFirstDayDate.getMonth());
 		//GWT.log("___"+this.currentWeekFirstDayDate.getMonth()+1);
 		
 		calendarHandler.setDisplayYear(this.currentWeekFirstDayDate.getYear());

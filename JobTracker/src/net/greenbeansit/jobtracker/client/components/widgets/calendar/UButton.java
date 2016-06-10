@@ -94,7 +94,7 @@ public class UButton extends Button implements CalendarObserver{
 	@Override
 	public void notifyHandler() {
 		changeDateToMonday(date);
-		calendarHandler.setDisplayMonth( this.date.getMonth() + 1 );
+		calendarHandler.setDisplayMonth( this.date.getMonth());
 		
 		calendarHandler.updateObserver(this);
 		
