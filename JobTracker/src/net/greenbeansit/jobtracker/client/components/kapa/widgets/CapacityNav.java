@@ -171,11 +171,11 @@ public class CapacityNav extends Composite implements LogicObservable, CapaCalen
         this.jobList = handler.getJobList();
 
         for (PseudoJob pjob : pJobList) {
-            UtilizationWeek uw = new UtilizationWeek(0, 0, pjob.getName(), new Date(), 0, 0, new Date(), 0, pjob.getId(), 0);
+            UtilizationWeek uw = new UtilizationWeek(0, 0, pjob.getName(), pjob.getName() ,new Date(), 0, 0, new Date(), 0, pjob.getId(), 0);
             utilizationWeekList.add(uw);
         }
         for (Job job : jobList) {
-            UtilizationWeek uw = new UtilizationWeek(999, 0, job.toString(), new Date(), 0, 0, new Date(), 0, 9999, 0);
+            UtilizationWeek uw = new UtilizationWeek(999, 0, job.toString(), job.getDesc(), new Date(), 0, 0, new Date(), 0, 9999, 0);
             utilizationWeekList.add(uw);
         }
     }
@@ -229,7 +229,7 @@ public class CapacityNav extends Composite implements LogicObservable, CapaCalen
         if (currentUtilizationWeek != null) {
             for (Option option : selectJob.getItems()) {
                 ((SelectJobOption) option).setSelected(false);
-                if (((SelectJobOption) option).getUtilizationWeek().equals(currentUtilizationWeek)) {
+                if (((SelectJobOption) option).getUtilizationWeek().getName().equals(currentUtilizationWeek.getName())) {
                     option.setSelected(true);
                 }
             }
@@ -260,10 +260,8 @@ public class CapacityNav extends Composite implements LogicObservable, CapaCalen
     @Override
     public void notifyLogicHandler() {
         if (currentUtilizationWeek != null) {
-            // TODO - insert name
             currentUtilizationWeek.setText(description.getText());
             currentUtilizationWeek.setPossibility(mySlider.getValue().intValue());
-            GWT.log("notify logicHandler " + currentUtilizationWeek.getText());
             handler.setTempUtilizationWeek(currentUtilizationWeek);
         }
     }
@@ -272,9 +270,21 @@ public class CapacityNav extends Composite implements LogicObservable, CapaCalen
         if (calendarHandler.getCurrentUtilizationWeek() != null) {
             myProjects.showTab();
             description.setText(calendarHandler.getCurrentUtilizationWeek().getText());
-
             mySlider.setValue(calendarHandler.getCurrentUtilizationWeek().getPossibility().doubleValue());
             possibilityPercentage.setText(calendarHandler.getCurrentUtilizationWeek().getPossibility().toString());
+
+            for (Option option : selectJob.getItems()) {
+                GWT.log("DONE!");
+                GWT.log(((SelectJobOption) option).getUtilizationWeek().getName());
+                GWT.log(calendarHandler.getCurrentUtilizationWeek().getName());
+                GWT.log(currentUtilizationWeek.getName());
+                ((SelectJobOption) option).setSelected(false);
+                if (((SelectJobOption) option).getUtilizationWeek().getName().equals(calendarHandler.getCurrentUtilizationWeek().getName())) {
+//                if (((SelectJobOption) option).getUtilizationWeek().getName().equals(currentUtilizationWeek.getName())) {
+                    option.setSelected(true);
+                }
+            }
+
         } else {
             newProject.showTab();
         }

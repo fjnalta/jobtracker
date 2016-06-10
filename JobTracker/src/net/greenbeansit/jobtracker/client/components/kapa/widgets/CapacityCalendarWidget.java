@@ -186,7 +186,7 @@ public class CapacityCalendarWidget extends Composite implements CapaCalendarObs
                         endDate.setDate(endDate.getDate()-1);
                         Date beginDate = new Date(tmp.getISOStart());
 
-                        UtilizationWeek tempUtil = new UtilizationWeek(0,0,"new Report",beginDate,8,16,endDate,0,0,0);
+                        UtilizationWeek tempUtil = new UtilizationWeek(0,0,"","new Report",beginDate,8,16,endDate,0,0,0);
 
                         unselect(viewObject, event);
                         currentUtilizationWeek = tempUtil;
@@ -240,7 +240,7 @@ public class CapacityCalendarWidget extends Composite implements CapaCalendarObs
                         Date endDate = new Date(dragEvent.getISOEnd());
                         endDate.setDate(endDate.getDate()-1);
                         Date beginDate = new Date(dragEvent.getISOStart());
-                        UtilizationWeek tempUtil = new UtilizationWeek(0,0,"",beginDate,8,16,endDate,0,0,0);
+                        UtilizationWeek tempUtil = new UtilizationWeek(0,0,"","",beginDate,8,16,endDate,0,0,0);
                         fullcalendar.addEventToSave(tempUtil);
                         notifyHandler();
                     }

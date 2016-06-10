@@ -15,6 +15,7 @@ public class UtilizationWeek implements Serializable {
 
     private Integer id;
     private Integer author;
+    private String  name;
     private String  text;
     private Date    beginDate;
     private Date    endDate;
@@ -36,6 +37,7 @@ public class UtilizationWeek implements Serializable {
      *
      * @param id          the unique identifier
      * @param author      the id of the author
+     * @param name        the name of the UtilizationWeek
      * @param text        the description
      * @param beginDate   the begin Date
      * @param beginTime   the begin Time
@@ -45,11 +47,12 @@ public class UtilizationWeek implements Serializable {
      * @param pseudoJobId the unique identifier for the pseudo job
      * @param breakTime   the break time
      */
-    public UtilizationWeek(Integer id, Integer author, String text, Date beginDate,
+    public UtilizationWeek(Integer id, Integer author, String name, String text, Date beginDate,
                            Integer beginTime, Integer endTime, Date endDate, Integer possibility,
                            Integer pseudoJobId, Integer breakTime) {
         this.id = id;
         this.author = author;
+        this.name = name;
         this.text = text;
         this.beginDate = beginDate;
         this.beginTime = beginTime;
@@ -96,6 +99,14 @@ public class UtilizationWeek implements Serializable {
             throw new IllegalArgumentException();
         }
         this.author = author;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     /**

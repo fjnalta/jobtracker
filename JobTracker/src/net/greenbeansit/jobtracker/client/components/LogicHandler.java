@@ -428,6 +428,8 @@ public class LogicHandler {
 	public void saveUtilizationWeek(UtilizationWeek report) {
 		if (report != null && currentUser != null && tempUtilizationWeek!=null) {
 			final UtilizationWeek tempReport = report;
+			tempReport.setName(tempUtilizationWeek.getName());
+			GWT.log(tempUtilizationWeek.getName());
 			tempReport.setText(tempUtilizationWeek.getText());
 			tempReport.setAuthor(currentUser.getId());
 			tempReport.setPseudoJobId(tempUtilizationWeek.getPseudoJobId());
