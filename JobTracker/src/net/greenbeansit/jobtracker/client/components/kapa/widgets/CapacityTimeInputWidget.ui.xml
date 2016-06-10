@@ -27,7 +27,7 @@
         </b:Column>
         <b:Column size="XS_1,SM_1,MD_1,LG_1">
             <b:FormLabel>Löschen:</b:FormLabel>
-            <b:Button text="x" ui:field="buttonDelete" addStyleNames="{style.buttonBook}"/>
+            <b:Button ui:field="buttonDelete" addStyleNames="{style.buttonBook}"/>
         </b:Column>
         <b:Column size="XS_1,SM_1,MD_1,LG_1">
             <b:FormLabel>Buchen:</b:FormLabel>

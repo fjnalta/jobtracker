@@ -12,6 +12,7 @@ import net.greenbeansit.jobtracker.client.components.kapa.CapaCalendarObserver;
 import net.greenbeansit.jobtracker.shared.UtilizationWeek;
 import org.gwtbootstrap3.client.ui.Button;
 import org.gwtbootstrap3.client.ui.TextBox;
+import org.gwtbootstrap3.client.ui.constants.IconType;
 
 /**
  * Shows the bottom Widget on the Capacity Page. This Widget is used to display
@@ -58,7 +59,10 @@ public class CapacityTimeInputWidget extends Composite implements CapaCalendarOb
     private static CapacityTimeInputWidgetUiBinder uiBinder = GWT.create(CapacityTimeInputWidgetUiBinder.class);
 
     private UtilizationWeek currentUtilizationWeek;
-
+    
+    @UiField
+    Button buttonDelete;
+    
     /**
      * Initializes a new Instance of CapacityTimeInputWidget.
      */
@@ -70,7 +74,7 @@ public class CapacityTimeInputWidget extends Composite implements CapaCalendarOb
         handler.updateObservable(this);
         calendarHandler.addObserver(this);
         currentUtilizationWeek = handler.getCurrentUtilizationWeek();
-
+        buttonDelete.setIcon(IconType.TRASH);
     }
 
     @UiField

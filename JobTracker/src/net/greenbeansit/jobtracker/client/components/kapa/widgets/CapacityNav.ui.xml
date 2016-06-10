@@ -93,7 +93,7 @@
 					<b:FormLabel for="projectName">Projektname</b:FormLabel>
 					<b:TextBox placeholder="Bitte eintragen..." ui:field="textIdentifier" />
 				</b:FormGroup>
-				<b:Button type="PRIMARY" text="Speichern" ui:field="buttonSave"
+				<b:Button type="PRIMARY" text="Projekt anlegen" ui:field="buttonSave"
 						  addStyleNames="{style.buttonSave} {style.button-blue}" />
 			</b:FieldSet>
 		</b:Form>
