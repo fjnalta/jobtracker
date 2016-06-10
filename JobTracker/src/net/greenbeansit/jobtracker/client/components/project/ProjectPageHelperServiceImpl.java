@@ -13,7 +13,7 @@ import net.greenbeansit.jobtracker.client.utils.rest.RestClient;
 import net.greenbeansit.jobtracker.client.utils.rest.RestClient.SuccessFunction;
 import net.greenbeansit.jobtracker.shared.Customer;
 import net.greenbeansit.jobtracker.shared.Job;
-import net.greenbeansit.jobtracker.shared.rest.services.RestService.ProjectPageRestServiceResponse;
+import net.greenbeansit.jobtracker.shared.ProjectPageRestServiceResponse;
 
 /**
  * Implementation of {@link ProjectPageHelperService}.

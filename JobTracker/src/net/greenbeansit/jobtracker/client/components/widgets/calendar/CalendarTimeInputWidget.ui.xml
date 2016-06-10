@@ -112,9 +112,9 @@
 			</b:FormGroup>
 		</b:Column>
 		<b:Column size="XS_12,SM_12,MD_12,LG_12" addStyleNames="{style.column} {style.buttonRow}">
-			<b:Button addStyleNames="{style.eventButton}" text="+"
+			<b:Button addStyleNames="{style.eventButton}" 
 				ui:field="buttonCopy" />
-			<b:Button addStyleNames="{style.eventButton}" text="x"
+			<b:Button addStyleNames="{style.eventButton}" 
 				ui:field="buttonDelete" />
 			<b:Button type="PRIMARY" text="" addStyleNames="{style.button-book}"
 				ui:field="buttonBook" />

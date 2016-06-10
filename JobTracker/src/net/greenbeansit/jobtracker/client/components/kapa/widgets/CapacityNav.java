@@ -249,10 +249,13 @@ public class CapacityNav extends Composite implements LogicObservable, CapaCalen
 
         if (currentUtilizationWeek != null) {
             for (Option option : selectJob.getItems()) {
-                ((SelectJobOption) option).setSelected(false);
-                if (((SelectJobOption) option).getUtilizationWeek().getName().equals(currentUtilizationWeek.getName())) {
-                    option.setSelected(true);
-                }
+            	if(option instanceof SelectJobOption)
+            	{
+            		((SelectJobOption) option).setSelected(false);
+            		if (((SelectJobOption) option).getUtilizationWeek().getName().equals(currentUtilizationWeek.getName())) {
+            			option.setSelected(true);
+            		}
+            	}
             }
             for (Option option : selectCustomer.getItems()) {
                 ((CustomerOption) option).setSelected(false);

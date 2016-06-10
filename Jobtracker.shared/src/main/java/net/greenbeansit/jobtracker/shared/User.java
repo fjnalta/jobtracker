@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.greenbeansit.jobtracker.shared.rest.services.RestService.JobID;
+import net.greenbeansit.jobtracker.shared.JobID;
 
 /**
  * Represents a normal user with no extra rights.

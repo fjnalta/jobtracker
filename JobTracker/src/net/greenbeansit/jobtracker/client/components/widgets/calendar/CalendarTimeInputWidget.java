@@ -136,6 +136,8 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 		buttonTimeHourUpDuration.setIcon(IconType.ARROW_UP);
 		buttonTimeMinuteUpDuration.setIcon(IconType.ARROW_UP);
 
+		buttonDelete.setIcon(IconType.TRASH);
+		buttonCopy.setIcon(IconType.COPY);
 //		addonDateStart.setText(constants.addonDateStart());
 //		addonDateEnd.setText(constants.addonDateEnd());
 //		addonTimeStart.setText(constants.addonTimeStart());
@@ -514,7 +516,6 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 			handler.saveReport(tmp);
 		}
 		}else{
-			GWT.log(calendarHandler.calendar.currentEvent.getId());
 			ActivityReport tmp = new ActivityReport(Integer.parseInt(calendarHandler.calendar.currentEvent.getId())
 					, 0, 0, 0, 0, "", getDateFromBox(dateStart), startTime, duration,
 					breakTime);

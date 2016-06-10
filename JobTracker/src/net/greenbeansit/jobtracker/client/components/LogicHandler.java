@@ -148,7 +148,7 @@ public class LogicHandler {
 		tempTemplate.setAuthor(report.getAuthor());
 		tempTemplate.setText(report.getText());
 		tempTemplate.setTaskId(report.getTaskId());
-		GWT.log("current selected report :" + report.toString());
+//		GWT.log("current selected report :" + report.toString());
 		this.currentTemplate = tempTemplate;
 		this.updateAllObservables();
 	}
@@ -432,7 +432,7 @@ public class LogicHandler {
 			if (report != null && currentUser != null && tempUtilizationWeek != null&&tempUtilizationWeek.getCustomerId()!=null) {
 				final UtilizationWeek tempReport = report;
 				tempReport.setName(tempUtilizationWeek.getName());
-				GWT.log(tempUtilizationWeek.getName());
+//				GWT.log(tempUtilizationWeek.getName());
 				tempReport.setText(tempUtilizationWeek.getText());
 				tempReport.setAuthor(currentUser.getId());
 				tempReport.setPseudoJobId(tempUtilizationWeek.getPseudoJobId());
@@ -473,8 +473,8 @@ public class LogicHandler {
 	 */
 	public void saveTemplate(ActivityReportTemplate template) {
 		if(currentJob!=null){
-			GWT.log(currentJob.getJobNr()+"");
-			GWT.log(currentJob.getPosNr()+"");
+//			GWT.log(currentJob.getJobNr()+"");
+//			GWT.log(currentJob.getPosNr()+"");
 			template.setJobNr(currentJob.getJobNr());
 			template.setPosNr(currentJob.getPosNr());
 			final ActivityReportTemplate temp = template;

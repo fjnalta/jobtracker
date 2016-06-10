@@ -36,6 +36,7 @@
 		width: 20%;
 		overflow: hidden;
 		text-align: right;
+		display: inline-block;
 	}
 	.iconLock-base {
 		width: 10%;

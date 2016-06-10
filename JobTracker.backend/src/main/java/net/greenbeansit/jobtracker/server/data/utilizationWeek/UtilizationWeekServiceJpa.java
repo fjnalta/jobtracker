@@ -116,7 +116,7 @@ public class UtilizationWeekServiceJpa implements UtilizationWeekDataService
 				new java.util.Date(entity.getBeginDate().getTime()), 0, 0,
 				new java.util.Date(entity.getEndDate().getTime()),
 				entity.getPossibilty(), entity.getPseudoJobId(),
-				entity.getBreakTime());
+				entity.getBreakTime(), entity.getCustomerId());
 	}
 
 	/**
@@ -134,6 +134,6 @@ public class UtilizationWeekServiceJpa implements UtilizationWeekDataService
 				util.getName(), util.getText(),
 				new Date(util.getBeginDate().getTime()), 0,
 				new Date(util.getEndDate().getTime()), 0, util.getPossibility(),
-				util.getBreakTime(), util.getPseudoJobId());
+				util.getBreakTime(), util.getPseudoJobId(), util.getCustomerId());
 	}
 }
