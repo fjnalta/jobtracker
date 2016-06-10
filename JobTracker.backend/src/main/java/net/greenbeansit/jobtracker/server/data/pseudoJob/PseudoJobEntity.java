@@ -10,8 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import net.greenbeansit.jobtracker.shared.PseudoJob;
-
 /**
  * A class representing PseudoJob (for capacity planning) as entities in our
  * database. Only used in backend. Each entity class requires a standard

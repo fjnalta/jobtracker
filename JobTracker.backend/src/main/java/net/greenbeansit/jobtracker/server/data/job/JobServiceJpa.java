@@ -84,6 +84,11 @@ public class JobServiceJpa implements JobDataService
 		{
 			jobs.add(getJob(relation.getJobNr(), relation.getPosNo()));
 		}
+		//Add internal jobs
+		for (JobEntity job : repository.findByInternTrue())
+		{
+			jobs.add(convert(job));
+		}
 		return jobs;
 	}
 

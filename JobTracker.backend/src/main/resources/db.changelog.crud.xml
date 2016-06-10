@@ -209,4 +209,32 @@
 			]]>
 		</sql>
 	</changeSet>
+	<changeSet id="20160610-user-15" author="mike">
+		<sql>
+			<![CDATA[
+				INSERT INTO user (name, surname, supervisor, vacation_days)
+				VALUES("Klaus","Maler", 7, 30),
+				("Peter", "Baumann", 7, 25),
+				("Markus", "Fischer", 7, 30),
+				("Katharina", "Lorenzo", 7, 2),
+				("Alexandra", "Anguelov", 7, 14),
+				("Hildegard", "Meister", 7, 30),
+				("Tom", "Michelin", 7, 30),
+				("Leonie", "Moreno-Frei", 7, 29),
+				("Hermann", "Nitsch", 7, 0);
+			]]>
+		</sql>
+	</changeSet>
+	<changeSet id="20160610-job-16" author="mike">
+		<sql>
+			<![CDATA[
+				INSERT INTO job (job_no, pos_no, description, customer_id, budget, budget_used, accounting_mode, is_intern)
+				VALUES(999999, 001, "Intern - Urlaub", 3, 0, 0, 0, true),
+				(999999, 002, "Intern - Krankheit", 3, 0, 0, 0, true),
+				(999999, 003, "Intern - Schlechtleistung", 3, 0, 0, 0, true),
+				(999999, 004, "Intern - Meeting", 3, 0, 0, 0, true),
+				(999999, 005, "Intern - Akquise", 3, 0, 0, 0, true);
+			]]>
+		</sql>
+	</changeSet>
 </databaseChangeLog>

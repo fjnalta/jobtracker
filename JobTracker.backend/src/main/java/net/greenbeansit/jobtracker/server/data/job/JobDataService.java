@@ -41,7 +41,7 @@ public interface JobDataService
 	List<Job> getByCustomer(Integer customerId);
 
 	/**
-	 * Retrieves all Jobs available to the given User
+	 * Retrieves all Jobs available to the given User. Includes internal jobs.
 	 * 
 	 * @param userId
 	 *            ID of the user
