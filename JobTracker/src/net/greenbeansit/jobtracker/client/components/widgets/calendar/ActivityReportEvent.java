@@ -165,5 +165,29 @@ public class ActivityReportEvent extends Event implements LogicObservable {
 	public void notifyLogicHandler() {
 
 	}
+	
+	public void setOtherTitle(){
+		GWT.log("set other name");
+		//yyyy-mm-ddThh:mm:ss.000Z
+		String pause;
+		if(this.getAp().getBreakTime() > 0){
+			pause = "Pause:" + this.getAp().getBreakTime()/60 + "h"
+					+ this.getAp().getBreakTime()%60 + "min";
+		}else{
+			pause = "Pause: 0h";
+		}
+		this.setTitle(
+				"\n\rJobNr.\n\r" +
+				this.getAp().getJobNr()+
+				"\n\r" +
+				this.getAp().getText()
+				+"\n\r\n\r" +
+				"Dauer:" + this.getAp().getDuration()/60 + "h"
+				+ this.getAp().getDuration()%60 + "min"
+				+"\n\r\n\r" +
+				pause
+				
+				);
+	}
 
 }
