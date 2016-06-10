@@ -7,6 +7,7 @@ import org.gwtbootstrap3.client.ui.constants.ProgressBarType;
 import org.gwtbootstrap3.client.ui.html.Span;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.i18n.client.NumberFormat;
 import com.google.gwt.resources.client.CssResource;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
@@ -34,7 +35,6 @@ public class ProjectBudgetBar extends Composite
 	interface ProjectBudgetBarUiBinder
 			extends UiBinder<Widget, ProjectBudgetBar>
 	{
-
 	}
 
 	/**
@@ -60,7 +60,7 @@ public class ProjectBudgetBar extends Composite
 	}
 
 	@UiField
-	Span				spanName;
+	Span				spanName, spanBudget;
 
 	@UiField
 	ProgressBar			barBudget;
@@ -87,15 +87,24 @@ public class ProjectBudgetBar extends Composite
 		
 		double percentage = ((double)job.getUsedBudget() / job.getMaxBudget()) * 100.0;
 		
-		barBudget.setPercent(percentage);
-		barBudget.setText(job.getUsedBudget() + " / " + job.getMaxBudget() + "(" + percentage + "%)");
 		
-		if(percentage > 90)
+		spanBudget.setText(job.getUsedBudget() + " / " + job.getMaxBudget() + " (" + NumberFormat.getFormat("0.00").format(percentage) + " %)");
+		
+		if(percentage >= 100)
+		{
 			barBudget.setType(ProgressBarType.DANGER);
-		else if(percentage > 75)
-			barBudget.setType(ProgressBarType.WARNING);
+			
+			barBudget.setPercent(100);
+		}
 		else
-			barBudget.setType(ProgressBarType.SUCCESS);
+		{
+			if(percentage > 90)
+				barBudget.setType(ProgressBarType.WARNING);
+			else
+				barBudget.setType(ProgressBarType.SUCCESS);
+			
+			barBudget.setPercent(percentage);
+		}
 		
 		if(job.isLocked() == null || job.isLocked())
 		{
