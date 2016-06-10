@@ -13,8 +13,8 @@ import net.greenbeansit.jobtracker.client.utils.rest.RestClient;
 import net.greenbeansit.jobtracker.client.utils.rest.RestClient.SuccessFunction;
 import net.greenbeansit.jobtracker.shared.Job;
 import net.greenbeansit.jobtracker.shared.User;
-import net.greenbeansit.jobtracker.shared.rest.services.RestService.JobID;
-import net.greenbeansit.jobtracker.shared.rest.services.RestService.ManagerPageRestServiceResponse;
+import net.greenbeansit.jobtracker.shared.JobID;
+import net.greenbeansit.jobtracker.shared.ManagerPageRestServiceResponse;
 
 /**
  * Implementation of {@link ManagerPageHelperService}.
