@@ -516,7 +516,6 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 			handler.saveReport(tmp);
 		}
 		}else{
-			GWT.log(calendarHandler.calendar.currentEvent.getId());
 			ActivityReport tmp = new ActivityReport(Integer.parseInt(calendarHandler.calendar.currentEvent.getId())
 					, 0, 0, 0, 0, "", getDateFromBox(dateStart), startTime, duration,
 					breakTime);
