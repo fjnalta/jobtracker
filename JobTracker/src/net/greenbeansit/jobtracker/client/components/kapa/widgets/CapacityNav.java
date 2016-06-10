@@ -234,7 +234,7 @@ public class CapacityNav extends Composite implements LogicObservable, CapaCalen
                 }
             }
         }
-        //notifyLogicHandler();
+        notifyLogicHandler();
         selectJob.refresh();
     }
 

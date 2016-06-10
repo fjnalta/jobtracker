@@ -38,6 +38,7 @@ public class LogicHandler {
 	private List<ActivityReport> currentReportsList = new ArrayList<ActivityReport>();
 	private List<ActivityReportTemplate> templateList = new ArrayList<ActivityReportTemplate>();
 	private List<UtilizationWeek> utilizationWeekList = new ArrayList<UtilizationWeek>();
+	private List<Customer> customerList = new ArrayList<Customer>();
 	private List<Job> jobList = new ArrayList<Job>();
 	private List<PseudoJob> pseudoJobList = new ArrayList<PseudoJob>();
 
@@ -79,6 +80,8 @@ public class LogicHandler {
 
 		this.currentUser = new User();
 		this.currentUser.setId(2);
+
+		loadAllCustomers();
 	}
 
 	/**
@@ -465,27 +468,33 @@ public class LogicHandler {
 	 */
 	public void saveTemplate(ActivityReportTemplate template) {
 		final ActivityReportTemplate temp = template;
-		updateAllObservables();
-		try {
-			RestClient.build(new SuccessFunction<ActivityReportTemplate>() {
-				@Override
-				public void onSuccess(Method method, ActivityReportTemplate response) {
-					LogicHandler.this.loadTemplates();
-					LogicHandler.this.updateAllObservables();
-					GWT.log("Template saved");
-					NotifyHelper.successMessage("Template saved successfully!");
-				}
+		if(currentJob!=null){
+			temp.setJobNr(currentJob.getJobNr());
+			temp.setPosNr(currentJob.getPosNr());
+			try {
+				RestClient.build(new SuccessFunction<ActivityReportTemplate>() {
+					@Override
+					public void onSuccess(Method method, ActivityReportTemplate response) {
+						LogicHandler.this.loadTemplates();
+						LogicHandler.this.updateAllObservables();
+						GWT.log("Template saved");
+						NotifyHelper.successMessage("Template saved successfully!");
+					}
 
-				@Override
-				public void onFailure(Method method, Throwable exception) {
-					NotifyHelper.errorMessage(exception.getMessage());
-					GWT.log(exception.getMessage());
-				}
+					@Override
+					public void onFailure(Method method, Throwable exception) {
+						NotifyHelper.errorMessage(exception.getMessage());
+						GWT.log(exception.getMessage());
+					}
 
-			}).getEmployeeService().saveReportTemplate(currentUser.getId(), template);
-		} catch (Exception e) {
-			e.printStackTrace();
+				}).getEmployeeService().saveReportTemplate(currentUser.getId(), template);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else{
+			NotifyHelper.errorMessage("Setzen sie bitte den Job!");
 		}
+		updateAllObservables();
 	}
 
 	/**
@@ -814,4 +823,51 @@ public class LogicHandler {
 //		GWT.log("LogicHandler: TempUtilizationName: " + tempUtilizationWeek.getText());
 		this.tempUtilizationWeek = tempUtilizationWeek;
 	}
+
+	/**
+	 * Method for loading all customes from the backend
+	 */
+	public void loadAllCustomers(){
+		try {
+			RestClient.build(new SuccessFunction<List<Customer>>() {
+				@Override
+				public void onSuccess(Method method, List<Customer> response) {
+					LogicHandler.this.setCustomerList(response);
+					GWT.log("customers loaded");
+				}
+
+				@Override
+				public void onFailure(Method method, Throwable exception) {
+					GWT.log(exception.getMessage());
+				}
+
+			}).getEmployeeService().getAllCustomer();
+		} catch (Exception e) {
+			GWT.log(e.getMessage());
+		}
+	}
+
+	/**
+	 * Method for get a customer from a id
+	 * @param id
+     */
+	public Customer getCustomerNameForID(Integer id){
+		Customer temp = new Customer(0,"noname");
+		for(Customer elem : this.customerList){
+			if(id == elem.getId()){
+				temp = elem;
+			}
+		}
+		return temp;
+	}
+
+
+	public List<Customer> getCustomerList() {
+		return customerList;
+	}
+
+	public void setCustomerList(List<Customer> customerList) {
+		this.customerList = customerList;
+	}
+
 }
