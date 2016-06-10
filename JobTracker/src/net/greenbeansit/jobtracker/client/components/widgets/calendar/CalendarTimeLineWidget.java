@@ -89,14 +89,6 @@ public class CalendarTimeLineWidget extends Composite implements CalendarObserve
 		
 	}
 
-	/**
-	 * Initializes a new Instance of {@link CalendarTimeLineWidget}
-	 * 
-	 * @param firstName
-	 *            the FirstName.
-	 */
-
-
 	@Override
 	public void update() {
 
@@ -106,7 +98,7 @@ public class CalendarTimeLineWidget extends Composite implements CalendarObserve
 	/**
 	 * Gets the Month name to a specific month.
 	 * 
-	 * @param string
+	 * @param month
 	 *            the String of the Month
 	 * @return the Name of the Month.
 	 */

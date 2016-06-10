@@ -114,7 +114,7 @@ public class ActivityReportCalendar extends Composite
 	/**
 	 * Loads the reports from the server.
 	 * 
-	 * @param userId
+	 * @param userId the userID.
 	 */
 	public void loadServerReports(Integer userId)
 	{

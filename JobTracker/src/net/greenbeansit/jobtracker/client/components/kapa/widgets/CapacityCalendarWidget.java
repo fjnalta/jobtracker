@@ -12,7 +12,6 @@ import net.greenbeansit.jobtracker.client.components.CalendarObserver;
 import net.greenbeansit.jobtracker.client.components.LogicObservable;
 import net.greenbeansit.jobtracker.client.components.kapa.CapaCalendarObserver;
 import net.greenbeansit.jobtracker.client.components.kapa.data.CapacityReportEvent;
-import net.greenbeansit.jobtracker.client.components.widgets.UtilizationWidget;
 import net.greenbeansit.jobtracker.client.components.widgets.calendar.FullCalendarCustomize;
 import net.greenbeansit.jobtracker.shared.UtilizationWeek;
 import org.gwtbootstrap3.client.ui.Column;
@@ -102,6 +101,7 @@ public class CapacityCalendarWidget extends Composite implements CapaCalendarObs
 
                 GeneralDisplay generalDisplay = new GeneralDisplay();
                 generalDisplay.setWeekNumbers(true);
+                generalDisplay.setWeekends(false);
                 generalDisplay.setFirstDayOption(1);
 
                 Header header = new Header();
@@ -119,10 +119,8 @@ public class CapacityCalendarWidget extends Composite implements CapaCalendarObs
                 calendarHandler.registerCalendar(fullcalendar);
                 fullcalendar.render();
                 month.setSubText(monthToString(fullcalendar.getDate().getMonth()));
+                handler.loadAllUtilizationWeeks();
             }
-
-
-            // TODO - get startDate and beginDate from created CapacityReportEvent and add the Dates to the handler.currentUtilizationWeek
 
             /**
              * Sets the Click and Hover config for the {@link CapacityCalendarWidget}
@@ -149,12 +147,14 @@ public class CapacityCalendarWidget extends Composite implements CapaCalendarObs
                         CapacityReportEvent e = new CapacityReportEvent(calendarEvent);
                         fullcalendar.currentCapacityEvent = e;
                         for (CapacityReportEvent a : eventList) {
-                            if (a.getDescription().equals(e.getDescription())) {
+                            if (a.getId().equals(e.getId())) {
                                 handler.setCurrentUtilizationWeek(a.getUw());
+                                calendarHandler.setCurrentUtilizationWeek(a.getUw());
                             }
                         }
-                        notifyHandler();
+
                         notifyLogicHandler();
+                        notifyHandler();
                     }
 
                     /**
@@ -186,19 +186,18 @@ public class CapacityCalendarWidget extends Composite implements CapaCalendarObs
                         endDate.setDate(endDate.getDate()-1);
                         Date beginDate = new Date(tmp.getISOStart());
 
-                        UtilizationWeek tempUtil = new UtilizationWeek(0,0,"",beginDate,8,16,endDate,0,0,0);
+                        UtilizationWeek tempUtil = new UtilizationWeek(0,0,"","new Report",beginDate,8,16,endDate,0,0,0);
 
                         unselect(viewObject, event);
                         currentUtilizationWeek = tempUtil;
 
                         tmp.setUtilizationWeek(tempUtil);
-                        GWT.log((tmp.getUw()!=null) + "");
                         fullcalendar.addEvent(tmp);
                         fullcalendar.addEventToSave(tempUtil);
 
                         fullcalendar.currentCapacityEvent = tmp;
-                        notifyHandler();
                         notifyLogicHandler();
+                        notifyHandler();
                     }
 
                     @Override
@@ -241,7 +240,7 @@ public class CapacityCalendarWidget extends Composite implements CapaCalendarObs
                         Date endDate = new Date(dragEvent.getISOEnd());
                         endDate.setDate(endDate.getDate()-1);
                         Date beginDate = new Date(dragEvent.getISOStart());
-                        UtilizationWeek tempUtil = new UtilizationWeek(0,0,"",beginDate,8,16,endDate,0,0,0);
+                        UtilizationWeek tempUtil = new UtilizationWeek(0,0,"","",beginDate,8,16,endDate,0,0,0);
                         fullcalendar.addEventToSave(tempUtil);
                         notifyHandler();
                     }
@@ -293,16 +292,16 @@ public class CapacityCalendarWidget extends Composite implements CapaCalendarObs
      *
      * @param reports List of {@link UtilizationWeek} for CapacityPlaning
      */
-    public void addActvityReports(List<UtilizationWeek> reports) {
+    public void addUtilizationWeeks(List<UtilizationWeek> reports) {
+
         if (!reports.isEmpty()) {
             for (UtilizationWeek ap : reports) {
                 CapacityReportEvent e = new CapacityReportEvent(ap, ap.getId() + "", ap.getText(), true, true, true);
                 ap.getBeginDate().setYear((2016 - 1900));
                 e.setStart(calendarHandler.getISO8601StringForDate(ap.getBeginDate(), ap.getBeginTime()));
-                e.setEnd(calendarHandler.getISO8601StringForDate(ap.getBeginDate(), ap.getEndTime()));
+                e.setEnd(calendarHandler.getISO8601StringForDate(ap.getEndDate(), ap.getEndTime()));
                 fullcalendar.addEvent(e);
                 this.eventList.add(e);
-                fullcalendar.render();
                 fullcalendar.currentCapacityEvent = null;
             }
         }
@@ -335,6 +334,7 @@ public class CapacityCalendarWidget extends Composite implements CapaCalendarObs
     public void updateObservable() {
         currentUtilizationWeek = handler.getCurrentUtilizationWeek();
         fullcalendar.render();
+        addUtilizationWeeks(handler.getCurrentUtilizationWeekList());
     }
 
     /**

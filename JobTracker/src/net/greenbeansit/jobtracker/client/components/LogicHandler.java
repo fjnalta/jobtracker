@@ -37,9 +37,9 @@ public class LogicHandler {
 	private List<JobTask> jobTasksList = new ArrayList<JobTask>();
 	private List<ActivityReport> currentReportsList = new ArrayList<ActivityReport>();
 	private List<ActivityReportTemplate> templateList = new ArrayList<ActivityReportTemplate>();
+	private List<UtilizationWeek> utilizationWeekList = new ArrayList<UtilizationWeek>();
 	private List<Job> jobList = new ArrayList<Job>();
 	private List<PseudoJob> pseudoJobList = new ArrayList<PseudoJob>();
-	private List<UtilizationWeek> utilizationWeekList = new ArrayList<UtilizationWeek>();
 
 	private List<Integer> utilizationList = new ArrayList<Integer>();
 	private User currentUser;
@@ -182,6 +182,10 @@ public class LogicHandler {
 		return utilizationWeekList;
 	}
 
+	public void setCurrentUtilizationWeekList(List<UtilizationWeek> utilizationWeekList) {
+		this.utilizationWeekList = utilizationWeekList;
+	}
+
 	/**
 	 * function for setting the currently loaded reports
 	 * @param currentReportsList the List<ActivityReport> object with the reports
@@ -275,9 +279,31 @@ public class LogicHandler {
 
 		}).getEmployeeService().getAllReports(currentUser.getId());
 	}
-	
+
 	/**
-	 * Function for loading all {@link Jobtask}s for the current user
+	 * Function for loading all Utilization Weeks for the current user
+	 */
+	public void loadAllUtilizationWeeks(){
+		RestClient.build(new SuccessFunction<List<UtilizationWeek>>() {
+			@Override
+			public void onSuccess(Method method, List<UtilizationWeek> response) {
+				NotifyHelper.successMessage("Reports loaded from backend");
+				LogicHandler.this.setCurrentUtilizationWeekList(response);
+				LogicHandler.this.updateAllObservables();
+				calendar.updateObservable();
+			}
+
+			@Override
+			public void onFailure(Method method, Throwable exception) {
+				NotifyHelper.errorMessage("FAILED: " + exception.getMessage());
+				GWT.log(exception.getMessage());
+			}
+
+		}).getEmployeeService().getAllUtilizationWeeks(currentUser.getId());
+	}
+
+	/**
+	 * Function for loading all Jobtasks for the current user
 	 */
 	public void getAllJobTasks(){
 		RestClient.build(new SuccessFunction<List<JobTask>>() {
@@ -295,7 +321,7 @@ public class LogicHandler {
 				NotifyHelper.errorMessage("FAILED: " + exception.getMessage());
 				GWT.log(exception.getMessage());
 			}
-			
+
 		}).getEmployeeService().getJobTasks(LogicHandler.this.getCurrentUser().getId());
 	}
 	
@@ -362,6 +388,7 @@ public class LogicHandler {
 		final ActivityReport tempReport = reportDummy;
 
 		if (currentTemplate != null && currentJob != null && currentUser != null) {
+			tempReport.setId(0);
 			tempReport.setJobNr(currentJob.getJobNr());
 			tempReport.setPosNr(currentJob.getPosNr());
 			tempReport.setText(currentTemplate.getText());
@@ -395,12 +422,14 @@ public class LogicHandler {
 	 * Function for saving an UtilizationWeek to the backend. It first collects all needed information,
 	 * then if everything is correct it will try to save it.
 	 * On success is calls {@link #updateAllObservables()}to update the widgets
-	 *
+	 * @param report
+	 * 			the {@link UtilizationWeek}.
 	 */
 	public void saveUtilizationWeek(UtilizationWeek report) {
-
 		if (report != null && currentUser != null && tempUtilizationWeek!=null) {
 			final UtilizationWeek tempReport = report;
+			tempReport.setName(tempUtilizationWeek.getName());
+			GWT.log(tempUtilizationWeek.getName());
 			tempReport.setText(tempUtilizationWeek.getText());
 			tempReport.setAuthor(currentUser.getId());
 			tempReport.setPseudoJobId(tempUtilizationWeek.getPseudoJobId());
@@ -412,7 +441,6 @@ public class LogicHandler {
 						GWT.log(tempReport.toString());
 						LogicHandler.this.updateAllObservables();
 						NotifyHelper.successMessage("Report saved");
-
 					}
 
 					@Override
@@ -689,8 +717,6 @@ public class LogicHandler {
 	 * @param currentJob {@link Job} object to be set
 	 */
 	public void setCurrentUtilizationWeek(UtilizationWeek currentJob) {
-
-		GWT.log("set week");
 		this.currentUtilizationWeek = currentJob;
 	}
 
@@ -759,7 +785,7 @@ public class LogicHandler {
 	}
 	/**
 	 * get the {@link JobTask} {@link List}
-	 * @return {@link List} object with the currently loaded {@link JobTak}s
+	 * @return {@link List} object with the currently loaded JobTask.
 	 */
 	public List<JobTask> getJobTasksList() {
 		return jobTasksList;
@@ -767,21 +793,26 @@ public class LogicHandler {
 	
 	/**
 	 * set the {@link JobTask} {@link List}
-	 * @param jobTasksList {@link List} object with the {@link JobTak}s to save
+	 * @param jobTasksList {@link List} object with the {@link JobTask}s to save
 	 */
 	public void setJobTasksList(List<JobTask> jobTasksList) {
 		this.jobTasksList = jobTasksList;
 	}
 
+	/**
+	 * Get's the temporary {@link UtilizationWeek}.
+	 * @return the {@link UtilizationWeek}
+     */
 	public UtilizationWeek getTempUtilizationWeek() {
 		return tempUtilizationWeek;
 	}
 
+	/**
+	 * Set's the temporary {@link UtilizationWeek}
+	 * @param tempUtilizationWeek the {@link UtilizationWeek}.
+     */
 	public void setTempUtilizationWeek(UtilizationWeek tempUtilizationWeek) {
-		GWT.log("set temp");
+//		GWT.log("LogicHandler: TempUtilizationName: " + tempUtilizationWeek.getText());
 		this.tempUtilizationWeek = tempUtilizationWeek;
 	}
-
-
-
 }

@@ -2,6 +2,7 @@ package net.greenbeansit.jobtracker.client.components.kapa;
 
 import net.greenbeansit.jobtracker.client.components.LogicObservable;
 import net.greenbeansit.jobtracker.client.components.widgets.calendar.FullCalendarCustomize;
+import net.greenbeansit.jobtracker.shared.UtilizationWeek;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -19,6 +20,7 @@ public class CapaCalendarHandler implements LogicObservable {
      */
     public FullCalendarCustomize calendar;
     private List<CapaCalendarObserver> list = new ArrayList<>();
+    private UtilizationWeek currentUtilizationWeek;
 
     /**
      *
@@ -80,9 +82,7 @@ public class CapaCalendarHandler implements LogicObservable {
 
     @Override
     public void notifyLogicHandler() {
-
         handler.updateAllObservables();
-
     }
 
     /**
@@ -95,6 +95,14 @@ public class CapaCalendarHandler implements LogicObservable {
         return (date.getYear()+1900) + "-" + fillLeadingZero((date.getMonth()+1)) + "-" + fillLeadingZero(date.getDate()) + "T"
                 + fillLeadingZero(calculateHours(time)) + ":" + fillLeadingZero(calculateMinutes(time)) + ":00"
                 + ".000Z";
+    }
+
+    public void setCurrentUtilizationWeek(UtilizationWeek uw) {
+        this.currentUtilizationWeek = uw;
+    }
+
+    public UtilizationWeek getCurrentUtilizationWeek(){
+        return this.currentUtilizationWeek;
     }
 
     /**
@@ -126,6 +134,5 @@ public class CapaCalendarHandler implements LogicObservable {
     private int calculateHours(int time) {
         return time / 60;
     }
-
-
 }
+

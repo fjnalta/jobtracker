@@ -327,6 +327,12 @@ public class CalendarWidget extends Composite implements CalendarObserver, Logic
 						}
 					}
 
+					/**
+					 * Saves the Event
+					 * @param start the event start
+                     * @param end the event end
+                     * @return the tempReport.
+                     */
 					private ActivityReport saveEventTemporary(JavaScriptObject start, JavaScriptObject end){
 						String[] splitStart = start.toString().split(" ");
 						String startYear = splitStart[3];
@@ -504,6 +510,10 @@ public class CalendarWidget extends Composite implements CalendarObserver, Logic
 
 	}
 
+	/**
+	 * Adds the reports to the list to be saved.
+	 * @param report the report.
+     */
 	public void addReportsToSave(ActivityReport report){
 		calendar.addEventToSave(report);
 	}

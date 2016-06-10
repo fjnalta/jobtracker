@@ -56,6 +56,10 @@ public class JobWorkerListWidget extends Composite
 		columnHeaderNameTitle.setText(constants.jobWorkerListColumnName());
 	}
 
+	/**
+	 * fills the list
+	 * @param worker the Worker List.
+     */
 	public void fillWorkerList(List<User> worker)
 	{
 		for (User user : worker)

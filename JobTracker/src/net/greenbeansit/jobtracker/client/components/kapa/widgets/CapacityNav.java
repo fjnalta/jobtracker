@@ -2,6 +2,7 @@ package net.greenbeansit.jobtracker.client.components.kapa.widgets;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -18,6 +19,7 @@ import net.greenbeansit.jobtracker.shared.Job;
 import net.greenbeansit.jobtracker.shared.PseudoJob;
 import net.greenbeansit.jobtracker.shared.UtilizationWeek;
 import org.gwtbootstrap3.client.ui.Button;
+import org.gwtbootstrap3.client.ui.TabListItem;
 import org.gwtbootstrap3.client.ui.TextArea;
 import org.gwtbootstrap3.client.ui.TextBox;
 import org.gwtbootstrap3.client.ui.constants.IconType;
@@ -57,8 +59,12 @@ public class CapacityNav extends Composite implements LogicObservable, CapaCalen
     @UiField
     Slider mySlider;
 
+    @UiField
+    TabListItem myProjects, newProject;
+
     /**
      * This Method sets the possibility of the {@link UtilizationWeek}
+     *
      * @param event the slide event
      */
     @UiHandler("mySlider")
@@ -70,6 +76,7 @@ public class CapacityNav extends Composite implements LogicObservable, CapaCalen
 
     /**
      * This Method increases the possibility of the {@link UtilizationWeek} by 25%.
+     *
      * @param e {@link SlideEvent}
      */
     @UiHandler("buttonUp")
@@ -82,6 +89,7 @@ public class CapacityNav extends Composite implements LogicObservable, CapaCalen
 
     /**
      * This Method decreases the possibility of the {@link UtilizationWeek} by 25%.
+     *
      * @param e {@link ClickEvent}
      */
     @UiHandler("buttonDown")
@@ -93,6 +101,7 @@ public class CapacityNav extends Composite implements LogicObservable, CapaCalen
 
     /**
      * This Method saves a new Pseudo Job to the Database
+     *
      * @param e {@link ClickEvent}
      */
     @UiHandler("buttonSave")
@@ -127,9 +136,10 @@ public class CapacityNav extends Composite implements LogicObservable, CapaCalen
 
         handler.addObservable(this);
         handler.updateObservable(this);
+        calendarHandler.addObserver(this);
 
         createUtilizationWeekList();
-        
+
         initializeUIElements();
         selectJob.addValueChangeHandler(new ValueChangeHandler<String>() {
             @Override
@@ -140,10 +150,20 @@ public class CapacityNav extends Composite implements LogicObservable, CapaCalen
             }
         });
 
+        newProject.addClickHandler(new ClickHandler() {
+            @Override
+            public void onClick(ClickEvent event) {
+                description.setText("");
+            }
+        });
+
         handler.loadJobs();
         handler.loadPseudoJobs();
     }
 
+    /**
+     * Displays all Jobs and Pseudo Jobs in CapacityNav.
+     */
     private void createUtilizationWeekList() {
         utilizationWeekList.clear();
 
@@ -151,11 +171,11 @@ public class CapacityNav extends Composite implements LogicObservable, CapaCalen
         this.jobList = handler.getJobList();
 
         for (PseudoJob pjob : pJobList) {
-            UtilizationWeek uw = new UtilizationWeek(0, 0, pjob.getName(), new Date(),0, 0, new Date(), 0, pjob.getId(), 0);
+            UtilizationWeek uw = new UtilizationWeek(0, 0, pjob.getName(), pjob.getName() ,new Date(), 0, 0, new Date(), 0, pjob.getId(), 0);
             utilizationWeekList.add(uw);
         }
         for (Job job : jobList) {
-            UtilizationWeek uw = new UtilizationWeek(999, 0, job.toString(), new Date(), 0, 0, new Date(), 0, 9999, 0);
+            UtilizationWeek uw = new UtilizationWeek(999, 0, job.toString(), job.getDesc(), new Date(), 0, 0, new Date(), 0, 9999, 0);
             utilizationWeekList.add(uw);
         }
     }
@@ -167,11 +187,22 @@ public class CapacityNav extends Composite implements LogicObservable, CapaCalen
         buttonDown.setIcon(IconType.ARROW_DOWN);
         buttonUp.setIcon(IconType.ARROW_UP);
         possibilityPercentage.setText(mySlider.getValue().toString());
+        description.addValueChangeHandler(new ValueChangeHandler<String>() {
+            @Override
+            public void onValueChange(ValueChangeEvent<String> event) {
+                notifyLogicHandler();
+            }
+        });
     }
 
+    /**
+     * Adds the {@link UtilizationWeek}s to the select box.
+     *
+     * @param utilWeekList the {@link UtilizationWeek}
+     */
     private void addUtilizationWeeks(List<UtilizationWeek> utilWeekList) {
         for (UtilizationWeek currentUtilWeek : utilWeekList) {
-            if(currentUtilWeek.getId().intValue() == 999) {
+            if (currentUtilWeek.getId().intValue() == 999) {
                 SelectJobOption tempOption = new SelectJobOption(currentUtilWeek);
                 allJobsOptGroup.add(tempOption);
             } else {
@@ -189,6 +220,7 @@ public class CapacityNav extends Composite implements LogicObservable, CapaCalen
         allJobsOptGroup.clear();
         myJobsOptGroup.clear();
         textIdentifier.clear();
+        utilizationWeekList.clear();
 
         createUtilizationWeekList();
         addUtilizationWeeks(this.utilizationWeekList);
@@ -197,7 +229,7 @@ public class CapacityNav extends Composite implements LogicObservable, CapaCalen
         if (currentUtilizationWeek != null) {
             for (Option option : selectJob.getItems()) {
                 ((SelectJobOption) option).setSelected(false);
-                if (((SelectJobOption) option).getUtilizationWeek().equals(currentUtilizationWeek)) {
+                if (((SelectJobOption) option).getUtilizationWeek().getName().equals(currentUtilizationWeek.getName())) {
                     option.setSelected(true);
                 }
             }
@@ -211,8 +243,7 @@ public class CapacityNav extends Composite implements LogicObservable, CapaCalen
      */
     @Override
     public void update() {
-
-        // TODO - load other Tab if calendar job is clicked
+        loadMyProjectPage();
     }
 
     /**
@@ -228,11 +259,34 @@ public class CapacityNav extends Composite implements LogicObservable, CapaCalen
      */
     @Override
     public void notifyLogicHandler() {
-        if(currentUtilizationWeek != null) {
+        if (currentUtilizationWeek != null) {
             currentUtilizationWeek.setText(description.getText());
+            currentUtilizationWeek.setPossibility(mySlider.getValue().intValue());
             handler.setTempUtilizationWeek(currentUtilizationWeek);
         }
+    }
 
+    private void loadMyProjectPage() {
+        if (calendarHandler.getCurrentUtilizationWeek() != null) {
+            myProjects.showTab();
+            description.setText(calendarHandler.getCurrentUtilizationWeek().getText());
+            mySlider.setValue(calendarHandler.getCurrentUtilizationWeek().getPossibility().doubleValue());
+            possibilityPercentage.setText(calendarHandler.getCurrentUtilizationWeek().getPossibility().toString());
 
+            for (Option option : selectJob.getItems()) {
+                GWT.log("DONE!");
+                GWT.log(((SelectJobOption) option).getUtilizationWeek().getName());
+                GWT.log(calendarHandler.getCurrentUtilizationWeek().getName());
+                GWT.log(currentUtilizationWeek.getName());
+                ((SelectJobOption) option).setSelected(false);
+                if (((SelectJobOption) option).getUtilizationWeek().getName().equals(calendarHandler.getCurrentUtilizationWeek().getName())) {
+//                if (((SelectJobOption) option).getUtilizationWeek().getName().equals(currentUtilizationWeek.getName())) {
+                    option.setSelected(true);
+                }
+            }
+
+        } else {
+            newProject.showTab();
+        }
     }
 }

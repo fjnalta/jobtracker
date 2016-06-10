@@ -10,6 +10,10 @@ import com.google.gwt.user.client.ui.Widget;
 
 import net.greenbeansit.jobtracker.shared.User;
 
+/**
+ * This Class represents a List Item for the {@link JobWorkerListItem}
+ * @author Max Blatt
+ */
 public class JobWorkerListItem extends Composite
 {
 
@@ -23,8 +27,11 @@ public class JobWorkerListItem extends Composite
 
 	@UiField
 	Heading headingWorkerName;
-	
-	
+
+	/**
+	 * Initializes a new Instance of JobWorkerListItem
+	 * @param user the User.
+     */
 	public JobWorkerListItem(User user)
 	{
 		initWidget(uiBinder.createAndBindUi(this));

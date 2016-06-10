@@ -26,15 +26,27 @@ public class SelectJobOption extends Option {
 		this.setText(job.toString());
 	}
 
+	/**
+	 * Initializes a new Instance of {@link SelectJobOption} with a {@link UtilizationWeek}.
+	 * @param utilizationWeek the {@link UtilizationWeek}
+     */
 	public SelectJobOption(UtilizationWeek utilizationWeek) {
 		this.setUtilizationWeek(utilizationWeek);
 		this.setText(utilizationWeek.getText());
 	}
 
+	/**
+	 * Sets the {@link UtilizationWeek}
+	 * @param utilizationWeek the {@link UtilizationWeek}.
+     */
 	public void setUtilizationWeek(UtilizationWeek utilizationWeek) {
 		this.utilizationWeek = utilizationWeek;
 	}
 
+	/**
+	 * Gets the {@link UtilizationWeek}
+	 * @return the {@link UtilizationWeek}
+     */
 	public UtilizationWeek getUtilizationWeek() {
 		return utilizationWeek;
 	}

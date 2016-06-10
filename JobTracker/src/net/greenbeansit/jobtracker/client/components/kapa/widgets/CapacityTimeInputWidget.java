@@ -9,13 +9,9 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 import net.greenbeansit.jobtracker.client.components.LogicObservable;
 import net.greenbeansit.jobtracker.client.components.kapa.CapaCalendarObserver;
-import net.greenbeansit.jobtracker.client.components.kapa.data.CapacityReportEvent;
 import net.greenbeansit.jobtracker.shared.UtilizationWeek;
 import org.gwtbootstrap3.client.ui.Button;
 import org.gwtbootstrap3.client.ui.TextBox;
-import org.gwtbootstrap3.client.ui.constants.IconType;
-
-import java.util.Date;
 
 /**
  * Shows the bottom Widget on the Capacity Page. This Widget is used to display
@@ -31,8 +27,10 @@ public class CapacityTimeInputWidget extends Composite implements CapaCalendarOb
      */
     @Override
     public void update() {
-        projectStart.setText(splitISOString(calendarHandler.calendar.currentCapacityEvent.getISOStart()));
-        projectEnd.setText(splitISOString(calendarHandler.calendar.currentCapacityEvent.getISOEnd()));
+        if(calendarHandler.calendar.currentCapacityEvent != null) {
+            projectStart.setText(splitISOString(calendarHandler.calendar.currentCapacityEvent.getISOStart()));
+            projectEnd.setText(splitISOString(calendarHandler.calendar.currentCapacityEvent.getISOEnd()));
+        }
         notifyLogicHandler();
     }
 
@@ -65,12 +63,11 @@ public class CapacityTimeInputWidget extends Composite implements CapaCalendarOb
      * Initializes a new Instance of CapacityTimeInputWidget.
      */
     public CapacityTimeInputWidget() {
+
         initWidget(uiBinder.createAndBindUi(this));
 
-
-        setButtons();
-
         handler.addObservable(this);
+        handler.updateObservable(this);
         calendarHandler.addObserver(this);
         currentUtilizationWeek = handler.getCurrentUtilizationWeek();
 
@@ -78,10 +75,6 @@ public class CapacityTimeInputWidget extends Composite implements CapaCalendarOb
 
     @UiField
     TextBox projectStart, projectEnd;
-
-    @UiField
-    Button buttonUpYearStart, buttonDownYearStart,
-            buttonUpYearEnd, buttonDownYearEnd;
 
     /**
      * {@link UiHandler} for the {@link Button} that saves the
@@ -98,26 +91,11 @@ public class CapacityTimeInputWidget extends Composite implements CapaCalendarOb
         calendarHandler.calendar.getCapacityReportsToSave().clear();
     }
 
-    private Date createDateFromText(String text) {
-        String[] split = text.split("-");
-        int year = Integer.parseInt(split[0]);
-        int month = Integer.parseInt(split[1]);
-        int day = Integer.parseInt(split[2]);
-        return new Date(year, month, day);
-    }
-
     /**
-     * This Method sets the icons for all Buttons in this Widget
+     * Removes the Time from the Date String.
+     * @param string the Date string.
+     * @return the Date string.
      */
-    private void setButtons() {
-
-        buttonUpYearStart.setIcon(IconType.ARROW_UP);
-        buttonDownYearStart.setIcon(IconType.ARROW_DOWN);
-
-        buttonUpYearEnd.setIcon(IconType.ARROW_UP);
-        buttonDownYearEnd.setIcon(IconType.ARROW_DOWN);
-    }
-
     private String splitISOString(String string){
         if (string != null && string.length() > 0) {
             string = string.substring(0, string.length()-14);

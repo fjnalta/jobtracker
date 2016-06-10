@@ -178,6 +178,7 @@ public class User implements Serializable
 	 * Sets the remaining vacation days.
 	 * 
 	 * @param remainingVacationDays
+	 * 				the remaining vacation days.
 	 */
 	public void setRemainingVacationDays(Integer remainingVacationDays)
 	{

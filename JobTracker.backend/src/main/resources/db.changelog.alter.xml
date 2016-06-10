@@ -203,4 +203,11 @@
             ]]>
         </sql>
     </changeSet>
+    <changeSet id="20160607-ALTERUtilizationWeek" author="phil">
+        <sql>
+            <![CDATA[
+                ALTER TABLE `utilization_week` ADD COLUMN `name` VARCHAR(64);
+            ]]>
+        </sql>
+    </changeSet>
 </databaseChangeLog>

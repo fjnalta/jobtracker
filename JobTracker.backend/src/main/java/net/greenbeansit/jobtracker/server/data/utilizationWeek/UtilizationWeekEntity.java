@@ -37,6 +37,8 @@ public class UtilizationWeekEntity implements Serializable
 
 	@Column(name = "author")
 	private Integer				author;
+	@Column(name = "name")
+	private String				name;
 	@Column(name = "text")
 	private String				text;
 	@Column(name = "begin_date")
@@ -85,12 +87,13 @@ public class UtilizationWeekEntity implements Serializable
      * @param pseudoJobId
 	 * 			the pseudoJobId
      */
-	public UtilizationWeekEntity(Integer id, Integer author, String text, Date beginDate,
+	public UtilizationWeekEntity(Integer id, Integer author, String name, String text, Date beginDate,
 								 Integer beginTime, Date endDate, Integer endTime,
 								 Integer possibility, Integer breakTime, Integer pseudoJobId)
 	{
 		this.id = id;
 		this.author = author;
+		this.name = name;
 		this.text = text;
 		this.beginDate = beginDate;
 		this.beginTime = beginTime;
@@ -126,6 +129,14 @@ public class UtilizationWeekEntity implements Serializable
 		return author;
 	}
 
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getName(){
+		return this.name;
+	}
+
 	/**
 	 * @param author
 	 *            set authorID
@@ -135,10 +146,18 @@ public class UtilizationWeekEntity implements Serializable
 		this.author = author;
 	}
 
+	/**
+	 * Gets the Text
+	 * @return the text.
+     */
 	public String getText() {
 		return this.text;
 	}
 
+	/**
+	 * Sets the text.
+	 * @param text the Text.
+     */
 	public void setText(String text) {
 		this.text = text;
 	}
