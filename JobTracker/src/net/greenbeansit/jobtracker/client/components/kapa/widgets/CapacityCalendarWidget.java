@@ -150,6 +150,7 @@ public class CapacityCalendarWidget extends Composite implements CapaCalendarObs
                             if (a.getId().equals(e.getId())) {
                                 handler.setCurrentUtilizationWeek(a.getUw());
                                 calendarHandler.setCurrentUtilizationWeek(a.getUw());
+                                handler.updateAllObservables();
                             }
                         }
 
@@ -183,7 +184,7 @@ public class CapacityCalendarWidget extends Composite implements CapaCalendarObs
                         tmp.setStart(start);
                         tmp.setEnd(end);
                         Date endDate = new Date(tmp.getISOEnd());
-                        endDate.setDate(endDate.getDate()-1);
+                        endDate.setHours(endDate.getHours()-1);
                         Date beginDate = new Date(tmp.getISOStart());
 
                         UtilizationWeek tempUtil = new UtilizationWeek(0,0,"","new Report",beginDate,8,16,endDate,0,0,0);
@@ -238,7 +239,7 @@ public class CapacityCalendarWidget extends Composite implements CapaCalendarObs
                                           NativeEvent nativeEvent) {
                         CapacityReportEvent dragEvent = new CapacityReportEvent(calendarEvent);
                         Date endDate = new Date(dragEvent.getISOEnd());
-                        endDate.setDate(endDate.getDate()-1);
+                        endDate.setHours(endDate.getHours()-1);
                         Date beginDate = new Date(dragEvent.getISOStart());
                         UtilizationWeek tempUtil = new UtilizationWeek(0,0,"","",beginDate,8,16,endDate,0,0,0);
                         fullcalendar.addEventToSave(tempUtil);
@@ -294,8 +295,11 @@ public class CapacityCalendarWidget extends Composite implements CapaCalendarObs
      */
     public void addUtilizationWeeks(List<UtilizationWeek> reports) {
 
+        this.eventList.clear();
+        fullcalendar.removeAllEvents();
         if (!reports.isEmpty()) {
             for (UtilizationWeek ap : reports) {
+                GWT.log(ap.getId() + "");
                 CapacityReportEvent e = new CapacityReportEvent(ap, ap.getId() + "", ap.getText(), true, true, true);
                 ap.getBeginDate().setYear((2016 - 1900));
                 e.setStart(calendarHandler.getISO8601StringForDate(ap.getBeginDate(), ap.getBeginTime()));

@@ -290,7 +290,6 @@ public class LogicHandler {
 				NotifyHelper.successMessage("Reports loaded from backend");
 				LogicHandler.this.setCurrentUtilizationWeekList(response);
 				LogicHandler.this.updateAllObservables();
-				calendar.updateObservable();
 			}
 
 			@Override
@@ -438,7 +437,7 @@ public class LogicHandler {
 				RestClient.build(new SuccessFunction<UtilizationWeek>() {
 					@Override
 					public void onSuccess(Method method, UtilizationWeek response) {
-						GWT.log(tempReport.toString());
+						LogicHandler.this.getCurrentUtilizationWeekList().add(tempReport);
 						LogicHandler.this.updateAllObservables();
 						NotifyHelper.successMessage("Report saved");
 					}

@@ -224,7 +224,7 @@ public class CapacityNav extends Composite implements LogicObservable, CapaCalen
 
         createUtilizationWeekList();
         addUtilizationWeeks(this.utilizationWeekList);
-        currentUtilizationWeek = handler.getTempUtilizationWeek();
+        currentUtilizationWeek = handler.getCurrentUtilizationWeek();
 
         if (currentUtilizationWeek != null) {
             for (Option option : selectJob.getItems()) {
@@ -234,7 +234,7 @@ public class CapacityNav extends Composite implements LogicObservable, CapaCalen
                 }
             }
         }
-        notifyLogicHandler();
+        //notifyLogicHandler();
         selectJob.refresh();
     }
 
