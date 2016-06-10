@@ -325,12 +325,14 @@ public class CalendarUtilizationWidget extends Composite implements CalendarObse
 
 		// For empty Days
 		if (number < 1) {
-			number = 15;
+			number = 7;
 		}
-
+		if (number > 100) {
+			number = 100;
+		}
 		vp.setHeight(number + "%");
 
-		vp.setStyleName(this.SUFFIXPATH + "barChartHeight", true);
+		vp.setStyleName(this.SUFFIXPATH + "barChart", true);
 
 		return vp;
 	}
