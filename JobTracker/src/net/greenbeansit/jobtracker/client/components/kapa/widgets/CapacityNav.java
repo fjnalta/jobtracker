@@ -258,13 +258,10 @@ public class CapacityNav extends Composite implements LogicObservable, CapaCalen
             	}
             }
             for (Option option : selectCustomer.getItems()) {
-            	if(option instanceof SelectJobOption)
-            	{
-            		((SelectJobOption) option).setSelected(false);
-            		if (((CustomerOption) option).getCustomer().getId().equals(currentUtilizationWeek.getCustomerId())) {
-            			option.setSelected(true);
-            		}
-            	}
+                ((CustomerOption) option).setSelected(false);
+                if (((CustomerOption) option).getCustomer().getId().equals(currentUtilizationWeek.getCustomerId())) {
+                    option.setSelected(true);
+                }
             }
         }
 
@@ -310,10 +307,10 @@ public class CapacityNav extends Composite implements LogicObservable, CapaCalen
             possibilityPercentage.setText(calendarHandler.getCurrentUtilizationWeek().getPossibility().toString());
 
             for (Option option : selectJob.getItems()) {
-//                GWT.log("DONE!");
-//                GWT.log(((SelectJobOption) option).getUtilizationWeek().getName());
-//                GWT.log(calendarHandler.getCurrentUtilizationWeek().getName());
-//                GWT.log(currentUtilizationWeek.getName());
+                GWT.log("DONE!");
+                GWT.log(((SelectJobOption) option).getUtilizationWeek().getName());
+                GWT.log(calendarHandler.getCurrentUtilizationWeek().getName());
+                GWT.log(currentUtilizationWeek.getName());
                 ((SelectJobOption) option).setSelected(false);
                 if (((SelectJobOption) option).getUtilizationWeek().getName().equals(calendarHandler.getCurrentUtilizationWeek().getName())) {
 //                if (((SelectJobOption) option).getUtilizationWeek().getName().equals(currentUtilizationWeek.getName())) {

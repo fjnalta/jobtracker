@@ -225,4 +225,22 @@
             ]]>
         </sql>
     </changeSet>
+    <changeSet id="20160610-CREATETransaction" author="mike">
+        <sql>
+            <![CDATA[
+				CREATE TABLE `transaction`
+				(
+					`id` INT NOT NULL AUTO_INCREMENT,
+					`author` INT NOT NULL,
+					`job_no` INT,
+					`pos_no` INT,
+					`budget_used` INT,
+					`date` DATE,
+					PRIMARY KEY (`id`),
+					FOREIGN KEY (`author`) REFERENCES user(`id`),
+					FOREIGN KEY (`job_no`, `pos_no`) REFERENCES job(`job_no`, `pos_no`)
+				);
+			]]>
+        </sql>
+    </changeSet>
 </databaseChangeLog>

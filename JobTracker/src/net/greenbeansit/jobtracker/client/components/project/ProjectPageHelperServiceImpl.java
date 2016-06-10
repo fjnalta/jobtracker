@@ -13,7 +13,7 @@ import net.greenbeansit.jobtracker.client.utils.rest.RestClient;
 import net.greenbeansit.jobtracker.client.utils.rest.RestClient.SuccessFunction;
 import net.greenbeansit.jobtracker.shared.Customer;
 import net.greenbeansit.jobtracker.shared.Job;
-import net.greenbeansit.jobtracker.shared.rest.services.RestService.ProjectPageRestServiceResponse;
+import net.greenbeansit.jobtracker.shared.ProjectPageRestServiceResponse;
 
 /**
  * Implementation of {@link ProjectPageHelperService}.
@@ -79,8 +79,15 @@ class ProjectPageHelperServiceImpl implements ProjectPageHelperService
 			public void onSuccess(Method method,
 					ProjectPageRestServiceResponse response)
 			{
+				List<Job> jobs = new ArrayList<Job>();
+				for(Job job : response.getJobs())
+				{
+					if(!job.isIntern())
+						jobs.add(job);
+				}
+				
 				if (response.getJobs() != null)
-					cachedJobs = response.getJobs();
+					cachedJobs = jobs;
 
 				if (response.getCustomers() != null)
 					cachedCustomers = response.getCustomers();
