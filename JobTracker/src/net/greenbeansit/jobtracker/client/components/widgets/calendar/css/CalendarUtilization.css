@@ -26,7 +26,6 @@
 	width: 25px;
 	height: 25px;
 	border: none;
-	padding-right: 15px;
 	background-color: white;
 	border-radius: 50%;
 	padding: 0px 4px;
@@ -37,53 +36,49 @@
 
 .button-Day-current {
 	color:white;
-	width: 5px;
 	text-align: center;
-	padding-right: 20px;
-	background-color: rgba(171 ,171 ,171,0.7);
 	width: 25px;
 	height: 25px;
-	border: none;
-	padding-right: 15px;
 	background-color: rgba(238 ,0 ,0,0.5 );
 	border: none;
-	border-radius: 30px;
 	border-radius: 50%;
 	padding: 0px 4px;
 	text-align:center;
 	line-height:25px;
 	font-size:13px;
 }
+
 .label-week{
 	opacity:1;
 }
+
 .label-not-week{
 	opacity:0.3;
 }
+
 td {
-	padding-top: 0;
-	margin-top: 0;
 	text-align: center;
 	vertical-align: bottom;
 }
-.fontColor {
-	color: red;
+
+.barChartOuter{
+	
+	height: 60px;
+	width: 9px;
+	display: inline-block;
+	background-color: rgba(0,0,0,0);
+	border: 1px solid black;
 }
 
 .barChart {
+	position:relative;	
+	bottom:0px;
+	
 	width: 7px;
-	text-align: center;
-	display: inline-block;
-	background-color: #00AAAA;
-	border-radius: 10px;
-}
-
-.barChartHeight {
-	width: 7px;
-	text-align: center;
 	display: inline-block;
 	background-color: #ff8c00;
 	border-radius: 10px;
+	border: 1px solid green;
 }
 
 .button-Day:HOVER{
@@ -91,13 +86,14 @@ td {
 	border-color:rgb(255,0,0);
 	
 }
+
 .button-Day-current:HOVER{
 	
 	border-radius:50px;
 	background-color: rgba(238 ,0 ,0,0.5 );
 }
-.button-Day:FOCUS {
 
+.button-Day:FOCUS {
 	
 }
 
