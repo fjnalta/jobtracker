@@ -209,6 +209,7 @@
 			]]>
 		</sql>
 	</changeSet>
+<<<<<<< HEAD
 	<changeSet id="20160610-user-15" author="mike">
 		<sql>
 			<![CDATA[
@@ -237,4 +238,6 @@
 			]]>
 		</sql>
 	</changeSet>
+=======
+>>>>>>> branch 'master' of ssh://m.hukiewitz@jonathan.sv.hs-mannheim.de/rest/svn/GreenBeansIT/GreenBeansIT
 </databaseChangeLog>
