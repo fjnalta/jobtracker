@@ -33,6 +33,10 @@ public class ActivityReportTemplateEntity implements Serializable
 	private String				text;
 	@Column(name = "taskId")
 	private Integer				taskId;
+	@Column(name = "job_no")
+	private Integer				jobNo;
+	@Column(name = "pos_no")
+	private Integer				posNo;
 
 	/**
 	 * Standard constructor for internal purposes.
@@ -54,6 +58,7 @@ public class ActivityReportTemplateEntity implements Serializable
 	 * @param author
 	 *            id of the author
 	 */
+	@Deprecated
 	public ActivityReportTemplateEntity(String name, String text,
 			Integer taskId, Integer author)
 	{
@@ -62,13 +67,39 @@ public class ActivityReportTemplateEntity implements Serializable
 		this.taskId = taskId;
 		this.author = author;
 	}
+	
+	/**
+	 * Creates a new {@link ActivityReportTemplateEntity}.
+	 * 
+	 * @param name
+	 *            name given by the author
+	 * @param text
+	 *            description as written by the author
+	 * @param taskId
+	 *            corresponding id for eventual JIRA compatibility
+	 * @param author
+	 *            id of the author
+	 * @param jobNr 
+	 *            3 to 6 digits
+	 * @param posNr
+	 * 			  up to 3 digits
+	 */
+	public ActivityReportTemplateEntity(String name, String text,
+			Integer taskId, Integer author, Integer jobNr, Integer posNr)
+	{
+		this.name = name;
+		this.text = text;
+		this.taskId = taskId;
+		this.author = author;
+		this.jobNo = jobNr;
+		this.posNo = posNr;
+	}
 
 	/**
 	 * Gets the Name of the {@link ActivityReportTemplateEntity}
 	 * 
 	 * @return the name.
 	 */
-	@Column(name = "name")
 	public String getName()
 	{
 		return name;
@@ -90,7 +121,6 @@ public class ActivityReportTemplateEntity implements Serializable
 	 * 
 	 * @return the Text of the {@link ActivityReportTemplateEntity}
 	 */
-	@Column(name = "text")
 	public String getText()
 	{
 		return text;
@@ -113,7 +143,6 @@ public class ActivityReportTemplateEntity implements Serializable
 	 * 
 	 * @return the Task id of the {@link ActivityReportTemplateEntity}
 	 */
-	@Column(name = "task_id")
 	public Integer getTaskId()
 	{
 		return taskId;
@@ -135,7 +164,6 @@ public class ActivityReportTemplateEntity implements Serializable
 	 * 
 	 * @return the Author of the {@link ActivityReportTemplateEntity}
 	 */
-	@Column(name = "author")
 	public Integer getAuthor()
 	{
 		return author;
@@ -150,6 +178,46 @@ public class ActivityReportTemplateEntity implements Serializable
 	public void setAuthor(Integer author)
 	{
 		this.author = author;
+	}
+	
+	/**
+	 * Gets the job number
+	 * 
+	 * @return the job number
+	 */
+	public Integer getJobNo()
+	{
+		return jobNo;
+	}
+	
+	/**
+	 * Sets the job number
+	 * 
+	 * @param jobNo 3 to 6 digits
+	 */
+	public void setJobNo(Integer jobNo)
+	{
+		this.jobNo = jobNo;
+	}
+	
+	/**
+	 * Gets the position number
+	 * 
+	 * @return the position number
+	 */
+	public Integer getPosNo()
+	{
+		return posNo;
+	}
+	
+	/**
+	 * Sets the position number
+	 * 
+	 * @param posNo up to 3 digits
+	 */
+	public void setPosNo(Integer posNo)
+	{
+		this.posNo = posNo;
 	}
 	
 	public boolean equals(Object obj) {
