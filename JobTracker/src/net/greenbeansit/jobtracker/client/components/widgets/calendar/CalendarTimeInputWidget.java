@@ -136,6 +136,8 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 		buttonTimeHourUpDuration.setIcon(IconType.ARROW_UP);
 		buttonTimeMinuteUpDuration.setIcon(IconType.ARROW_UP);
 
+		buttonDelete.setIcon(IconType.TRASH);
+		buttonCopy.setIcon(IconType.COPY);
 //		addonDateStart.setText(constants.addonDateStart());
 //		addonDateEnd.setText(constants.addonDateEnd());
 //		addonTimeStart.setText(constants.addonTimeStart());
