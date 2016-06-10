@@ -467,10 +467,12 @@ public class LogicHandler {
 	 * @param template {@link ActivityReportTemplate} to save
 	 */
 	public void saveTemplate(ActivityReportTemplate template) {
-		final ActivityReportTemplate temp = template;
 		if(currentJob!=null){
-			temp.setJobNr(currentJob.getJobNr());
-			temp.setPosNr(currentJob.getPosNr());
+			GWT.log(currentJob.getJobNr()+"");
+			GWT.log(currentJob.getPosNr()+"");
+			template.setJobNr(currentJob.getJobNr());
+			template.setPosNr(currentJob.getPosNr());
+			final ActivityReportTemplate temp = template;
 			try {
 				RestClient.build(new SuccessFunction<ActivityReportTemplate>() {
 					@Override

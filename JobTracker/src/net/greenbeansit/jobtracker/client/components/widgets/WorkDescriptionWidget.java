@@ -142,7 +142,6 @@ public class WorkDescriptionWidget extends Composite implements LogicObservable
 				handler.updateAllObservables();
 			}
 		}
-
 	}
 
 	/**
