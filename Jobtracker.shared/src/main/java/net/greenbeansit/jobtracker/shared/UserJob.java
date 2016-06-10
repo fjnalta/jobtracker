@@ -27,9 +27,12 @@ public class UserJob implements Serializable
 	 * 
 	 * @param userId
 	 *            the unique identifier
-	 * @param jobNo jobNo of the job
-	 * @param posNo posNo of the job
-	 * @param role role in this job
+	 * @param jobNo
+	 *            jobNo of the job
+	 * @param posNo
+	 *            posNo of the job
+	 * @param role
+	 *            role in this job
 	 */
 	public UserJob(Integer userId, Integer jobNo, Integer posNo, Integer role)
 	{
@@ -49,8 +52,9 @@ public class UserJob implements Serializable
 
 	/**
 	 * get userID
+	 * 
 	 * @return the userID Integer
-     */
+	 */
 	public Integer getUserId()
 	{
 		return userId;
@@ -58,8 +62,10 @@ public class UserJob implements Serializable
 
 	/**
 	 * set the userID
-	 * @param userId Integer value
-     */
+	 * 
+	 * @param userId
+	 *            Integer value
+	 */
 	public void setUserId(Integer userId)
 	{
 		if (userId == null)
@@ -71,8 +77,9 @@ public class UserJob implements Serializable
 
 	/**
 	 * get the jobNr
+	 * 
 	 * @return Integer value
-     */
+	 */
 	public Integer getJobNr()
 	{
 		return jobNo;
@@ -80,8 +87,10 @@ public class UserJob implements Serializable
 
 	/**
 	 * set the jobNr
-	 * @param jobNo Integer value
-     */
+	 * 
+	 * @param jobNo
+	 *            Integer value
+	 */
 	public void setJobNr(Integer jobNo)
 	{
 		if (jobNo == null)
@@ -93,8 +102,9 @@ public class UserJob implements Serializable
 
 	/**
 	 * get posNr
+	 * 
 	 * @return Integer value
-     */
+	 */
 	public Integer getPosNr()
 	{
 		return posNo;
@@ -102,8 +112,10 @@ public class UserJob implements Serializable
 
 	/**
 	 * set the posNr
-	 * @param posNo Interger value
-     */
+	 * 
+	 * @param posNo
+	 *            Interger value
+	 */
 	public void setPosNr(Integer posNo)
 	{
 		this.posNo = posNo;
@@ -111,8 +123,9 @@ public class UserJob implements Serializable
 
 	/**
 	 * get the role
+	 * 
 	 * @return Integer value
-     */
+	 */
 	public Integer getRole()
 	{
 		return role;
@@ -120,8 +133,10 @@ public class UserJob implements Serializable
 
 	/**
 	 * set the role in this job
-	 * @param role Integer value
-     */
+	 * 
+	 * @param role
+	 *            Integer value
+	 */
 	public void setRole(Integer role)
 	{
 		if (role == null)
@@ -133,8 +148,9 @@ public class UserJob implements Serializable
 
 	/**
 	 * get the posNo
+	 * 
 	 * @return Integer value
-     */
+	 */
 	public Integer getPosNo()
 	{
 		return posNo;
@@ -143,8 +159,9 @@ public class UserJob implements Serializable
 	/**
 	 * set the posNo
 	 *
-	 * @param posNo Integer value
-     */
+	 * @param posNo
+	 *            Integer value
+	 */
 	public void setPosNo(Integer posNo)
 	{
 		if (posNo == null)
@@ -168,16 +185,17 @@ public class UserJob implements Serializable
 		} else
 			return false;
 	}
-	
+
 	@Override
-    public int hashCode() {
-        if(userId == null || jobNo == null || posNo == null)
-        	return 0;
-        List<Integer> ints = new ArrayList<Integer>();
-        ints.add(userId);
-        ints.add(jobNo);
-        ints.add(posNo);
-        ints.add(role);
-        return ints.hashCode();
-    }
+	public int hashCode()
+	{
+		if (userId == null || jobNo == null || posNo == null)
+			return 0;
+		List<Integer> ints = new ArrayList<Integer>();
+		ints.add(userId);
+		ints.add(jobNo);
+		ints.add(posNo);
+		ints.add(role);
+		return ints.hashCode();
+	}
 }

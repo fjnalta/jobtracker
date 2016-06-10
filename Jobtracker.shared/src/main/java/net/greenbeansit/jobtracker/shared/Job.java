@@ -8,24 +8,26 @@ import java.io.Serializable;
  * @author Mike Hukiewitz & Alex & Philipp Minges
  */
 
-public class Job implements Serializable {
-	private static final long serialVersionUID = -3379608733084915877L;
+public class Job implements Serializable
+{
+	private static final long	serialVersionUID	= -3379608733084915877L;
 
-	private Integer jobNr;
-	private Integer posNr;
-	private Integer payMode;
-	private Integer customerID;
-	private String desc;
-	private Integer maxBudget;
-	private Integer usedBudget;
-	private Boolean isIntern;
-	private Boolean isLocked;
-	
+	private Integer				jobNr;
+	private Integer				posNr;
+	private Integer				payMode;
+	private Integer				customerID;
+	private String				desc;
+	private Integer				maxBudget;
+	private Integer				usedBudget;
+	private Boolean				isIntern;
+	private Boolean				isLocked;
+
 	/**
 	 * Initializes a new instance of the {@link Job} class with all its fields
 	 * set to null.
 	 */
-	public Job() {
+	public Job()
+	{
 
 	}
 
@@ -47,9 +49,14 @@ public class Job implements Serializable {
 	 *            the maximum budget for the job.
 	 * @param usedBudget
 	 *            the currently used budget for the job
-	 * @param isLocked true if locked for further booking
+	 * @param isLocked
+	 *            true if further booking on this job is not allowed
 	 */
-	public Job(Integer jobNr, Integer posNr, Integer payMode, Integer customerID, String desc, Integer maxBudget, Integer usedBudget, Boolean isLocked) {
+	@Deprecated
+	public Job(Integer jobNr, Integer posNr, Integer payMode,
+			Integer customerID, String desc, Integer maxBudget,
+			Integer usedBudget, Boolean isLocked)
+	{
 		this.maxBudget = maxBudget;
 		this.usedBudget = usedBudget;
 		this.jobNr = jobNr;
@@ -61,135 +68,209 @@ public class Job implements Serializable {
 	}
 
 	/**
+	 * Initializes a new instance of the {@link Job} class with the following
+	 * values.
+	 * 
+	 * @param jobNr
+	 *            the jobNr the is used to identify the {@link Job}.
+	 * @param posNr
+	 *            the position no.
+	 * @param payMode
+	 *            0 = NF, 1 = TM, 2 = FP
+	 * @param customerID
+	 *            the unique identifier for the customer
+	 * @param desc
+	 *            the description of the job
+	 * @param maxBudget
+	 *            the maximum budget for the job.
+	 * @param usedBudget
+	 *            the currently used budget for the job
+	 * @param isIntern
+	 *            true if internal job and not to be displayed as filter option
+	 * @param isLocked
+	 *            true if further booking on this job is not allowed
+	 */
+	public Job(Integer jobNr, Integer posNr, Integer payMode,
+			Integer customerID, String desc, Integer maxBudget,
+			Integer usedBudget, Boolean isIntern, Boolean isLocked)
+	{
+		this.maxBudget = maxBudget;
+		this.usedBudget = usedBudget;
+		this.jobNr = jobNr;
+		this.posNr = posNr;
+		this.payMode = payMode;
+		this.customerID = customerID;
+		this.desc = desc;
+		this.setIntern(isIntern);
+		this.setLocked(isLocked);
+	}
+
+	/**
 	 * Setter & Getter
+	 * 
 	 * @return Integer value
 	 */
-	public Integer getMaxBudget() {
+	public Integer getMaxBudget()
+	{
 		return maxBudget;
 	}
 
 	/**
 	 * set the jobNr
-	 * @param jobNr Integer value
-     */
-	public void setJobNr(Integer jobNr) {
-		if(jobNr == null)
+	 * 
+	 * @param jobNr
+	 *            Integer value
+	 */
+	public void setJobNr(Integer jobNr)
+	{
+		if (jobNr == null)
 			throw new IllegalArgumentException();
 		this.jobNr = jobNr;
 	}
 
 	/**
 	 * set the posNr
-	 * @param posNr Integer value
-     */
-	public void setPosNr(Integer posNr) {
-		if(posNr == null)
+	 * 
+	 * @param posNr
+	 *            Integer value
+	 */
+	public void setPosNr(Integer posNr)
+	{
+		if (posNr == null)
 			throw new IllegalArgumentException();
 		this.posNr = posNr;
 	}
 
 	/**
 	 * set the payMode
-	 * @param payMode Integer value
-     */
-	public void setPayMode(Integer payMode) {
-		if(payMode == null)
+	 * 
+	 * @param payMode
+	 *            Integer value
+	 */
+	public void setPayMode(Integer payMode)
+	{
+		if (payMode == null)
 			throw new IllegalArgumentException();
 		this.payMode = payMode;
 	}
 
 	/**
 	 * set the customerID
-	 * @param customerID Integer value
-     */
-	public void setCustomerID(Integer customerID) {
-		if(customerID == null)
+	 * 
+	 * @param customerID
+	 *            Integer value
+	 */
+	public void setCustomerID(Integer customerID)
+	{
+		if (customerID == null)
 			throw new IllegalArgumentException();
 		this.customerID = customerID;
 	}
 
 	/**
 	 * set the description
-	 * @param desc String value
-     */
-	public void setDesc(String desc) {
-		if(desc == "")
+	 * 
+	 * @param desc
+	 *            String value
+	 */
+	public void setDesc(String desc)
+	{
+		if (desc == "")
 			throw new IllegalArgumentException();
 		this.desc = desc;
 	}
 
 	/**
 	 * set the maxBudget
-	 * @param maxBudget Integer value
-     */
-	public void setMaxBudget(Integer maxBudget) {
-		if(maxBudget == null)
+	 * 
+	 * @param maxBudget
+	 *            Integer value
+	 */
+	public void setMaxBudget(Integer maxBudget)
+	{
+		if (maxBudget == null)
 			throw new IllegalArgumentException();
 		this.maxBudget = maxBudget;
 	}
 
 	/**
 	 * set the usedBudget
-	 * @param usedBudget Integer value
-     */
-	public void setUsedBudget(Integer usedBudget) {
-		if(usedBudget == null)
+	 * 
+	 * @param usedBudget
+	 *            Integer value
+	 */
+	public void setUsedBudget(Integer usedBudget)
+	{
+		if (usedBudget == null)
 			throw new IllegalArgumentException();
 		this.usedBudget = usedBudget;
 	}
 
 	/**
 	 * get the used budget
+	 * 
 	 * @return Integer value
-     */
-	public Integer getUsedBudget() {
+	 */
+	public Integer getUsedBudget()
+	{
 		return usedBudget;
 	}
 
 	/**
 	 * get the description
+	 * 
 	 * @return String value
-     */
-	public String getDesc() {
+	 */
+	public String getDesc()
+	{
 		return desc;
 	}
 
 	/**
 	 * get the jobNr
+	 * 
 	 * @return Integer value
-     */
-	public Integer getJobNr() {
+	 */
+	public Integer getJobNr()
+	{
 		return jobNr;
 	}
 
 	/**
 	 * get the posNr
+	 * 
 	 * @return Integer value
-     */
-	public Integer getPosNr() {
+	 */
+	public Integer getPosNr()
+	{
 		return posNr;
 	}
 
 	/**
 	 * get the payMode
+	 * 
 	 * @return Integer value
-     */
-	public Integer getPayMode() {
+	 */
+	public Integer getPayMode()
+	{
 		return payMode;
 	}
 
 	/**
 	 * get the customerID
+	 * 
 	 * @return Integer value
-     */
-	public Integer getCustomerID() {
+	 */
+	public Integer getCustomerID()
+	{
 		return customerID;
 	}
 
 	/**
 	 * get the isIntern value
+	 * 
 	 * @return Boolean value
-     */
+	 */
 	public Boolean isIntern()
 	{
 		return isIntern;
@@ -197,17 +278,20 @@ public class Job implements Serializable {
 
 	/**
 	 * set the isIntern value
-	 * @param isIntern Boolean value
-     */
+	 * 
+	 * @param isIntern
+	 *            Boolean value
+	 */
 	public void setIntern(Boolean isIntern)
 	{
 		this.isIntern = isIntern;
 	}
-	
+
 	/**
 	 * get the isLocked value
+	 * 
 	 * @return Boolean value
-     */
+	 */
 	public Boolean isLocked()
 	{
 		return isLocked;
@@ -215,8 +299,10 @@ public class Job implements Serializable {
 
 	/**
 	 * set the isLocked value
-	 * @param isLocked Boolean value
-     */
+	 * 
+	 * @param isLocked
+	 *            Boolean value
+	 */
 	public void setLocked(Boolean isLocked)
 	{
 		this.isLocked = isLocked;
@@ -224,45 +310,51 @@ public class Job implements Serializable {
 
 	/**
 	 * custom toString method
+	 * 
 	 * @return String value
-     */
-	public String toString() {
+	 */
+	public String toString()
+	{
 		String payMode;
-		switch(this.payMode)
+		switch (this.payMode)
 		{
-			case 0:
-				payMode = "NF";
-				break;
-			case 1:
-				payMode = "TM";
-				break;
-			case 2:
-				payMode = "FP";
-				break;
-			default:
-				payMode = "UNDEFINED";
+		case 0:
+			payMode = "NF";
+			break;
+		case 1:
+			payMode = "TM";
+			break;
+		case 2:
+			payMode = "FP";
+			break;
+		default:
+			payMode = "UNDEFINED";
 		}
-			
-		return this.jobNr + "-" + this.posNr + "-" + payMode + " | " + this.customerID + " | " + this.desc;
+
+		return this.jobNr + "-" + this.posNr + "-" + payMode + " | "
+				+ this.customerID + " | " + this.desc;
 	}
 
-	public boolean equals(Object obj) {
-		if(obj == null)
+	public boolean equals(Object obj)
+	{
+		if (obj == null)
 			return false;
 		else if (obj instanceof Job)
 		{
 			Job temp = (Job) obj;
-			return this.jobNr.equals(temp.jobNr) && this.posNr.equals(temp.posNr);
+			return this.jobNr.equals(temp.jobNr)
+					&& this.posNr.equals(temp.posNr);
 		} else
 			return false;
 	}
-	
+
 	@Override
-    public int hashCode() {
-		if(jobNr == null || posNr == null)
+	public int hashCode()
+	{
+		if (jobNr == null || posNr == null)
 			return 0;
-		Integer hashInt = jobNr*1000 + posNr;
-        return hashInt.hashCode();
-    }
+		Integer hashInt = jobNr * 1000 + posNr;
+		return hashInt.hashCode();
+	}
 
 }

@@ -89,9 +89,10 @@ public class CustomerEntity implements Serializable
 	{
 		this.name = name;
 	}
-	
-	public boolean equals(Object obj) {
-		if(obj == null)
+
+	public boolean equals(Object obj)
+	{
+		if (obj == null)
 			return false;
 		else if (obj instanceof CustomerEntity)
 		{
@@ -100,10 +101,11 @@ public class CustomerEntity implements Serializable
 		} else
 			return false;
 	}
-	
+
 	@Override
-    public int hashCode() {
-        return id == null ? 0 : id.hashCode();
-    }
+	public int hashCode()
+	{
+		return id == null ? 0 : id.hashCode();
+	}
 
 }

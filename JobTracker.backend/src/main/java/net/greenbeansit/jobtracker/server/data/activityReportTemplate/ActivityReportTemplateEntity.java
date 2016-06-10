@@ -67,7 +67,7 @@ public class ActivityReportTemplateEntity implements Serializable
 		this.taskId = taskId;
 		this.author = author;
 	}
-	
+
 	/**
 	 * Creates a new {@link ActivityReportTemplateEntity}.
 	 * 
@@ -79,10 +79,10 @@ public class ActivityReportTemplateEntity implements Serializable
 	 *            corresponding id for eventual JIRA compatibility
 	 * @param author
 	 *            id of the author
-	 * @param jobNr 
+	 * @param jobNr
 	 *            3 to 6 digits
 	 * @param posNr
-	 * 			  up to 3 digits
+	 *            up to 3 digits
 	 */
 	public ActivityReportTemplateEntity(String name, String text,
 			Integer taskId, Integer author, Integer jobNr, Integer posNr)
@@ -179,7 +179,7 @@ public class ActivityReportTemplateEntity implements Serializable
 	{
 		this.author = author;
 	}
-	
+
 	/**
 	 * Gets the job number
 	 * 
@@ -189,17 +189,18 @@ public class ActivityReportTemplateEntity implements Serializable
 	{
 		return jobNo;
 	}
-	
+
 	/**
 	 * Sets the job number
 	 * 
-	 * @param jobNo 3 to 6 digits
+	 * @param jobNo
+	 *            3 to 6 digits
 	 */
 	public void setJobNo(Integer jobNo)
 	{
 		this.jobNo = jobNo;
 	}
-	
+
 	/**
 	 * Gets the position number
 	 * 
@@ -209,34 +210,38 @@ public class ActivityReportTemplateEntity implements Serializable
 	{
 		return posNo;
 	}
-	
+
 	/**
 	 * Sets the position number
 	 * 
-	 * @param posNo up to 3 digits
+	 * @param posNo
+	 *            up to 3 digits
 	 */
 	public void setPosNo(Integer posNo)
 	{
 		this.posNo = posNo;
 	}
-	
-	public boolean equals(Object obj) {
-		if(obj == null)
+
+	public boolean equals(Object obj)
+	{
+		if (obj == null)
 			return false;
 		else if (obj instanceof ActivityReportTemplateEntity)
 		{
 			ActivityReportTemplateEntity temp = (ActivityReportTemplateEntity) obj;
-			return this.author.equals(temp.author) && this.name.equals(temp.name);
+			return this.author.equals(temp.author)
+					&& this.name.equals(temp.name);
 		} else
 			return false;
 	}
-	
+
 	@Override
-    public int hashCode() {
-		if(author == null || name == null)
+	public int hashCode()
+	{
+		if (author == null || name == null)
 			return 0;
 		String hashString = author + name;
-        return hashString.hashCode();
-    }
+		return hashString.hashCode();
+	}
 
 }

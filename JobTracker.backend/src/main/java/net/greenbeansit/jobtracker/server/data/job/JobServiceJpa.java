@@ -84,7 +84,7 @@ public class JobServiceJpa implements JobDataService
 		{
 			jobs.add(getJob(relation.getJobNr(), relation.getPosNo()));
 		}
-		//Add internal jobs
+		// Add internal jobs
 		for (JobEntity job : repository.findByInternTrue())
 		{
 			jobs.add(convert(job));
@@ -106,7 +106,7 @@ public class JobServiceJpa implements JobDataService
 		return new Job(entity.getJobNr(), entity.getPosNr(),
 				entity.getAccountingMode(), entity.getCustomerID(),
 				entity.getDesc(), entity.getMaxBudget(), entity.getUsedBudget(),
-				entity.getLocked());
+				entity.getIntern(), entity.getLocked());
 	}
 
 	/**
@@ -122,6 +122,6 @@ public class JobServiceJpa implements JobDataService
 			return null;
 		return new JobEntity(job.getJobNr(), job.getPosNr(), job.getPayMode(),
 				job.getCustomerID(), job.getDesc(), job.getMaxBudget(),
-				job.getUsedBudget(), job.isLocked());
+				job.getUsedBudget(), job.isIntern(), job.isLocked());
 	}
 }

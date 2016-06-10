@@ -69,7 +69,7 @@ public class ActivityReportServiceJpa implements ActivityReportDataService
 	public boolean save(ActivityReport report)
 	{
 		ActivityReportEntity entity = repository.findOne(report.getId());
-		if(entity != null)
+		if (entity != null)
 		{
 			entity.setAuthor(report.getAuthor());
 			entity.setBeginDate((Date) report.getDate());

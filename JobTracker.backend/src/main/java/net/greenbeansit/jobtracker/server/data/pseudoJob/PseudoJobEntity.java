@@ -116,20 +116,22 @@ public class PseudoJobEntity implements Serializable
 	{
 		this.author = author;
 	}
-	
-	public boolean equals(Object obj) {
-        if(obj == null)
-            return false;
-        else if (obj instanceof PseudoJobEntity)
-        {
-            PseudoJobEntity temp = (PseudoJobEntity) obj;
-            return this.id.equals(temp.id);
-        } else
-            return false;
-    }
-	
+
+	public boolean equals(Object obj)
+	{
+		if (obj == null)
+			return false;
+		else if (obj instanceof PseudoJobEntity)
+		{
+			PseudoJobEntity temp = (PseudoJobEntity) obj;
+			return this.id.equals(temp.id);
+		} else
+			return false;
+	}
+
 	@Override
-    public int hashCode() {
-        return id == null ? 0 : id.hashCode();
-    }
+	public int hashCode()
+	{
+		return id == null ? 0 : id.hashCode();
+	}
 }

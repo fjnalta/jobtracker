@@ -18,7 +18,8 @@ public class Customer implements Serializable
 	/**
 	 * Empty Constructor
 	 */
-	public Customer(){
+	public Customer()
+	{
 
 	}
 
@@ -38,8 +39,9 @@ public class Customer implements Serializable
 
 	/**
 	 * Gets the Id of the Customer
+	 * 
 	 * @return the id.
-     */
+	 */
 	public Integer getId()
 	{
 		return id;
@@ -47,8 +49,10 @@ public class Customer implements Serializable
 
 	/**
 	 * Sets the id of the Customer
-	 * @param id the id of the Customer.
-     */
+	 * 
+	 * @param id
+	 *            the id of the Customer.
+	 */
 	public void setId(Integer id)
 	{
 		if (id == null)
@@ -60,8 +64,9 @@ public class Customer implements Serializable
 
 	/**
 	 * Gets the Name of the Customer
+	 * 
 	 * @return the Name of the Customer.
-     */
+	 */
 	public String getName()
 	{
 		return name;
@@ -69,8 +74,10 @@ public class Customer implements Serializable
 
 	/**
 	 * Sets the Name of the Customer.
-	 * @param name the Name of the Customer.
-     */
+	 * 
+	 * @param name
+	 *            the Name of the Customer.
+	 */
 	public void setName(String name)
 	{
 		if (name == null)
@@ -79,9 +86,10 @@ public class Customer implements Serializable
 		}
 		this.name = name;
 	}
-	
-	public boolean equals(Object obj) {
-		if(obj == null)
+
+	public boolean equals(Object obj)
+	{
+		if (obj == null)
 			return false;
 		else if (obj instanceof Customer)
 		{
@@ -90,9 +98,10 @@ public class Customer implements Serializable
 		} else
 			return false;
 	}
-	
+
 	@Override
-    public int hashCode() {
-        return id == null ? 0 : id.hashCode();
-    }
+	public int hashCode()
+	{
+		return id == null ? 0 : id.hashCode();
+	}
 }

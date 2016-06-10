@@ -76,6 +76,7 @@ public class JobEntity implements Serializable
 	 * @param isLocked
 	 *            true if job is locked for further booking
 	 */
+	@Deprecated
 	public JobEntity(Integer jobNr, Integer posNr, Integer accountingMode,
 			Integer customerID, String desc, Integer maxBudget,
 			Integer usedBudget, boolean isLocked)
@@ -88,6 +89,43 @@ public class JobEntity implements Serializable
 		this.maxBudget = maxBudget;
 		this.usedBudget = usedBudget;
 		this.intern = false;
+		this.locked = isLocked;
+	}
+
+	/**
+	 * Creates a new {@link JobEntity}.
+	 * 
+	 * @param jobNr
+	 *            3 to 6 digits
+	 * @param posNr
+	 *            up to 3 digits
+	 * @param accountingMode
+	 *            0 = NF, 1 = TM (Time & Material), 2 = FP (Festpreis)
+	 * @param customerID
+	 *            id of the customer
+	 * @param desc
+	 *            short description of the job (max. 30 characters)
+	 * @param maxBudget
+	 *            maximum budget
+	 * @param usedBudget
+	 *            already used budget
+	 * @param isIntern
+	 *            true if internal job and not to be displayed as filter option
+	 * @param isLocked
+	 *            true if job is locked for further booking
+	 */
+	public JobEntity(Integer jobNr, Integer posNr, Integer accountingMode,
+			Integer customerID, String desc, Integer maxBudget,
+			Integer usedBudget, boolean isIntern, boolean isLocked)
+	{
+		this.jobNr = jobNr;
+		this.posNr = posNr;
+		this.accountingMode = accountingMode;
+		this.customerID = customerID;
+		this.desc = desc;
+		this.maxBudget = maxBudget;
+		this.usedBudget = usedBudget;
+		this.intern = isIntern;
 		this.locked = isLocked;
 	}
 
@@ -269,24 +307,27 @@ public class JobEntity implements Serializable
 	{
 		this.locked = isLocked;
 	}
-	
-	public boolean equals(Object obj) {
-		if(obj == null)
+
+	public boolean equals(Object obj)
+	{
+		if (obj == null)
 			return false;
 		else if (obj instanceof JobEntity)
 		{
 			JobEntity temp = (JobEntity) obj;
-			return this.jobNr.equals(temp.jobNr) && this.posNr.equals(temp.posNr);
+			return this.jobNr.equals(temp.jobNr)
+					&& this.posNr.equals(temp.posNr);
 		} else
 			return false;
 	}
-	
+
 	@Override
-    public int hashCode() {
-		if(jobNr == null || posNr == null)
+	public int hashCode()
+	{
+		if (jobNr == null || posNr == null)
 			return 0;
-		Integer hashInt = jobNr*1000 + posNr;
-        return hashInt.hashCode();
-    }
+		Integer hashInt = jobNr * 1000 + posNr;
+		return hashInt.hashCode();
+	}
 
 }

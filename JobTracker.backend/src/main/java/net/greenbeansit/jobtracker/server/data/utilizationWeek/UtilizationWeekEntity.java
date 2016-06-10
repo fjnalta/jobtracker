@@ -64,32 +64,34 @@ public class UtilizationWeekEntity implements Serializable
 
 	/**
 	 * Initializes a new Instance of {@link UtilizationWeekEntity}
+	 * 
 	 * @param id
-	 * 			the Id of the Utilization Week
+	 *            the Id of the Utilization Week
 	 * @param author
-	 * 			the Author id
+	 *            the Author id
 	 * @param name
-	 * 			the name
+	 *            the name
 	 * @param text
-	 * 			the Description
+	 *            the Description
 	 * @param beginDate
-	 * 			the Begin Date
+	 *            the Begin Date
 	 * @param beginTime
-	 * 			the Begin Time
+	 *            the Begin Time
 	 * @param endDate
-	 * 			the End Date
+	 *            the End Date
 	 * @param endTime
-	 * 			the End Time
+	 *            the End Time
 	 * @param possibility
-	 * 			the possibility
-     * @param breakTime
-	 * 			the break Time
-     * @param pseudoJobId
-	 * 			the pseudoJobId
-     */
-	public UtilizationWeekEntity(Integer id, Integer author, String name, String text, Date beginDate,
-								 Integer beginTime, Date endDate, Integer endTime,
-								 Integer possibility, Integer breakTime, Integer pseudoJobId)
+	 *            the possibility
+	 * @param breakTime
+	 *            the break Time
+	 * @param pseudoJobId
+	 *            the pseudoJobId
+	 */
+	public UtilizationWeekEntity(Integer id, Integer author, String name,
+			String text, Date beginDate, Integer beginTime, Date endDate,
+			Integer endTime, Integer possibility, Integer breakTime,
+			Integer pseudoJobId)
 	{
 		this.id = id;
 		this.author = author;
@@ -130,16 +132,19 @@ public class UtilizationWeekEntity implements Serializable
 	}
 
 	/**
-	 * @param name set name
+	 * @param name
+	 *            set name
 	 */
-	public void setName(String name) {
+	public void setName(String name)
+	{
 		this.name = name;
 	}
 
 	/**
 	 * @return the name
 	 */
-	public String getName(){
+	public String getName()
+	{
 		return this.name;
 	}
 
@@ -154,19 +159,25 @@ public class UtilizationWeekEntity implements Serializable
 
 	/**
 	 * Gets the Text
+	 * 
 	 * @return the text.
-     */
-	public String getText() {
+	 */
+	public String getText()
+	{
 		return this.text;
 	}
 
 	/**
 	 * Sets the text.
-	 * @param text the Text.
-     */
-	public void setText(String text) {
+	 * 
+	 * @param text
+	 *            the Text.
+	 */
+	public void setText(String text)
+	{
 		this.text = text;
 	}
+
 	/**
 	 * @return the begin date
 	 */
@@ -186,49 +197,64 @@ public class UtilizationWeekEntity implements Serializable
 
 	/**
 	 * Returns the Begin Time of the Utilization Week
+	 * 
 	 * @return the begin Time
-     */
-	public Integer getBeginTime(){
+	 */
+	public Integer getBeginTime()
+	{
 		return this.beginTime;
 	}
 
 	/**
 	 * Sets the Begin Time
-	 * @param start the begin Time
-     */
-	public void setBeginTime(Integer start) {
+	 * 
+	 * @param start
+	 *            the begin Time
+	 */
+	public void setBeginTime(Integer start)
+	{
 		this.beginTime = start;
 	}
 
 	/**
 	 * Gets the End Date
+	 * 
 	 * @return the End Date.
-     */
-	public Date getEndDate(){
+	 */
+	public Date getEndDate()
+	{
 		return this.endDate;
 	}
 
 	/**
 	 * Sets the End Date
-	 * @param end the endDate.
-     */
-	public void setEndDate(Date end) {
+	 * 
+	 * @param end
+	 *            the endDate.
+	 */
+	public void setEndDate(Date end)
+	{
 		this.endDate = end;
 	}
 
 	/**
 	 * Gets the End Time
+	 * 
 	 * @return the End Time
-     */
-	public Integer getEndTime(){
+	 */
+	public Integer getEndTime()
+	{
 		return this.endTime;
 	}
 
 	/**
 	 * Sets the end Time
-	 * @param end the End Time
-     */
-	public void setEndTime(Integer end) {
+	 * 
+	 * @param end
+	 *            the End Time
+	 */
+	public void setEndTime(Integer end)
+	{
 		this.endTime = end;
 	}
 
@@ -251,17 +277,22 @@ public class UtilizationWeekEntity implements Serializable
 
 	/**
 	 * Gets the break Time
+	 * 
 	 * @return the break Time
-     */
-	public Integer getBreakTime(){
+	 */
+	public Integer getBreakTime()
+	{
 		return this.breakTime;
 	}
 
 	/**
 	 * Sets the break Time
-	 * @param breakTime the Break Time
-     */
-	public void setBreakTime(Integer breakTime){
+	 * 
+	 * @param breakTime
+	 *            the Break Time
+	 */
+	public void setBreakTime(Integer breakTime)
+	{
 		this.breakTime = breakTime;
 	}
 
@@ -282,8 +313,9 @@ public class UtilizationWeekEntity implements Serializable
 		this.pseudoJobId = pseudoJobId;
 	}
 
-	public boolean equals(Object obj) {
-		if(obj == null)
+	public boolean equals(Object obj)
+	{
+		if (obj == null)
 			return false;
 		else if (obj instanceof UtilizationWeekEntity)
 		{
@@ -294,7 +326,8 @@ public class UtilizationWeekEntity implements Serializable
 	}
 
 	@Override
-	public int hashCode() {
+	public int hashCode()
+	{
 		return id == null ? 0 : id.hashCode();
 	}
 }

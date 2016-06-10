@@ -16,14 +16,14 @@ public class User implements Serializable
 	/**
 	 * 
 	 */
-	private static final long	serialVersionUID	= 5141608788110790303L;
-	private Integer				id = null;
-	private String				name = null, surname = null;
-	private Integer				supervisor = null;
-	private Integer				utilization = null;
-	private List<JobID>			assignedJobs= new ArrayList<JobID>();
-	private Integer				remainingVacationDays = null;
-	
+	private static final long	serialVersionUID		= 5141608788110790303L;
+	private Integer				id						= null;
+	private String				name					= null, surname = null;
+	private Integer				supervisor				= null;
+	private Integer				utilization				= null;
+	private List<JobID>			assignedJobs			= new ArrayList<JobID>();
+	private Integer				remainingVacationDays	= null;
+
 	/**
 	 * Initializes a new instance of the {@link User} class.
 	 */
@@ -34,11 +34,15 @@ public class User implements Serializable
 
 	/**
 	 *
-	 * @param id user ID
-	 * @param name user name
-	 * @param surname user surname
-	 * @param supervisor superviser ID for this user
-     */
+	 * @param id
+	 *            user ID
+	 * @param name
+	 *            user name
+	 * @param surname
+	 *            user surname
+	 * @param supervisor
+	 *            superviser ID for this user
+	 */
 	public User(Integer id, String name, String surname, Integer supervisor)
 	{
 		this.id = id;
@@ -50,17 +54,21 @@ public class User implements Serializable
 	/**
 	 *
 	 * @return id of this user
-     */
-	public Integer getId() {
+	 */
+	public Integer getId()
+	{
 		return id;
 	}
 
 	/**
 	 * set id of this user
-	 * @param id Integer value
-     */
-	public void setId(Integer id) {
-		if(id == null)
+	 * 
+	 * @param id
+	 *            Integer value
+	 */
+	public void setId(Integer id)
+	{
+		if (id == null)
 		{
 			throw new IllegalArgumentException();
 		}
@@ -69,18 +77,23 @@ public class User implements Serializable
 
 	/**
 	 * get the name of this user
+	 * 
 	 * @return String value name
-     */
-	public String getName() {
+	 */
+	public String getName()
+	{
 		return name;
 	}
 
 	/**
 	 * set the name of this user
-	 * @param name String value name
-     */
-	public void setName(String name) {
-		if(name == "")
+	 * 
+	 * @param name
+	 *            String value name
+	 */
+	public void setName(String name)
+	{
+		if (name == "")
 		{
 			throw new IllegalArgumentException();
 		}
@@ -89,18 +102,23 @@ public class User implements Serializable
 
 	/**
 	 * get the surname of this user
+	 * 
 	 * @return the String value of surname
-     */
-	public String getSurname() {
+	 */
+	public String getSurname()
+	{
 		return surname;
 	}
 
 	/**
 	 * set the surname of this user
-	 * @param surname String value
-     */
-	public void setSurname(String surname) {
-		if(surname == "")
+	 * 
+	 * @param surname
+	 *            String value
+	 */
+	public void setSurname(String surname)
+	{
+		if (surname == "")
 		{
 			throw new IllegalArgumentException();
 		}
@@ -109,18 +127,23 @@ public class User implements Serializable
 
 	/**
 	 * get the superviser ID in charge for this user
+	 * 
 	 * @return Integer value
-     */
-	public Integer getSupervisor() {
+	 */
+	public Integer getSupervisor()
+	{
 		return supervisor;
 	}
 
 	/**
 	 * set teh superviser id for this user
-	 * @param supervisor Integer value
-     */
-	public void setSupervisor(Integer supervisor) {
-		if(supervisor == null)
+	 * 
+	 * @param supervisor
+	 *            Integer value
+	 */
+	public void setSupervisor(Integer supervisor)
+	{
+		if (supervisor == null)
 		{
 			throw new IllegalArgumentException();
 		}
@@ -129,8 +152,9 @@ public class User implements Serializable
 
 	/**
 	 * get the utilization of this user
+	 * 
 	 * @return utilization integer value
-     */
+	 */
 	public Integer getUtilization()
 	{
 		return utilization;
@@ -138,8 +162,10 @@ public class User implements Serializable
 
 	/**
 	 * set the utilization for this user
-	 * @param utilization Integer value
-     */
+	 * 
+	 * @param utilization
+	 *            Integer value
+	 */
 	public void setUtilization(Integer utilization)
 	{
 		this.utilization = utilization;
@@ -147,8 +173,9 @@ public class User implements Serializable
 
 	/**
 	 * get the assigned jobs for this user
+	 * 
 	 * @return all assigned jobs for this user
-     */
+	 */
 	public List<JobID> getAssignedJobs()
 	{
 		return assignedJobs;
@@ -156,14 +183,15 @@ public class User implements Serializable
 
 	/**
 	 * set the assigned jobs for this user
-	 * @param assignedJobs List<JOBID> object
-     */
+	 * 
+	 * @param assignedJobs
+	 *            List<JOBID> object
+	 */
 	public void setAssignedJobs(List<JobID> assignedJobs)
 	{
 		this.assignedJobs = assignedJobs;
 	}
-	
-	
+
 	/**
 	 * Get the remaining vacation days.
 	 * 
@@ -178,15 +206,16 @@ public class User implements Serializable
 	 * Sets the remaining vacation days.
 	 * 
 	 * @param remainingVacationDays
-	 * 				the remaining vacation days.
+	 *            the remaining vacation days.
 	 */
 	public void setRemainingVacationDays(Integer remainingVacationDays)
 	{
 		this.remainingVacationDays = remainingVacationDays;
 	}
 
-	public boolean equals(Object obj) {
-		if(obj == null)
+	public boolean equals(Object obj)
+	{
+		if (obj == null)
 			return false;
 		else if (obj instanceof User)
 		{
@@ -195,9 +224,10 @@ public class User implements Serializable
 		} else
 			return false;
 	}
-	
+
 	@Override
-    public int hashCode() {
-        return id == null ? 0 : id.hashCode();
-    }
+	public int hashCode()
+	{
+		return id == null ? 0 : id.hashCode();
+	}
 }

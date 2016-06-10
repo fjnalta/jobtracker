@@ -73,32 +73,32 @@ public class UtilizationWeekServiceJpa implements UtilizationWeekDataService
 	{
 		repository.delete(utilId);
 	}
-	
-//	@Override
-//	public List<UtilizationWeek> getByUserAndMonth(Integer authorId,
-//			Integer year, Integer month)
-//	{
-//		ArrayList<UtilizationWeek> list = new ArrayList<UtilizationWeek>();
-//		for (UtilizationWeekEntity entity : repository
-//				.findByAuthorAndMonth(authorId, year, month))
-//		{
-//			list.add(convert(entity));
-//		}
-//		return list;
-//	}
-//
-//	@Override
-//	public List<UtilizationWeek> getByUserAndYear(Integer authorId,
-//			Integer year)
-//	{
-//		ArrayList<UtilizationWeek> list = new ArrayList<UtilizationWeek>();
-//		for (UtilizationWeekEntity entity : repository
-//				.findByAuthorAndYear(authorId, year))
-//		{
-//			list.add(convert(entity));
-//		}
-//		return list;
-//	}
+
+	// @Override
+	// public List<UtilizationWeek> getByUserAndMonth(Integer authorId,
+	// Integer year, Integer month)
+	// {
+	// ArrayList<UtilizationWeek> list = new ArrayList<UtilizationWeek>();
+	// for (UtilizationWeekEntity entity : repository
+	// .findByAuthorAndMonth(authorId, year, month))
+	// {
+	// list.add(convert(entity));
+	// }
+	// return list;
+	// }
+	//
+	// @Override
+	// public List<UtilizationWeek> getByUserAndYear(Integer authorId,
+	// Integer year)
+	// {
+	// ArrayList<UtilizationWeek> list = new ArrayList<UtilizationWeek>();
+	// for (UtilizationWeekEntity entity : repository
+	// .findByAuthorAndYear(authorId, year))
+	// {
+	// list.add(convert(entity));
+	// }
+	// return list;
+	// }
 
 	/**
 	 * Converty the {@link UtilizationWeekEntity} to {@link UtilizationWeek}
@@ -111,9 +111,10 @@ public class UtilizationWeekServiceJpa implements UtilizationWeekDataService
 	{
 		if (entity == null)
 			return null;
-		return new UtilizationWeek(entity.getId(), entity.getAuthor(), entity.getName(),
-				entity.getText(), new java.util.Date(entity.getBeginDate().getTime()), 0,
-				0, new java.util.Date(entity.getEndDate().getTime()),
+		return new UtilizationWeek(entity.getId(), entity.getAuthor(),
+				entity.getName(), entity.getText(),
+				new java.util.Date(entity.getBeginDate().getTime()), 0, 0,
+				new java.util.Date(entity.getEndDate().getTime()),
 				entity.getPossibilty(), entity.getPseudoJobId(),
 				entity.getBreakTime());
 	}
@@ -129,8 +130,9 @@ public class UtilizationWeekServiceJpa implements UtilizationWeekDataService
 	{
 		if (util == null)
 			return null;
-		return new UtilizationWeekEntity(util.getId(), util.getAuthor(), util.getName(),
-				util.getText(), new Date(util.getBeginDate().getTime()), 0,
+		return new UtilizationWeekEntity(util.getId(), util.getAuthor(),
+				util.getName(), util.getText(),
+				new Date(util.getBeginDate().getTime()), 0,
 				new Date(util.getEndDate().getTime()), 0, util.getPossibility(),
 				util.getBreakTime(), util.getPseudoJobId());
 	}

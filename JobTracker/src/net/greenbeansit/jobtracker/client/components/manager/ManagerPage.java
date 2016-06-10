@@ -238,7 +238,10 @@ public class ManagerPage extends Composite
 		selectJob.clear();
 
 		for (Job job : jobs)
-			selectJob.add(new JobSelectOption(job));
+		{
+			if(!job.isIntern())
+				selectJob.add(new JobSelectOption(job));
+		}
 
 		selectJob.refresh();
 	}

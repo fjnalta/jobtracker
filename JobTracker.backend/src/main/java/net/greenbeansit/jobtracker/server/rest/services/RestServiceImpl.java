@@ -387,9 +387,10 @@ public class RestServiceImpl implements RestService
 	public List<JobTask> getJobTasks(Integer user)
 	{
 		List<JobTask> tasks = new ArrayList<JobTask>();
-		for(Job job : jobService.getByUser(user))
+		for (Job job : jobService.getByUser(user))
 		{
-			tasks.addAll(jobTaskService.getByJobNr(job.getJobNr(), job.getPosNr()));
+			tasks.addAll(
+					jobTaskService.getByJobNr(job.getJobNr(), job.getPosNr()));
 		}
 		return tasks;
 	}
