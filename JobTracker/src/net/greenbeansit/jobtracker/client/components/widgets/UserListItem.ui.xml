@@ -12,6 +12,7 @@
 		width: 30%;
 		overflow: hidden;
 		float: left;
+		display: inline-block;
 	}
 	
 	.barUtilization {
@@ -21,7 +22,6 @@
 	
 	.barUtilizationContainer {
 		width: 60%;
-		height: 80%;
 		margin-top: auto;
 		margin-bottom: auto;
 		margin-left: 0;
@@ -34,8 +34,8 @@
 	.spanUtilization {
 		width: 10%;
 		overflow: hidden;
-		float: right;
 		text-align: right;
+		display: inline-block;
 	}
 	</ui:style>
 	<h:ClearFix addStyleNames="{style.container}" ui:field="container">
