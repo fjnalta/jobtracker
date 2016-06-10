@@ -299,7 +299,7 @@ public class CapacityCalendarWidget extends Composite implements CapaCalendarObs
         fullcalendar.removeAllEvents();
         if (!reports.isEmpty()) {
             for (UtilizationWeek ap : reports) {
-                GWT.log(ap.getId() + "");
+//                GWT.log(ap.getId() + "");
                 CapacityReportEvent e = new CapacityReportEvent(ap, ap.getId() + "", ap.getText(), true, true, true);
                 ap.getBeginDate().setYear((2016 - 1900));
                 e.setStart(calendarHandler.getISO8601StringForDate(ap.getBeginDate(), ap.getBeginTime()));

@@ -249,16 +249,22 @@ public class CapacityNav extends Composite implements LogicObservable, CapaCalen
 
         if (currentUtilizationWeek != null) {
             for (Option option : selectJob.getItems()) {
-                ((SelectJobOption) option).setSelected(false);
-                if (((SelectJobOption) option).getUtilizationWeek().getName().equals(currentUtilizationWeek.getName())) {
-                    option.setSelected(true);
-                }
+            	if(option instanceof SelectJobOption)
+            	{
+            		((SelectJobOption) option).setSelected(false);
+            		if (((SelectJobOption) option).getUtilizationWeek().getName().equals(currentUtilizationWeek.getName())) {
+            			option.setSelected(true);
+            		}
+            	}
             }
             for (Option option : selectCustomer.getItems()) {
-                ((SelectJobOption) option).setSelected(false);
-                if (((CustomerOption) option).getCustomer().getId().equals(currentUtilizationWeek.getCustomerId())) {
-                    option.setSelected(true);
-                }
+            	if(option instanceof SelectJobOption)
+            	{
+            		((SelectJobOption) option).setSelected(false);
+            		if (((CustomerOption) option).getCustomer().getId().equals(currentUtilizationWeek.getCustomerId())) {
+            			option.setSelected(true);
+            		}
+            	}
             }
         }
 
@@ -304,10 +310,10 @@ public class CapacityNav extends Composite implements LogicObservable, CapaCalen
             possibilityPercentage.setText(calendarHandler.getCurrentUtilizationWeek().getPossibility().toString());
 
             for (Option option : selectJob.getItems()) {
-                GWT.log("DONE!");
-                GWT.log(((SelectJobOption) option).getUtilizationWeek().getName());
-                GWT.log(calendarHandler.getCurrentUtilizationWeek().getName());
-                GWT.log(currentUtilizationWeek.getName());
+//                GWT.log("DONE!");
+//                GWT.log(((SelectJobOption) option).getUtilizationWeek().getName());
+//                GWT.log(calendarHandler.getCurrentUtilizationWeek().getName());
+//                GWT.log(currentUtilizationWeek.getName());
                 ((SelectJobOption) option).setSelected(false);
                 if (((SelectJobOption) option).getUtilizationWeek().getName().equals(calendarHandler.getCurrentUtilizationWeek().getName())) {
 //                if (((SelectJobOption) option).getUtilizationWeek().getName().equals(currentUtilizationWeek.getName())) {
