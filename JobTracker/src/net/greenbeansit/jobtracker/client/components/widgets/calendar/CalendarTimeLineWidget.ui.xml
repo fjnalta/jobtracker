@@ -10,6 +10,7 @@
 		<b:Column size="XS_12,SM_6,MD_6,LG_6">
 			<b:Button ui:field="buttonWeek" addStyleNames="{style.buttonStyle}" />
 			<b:Button ui:field="buttonMonth" addStyleNames="{style.buttonStyle}" />
+			<b:Button ui:field="buttonYear" addStyleNames="{style.buttonStyle}" />
 		</b:Column>
 		<b:Column size="XS_12,SM_6,MD_6,LG_6">
 			<h:ClearFix addStyleNames="{style.textContainer}">
