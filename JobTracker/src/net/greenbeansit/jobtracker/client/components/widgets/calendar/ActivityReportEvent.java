@@ -168,8 +168,6 @@ public class ActivityReportEvent extends Event implements LogicObservable {
 	}
 
 	public void setOtherTitle() {
-		GWT.log("set other name");
-		// yyyy-mm-ddThh:mm:ss.000Z
 		String pause;
 		if (this.getAp().getBreakTime() > 0) {
 			pause = "Pause:" + this.getAp().getBreakTime() / 60 + "h" + this.getAp().getBreakTime() % 60 + "min";
