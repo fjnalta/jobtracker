@@ -7,6 +7,7 @@ import net.greenbeansit.jobtracker.client.components.LogicHandler;
 import net.greenbeansit.jobtracker.shared.Job;
 import org.gwtbootstrap3.client.ui.Button;
 import org.gwtbootstrap3.client.ui.FormLabel;
+import org.gwtbootstrap3.client.ui.Heading;
 import org.gwtbootstrap3.client.ui.TextArea;
 import org.gwtbootstrap3.client.ui.TextBox;
 import org.gwtbootstrap3.extras.select.client.ui.OptGroup;
@@ -75,6 +76,10 @@ public class WorkDescriptionWidget extends Composite implements LogicObservable
 	Button buttonLoad;
 
 	
+
+	@UiField
+	FormLabel headingCollapseTemplate;
+	
 	ActivityReportTemplate selectedTemplate;
 
 	/**
@@ -101,6 +106,7 @@ public class WorkDescriptionWidget extends Composite implements LogicObservable
 		buttonSave.setText(constants.buttonSaveTemplate());
 
 
+		headingCollapseTemplate.setText(constants.buttonTemplateText());
 		
 		labelDescription.setText(constants.headingWorkDescription());
 		labelTask.setText(constants.headingSelectTask());
