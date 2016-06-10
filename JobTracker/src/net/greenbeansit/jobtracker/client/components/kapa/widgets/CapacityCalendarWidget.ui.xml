@@ -6,13 +6,11 @@
              xmlns:a="urn:import:com.google.gwt.user.client.ui">
     <ui:style>
         .mainColumn {
-            display: table-cell;
             float: none;
             vertical-align: top;
         }
 
         .mainContainer {
-            display: table;
         }
 
     </ui:style>

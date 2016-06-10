@@ -15,22 +15,22 @@
     }
 	</ui:style>
 	<b:Container fluid="true">
-        <b:Column size="XS_5,SM_5,MD_5,LG_5">
-            <b:FormLabel>Projektstart:</b:FormLabel>
+        <b:Column size="XS_6,SM_6,MD_6,LG_6">
+            <b:FormLabel>Projektstart</b:FormLabel>
             <b:TextBox readOnly="true" ui:field="projectStart"
                        addStyleNames="{style.buttonText}"></b:TextBox>
         </b:Column>
-        <b:Column size="XS_5,SM_5,MD_5,LG_5">
-            <b:FormLabel>Projektende:</b:FormLabel>
+        <b:Column size="XS_6,SM_6,MD_6,LG_6">
+            <b:FormLabel>Projektende</b:FormLabel>
             <b:TextBox readOnly="true" ui:field="projectEnd"
                        addStyleNames="{style.buttonText}"></b:TextBox>
         </b:Column>
-        <b:Column size="XS_1,SM_1,MD_1,LG_1">
-            <b:FormLabel>Löschen:</b:FormLabel>
+        <b:Column offset="XS_8,SM_8,MD_8,LG_8" size="XS_2,SM_2,MD_2,LG_2">
+            <b:FormLabel>Löschen</b:FormLabel>
             <b:Button ui:field="buttonDelete" addStyleNames="{style.buttonBook}"/>
         </b:Column>
-        <b:Column size="XS_1,SM_1,MD_1,LG_1">
-            <b:FormLabel>Buchen:</b:FormLabel>
+        <b:Column size="XS_2,SM_2,MD_2,LG_2">
+            <b:FormLabel>Buchen</b:FormLabel>
             <b:Button type="PRIMARY" text="OK" ui:field="buttonBook" addStyleNames="{style.button-blue}" />
         </b:Column>
 	</b:Container>
