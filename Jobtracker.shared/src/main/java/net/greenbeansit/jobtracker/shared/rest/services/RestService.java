@@ -463,6 +463,8 @@ public interface RestService extends DirectRestService
 	 * @param posNo the position number.
 	 * @return a list of {@link JobTask}s.
 	 */
+	@GET
+	@Path("/jobTasks/{jobNo}&{posNo}")
 	List<JobTask> getJobTasks(@PathParam("jobNo") Integer jobNo,
 			@PathParam("posNo") Integer posNo);
 

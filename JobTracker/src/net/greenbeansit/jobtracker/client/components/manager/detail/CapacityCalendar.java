@@ -113,7 +113,8 @@ public class CapacityCalendar extends Composite
 			@Override
 			public void run()
 			{
-				calendar.render();
+				if(calendar != null)
+					calendar.render();
 			}
 		};
 		timer.schedule(10);
