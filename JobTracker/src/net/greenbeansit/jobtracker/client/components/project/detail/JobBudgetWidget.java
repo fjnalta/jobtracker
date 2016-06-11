@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.fusesource.restygwt.client.Method;
 import org.gwtbootstrap3.client.ui.Button;
 import org.gwtbootstrap3.client.ui.Label;
 import org.gwtbootstrap3.client.ui.html.ClearFix;
@@ -31,6 +32,8 @@ import net.greenbeansit.jobtracker.client.components.widgets.GraphWidget.GraphMo
 import net.greenbeansit.jobtracker.client.localization.HomePageConstants;
 import net.greenbeansit.jobtracker.client.localization.ProjectDetailPageConstants;
 import net.greenbeansit.jobtracker.client.utils.rest.NotifyHelper;
+import net.greenbeansit.jobtracker.client.utils.rest.RestClient;
+import net.greenbeansit.jobtracker.client.utils.rest.RestClient.SuccessFunction;
 import net.greenbeansit.jobtracker.shared.ActivityReport;
 import net.greenbeansit.jobtracker.shared.Job;
 
@@ -110,13 +113,54 @@ public class JobBudgetWidget extends Composite implements OnDisplayEventListener
 				}
 			}
 		});
-		
-		initializeGraph();
 	}
 
 	/**
-	 * Initializes the graph widget
+	 * Initializes the widget.
+	 * 
+	 * @param jobNo
+	 * @param posNo
 	 */
+	public void initialize(final Integer jobNo, final Integer posNo)
+	{
+		ChartLoader chartLoader = new ChartLoader(ChartPackage.CORECHART);
+		chartLoader.loadApi(new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				// Create and attach the chart
+				linechart = new LineChart();
+				linechart.setWidth("100%");
+				linechart.setHeight("400px");
+				budgetContent.add(linechart);
+				
+				
+				RestClient.build(new SuccessFunction<List<Integer>>()
+				{
+					@Override
+					public void onSuccess(Method method, List<Integer> response)
+					{
+						budgetSteps = response;
+						
+						initializeGraph();
+					}
+
+					@Override
+					public void onFailure(Method method, Throwable exception)
+					{
+						GWT.log(exception.toString());
+						NotifyHelper.errorMessage(exception.toString());
+					}
+				}).getEmployeeService().getUsedBudgedYear(jobNo, posNo, 2016);
+			}
+		});
+	}
+	
+	/**
+	 * Initializes the graph.
+	 */
+	@SuppressWarnings("deprecation")
 	private void initializeGraph()
 	{
 		maxBudget = 400000;
@@ -154,162 +198,11 @@ public class JobBudgetWidget extends Composite implements OnDisplayEventListener
 		endDate.setHours(0);
 		endDate.setMinutes(0);
 		endDate.setSeconds(0);
-		endDate.setDate(endDate.getDate() + 1);
-
-		ChartLoader chartLoader = new ChartLoader(ChartPackage.CORECHART);
-		chartLoader.loadApi(new Runnable()
-		{
-
-			@Override
-			public void run()
-			{
-				// Create and attach the chart
-				linechart = new LineChart();
-				linechart.setWidth("100%");
-				linechart.setHeight("400px");
-				budgetContent.add(linechart);
-				showWeekMode(null);
-			}
-		});
-	}
-
-	/**
-	 * Event handling for the buttonPrevious, shows the previous time span
-	 * 
-	 * @param event
-	 *            CLickEvent of the button
-	 */
-	@UiHandler("buttonPrevious")
-	public void showPrevious(ClickEvent event)
-	{
-		budgetSteps.add(currentBudgetEndFocus - currentBudgetStartFocus);
-		currentBudgetEndFocus = currentBudgetStartFocus;
-
-		switch (currentMode)
-		{
-		case WEEK:
-			startDate.setDate(startDate.getDate() - 7);
-			this.endDate.setYear(this.startDate.getYear());
-			this.endDate.setMonth(this.startDate.getMonth());
-			this.endDate.setDate(this.startDate.getDate() + 6);
-			showWeek();
-			break;
-		case MONTH:
-			endDate.setMonth(startDate.getMonth());
-			startDate.setMonth(startDate.getMonth() - 1);
-			endDate.setDate(endDate.getDate() - endDate.getDate());
-			endDate.setYear(startDate.getYear());
-			showMonth();
-			break;
-		case YEAR:
-			endDate.setYear(startDate.getYear());
-			startDate.setYear(startDate.getYear() - 1);
-			endDate.setMonth(0);
-			endDate.setDate(0);
-			showYear();
-			break;
-		default:
-			break;
-		}
-	}
-
-	/**
-	 * event handling for buttonNext, shows the next time span
-	 * @param event ClickEvent of the Button
-	 */
-	@UiHandler("buttonNext")
-	public void showNext(ClickEvent event) {
-		GWT.log("buttonNext");
-		currentBudgetStartFocus = currentBudgetEndFocus;
-
-		if(!budgetSteps.isEmpty())	{
-			currentBudgetEndFocus += budgetSteps.get(budgetSteps.size() - 1);
-			budgetSteps.remove(budgetSteps.size() - 1);
-		}
-
-		switch (currentMode) {
-			case WEEK:
-				startDate.setDate(startDate.getDate() + 7);
-				endDate.setDate(endDate.getDate()+7);
-				showWeek();
-				break;
-			case MONTH:
-				startDate.setMonth(startDate.getMonth() + 1);
-				endDate.setMonth(endDate.getMonth() + 2);
-				endDate.setDate(0);
-				if (endDate.getMonth() - startDate.getMonth() > 0) {
-					endDate.setDate(0);
-				}
-				showMonth();
-				break;
-			case YEAR:
-				startDate.setYear(startDate.getYear() + 1);
-				endDate.setYear(endDate.getYear() + 1);
-				showYear();
-				break;
-			default:
-				break;
-		}
+		endDate.setYear(endDate.getYear() + 1);
 
 	}
 
-	/**
-	 * Event handling for the buttonModeWeek, switches the graph to week mode
-	 * 
-	 * @param event
-	 *            ClickEvent of the button
-	 */
-	@UiHandler("buttonModeWeek")
-	public void showWeekMode(ClickEvent event)
-	{
-		reset();
-		buttonModeYear.removeStyleName("active");
-		buttonModeMonth.removeStyleName("active");
-		buttonModeWeek.addStyleName("active");
-		currentMode = GraphMode.WEEK;
-		startDate.setDate(startDate.getDate() - startDate.getDay() + 1);
-		showWeek();
-	}
-
-	/**
-	 * Event handling for the buttonModeMonth, switches the graph to month mode
-	 * 
-	 * @param event
-	 *            ClickEvent of the button
-	 */
-	@UiHandler("buttonModeMonth")
-	public void showMonthMode(ClickEvent event)
-	{
-		reset();
-		buttonModeYear.removeStyleName("active");
-		buttonModeMonth.addStyleName("active");
-		buttonModeWeek.removeStyleName("active");
-		currentMode = GraphMode.MONTH;
-		startDate.setDate(startDate.getDate() - startDate.getDate() + 1);
-		showMonth();
-	}
-
-	/**
-	 * Event handling for the buttonModeYear, switches the graph to year mode
-	 * 
-	 * @param event
-	 *            the Click event.
-	 */
-	@UiHandler("buttonModeYear")
-	public void showYearMode(ClickEvent event)
-	{
-		reset();
-		budgetSteps.clear();
-		buttonModeYear.addStyleName("active");
-		buttonModeMonth.removeStyleName("active");
-		buttonModeWeek.removeStyleName("active");
-		currentMode = GraphMode.YEAR;
-		startDate.setMonth(0);
-		startDate.setDate(1);
-		endDate.setHours(endDate.getHours() + 1);
-		showYear();
-	}
-
+	
 	/**
 	 * Method for resetting the graph widget
 	 */
@@ -569,5 +462,144 @@ public class JobBudgetWidget extends Composite implements OnDisplayEventListener
 	{
 		linechart.redraw();
 	}
+	
+	/**
+	 * Event handling for the buttonPrevious, shows the previous time span
+	 * 
+	 * @param event
+	 *            CLickEvent of the button
+	 */
+	@UiHandler("buttonPrevious")
+	public void showPrevious(ClickEvent event)
+	{
+		budgetSteps.add(currentBudgetEndFocus - currentBudgetStartFocus);
+		currentBudgetEndFocus = currentBudgetStartFocus;
+
+		switch (currentMode)
+		{
+		case WEEK:
+			startDate.setDate(startDate.getDate() - 7);
+			this.endDate.setYear(this.startDate.getYear());
+			this.endDate.setMonth(this.startDate.getMonth());
+			this.endDate.setDate(this.startDate.getDate() + 6);
+			showWeek();
+			break;
+		case MONTH:
+			endDate.setMonth(startDate.getMonth());
+			startDate.setMonth(startDate.getMonth() - 1);
+			endDate.setDate(endDate.getDate() - endDate.getDate());
+			endDate.setYear(startDate.getYear());
+			showMonth();
+			break;
+		case YEAR:
+			endDate.setYear(startDate.getYear());
+			startDate.setYear(startDate.getYear() - 1);
+			endDate.setMonth(0);
+			endDate.setDate(0);
+			showYear();
+			break;
+		default:
+			break;
+		}
+	}
+
+	/**
+	 * event handling for buttonNext, shows the next time span
+	 * @param event ClickEvent of the Button
+	 */
+	@UiHandler("buttonNext")
+	public void showNext(ClickEvent event) {
+		GWT.log("buttonNext");
+		currentBudgetStartFocus = currentBudgetEndFocus;
+
+		if(!budgetSteps.isEmpty())	{
+			currentBudgetEndFocus += budgetSteps.get(budgetSteps.size() - 1);
+			budgetSteps.remove(budgetSteps.size() - 1);
+		}
+
+		switch (currentMode) {
+			case WEEK:
+				startDate.setDate(startDate.getDate() + 7);
+				endDate.setDate(endDate.getDate()+7);
+				showWeek();
+				break;
+			case MONTH:
+				startDate.setMonth(startDate.getMonth() + 1);
+				endDate.setMonth(endDate.getMonth() + 2);
+				endDate.setDate(0);
+				if (endDate.getMonth() - startDate.getMonth() > 0) {
+					endDate.setDate(0);
+				}
+				showMonth();
+				break;
+			case YEAR:
+				startDate.setYear(startDate.getYear() + 1);
+				endDate.setYear(endDate.getYear() + 1);
+				showYear();
+				break;
+			default:
+				break;
+		}
+
+	}
+
+	/**
+	 * Event handling for the buttonModeWeek, switches the graph to week mode
+	 * 
+	 * @param event
+	 *            ClickEvent of the button
+	 */
+	@UiHandler("buttonModeWeek")
+	public void showWeekMode(ClickEvent event)
+	{
+		reset();
+		buttonModeYear.removeStyleName("active");
+		buttonModeMonth.removeStyleName("active");
+		buttonModeWeek.addStyleName("active");
+		currentMode = GraphMode.WEEK;
+		startDate.setDate(startDate.getDate() - startDate.getDay() + 1);
+		showWeek();
+	}
+
+	/**
+	 * Event handling for the buttonModeMonth, switches the graph to month mode
+	 * 
+	 * @param event
+	 *            ClickEvent of the button
+	 */
+	@UiHandler("buttonModeMonth")
+	public void showMonthMode(ClickEvent event)
+	{
+		reset();
+		buttonModeYear.removeStyleName("active");
+		buttonModeMonth.addStyleName("active");
+		buttonModeWeek.removeStyleName("active");
+		currentMode = GraphMode.MONTH;
+		startDate.setDate(startDate.getDate() - startDate.getDate() + 1);
+		showMonth();
+	}
+
+	/**
+	 * Event handling for the buttonModeYear, switches the graph to year mode
+	 * 
+	 * @param event
+	 *            the Click event.
+	 */
+	@UiHandler("buttonModeYear")
+	public void showYearMode(ClickEvent event)
+	{
+		reset();
+		budgetSteps.clear();
+		buttonModeYear.addStyleName("active");
+		buttonModeMonth.removeStyleName("active");
+		buttonModeWeek.removeStyleName("active");
+		currentMode = GraphMode.YEAR;
+		startDate.setMonth(0);
+		startDate.setDate(1);
+		endDate.setHours(endDate.getHours() + 1);
+		showYear();
+	}
+
+	
 
 }

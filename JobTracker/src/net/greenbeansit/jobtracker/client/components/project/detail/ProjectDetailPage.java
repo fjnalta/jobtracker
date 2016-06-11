@@ -151,6 +151,9 @@ public class ProjectDetailPage extends Composite
 						NotifyHelper.errorMessage(error.toString());
 					}
 				});
+
+		jobBudgetWidget.initialize(jobNo, posNo);
+		jobTaskWidget.initializeChart(jobNo, posNo);
 	}
 
 }
