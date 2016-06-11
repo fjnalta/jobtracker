@@ -454,7 +454,17 @@ public interface RestService extends DirectRestService
 	 */
 	@GET
 	@Path("/users/{userId}/jobTasks")
-	List<JobTask> getJobTasks(@PathParam("userId") Integer user);
+	List<JobTask> getJobTasksOfUser(@PathParam("userId") Integer user);
+	
+	/**
+	 * Gets all {@link JobTask}s of the following {@link Job}.
+	 * 
+	 * @param jobNo the job number.
+	 * @param posNo the position number.
+	 * @return a list of {@link JobTask}s.
+	 */
+	List<JobTask> getJobTasks(@PathParam("jobNo") Integer jobNo,
+			@PathParam("posNo") Integer posNo);
 
 	/**
 	 * Retrieves a list of total used budget values for each month in a year for

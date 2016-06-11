@@ -387,7 +387,7 @@ public class RestServiceImpl implements RestService
 	}
 
 	@Override
-	public List<JobTask> getJobTasks(Integer user)
+	public List<JobTask> getJobTasksOfUser(Integer user)
 	{
 		List<JobTask> tasks = new ArrayList<JobTask>();
 		for (Job job : jobService.getByUser(user))
@@ -396,6 +396,13 @@ public class RestServiceImpl implements RestService
 					jobTaskService.getByJobNr(job.getJobNr(), job.getPosNr()));
 		}
 		return tasks;
+	}
+	
+	@Override
+	public List<JobTask> getJobTasks(Integer jobNo, Integer posNo)
+	{
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override

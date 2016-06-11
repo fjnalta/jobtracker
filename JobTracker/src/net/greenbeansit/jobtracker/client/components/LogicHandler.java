@@ -325,7 +325,7 @@ public class LogicHandler {
 				GWT.log(exception.getMessage());
 			}
 
-		}).getEmployeeService().getJobTasks(LogicHandler.this.getCurrentUser().getId());
+		}).getEmployeeService().getJobTasksOfUser(LogicHandler.this.getCurrentUser().getId());
 	}
 	
 	/**
