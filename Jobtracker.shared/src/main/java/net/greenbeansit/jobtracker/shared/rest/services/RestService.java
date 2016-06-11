@@ -389,7 +389,7 @@ public interface RestService extends DirectRestService
 	 *            true when enabling the lock, false when disabling
 	 */
 	@PUT
-	@Path("project/{jobNo}&{posNo}/lock/{bool}")
+	@Path("jobs/{jobNo}&{posNo}/lock/{bool}")
 	void setJobLock(@PathParam("jobNo") Integer jobNo,
 			@PathParam("posNo") Integer posNo, @PathParam("bool") boolean lock);
 
@@ -455,4 +455,43 @@ public interface RestService extends DirectRestService
 	@GET
 	@Path("/users/{userId}/jobTasks")
 	List<JobTask> getJobTasks(@PathParam("userId") Integer user);
+
+	/**
+	 * Retrieves a list of total used budget values for each month in a year for
+	 * a given job number.
+	 * 
+	 * @param jobNo
+	 *            3 to 6 digits
+	 * @param posNo
+	 *            up to 3 digits
+	 * @param year
+	 *            the year
+	 * @return List of total budget values. Months start at index 1. Index 0 is
+	 *         zero.
+	 */
+	@GET
+	@Path("/jobs/{jobNo}&{posNo}/budget/{year}")
+	List<Integer> getUsedBudgedYear(@PathParam("jobNo") Integer jobNo,
+			@PathParam("posNo") Integer posNo, @PathParam("year") Integer year);
+
+	/**
+	 * Retrieves a list of total used budget value for each day in a month for a
+	 * given job number.
+	 * 
+	 * @param jobNo
+	 *            3 to 6 digits
+	 * @param posNo
+	 *            up to 3 digits
+	 * @param year
+	 *            the year
+	 * @param month
+	 *            the month
+	 * @return List of total budget values. Days start at index 1. Index 0 is
+	 *         zero.
+	 */
+	@GET
+	@Path("/jobs/{jobNo}&{posNo}/budget/{year}/{month}")
+	List<Integer> getUsedBudgedMonth(@PathParam("jobNo") Integer jobNo,
+			@PathParam("posNo") Integer posNo, @PathParam("year") Integer year,
+			@PathParam("month") Integer month);
 }

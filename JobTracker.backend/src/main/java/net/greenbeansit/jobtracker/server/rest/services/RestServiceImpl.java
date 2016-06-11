@@ -13,6 +13,7 @@ import net.greenbeansit.jobtracker.server.data.customer.CustomerDataService;
 import net.greenbeansit.jobtracker.server.data.job.JobDataService;
 import net.greenbeansit.jobtracker.server.data.jobTask.JobTaskDataService;
 import net.greenbeansit.jobtracker.server.data.pseudoJob.PseudoJobDataService;
+import net.greenbeansit.jobtracker.server.data.transaction.TransactionDataService;
 import net.greenbeansit.jobtracker.server.data.user.UserDataService;
 import net.greenbeansit.jobtracker.server.data.userJob.UserJobDataService;
 import net.greenbeansit.jobtracker.server.data.utilizationWeek.UtilizationWeekDataService;
@@ -44,6 +45,8 @@ public class RestServiceImpl implements RestService
 	private UtilizationWeekDataService			utilizationWeekService;
 	@Inject
 	private JobTaskDataService					jobTaskService;
+	@Inject
+	private TransactionDataService				transactionService;
 
 	/**
 	 * Empty Constructor for Spring mapping
@@ -393,5 +396,19 @@ public class RestServiceImpl implements RestService
 					jobTaskService.getByJobNr(job.getJobNr(), job.getPosNr()));
 		}
 		return tasks;
+	}
+
+	@Override
+	public List<Integer> getUsedBudgedYear(Integer jobNo, Integer posNo,
+			Integer year)
+	{
+		return transactionService.getJobYearView(jobNo, posNo, year);
+	}
+
+	@Override
+	public List<Integer> getUsedBudgedMonth(Integer jobNo, Integer posNo,
+			Integer year, Integer month)
+	{
+		return transactionService.getJobMonthView(jobNo, posNo, year, month);
 	}
 }
