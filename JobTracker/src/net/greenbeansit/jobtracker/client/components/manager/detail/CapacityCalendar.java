@@ -44,7 +44,7 @@ public class CapacityCalendar extends Composite
 	}
 
 	@UiField
-	ClearFix container;
+	ClearFix container, calendarContainer;
 	
 	FullCalendar calendar;
 	CalendarConfig config;
@@ -100,7 +100,7 @@ public class CapacityCalendar extends Composite
 		calendar = new FullCalendar("test3", ViewOption.agendaWeek, config, false);
 		calendar.goToDate(new Date());
 		
-		container.add(calendar);
+		calendarContainer.add(calendar);
 	}
 
 	/**

@@ -80,6 +80,9 @@ public class ManagerEmployeeDetailPage extends Composite
 
 	@UiField
 	Anchor											anchorBackward;
+	
+	@UiField
+	CapacityReportDescriptionWidget capacityReportDescriptionWidget;
 
 	private ManagerEmployeeDetailPageHelperService	helperService;
 
@@ -110,6 +113,8 @@ public class ManagerEmployeeDetailPage extends Composite
 			public void onShow(TabShowEvent event)
 			{
 				jobChart.onDisplay();
+				
+				capacityReportDescriptionWidget.setVisible(false);
 			}
 		});
 
@@ -119,6 +124,8 @@ public class ManagerEmployeeDetailPage extends Composite
 			public void onShow(TabShowEvent event)
 			{
 				reportCalendar.onDisplayed();
+				
+				capacityReportDescriptionWidget.setVisible(false);
 			}
 		});
 
@@ -128,6 +135,8 @@ public class ManagerEmployeeDetailPage extends Composite
 			public void onShow(TabShowEvent event)
 			{
 				capacityCalendar.onDisplayed();
+				
+				capacityReportDescriptionWidget.setVisible(true);
 			}
 		});
 
@@ -161,5 +170,7 @@ public class ManagerEmployeeDetailPage extends Composite
 						NotifyHelper.errorMessage(error.toString());
 					}
 				});
+	
+		capacityReportDescriptionWidget.setVisible(false);
 	}
 }
