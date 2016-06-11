@@ -39,18 +39,18 @@
 	</ui:style>
 	<h:ClearFix>
 		<b:Column size="XS_12,SM_12,MD_12,LG_12">
-			<h:ClearFix ui:field="budgetContent"/>
+			<b:Button ui:field="buttonModeWeek" addStyleNames="{style.buttonStyle}" />
+			<b:Button ui:field="buttonModeMonth" addStyleNames="{style.buttonStyle}" />
+			<b:Button ui:field="buttonModeYear" addStyleNames="{style.buttonStyle}" />
+		</b:Column>
+		<b:Column size="XS_12,SM_12,MD_12,LG_12">
+			<h:ClearFix ui:field="budgetContent" />
 		</b:Column>
 		<b:Column size="XS_12,SM_12MD_12,LG_12">
 			<b:Button icon="ARROW_LEFT" ui:field="buttonPrevious" />
 			<b:Label text="JANUAR" ui:field="labelCurrentFocus"
 				addStyleNames="{style.label}" />
 			<b:Button icon="ARROW_RIGHT" ui:field="buttonNext" />
-		</b:Column>
-		<b:Column size="XS_12,SM_12,MD_12,LG_12">
-			<b:Button ui:field="buttonModeWeek" addStyleNames="{style.buttonStyle}" />
-			<b:Button ui:field="buttonModeMonth" addStyleNames="{style.buttonStyle}" />
-			<b:Button ui:field="buttonModeYear" addStyleNames="{style.buttonStyle}" />
 		</b:Column>
 	</h:ClearFix>
 </ui:UiBinder> 
