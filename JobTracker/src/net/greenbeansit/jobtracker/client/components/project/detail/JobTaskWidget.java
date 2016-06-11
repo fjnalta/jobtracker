@@ -1,5 +1,8 @@
 package net.greenbeansit.jobtracker.client.components.project.detail;
 
+import java.util.List;
+
+import org.fusesource.restygwt.client.Method;
 import org.gwtbootstrap3.client.ui.html.ClearFix;
 
 import com.google.gwt.core.client.GWT;
@@ -18,6 +21,9 @@ import com.googlecode.gwt.charts.client.corechart.PieChart;
 import com.googlecode.gwt.charts.client.corechart.PieChartOptions;
 
 import net.greenbeansit.jobtracker.client.localization.ProjectDetailPageConstants;
+import net.greenbeansit.jobtracker.client.utils.rest.NotifyHelper;
+import net.greenbeansit.jobtracker.client.utils.rest.RestClient;
+import net.greenbeansit.jobtracker.client.utils.rest.RestClient.SuccessFunction;
 import net.greenbeansit.jobtracker.shared.Job;
 import net.greenbeansit.jobtracker.shared.JobTask;
 
@@ -70,13 +76,13 @@ public class JobTaskWidget extends Composite implements OnDisplayEventListener
 			}
 		});
 
-		initializeChart();
+//		initializeChart();
 	}
 
 	/**
 	 * Initializes the Widget.
 	 */
-	private void initializeChart()
+	public void initializeChart(final Integer jobNo, final Integer posNo)
 	{
 		ChartLoader chartLoader = new ChartLoader(ChartPackage.CORECHART);
 		chartLoader.loadApi(new Runnable()
@@ -88,7 +94,23 @@ public class JobTaskWidget extends Composite implements OnDisplayEventListener
 				piechart.setWidth("100%");
 				piechart.setHeight("400px");
 				activityContent.add(piechart);
-				drawPieChart();
+//				drawPieChart();
+				
+				RestClient.build(new SuccessFunction<List<JobTask>>()
+				{
+					@Override
+					public void onSuccess(Method method, List<JobTask> response)
+					{
+						drawPieChart(response);
+					}
+
+					@Override
+					public void onFailure(Method method, Throwable exception)
+					{
+						GWT.log(exception.toString());
+						NotifyHelper.errorMessage(exception.toString());
+					}
+				}).getEmployeeService().getJobTasks(jobNo, posNo);
 			}
 		});
 	}
@@ -96,24 +118,21 @@ public class JobTaskWidget extends Composite implements OnDisplayEventListener
 	/**
 	 * Draws the pie chart.
 	 */
-	private void drawPieChart()
+	private void drawPieChart(List<JobTask> list)
 	{
 		// Prepare the data
 		DataTable dataTable = DataTable.create();
 		dataTable.addColumn(ColumnType.STRING, constants.jobTaskColumnName());
 		dataTable.addColumn(ColumnType.NUMBER, constants.jobTaskColumnHoursPerDay());
-		dataTable.addRows(5);
-		dataTable.setValue(0, 0, "Task 1");
-		dataTable.setValue(0, 1, 11);
-		dataTable.setValue(1, 0, "Task 2");
-		dataTable.setValue(1, 1, 7);
-		dataTable.setValue(2, 0, "Task  3");
-		dataTable.setValue(2, 1, 3);
-		dataTable.setValue(3, 0, "Task 4");
-		dataTable.setValue(3, 1, 2);
-		dataTable.setValue(4, 0, "Task 5");
-		dataTable.setValue(4, 1, 1);
-
+		
+		for(JobTask task : list)
+		{
+			int rowIndex = dataTable.addRow();
+			
+			dataTable.setCell(rowIndex, 0, task.getName());
+			dataTable.setCell(rowIndex, 1, 20);
+		}
+		
 		// Set options
 		PieChartOptions options = PieChartOptions.create();
 
