@@ -70,7 +70,7 @@ public interface TransactionEntityRepository
 	 *            the month
 	 * @return List of corresponding {@link TransactionEntity}
 	 */
-	@Query("select x from TransactionEntity x where x.job_no = :jobno and x.pos_no = :posno and YEAR(x.date) = :year and MONTH(x.date) = :month")
+	@Query("select x from TransactionEntity x where x.jobNo = :jobno and x.posNo = :posno and YEAR(x.date) = :year and MONTH(x.date) = :month")
 	List<TransactionEntity> findByJobAndMonth(@Param("jobno") Integer jobNo,
 			@Param("posno") Integer posNo, @Param("year") Integer year,
 			@Param("month") Integer month);
@@ -101,7 +101,7 @@ public interface TransactionEntityRepository
 	 *            the year
 	 * @return List of corresponding {@link TransactionEntity}
 	 */
-	@Query("select x from TransactionEntity x where x.job_no = :jobno and x.pos_no = :posno and YEAR(x.date) = :year")
+	@Query("select x from TransactionEntity x where x.jobNo = :jobno and x.posNo = :posno and YEAR(x.date) = :year")
 	List<TransactionEntity> findByJobAndYear(@Param("jobno") Integer jobNo,
 			@Param("posno") Integer posNo, @Param("year") Integer year);
 }
