@@ -39,6 +39,14 @@
 		margin-top: 5px;
 		margin-bottom: 5px;
 	}
+	.select {
+		border-radius: 0;
+	}
+	
+	.select > button {
+		border-radius: 0 !important;
+		background: #000099
+	}
 	</ui:style>
 	<h:ClearFix>
 		<b:Row addStyleNames="{style.row}">
@@ -48,9 +56,11 @@
 					addStyleNames="{style.textArea}" ui:field="textDiscription" />
 			</b:FormGroup>
 			<b:FormGroup>
-				<b:FormLabel for="description2" ui:field="labelTask"></b:FormLabel>
-				<b:TextBox placeholder="" b:id="description2"
-					addStyleNames="{style.textArea}" ui:field="textIdentifier" />
+				<s:Select ui:field="selectTaskId" placeholder="TaskID auswählen" type="PRIMARY"
+			addStyleNames="{style.select}">
+					<s:OptGroup ui:field="optGroupTaskId">
+					</s:OptGroup>
+				</s:Select>
 			</b:FormGroup>
 		</b:Row>
 

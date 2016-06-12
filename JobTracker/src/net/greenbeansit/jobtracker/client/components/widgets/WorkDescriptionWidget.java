@@ -5,6 +5,8 @@ import java.util.List;
 import net.greenbeansit.jobtracker.client.components.LogicHandler;
 
 import net.greenbeansit.jobtracker.shared.Job;
+import net.greenbeansit.jobtracker.shared.JobTask;
+
 import org.gwtbootstrap3.client.ui.Button;
 import org.gwtbootstrap3.client.ui.FormLabel;
 import org.gwtbootstrap3.client.ui.Heading;
@@ -52,19 +54,17 @@ public class WorkDescriptionWidget extends Composite implements LogicObservable
 	}
 	
 	@UiField 
-	Select selectTemplate;
+	Select selectTemplate, selectTaskId;
 	
 	@UiField 
-	OptGroup optGroupTemplate;
+	OptGroup optGroupTemplate, optGroupTaskId;
 	
 	@UiField
 	TextArea textDiscription;
 	
-	@UiField
-	TextBox textIdentifier;
 	
 	@UiField
-	FormLabel labelDescription, labelTask;
+	FormLabel labelDescription;
 	
 	@UiField
 	TextBox textName;
@@ -81,6 +81,7 @@ public class WorkDescriptionWidget extends Composite implements LogicObservable
 	FormLabel headingCollapseTemplate;
 	
 	ActivityReportTemplate selectedTemplate;
+	JobTask selectedJobTask;
 
 	/**
 	 * Standard constructor, first register this object to LogicHandler
@@ -98,7 +99,14 @@ public class WorkDescriptionWidget extends Composite implements LogicObservable
 				selectedTemplate = ((SelectTemplateOption)selectTemplate.getSelectedItem()).getTemplate();
 			}
 		});
+		selectTaskId.addValueChangeHandler(new ValueChangeHandler<String>() {		
+			@Override
+			public void onValueChange(ValueChangeEvent<String> event) {
+				
+			}
+		});
 		handler.loadTemplates();
+		handler.getAllJobTasks();
 		
 		textDiscription.setPlaceholder(constants.workDescriptionPlaceHolder());
 		textName.setPlaceholder(constants.textTemplateNamePlaceHolder());
@@ -109,7 +117,6 @@ public class WorkDescriptionWidget extends Composite implements LogicObservable
 		headingCollapseTemplate.setText(constants.buttonTemplateText());
 		
 		labelDescription.setText(constants.headingWorkDescription());
-		labelTask.setText(constants.headingSelectTask());
 	}
 
 	/**
@@ -177,9 +184,18 @@ public class WorkDescriptionWidget extends Composite implements LogicObservable
 				textDiscription.setText(currentTemplate.getText());
 			}
 			if(currentTemplate.getTaskId()!=null){
-				textIdentifier.setText(String.valueOf(currentTemplate.getTaskId()));
+
 			}
 		}
+		List<JobTask> jobTaskList = handler.getJobTasksList();
+		selectTaskId.clear();
+		if(handler.getCurrentJob()!=null){
+			for (JobTask jobTask : jobTaskList) {
+				if(jobTask.getPosNr().compareTo(handler.getCurrentJob().getPosNr()) == 0 )
+					selectTaskId.add(new SelectTaskIDOption(jobTask));
+			}
+		}
+		selectTaskId.refresh();
 		selectTemplate.refresh();
 	}
 
@@ -193,9 +209,6 @@ public class WorkDescriptionWidget extends Composite implements LogicObservable
 		template.setName(null);
 		template.setTaskId(null);
 		template.setText(null);
-		if(!textIdentifier.getText().isEmpty()){
-			//template.setTaskId();
-		}
 		if(!textName.getText().isEmpty()){
 			template.setName(textName.getText());
 		}
