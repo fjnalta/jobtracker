@@ -191,7 +191,9 @@ public class WorkDescriptionWidget extends Composite implements LogicObservable
 		selectTaskId.clear();
 		if(handler.getCurrentJob()!=null){
 			for (JobTask jobTask : jobTaskList) {
-				if(jobTask.getPosNr().compareTo(handler.getCurrentJob().getPosNr()) == 0 )
+				if(jobTask.getJobNr().compareTo(handler.getCurrentJob().getJobNr()) == 0
+					&&	
+					jobTask.getPosNr().compareTo(handler.getCurrentJob().getPosNr()) == 0 )
 					selectTaskId.add(new SelectTaskIDOption(jobTask));
 			}
 		}
