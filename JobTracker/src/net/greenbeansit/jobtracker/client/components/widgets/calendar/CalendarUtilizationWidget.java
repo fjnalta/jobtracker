@@ -325,16 +325,16 @@ public class CalendarUtilizationWidget extends Composite implements CalendarObse
 	private VerticalPanel getBarChart(double number) {
 
 		VerticalPanel inner = new VerticalPanel();
-		
+		int maxHeigh = 100;
 		// For empty Days
 		if (number < 1) {
-			number = 10;
+			number = 7;
 		}
-		if (number > 60) {
-			number = 60;
+		if (number > maxHeigh) {
+			number = maxHeigh;
 		}
 		
-		inner.setHeight(this.getHeightInPercent(60, number) + "px");
+		inner.setHeight(this.getHeightInPercent(maxHeigh, number) + "px");
 
 		inner.setStyleName(this.SUFFIXPATH + "barChart", true);
 
