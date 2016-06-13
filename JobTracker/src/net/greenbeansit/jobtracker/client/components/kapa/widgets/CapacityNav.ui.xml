@@ -20,14 +20,6 @@
 		padding-top: 12px;
 	}
 	
-	.buttonTop {
-		border-radius: 4px 4px 0px 0px !important;
-	}
-	
-	.buttonDown {
-		border-radius: 0px 0px 4px 4px !important;
-	}
-	
 	.buttonSave {
 		margin-bottom: 5px;
 	}
@@ -109,9 +101,9 @@
 			</b:Column>
 			<b:Column size="XS_1,SM_1,MD_1,LG_1" addStyleNames="{style.smallColumn}">
 				<b:VerticalButtonGroup>
-					<b:Button size="EXTRA_SMALL" addStyleNames="{style.buttonTop}"
+					<b:Button size="EXTRA_SMALL"
 						ui:field="buttonUp" />
-					<b:Button size="EXTRA_SMALL" addStyleNames="{style.buttonDown}"
+					<b:Button size="EXTRA_SMALL"
 						ui:field="buttonDown" />
 				</b:VerticalButtonGroup>
 			</b:Column>
