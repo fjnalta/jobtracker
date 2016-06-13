@@ -137,7 +137,7 @@
 				<b:Row addStyleNames="{style.smallContainer}">
 					<widgets:UtilizationWidget ui:field="utilizationWidget"/>
 				</b:Row>
-				<b:Row addStyleNames="{style.smallContainer}">
+				<b:Row addStyleNames="{style.smallContainer}" ui:field="capacityReportDescriptionWidgetContainer">
 					<d:CapacityReportDescriptionWidget ui:field="capacityReportDescriptionWidget"/>
 				</b:Row>
 			</b:Column>

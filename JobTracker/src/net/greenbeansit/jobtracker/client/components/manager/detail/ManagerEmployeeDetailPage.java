@@ -5,6 +5,7 @@ import org.gwtbootstrap3.client.shared.event.TabShowHandler;
 import org.gwtbootstrap3.client.ui.Anchor;
 import org.gwtbootstrap3.client.ui.Heading;
 import org.gwtbootstrap3.client.ui.NavTabs;
+import org.gwtbootstrap3.client.ui.Row;
 import org.gwtbootstrap3.client.ui.TabListItem;
 import org.gwtbootstrap3.client.ui.html.Span;
 
@@ -83,6 +84,9 @@ public class ManagerEmployeeDetailPage extends Composite
 	
 	@UiField
 	CapacityReportDescriptionWidget capacityReportDescriptionWidget;
+	
+	@UiField
+	Row capacityReportDescriptionWidgetContainer;
 
 	private ManagerEmployeeDetailPageHelperService	helperService;
 
@@ -114,7 +118,7 @@ public class ManagerEmployeeDetailPage extends Composite
 			{
 				jobChart.onDisplay();
 				
-				capacityReportDescriptionWidget.setVisible(false);
+				capacityReportDescriptionWidgetContainer.setVisible(false);
 			}
 		});
 
@@ -125,7 +129,7 @@ public class ManagerEmployeeDetailPage extends Composite
 			{
 				reportCalendar.onDisplayed();
 				
-				capacityReportDescriptionWidget.setVisible(false);
+				capacityReportDescriptionWidgetContainer.setVisible(false);
 			}
 		});
 
@@ -136,7 +140,7 @@ public class ManagerEmployeeDetailPage extends Composite
 			{
 				capacityCalendar.onDisplayed();
 				
-				capacityReportDescriptionWidget.setVisible(true);
+				capacityReportDescriptionWidgetContainer.setVisible(true);
 			}
 		});
 
@@ -171,6 +175,7 @@ public class ManagerEmployeeDetailPage extends Composite
 					}
 				});
 	
-		capacityReportDescriptionWidget.setVisible(false);
+		capacityReportDescriptionWidgetContainer.setVisible(false);
+//		capacityReportDescriptionWidget.setVisible(false);
 	}
 }
