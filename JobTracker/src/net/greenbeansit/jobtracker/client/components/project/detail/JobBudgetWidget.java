@@ -200,6 +200,16 @@ public class JobBudgetWidget extends Composite implements OnDisplayEventListener
 		endDate.setSeconds(0);
 		endDate.setYear(endDate.getYear() + 1);
 
+		reset();
+		budgetSteps.clear();
+		buttonModeYear.addStyleName("active");
+		buttonModeMonth.removeStyleName("active");
+		buttonModeWeek.removeStyleName("active");
+		currentMode = GraphMode.YEAR;
+		startDate.setMonth(0);
+		startDate.setDate(1);
+		endDate.setHours(endDate.getHours() + 1);
+		showYear();
 	}
 
 	
