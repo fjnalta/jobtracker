@@ -330,8 +330,8 @@ public class CalendarUtilizationWidget extends Composite implements CalendarObse
 		if (number < 1) {
 			number = 10;
 		}
-		if (number > 100) {
-			number = 100;
+		if (number > 60) {
+			number = 60;
 		}
 		
 		inner.setHeight(this.getHeightInPercent(60, number) + "px");
