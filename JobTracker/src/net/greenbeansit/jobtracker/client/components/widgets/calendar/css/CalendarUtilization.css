@@ -61,6 +61,12 @@ td {
 	vertical-align: bottom;
 }
 
+.tableHeight{
+	
+ height: 60px;	
+	
+}
+
 .barChartOuter{
 	
 	height: 60px;

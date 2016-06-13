@@ -179,6 +179,8 @@ public class CalendarUtilizationWidget extends Composite implements CalendarObse
 
 		this.setTime(0, 0);
 
+		
+		
 		handler.loadUtilization(currentWeekFirstDayDate.getYear() + 1900, currentWeekFirstDayDate.getMonth() + 1);
 
 	}
@@ -240,6 +242,7 @@ public class CalendarUtilizationWidget extends Composite implements CalendarObse
 	 */
 	private void createFirstRow(int dayNumberColumn, int element) {
 
+		this.table.getRowFormatter().addStyleName(0,this.SUFFIXPATH + "tableHeight" );
 		this.table.setWidget(0, dayNumberColumn, list.get(element));
 	}
 
@@ -321,10 +324,7 @@ public class CalendarUtilizationWidget extends Composite implements CalendarObse
 	 */
 	private VerticalPanel getBarChart(double number) {
 
-		VerticalPanel outer = new VerticalPanel();
 		VerticalPanel inner = new VerticalPanel();
-		
-		outer.add(inner);
 		
 		// For empty Days
 		if (number < 1) {
@@ -333,10 +333,9 @@ public class CalendarUtilizationWidget extends Composite implements CalendarObse
 		
 		inner.setHeight(this.getHeightInPercent(60, number) + "px");
 
-		outer.setStyleName(this.SUFFIXPATH + "barChartOuter", true);
 		inner.setStyleName(this.SUFFIXPATH + "barChart", true);
 
-		return outer;
+		return inner;
 	}
 	
 	/**
