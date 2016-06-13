@@ -12,6 +12,8 @@ import org.gwtbootstrap3.extras.fullcalendar.client.ui.ViewOption;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.DoubleClickEvent;
+import com.google.gwt.event.dom.client.DoubleClickHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
@@ -42,7 +44,7 @@ public class CalendarUtilizationWidget extends Composite implements CalendarObse
 	}
 
 	// Path for the css File
-	private final String 						SUFFIXPATH = "net-greenbeansit-jobtracker-client-components-widgets-calendar-CalendarUtilizationWidget_CalendarUtilizationWidgetUiBinderImpl_GenCss_style-";
+	public final String 						SUFFIXPATH = "net-greenbeansit-jobtracker-client-components-widgets-calendar-CalendarUtilizationWidget_CalendarUtilizationWidgetUiBinderImpl_GenCss_style-";
 	// This date iterate to every day of month
 	private Date 								iteratorDate;
 	// This date is needed for the current week view
@@ -324,7 +326,7 @@ public class CalendarUtilizationWidget extends Composite implements CalendarObse
 	 */
 	private VerticalPanel getBarChart(double number) {
 
-		VerticalPanel inner = new VerticalPanel();
+		final VerticalPanel chart = new VerticalPanel();
 		int maxHeigh = 70;
 		
 		// For empty Days
@@ -335,11 +337,22 @@ public class CalendarUtilizationWidget extends Composite implements CalendarObse
 			number = maxHeigh;
 		}
 		
-		inner.setHeight(this.getHeightInPercent(maxHeigh, number) + "px");
+		chart.setHeight(this.getHeightInPercent(maxHeigh, number) + "px");
 
-		inner.setStyleName(this.SUFFIXPATH + "barChart", true);
+		chart.setStyleName(this.SUFFIXPATH + "barChart", true);
 
-		return inner;
+		DoubleClickHandler dc = new DoubleClickHandler() {
+			
+			@Override
+			public void onDoubleClick(DoubleClickEvent event) {
+				
+				chart.setStyleName(SUFFIXPATH + "barChartBlue", true);
+				
+			}
+		};
+		chart.addDomHandler(dc, DoubleClickEvent.getType());
+		
+		return chart;
 	}
 	
 	/**
