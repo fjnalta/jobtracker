@@ -67,24 +67,12 @@ td {
 	
 }
 
-.barChartOuter{
-	
-	height: 60px;
-	width: 9px;
-	display: inline-block;
-	background-color: rgba(0,0,0,0);
-	
-}
-
 .barChart {
-	position:relative;	
-	bottom:0px;
 	
 	width: 7px;
 	display: inline-block;
 	background-color: #ff8c00;
 	border-radius: 10px;
-	border: 1px solid green;
 }
 
 .button-Day:HOVER{
