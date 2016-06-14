@@ -9,6 +9,9 @@ import org.gwtbootstrap3.client.ui.constants.IconType;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.KeyCodes;
+import com.google.gwt.event.dom.client.KeyDownEvent;
+import com.google.gwt.event.dom.client.KeyDownHandler;
 import com.google.gwt.event.dom.client.KeyPressEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
@@ -31,18 +34,18 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 
 	private static CalendarTimeInputWidgetUiBinder uiBinder = GWT.create(CalendarTimeInputWidgetUiBinder.class);
 
-	private static HomePageConstants			constants	= GWT
-			.create(HomePageConstants.class);
-	
+	private static HomePageConstants constants = GWT.create(HomePageConstants.class);
+
 	/**
 	 * UIBinder Interface for {@link CalendarTimeInputWidget}
 	 */
 	interface CalendarTimeInputWidgetUiBinder extends UiBinder<Widget, CalendarTimeInputWidget> {
 	}
 
-//	@UiField
-//	InputGroupAddon addonDateStart, addonDateEnd, addonTimeStart, addonTimeEnd, addonBreak, addonDuration;
-	
+	// @UiField
+	// InputGroupAddon addonDateStart, addonDateEnd, addonTimeStart,
+	// addonTimeEnd, addonBreak, addonDuration;
+
 	@UiField
 	Button buttonUpDateStart;
 	@UiField
@@ -138,13 +141,45 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 
 		buttonDelete.setIcon(IconType.TRASH);
 		buttonCopy.setIcon(IconType.COPY);
-//		addonDateStart.setText(constants.addonDateStart());
-//		addonDateEnd.setText(constants.addonDateEnd());
-//		addonTimeStart.setText(constants.addonTimeStart());
-//		addonTimeEnd.setText(constants.addonTimeEnd());
-//		addonBreak.setText(constants.addonBreak());
-//		addonDuration.setText(constants.addonDuration());
-//		
+		// addonDateStart.setText(constants.addonDateStart());
+		// addonDateEnd.setText(constants.addonDateEnd());
+		// addonTimeStart.setText(constants.addonTimeStart());
+		// addonTimeEnd.setText(constants.addonTimeEnd());
+		// addonBreak.setText(constants.addonBreak());
+		// addonDuration.setText(constants.addonDuration());
+		//
+		KeyDownHandler keyDown = new KeyDownHandler() {
+
+			@Override
+			public void onKeyDown(KeyDownEvent event) {
+				if (event.getNativeKeyCode() == KeyCodes.KEY_DELETE) {
+					handler.deleteReport(0, Integer.parseInt(calendarHandler.calendar.currentEvent.getId()));
+					calendarHandler.calendar.removeEvent(calendarHandler.calendar.currentEvent.getId());
+
+				}
+				if (event.getNativeKeyCode() == KeyCodes.KEY_ENTER) {
+					int startTime = createTimeFromText(eventStart.getText());
+					int duration = createTimeFromText(workTime.getText());
+					int breakTime = createTimeFromText(pause.getText());
+					if (calendarHandler.calendar.getEventsToSave().size() > 0) {
+						for (ActivityReport report : calendarHandler.calendar.getEventsToSave()) {
+							ActivityReport tmp = new ActivityReport(report.getId(), 0, 0, 0, 0, "", report.getDate(),
+									startTime, duration, breakTime);
+							handler.saveReport(tmp);
+						}
+					} else {
+						ActivityReport tmp = new ActivityReport(
+								Integer.parseInt(calendarHandler.calendar.currentEvent.getId()), 0, 0, 0, 0, "",
+								getDateFromBox(dateStart), startTime, duration, breakTime);
+						handler.saveReport(tmp);
+					}
+					calendarHandler.calendar.getEventsToSave().clear();
+				}
+
+			}
+		};
+		buttonBook.addDomHandler(keyDown, KeyDownEvent.getType());
+
 		buttonBook.setText(constants.buttonBook());
 	}
 
@@ -509,19 +544,18 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 		int startTime = createTimeFromText(eventStart.getText());
 		int duration = createTimeFromText(workTime.getText());
 		int breakTime = createTimeFromText(pause.getText());
-		if(calendarHandler.calendar.getEventsToSave().size() > 0){
-		for (ActivityReport report : calendarHandler.calendar.getEventsToSave()) {
+		if (calendarHandler.calendar.getEventsToSave().size() > 0) {
+			for (ActivityReport report : calendarHandler.calendar.getEventsToSave()) {
+				handler.deleteReport(0, Integer.parseInt(calendarHandler.calendar.currentEvent.getId()));
+				ActivityReport tmp = new ActivityReport(report.getId(), 0, 0, 0, 0, "", report.getDate(), startTime,
+						duration, breakTime);
+				handler.saveReport(tmp);
+			}
+		} else {
 			handler.deleteReport(0, Integer.parseInt(calendarHandler.calendar.currentEvent.getId()));
-			ActivityReport tmp = new ActivityReport(report.getId(), 0, 0, 0, 0, "", report.getDate(), startTime, duration,
-					breakTime);
+			ActivityReport tmp = new ActivityReport(Integer.parseInt(calendarHandler.calendar.currentEvent.getId()), 0,
+					0, 0, 0, "", getDateFromBox(dateStart), startTime, duration, breakTime);
 			handler.saveReport(tmp);
-		}
-		}else{
-			handler.deleteReport(0, Integer.parseInt(calendarHandler.calendar.currentEvent.getId()));
-			ActivityReport tmp = new ActivityReport(Integer.parseInt(calendarHandler.calendar.currentEvent.getId())
-					, 0, 0, 0, 0, "", getDateFromBox(dateStart), startTime, duration,
-					breakTime);
-			handler.saveReport(tmp);	
 		}
 		calendarHandler.calendar.getEventsToSave().clear();
 
@@ -538,6 +572,8 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 		pause.setText(createTimeForTextBox(arp.getBreak()));
 
 		workTime.setText(calculateDuration());
+		
+		this.buttonBook.setFocus(true);
 	}
 
 	@Override
@@ -983,7 +1019,7 @@ public class CalendarTimeInputWidget extends Composite implements CalendarObserv
 		int hours = Integer.parseInt(hourString);
 		int minutes = Integer.parseInt(minuteString);
 		int startOfEvent = createTimeFromText(eventStart.getText());
-		int duration = createTimeFromText(workTime.getText())+1;
+		int duration = createTimeFromText(workTime.getText()) + 1;
 		if (1440 > (startOfEvent + duration)) {
 			if (minutes < 59) {
 				minutes++;
