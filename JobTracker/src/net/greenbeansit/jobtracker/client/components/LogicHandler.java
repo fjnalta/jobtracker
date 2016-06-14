@@ -338,7 +338,7 @@ public class LogicHandler {
 		RestClient.build(new SuccessFunction<List<ActivityReport>>() {
 			@Override
 			public void onSuccess(Method method, List<ActivityReport> response) {
-				NotifyHelper.successMessage("Report deleted");
+				//NotifyHelper.successMessage("Report deleted");
 				for(ActivityReport report : currentReportsList){
 					if(report.getId()==reportID){
 						currentReportsList.remove(report);

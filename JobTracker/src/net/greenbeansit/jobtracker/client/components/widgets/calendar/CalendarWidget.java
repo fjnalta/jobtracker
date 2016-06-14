@@ -246,6 +246,8 @@ public class CalendarWidget extends Composite implements CalendarObserver, Logic
 						
 						calendar.addEvent(tmp);
 						calendar.currentEvent = tmp;
+						
+						handler.setCurrentReport(tmp.getAp());
 					}
 
 					/**
@@ -341,6 +343,7 @@ public class CalendarWidget extends Composite implements CalendarObserver, Logic
 						String eventStandardStart = startYear + "-" + startMonth + "-" + startDay + "T08:00:00.000Z";
 						String eventStandardEnd = startYear + "-" + startMonth + "-" + startDay + "T16:00:00.000Z";
 						ActivityReport tempReport = new ActivityReport();
+						tempReport.setAuthor(handler.getCurrentUser().getId());
 						tempReport.setDate(Integer.valueOf(startYear),Integer.valueOf(startMonth),Integer.valueOf(startDay));
 						calendar.addEventToSave(tempReport);
 						return tempReport;

@@ -123,8 +123,6 @@ public class Job implements Serializable
 	 */
 	public void setJobNr(Integer jobNr)
 	{
-		if (jobNr == null)
-			throw new IllegalArgumentException();
 		this.jobNr = jobNr;
 	}
 
@@ -136,8 +134,6 @@ public class Job implements Serializable
 	 */
 	public void setPosNr(Integer posNr)
 	{
-		if (posNr == null)
-			throw new IllegalArgumentException();
 		this.posNr = posNr;
 	}
 
