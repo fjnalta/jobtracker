@@ -351,7 +351,7 @@ public class LogicHandler {
 				NotifyHelper.errorMessage("FAILED: " + exception.getMessage());
 				GWT.log(exception.getMessage());
 			}
-		}).getEmployeeService().deleteReport(currentReport.getAuthor(),reportId);
+		}).getEmployeeService().deleteReport(currentUser.getId(),reportId);
 	}
 	
 	/**
