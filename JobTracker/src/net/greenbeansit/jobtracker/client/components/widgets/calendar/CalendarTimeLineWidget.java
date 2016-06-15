@@ -34,6 +34,9 @@ public class CalendarTimeLineWidget extends Composite implements CalendarObserve
 	interface CalendarTimeLineWidgetUiBinder extends UiBinder<Widget, CalendarTimeLineWidget> {
 	}
 	
+	// Path for the css File
+	public final String 	SUFFIXPATH = "net-greenbeansit-jobtracker-client-components-widgets-calendar-CalendarTimeLineWidget_CalendarTimeLineWidgetUiBinderImpl_GenCss_style-";
+		
 	@UiField
 	Span 					date;
 
@@ -55,6 +58,12 @@ public class CalendarTimeLineWidget extends Composite implements CalendarObserve
 	@UiHandler("buttonMonth")
 	public void onClickButtonMonth(ClickEvent event) {
 
+		this.buttonMonth.addStyleName(this.SUFFIXPATH + "button-current");
+		this.buttonMonth.removeStyleName(this.SUFFIXPATH + "button-not-current");
+		
+		this.buttonWeek.addStyleName(this.SUFFIXPATH + "button-not-current");	
+		this.buttonWeek.removeStyleName(this.SUFFIXPATH + "button-current");
+		
 		calendarHandler.calendar.setView(ViewOption.month);
 
 		notifyHandler();
@@ -69,6 +78,12 @@ public class CalendarTimeLineWidget extends Composite implements CalendarObserve
 	@UiHandler("buttonWeek")
 	public void onClickButtonWeek(ClickEvent event) {
 
+		this.buttonWeek.addStyleName(this.SUFFIXPATH + "button-current");
+		this.buttonWeek.removeStyleName(this.SUFFIXPATH + "button-not-current");
+		
+		this.buttonMonth.addStyleName(this.SUFFIXPATH + "button-not-current");
+		this.buttonMonth.removeStyleName(this.SUFFIXPATH + "button-current");
+		
 		calendarHandler.calendar.setView(ViewOption.agendaWeek);
 
 		notifyHandler();
@@ -84,6 +99,9 @@ public class CalendarTimeLineWidget extends Composite implements CalendarObserve
 		Date day = new Date();
 		
 		calendarHandler.addObserver(this);
+		
+		this.buttonWeek.addStyleName(this.SUFFIXPATH + "button-current");
+		this.buttonMonth.addStyleName(this.SUFFIXPATH + "button-not-current");
 		
 		setCalenderWeek(getMonthName(day.getMonth() + 1) +" "+ (day.getYear()+1900));
 		

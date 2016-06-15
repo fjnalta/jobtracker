@@ -11,9 +11,13 @@
 }
 
 .button-current {
-	background-color: grey;
-	color: grey;
+	background-color: rgb(190, 190, 190);
 	border-color: grey;
+}
+
+.button-current:FOCUS, .button-current:ACTIVE  {
+	padding: 0px;
+	
 }
 
 .button-not-current {
