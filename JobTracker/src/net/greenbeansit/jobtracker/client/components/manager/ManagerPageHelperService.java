@@ -2,6 +2,7 @@ package net.greenbeansit.jobtracker.client.components.manager;
 
 import java.util.List;
 
+import net.greenbeansit.jobtracker.client.components.manager.ManagerPageHelperServiceImpl.Callback;
 import net.greenbeansit.jobtracker.shared.Job;
 import net.greenbeansit.jobtracker.shared.User;
 
@@ -68,4 +69,6 @@ interface ManagerPageHelperService
 	 * @return a list of {@link Job}s.
 	 */
 	List<Job> getJobs();
+	
+	void loadServerData(final Callback initCallback);
 }

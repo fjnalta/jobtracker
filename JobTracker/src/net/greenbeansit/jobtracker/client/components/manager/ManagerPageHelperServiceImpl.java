@@ -57,9 +57,9 @@ class ManagerPageHelperServiceImpl implements ManagerPageHelperService
 	 *            the {@link Callback} that will be called after the
 	 *            asynchronous process has been finished.
 	 */
-	public ManagerPageHelperServiceImpl(Callback initCallback)
+	public ManagerPageHelperServiceImpl()
 	{
-		loadServerData(initCallback);
+		
 	}
 
 	/**
@@ -69,8 +69,9 @@ class ManagerPageHelperServiceImpl implements ManagerPageHelperService
 	 *            the {@link Callback} that will be called after the
 	 *            asynchronous process has been finished.
 	 */
-	private void loadServerData(final Callback initCallback)
-	{
+	@Override
+	public void loadServerData(final Callback initCallback)
+	{		
 		RestClient.build(new SuccessFunction<ManagerPageRestServiceResponse>()
 		{
 			@Override
@@ -109,6 +110,7 @@ class ManagerPageHelperServiceImpl implements ManagerPageHelperService
 	@Override
 	public List<User> sortUser(List<User> user, ManagerPageSortMode sortmode)
 	{
+		GWT.log("sortUser" + user);
 		if (user == null)
 			user = cachedUser;
 

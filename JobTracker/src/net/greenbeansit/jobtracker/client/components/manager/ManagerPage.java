@@ -126,9 +126,12 @@ public class ManagerPage extends Composite
 				for (Option option : selectJob.getSelectedItems())
 					filter.add(((JobSelectOption) option).getJob());
 
+				GWT.log("filter " + filter);
 				currentFilter = filter;
 
-				fillEmployeeList(helperService.filterUser(filter));
+				currentUserList = helperService.filterUser(filter); 
+				
+				fillEmployeeList(currentUserList);
 			}
 		});
 
@@ -180,7 +183,8 @@ public class ManagerPage extends Composite
 		}, ClickEvent.getType());
 
 		
-		helperService = new ManagerPageHelperServiceImpl(new Callback()
+		helperService = new ManagerPageHelperServiceImpl();
+		helperService.loadServerData(new Callback()
 		{
 			@Override
 			public void onSuccess()
