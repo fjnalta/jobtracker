@@ -2,7 +2,8 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:b="urn:import:org.gwtbootstrap3.client.ui"
 	xmlns:b.html="urn:import:org.gwtbootstrap3.client.ui.html" xmlns:s="urn:import:org.gwtbootstrap3.extras.select.client.ui"
-	xmlns:widgets="urn:import:net.greenbeansit.jobtracker.client.components.widgets" xmlns:d="urn:import:net.greenbeansit.jobtracker.client.components.manager.detail">
+	xmlns:widgets="urn:import:net.greenbeansit.jobtracker.client.components.widgets" xmlns:d="urn:import:net.greenbeansit.jobtracker.client.components.manager.detail"
+	xmlns:w="urn:import:net.greenbeansit.jobtracker.client.components.kapa.widgets">
 	<ui:style>
 	/*Container*/
 	.headerRow {
@@ -135,7 +136,7 @@
 					-->
 				</b:Row>
 				<b:Row addStyleNames="{style.smallContainer}" ui:field="capacityReportDescriptionWidgetContainer">
-					<d:CapacityReportDescriptionWidget ui:field="capacityReportDescriptionWidget"/>
+					<w:CapacityNav ui:field="capacityReportDescriptionWidget"/>
 				</b:Row>
 					<b:Row addStyleNames="{style.smallContainer}">
 					<widgets:UtilizationWidget ui:field="utilizationWidget"/>
@@ -157,7 +158,9 @@
 							<d:ActivityReportCalendar ui:field="reportCalendar"></d:ActivityReportCalendar>
 						</b:TabPane>
 						<b:TabPane b:id="tab3">
-							<d:CapacityCalendar ui:field="capacityCalendar"></d:CapacityCalendar>
+							<w:MonthlyUtilizationWidget></w:MonthlyUtilizationWidget>
+							<w:CapacityCalendarWidget ui:field="capacityCalendar"></w:CapacityCalendarWidget>
+							<w:CapacityTimeInputWidget></w:CapacityTimeInputWidget>
 						</b:TabPane>
 					</b:TabContent>
 				</b:Row>

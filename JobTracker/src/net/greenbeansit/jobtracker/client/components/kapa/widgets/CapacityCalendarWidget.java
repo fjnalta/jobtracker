@@ -13,7 +13,13 @@ import net.greenbeansit.jobtracker.client.components.LogicObservable;
 import net.greenbeansit.jobtracker.client.components.kapa.CapaCalendarObserver;
 import net.greenbeansit.jobtracker.client.components.kapa.data.CapacityReportEvent;
 import net.greenbeansit.jobtracker.client.components.widgets.calendar.FullCalendarCustomize;
+import net.greenbeansit.jobtracker.client.utils.rest.NotifyHelper;
+import net.greenbeansit.jobtracker.client.utils.rest.RestClient;
+import net.greenbeansit.jobtracker.client.utils.rest.RestClient.SuccessFunction;
+import net.greenbeansit.jobtracker.shared.ActivityReport;
 import net.greenbeansit.jobtracker.shared.UtilizationWeek;
+
+import org.fusesource.restygwt.client.Method;
 import org.gwtbootstrap3.client.ui.Column;
 import org.gwtbootstrap3.client.ui.Container;
 import org.gwtbootstrap3.client.ui.Heading;
@@ -397,4 +403,23 @@ public class CapacityCalendarWidget extends Composite implements CapaCalendarObs
         }
         return out;
     }
+    
+	/**
+	 * Tells the calendar to redraw itself.
+	 */
+	public void onDisplayed()
+	{
+		Timer timer = new Timer()
+		{
+			@Override
+			public void run()
+			{
+				if(fullcalendar != null)
+					fullcalendar.render();
+			}
+		};
+		timer.schedule(10);
+	}
+
+
 }

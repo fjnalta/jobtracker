@@ -15,6 +15,8 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 
+import net.greenbeansit.jobtracker.client.components.kapa.widgets.CapacityCalendarWidget;
+import net.greenbeansit.jobtracker.client.components.kapa.widgets.CapacityNav;
 import net.greenbeansit.jobtracker.client.components.manager.detail.ManagerEmployeeDetailPageHelperServiceImpl.Callback;
 import net.greenbeansit.jobtracker.client.components.widgets.UtilizationWidget;
 import net.greenbeansit.jobtracker.client.localization.ManagerEmployeeDetailPageConstants;
@@ -48,7 +50,7 @@ public class ManagerEmployeeDetailPage extends Composite
 	ActivityReportCalendar							reportCalendar;
 
 	@UiField
-	CapacityCalendar								capacityCalendar;
+	CapacityCalendarWidget							capacityCalendar;
 
 	@UiField
 	NavTabs											tabControl;
@@ -83,10 +85,10 @@ public class ManagerEmployeeDetailPage extends Composite
 	Anchor											anchorBackward;
 	
 	@UiField
-	CapacityReportDescriptionWidget capacityReportDescriptionWidget;
+	CapacityNav 									capacityReportDescriptionWidget;
 	
 	@UiField
-	Row capacityReportDescriptionWidgetContainer;
+	Row 											capacityReportDescriptionWidgetContainer;
 
 	private ManagerEmployeeDetailPageHelperService	helperService;
 
