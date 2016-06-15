@@ -272,7 +272,7 @@
 			]]>
 		</sql>
 	</changeSet>
-		<changeSet id="20160615-activity_report-2" author="jonathan">
+	<changeSet id="20160615-activity_report-2" author="jonathan">
 		<sql>
 			<![CDATA[
 				INSERT INTO activity_report (author, text, begin_date, begin_time, end_time, break_time, job_no, pos_no)
@@ -395,35 +395,111 @@
 			]]>
 		</sql>
 	</changeSet>
-		<changeSet id="20160615-utilization_week-3" author="ahjathod">
+	<changeSet id="20160615-activity_report-102" author="jonathan">
+		<sql>
+			<![CDATA[
+				INSERT INTO activity_report (author, text, begin_date, begin_time, end_time, break_time, job_no, pos_no)
+				VALUES(2, "JobTracker Frontend", '2016-06-01', '08:00:00', '16:00:00', 30, 100245, 001),
+				(2, "JobTracker Frontend", '2016-06-02', '08:00:00', '16:00:00', 30, 100245, 001),
+				(2, "JobTracker Frontend", '2016-06-06', '08:00:00', '16:00:00', 30, 100245, 001),
+				(2, "JobTracker Frontend", '2016-06-07', '08:00:00', '16:00:00', 30, 100245, 001),
+				(2, "JobTracker Frontend", '2016-06-08', '08:00:00', '16:00:00', 30, 100245, 001),
+				(2, "JobTracker Frontend", '2016-06-09', '08:00:00', '16:00:00', 30, 100245, 001),
+				(2, "JobTracker Frontend", '2016-06-10', '08:00:00', '16:00:00', 30, 100245, 001),
+				(2, "JobTracker Frontend", '2016-06-13', '08:00:00', '16:00:00', 30, 100245, 001),
+				(2, "JobTracker Frontend", '2016-06-14', '08:00:00', '16:00:00', 30, 100245, 001),
+				(2, "JobTracker Frontend", '2016-06-15', '08:00:00', '16:00:00', 30, 100245, 001)
+				;
+			]]>
+		</sql>
+	</changeSet>
+	<changeSet id="20160615-activity_report-may-2" author="jonathan">
+		<sql>
+			<![CDATA[
+				INSERT INTO activity_report (author, text, begin_date, begin_time, end_time, break_time, job_no, pos_no)
+				VALUES(2, "JobTracker Frontend", '2016-06-01', '08:00:00', '16:00:00', 30, 100245, 001),
+				(2, "JobTracker Frontend", '2016-05-02', '08:00:00', '16:00:00', 30, 100245, 001),
+				(2, "JobTracker Frontend", '2016-05-03', '08:00:00', '16:00:00', 30, 100245, 001),
+				(2, "JobTracker Frontend", '2016-05-04', '08:00:00', '16:00:00', 30, 100245, 001),
+				(2, "JobTracker Frontend", '2016-05-06', '08:00:00', '16:00:00', 30, 100245, 001),
+				(2, "JobTracker Frontend", '2016-05-09', '08:00:00', '16:00:00', 30, 100245, 001),
+				(2, "JobTracker Frontend", '2016-05-10', '08:00:00', '16:00:00', 30, 100245, 001),
+				(2, "JobTracker Frontend", '2016-05-11', '08:00:00', '16:00:00', 30, 100245, 001),
+				(2, "JobTracker Frontend", '2016-05-12', '08:00:00', '16:00:00', 30, 100245, 001),
+				(2, "JobTracker Frontend", '2016-05-13', '08:00:00', '16:00:00', 30, 100245, 001),
+				(2, "JobTracker Frontend", '2016-05-17', '08:00:00', '16:00:00', 30, 100245, 001),
+				(2, "JobTracker Frontend", '2016-05-18', '08:00:00', '16:00:00', 30, 100245, 001),
+				(2, "JobTracker Frontend", '2016-05-19', '08:00:00', '16:00:00', 30, 100245, 001),
+				(2, "JobTracker Frontend", '2016-05-20', '08:00:00', '16:00:00', 30, 100245, 001),
+				(2, "JobTracker Frontend", '2016-05-23', '08:00:00', '16:00:00', 30, 100245, 001),
+				(2, "JobTracker Frontend", '2016-05-24', '08:00:00', '16:00:00', 30, 100245, 001),
+				(2, "JobTracker Frontend", '2016-05-25', '08:00:00', '16:00:00', 30, 100245, 001),
+				(2, "JobTracker Frontend", '2016-05-27', '08:00:00', '16:00:00', 30, 100245, 001),
+				(2, "JobTracker Frontend", '2016-05-30', '08:00:00', '16:00:00', 30, 100245, 001),
+				(2, "JobTracker Frontend", '2016-05-31', '08:00:00', '16:00:00', 30, 100245, 001)
+				;
+			]]>
+		</sql>
+	</changeSet>
+	<changeSet id="20160615-psuedo_job-2" author="ahjathod">
+		<sql>
+			<![CDATA[
+			INSERT INTO pseudo_job
+			(name,author)
+			VALUES("Kundenworkshop",3),
+			("Kundenworkshop",4),
+			("Kundenworkshop",5),
+			("Kundenworkshop",7),
+			("Kundenworkshop",8),
+			("Kundenworkshop",9),
+			("Kundenworkshop",10),
+			("Kundenworkshop",11),
+			("Kundenworkshop",12),
+			("Kundenworkshop",13),
+			("Kundenworkshop",14),
+			("Kundenworkshop",15),
+			("Kundenworkshop",16),
+			("Kundenworkshop",17),
+			("Kundenworkshop",18),
+			("Kundenworkshop",19),
+			("Kundenworkshop",20),
+			("Kundenworkshop",21),
+			("Kundenworkshop",22),
+			("Kundenworkshop",23),
+			("Kundenworkshop",24),
+			("Kundenworkshop",1);
+			]]>
+		</sql>
+	</changeSet>
+	<changeSet id="20160615-1-utilization_week-5" author="ahjathod">
 		<sql>
 			<![CDATA[
 			INSERT INTO utilization_week
 			(author,text,begin_date,begin_time,end_date,end_time,possibility,break_time,pseudo_job_id)
-			VALUES(1,"Kundenworkshop",'2016-07-17','08:00','2016-07-30','16:00',75,60,10002),
-			(2,"Kundenworkshop",'2016-07-17','08:00','2016-07-30','16:00',75,60,10002),
-			(3,"Kundenworkshop",'2016-07-17','08:00','2016-07-30','16:00',75,60,10002),
-			(4,"Kundenworkshop",'2016-07-17','08:00','2016-07-30','16:00',75,60,10002),
-			(5,"Kundenworkshop",'2016-07-17','08:00','2016-07-30','16:00',75,60,10002),
-			(6,"Kundenworkshop",'2016-07-17','08:00','2016-07-30','16:00',75,60,10002),
-			(7,"Kundenworkshop",'2016-07-17','08:00','2016-07-30','16:00',75,60,10002),
-			(8,"Kundenworkshop",'2016-07-17','08:00','2016-07-30','16:00',75,60,10002),
-			(9,"Kundenworkshop",'2016-07-17','08:00','2016-07-30','16:00',75,60,10002),
-			(10,"Kundenworkshop",'2016-07-17','08:00','2016-07-30','16:00',75,60,10002),
-			(11,"Kundenworkshop",'2016-07-17','08:00','2016-07-30','16:00',75,60,10002),
-			(12,"Kundenworkshop",'2016-07-17','08:00','2016-07-30','16:00',75,60,10002),
-			(13,"Kundenworkshop",'2016-07-17','08:00','2016-07-30','16:00',75,60,10002),
-			(14,"Kundenworkshop",'2016-07-17','08:00','2016-07-30','16:00',75,60,10002),
-			(15,"Kundenworkshop",'2016-07-17','08:00','2016-07-30','16:00',75,60,10002),
-			(16,"Kundenworkshop",'2016-07-17','08:00','2016-07-30','16:00',75,60,10002),
-			(17,"Kundenworkshop",'2016-07-17','08:00','2016-07-30','16:00',75,60,10002),
-			(18,"Kundenworkshop",'2016-07-17','08:00','2016-07-30','16:00',75,60,10002),
-			(19,"Kundenworkshop",'2016-07-17','08:00','2016-07-30','16:00',75,60,10002),
-			(20,"Kundenworkshop",'2016-07-17','08:00','2016-07-30','16:00',75,60,10002),
-			(21,"Kundenworkshop",'2016-07-17','08:00','2016-07-30','16:00',75,60,10002),
-			(22,"Kundenworkshop",'2016-07-17','08:00','2016-07-30','16:00',75,60,10002),
-			(23,"Kundenworkshop",'2016-07-17','08:00','2016-07-30','16:00',75,60,10002),
-			(24,"Kundenworkshop",'2016-07-17','08:00','2016-07-30','16:00',75,60,10002);
+			VALUES(1,"Kundenworkshop",'2016-06-17','08:00','2016-06-30','16:00',75,60,10049),
+			(2,"Kundenworkshop",'2016-06-17','08:00','2016-06-30','16:00',75,60,10050),
+			(3,"Kundenworkshop",'2016-06-17','08:00','2016-06-30','16:00',75,60,10028),
+			(4,"Kundenworkshop",'2016-06-17','08:00','2016-06-30','16:00',75,60,10029),
+			(5,"Kundenworkshop",'2016-06-17','08:00','2016-06-30','16:00',75,60,10030),
+			(6,"Kundenworkshop",'2016-06-17','08:00','2016-06-30','16:00',75,60,10031),
+			(7,"Kundenworkshop",'2016-06-17','08:00','2016-06-30','16:00',75,60,10032),
+			(8,"Kundenworkshop",'2016-06-17','08:00','2016-06-30','16:00',75,60,10033),
+			(9,"Kundenworkshop",'2016-06-17','08:00','2016-06-30','16:00',75,60,10034),
+			(10,"Kundenworkshop",'2016-06-17','08:00','2016-06-30','16:00',75,60,10035),
+			(11,"Kundenworkshop",'2016-06-17','08:00','2016-06-30','16:00',75,60,10036),
+			(12,"Kundenworkshop",'2016-06-17','08:00','2016-06-30','16:00',75,60,10037),
+			(13,"Kundenworkshop",'2016-06-17','08:00','2016-06-30','16:00',75,60,10038),
+			(14,"Kundenworkshop",'2016-06-17','08:00','2016-06-30','16:00',75,60,10039),
+			(15,"Kundenworkshop",'2016-06-17','08:00','2016-06-30','16:00',75,60,10040),
+			(16,"Kundenworkshop",'2016-06-17','08:00','2016-06-30','16:00',75,60,10041),
+			(17,"Kundenworkshop",'2016-06-17','08:00','2016-06-30','16:00',75,60,10042),
+			(18,"Kundenworkshop",'2016-06-17','08:00','2016-06-30','16:00',75,60,10043),
+			(19,"Kundenworkshop",'2016-06-17','08:00','2016-06-30','16:00',75,60,10044),
+			(20,"Kundenworkshop",'2016-06-17','08:00','2016-06-30','16:00',75,60,10045),
+			(21,"Kundenworkshop",'2016-06-17','08:00','2016-06-30','16:00',75,60,10046),
+			(22,"Kundenworkshop",'2016-06-17','08:00','2016-06-30','16:00',75,60,10047),
+			(23,"Kundenworkshop",'2016-06-17','08:00','2016-06-30','16:00',75,60,10048),
+			(24,"Kundenworkshop",'2016-06-17','08:00','2016-06-30','16:00',75,60,10049);
 			]]>
 		</sql>
 	</changeSet>
