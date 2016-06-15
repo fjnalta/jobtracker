@@ -49,7 +49,7 @@ public class JobTaskServiceJpa implements JobTaskDataService
 			list.add(convert(entity));
 		}
 		return list;
-	}
+	} 
 
 	/**
 	 * Converts a {@link JobTaskEntity} to {@link JobTask}
