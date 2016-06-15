@@ -70,7 +70,7 @@
 					addStyleNames="{style.textArea}" ui:field="textDiscription" />
 			</b:FormGroup>
 			<b:FormGroup>
-				<s:Select ui:field="selectTaskId" placeholder="TaskID auswählen" type="PRIMARY"
+				<s:Select ui:field="selectTaskId" placeholder="Task auswählen" type="PRIMARY"
 			addStyleNames="{style.select}">
 					<s:OptGroup ui:field="optGroupTaskId">
 					</s:OptGroup>

@@ -97,7 +97,7 @@ public class CapacityCalendar extends Composite
 		
 		config.setGeneralDisplay(generalDisplay);
 		
-		calendar = new FullCalendar("test3", ViewOption.agendaWeek, config, false);
+		calendar = new FullCalendar("test3", ViewOption.month, config, false);
 		calendar.goToDate(new Date());
 		
 		calendarContainer.add(calendar);

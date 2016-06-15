@@ -496,6 +496,7 @@ public class CalendarWidget extends Composite implements CalendarObserver, Logic
 	@SuppressWarnings("deprecation")
 	public void addActvityReports(List<ActivityReport> reports) {
 		if (!reports.isEmpty()) {
+			calendar.removeAllEvents();
 			for (ActivityReport ap : reports) {
 				ActivityReportEvent e = new ActivityReportEvent(ap, ap.getId() + "", ap.getText() + ap.getId(), true, true, true);
 				ap.getDate().setYear((2016 - 1900));
