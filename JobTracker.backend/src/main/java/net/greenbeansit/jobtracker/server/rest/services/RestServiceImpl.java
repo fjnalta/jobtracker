@@ -401,8 +401,7 @@ public class RestServiceImpl implements RestService
 	@Override
 	public List<JobTask> getJobTasks(Integer jobNo, Integer posNo)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return jobTaskService.getByJobNr(jobNo, posNo);
 	}
 
 	@Override
